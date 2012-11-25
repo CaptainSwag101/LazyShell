@@ -2,361 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LAZYSHELL.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LoadNotes" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="AllyEquipment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Value>
     </Setting>
-    <Setting Name="LastRomPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"C:\\"</Value>
-    </Setting>
-    <Setting Name="VisualThemeSystem" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="UndoStackSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">255</Value>
-    </Setting>
-    <Setting Name="patchServerURL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://home.comcast.net/~giangurgolo/patches/</Value>
-    </Setting>
-    <Setting Name="NotePathCustom" Type="System.String" Scope="User">
+    <Setting Name="BackupROMDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="LevelNames" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
-    </Setting>
-    <Setting Name="ZSNESPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="PreviewArguments" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-m -zs 0 -v 2</Value>
-    </Setting>
-    <Setting Name="PreviewFirstTime" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="PreviewDynamicRomName" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="PreviewArgsDefault" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">-m -zs 0 -v 2</Value>
-    </Setting>
-    <Setting Name="UnverifiedRomWarning" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ShowEncryptionWarnings" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="LastDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"C:\\"</Value>
-    </Setting>
-    <Setting Name="LoadLastUsedROM" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ShopNames" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;Mushroom Kingdom&lt;/string&gt;
-  &lt;string&gt;Rose Town Items&lt;/string&gt;
-  &lt;string&gt;Rose Town Armor&lt;/string&gt;
-  &lt;string&gt;Frog Disciple Shop&lt;/string&gt;
-  &lt;string&gt;Moleville Shop&lt;/string&gt;
-  &lt;string&gt;Marrymore Shop&lt;/string&gt;
-  &lt;string&gt;Frog Coin Emporium&lt;/string&gt;
-  &lt;string&gt;Sea Item shop&lt;/string&gt;
-  &lt;string&gt;Seaside Town Items (pre-Yaridovich)&lt;/string&gt;
-  &lt;string&gt;Juice Bar (no card)&lt;/string&gt;
-  &lt;string&gt;Juice Bar (alto card)&lt;/string&gt;
-  &lt;string&gt;Juice Bar (tenor card)&lt;/string&gt;
-  &lt;string&gt;Juice Bar (soprano card)&lt;/string&gt;
-  &lt;string&gt;Seaside Weapons&lt;/string&gt;
-  &lt;string&gt;Seaside Armor&lt;/string&gt;
-  &lt;string&gt;Seaside Accessory&lt;/string&gt;
-  &lt;string&gt;Seaside Health Foods&lt;/string&gt;
-  &lt;string&gt;Monstro Town shop&lt;/string&gt;
-  &lt;string&gt;Nimbus Land shop&lt;/string&gt;
-  &lt;string&gt;Hinopio's Shop&lt;/string&gt;
-  &lt;string&gt;Baby Goomba shop&lt;/string&gt;
-  &lt;string&gt;Nimbus Land Item/Weapon&lt;/string&gt;
-  &lt;string&gt;Croco's Shop 1&lt;/string&gt;
-  &lt;string&gt;Croco's Shop 2&lt;/string&gt;
-  &lt;string&gt;Toad's Shop&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-  &lt;string&gt;___DUMMY&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="EventLabels" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
-    </Setting>
-    <Setting Name="ActionLabels" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
-    </Setting>
-    <Setting Name="Keystrokes" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;!&lt;/string&gt;
-  &lt;string&gt;“&lt;/string&gt;
-  &lt;string&gt;”&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;‘&lt;/string&gt;
-  &lt;string&gt;’&lt;/string&gt;
-  &lt;string&gt;(&lt;/string&gt;
-  &lt;string&gt;)&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;,&lt;/string&gt;
-  &lt;string&gt;-&lt;/string&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;/&lt;/string&gt;
-  &lt;string&gt;0&lt;/string&gt;
-  &lt;string&gt;1&lt;/string&gt;
-  &lt;string&gt;2&lt;/string&gt;
-  &lt;string&gt;3&lt;/string&gt;
-  &lt;string&gt;4&lt;/string&gt;
-  &lt;string&gt;5&lt;/string&gt;
-  &lt;string&gt;6&lt;/string&gt;
-  &lt;string&gt;7&lt;/string&gt;
-  &lt;string&gt;8&lt;/string&gt;
-  &lt;string&gt;9&lt;/string&gt;
-  &lt;string&gt;~&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;?&lt;/string&gt;
-  &lt;string&gt;@&lt;/string&gt;
-  &lt;string&gt;A&lt;/string&gt;
-  &lt;string&gt;B&lt;/string&gt;
-  &lt;string&gt;C&lt;/string&gt;
-  &lt;string&gt;D&lt;/string&gt;
-  &lt;string&gt;E&lt;/string&gt;
-  &lt;string&gt;F&lt;/string&gt;
-  &lt;string&gt;G&lt;/string&gt;
-  &lt;string&gt;H&lt;/string&gt;
-  &lt;string&gt;I&lt;/string&gt;
-  &lt;string&gt;J&lt;/string&gt;
-  &lt;string&gt;K&lt;/string&gt;
-  &lt;string&gt;L&lt;/string&gt;
-  &lt;string&gt;M&lt;/string&gt;
-  &lt;string&gt;N&lt;/string&gt;
-  &lt;string&gt;O&lt;/string&gt;
-  &lt;string&gt;P&lt;/string&gt;
-  &lt;string&gt;Q&lt;/string&gt;
-  &lt;string&gt;R&lt;/string&gt;
-  &lt;string&gt;S&lt;/string&gt;
-  &lt;string&gt;T&lt;/string&gt;
-  &lt;string&gt;U&lt;/string&gt;
-  &lt;string&gt;V&lt;/string&gt;
-  &lt;string&gt;W&lt;/string&gt;
-  &lt;string&gt;X&lt;/string&gt;
-  &lt;string&gt;Y&lt;/string&gt;
-  &lt;string&gt;Z&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;a&lt;/string&gt;
-  &lt;string&gt;b&lt;/string&gt;
-  &lt;string&gt;c&lt;/string&gt;
-  &lt;string&gt;d&lt;/string&gt;
-  &lt;string&gt;e&lt;/string&gt;
-  &lt;string&gt;f&lt;/string&gt;
-  &lt;string&gt;g&lt;/string&gt;
-  &lt;string&gt;h&lt;/string&gt;
-  &lt;string&gt;i&lt;/string&gt;
-  &lt;string&gt;j&lt;/string&gt;
-  &lt;string&gt;k&lt;/string&gt;
-  &lt;string&gt;l&lt;/string&gt;
-  &lt;string&gt;m&lt;/string&gt;
-  &lt;string&gt;n&lt;/string&gt;
-  &lt;string&gt;o&lt;/string&gt;
-  &lt;string&gt;p&lt;/string&gt;
-  &lt;string&gt;q&lt;/string&gt;
-  &lt;string&gt;r&lt;/string&gt;
-  &lt;string&gt;s&lt;/string&gt;
-  &lt;string&gt;t&lt;/string&gt;
-  &lt;string&gt;u&lt;/string&gt;
-  &lt;string&gt;v&lt;/string&gt;
-  &lt;string&gt;w&lt;/string&gt;
-  &lt;string&gt;x&lt;/string&gt;
-  &lt;string&gt;y&lt;/string&gt;
-  &lt;string&gt;z&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;:&lt;/string&gt;
-  &lt;string&gt;;&lt;/string&gt;
-  &lt;string&gt;&amp;lt;&lt;/string&gt;
-  &lt;string&gt;&amp;gt;&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;#&lt;/string&gt;
-  &lt;string&gt;+&lt;/string&gt;
-  &lt;string&gt;×&lt;/string&gt;
-  &lt;string&gt;%&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;*&lt;/string&gt;
-  &lt;string&gt;'&lt;/string&gt;
-  &lt;string&gt;&amp;amp;&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="CreateBackupROM" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -364,581 +14,11 @@
     <Setting Name="CreateBackupROMSave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="BackupROMDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="KeystrokesMenu" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;:&lt;/string&gt;
-  &lt;string&gt;,&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;/&lt;/string&gt;
-  &lt;string&gt;0&lt;/string&gt;
-  &lt;string&gt;1&lt;/string&gt;
-  &lt;string&gt;2&lt;/string&gt;
-  &lt;string&gt;3&lt;/string&gt;
-  &lt;string&gt;4&lt;/string&gt;
-  &lt;string&gt;5&lt;/string&gt;
-  &lt;string&gt;6&lt;/string&gt;
-  &lt;string&gt;7&lt;/string&gt;
-  &lt;string&gt;8&lt;/string&gt;
-  &lt;string&gt;9&lt;/string&gt;
-  &lt;string&gt;~&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;?&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;A&lt;/string&gt;
-  &lt;string&gt;B&lt;/string&gt;
-  &lt;string&gt;C&lt;/string&gt;
-  &lt;string&gt;D&lt;/string&gt;
-  &lt;string&gt;E&lt;/string&gt;
-  &lt;string&gt;F&lt;/string&gt;
-  &lt;string&gt;G&lt;/string&gt;
-  &lt;string&gt;H&lt;/string&gt;
-  &lt;string&gt;I&lt;/string&gt;
-  &lt;string&gt;J&lt;/string&gt;
-  &lt;string&gt;K&lt;/string&gt;
-  &lt;string&gt;L&lt;/string&gt;
-  &lt;string&gt;M&lt;/string&gt;
-  &lt;string&gt;N&lt;/string&gt;
-  &lt;string&gt;O&lt;/string&gt;
-  &lt;string&gt;P&lt;/string&gt;
-  &lt;string&gt;Q&lt;/string&gt;
-  &lt;string&gt;R&lt;/string&gt;
-  &lt;string&gt;S&lt;/string&gt;
-  &lt;string&gt;T&lt;/string&gt;
-  &lt;string&gt;U&lt;/string&gt;
-  &lt;string&gt;V&lt;/string&gt;
-  &lt;string&gt;W&lt;/string&gt;
-  &lt;string&gt;X&lt;/string&gt;
-  &lt;string&gt;Y&lt;/string&gt;
-  &lt;string&gt;Z&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;a&lt;/string&gt;
-  &lt;string&gt;b&lt;/string&gt;
-  &lt;string&gt;c&lt;/string&gt;
-  &lt;string&gt;d&lt;/string&gt;
-  &lt;string&gt;e&lt;/string&gt;
-  &lt;string&gt;f&lt;/string&gt;
-  &lt;string&gt;g&lt;/string&gt;
-  &lt;string&gt;h&lt;/string&gt;
-  &lt;string&gt;i&lt;/string&gt;
-  &lt;string&gt;j&lt;/string&gt;
-  &lt;string&gt;k&lt;/string&gt;
-  &lt;string&gt;l&lt;/string&gt;
-  &lt;string&gt;m&lt;/string&gt;
-  &lt;string&gt;n&lt;/string&gt;
-  &lt;string&gt;o&lt;/string&gt;
-  &lt;string&gt;p&lt;/string&gt;
-  &lt;string&gt;q&lt;/string&gt;
-  &lt;string&gt;r&lt;/string&gt;
-  &lt;string&gt;s&lt;/string&gt;
-  &lt;string&gt;t&lt;/string&gt;
-  &lt;string&gt;u&lt;/string&gt;
-  &lt;string&gt;v&lt;/string&gt;
-  &lt;string&gt;w&lt;/string&gt;
-  &lt;string&gt;x&lt;/string&gt;
-  &lt;string&gt;y&lt;/string&gt;
-  &lt;string&gt;z&lt;/string&gt;
-  &lt;string&gt;!&lt;/string&gt;
-  &lt;string&gt;#&lt;/string&gt;
-  &lt;string&gt;-&lt;/string&gt;
-  &lt;string&gt;’&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;:&lt;/string&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;“&lt;/string&gt;
-  &lt;string&gt;”&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;:&lt;/string&gt;
-  &lt;string&gt;;&lt;/string&gt;
-  &lt;string&gt;&amp;lt;&lt;/string&gt;
-  &lt;string&gt;&amp;gt;&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;#&lt;/string&gt;
-  &lt;string&gt;+&lt;/string&gt;
-  &lt;string&gt;×&lt;/string&gt;
-  &lt;string&gt;%&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;*&lt;/string&gt;
-  &lt;string&gt;'&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="KeystrokesDesc" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;!&lt;/string&gt;
-  &lt;string&gt;“&lt;/string&gt;
-  &lt;string&gt;”&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;‘&lt;/string&gt;
-  &lt;string&gt;’&lt;/string&gt;
-  &lt;string&gt;(&lt;/string&gt;
-  &lt;string&gt;)&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;,&lt;/string&gt;
-  &lt;string&gt;-&lt;/string&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;/&lt;/string&gt;
-  &lt;string&gt;0&lt;/string&gt;
-  &lt;string&gt;1&lt;/string&gt;
-  &lt;string&gt;2&lt;/string&gt;
-  &lt;string&gt;3&lt;/string&gt;
-  &lt;string&gt;4&lt;/string&gt;
-  &lt;string&gt;5&lt;/string&gt;
-  &lt;string&gt;6&lt;/string&gt;
-  &lt;string&gt;7&lt;/string&gt;
-  &lt;string&gt;8&lt;/string&gt;
-  &lt;string&gt;9&lt;/string&gt;
-  &lt;string&gt;~&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;?&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string&gt;A&lt;/string&gt;
-  &lt;string&gt;B&lt;/string&gt;
-  &lt;string&gt;C&lt;/string&gt;
-  &lt;string&gt;D&lt;/string&gt;
-  &lt;string&gt;E&lt;/string&gt;
-  &lt;string&gt;F&lt;/string&gt;
-  &lt;string&gt;G&lt;/string&gt;
-  &lt;string&gt;H&lt;/string&gt;
-  &lt;string&gt;I&lt;/string&gt;
-  &lt;string&gt;J&lt;/string&gt;
-  &lt;string&gt;K&lt;/string&gt;
-  &lt;string&gt;L&lt;/string&gt;
-  &lt;string&gt;M&lt;/string&gt;
-  &lt;string&gt;N&lt;/string&gt;
-  &lt;string&gt;O&lt;/string&gt;
-  &lt;string&gt;P&lt;/string&gt;
-  &lt;string&gt;Q&lt;/string&gt;
-  &lt;string&gt;R&lt;/string&gt;
-  &lt;string&gt;S&lt;/string&gt;
-  &lt;string&gt;T&lt;/string&gt;
-  &lt;string&gt;U&lt;/string&gt;
-  &lt;string&gt;V&lt;/string&gt;
-  &lt;string&gt;W&lt;/string&gt;
-  &lt;string&gt;X&lt;/string&gt;
-  &lt;string&gt;Y&lt;/string&gt;
-  &lt;string&gt;Z&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;a&lt;/string&gt;
-  &lt;string&gt;b&lt;/string&gt;
-  &lt;string&gt;c&lt;/string&gt;
-  &lt;string&gt;d&lt;/string&gt;
-  &lt;string&gt;e&lt;/string&gt;
-  &lt;string&gt;f&lt;/string&gt;
-  &lt;string&gt;g&lt;/string&gt;
-  &lt;string&gt;h&lt;/string&gt;
-  &lt;string&gt;i&lt;/string&gt;
-  &lt;string&gt;j&lt;/string&gt;
-  &lt;string&gt;k&lt;/string&gt;
-  &lt;string&gt;l&lt;/string&gt;
-  &lt;string&gt;m&lt;/string&gt;
-  &lt;string&gt;n&lt;/string&gt;
-  &lt;string&gt;o&lt;/string&gt;
-  &lt;string&gt;p&lt;/string&gt;
-  &lt;string&gt;q&lt;/string&gt;
-  &lt;string&gt;r&lt;/string&gt;
-  &lt;string&gt;s&lt;/string&gt;
-  &lt;string&gt;t&lt;/string&gt;
-  &lt;string&gt;u&lt;/string&gt;
-  &lt;string&gt;v&lt;/string&gt;
-  &lt;string&gt;w&lt;/string&gt;
-  &lt;string&gt;x&lt;/string&gt;
-  &lt;string&gt;y&lt;/string&gt;
-  &lt;string&gt;z&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;-&lt;/string&gt;
-  &lt;string&gt;’&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string&gt;&amp;amp;&lt;/string&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-  &lt;string /&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="LoadAllData" Type="System.Boolean" Scope="User">
+    <Setting Name="FirstLoad" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="PreviewMaxStats" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="PreviewAllies" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="PreviewBattlefield" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastLevel" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="PreviewLevel" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="AllyEquipment" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Value>
     </Setting>
     <Setting Name="History" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="LastSprite" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastDialogue" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastEventScript" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastEffect" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastFormation" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastMonster" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastItem" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastAttack" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastSpell" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastAnimation" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -946,72 +26,122 @@
     <Setting Name="LastAnimationCat" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="LastEventScriptCat" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastBattlefield" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastBattleDialogue" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="LastFormationPack" Type="System.Int32" Scope="User">
+    <Setting Name="LastAttack" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastAudioSample" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="RememberLastIndex" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="LastBattleDialogue" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="FirstLoad" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="LastBattlefield" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastDialogue" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"C:\\"</Value>
+    </Setting>
+    <Setting Name="LastEffect" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastEventScript" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastEventScriptCat" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastFormation" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastFormationPack" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastItem" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastMineCart" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="KeystrokesBonus" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;G&lt;/string&gt;
-  &lt;string&gt;H&lt;/string&gt;
-  &lt;string&gt;E&lt;/string&gt;
-  &lt;string&gt;F&lt;/string&gt;
-  &lt;string&gt;C&lt;/string&gt;
-  &lt;string&gt;D&lt;/string&gt;
-  &lt;string&gt;A&lt;/string&gt;
-  &lt;string&gt;B&lt;/string&gt;
-  &lt;string&gt;I&lt;/string&gt;
-  &lt;string&gt;J&lt;/string&gt;
-  &lt;string&gt;K&lt;/string&gt;
-  &lt;string&gt;L&lt;/string&gt;
-  &lt;string&gt;M&lt;/string&gt;
-  &lt;string&gt;N&lt;/string&gt;
-  &lt;string&gt;O&lt;/string&gt;
-  &lt;string&gt;P&lt;/string&gt;
-  &lt;string&gt;W&lt;/string&gt;
-  &lt;string&gt;X&lt;/string&gt;
-  &lt;string&gt;U&lt;/string&gt;
-  &lt;string&gt;V&lt;/string&gt;
-  &lt;string&gt;S&lt;/string&gt;
-  &lt;string&gt;T&lt;/string&gt;
-  &lt;string&gt;Q&lt;/string&gt;
-  &lt;string&gt;R&lt;/string&gt;
-  &lt;string&gt;Y&lt;/string&gt;
-  &lt;string&gt;Z&lt;/string&gt;
-  &lt;string&gt;!&lt;/string&gt;
-  &lt;string&gt;?&lt;/string&gt;
-  &lt;string&gt;.&lt;/string&gt;
-  &lt;string&gt;*&lt;/string&gt;
-  &lt;string&gt;@&lt;/string&gt;
-  &lt;string /&gt;
-&lt;/ArrayOfString&gt;</Value>
+    <Setting Name="LastMonster" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastRomPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"C:\\"</Value>
+    </Setting>
+    <Setting Name="LastSoundType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastSPC" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="LastSoundType" Type="System.Int32" Scope="User">
+    <Setting Name="LastSpell" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastSprite" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LoadAllData" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LoadLastUsedROM" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LoadNotes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NotePathCustom" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PatchServerURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://home.comcast.net/~giangurgolo/patches/</Value>
+    </Setting>
+    <Setting Name="PreviewAllies" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PreviewArgsDefault" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">-m -zs 0 -v 2</Value>
+    </Setting>
+    <Setting Name="PreviewArguments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-m -zs 0 -v 2</Value>
+    </Setting>
+    <Setting Name="PreviewBattlefield" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PreviewDynamicRomName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PreviewFirstTime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PreviewLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PreviewMaxStats" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RememberLastIndex" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowEncryptionWarnings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UndoStackSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">65535</Value>
+    </Setting>
+    <Setting Name="UnverifiedRomWarning" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VisualThemeSystem" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ZSNESPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

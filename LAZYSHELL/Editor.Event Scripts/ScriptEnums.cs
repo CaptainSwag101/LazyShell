@@ -4,9 +4,8 @@ using System.Text;
 
 namespace LAZYSHELL.ScriptsEditor
 {
-    static class ScriptEnums
+    public static class ScriptEnums
     {
-        // Average Length: 1
         private static int[] EventLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
@@ -34,7 +33,7 @@ namespace LAZYSHELL.ScriptsEditor
             5,5,5,5,6,6,5,5,  3,5,3,3,3,3,3,3, // 0xE0
             2,3,3,3,1,1,1,1,  5,1,1,1,1,0,1,1  // 0xF0
         };
-        private static int[] EventOptionFDLengths = new int[]
+        private static int[] EventFDLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0, // 0x00
@@ -67,7 +66,7 @@ namespace LAZYSHELL.ScriptsEditor
             1,1,1,1,1,1,1,1,  3,1,2,2,2,2,2,1, // 0x00
             2,2,2,2,2,2,1,1,  1,1,1,1,1,1,1,1, // 0x10
 
-            2,1,1,2,5,5,16,16,  16,2,1,5,3,3,3,7, // 0x20
+            2,1,1,2,5,5,16,16,16,2,1,5,3,3,3,7, // 0x20
             3,3,3,3,2,3,1,1,  1,1,6,6,5,3,5,4, // 0x30
             
             1,1,1,1,1,1,1,1,  1,1,1,1,1,1,1,1, // 0x40
@@ -88,7 +87,7 @@ namespace LAZYSHELL.ScriptsEditor
             5,5,5,5,6,6,5,5,  3,5,3,3,3,3,3,3, // 0xE0
             2,3,3,3,1,1,1,1,  5,1,1,1,1,0,1,1  // 0xF0
         };
-        private static int[] ActionOptionFDLengths = new int[]
+        private static int[] ActionFDLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,3, // 0x00
@@ -115,50 +114,44 @@ namespace LAZYSHELL.ScriptsEditor
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xE0
             2,2,2,2,2,2,2,2,  2,2,2,2,2,2,2,2, // 0xF0        
         };
-        public static int GetEventOpcodeLength(int script, int option)
+        public static int GetEventCommandLength(int script, int param1)
         {
-            int len = EventLengths[script];
-
-            if (len == 0 && (int)script > 0x2F)
-                len = EventOptionFDLengths[option];
-            if (len == 0 && (script <= 0x2F && option >= 0xF2))
+            int length = EventLengths[script];
+            if (length == 0 && (int)script > 0x2F)
+                length = EventFDLengths[param1];
+            if (length == 0 && (script <= 0x2F && param1 >= 0xF2))
             {
-                if (option >= 0 && option <= 0x7F || option >= 0xF6 && option <= 0xFF)
-                    len = 2;
-                else if (option == 0xF0 || option == 0xF1)
-                    len = 3;
-                else if (option == 0xF2 || option == 0xF3 || option == 0xF4 || option == 0xF5)
-                    len = 4;
+                if (param1 >= 0 && param1 <= 0x7F || param1 >= 0xF6 && param1 <= 0xFF)
+                    length = 2;
+                else if (param1 == 0xF0 || param1 == 0xF1)
+                    length = 3;
+                else if (param1 == 0xF2 || param1 == 0xF3 || param1 == 0xF4 || param1 == 0xF5)
+                    length = 4;
             }
-            if (len == 0) // Now we have to be dealing with Event Command that triggers an action queue
+            if (length == 0) // Now we have to be dealing with Event Command that triggers an action queue
             {
-                if ((int)option == 0xF0 || (int)option == 0xF1)
+                if ((int)param1 == 0xF0 || (int)param1 == 0xF1)
                 {
                     return 3; // problem because we need byte 3!
                 }
                 else
-                    len = 2;
-
-                len += (int)option & 0x7F; // Max value of 127 0x7F
+                    length = 2;
+                length += (int)param1 & 0x7F; // Max value of 127 0x7F
             }
-            if (len == 0)
+            if (length == 0)
                 throw new Exception("Invalid Length");
-
-            return len;
+            return length;
         }
-        public static int GetActionOpcodeLength(int queue, int option)
+        public static int GetActionCommandLength(int script, int param1)
         {
-            int len;
-
-            if ((int)queue == 0xFD)
-                len = ActionOptionFDLengths[option];
+            int length;
+            if ((int)script == 0xFD)
+                length = ActionFDLengths[param1];
             else
-                len = ActionLengths[queue];
-
-            if (len == 0)
+                length = ActionLengths[script];
+            if (length == 0)
                 throw new Exception("Invalid Length");
-
-            return len;
+            return length;
         }
     }
 }

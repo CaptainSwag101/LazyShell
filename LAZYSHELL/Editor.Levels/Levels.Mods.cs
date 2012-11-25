@@ -266,7 +266,7 @@ namespace LAZYSHELL
                 tileMods.TilemapsB[2] = new byte[tileMods.TilemapsA[2].Length];
                 tileMods.TilemapsA[2].CopyTo(tileMods.TilemapsB[2], 0);
             }
-            tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.Mod_, true);
+            tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.MOD, true);
             this.tileModsFieldTree.BeginUpdate();
             this.tileModsFieldTree.SelectedNode.Nodes.Add("ALTERNATE");
             this.tileModsFieldTree.SelectedNode = this.tileModsFieldTree.SelectedNode.Nodes[0];
@@ -432,9 +432,9 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not change the width. There is not enough free space available.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.Mod_, false);
+            tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.MOD, false);
             if (tileMods.Set)
-                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.Mod_, true);
+                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.MOD, true);
             tileModsBytesLeft.Text = CalculateFreeTileModSpace() + " bytes left";
             tileModsBytesLeft.BackColor = CalculateFreeTileModSpace() >= 0 ? SystemColors.Control : Color.Red;
             picture.Invalidate();
@@ -450,9 +450,9 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not change the height. There is not enough free space available.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.Mod_, false);
+            tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.MOD, false);
             if (tileMods.Set)
-                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.Mod_, true);
+                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.MOD, true);
             tileModsBytesLeft.Text = CalculateFreeTileModSpace() + " bytes left";
             tileModsBytesLeft.BackColor = CalculateFreeTileModSpace() >= 0 ? SystemColors.Control : Color.Red;
             picture.Invalidate();
@@ -516,7 +516,7 @@ namespace LAZYSHELL
             if (this.tileModsFieldTree.SelectedNode.Parent == null && tileMods.CurrentMod > 0)
             {
                 index = tileModsFieldTree.SelectedNode.Index - 1;
-                tileMods.ReverseMod(tileMods.CurrentMod - 1);
+                tileMods.Reverse(tileMods.CurrentMod - 1);
             }
             else
                 return;
@@ -529,7 +529,7 @@ namespace LAZYSHELL
             if (this.tileModsFieldTree.SelectedNode.Parent == null && tileMods.CurrentMod < tileMods.Mods.Count - 1)
             {
                 index = tileModsFieldTree.SelectedNode.Index + 1;
-                tileMods.ReverseMod(tileMods.CurrentMod);
+                tileMods.Reverse(tileMods.CurrentMod);
             }
             else
                 return;
@@ -538,7 +538,7 @@ namespace LAZYSHELL
         private void tileModsCopy_Click(object sender, EventArgs e)
         {
             if (tileModsFieldTree.SelectedNode != null)
-                copyTileMod = tileMods.Mod_.Copy(level, tileset);
+                copyTileMod = tileMods.MOD.Copy(level, tileset);
         }
         private void tileModsPaste_Click(object sender, EventArgs e)
         {
@@ -546,7 +546,7 @@ namespace LAZYSHELL
         }
         private void tileModsDuplicate_Click(object sender, EventArgs e)
         {
-            AddNewTileMod(tileMods.Mod_.Copy(level, tileset));
+            AddNewTileMod(tileMods.MOD.Copy(level, tileset));
         }
         // solidity mods
         private void solidModsFieldTree_AfterSelect(object sender, TreeViewEventArgs e)

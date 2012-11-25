@@ -89,13 +89,14 @@ namespace LAZYSHELL
             this.pictureBoxTilesetL1.Height = height;
             this.pictureBoxTilesetL2.Height = height;
             this.pictureBoxTilesetL3.Height = height;
-            if (this.tileset.Tilesets_Tiles[Layer] == null)
+            if (this.tileset.Tilesets_tiles[Layer] == null)
                 this.Layer = 0;
             LoadTileEditor();
             SetTileSetImage();
         }
         public void Reload(Tileset tileset, Delegate update, PaletteSet paletteSet, Overlay overlay)
         {
+            mouseDownTile = 0;
             this.pictureBoxTilesetL1.Height = height;
             this.pictureBoxTilesetL2.Height = height;
             this.pictureBoxTilesetL3.Height = height;
@@ -104,7 +105,7 @@ namespace LAZYSHELL
             this.paletteSet = paletteSet;
             this.overlay = overlay;
             this.update = update;
-            if (this.tileset.Tilesets_Tiles[Layer] == null)
+            if (this.tileset.Tilesets_tiles[Layer] == null)
                 this.Layer = 0;
             LoadTileEditor();
             SetTileSetImage();
@@ -120,11 +121,11 @@ namespace LAZYSHELL
         }
         private void SetTileSetImage()
         {
-            if (tileset.Tilesets_Tiles[Layer] != null)
+            if (tileset.Tilesets_tiles[Layer] != null)
             {
                 int height = Layer < 2 ? tileset.Height : tileset.HeightL3;
-                int[] tileSetPixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, height, 0, false);
-                int[] priority1Pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[Layer], 16, height, 0, true);
+                int[] tileSetPixels = Do.TilesetToPixels(tileset.Tilesets_tiles[Layer], 16, height, 0, false);
+                int[] priority1Pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[Layer], 16, height, 0, true);
                 tilesetImage = new Bitmap(Do.PixelsToImage(tileSetPixels, 256, height * 16));
                 priority1 = new Bitmap(Do.PixelsToImage(priority1Pixels, 256, height * 16));
                 pictureBox.Height = height * 16;
@@ -141,7 +142,7 @@ namespace LAZYSHELL
         }
         private void LoadTileEditor()
         {
-            if (tileset.Tilesets_Tiles[Layer] == null)
+            if (tileset.Tilesets_tiles[Layer] == null)
                 return;
             switch (Layer)
             {
@@ -149,26 +150,26 @@ namespace LAZYSHELL
                     if (TileEditor == null)
                     {
                         TileEditor = new TileEditor(new Function(TileUpdate),
-                            this.tileset.Tilesets_Tiles[Layer][mouseDownTile],
+                            this.tileset.Tilesets_tiles[Layer][mouseDownTile],
                             tileset.GraphicsL3, paletteSet, 0x10);
                         TileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
                         TileEditor.Reload(new Function(TileUpdate),
-                            this.tileset.Tilesets_Tiles[Layer][mouseDownTile],
+                            this.tileset.Tilesets_tiles[Layer][mouseDownTile],
                             tileset.GraphicsL3, paletteSet, 0x10);
                     break;
                 default:
                     if (TileEditor == null)
                     {
                         TileEditor = new TileEditor(new Function(TileUpdate),
-                        this.tileset.Tilesets_Tiles[Layer][mouseDownTile],
+                        this.tileset.Tilesets_tiles[Layer][mouseDownTile],
                         tileset.Graphics, paletteSet, 0x20);
                         TileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
                     }
                     else
                         TileEditor.Reload(new Function(TileUpdate),
-                        this.tileset.Tilesets_Tiles[Layer][mouseDownTile],
+                        this.tileset.Tilesets_tiles[Layer][mouseDownTile],
                         tileset.Graphics, paletteSet, 0x20);
                     break;
             }
@@ -202,7 +203,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
                 {
                     copiedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.Tilesets_Tiles[Layer][(y + y_) * 16 + x + x_].Copy();
+                        tileset.Tilesets_tiles[Layer][(y + y_) * 16 + x + x_].Copy();
                 }
             }
             this.copiedTiles.Tiles = copiedTiles;
@@ -223,7 +224,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
                 {
                     draggedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.Tilesets_Tiles[Layer][(y + y_) * 16 + x + x_].Copy();
+                        tileset.Tilesets_tiles[Layer][(y + y_) * 16 + x + x_].Copy();
                 }
             }
             this.draggedTiles.Tiles = draggedTiles;
@@ -265,12 +266,12 @@ namespace LAZYSHELL
                         continue;
                     int index = (y + y_) * 16 + x + x_;
                     Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
-                    tileset.Tilesets_Tiles[Layer][index] = tile.Copy();
-                    tileset.Tilesets_Tiles[Layer][index].TileIndex = index;
+                    tileset.Tilesets_tiles[Layer][index] = tile.Copy();
+                    tileset.Tilesets_tiles[Layer][index].TileIndex = index;
                 }
             }
             overlay.SelectTS = null;
-            tileset.DrawTileset(tileset.Tilesets_Tiles[Layer], tileset.Tilesets_Bytes[Layer]);
+            tileset.DrawTileset(tileset.Tilesets_tiles[Layer], tileset.Tilesets_bytes[Layer]);
             tileset.Assemble(16, Layer);
             SetTileSetImage();
             if (autoUpdate.Checked)
@@ -284,9 +285,9 @@ namespace LAZYSHELL
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
-                    tileset.Tilesets_Tiles[Layer][(y + y_) * 16 + x + x_].Clear();
+                    tileset.Tilesets_tiles[Layer][(y + y_) * 16 + x + x_].Clear();
             }
-            tileset.DrawTileset(tileset.Tilesets_Tiles[Layer], tileset.Tilesets_Bytes[Layer]);
+            tileset.DrawTileset(tileset.Tilesets_tiles[Layer], tileset.Tilesets_bytes[Layer]);
             tileset.Assemble(16, Layer);
             SetTileSetImage();
             if (autoUpdate.Checked)
@@ -306,7 +307,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
                 {
                     copiedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.Tilesets_Tiles[Layer][(y + y_) * 16 + x + x_].Copy();
+                        tileset.Tilesets_tiles[Layer][(y + y_) * 16 + x + x_].Copy();
                 }
             }
             if (type == "mirror")
@@ -327,12 +328,12 @@ namespace LAZYSHELL
             {
                 for (int x = 0; x < overlay.SelectTS.Width / 16; x++)
                 {
-                    Tile tile = tileset.Tilesets_Tiles[Layer][(y + y_) * 16 + x + x_];
+                    Tile tile = tileset.Tilesets_tiles[Layer][(y + y_) * 16 + x + x_];
                     foreach (Subtile subtile in tile.Subtiles)
                         subtile.Priority1 = priority1;
                 }
             }
-            tileset.DrawTileset(tileset.Tilesets_Tiles[Layer], tileset.Tilesets_Bytes[Layer]);
+            tileset.DrawTileset(tileset.Tilesets_tiles[Layer], tileset.Tilesets_bytes[Layer]);
             SetTileSetImage();
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
@@ -462,7 +463,7 @@ namespace LAZYSHELL
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            e.Cancel = tileset.Tilesets_Tiles[e.TabPageIndex] == null;
+            e.Cancel = tileset.Tilesets_tiles[e.TabPageIndex] == null;
         }
         // image
         private void pictureBoxTileset_Paint(object sender, PaintEventArgs e)
@@ -626,13 +627,13 @@ namespace LAZYSHELL
         private void pictureBoxTileset_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyData == (Keys.Control | Keys.V) && !lockEditing.Checked)
-                buttonEditPaste_Click(null, null);
+                buttonEditPaste.PerformClick();
             if (e.KeyData == (Keys.Control | Keys.C) && !lockEditing.Checked)
-                buttonEditCopy_Click(null, null);
+                buttonEditCopy.PerformClick();
             if (e.KeyData == Keys.Delete && !lockEditing.Checked)
-                buttonEditDelete_Click(null, null);
+                buttonEditDelete.PerformClick();
             if (e.KeyData == (Keys.Control | Keys.X) && !lockEditing.Checked)
-                buttonEditCut_Click(null, null);
+                buttonEditCut.PerformClick();
             if (e.KeyData == (Keys.Control | Keys.D))
             {
                 if (draggedTiles != null)

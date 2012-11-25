@@ -49,6 +49,9 @@ namespace LAZYSHELL
                 return (int)rate;
             }
         }
+        //
+        private Search searchWindow;
+        private EditLabel labelWindow;
         // constructor
         public SampleEditor()
         {
@@ -71,6 +74,8 @@ namespace LAZYSHELL
                 wav = BRR.BRRToWAV(sample.Sample, sampleRate);
                 loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
             }
+            searchWindow = new Search(sampleNum, searchText, searchNames, sampleName.Items);
+            labelWindow = new EditLabel(sampleName, sampleNum, "Samples", true);
         }
         // functions
         private void RefreshSample()
@@ -86,7 +91,7 @@ namespace LAZYSHELL
         }
         private void DrawWavelength(Graphics g, int width, int height, byte[] wav)
         {
-            int size = Bits.Get32Bit(wav, 0x0028) / 2;
+            int size = Bits.GetInt32(wav, 0x0028) / 2;
             int offset = 0x2C;
             List<Point> points = new List<Point>();
             double w_ratio = (double)width / (double)size;
@@ -260,7 +265,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("Are you sure you want to reset the current sample? You will lose all unsaved changes.",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
-            sample = new BRRSample(Model.Data, Index);
+            sample = new BRRSample(Index);
             RefreshSample();
         }
         private void label1_LinkClicked(object sender, LinkClickedEventArgs e)

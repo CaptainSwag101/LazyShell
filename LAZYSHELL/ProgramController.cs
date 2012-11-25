@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Forms;//remove later
+using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
@@ -14,6 +14,16 @@ namespace LAZYSHELL
         {
             this.App = app;
         }
+        // assemblers
+        public void Assemble()
+        {
+            App.Assemble();
+        }
+        public bool AssembleAndCloseWindows()
+        {
+            return App.CloseAll();
+        }
+        // functions
         #region File Managing
         public bool OpenRomFile()
         {
@@ -114,14 +124,6 @@ namespace LAZYSHELL
         {
             return Model.VerifyMD5Checksum();
         }
-        public void Assemble()
-        {
-            App.Assemble();
-        }
-        public bool AssembleAndCloseWindows()
-        {
-            return App.CloseAll();
-        }
         #endregion
         #region Author Stamp
         public bool Locked()
@@ -212,7 +214,7 @@ namespace LAZYSHELL
         }
         public void Notes()
         {
-            App.CreateNotesWindow();
+            App.CreateProjectWindow();
         }
         public void Dock()
         {

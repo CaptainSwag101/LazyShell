@@ -11,85 +11,68 @@ namespace LAZYSHELL
     [Serializable()]
     public class Dialogue : Element
     {
-        [NonSerialized()]
-        private byte[] data;
-        private int index;
-        private char[] rawDialogue;
+        #region variables
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // class variables
+        private char[] text;
         private int offset;
         private int pointer;
-        private ushort[] dialoguePointer = new ushort[8];
         private bool error = false;
         private int caretPosByteView;
         private int caretPosTextView;
+        // non-serialized variables
         [NonSerialized()]
         private TextHelper textHelper;
-        private int duplicateOfDialogue;
-        private int withinDialogue;
-        private int indexInDialogue;
-        // Accessors
-        public override byte[] Data { get { return data; } set { data = value; } }
-        public override int Index { get { return index; } set { index = value; } }
-        public int DuplicateOfDialogue { get { return duplicateOfDialogue; } set { duplicateOfDialogue = value; } }
-        public int WithinDialogue { get { return withinDialogue; } set { withinDialogue = value; } }
-        public int IndexInDialogue { get { return indexInDialogue; } set { indexInDialogue = value; } }
-        public int Length { get { return rawDialogue.Length; } }
+        private int reference;
+        private int parent;
+        private int position;
+        #endregion
+        #region accessors
+        // public accessors
+        public char[] Text { get { return text; } set { text = value; } }
+        public int Length { get { return text.Length; } }
         public int Offset { get { return this.offset; } set { this.offset = value; } }
-        public int Pointer { get { return Bits.GetShort(data, 0x37E000 + index * 2); } }    // this is used to find duplicates
-        //
-        public char[] RawDialogue { get { return rawDialogue; } set { rawDialogue = value; } }
-        public string GetDialogue(bool byteView, string[] tables)
+        public int Pointer { get { return Bits.GetShort(rom, 0x37E000 + index * 2); } }    // this is used to find duplicates
+        // external managers       
+        /// <summary>
+        /// The dialogue's reference dialogue. Ignored if same as index.
+        /// </summary>
+        public int Reference { get { return reference; } set { reference = value; } }
+        /// <summary>
+        /// The dialogue's containing dialogue. Ignored if same as index.
+        /// </summary>
+        public int Parent { get { return parent; } set { parent = value; } }
+        /// <summary>
+        /// The index, or position, of the dialogue in it's parent container. Ignored if parent same as index.
+        /// </summary>
+        public int Position { get { return position; } set { position = value; } }
+        #endregion
+        // constructor
+        public Dialogue(int index)
         {
-            if (!error)
-                return new string(textHelper.DecodeText(rawDialogue, byteView, tables));
-            else
-                return new string(rawDialogue);
-        }
-        public int GetCaretPosition(bool byteView)
-        {
-            if (byteView)
-                return caretPosByteView;
-            else
-                return caretPosTextView;
-        }
-        public bool SetDialogue(string value, bool byteView, string[] tables)
-        {
-            this.rawDialogue = textHelper.EncodeText(value.ToCharArray(), byteView, tables);
-            this.error = textHelper.Error;
-            return !error;
-        }
-        public void SetCaretPosition(int value, bool byteView)
-        {
-            if (byteView)
-                this.caretPosByteView = value;
-            else
-                this.caretPosTextView = value;
-        }
-        // Constructor
-        public Dialogue(byte[] data, int dialogueNum)
-        {
-            this.data = data;
-            this.index = dialogueNum;
+            this.index = index;
             this.textHelper = TextHelper.Instance;
-            InitializeDialogue(data);
+            Disassemble();
         }
-        // Dissasembler
-        private void InitializeDialogue(byte[] data)
+        #region functions
+        // assemblers
+        private void Disassemble()
         {
-            rawDialogue = GetDialogue(data);
+            text = GetText();
         }
-        public ushort Assemble(ushort offset)
+        public void Assemble(int offset)
         {
-            return SaveDialogue(offset);
+            Assemble(ref offset);
         }
-        private ushort SaveDialogue(ushort offset)
+        public void Assemble(ref int offset)
         {
             if (index >= 0x0800)
-                Bits.SetShort(data, 0x37E000 + index * 2, (ushort)(offset - 4));
+                Bits.SetShort(rom, 0x37E000 + index * 2, (ushort)(offset - 4));
             else
-                Bits.SetShort(data, 0x37E000 + index * 2, (ushort)(offset - 8));
-
+                Bits.SetShort(rom, 0x37E000 + index * 2, (ushort)(offset - 8));
             int dlgOffset = 0;
-
             // Select bank to save to
             if (index >= 0x0C00)
                 dlgOffset = offset + 0x240000;
@@ -97,51 +80,51 @@ namespace LAZYSHELL
                 dlgOffset = offset + 0x230000;
             else
                 dlgOffset = offset + 0x220000;
-
-            Bits.SetCharArray(data, dlgOffset, rawDialogue);
-            return (ushort)rawDialogue.Length;
+            Bits.SetCharArray(rom, dlgOffset, text);
+            offset += text.Length;
         }
-        private char[] GetDialogue(byte[] data)
+        // class functions
+        private char[] GetText()
         {
-            int dlgPtr = Bits.GetShort(data, 0x37E000 + (index * 2));
+            int dlgPtr = Bits.GetShort(rom, 0x37E000 + (index * 2));
             int secPtr;
             if (index >= 0xC00)
-                secPtr = Bits.GetShort(data, 0x240000 + (((index - 0xC00) >> 8) & 0xFE));
+                secPtr = Bits.GetShort(rom, 0x240000 + (((index - 0xC00) >> 8) & 0xFE));
             else if (index >= 0x800)
-                secPtr = Bits.GetShort(data, 0x230000 + (((index - 0x800) >> 8) & 0xFE));
+                secPtr = Bits.GetShort(rom, 0x230000 + (((index - 0x800) >> 8) & 0xFE));
             else
-                secPtr = Bits.GetShort(data, 0x220000 + ((index >> 8) & 0xFE));
+                secPtr = Bits.GetShort(rom, 0x220000 + ((index >> 8) & 0xFE));
             int numGroup = index >= 0x800 ? 4 : 8;
-            Bits.SetShort(data, 0x37E000 + (index * 2), (ushort)(dlgPtr + secPtr - numGroup));
+            Bits.SetShort(rom, 0x37E000 + (index * 2), (ushort)(dlgPtr + secPtr - numGroup));
             // checks if pointer points to beyond capacity of dialogue in bank
             // if it is, then it sets the pointer to the last dialogue, thus making it a duplicate
             // this fixes the problems with dialogues 3066 to 3071
-            dlgPtr = Bits.GetShort(data, 0x37E000 + (index * 2));
+            dlgPtr = Bits.GetShort(rom, 0x37E000 + (index * 2));
             if (index >= 0x800)
             {
                 if (dlgPtr >= 0xF2D1 - 4)
-                    Bits.SetShort(data, 0x37E000 + (index * 2), (ushort)(Bits.GetShort(data, 0x37E000 + ((index - 1) * 2))));
+                    Bits.SetShort(rom, 0x37E000 + (index * 2), (ushort)(Bits.GetShort(rom, 0x37E000 + ((index - 1) * 2))));
             }
             else
             {
                 if (dlgPtr >= 0xFD18 - 8)
-                    Bits.SetShort(data, 0x37E000 + (index * 2), (ushort)(Bits.GetShort(data, 0x37E000 + ((index - 1) * 2))));
+                    Bits.SetShort(rom, 0x37E000 + (index * 2), (ushort)(Bits.GetShort(rom, 0x37E000 + ((index - 1) * 2))));
             }
             // simplify all of the section pointers
             if (index == 0xFFF)
             {
-                Bits.SetShort(data, 0x220002, 0x0008);
-                Bits.SetShort(data, 0x220004, 0x0008);
-                Bits.SetShort(data, 0x220006, 0x0008);
-                Bits.SetShort(data, 0x230002, 0x0004);
-                Bits.SetShort(data, 0x240002, 0x0004);
+                Bits.SetShort(rom, 0x220002, 0x0008);
+                Bits.SetShort(rom, 0x220004, 0x0008);
+                Bits.SetShort(rom, 0x220006, 0x0008);
+                Bits.SetShort(rom, 0x230002, 0x0004);
+                Bits.SetShort(rom, 0x240002, 0x0004);
             }
-            this.pointer = Bits.GetShort(data, 0x37E000 + index * 2); // from pointer table
-            if (index >= 0x0C00) 
+            this.pointer = Bits.GetShort(rom, 0x37E000 + index * 2); // from pointer table
+            if (index >= 0x0C00)
                 this.offset = this.pointer + 4 + 0x240000;
-            else if (index >= 0x0800) 
+            else if (index >= 0x0800)
                 this.offset = this.pointer + 4 + 0x230000;
-            else 
+            else
                 this.offset = this.pointer + 8 + 0x220000;
             //
             int count = this.offset;
@@ -149,7 +132,7 @@ namespace LAZYSHELL
             byte ptr = 0x01;
             while (ptr != 0x00 && ptr != 0x06)
             {
-                ptr = data[count];
+                ptr = rom[count];
                 if (ptr == 0x0B || ptr == 0x0D || ptr == 0x1C)
                 {
                     length++;
@@ -160,37 +143,19 @@ namespace LAZYSHELL
             }
             char[] dialogue = new char[length];
             for (int i = 0; i < length; i++)
-                dialogue[i] = (char)data[this.offset + i];
+                dialogue[i] = (char)rom[this.offset + i];
             return dialogue;
         }
-        public bool CompatibleWithGame()
+        public string GetText(bool byteView, string[] tables)
         {
-            for (int i = 0; i < rawDialogue.Length; i++)
-            {
-                if (rawDialogue[i] == '\x0b' || rawDialogue[i] == '\x0d')
-                {
-                    i += 2;
-                }
-                if (!IsValidCharTmp(rawDialogue[i]))
-                    return false;
-            }
-            return true;
+            if (!error)
+                return new string(textHelper.Decode(text, byteView, tables));
+            else
+                return new string(text);
         }
-        private bool IsValidCharTmp(char toTest)
+        public string GetStub(bool byteView, string[] tables)
         {
-            if (toTest >= '\x00' && toTest <= '\x1C')
-                return true;
-            if (toTest >= '\x20' && toTest <= '\x5A')
-                return true;
-            if (toTest >= '\x61' && toTest <= '\x7A')
-                return true;
-            if (toTest >= '\x8E' && toTest <= '\x9C')
-                return true;
-            return false;
-        }
-        public string GetDialogueStub(bool byteView, string[] tables)
-        {
-            string temp = GetDialogue(byteView, tables);
+            string temp = GetText(byteView, tables);
             if (temp.Length > 40)
             {
                 temp = temp.Substring(0, 37);
@@ -199,16 +164,31 @@ namespace LAZYSHELL
             else
                 return temp;
         }
+        public int GetCaretPosition(bool byteView)
+        {
+            if (byteView)
+                return caretPosByteView;
+            else
+                return caretPosTextView;
+        }
+        public bool SetText(string value, bool byteView, string[] tables)
+        {
+            this.text = textHelper.Encode(value.ToCharArray(), byteView, tables);
+            this.error = textHelper.Error;
+            return !error;
+        }
+        public void SetCaretPosition(int value, bool byteView)
+        {
+            if (byteView)
+                this.caretPosByteView = value;
+            else
+                this.caretPosTextView = value;
+        }
+        // universal functions
         public override void Clear()
         {
-            rawDialogue = new char[0];
+            text = new char[0];
         }
-        public FileStream Serialize()
-        {
-            return null;
-        }
-        public void Deserialize()
-        {
-        }
+        #endregion
     }
 }

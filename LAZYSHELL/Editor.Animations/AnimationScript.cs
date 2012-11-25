@@ -8,28 +8,26 @@ namespace LAZYSHELL.ScriptsEditor
 {
     public class AnimationScript
     {
+        // universal variables
         private int type; public int Type { get { return this.type; } }
-        private int index; 
-        public int Index { get { return this.index; } set { this.index = value; } }
-        private int baseOffset; public int BaseOffset { get { return this.baseOffset; } set { this.baseOffset = value; } }
-
-        private ArrayList commands; public ArrayList Commands { get { if (this.commands == null) this.commands = new ArrayList(); return this.commands; } set { this.commands = value; } }
-
-        private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
-        public byte aMem = 0;
-        public byte AMem
+        private int index; public int Index { get { return this.index; } set { this.index = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        // class variables
+        private List<AnimationCommand> commands;
+        public List<AnimationCommand> Commands
         {
-            get { return this.aMem; }
-            set
+            get
             {
-                //byte temp = aMem;
-                this.aMem = value;
-                //this.aMem = temp;
+                if (this.commands == null)
+                    this.commands = new List<AnimationCommand>();
+                return this.commands;
             }
+            set { this.commands = value; }
         }
-
-        #region Behavior Offsets
-        private int[] behaviorOffsets = new int[]
+        public byte amem = 0; public byte AMEM { get { return this.amem; } set { this.amem = value; } }
+        private int baseOffset; public int BaseOffset { get { return this.baseOffset; } set { this.baseOffset = value; } }
+        // constant variables
+        private readonly int[] behaviorOffsets = new int[]
         {
             0x3505C6,0x3505DA,0x350635,0x350669,0x3506A7,0x350737,0x350790,0x350796,
             0x3507A2,0x3507E9,0x350830,0x35086A,0x3508A4,0x3508BA,0x350916,0x35091C,
@@ -39,17 +37,15 @@ namespace LAZYSHELL.ScriptsEditor
             0x350DA3,0x350DAF,0x350DED,0x350E38,0x350E4A,0x350E84,0x350E98,0x350EEE,
             0x350F1A,0x350F44,0x350F4A,0x350F56,0x350F6B,0x350F7A
         };
-        #endregion
-
-        public AnimationScript(byte[] data, int index, int type)
+        // constructor
+        public AnimationScript(int index, int type)
         {
-            this.data = data;
             this.index = index;
             this.type = type;
-
-            InitializeAnimationScript(index, type);
+            Disassemble();
         }
-        private void InitializeAnimationScript(int animationNum, int type)
+        // disassembler
+        private void Disassemble()
         {
             int bank = 0x350000, start = 0;
             switch (type)
@@ -63,15 +59,16 @@ namespace LAZYSHELL.ScriptsEditor
                 case 7: start = 0x6004; bank = 0x3A0000; break;
             }
             if (type == 0)
-                baseOffset = behaviorOffsets[animationNum];
+                baseOffset = behaviorOffsets[index];
             else
-                baseOffset = bank + Bits.GetShort(data, bank + start + animationNum * 2);
-            ParseAnimationScript(data);
+                baseOffset = bank + Bits.GetShort(rom, bank + start + index * 2);
+            ParseScript(rom);
         }
-        private void ParseAnimationScript(byte[] data)
+        // functions
+        private void ParseScript(byte[] rom)
         {
-            int offset = baseOffset, len = 0;
-            AnimationScriptCommand temp;
+            int offset = baseOffset, length = 0;
+            AnimationCommand temp;
             if (type == 7)
             {
                 offset = baseOffset + 2;
@@ -81,103 +78,62 @@ namespace LAZYSHELL.ScriptsEditor
             }
 
             if (this.commands == null)
-                this.commands = new ArrayList();
+                this.commands = new List<AnimationCommand>();
 
-            while (offset < data.Length)
+            while (offset < rom.Length)
             {
                 if (offset == 0x3A6BA1)   // another annoying rare case
                     break;
-
-                len = GetAnimationOpcodeLength(data, offset);
-                temp = new AnimationScriptCommand(data, Bits.GetByteArray(data, offset, len), offset, this, null);
-
+                //
+                length = GetOpcodeLength(rom, offset);
+                temp = new AnimationCommand(Bits.GetByteArray(rom, offset, length), offset, this, null);
+                // memory modifiying commands
                 switch (temp.Opcode)
                 {
                     case 0x20:
-                    case 0x21: if ((temp.Option & 0x0F) == 0) aMem = temp.AnimationData[2]; break;
+                    case 0x21: if ((temp.Param1 & 0x0F) == 0) amem = temp.CommandData[2]; break;
                     case 0x2C:
-                    case 0x2D: if ((temp.Option & 0x0F) == 0) aMem += temp.AnimationData[2]; break;
+                    case 0x2D: if ((temp.Param1 & 0x0F) == 0) amem += temp.CommandData[2]; break;
                     case 0x2E:
-                    case 0x2F: if ((temp.Option & 0x0F) == 0) aMem -= temp.AnimationData[2]; break;
+                    case 0x2F: if ((temp.Param1 & 0x0F) == 0) amem -= temp.CommandData[2]; break;
                     case 0x30:
-                    case 0x31: if ((temp.Option & 0x0F) == 0) aMem++; break;
+                    case 0x31: if ((temp.Param1 & 0x0F) == 0) amem++; break;
                     case 0x32:
-                    case 0x33: if ((temp.Option & 0x0F) == 0) aMem--; break;
+                    case 0x33: if ((temp.Param1 & 0x0F) == 0) amem--; break;
                     case 0x34:
-                    case 0x35: if ((temp.Option & 0x0F) == 0) aMem = 0; break;
+                    case 0x35: if ((temp.Param1 & 0x0F) == 0) amem = 0; break;
                     case 0x6A:
-                    case 0x6B: if ((temp.Option & 0x0F) == 0) aMem = (byte)(temp.AnimationData[2] - 1); break;
+                    case 0x6B: if ((temp.Param1 & 0x0F) == 0) amem = (byte)(temp.CommandData[2] - 1); break;
                 }
-
                 commands.Add(temp);
-
-                if (data[offset] == 0x07 || // end animation packet
-                    data[offset] == 0x09 || // jump directly to address (thus ending this)
-                    data[offset] == 0x11 || // end subroutine
-                    data[offset] == 0x5E)   // end sprite subroutine
+                // termination commands
+                if (rom[offset] == 0x07 || // end animation packet
+                    rom[offset] == 0x09 || // jump directly to address (thus ending this)
+                    rom[offset] == 0x11 || // end subroutine
+                    rom[offset] == 0x5E)   // end sprite subroutine
                     break;
-
-                offset += len;
+                //
+                offset += length;
             }
         }
-        public void RefreshAnimationScript()
+        public void RefreshScript()
         {
             this.commands = null;
-            InitializeAnimationScript(this.index, this.type);
+            Disassemble();
         }
-        public int GetAnimationOpcodeLength(byte[] data, int offset)
+        public int GetOpcodeLength(byte[] rom, int offset)
         {
-            byte opcode, option;
-            int len;
-
-            opcode = data[offset];
-            if (data.Length - offset > 1)
-                option = data[offset + 1];
+            byte param;
+            byte opcode = rom[offset];
+            if (rom.Length - offset > 1)
+                param = rom[offset + 1];
             else
-                option = 0;
-
-            len = A_ScriptEnums.GetAnimationOpcodeLength(opcode, option);
-
-            return len;
+                param = 0;
+            return A_ScriptEnums.GetCommandLength(opcode, param);
         }
-        private int StrChr(int offset, byte chr, int maxLen, byte[] data)
+        public void Add(AnimationCommand command)
         {
-            int i = 0;
-
-            while (data[offset + i] != chr && i < maxLen)
-                i++;
-
-            return i;
+            commands.Add(command);
         }
-        private int StrShrt(int offset, ushort chr, int maxLen, byte[] data)
-        {
-            int i = 0;
-
-            while (Bits.GetShort(data, offset + i) != chr && i < maxLen)
-                i++;
-
-            return i;
-        }
-        #region Management Methods
-        public void Modify(AnimationScriptCommand asc)
-        {
-            AnimationScriptCommand cmd;
-            for (int i = 0; i < this.commands.Count; i++)
-            {
-                cmd = (AnimationScriptCommand)this.commands[i];
-                if (asc.InternalOffset == cmd.InternalOffset)
-                {
-                    byte[] temp = new byte[asc.AnimationData.Length];
-                    asc.AnimationData.CopyTo(temp, 0);
-                    cmd = new AnimationScriptCommand(data, temp, asc.Offset, this, null);
-                }
-                cmd.Modify(asc);
-            }
-        }
-        public void Add(AnimationScriptCommand asc)
-        {
-            commands.Add(asc);
-        }
-        #endregion
     }
 }

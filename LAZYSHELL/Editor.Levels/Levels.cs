@@ -16,7 +16,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class Levels : Form
+    public partial class Levels : NewForm
     {
         #region Variables
 
@@ -36,7 +36,7 @@ namespace LAZYSHELL
         private PaletteSet[] paletteSets { get { return Model.PaletteSets; } set { Model.PaletteSets = value; } }
         private PrioritySet[] prioritySets { get { return Model.PrioritySets; } set { Model.PrioritySets = value; } }
         private SolidityTile[] solidTiles { get { return Model.SolidTiles; } set { Model.SolidTiles = value; } }
-        private NPCSpritePartitions[] npcSpritePartitions { get { return Model.NPCSpritePartitions; } }
+        private Partitions[] npcSpritePartitions { get { return Model.NPCSpritePartitions; } }
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
         //
         private Level level { get { return levels[index]; } set { levels[index] = value; } }
@@ -57,12 +57,12 @@ namespace LAZYSHELL
         public ToolStripNumericUpDown LevelNum { get { return levelNum; } set { levelNum = value; } }
         public TabControl TabControl { get { return tabControl; } set { tabControl = value; } }
         private Search searchWindow;
+        private EditLabel labelWindow;
         private SpaceAnalyzer sa;
         #endregion
         // Constructor
         public Levels()
         {
-            settings.Keystrokes[0x20] = "\x20";
 
             InitializeComponent();
             this.levelInfo.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader() });
@@ -70,16 +70,15 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStripToggle, Keys.F1, helpTips);
             Do.AddShortcut(toolStripToggle, Keys.F2, baseConvertor);
             searchWindow = new Search(levelNum, nameTextBox, searchLevelNames, levelName.Items);
+            labelWindow = new EditLabel(levelName, levelNum, "Levels", true);
 
-            if (settings.LevelNames.Count == 0)
-                settings.LevelNames.AddRange(Lists.LevelNames);
-            this.levelName.Items.AddRange(Lists.Numerize(settings.LevelNames));
+            this.levelName.Items.AddRange(Lists.Numerize(Lists.LevelNames));
 
             this.layerMessageBox.Items.Add("{NONE}");
             Dialogue[] dialogues = Model.GetDialogues(0, 128);
             string[] tables = Model.DTEStr(true);
             for (int i = 0; i < 128; i++)
-                this.layerMessageBox.Items.Add(dialogues[i].GetDialogueStub(true, tables));
+                this.layerMessageBox.Items.Add(dialogues[i].GetStub(true, tables));
 
             this.mapGFXSet1Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames));
             this.mapGFXSet2Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames));
@@ -111,7 +110,7 @@ namespace LAZYSHELL
                 RefreshLevel();
 
             updatingLevel = true;
-            InitializeSettings(); // Sets initial control settings
+            Initialize(); // Sets initial control settings
             updatingLevel = false;
 
             new ToolTipLabel(this, baseConvertor, helpTips);
@@ -124,7 +123,7 @@ namespace LAZYSHELL
                 Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
         #region Functions
-        private void InitializeSettings()
+        private void Initialize()
         {
             InitializeLayerProperties();
             InitializeMapProperties();
@@ -152,10 +151,8 @@ namespace LAZYSHELL
             panelLevels.Controls.Add(levelsSolidTiles);
             panelLevels.Controls.Add(levelsTemplate);
 
-            openTilemap.Checked = true;
-            openTilemap_Click(null, null);
-            openTileset.Checked = true;
-            openTileset_Click(null, null);
+            openTilemap.PerformClick();
+            openTileset.PerformClick();
 
             levelsTileset.BringToFront();
             levelsTilemap.BringToFront();
@@ -256,23 +253,23 @@ namespace LAZYSHELL
             List<string[]> items = new List<string[]>();
             items.Add(new string[] { "Layer", ((index * 18) + 0x1D0040).ToString("X6") });
             items.Add(new string[] { "Map", ((index * 2) + 0x148000).ToString("X6") });
-            int pointer = Bits.GetShort(Model.Data, (index * 2) + 0x148000);
-            int offset = Bits.GetShort(Model.Data, pointer);
+            int pointer = Bits.GetShort(Model.ROM, (index * 2) + 0x148000);
+            int offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "NPC", (offset + 0x140000).ToString("X6") });
             pointer = (index * 2) + 0x1D2D64;
-            offset = Bits.GetShort(Model.Data, pointer);
+            offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "Exit", (offset + 0x1D0000).ToString("X6") });
             pointer = (index * 2) + 0x20E000;
-            offset = Bits.GetShort(Model.Data, pointer);
+            offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "Event", (offset + 0x200000).ToString("X6") });
             pointer = (index * 2) + 0x1D4905;
-            offset = Bits.GetShort(Model.Data, pointer);
+            offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "Overlap", (offset + 0x1D0000).ToString("X6") });
             pointer = (index * 2) + 0x1D5EBD;
-            offset = Bits.GetShort(Model.Data, pointer);
+            offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "Tile mod", (offset + 0x1D0000).ToString("X6") });
             pointer = (index * 2) + 0x1D8DB0;
-            offset = Bits.GetShort(Model.Data, pointer);
+            offset = Bits.GetShort(Model.ROM, pointer);
             items.Add(new string[] { "Solid mod", (offset + 0x1D0000).ToString("X6") });
             ListViewItem[] listViewItems = new ListViewItem[items.Count];
             for (int i = 0; i < items.Count; i++)
@@ -340,14 +337,14 @@ namespace LAZYSHELL
                 np.Assemble();
             foreach (SolidityTile st in solidTiles)
                 st.Assemble();
-            foreach (NPCSpritePartitions sp in npcSpritePartitions)
+            foreach (Partitions sp in npcSpritePartitions)
                 sp.Assemble();
 
-            ushort offsetStart = 0x3166;
+            int offsetStart = 0x3166;
             if (CalculateFreeExitSpace() >= 0)
             {
                 for (int i = 0; i < 512; i++)
-                    offsetStart = levels[i].LevelExits.Assemble(offsetStart);
+                    levels[i].LevelExits.Assemble(ref offsetStart);
             }
             else
                 MessageBox.Show("Exit fields were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -356,7 +353,7 @@ namespace LAZYSHELL
             if (CalculateFreeEventSpace() >= 6)
             {
                 for (int i = 0; i < 512; i++)
-                    offsetStart = levels[i].LevelEvents.Assemble(offsetStart);
+                    levels[i].LevelEvents.Assemble(ref offsetStart);
             }
             else
                 MessageBox.Show("Event fields were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -365,7 +362,7 @@ namespace LAZYSHELL
             if (CalculateFreeNPCSpace() >= 4)
             {
                 for (int i = 0; i < 512; i++)
-                    offsetStart = levels[i].LevelNPCs.Assemble(offsetStart);
+                    levels[i].LevelNPCs.Assemble(ref offsetStart);
             }
             else
                 MessageBox.Show("NPCs were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -374,7 +371,7 @@ namespace LAZYSHELL
             if (CalculateFreeOverlapSpace() >= 0)
             {
                 for (int i = 0; i < 512; i++)
-                    offsetStart = levels[i].LevelOverlaps.Assemble(offsetStart);
+                    levels[i].LevelOverlaps.Assemble(ref offsetStart);
             }
             else
                 MessageBox.Show("Overlaps were not saved because they exceed the maximum alotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -432,24 +429,6 @@ namespace LAZYSHELL
         {
             if (updatingLevel) return;
             levelNum.Value = levelName.SelectedIndex;
-        }
-        private void addThisLevelToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Model.Program.Notes == null || !Model.Program.Notes.Visible)
-                Model.Program.CreateNotesWindow();
-            Notes temp = Model.Program.Notes;
-            if (temp.ThisNotes == null)
-                temp.LoadNotes();
-            if (temp.ThisNotes != null)
-            {
-                temp.AddingFromEditor(1, index, settings.LevelNames[index], settings.LevelNames[index]);
-                temp.BringToFront();
-            }
-            else
-            {
-                MessageBox.Show("Could not add element to notes database.", "LAZY SHELL",
-                    MessageBoxButtons.OK);
-            }
         }
         private void navigateBck_Click(object sender, EventArgs e)
         {
@@ -629,10 +608,10 @@ namespace LAZYSHELL
                 Model.SolidityMaps[i] = new byte[0x20C2];
                 Model.EditSolidityMaps[i] = true;
             }
-            for (int i = 0; i < Model.TileSetsBF.Length; i++)
+            for (int i = 0; i < Model.TilesetsBF.Length; i++)
             {
-                Model.TileSetsBF[i] = new byte[0x2000];
-                Model.EditTileSetsBF[i] = true;
+                Model.TilesetsBF[i] = new byte[0x2000];
+                Model.EditTilesetsBF[i] = true;
             }
 
             fullUpdate = true;
@@ -805,10 +784,10 @@ namespace LAZYSHELL
         private void unusedToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             // Clear all unused components
-            unusedGraphicSetsToolStripMenuItem_Click(null, null);
-            unusedToolStripMenuItem_Click(null, null);
-            unusedToolStripMenuItem1_Click(null, null);
-            unusedToolStripMenuItem2_Click(null, null);
+            unusedGraphicSetsToolStripMenuItem.PerformClick();
+            unusedToolStripMenuItem.PerformClick();
+            unusedToolStripMenuItem1.PerformClick();
+            unusedToolStripMenuItem2.PerformClick();
         }
         private void arraysToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -859,12 +838,12 @@ namespace LAZYSHELL
                 bw.Close();
                 fs.Close();
             }
-            for (int i = 0; i < Model.TileSetsBF.Length; i++)
+            for (int i = 0; i < Model.TilesetsBF.Length; i++)
             {
                 CreateDir(fullPath + "Battlefield Tile Sets\\");
                 fs = new FileStream(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin", FileMode.Create, FileAccess.ReadWrite);
                 bw = new BinaryWriter(fs);
-                bw.Write(Model.TileSetsBF[i], 0, Model.TileSetsBF[i].Length);
+                bw.Write(Model.TilesetsBF[i], 0, Model.TilesetsBF[i].Length);
                 bw.Close();
                 fs.Close();
             }
@@ -932,17 +911,17 @@ namespace LAZYSHELL
 
                     Model.EditTileSets[i] = true;
                 }
-                for (int i = 0; i < Model.TileSetsBF.Length; i++)
+                for (int i = 0; i < Model.TilesetsBF.Length; i++)
                 {
                     if (!File.Exists(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin"))
                         continue;
                     fs = File.OpenRead(fullPath + "Battlefield Tile Sets\\tileSetBF." + i.ToString("d3") + ".bin");
                     br = new BinaryReader(fs);
-                    Model.TileSetsBF[i] = br.ReadBytes(Model.TileSetsBF[i].Length);
+                    Model.TilesetsBF[i] = br.ReadBytes(Model.TilesetsBF[i].Length);
                     br.Close();
                     fs.Close();
 
-                    Model.EditTileSetsBF[i] = true;
+                    Model.EditTilesetsBF[i] = true;
                 }
 
                 fullUpdate = true;
@@ -1030,7 +1009,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current level map. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            levelMap = new LevelMap(Model.Data, level.LevelMap);
+            levelMap = new LevelMap(level.LevelMap);
             mapNum_ValueChanged(null, null);
         }
         private void resetLayerDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1038,7 +1017,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current layer data. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            layer = new LevelLayer(Model.Data, index);
+            layer = new LevelLayer(index);
             levelNum_ValueChanged(null, null);
         }
         private void resetNPCDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1046,7 +1025,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current NPCs. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            npcs = new LevelNPCs(Model.Data, index);
+            npcs = new LevelNPCs(index);
             overlay.NPCImages = null;
             InitializeNPCProperties();
         }
@@ -1055,7 +1034,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current events. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            events = new LevelEvents(Model.Data, index);
+            events = new LevelEvents(index);
             InitializeEventFieldProperties();
         }
         private void resetExitDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1063,7 +1042,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current exits. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            exits = new LevelExits(Model.Data, index);
+            exits = new LevelExits(index);
             InitializeExitFieldProperties();
         }
         private void resetOverlapDataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1071,7 +1050,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current overlaps. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            overlaps = new LevelOverlaps(Model.Data, index);
+            overlaps = new LevelOverlaps(index);
             InitializeOverlapProperties();
         }
         private void resetTilemapModsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1079,7 +1058,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current tilemap mods. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            tileMods = new LevelTileMods(Model.Data, index);
+            tileMods = new LevelTileMods(index);
             foreach (Level l in levels)
                 l.LevelTileMods.ClearTilemaps();
             foreach (LevelTileMods.Mod mod in tileMods.Mods)
@@ -1095,7 +1074,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current solidity mods. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            solidMods = new LevelSolidMods(Model.Data, index);
+            solidMods = new LevelSolidMods(index);
             foreach (Level l in levels)
                 l.LevelSolidMods.ClearTilemaps();
             foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
@@ -1122,7 +1101,7 @@ namespace LAZYSHELL
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             int palette = levelMap.PaletteSet;
-            paletteSet = new PaletteSet(Model.Data, palette, (palette * 0xD4) + 0x249FE2, 8, 16, 30);
+            paletteSet = new PaletteSet(Model.ROM, palette, (palette * 0xD4) + 0x249FE2, 8, 16, 30);
             fullUpdate = true;
             if (!updatingLevel)
                 RefreshLevel();
@@ -1167,17 +1146,17 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to all components. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            levelMap = new LevelMap(Model.Data, level.LevelMap);
-            layer = new LevelLayer(Model.Data, index);
-            npcs = new LevelNPCs(Model.Data, index);
+            levelMap = new LevelMap(level.LevelMap);
+            layer = new LevelLayer(index);
+            npcs = new LevelNPCs(index);
             overlay.NPCImages = null;
-            events = new LevelEvents(Model.Data, index);
-            exits = new LevelExits(Model.Data, index);
-            overlaps = new LevelOverlaps(Model.Data, index);
-            tileMods = new LevelTileMods(Model.Data, index);
-            solidMods = new LevelSolidMods(Model.Data, index);
+            events = new LevelEvents(index);
+            exits = new LevelExits(index);
+            overlaps = new LevelOverlaps(index);
+            tileMods = new LevelTileMods(index);
+            solidMods = new LevelSolidMods(index);
             int palette = levelMap.PaletteSet;
-            paletteSet = new PaletteSet(Model.Data, palette, (palette * 0xD4) + 0x249FE2, 8, 16, 30);
+            paletteSet = new PaletteSet(Model.ROM, palette, (palette * 0xD4) + 0x249FE2, 8, 16, 30);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetA + 0x48, levelMap.GraphicSetA + 0x49, false);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetB + 0x48, levelMap.GraphicSetB + 0x49, false);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetC + 0x48, levelMap.GraphicSetC + 0x49, false);
@@ -1204,41 +1183,6 @@ namespace LAZYSHELL
         }
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
-        // level name editor
-        private void changeLevelName_Click(object sender, EventArgs e)
-        {
-            toolStripTextBox1.Visible = changeLevelName.Checked;
-            reset.Visible = changeLevelName.Checked;
-            if (toolStripTextBox1.Visible)
-            {
-                toolStripTextBox1.Focus();
-                toolStripTextBox1.Text = settings.LevelNames[index];
-            }
-        }
-        private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            settings.LevelNames[index] = this.toolStripTextBox1.Text;
-            updatingLevel = true;
-            levelName.BeginUpdate();
-            levelName.Items.Clear();
-            levelName.Items.AddRange(Lists.Numerize(Lists.Convert(settings.LevelNames)));
-            levelName.SelectedIndex = index;
-            levelName.EndUpdate();
-            updatingLevel = false;
-        }
-        private void toolStripTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Escape)
-            {
-                changeLevelName.Checked = false;
-                toolStripTextBox1.Visible = false;
-                reset.Visible = false;
-            }
-        }
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            toolStripTextBox1.Text = Lists.LevelNames[index];
         }
         //
         private void Levels_KeyDown(object sender, KeyEventArgs e)

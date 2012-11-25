@@ -31,6 +31,14 @@ namespace LAZYSHELL
                     return StringComparison.CurrentCultureIgnoreCase;
             }
         }
+        private Timer timer = new Timer();
+        private Point searchFieldLocation
+        {
+            get
+            {
+                return searchField.Control.PointToScreen(new Point(searchField.Width, searchField.Height));
+            }
+        }
         #endregion
         // constructor
         /// <summary>
@@ -54,6 +62,7 @@ namespace LAZYSHELL
             LoadSearch();
             this.function = new Function(LoadSearch);
             this.function.DynamicInvoke();
+            InitializeTimer();
         }
         /// <summary>
         /// Loads a search form containing the results of a search query.
@@ -75,6 +84,8 @@ namespace LAZYSHELL
             InitializeProperties();
             this.function = new Function(LoadSearch);
             this.function.DynamicInvoke();
+            this.Location = searchFieldLocation;
+            InitializeTimer();
         }
         /// <summary>
         /// Loads a search form containing the results of a search query.
@@ -113,6 +124,8 @@ namespace LAZYSHELL
                 this.richTextBox.BringToFront();
                 this.function.DynamicInvoke(richTextBox, stringComparison, matchWholeWord.Checked, false, "");
             }
+            this.Location = searchFieldLocation;
+            InitializeTimer();
         }
         // functions
         private void InitializeProperties()
@@ -138,6 +151,8 @@ namespace LAZYSHELL
             }
             for (int i = 0; i < names.Count; i++)
             {
+                if (names[i] == null)
+                    continue;
                 string name = names[i].ToString();
                 int index = name.IndexOf(searchField.Text, stringComparison);
                 if (index >= 0)
@@ -157,6 +172,14 @@ namespace LAZYSHELL
                 listBox.Items.Count * listBox.ItemHeight + 32 + toolStrip1.Height,
                 Screen.PrimaryScreen.WorkingArea.Height - this.Top - 16);
             listBox.EndUpdate();
+        }
+        private void InitializeTimer()
+        {
+            timer.Tick += new EventHandler(delegate
+            {
+                timer.Stop(); this.Location = searchFieldLocation;
+            });
+            timer.Start();
         }
         #region Event handlers
         private void matchCase_CheckedChanged(object sender, EventArgs e)
@@ -245,11 +268,10 @@ namespace LAZYSHELL
         }
         private void searchButton_Click(object sender, EventArgs e)
         {
-            //searchField.Visible = searchButton.Checked;
             this.Visible = searchButton.Checked;
             if (this.Visible && !initialized)
             {
-                this.Location = searchField.Control.PointToScreen(new Point(searchField.Width, searchField.Height));
+                this.Location = searchFieldLocation;
                 initialized = true;
             }
         }

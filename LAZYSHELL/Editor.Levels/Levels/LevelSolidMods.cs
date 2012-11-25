@@ -10,13 +10,15 @@ namespace LAZYSHELL
     [Serializable()]
     public class LevelSolidMods
     {
+        // universal variables
         private int index;
-        [NonSerialized()]
-        private byte[] data;
-        public byte[] Data { get { return this.data; } set { this.data = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        // class variables
         private List<LevelMod> mods = new List<LevelMod>();
         public List<LevelMod> Mods { get { return mods; } set { mods = value; } }
         public int Count { get { return mods.Count; } }
+        // external selectors
+        private LevelMod mod; public LevelMod Mod_ { get { return mod; } }
         private int currentMod = 0;
         public int CurrentMod
         {
@@ -35,7 +37,7 @@ namespace LAZYSHELL
         }
         private int selectedMod;
         public int SelectedMod { get { return this.selectedMod; } set { selectedMod = value; } }
-        private LevelMod mod; public LevelMod Mod_ { get { return mod; } }
+        // public accessors
         public int X
         {
             get { return mod.X; }
@@ -76,56 +78,44 @@ namespace LAZYSHELL
                 mod.Pixels = null;
             }
         }
+        // constructor
+        public LevelSolidMods(int index)
+        {
+            this.index = index;
+            Disassemble();
+        }
+        // assemblers
+        private void Disassemble()
+        {
+            int pointerOffset = (index * 2) + 0x1D8DB0;
+            ushort offsetStart = Bits.GetShort(rom, pointerOffset); pointerOffset += 2;
+            ushort offsetEnd = Bits.GetShort(rom, pointerOffset);
+            if (index == 0x1FF) offsetEnd = 0;
+            // no exit fields for level
+            if (offsetStart >= offsetEnd) return; 
+            //
+            int offset = offsetStart + 0x1D0000;
+            if (index == 84) index = 84;
+            while (offset < offsetEnd + 0x1D0000)
+            {
+                LevelMod tMod = new LevelMod();
+                tMod.Disassemble(ref offset);
+                mods.Add(tMod);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="offset">The offset in the byte[0x20C2] array.</param>
         /// <returns></returns>
-        public bool WithinBounds(int offset)
-        {
-            if (mod != null)
-                return mod.WithinBounds(offset);
-            else
-                return false;
-        }
-        public LevelSolidMods(byte[] data, int index)
-        {
-            this.data = data;
-            this.index = index;
-            InitializeLevel();
-        }
-        private void InitializeLevel()
-        {
-            int offset;
-            ushort offsetStart = 0;
-            ushort offsetEnd = 0;
-            LevelMod tMod;
-
-            int pointerOffset = (index * 2) + 0x1D8DB0;
-
-            offsetStart = Bits.GetShort(data, pointerOffset); pointerOffset += 2;
-            offsetEnd = Bits.GetShort(data, pointerOffset);
-
-            if (index == 0x1FF) offsetEnd = 0;
-
-            if (offsetStart >= offsetEnd) return; // no exit fields for level
-
-            offset = offsetStart + 0x1D0000;
-            if (index == 84) index = 84;
-            while (offset < offsetEnd + 0x1D0000)
-            {
-                tMod = new LevelMod();
-                tMod.InitializeMod(data, ref offset);
-                mods.Add(tMod);
-            }
-        }
         public void Assemble(ref int offset)
         {
             int pointerOffset = (index * 2) + 0x1D8DB0;
-            Bits.SetShort(data, pointerOffset, (ushort)offset);
+            Bits.SetShort(rom, pointerOffset, (ushort)offset);
             foreach (LevelMod mod in mods)
-                mod.Assemble(data, ref offset);
+                mod.Assemble(rom, ref offset);
         }
+        // list managers
         public void ClearTilemaps()
         {
             foreach (LevelMod mod in mods)
@@ -167,15 +157,38 @@ namespace LAZYSHELL
         {
             mod.CopyToTiles();
         }
+        // class functions
+        public bool WithinBounds(int offset)
+        {
+            if (mod != null)
+                return mod.WithinBounds(offset);
+            else
+                return false;
+        }
+        // universal functions
+        public void Clear()
+        {
+            foreach (LevelMod mod in mods)
+                mod.Clear();
+        }
+        // classes
         [Serializable()]
         public class LevelMod : Tilemap
         {
+            // universal variables
+            private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+            // class variables
             private int x;
             private int y;
             private int width = 1;
             private int height = 1;
             private bool b0b7;
             private byte[] tiles = new byte[2];
+            private byte[] tilemap_Bytes;
+            [NonSerialized()]
+            private int[] pixels;
+            private Bitmap image;
+            // public accessors
             public int X
             {
                 get { return x; }
@@ -214,12 +227,24 @@ namespace LAZYSHELL
                     CopyToTilemap();
                 }
             }
+            public int Length
+            {
+                get
+                {
+                    int length = 2;
+                    if (!(width == 1 && height == 1))
+                        length++;
+                    length += width * height;
+                    length += (width * height) / 4;
+                    if ((width * height) % 4 != 0)
+                        length++;
+                    return length;
+                }
+            }
             public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }
             public override int Height_p { get { return Height * 16; } set { Height = value / 16; } }
             public bool B0b7 { get { return b0b7; } set { b0b7 = value; } }
             public byte[] Tiles { get { return tiles; } set { tiles = value; } }
-            // drawing
-            private byte[] tilemap_Bytes;
             public override byte[] Tilemap_Bytes
             {
                 get
@@ -245,10 +270,29 @@ namespace LAZYSHELL
                     throw new NotImplementedException();
                 }
             }
-            [NonSerialized()]
-            private int[] pixels;
+            public override Tile[] Tilemap_Tiles
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            public override Tile[][] Tilemaps_Tiles
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
             public override int[] Pixels { get { return pixels; } set { pixels = value; } }
-            private Bitmap image;
             public override Bitmap Image
             {
                 get
@@ -259,12 +303,13 @@ namespace LAZYSHELL
                 }
                 set { image = value; }
             }
-            public void InitializeMod(byte[] data, ref int offset)
+            // assemblers
+            public void Disassemble(ref int offset)
             {
-                b0b7 = (data[offset] & 0x80) == 0x80;
-                this.x = data[offset++] & 0x7F;
-                bool one = (data[offset] & 0x80) == 0x80;
-                this.y = data[offset++] & 0x7F;
+                b0b7 = (rom[offset] & 0x80) == 0x80;
+                this.x = rom[offset++] & 0x7F;
+                bool one = (rom[offset] & 0x80) == 0x80;
+                this.y = rom[offset++] & 0x7F;
                 if (one)
                 {
                     width = 1;
@@ -272,23 +317,97 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    width = (data[offset] & 0x0F) + 1;
-                    height = (data[offset++] >> 4) + 1;
+                    width = (rom[offset] & 0x0F) + 1;
+                    height = (rom[offset++] >> 4) + 1;
                 }
                 tiles = new byte[(width * height) * 2];
                 byte upper = 0;
                 for (int i = 0, c = 0; c < (width * height) * 2; i++)
                 {
                     if (i % 5 == 0)
-                        upper = data[offset++];
+                        upper = rom[offset++];
                     else
                     {
-                        tiles[c++] = data[offset++];
+                        tiles[c++] = rom[offset++];
                         tiles[c++] = (byte)((upper >> (((i % 5) - 1) * 2)) & 0x03);
                     }
                 }
                 CopyToTilemap();
             }
+            public override void Assemble()
+            {
+                throw new NotImplementedException();
+            }
+            public void Assemble(byte[] data, ref int offset)
+            {
+                data[offset] = (byte)this.x;
+                Bits.SetBit(data, offset++, 7, b0b7);
+                data[offset] = (byte)this.y;
+                Bits.SetBit(data, offset++, 7, width == 1 && height == 1);
+                if (!(width == 1 && height == 1))
+                {
+                    data[offset] = (byte)(width - 1);
+                    data[offset++] |= (byte)((height - 1) << 4);
+                }
+                for (int i = 0, c = 0; c < (width * height) * 2; i++)
+                {
+                    if (i % 5 == 0)
+                        data[offset++] = 0;
+                    else
+                    {
+                        data[offset] = tiles[c++];
+                        data[offset++ - (i % 5)] |= (byte)(tiles[c++] << (((i % 5) - 1) * 2));
+                    }
+                }
+            }
+            // accessor functions
+            public override int[] GetPixels(int layer, Point location, Size size)
+            {
+                throw new NotImplementedException();
+            }
+            public override int[] GetPixels(Point location, Size size)
+            {
+                throw new NotImplementedException();
+            }
+            public override int[] GetPriority1Pixels()
+            {
+                throw new NotImplementedException();
+            }
+            public override int GetPixelLayer(int x, int y)
+            {
+                return 0;
+            }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="value">The tile index to change to.</param>
+            /// <param name="x">The isometric X coord relative to a full solidity map.</param>
+            /// <param name="y">The isometric Y coord relative to a full solidity map.</param>
+            public override int GetTileNum(int index)
+            {
+                return Bits.GetShort(tilemap_Bytes, index * 2);
+            }
+            public override int GetTileNum(int layer, int x, int y)
+            {
+                throw new NotImplementedException();
+            }
+            public override int GetTileNum(int layer, int x, int y, bool ignoretransparent)
+            {
+                throw new NotImplementedException();
+            }
+            public override void SetTileNum()
+            {
+            }
+            public override void SetTileNum(int tilenum, int layer, int x, int y)
+            {
+                int offset = 0x41 * (y / 2);
+                if (y % 2 != 0)
+                    offset += 0x21;
+                offset += x;
+                offset *= 2;
+                Bits.SetShort(tilemap_Bytes, offset, (ushort)tilenum);
+            }
+            // class functions
             public void CopyToTilemap()
             {
                 tilemap_Bytes = new byte[0x20C2];
@@ -322,91 +441,9 @@ namespace LAZYSHELL
                     tiles[c++] = tilemap_Bytes[startOffset + i + 1];
                 }
             }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="value">The tile index to change to.</param>
-            /// <param name="x">The isometric X coord relative to a full solidity map.</param>
-            /// <param name="y">The isometric Y coord relative to a full solidity map.</param>
-            public override int GetTileNum(int index)
-            {
-                return Bits.GetShort(tilemap_Bytes, index * 2);
-            }
-            public override int GetTileNum(int layer, int x, int y)
+            public override void RedrawTilemaps()
             {
                 throw new NotImplementedException();
-            }
-            public override int GetTileNum(int layer, int x, int y, bool ignoretransparent)
-            {
-                throw new NotImplementedException();
-            }
-            public override void Assemble()
-            {
-                throw new NotImplementedException();
-            }
-            public void Assemble(byte[] data, ref int offset)
-            {
-                data[offset] = (byte)this.x;
-                Bits.SetBit(data, offset++, 7, b0b7);
-                data[offset] = (byte)this.y;
-                Bits.SetBit(data, offset++, 7, width == 1 && height == 1);
-                if (!(width == 1 && height == 1))
-                {
-                    data[offset] = (byte)(width - 1);
-                    data[offset++] |= (byte)((height - 1) << 4);
-                }
-                for (int i = 0, c = 0; c < (width * height) * 2; i++)
-                {
-                    if (i % 5 == 0)
-                        data[offset++] = 0;
-                    else
-                    {
-                        data[offset] = tiles[c++];
-                        data[offset++ - (i % 5)] |= (byte)(tiles[c++] << (((i % 5) - 1) * 2));
-                    }
-                }
-            }
-            public void Clear()
-            {
-                Array.Clear(tiles, 0, tiles.Length);
-            }
-            public int Length
-            {
-                get
-                {
-                    int length = 2;
-                    if (!(width == 1 && height == 1))
-                        length++;
-                    length += width * height;
-                    length += (width * height) / 4;
-                    if ((width * height) % 4 != 0)
-                        length++;
-                    return length;
-                }
-            }
-            public LevelMod Copy()
-            {
-                LevelMod copy = new LevelMod();
-                copy.Tiles = Bits.Copy(tiles);
-                copy.Pixels = Bits.Copy(pixels);
-                copy.Tilemap_Bytes = Bits.Copy(tilemap_Bytes);
-                copy.Width = width;
-                copy.Height = height;
-                copy.X = x;
-                copy.Y = y;
-                return copy;
-            }
-            public override void SetTileNum()
-            {
-            }
-            public override void SetTileNum(int tilenum, int layer, int x, int y)
-            {
-                int offset = 0x41 * (y / 2);
-                if (y % 2 != 0)
-                    offset += 0x21;
-                offset += x;
-                offset *= 2;
-                Bits.SetShort(tilemap_Bytes, offset, (ushort)tilenum);
             }
             public bool WithinBounds(int offset)
             {
@@ -428,53 +465,24 @@ namespace LAZYSHELL
                 }
                 return false;
             }
-            public override void RedrawTilemaps()
+            // universal functions
+            public void Clear()
             {
-                throw new NotImplementedException();
+                Array.Clear(tiles, 0, tiles.Length);
             }
-            public override int[] GetPixels(int layer, Point location, Size size)
+            // spawning
+            public LevelMod Copy()
             {
-                throw new NotImplementedException();
+                LevelMod copy = new LevelMod();
+                copy.Tiles = Bits.Copy(tiles);
+                copy.Pixels = Bits.Copy(pixels);
+                copy.Tilemap_Bytes = Bits.Copy(tilemap_Bytes);
+                copy.Width = width;
+                copy.Height = height;
+                copy.X = x;
+                copy.Y = y;
+                return copy;
             }
-            public override int[] GetPixels(Point location, Size size)
-            {
-                throw new NotImplementedException();
-            }
-            public override Tile[] Tilemap_Tiles
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-                set
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            public override Tile[][] Tilemaps_Tiles
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-                set
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            public override int[] GetPriority1Pixels()
-            {
-                throw new NotImplementedException();
-            }
-            public override int GetPixelLayer(int x, int y)
-            {
-                return 0;
-            }
-        }
-        public void Clear()
-        {
-            foreach (LevelMod mod in mods)
-                mod.Clear();
         }
     }
 }

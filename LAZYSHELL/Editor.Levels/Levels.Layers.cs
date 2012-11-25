@@ -45,27 +45,27 @@ namespace LAZYSHELL
             this.layerMaskHighY.Value = layer.MaskHighY;
             this.layerMaskLowX.Value = layer.MaskLowX;
             this.layerMaskLowY.Value = layer.MaskLowY;
-            this.layerL2UpShift.Value = layer.UpShiftL2;
-            this.layerL2LeftShift.Value = layer.LeftShiftL2;
-            this.layerL3UpShift.Value = layer.UpShiftL3;
-            this.layerL3LeftShift.Value = layer.LeftShiftL3;
+            this.layerL2UpShift.Value = layer.YNegL2;
+            this.layerL2LeftShift.Value = layer.XNegL2;
+            this.layerL3UpShift.Value = layer.YNegL3;
+            this.layerL3LeftShift.Value = layer.XNegL3;
 
-            this.layerInfiniteAutoscroll.Checked = layer.InfiniteAutoscroll;
+            this.layerInfiniteAutoscroll.Checked = layer.InfiniteScrolling;
             this.layerLockMask.Checked = layer.MaskLock;
 
-            this.layerScrollWrapping.SetItemChecked(0, layer.HorizontalScrollWrapL1);
-            this.layerScrollWrapping.SetItemChecked(1, layer.VerticalScrollWrapL1);
-            this.layerScrollWrapping.SetItemChecked(2, layer.HorizontalScrollWrapL2);
-            this.layerScrollWrapping.SetItemChecked(3, layer.VerticalScrollWrapL2);
-            this.layerScrollWrapping.SetItemChecked(4, layer.HorizontalScrollWrapL3);
-            this.layerScrollWrapping.SetItemChecked(5, layer.VerticalScrollWrapL3);
+            this.layerScrollWrapping.SetItemChecked(0, layer.ScrollWrapL1_HZ);
+            this.layerScrollWrapping.SetItemChecked(1, layer.ScrollWrapL1_VT);
+            this.layerScrollWrapping.SetItemChecked(2, layer.ScrollWrapL2_HZ);
+            this.layerScrollWrapping.SetItemChecked(3, layer.ScrollWrapL2_VT);
+            this.layerScrollWrapping.SetItemChecked(4, layer.ScrollWrapL3_HZ);
+            this.layerScrollWrapping.SetItemChecked(5, layer.ScrollWrapL3_VT);
             this.layerScrollWrapping.SetItemChecked(6, layer.CulexA);
             this.layerScrollWrapping.SetItemChecked(7, layer.CulexB);
 
-            this.layerL2HSync.SelectedIndex = layer.HorizontalSyncL2;
-            this.layerL3HSync.SelectedIndex = layer.HorizontalSyncL3;
-            this.layerL2VSync.SelectedIndex = layer.VerticalSyncL2;
-            this.layerL3VSync.SelectedIndex = layer.VerticalSyncL3;
+            this.layerL2HSync.SelectedIndex = layer.SyncL2_HZ;
+            this.layerL3HSync.SelectedIndex = layer.SyncL3_HZ;
+            this.layerL2VSync.SelectedIndex = layer.SyncL2_VT;
+            this.layerL3VSync.SelectedIndex = layer.SyncL3_VT;
 
             this.layerL2ScrollDirection.SelectedIndex = layer.ScrollDirectionL2;
             this.layerL3ScrollDirection.SelectedIndex = layer.ScrollDirectionL3;
@@ -74,10 +74,10 @@ namespace LAZYSHELL
             this.layerL2ScrollShift.Checked = layer.ScrollL2Bit7;
             this.layerL3ScrollShift.Checked = layer.ScrollL3Bit7;
 
-            this.layerL3Effects.SelectedIndex = layer.AnimationEffectL3;
-            this.layerOBJEffects.SelectedIndex = layer.ExtraEffects;
+            this.layerL3Effects.SelectedIndex = layer.EffectsL3;
+            this.layerOBJEffects.SelectedIndex = layer.EffectsNPC;
 
-            this.layerWaveEffect.Checked = layer.WaveEffectL3;
+            this.layerWaveEffect.Checked = layer.RipplingWater;
         }
 
         #endregion
@@ -314,47 +314,47 @@ namespace LAZYSHELL
         }
         private void layerL2LeftShift_ValueChanged(object sender, EventArgs e)
         {
-            layer.LeftShiftL2 = (byte)layerL2LeftShift.Value;
+            layer.XNegL2 = (byte)layerL2LeftShift.Value;
         }
         private void layerL3LeftShift_ValueChanged(object sender, EventArgs e)
         {
-            layer.LeftShiftL3 = (byte)layerL3LeftShift.Value;
+            layer.XNegL3 = (byte)layerL3LeftShift.Value;
         }
         private void layerL2UpShift_ValueChanged(object sender, EventArgs e)
         {
-            layer.UpShiftL2 = (byte)layerL2UpShift.Value;
+            layer.YNegL2 = (byte)layerL2UpShift.Value;
         }
         private void layerL3UpShift_ValueChanged(object sender, EventArgs e)
         {
-            layer.UpShiftL3 = (byte)layerL3UpShift.Value;
+            layer.YNegL3 = (byte)layerL3UpShift.Value;
         }
         private void layerScrollWrapping_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.HorizontalScrollWrapL1 = layerScrollWrapping.GetItemChecked(0);
-            layer.VerticalScrollWrapL1 = layerScrollWrapping.GetItemChecked(1);
-            layer.HorizontalScrollWrapL2 = layerScrollWrapping.GetItemChecked(2);
-            layer.VerticalScrollWrapL2 = layerScrollWrapping.GetItemChecked(3);
-            layer.HorizontalScrollWrapL3 = layerScrollWrapping.GetItemChecked(4);
-            layer.VerticalScrollWrapL3 = layerScrollWrapping.GetItemChecked(5);
+            layer.ScrollWrapL1_HZ = layerScrollWrapping.GetItemChecked(0);
+            layer.ScrollWrapL1_VT = layerScrollWrapping.GetItemChecked(1);
+            layer.ScrollWrapL2_HZ = layerScrollWrapping.GetItemChecked(2);
+            layer.ScrollWrapL2_VT = layerScrollWrapping.GetItemChecked(3);
+            layer.ScrollWrapL3_HZ = layerScrollWrapping.GetItemChecked(4);
+            layer.ScrollWrapL3_VT = layerScrollWrapping.GetItemChecked(5);
             layer.CulexA = layerScrollWrapping.GetItemChecked(6);
             layer.CulexB = layerScrollWrapping.GetItemChecked(7);
 
         }
         private void layerL2VSync_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.VerticalSyncL2 = (byte)layerL2VSync.SelectedIndex;
+            layer.SyncL2_VT = (byte)layerL2VSync.SelectedIndex;
         }
         private void layerL3VSync_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.VerticalSyncL3 = (byte)layerL3VSync.SelectedIndex;
+            layer.SyncL3_VT = (byte)layerL3VSync.SelectedIndex;
         }
         private void layerL2HSync_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.HorizontalSyncL2 = (byte)layerL2HSync.SelectedIndex;
+            layer.SyncL2_HZ = (byte)layerL2HSync.SelectedIndex;
         }
         private void layerL3HSync_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.HorizontalSyncL3 = (byte)layerL3HSync.SelectedIndex;
+            layer.SyncL3_HZ = (byte)layerL3HSync.SelectedIndex;
         }
         private void layerL2ScrollShift_CheckedChanged(object sender, EventArgs e)
         {
@@ -386,21 +386,21 @@ namespace LAZYSHELL
         }
         private void layerInfiniteAutoscroll_CheckedChanged(object sender, EventArgs e)
         {
-            layer.InfiniteAutoscroll = layerInfiniteAutoscroll.Checked;
+            layer.InfiniteScrolling = layerInfiniteAutoscroll.Checked;
             if (layerInfiniteAutoscroll.Checked) layerInfiniteAutoscroll.ForeColor = Color.Black;
             else layerInfiniteAutoscroll.ForeColor = Color.Gray;
         }
         private void layerL3Effects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.AnimationEffectL3 = (byte)layerL3Effects.SelectedIndex;
+            layer.EffectsL3 = (byte)layerL3Effects.SelectedIndex;
         }
         private void layerOBJEffects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            layer.ExtraEffects = (byte)layerOBJEffects.SelectedIndex;
+            layer.EffectsNPC = (byte)layerOBJEffects.SelectedIndex;
         }
         private void layerWaveEffect_CheckedChanged(object sender, EventArgs e)
         {
-            layer.WaveEffectL3 = layerWaveEffect.Checked;
+            layer.RipplingWater = layerWaveEffect.Checked;
             if (layerWaveEffect.Checked) layerWaveEffect.ForeColor = Color.Black;
             else layerWaveEffect.ForeColor = Color.Gray;
         }

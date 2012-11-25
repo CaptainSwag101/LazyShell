@@ -55,7 +55,7 @@ namespace LAZYSHELL
             {
                 for (int a = 0; a < 16; a++)
                 {
-                    Bits.Set24Bit(array, offset, paletteSet.Palettes[i][a]);
+                    Bits.SetInt24(array, offset, paletteSet.Palettes[i][a]);
                     offset += 3;
                 }
             }
@@ -67,8 +67,8 @@ namespace LAZYSHELL
         }
         private void ExportTileset(byte[] array, int layer, int offset)
         {
-            if (checkBox3.Checked && tileset.Tilesets_Tiles.Length >= layer + 1 && tileset.Tilesets_Tiles[layer] != null)
-                foreach (Tile tile in tileset.Tilesets_Tiles[layer])
+            if (checkBox3.Checked && tileset.Tilesets_tiles.Length >= layer + 1 && tileset.Tilesets_tiles[layer] != null)
+                foreach (Tile tile in tileset.Tilesets_tiles[layer])
                 {
                     foreach (Subtile subtile in tile.Subtiles)
                     {
@@ -151,7 +151,7 @@ namespace LAZYSHELL
         }
         private void ImportTileset(byte[] array, int layer, int offset)
         {
-            if (!checkBox3.Checked || tileset.Tilesets_Tiles[layer] == null)
+            if (!checkBox3.Checked || tileset.Tilesets_tiles[layer] == null)
                 return;
             int length;
             byte format;
@@ -165,7 +165,7 @@ namespace LAZYSHELL
                 length = tileset.Graphics.Length;
                 format = 0x20;
             }
-            foreach (Tile tile in tileset.Tilesets_Tiles[layer])
+            foreach (Tile tile in tileset.Tilesets_tiles[layer])
             {
                 if (tile == null)
                 {
@@ -198,7 +198,7 @@ namespace LAZYSHELL
                 int tile = Bits.GetShort(array, offset) & 0x1FF;
                 mirror = Bits.GetBit(array, offset + 1, 6);
                 invert = Bits.GetBit(array, offset + 1, 7);
-                tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][tile];
+                tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][tile];
                 if (layer != 2)
                 {
                     Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter, tile);
@@ -209,27 +209,27 @@ namespace LAZYSHELL
                     tilemap.Tilemaps_Bytes[layer][counter] = (byte)tile;
                     counter++; offset += 2;
                 }
-                if (tileset.Tilesets_Tiles[layer] == null || tileset.Tilesets_Tiles[layer].Length != 512)
+                if (tileset.Tilesets_tiles[layer] == null || tileset.Tilesets_tiles[layer].Length != 512)
                     continue;
                 if (mirror || invert)
                 {
-                    Tile copy = tileset.Tilesets_Tiles[layer][tile].Copy();
+                    Tile copy = tileset.Tilesets_tiles[layer][tile].Copy();
                     if (mirror)
                         Do.FlipHorizontal(copy);
                     if (invert)
                         Do.FlipVertical(copy);
-                    Tile contains = Do.Contains(tileset.Tilesets_Tiles[layer], copy);
+                    Tile contains = Do.Contains(tileset.Tilesets_tiles[layer], copy);
                     if (contains == null)
                     {
-                        tileset.Tilesets_Tiles[layer][extratiles] = copy;
-                        tileset.Tilesets_Tiles[layer][extratiles].TileIndex = extratiles;
-                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][extratiles];
+                        tileset.Tilesets_tiles[layer][extratiles] = copy;
+                        tileset.Tilesets_tiles[layer][extratiles].TileIndex = extratiles;
+                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][extratiles];
                         Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, extratiles);
                         extratiles++;
                     }
                     else
                     {
-                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][contains.TileIndex];
+                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][contains.TileIndex];
                         Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, contains.TileIndex);
                     }
                 }

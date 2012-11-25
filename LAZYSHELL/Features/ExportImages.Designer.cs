@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportImages));
             this.oneImageDefault = new System.Windows.Forms.RadioButton();
             this.oneSpriteSheet = new System.Windows.Forms.RadioButton();
             this.oneImageCropped = new System.Windows.Forms.RadioButton();
@@ -38,6 +37,7 @@
             this.maximumWidth = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.oneAnimatedGIF = new System.Windows.Forms.RadioButton();
             this.range = new System.Windows.Forms.RadioButton();
             this.current = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,9 +54,9 @@
             // 
             this.oneImageDefault.AutoSize = true;
             this.oneImageDefault.Checked = true;
-            this.oneImageDefault.Location = new System.Drawing.Point(11, 26);
+            this.oneImageDefault.Location = new System.Drawing.Point(11, 20);
             this.oneImageDefault.Name = "oneImageDefault";
-            this.oneImageDefault.Size = new System.Drawing.Size(342, 17);
+            this.oneImageDefault.Size = new System.Drawing.Size(351, 17);
             this.oneImageDefault.TabIndex = 0;
             this.oneImageDefault.TabStop = true;
             this.oneImageDefault.Text = "One image per mold, default size (all tilemap molds will be 256x256!)";
@@ -65,9 +65,9 @@
             // oneSpriteSheet
             // 
             this.oneSpriteSheet.AutoSize = true;
-            this.oneSpriteSheet.Location = new System.Drawing.Point(11, 60);
+            this.oneSpriteSheet.Location = new System.Drawing.Point(11, 54);
             this.oneSpriteSheet.Name = "oneSpriteSheet";
-            this.oneSpriteSheet.Size = new System.Drawing.Size(322, 17);
+            this.oneSpriteSheet.Size = new System.Drawing.Size(331, 17);
             this.oneSpriteSheet.TabIndex = 2;
             this.oneSpriteSheet.Text = "One sprite sheet image per sprite, molds cropped to pixel edges";
             this.oneSpriteSheet.UseVisualStyleBackColor = true;
@@ -76,16 +76,16 @@
             // oneImageCropped
             // 
             this.oneImageCropped.AutoSize = true;
-            this.oneImageCropped.Location = new System.Drawing.Point(11, 43);
+            this.oneImageCropped.Location = new System.Drawing.Point(11, 37);
             this.oneImageCropped.Name = "oneImageCropped";
-            this.oneImageCropped.Size = new System.Drawing.Size(232, 17);
+            this.oneImageCropped.Size = new System.Drawing.Size(236, 17);
             this.oneImageCropped.TabIndex = 1;
             this.oneImageCropped.Text = "One image per mold, cropped to pixel edges";
             this.oneImageCropped.UseVisualStyleBackColor = true;
             // 
             // ok_button
             // 
-            this.ok_button.Location = new System.Drawing.Point(226, 205);
+            this.ok_button.Location = new System.Drawing.Point(228, 219);
             this.ok_button.Name = "ok_button";
             this.ok_button.Size = new System.Drawing.Size(75, 23);
             this.ok_button.TabIndex = 7;
@@ -95,7 +95,7 @@
             // 
             // cancel_button
             // 
-            this.cancel_button.Location = new System.Drawing.Point(307, 205);
+            this.cancel_button.Location = new System.Drawing.Point(309, 219);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(75, 23);
             this.cancel_button.TabIndex = 8;
@@ -111,7 +111,7 @@
             // maximumWidth
             // 
             this.maximumWidth.Enabled = false;
-            this.maximumWidth.Location = new System.Drawing.Point(174, 83);
+            this.maximumWidth.Location = new System.Drawing.Point(174, 82);
             this.maximumWidth.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -135,7 +135,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 87);
+            this.label2.Location = new System.Drawing.Point(28, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 13);
             this.label2.TabIndex = 3;
@@ -144,16 +144,27 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.oneAnimatedGIF);
             this.groupBox1.Controls.Add(this.oneImageDefault);
             this.groupBox1.Controls.Add(this.maximumWidth);
             this.groupBox1.Controls.Add(this.oneSpriteSheet);
             this.groupBox1.Controls.Add(this.oneImageCropped);
             this.groupBox1.Location = new System.Drawing.Point(12, 85);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 114);
+            this.groupBox1.Size = new System.Drawing.Size(372, 128);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "How would you like to export all images?";
+            // 
+            // oneAnimatedGIF
+            // 
+            this.oneAnimatedGIF.AutoSize = true;
+            this.oneAnimatedGIF.Location = new System.Drawing.Point(11, 104);
+            this.oneAnimatedGIF.Name = "oneAnimatedGIF";
+            this.oneAnimatedGIF.Size = new System.Drawing.Size(296, 17);
+            this.oneAnimatedGIF.TabIndex = 0;
+            this.oneAnimatedGIF.Text = "One animated GIF per sequence, cropped to pixel edges";
+            this.oneAnimatedGIF.UseVisualStyleBackColor = true;
             // 
             // range
             // 
@@ -232,7 +243,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 240);
+            this.ClientSize = new System.Drawing.Size(396, 254);
             this.Controls.Add(this.range);
             this.Controls.Add(this.current);
             this.Controls.Add(this.label3);
@@ -276,5 +287,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown toIndex;
         private System.Windows.Forms.NumericUpDown fromIndex;
+        private System.Windows.Forms.RadioButton oneAnimatedGIF;
     }
 }

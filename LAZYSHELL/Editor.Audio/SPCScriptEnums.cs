@@ -4,9 +4,9 @@ using System.Text;
 
 namespace LAZYSHELL
 {
-    static class SPCScriptEnums
+    public static class SPCScriptEnums
     {
-        public static int[] SPCScriptLengths = new int[]
+        public static int[] CommandLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             1,1,1,1,1,1,1,1,  1,1,1,1,1,1,1,1,  // 0x00

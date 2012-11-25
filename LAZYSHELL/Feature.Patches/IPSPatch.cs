@@ -7,45 +7,23 @@ namespace LAZYSHELL.Patches
 {
     public class IPSPatch
     {
+        // class variables and accessors
         private bool verified = false; public bool Verified { get { return this.verified; } }
-        private ArrayList records = new ArrayList();
-
-        // Represents one chunk of an IPS Patch
-        private struct IPSRecord
-        {
-            public int offset, size;
-            public byte[] recordData;
-        }
-
+        private List<IPSRecord> records = new List<IPSRecord>();
+        // constructor
         public IPSPatch(byte[] patch)
         {
-            Dissassemble(patch);
+            Disassemble(patch);
         }
-        public bool ApplyTo(byte[] data)
-        {
-            try
-            {
-                foreach (IPSRecord record in records)
-                    ApplyIPSRecord(record, data);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-
-        }
-        private void Dissassemble(byte[] patch)
+        // assemblers
+        private void Disassemble(byte[] patch)
         {
             int index = 0;
             try
             {
                 index += ParseHeader(patch);
-
                 while (!EndOfPatch(patch, index))
-                {
                     index += ParseRecord(patch, index);
-                }
                 verified = true;
             }
             catch
@@ -53,7 +31,21 @@ namespace LAZYSHELL.Patches
                 verified = false;
             }
         }
-
+        // public functions
+        public bool ApplyTo(byte[] rom)
+        {
+            try
+            {
+                foreach (IPSRecord record in records)
+                    ApplyIPSRecord(record, rom);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        // class functions and accessors
         private int ParseHeader(byte[] patch)
         {
             byte[] header = Bits.GetByteArray(patch, 0, 5);
@@ -78,11 +70,10 @@ namespace LAZYSHELL.Patches
         private int ParseRecord(byte[] patch, int index)
         {
             IPSRecord record = new IPSRecord();
-
-            record.offset = Bits.Get24BitBigEndian(patch, index); index += 3;
+            record.offset = Bits.GetInt24Reversed(patch, index); index += 3;
             record.size = Bits.GetShortReversed(patch, index); index += 2;
-
-            if (record.size == 0) // RLE encoded
+            // RLE encoded
+            if (record.size == 0)
             {
                 record.size = Bits.GetShortReversed(patch, index); index += 2;
                 record.recordData = new Byte[record.size];
@@ -91,21 +82,25 @@ namespace LAZYSHELL.Patches
                 for (int i = 0; i < record.recordData.Length; i++)
                     record.recordData[i] = value;
                 this.records.Add(record); // Save the record
-
-                return 8; // Return 
-
+                // Return 
+                return 8; 
             }
-
             // Not RLE encoded
             record.recordData = Bits.GetByteArray(patch, index, record.size); index += record.size;
-            this.records.Add(record); // Save the record
-
-            return record.size + 5; // Return 
+            // Save the record
+            this.records.Add(record); 
+            // Return 
+            return record.size + 5;
         }
-
         private void ApplyIPSRecord(IPSRecord record, byte[] data)
         {
             Bits.SetByteArray(data, record.offset, record.recordData);
+        }
+        // represents one chunk of an IPS patch
+        private struct IPSRecord
+        {
+            public int offset, size;
+            public byte[] recordData;
         }
     }
 }

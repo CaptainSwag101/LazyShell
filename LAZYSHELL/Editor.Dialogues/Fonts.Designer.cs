@@ -34,7 +34,7 @@
             this.panel25 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBoxFontCharacter = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.colors = new System.Windows.Forms.PictureBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.fontEditZoomIn = new System.Windows.Forms.ToolStripButton();
@@ -51,15 +51,6 @@
             this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             this.fontEditMirror = new System.Windows.Forms.ToolStripButton();
             this.fontEditInvert = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.charKeystroke = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.showGrid = new System.Windows.Forms.ToolStripButton();
-            this.showBG = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBoxFontTable = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -69,33 +60,37 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.insertIntoTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertIntoBattleDialogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.indexLabel = new System.Windows.Forms.Label();
+            this.fontTable = new LAZYSHELL.NewPanel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toggleKeystrokes = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.indexLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.reset = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.showGrid = new System.Windows.Forms.ToolStripButton();
+            this.showBG = new System.Windows.Forms.ToolStripButton();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.fontType = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.openNewFontTable = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.numeralGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.battleMenuGraphicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numeralPalettesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.battleMenuPalettesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.openKeystrokes = new System.Windows.Forms.ToolStripButton();
-            this.saveKeystrokes = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.openNewFontTable = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.reset = new System.Windows.Forms.ToolStripButton();
             this.panel30.SuspendLayout();
             this.panel25.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontCharacter)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colors)).BeginInit();
             this.toolStrip2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTable)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.toolStrip7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,7 +104,7 @@
             0,
             0,
             0});
-            this.fontWidth.Location = new System.Drawing.Point(40, 3);
+            this.fontWidth.Location = new System.Drawing.Point(200, 3);
             this.fontWidth.Maximum = new decimal(new int[] {
             16,
             0,
@@ -121,7 +116,7 @@
             0,
             0});
             this.fontWidth.Name = "fontWidth";
-            this.fontWidth.Size = new System.Drawing.Size(40, 18);
+            this.fontWidth.Size = new System.Drawing.Size(40, 21);
             this.fontWidth.Text = "0";
             this.fontWidth.Value = new decimal(new int[] {
             0,
@@ -134,7 +129,8 @@
             // 
             this.panel30.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel30.Controls.Add(this.panel25);
-            this.panel30.Controls.Add(this.panel1);
+            this.panel30.Controls.Add(this.panel4);
+            this.panel30.Controls.Add(this.toolStrip1);
             this.panel30.Controls.Add(this.toolStrip7);
             this.panel30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel30.Location = new System.Drawing.Point(0, 0);
@@ -147,13 +143,12 @@
             this.panel25.AutoScroll = true;
             this.panel25.BackColor = System.Drawing.SystemColors.Control;
             this.panel25.Controls.Add(this.panel2);
-            this.panel25.Controls.Add(this.panel3);
+            this.panel25.Controls.Add(this.panel1);
             this.panel25.Controls.Add(this.toolStrip2);
-            this.panel25.Controls.Add(this.toolStrip1);
             this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel25.Location = new System.Drawing.Point(132, 25);
+            this.panel25.Location = new System.Drawing.Point(132, 50);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(284, 290);
+            this.panel25.Size = new System.Drawing.Size(284, 265);
             this.panel25.TabIndex = 2;
             // 
             // panel2
@@ -161,7 +156,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBoxFontCharacter);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(24, 45);
+            this.panel2.Location = new System.Drawing.Point(24, 20);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(260, 245);
             this.panel2.TabIndex = 3;
@@ -179,23 +174,23 @@
             this.pictureBoxFontCharacter.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseMove);
             this.pictureBoxFontCharacter.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFontCharacter_MouseUp);
             // 
-            // panel3
+            // panel1
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.colors);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(24, 25);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(260, 20);
-            this.panel3.TabIndex = 2;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.colors);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(24, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 20);
+            this.panel1.TabIndex = 448;
             // 
             // colors
             // 
             this.colors.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
             this.colors.Location = new System.Drawing.Point(0, 0);
             this.colors.Name = "colors";
-            this.colors.Size = new System.Drawing.Size(256, 16);
-            this.colors.TabIndex = 448;
+            this.colors.Size = new System.Drawing.Size(64, 16);
+            this.colors.TabIndex = 0;
             this.colors.TabStop = false;
             this.colors.Paint += new System.Windows.Forms.PaintEventHandler(this.colors_Paint);
             this.colors.MouseDown += new System.Windows.Forms.MouseEventHandler(this.colors_MouseDown);
@@ -219,7 +214,7 @@
             this.toolStripSeparator27,
             this.fontEditMirror,
             this.fontEditInvert});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(24, 265);
@@ -372,98 +367,16 @@
             this.fontEditInvert.Text = "Invert Character";
             this.fontEditInvert.Click += new System.EventHandler(this.fontEditInvert_Click);
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel3,
-            this.fontWidth,
-            this.toolStripSeparator2,
-            this.toolStripLabel2,
-            this.charKeystroke,
-            this.toolStripSeparator3,
-            this.showGrid,
-            this.showBG});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(284, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(33, 22);
-            this.toolStripLabel3.Text = "Width";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(24, 22);
-            this.toolStripLabel2.Text = "Key";
-            // 
-            // charKeystroke
-            // 
-            this.charKeystroke.MaxLength = 1;
-            this.charKeystroke.Name = "charKeystroke";
-            this.charKeystroke.Size = new System.Drawing.Size(25, 25);
-            this.charKeystroke.TextChanged += new System.EventHandler(this.charKeystroke_TextChanged);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // showGrid
-            // 
-            this.showGrid.CheckOnClick = true;
-            this.showGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.showGrid.Image = global::LAZYSHELL.Properties.Resources.buttonTogglePixelGrid;
-            this.showGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.showGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showGrid.Name = "showGrid";
-            this.showGrid.Size = new System.Drawing.Size(23, 22);
-            this.showGrid.Text = "Show/hide grid";
-            this.showGrid.Click += new System.EventHandler(this.showGrid_Click);
-            // 
-            // showBG
-            // 
-            this.showBG.CheckOnClick = true;
-            this.showBG.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.showBG.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.showBG.Name = "showBG";
-            this.showBG.Size = new System.Drawing.Size(23, 22);
-            this.showBG.Text = "BG";
-            this.showBG.Click += new System.EventHandler(this.showBG_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.indexLabel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(132, 290);
-            this.panel1.TabIndex = 1;
-            // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
             this.panel4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.pictureBoxFontTable);
-            this.panel4.Location = new System.Drawing.Point(0, 23);
+            this.panel4.Controls.Add(this.fontTable);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 50);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(132, 267);
+            this.panel4.Size = new System.Drawing.Size(132, 265);
             this.panel4.TabIndex = 448;
             // 
             // pictureBoxFontTable
@@ -544,15 +457,108 @@
             this.insertIntoBattleDialogueToolStripMenuItem.Text = "Insert into battle dialogue";
             this.insertIntoBattleDialogueToolStripMenuItem.Click += new System.EventHandler(this.insertIntoBattleDialogueToolStripMenuItem_Click);
             // 
+            // fontTable
+            // 
+            this.fontTable.Location = new System.Drawing.Point(0, 0);
+            this.fontTable.Name = "fontTable";
+            this.fontTable.Size = new System.Drawing.Size(128, 192);
+            this.fontTable.TabIndex = 448;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toggleKeystrokes,
+            this.toolStripSeparator1,
+            this.indexLabel,
+            this.toolStripSeparator2,
+            this.reset,
+            this.toolStripSeparator6,
+            this.toolStripLabel3,
+            this.fontWidth,
+            this.showGrid,
+            this.showBG});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(416, 25);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toggleKeystrokes
+            // 
+            this.toggleKeystrokes.CheckOnClick = true;
+            this.toggleKeystrokes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toggleKeystrokes.Image = global::LAZYSHELL.Properties.Resources.keystrokes;
+            this.toggleKeystrokes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleKeystrokes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleKeystrokes.Name = "toggleKeystrokes";
+            this.toggleKeystrokes.Size = new System.Drawing.Size(23, 22);
+            this.toggleKeystrokes.ToolTipText = "Show/hide keystrokes table";
+            this.toggleKeystrokes.CheckedChanged += new System.EventHandler(this.toggleKeystrokes_CheckedChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // indexLabel
             // 
-            this.indexLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.indexLabel.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.indexLabel.Location = new System.Drawing.Point(0, 0);
+            this.indexLabel.AutoSize = false;
             this.indexLabel.Name = "indexLabel";
-            this.indexLabel.Size = new System.Drawing.Size(132, 23);
-            this.indexLabel.TabIndex = 449;
+            this.indexLabel.Size = new System.Drawing.Size(90, 22);
+            this.indexLabel.Text = "[256]";
             this.indexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // reset
+            // 
+            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(23, 22);
+            this.reset.Text = "Reset";
+            this.reset.Click += new System.EventHandler(this.reset_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(39, 22);
+            this.toolStripLabel3.Text = " Width ";
+            // 
+            // showGrid
+            // 
+            this.showGrid.CheckOnClick = true;
+            this.showGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.showGrid.Image = global::LAZYSHELL.Properties.Resources.buttonTogglePixelGrid;
+            this.showGrid.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.showGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showGrid.Name = "showGrid";
+            this.showGrid.Size = new System.Drawing.Size(23, 22);
+            this.showGrid.Text = "Show/hide grid";
+            this.showGrid.Click += new System.EventHandler(this.showGrid_Click);
+            // 
+            // showBG
+            // 
+            this.showBG.CheckOnClick = true;
+            this.showBG.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.showBG.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.showBG.Name = "showBG";
+            this.showBG.Size = new System.Drawing.Size(23, 22);
+            this.showBG.Text = "BG";
+            this.showBG.Click += new System.EventHandler(this.showBG_Click);
             // 
             // toolStrip7
             // 
@@ -560,14 +566,9 @@
             this.toolStrip7.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fontType,
-            this.toolStripDropDownButton1,
-            this.toolStripSeparator1,
-            this.openKeystrokes,
-            this.saveKeystrokes,
             this.toolStripSeparator4,
             this.openNewFontTable,
-            this.toolStripSeparator6,
-            this.reset});
+            this.toolStripDropDownButton1});
             this.toolStrip7.Location = new System.Drawing.Point(0, 0);
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -588,6 +589,20 @@
             this.fontType.Name = "fontType";
             this.fontType.Size = new System.Drawing.Size(126, 25);
             this.fontType.SelectedIndexChanged += new System.EventHandler(this.fontType_SelectedIndexChanged);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // openNewFontTable
+            // 
+            this.openNewFontTable.Image = global::LAZYSHELL.Properties.Resources.openNewFontTable;
+            this.openNewFontTable.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openNewFontTable.Name = "openNewFontTable";
+            this.openNewFontTable.Size = new System.Drawing.Size(23, 22);
+            this.openNewFontTable.ToolTipText = "New Font Table";
+            this.openNewFontTable.Click += new System.EventHandler(this.openNewFontTable_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -640,61 +655,6 @@
             this.battleMenuPalettesToolStripMenuItem.Text = "Battle Menu Palettes";
             this.battleMenuPalettesToolStripMenuItem.Click += new System.EventHandler(this.battleMenuPalettesToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // openKeystrokes
-            // 
-            this.openKeystrokes.Image = global::LAZYSHELL.Properties.Resources.keys_load;
-            this.openKeystrokes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openKeystrokes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openKeystrokes.Name = "openKeystrokes";
-            this.openKeystrokes.Size = new System.Drawing.Size(23, 22);
-            this.openKeystrokes.ToolTipText = "Load Keystroke Table";
-            this.openKeystrokes.Click += new System.EventHandler(this.openKeystrokes_Click);
-            // 
-            // saveKeystrokes
-            // 
-            this.saveKeystrokes.Image = global::LAZYSHELL.Properties.Resources.keys_save;
-            this.saveKeystrokes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.saveKeystrokes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveKeystrokes.Name = "saveKeystrokes";
-            this.saveKeystrokes.Size = new System.Drawing.Size(23, 22);
-            this.saveKeystrokes.ToolTipText = "Save Keystroke Table";
-            this.saveKeystrokes.Click += new System.EventHandler(this.saveKeystrokes_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // openNewFontTable
-            // 
-            this.openNewFontTable.Image = global::LAZYSHELL.Properties.Resources.openNewFontTable;
-            this.openNewFontTable.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openNewFontTable.Name = "openNewFontTable";
-            this.openNewFontTable.Size = new System.Drawing.Size(23, 22);
-            this.openNewFontTable.ToolTipText = "New Font Table";
-            this.openNewFontTable.Click += new System.EventHandler(this.openNewFontTable_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // reset
-            // 
-            this.reset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.Text = "Reset";
-            this.reset.Click += new System.EventHandler(this.reset_Click);
-            // 
             // Fonts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,16 +671,15 @@
             this.panel25.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontCharacter)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.colors)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFontTable)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.toolStrip7.ResumeLayout(false);
             this.toolStrip7.PerformLayout();
             this.ResumeLayout(false);
@@ -750,19 +709,9 @@
         private System.Windows.Forms.ToolStripButton fontEditInvert;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox charKeystroke;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton showGrid;
         private System.Windows.Forms.ToolStrip toolStrip7;
         private System.Windows.Forms.ToolStripComboBox fontType;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton openKeystrokes;
-        private System.Windows.Forms.ToolStripButton saveKeystrokes;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox colors;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ToolStripButton showBG;
         private ToolStripNumericUpDown fontWidth;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -774,8 +723,6 @@
         private System.Windows.Forms.ToolStripMenuItem insertIntoTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton fontEditFill;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripMenuItem insertIntoBattleDialogueToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem numeralGraphicsToolStripMenuItem;
@@ -783,6 +730,14 @@
         private System.Windows.Forms.ToolStripMenuItem battleMenuGraphicsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem battleMenuPalettesToolStripMenuItem;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label indexLabel;
+        private System.Windows.Forms.ToolStripButton reset;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private NewPanel fontTable;
+        private System.Windows.Forms.ToolStripLabel indexLabel;
+        private System.Windows.Forms.ToolStripButton toggleKeystrokes;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox colors;
     }
 }

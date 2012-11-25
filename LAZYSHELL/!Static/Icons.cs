@@ -8,7 +8,7 @@ namespace LAZYSHELL
 {
     public static class Icons
     {
-        // channel track icons
+        // notation icons
         public static Bitmap noteWhole = Resources.noteWhole;
         public static Bitmap noteHalfDotted = Resources.noteHalfDotted;
         public static Bitmap noteHalf = Resources.noteHalf;
@@ -64,7 +64,9 @@ namespace LAZYSHELL
         public static Bitmap noteEmpty = Resources.noteEmpty;
         public static Bitmap noteEmptyDotted = Resources.noteEmptyDotted;
         public static Bitmap noteEmptyTriplet = Resources.noteEmptyTriplet;
-        //
+        public static Bitmap tieOver = Resources.tieOver;
+        public static Bitmap tieUnder = Resources.tieUnder;
+        // channel track icons
         public static Bitmap sharp = Resources.sharp;
         public static Bitmap octaveUp = Resources.octaveUp;
         public static Bitmap octaveDown = Resources.octaveDown;
@@ -85,8 +87,5 @@ namespace LAZYSHELL
         public static Bitmap drumsOn = Resources.drumsOn;
         public static Bitmap drumsOff = Resources.drumsOff;
         public static Bitmap vibrato = Resources.vibrato;
-        //
-        public static Bitmap tieOver = Resources.tieOver;
-        public static Bitmap tieUnder = Resources.tieUnder;
     }
 }

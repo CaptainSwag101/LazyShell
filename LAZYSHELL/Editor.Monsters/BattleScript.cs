@@ -8,54 +8,59 @@ namespace LAZYSHELL.ScriptsEditor
     [Serializable()]
     public class BattleScript : Element
     {
-        //pointers are stored 0x3930AA - 0x3932A9
-        //battlescripts are stored 0x3932AA - 0x3959F3 cannot go past 0x3959F3 - 0x274A in total len
-        [NonSerialized()]
-        private byte[] data;
-        public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value; } }
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // class variables
         private byte[] script; public byte[] Script { get { return script; } set { script = value; } }
-        public int ScriptLength { get { return script.Length; } }
-
-        private int index; public int MonsterNum { get { return index; } }
-
-        private int commandIndex = 0; public int CommandIndex { get { return commandIndex; } set { commandIndex = value; } }
-        public byte[] NextCommand()
+        private List<BattleCommand> commands;
+        public List<BattleCommand> Commands { get { return commands; } set { commands = value; } }
+        public int Length { get { return script.Length; } }
+        // constructor
+        public BattleScript(int index)
         {
-            if (commandIndex >= script.Length)
-                return null;
-            int len = GetOpcodeLength(script[commandIndex]);
-            commandIndex += len;
-            return Bits.GetByteArray(script, commandIndex - len, len);
-        }
-        public BattleScript(byte[] data, int index)
-        {
-            this.data = data;
             this.index = index;
-
-            InitializeBattleScript(index);
+            Disassemble(index);
         }
-        private void InitializeBattleScript(int index)
+        // assemblers
+        private void Disassemble(int index)
         {
             int bank = 0x390000;
-            ushort offset = Bits.GetShort(data, bank + 0x30AA + (index * 2));
-
-            int length = CalculateScriptLength(bank + offset);
-
-            script = Bits.GetByteArray(data, bank + offset, length);
+            int offset = Bits.GetShort(rom, bank + 0x30AA + (index * 2));
+            int length = GetLength(bank + offset);
+            this.script = Bits.GetByteArray(rom, bank + offset, length);
+            //
+            ParseScript();
         }
-
-        private int CalculateScriptLength(int offset)
+        public void Assemble(ref int offset)
         {
-            int len = 0;
+            Bits.SetByteArray(rom, offset, script);
+            offset += script.Length;
+        }
+        // class functions and accessors
+        private void ParseScript()
+        {
+            int offset = 0, length = 0;
+            if (script.Length > 0 && this.commands == null)
+                this.commands = new List<BattleCommand>();
+            //
+            BattleCommand bsc;
+            while (offset < script.Length)
+            {
+                length = Lists.BattleLengths[script[offset]];
+                bsc = new BattleCommand(Bits.GetByteArray(script, offset, length));
+                commands.Add(bsc);
+                offset += length;
+            }
+        }
+        private int GetLength(int offset)
+        {
             int totalLength = 0;
             bool endAll = false;
             bool endIf = false;
-            byte opcode;
-
             while (!endAll)
             {
-                opcode = data[offset];
+                byte opcode = rom[offset];
                 if (opcode == 0xFF)
                 {
                     if (!endIf)
@@ -63,57 +68,35 @@ namespace LAZYSHELL.ScriptsEditor
                     else
                         endAll = true;
                 }
-
-                len = GetOpcodeLength(opcode);
-
-                totalLength += len;
-                offset += len;
+                int length = Lists.BattleLengths[opcode];
+                totalLength += length;
+                offset += length;
             }
-
             return totalLength;
         }
-        private static int GetOpcodeLength(byte opcode)
+        public void Add(BattleCommand bsc)
         {
-            if (opcode < 0xE0 ||
-                opcode == 0xEC ||
-                opcode == 0xFB ||
-                opcode == 0xFD ||
-                opcode == 0xFE ||
-                opcode == 0xFF)
-                return 1;
-            else if (opcode == 0xE2 ||
-                opcode == 0xE3 ||
-                opcode == 0xE5 ||
-                opcode == 0xE8 ||
-                opcode == 0xED ||
-                opcode == 0xEF ||
-                opcode == 0xF1)
-                return 2;
-            else if (opcode == 0xE6 ||
-                opcode == 0xEB ||
-                opcode == 0xF2 ||
-                opcode == 0xF3)
-                return 3;
-            else if (opcode == 0xE0 ||
-                opcode == 0xE7 ||
-                opcode == 0xEA ||
-                opcode == 0xF0 ||
-                opcode == 0xF4 ||
-                opcode == 0xFC)
-                return 4;
-            else
-                MessageBox.Show("Invalid Opcode: " + opcode.ToString());
-
-            throw new Exception("Invalid Opcode: " + opcode.ToString());
+            this.commands.Add(bsc);
         }
-
-        public ushort Assemble(int offset)
+        public void Insert(int index, BattleCommand bsc)
         {
-            Bits.SetByteArray(data, offset, script);
-            return (ushort)script.Length;
+            this.commands.Insert(index, bsc);
         }
+        public void RemoveAt(int index)
+        {
+            this.commands.RemoveAt(index);
+        }
+        public void Reverse(int index, int count)
+        {
+            this.commands.Reverse(index, count);
+        }
+        // universal functions
         public override void Clear()
         {
+            this.commands.Clear();
+            BattleCommand bsc = new BattleCommand(new byte[] { 0xFF, 0xFF });
+            this.commands.Add(bsc);
+            this.commands.Add(bsc);
             script = new byte[2] { 0xFF, 0xFF };
         }
     }

@@ -11,6 +11,16 @@ namespace LAZYSHELL
     [Serializable()]
     public class Subtile
     {
+        // tile properties
+        private bool twobpp;
+        private bool priority1, mirror, invert;
+        public bool Priority1 { get { return priority1; } set { priority1 = value; } }
+        public bool Mirror { get { return mirror; } set { mirror = value; } }
+        public bool Invert { get { return invert; } set { invert = value; } }
+        private int index, palette;
+        public int Index { get { return index; } set { index = value; } }
+        public int Palette { get { return this.palette; } set { this.palette = value; } }
+        // accessors
         private int[] pixels = new int[64];
         public int[] Pixels
         {
@@ -29,17 +39,7 @@ namespace LAZYSHELL
                 colors = value;
             }
         }
-        private bool twobpp;
-
-        private bool priority1, mirror, invert;
-        public bool Priority1 { get { return priority1; } set { priority1 = value; } }
-        public bool Mirror { get { return mirror; } set { mirror = value; } }
-        public bool Invert { get { return invert; } set { invert = value; } }
-
-        private int index, palette;
-        public int Index { get { return index; } set { index = value; } }
-        public int Palette { get { return this.palette; } set { this.palette = value; } }
-
+        // constructors
         public Subtile(int index, byte[] graphics, int offset, int[] palette,
             bool mirror, bool invert, bool priority1, bool twobpp)
         {
@@ -124,6 +124,7 @@ namespace LAZYSHELL
         {
 
         }
+        // spawning
         public Subtile Copy()
         {
             Subtile copy = new Subtile();
@@ -148,6 +149,7 @@ namespace LAZYSHELL
             this.pixels.CopyTo(dest.Pixels, 0);
             this.colors.CopyTo(dest.Colors, 0);
         }
+        // universal functions
         public void Clear()
         {
             mirror = false;

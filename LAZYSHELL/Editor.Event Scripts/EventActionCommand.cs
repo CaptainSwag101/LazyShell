@@ -15,16 +15,20 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         // Used for updating internal offsets and pointers
         protected bool pointerChangedA; public bool PointerChangedA { get { return this.pointerChangedA; } set { this.pointerChangedA = value; } }
         protected bool pointerChangedB; public bool PointerChangedB { get { return this.pointerChangedB; } set { this.pointerChangedB = value; } }
-        public int CommandDelta { get { return this.offset - originalOffset; } }
+        public int Delta { get { return this.offset - originalOffset; } }
         public byte Opcode { get { return GetOpcode(); } set { SetOpcode(value); } }
-        public byte Option { get { return GetOption(); } set { SetOption(value); } }
+        public byte Param1 { get { return GetParam(1); } set { SetParam(value, 1); } }
+        public byte Param2 { get { return GetParam(2); } set { SetParam(value, 2); } }
+        public byte Param3 { get { return GetParam(3); } set { SetParam(value, 3); } }
+        public byte Param4 { get { return GetParam(4); } set { SetParam(value, 4); } }
+        public byte Param5 { get { return GetParam(5); } set { SetParam(value, 5); } }
         public abstract ushort ReadPointer();
         public abstract void WritePointer(ushort pointer);
         public abstract ushort ReadPointerSpecial(int index);
         public abstract void WritePointerSpecial(int index, ushort pointer);
         protected abstract byte GetOpcode();
         protected abstract void SetOpcode(byte opcode);
-        protected abstract byte GetOption();
-        protected abstract void SetOption(byte option);
+        protected abstract byte GetParam(int index);
+        protected abstract void SetParam(byte param, int index);
     }
 }

@@ -7,52 +7,46 @@ namespace LAZYSHELL
     [Serializable()]
     public class WorldMap : Element
     {
-        [NonSerialized()]
-        private byte[] data;
-        public override byte[] Data { get { return data; } set { data = value; } }
-        private int worldMapNum;
-        public override int Index { get { return worldMapNum; } set { worldMapNum = value; } }
-
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // class variables and accessors
         private byte tileset; public byte Tileset { get { return tileset; } set { tileset = value; } }
         private sbyte x; public sbyte X { get { return x; } set { x = value; } }
         private sbyte y; public sbyte Y { get { return y; } set { y = value; } }
-        private byte pointCount; public byte PointCount { get { return pointCount; } set { pointCount = value; } }
-
-        public WorldMap(byte[] data, int worldMapNum)
+        private byte locations; public byte Locations { get { return locations; } set { locations = value; } }
+        // constructor, functions
+        public WorldMap(int index)
         {
-            this.data = data;
-            this.worldMapNum = worldMapNum;
-
-            InitializeWorldMap(data);
+            this.index = index;
+            Disassemble();
         }
-
-        private void InitializeWorldMap(byte[] data)
+        // assemblers
+        private void Disassemble()
         {
-            int offset = worldMapNum * 3 + 0x3EF800;
-
-            tileset = (byte)data[offset]; offset++;
-            x = (sbyte)(data[offset] - 1 ^ 255); offset++;
-            y = (sbyte)(data[offset] - 1 ^ 255); offset++;
-
-            pointCount = (byte)data[0x3EF820 + worldMapNum];
+            int offset = index * 3 + 0x3EF800;
+            tileset = (byte)rom[offset++];
+            x = (sbyte)(rom[offset++] - 1 ^ 255); 
+            y = (sbyte)(rom[offset++] - 1 ^ 255); 
+            locations = (byte)rom[0x3EF820 + index];
         }
         public void Assemble()
         {
-            int offset = worldMapNum * 3 + 0x3EF800;
-
-            data[offset] = tileset; offset++;
-            data[offset] = (byte)((byte)x - 1 ^ 255); offset++;
-            data[offset] = (byte)((byte)y - 1 ^ 255);
-
-            offset = 0x3EF820 + worldMapNum;
-            data[offset] = pointCount;
+            int offset = index * 3 + 0x3EF800;
+            rom[offset++] = tileset; 
+            rom[offset++] = (byte)((byte)x - 1 ^ 255);
+            rom[offset] = (byte)((byte)y - 1 ^ 255);
+            //
+            offset = 0x3EF820 + index;
+            rom[offset] = locations;
         }
+        // universal functions
         public override void Clear()
         {
             tileset = 0;
             x = 0;
             y = 0;
-            pointCount = 0;
+            locations = 0;
         }
     }
 }

@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class FormationsEditor : Form
+    public partial class FormationsEditor : NewForm
     {
         
         private long checksum;
@@ -21,8 +21,6 @@ namespace LAZYSHELL
         // constructor
         public FormationsEditor()
         {
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
@@ -56,7 +54,7 @@ namespace LAZYSHELL
             foreach (FormationPack fp in Model.FormationPacks)
                 fp.Assemble();
             for (int i = 0; i < Model.FormationMusics.Length; i++)
-                Model.Data[0x029F51 + i] = Model.FormationMusics[i];
+                Model.ROM[0x029F51 + i] = Model.FormationMusics[i];
             checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // event handlers
@@ -121,7 +119,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current formation. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            formationsEditor.Formation = new Formation(Model.Data, formationsEditor.Index);
+            formationsEditor.Formation = new Formation(formationsEditor.Index);
             formationsEditor.RefreshFormations();
         }
         private void resetPackToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,7 +127,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current pack. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            packsEditor.Pack = new FormationPack(Model.Data, packsEditor.Index);
+            packsEditor.Pack = new FormationPack(packsEditor.Index);
             packsEditor.RefreshFormationPacks();
         }
         private void showFormations_Click(object sender, EventArgs e)

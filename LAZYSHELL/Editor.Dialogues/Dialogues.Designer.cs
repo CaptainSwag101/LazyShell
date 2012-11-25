@@ -124,6 +124,7 @@
             // dialogueNum
             // 
             this.dialogueNum.AutoSize = false;
+            this.dialogueNum.ContextMenuStrip = null;
             this.dialogueNum.Hexadecimal = false;
             this.dialogueNum.Increment = new decimal(new int[] {
             1,
@@ -160,7 +161,7 @@
             this.panelDialogues.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDialogues.Location = new System.Drawing.Point(244, 25);
             this.panelDialogues.Name = "panelDialogues";
-            this.panelDialogues.Size = new System.Drawing.Size(426, 615);
+            this.panelDialogues.Size = new System.Drawing.Size(458, 615);
             this.panelDialogues.TabIndex = 2;
             // 
             // panel60
@@ -226,7 +227,7 @@
             this.newLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newLine.Name = "newLine";
-            this.newLine.Size = new System.Drawing.Size(21, 16);
+            this.newLine.Size = new System.Drawing.Size(21, 20);
             this.newLine.Text = "New Line";
             this.newLine.Click += new System.EventHandler(this.newLine_Click);
             // 
@@ -237,7 +238,7 @@
             this.newLineA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newLineA.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newLineA.Name = "newLineA";
-            this.newLineA.Size = new System.Drawing.Size(21, 16);
+            this.newLineA.Size = new System.Drawing.Size(21, 20);
             this.newLineA.Text = "New Line, wait for input";
             this.newLineA.Click += new System.EventHandler(this.newLineA_Click);
             // 
@@ -253,7 +254,7 @@
             this.newPage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newPage.Name = "newPage";
-            this.newPage.Size = new System.Drawing.Size(21, 19);
+            this.newPage.Size = new System.Drawing.Size(21, 20);
             this.newPage.Text = "New Page";
             this.newPage.Click += new System.EventHandler(this.newPage_Click);
             // 
@@ -264,7 +265,7 @@
             this.newPageA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.newPageA.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newPageA.Name = "newPageA";
-            this.newPageA.Size = new System.Drawing.Size(21, 19);
+            this.newPageA.Size = new System.Drawing.Size(21, 20);
             this.newPageA.Text = "New Page, wait for input";
             this.newPageA.Click += new System.EventHandler(this.newPageA_Click);
             // 
@@ -280,7 +281,7 @@
             this.endString.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.endString.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.endString.Name = "endString";
-            this.endString.Size = new System.Drawing.Size(21, 15);
+            this.endString.Size = new System.Drawing.Size(21, 20);
             this.endString.Text = "End String";
             this.endString.Click += new System.EventHandler(this.endString_Click);
             // 
@@ -291,7 +292,7 @@
             this.endStringA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.endStringA.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.endStringA.Name = "endStringA";
-            this.endStringA.Size = new System.Drawing.Size(21, 15);
+            this.endStringA.Size = new System.Drawing.Size(21, 20);
             this.endStringA.Text = "End String, wait for input";
             this.endStringA.Click += new System.EventHandler(this.endStringA_Click);
             // 
@@ -322,7 +323,7 @@
             this.pause60f.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pause60f.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pause60f.Name = "pause60f";
-            this.pause60f.Size = new System.Drawing.Size(21, 19);
+            this.pause60f.Size = new System.Drawing.Size(21, 20);
             this.pause60f.Text = "Pause 1 second";
             this.pause60f.Click += new System.EventHandler(this.pause60f_Click);
             // 
@@ -333,7 +334,7 @@
             this.pauseA.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.pauseA.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pauseA.Name = "pauseA";
-            this.pauseA.Size = new System.Drawing.Size(21, 19);
+            this.pauseA.Size = new System.Drawing.Size(21, 20);
             this.pauseA.Text = "Pause, wait for input";
             this.pauseA.Click += new System.EventHandler(this.pauseA_Click);
             // 
@@ -494,6 +495,7 @@
             // pauseFrameNum
             // 
             this.pauseFrameNum.AutoSize = false;
+            this.pauseFrameNum.ContextMenuStrip = null;
             this.pauseFrameNum.Hexadecimal = false;
             this.pauseFrameNum.Increment = new decimal(new int[] {
             1,
@@ -779,7 +781,7 @@
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(670, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(702, 25);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -982,7 +984,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 640);
+            this.ClientSize = new System.Drawing.Size(702, 640);
             this.Controls.Add(this.panelDialogues);
             this.Controls.Add(this.panel60);
             this.Controls.Add(this.toolStrip3);

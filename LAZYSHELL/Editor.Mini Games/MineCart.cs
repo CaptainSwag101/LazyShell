@@ -138,7 +138,7 @@ namespace LAZYSHELL
             this.MiniGames = miniGames;
             InitializeComponent();
             this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-            this.music.SelectedIndex = Model.Data[0x0393EF];
+            this.music.SelectedIndex = Model.ROM[0x0393EF];
             updating = true;
             if (settings.RememberLastIndex)
                 Index = settings.LastMineCart;
@@ -180,8 +180,8 @@ namespace LAZYSHELL
                 startX.Visible = true;
                 startY.Visible = true;
                 toolStripSeparator6.Visible = true;
-                startX.Value = Bits.GetShort(Model.Data, 0x039670);
-                startY.Value = Bits.GetShort(Model.Data, 0x039679);
+                startX.Value = Bits.GetShort(Model.ROM, 0x039670);
+                startY.Value = Bits.GetShort(Model.ROM, 0x039679);
                 panelScreens.Hide();
             }
             else
@@ -343,11 +343,13 @@ namespace LAZYSHELL
         //
         private void StagePaletteUpdate()
         {
+            bgtileset.RedrawTilesets();
             tileset.RedrawTilesets();
             tilemap.RedrawTilemaps();
             LoadTilesetEditor();
             LoadTilemapEditor();
             //
+            screenBGImage = null;
             SetScreenImages();
             //
             checksum--;   // b/c switching colors won't modify checksum
@@ -472,16 +474,16 @@ namespace LAZYSHELL
         {
             if (previewer == null)
             {
-                previewer = new Previewer(Index, PreviewType.MineCart);
+                previewer = new Previewer(Index, EType.MineCart);
                 previewer.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                previewer.Reload(Index, PreviewType.MineCart);
+                previewer.Reload(Index, EType.MineCart);
         }
         //
         public void Assemble()
         {
-            Model.Data[0x0393EF] = (byte)this.music.SelectedIndex;
+            Model.ROM[0x0393EF] = (byte)this.music.SelectedIndex;
             MinecartData.Assemble();
             tilemap.Assemble();
             Model.MinecartM7PaletteSet.Assemble();
@@ -536,9 +538,9 @@ namespace LAZYSHELL
             if (!Model.Compress(Model.MinecartObjects, dst, ref offset, 0x8000 - 0x1E, "object & screen data"))
                 return;
             //
-            Bits.SetByteArray(Model.Data, 0x388000, dst);
-            Bits.SetShort(Model.Data, 0x039670, (ushort)startX.Value);
-            Bits.SetShort(Model.Data, 0x039679, (ushort)startY.Value);
+            Bits.SetByteArray(Model.ROM, 0x388000, dst);
+            Bits.SetShort(Model.ROM, 0x039670, (ushort)startX.Value);
+            Bits.SetShort(Model.ROM, 0x039679, (ushort)startY.Value);
         }
         #endregion
         #region Event Handlers
@@ -585,6 +587,7 @@ namespace LAZYSHELL
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
             Rectangle dst;
             Rectangle src;
+            // draw screens
             for (int i = 0; i < L1Indexes.Count; i++)
             {
                 dst = new Rectangle(i * 256, 0, 256, 256);
@@ -597,7 +600,7 @@ namespace LAZYSHELL
                         {
                             if (screenBGImage == null)
                             {
-                                int[] BGPixels = Do.TilesetToPixels(bgtileset.Tileset_Tiles, 32, 16, 0, false);
+                                int[] BGPixels = Do.TilesetToPixels(bgtileset.Tileset_tiles, 32, 16, 0, false);
                                 screenBGImage = new Bitmap(Do.PixelsToImage(BGPixels, 512, 256));
                             }
                             dst.Width = 512;
@@ -623,6 +626,7 @@ namespace LAZYSHELL
                     e.Graphics.DrawRectangle(pen, new Rectangle(i * 256, 0, 256 - 1, 256 - 1));
                 }
             }
+            // draw objects
             for (int i = 0; buttonObjects.Checked && i < minecartObjects.Count; i++)
             {
                 MCObject obj = minecartObjects[i];

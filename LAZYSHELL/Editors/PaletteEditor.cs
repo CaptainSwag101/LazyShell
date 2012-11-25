@@ -627,7 +627,7 @@ namespace LAZYSHELL
         #region Event Handlers
         private void PaletteEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            buttonReset_Click(null, null);
+            buttonReset.PerformClick();
         }
         private void pictureBoxPalette_Paint(object sender, PaintEventArgs e)
         {

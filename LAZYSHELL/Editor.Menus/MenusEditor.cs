@@ -22,8 +22,6 @@ namespace LAZYSHELL
         //
         public MenusEditor()
         {
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             //
             InitializeComponent();
             Do.AddShortcut(toolStrip2, Keys.Control | Keys.S, new EventHandler(save_Click));
@@ -52,6 +50,10 @@ namespace LAZYSHELL
         {
             updating = true;
             this.menuTextBox.Text = menuText.GetMenuString(textView.Checked);
+            this.toolStripSeparator2.Visible =
+                this.toolStripLabel2.Visible =
+                this.xCoord.Visible = menuText.Index >= 14 && menuText.Index <= 19;
+            this.xCoord.Value = menuText.X;
             CalculateFreeSpace();
             updating = false;
         }
@@ -68,7 +70,7 @@ namespace LAZYSHELL
             MenuTexts lastMenuText = null;
             foreach (MenuTexts menuText in Model.MenuTexts)
             {
-                if (lastMenuText != null && menuText.Length != 0 && Bits.Compare(menuText.MenuText, lastMenuText.MenuText))
+                if (lastMenuText != null && menuText.Length != 0 && Bits.Compare(menuText.Text, lastMenuText.Text))
                     continue;
                 lastMenuText = menuText;
                 used += menuText.Length + 1;
@@ -85,9 +87,9 @@ namespace LAZYSHELL
             MenuTexts lastMenuText = null;
             foreach (MenuTexts menuText in Model.MenuTexts)
             {
-                if (lastMenuText != null && menuText.Length != 0 && Bits.Compare(menuText.MenuText, lastMenuText.MenuText))
+                if (lastMenuText != null && menuText.Length != 0 && Bits.Compare(menuText.Text, lastMenuText.Text))
                 {
-                    Bits.SetShort(Model.Data, menuText.Index * 2 + 0x3EEF00, lastMenuText.Offset);
+                    Bits.SetShort(Model.ROM, menuText.Index * 2 + 0x3EEF00, lastMenuText.Offset);
                     menuText.Offset = lastMenuText.Offset;
                     continue;
                 }
@@ -99,12 +101,21 @@ namespace LAZYSHELL
                 menuText.Offset = offset;
                 lastMenuText = menuText;
                 //
-                Bits.SetShort(Model.Data, menuText.Index * 2 + 0x3EEF00, offset);
-                Bits.SetCharArray(temp, offset, menuText.MenuText);
+                Bits.SetShort(Model.ROM, menuText.Index * 2 + 0x3EEF00, offset);
+                Bits.SetCharArray(temp, offset, menuText.Text);
                 offset += menuText.Length;
                 temp[offset++] = 0;
+                switch (menuText.Index)
+                {
+                    case 14: Bits.SetByteBits(Model.ROM, 0x03328E, (byte)(menuText.X * 2), 0x3F); break;
+                    case 15: Bits.SetByteBits(Model.ROM, 0x03327E, (byte)(menuText.X * 2), 0x3F); break;
+                    case 16: Bits.SetByteBits(Model.ROM, 0x033282, (byte)(menuText.X * 2), 0x3F); break;
+                    case 17: Bits.SetByteBits(Model.ROM, 0x033286, (byte)(menuText.X * 2), 0x3F); break;
+                    case 18: Bits.SetByteBits(Model.ROM, 0x03328A, (byte)(menuText.X * 2), 0x3F); break;
+                    case 19: Bits.SetByteBits(Model.ROM, 0x03327A, (byte)(menuText.X * 2), 0x3F); break;
+                }
             }
-            Bits.SetByteArray(Model.Data, 0x3EF000, temp);
+            Bits.SetByteArray(Model.ROM, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             menus.Assemble();
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
@@ -191,7 +202,7 @@ namespace LAZYSHELL
                     menuTextBox.SelectionStart = tempSel + 2;
                 }
             }
-            if (textHelper.VerifyCorrectSymbols(this.menuTextBox.Text.ToCharArray(), !textView.Checked))
+            if (textHelper.VerifySymbols(this.menuTextBox.Text.ToCharArray(), !textView.Checked))
             {
                 menuText.SetMenuString(menuTextBox.Text, textView.Checked);
                 menuText.Error = textHelper.Error;
@@ -210,6 +221,13 @@ namespace LAZYSHELL
         private void textView_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+        private void xCoord_ValueChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            menuText.X = (int)xCoord.Value;
+            menus.SetTextObjects();
+            menus.Picture.Invalidate();
         }
     }
 }

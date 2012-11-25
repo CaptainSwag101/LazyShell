@@ -8,6 +8,9 @@ namespace LAZYSHELL
     [Serializable()]
     public class MinecartData
     {
+        // universal variables
+        private byte[] buffer; public byte[] BUFFER { get { return buffer; } set { buffer = value; } }
+        // public variables and accessors
         public MCObject[] M7ObjectsA = new MCObject[8];
         public MCObject[] M7ObjectsB = new MCObject[8];
         public List<int> L1Screens;
@@ -47,53 +50,60 @@ namespace LAZYSHELL
             }
             set { coin = value; }
         }
-        public MinecartData(byte[] data)
+        // constructor
+        public MinecartData(byte[] buffer)
+        {
+            this.buffer = buffer;
+            Disassemble();
+        }
+        // assemblers
+        private void Disassemble()
         {
             // mode7 objects
-            int offset = Bits.GetShort(data, 0);
+            int offset = Bits.GetShort(buffer, 0);
             for (int i = 0; i < 8; i++)
-                M7ObjectsA[i] = new MCObject(data[offset++], data[offset++]);
+                M7ObjectsA[i] = new MCObject(buffer[offset++], buffer[offset++]);
             for (int i = 0; i < 8; i++)
-                M7ObjectsB[i] = new MCObject(data[offset++], data[offset++]);
+                M7ObjectsB[i] = new MCObject(buffer[offset++], buffer[offset++]);
             // side-scrolling objects A
             SSObjectsA = new List<MCObject>();
-            offset = Bits.GetShort(data, 2);
-            WidthA = Bits.GetShort(data, offset); offset += 2;
-            while (Bits.GetShort(data, offset) != 0xFFFF)
+            offset = Bits.GetShort(buffer, 2);
+            WidthA = Bits.GetShort(buffer, offset); offset += 2;
+            while (Bits.GetShort(buffer, offset) != 0xFFFF)
             {
-                int x = Bits.GetShort(data, offset) + 256; offset += 2;
-                int type = data[offset++];
-                int size = data[offset++];
-                int y = data[offset++];
+                int x = Bits.GetShort(buffer, offset) + 256; offset += 2;
+                int type = buffer[offset++];
+                int size = buffer[offset++];
+                int y = buffer[offset++];
                 SSObjectsA.Add(new MCObject(type, x, y, size));
             }
             // side-scrolling objects B
             SSObjectsB = new List<MCObject>();
-            offset = Bits.GetShort(data, 4);
-            WidthB = Bits.GetShort(data, offset); offset += 2;
-            while (Bits.GetShort(data, offset) != 0xFFFF)
+            offset = Bits.GetShort(buffer, 4);
+            WidthB = Bits.GetShort(buffer, offset); offset += 2;
+            while (Bits.GetShort(buffer, offset) != 0xFFFF)
             {
-                int x = Bits.GetShort(data, offset) + 256; offset += 2;
-                int type = data[offset++];
-                int size = data[offset++];
-                int y = data[offset++];
+                int x = Bits.GetShort(buffer, offset) + 256; offset += 2;
+                int type = buffer[offset++];
+                int size = buffer[offset++];
+                int y = buffer[offset++];
                 SSObjectsB.Add(new MCObject(type, x, y, size));
             }
             // side-scrolling L1 screens
             L1Screens = new List<int>();
-            offset = Bits.GetShort(data, 6);
-            while (offset != Bits.GetShort(data, 8))
-                L1Screens.Add(data[offset++]);
+            offset = Bits.GetShort(buffer, 6);
+            while (offset != Bits.GetShort(buffer, 8))
+                L1Screens.Add(buffer[offset++]);
             // side-scrolling L2 screens
             L2Screens = new List<int>();
-            offset = Bits.GetShort(data, 8);
-            while (offset != Bits.GetShort(data, 10))
-                L2Screens.Add(data[offset++]);
+            offset = Bits.GetShort(buffer, 8);
+            while (offset != Bits.GetShort(buffer, 10))
+                L2Screens.Add(buffer[offset++]);
             // side-scrolling rail screens (2nd map)
             RailScreens = new List<int>();
-            offset = Bits.GetShort(data, 10);
-            while (offset < data.Length)
-                RailScreens.Add(data[offset++]);
+            offset = Bits.GetShort(buffer, 10);
+            while (offset < buffer.Length)
+                RailScreens.Add(buffer[offset++]);
         }
         public void Assemble()
         {
@@ -153,12 +163,14 @@ namespace LAZYSHELL
     [Serializable()]
     public class MCObject
     {
+        // class variables and accessors
         public Point Location;
         public int Type;
         public int X;
         public int Y;
         public int Count;
         public int Width { get { return Count * 32 - 16; } }
+        // constructors
         public MCObject(int x, int y)
         {
             X = x;
@@ -171,6 +183,7 @@ namespace LAZYSHELL
             Y = y;
             Count = count;
         }
+        // spawning
         public MCObject Copy()
         {
             MCObject copy = new MCObject(Type, X, Y, Count);

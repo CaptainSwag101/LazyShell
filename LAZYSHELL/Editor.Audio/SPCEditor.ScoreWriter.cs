@@ -251,8 +251,10 @@ namespace LAZYSHELL
             int middle = staffHeight / 2;
             int yCoord = y + middle;
             int clefOffset = 0;
-            if (clef == 0) clefOffset = -4;
-            else if (clef == 1) clefOffset = 4;
+            if (clef == 0) 
+                clefOffset = -4;
+            else if (clef == 1) 
+                clefOffset = 4;
             Bitmap stem = null;
             Bitmap head = null;
             Bitmap rest = null;
@@ -306,9 +308,13 @@ namespace LAZYSHELL
                 }
                 else
                     g.DrawImage(hilite ? Do.Fill(Icons.notePercussion, Color.Red) : Icons.notePercussion, x, yCoord);
-                // draw tie
+                // draw tie, must stretch/shrink according to notespacing
+                double ratio = (double)noteSpacing / 100.0;
                 Rectangle src = new Rectangle(0, 0, 16, 16);
-                Rectangle dst = new Rectangle(x - lastItem.Ticks + 8, pitch < 59 ? yCoord + 8 : yCoord + 2, lastItem.Ticks, 16);
+                Rectangle dst = new Rectangle(
+                    x - (int)(lastItem.Ticks * ratio) + 8, 
+                    pitch < 59 ? yCoord + 8 : yCoord + 2,
+                    (int)((double)lastItem.Ticks * ratio), 16);
                 Bitmap tie = pitch < 59 ? Icons.tieUnder : Icons.tieOver;
                 g.DrawImage(tie, dst, src, GraphicsUnit.Pixel);
             }
@@ -852,7 +858,7 @@ namespace LAZYSHELL
                         break;
                 }
             }
-            wStaffNew_Click(null, null);
+            wStaffNew.PerformClick();
             mouseDownStaff = staffs.Count - 1;
             staffs[mouseDownStaff].Notes = notes;
             SetScrollBars();
@@ -988,6 +994,7 @@ namespace LAZYSHELL
         // Notes and rests, etc.
         #endregion
     }
+    [Serializable()]
     public class Staff
     {
         public int Clef = 0; // Treble

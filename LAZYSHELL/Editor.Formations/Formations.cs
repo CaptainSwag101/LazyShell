@@ -31,7 +31,7 @@ namespace LAZYSHELL
         private Formation[] formations { get { return Model.Formations; } set { Model.Formations = value; } }
         private Formation formation { get { return formations[Index]; } set { formations[Index] = value; } }
         public Formation Formation { get { return formation; } set { formation = value; } }
-        private DDlistName monsterNames { get { return Model.MonsterNames; } set { Model.MonsterNames = value; } }
+        private SortedList monsterNames { get { return Model.MonsterNames; } set { Model.MonsterNames = value; } }
         private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
         private int[] palette { get { return Model.FontPaletteBattle.Palette; } }
         private Monster[] monsters { get { return Model.Monsters; } }
@@ -39,6 +39,7 @@ namespace LAZYSHELL
         public ToolStripTextBox FormationName { get { return nameTextBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
+        private EditLabel labelWindow;
         private List<Bitmap> monsterImages = new List<Bitmap>();
         private List<Bitmap> shadowImages = new List<Bitmap>();
         private Bitmap[] allyImages;
@@ -56,11 +57,12 @@ namespace LAZYSHELL
         public Formations()
         {
             this.overlay = new Overlay();
-            Model.MonsterNames = new DDlistName(monsters);
-            Model.MonsterNames.SortAlpha();
+            Model.MonsterNames = new SortedList(monsters);
+            Model.MonsterNames.SortAlphabetically();
             InitializeComponent();
             SetControls();
             searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
+            labelWindow = new EditLabel(formationNameList, formationNum, "Formations", false);
             InitializeStrings();
             this.formationNameList.SelectedIndex = 0;
             battlefieldName.SelectedIndex = 7;
@@ -143,7 +145,7 @@ namespace LAZYSHELL
                 groupBox1.Controls.Add(hide[i]);
             }
         }
-
+        //
         private void InitializeStrings()
         {
             updating = true;
@@ -165,15 +167,15 @@ namespace LAZYSHELL
             this.formationNameList.SelectedIndex = Index;
             for (int i = 0; i < 8; i++)
             {
-                bytes[i].Value = formation.Monster[i];
-                names[i].SelectedIndex = monsterNames.GetIndexFromNum(formation.Monster[i]);
+                bytes[i].Value = formation.Monsters[i];
+                names[i].SelectedIndex = monsterNames.GetSortedIndex(formation.Monsters[i]);
                 coordX[i].Value = formation.X[i];
                 coordY[i].Value = formation.Y[i];
             }
-            this.formationMusic.SelectedIndex = formation.FormationMusic;
-            this.formationBattleEvent.SelectedIndex = formation.FormationBattleEvent;
-            this.formationUnknown.Value = formation.FormationUnknown;
-            this.formationCantRun.Checked = formation.FormationCantRun;
+            this.formationMusic.SelectedIndex = formation.Music;
+            this.formationBattleEvent.SelectedIndex = formation.BattleEvent;
+            this.formationUnknown.Value = formation.Unknown;
+            this.formationCantRun.Checked = formation.CantRun;
             for (int i = 0; i < 8; i++)
             {
                 this.use[i].Checked = formation.Use[i];
@@ -195,9 +197,9 @@ namespace LAZYSHELL
             shadowImages = new List<Bitmap>();
             for (int i = 0; i < 8; i++)
             {
-                int[] pixels = Model.Monsters[formation.Monster[i]].Pixels();
+                int[] pixels = Model.Monsters[formation.Monsters[i]].Pixels;
                 monsterImages.Add(Do.PixelsToImage(pixels, 256, 256));
-                pixels = Model.Monsters[formation.Monster[i]].Shadow();
+                pixels = Model.Monsters[formation.Monsters[i]].Shadow;
                 shadowImages.Add(Do.PixelsToImage(pixels, 16, 16));
             }
             formation.PixelIndexes = null;
@@ -206,11 +208,11 @@ namespace LAZYSHELL
         private void RefreshFormationBattlefield()
         {
             PaletteSet paletteSet = paletteSets[battlefields[battlefieldName.SelectedIndex].PaletteSet];
-            BattlefieldTileSet tileSet = new BattlefieldTileSet(battlefields[battlefieldName.SelectedIndex], paletteSet);
-            int[] quadrant1 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 0, false);
-            int[] quadrant2 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 256, false);
-            int[] quadrant3 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 512, false);
-            int[] quadrant4 = Do.TilesetToPixels(tileSet.TileSetLayer, 16, 16, 768, false);
+            BattlefieldTileset tileSet = new BattlefieldTileset(battlefields[battlefieldName.SelectedIndex], paletteSet);
+            int[] quadrant1 = Do.TilesetToPixels(tileSet.Tileset_tiles, 16, 16, 0, false);
+            int[] quadrant2 = Do.TilesetToPixels(tileSet.Tileset_tiles, 16, 16, 256, false);
+            int[] quadrant3 = Do.TilesetToPixels(tileSet.Tileset_tiles, 16, 16, 512, false);
+            int[] quadrant4 = Do.TilesetToPixels(tileSet.Tileset_tiles, 16, 16, 768, false);
             int[] pixels = new int[512 * 512];
             Do.PixelsToPixels(quadrant1, pixels, 512, new Rectangle(0, 0, 256, 256));
             Do.PixelsToPixels(quadrant2, pixels, 512, new Rectangle(256, 0, 256, 256));
@@ -251,13 +253,13 @@ namespace LAZYSHELL
         {
             byte x = formation.X[a];
             byte y = formation.Y[a];
-            byte monster = formation.Monster[a];
+            byte monster = formation.Monsters[a];
             bool use = formation.Use[a];
             bool hide = formation.Hide[a];
             //
             this.coordX[a].Value = formation.X[b];
             this.coordY[a].Value = formation.Y[b];
-            this.bytes[a].Value = formation.Monster[b];
+            this.bytes[a].Value = formation.Monsters[b];
             this.use[a].Checked = formation.Use[b];
             this.hide[a].Checked = formation.Hide[b];
             //
@@ -334,8 +336,8 @@ namespace LAZYSHELL
             if (updating) return;
 
             int index = (int)((NumericUpDown)sender).Tag;
-            this.formation.Monster[index] = (byte)bytes[index].Value;
-            this.names[index].SelectedIndex = this.monsterNames.GetIndexFromNum((byte)bytes[index].Value);
+            this.formation.Monsters[index] = (byte)bytes[index].Value;
+            this.names[index].SelectedIndex = this.monsterNames.GetSortedIndex((byte)bytes[index].Value);
             this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
 
             RefreshMonsterImages();
@@ -345,7 +347,7 @@ namespace LAZYSHELL
             if (updating) return;
 
             int index = (int)((ComboBox)sender).Tag;
-            this.bytes[index].Value = this.monsterNames.GetNumFromIndex(this.names[index].SelectedIndex);
+            this.bytes[index].Value = this.monsterNames.GetUnsortedIndex(this.names[index].SelectedIndex);
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -394,7 +396,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            formation.FormationMusic = (byte)formationMusic.SelectedIndex;
+            formation.Music = (byte)formationMusic.SelectedIndex;
 
             updating = true;
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
@@ -408,7 +410,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            formation.FormationUnknown = (byte)formationUnknown.Value;
+            formation.Unknown = (byte)formationUnknown.Value;
         }
         private void formationCantRun_CheckedChanged(object sender, EventArgs e)
         {
@@ -416,7 +418,7 @@ namespace LAZYSHELL
 
             if (updating) return;
 
-            formation.FormationCantRun = formationCantRun.Checked;
+            formation.CantRun = formationCantRun.Checked;
         }
         private void battlefieldName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -441,7 +443,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            formation.FormationBattleEvent = (byte)formationBattleEvent.SelectedIndex;
+            formation.BattleEvent = (byte)formationBattleEvent.SelectedIndex;
         }
         private void musicTrack_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -659,7 +661,7 @@ namespace LAZYSHELL
             {
                 int i = items[a];
                 if (!formation.Use[i]) continue;
-                int elevation = monsters[formation.Monster[i]].Elevation * 16;
+                int elevation = monsters[formation.Monsters[i]].Elevation * 16;
                 int x = formation.X[i] - 8;
                 int y = formation.Y[i] + 14;
                 if (elevation > 0)
@@ -673,9 +675,9 @@ namespace LAZYSHELL
             {
                 if (allyImages == null || portraits == null)
                     SetAllyImages();
-                e.Graphics.DrawImage(allyImages[0], Model.Data[0x0296BD] - 128, Model.Data[0x0296BE] - 96 - 1);
-                e.Graphics.DrawImage(allyImages[2], Model.Data[0x0296BF] - 128, Model.Data[0x0296C0] - 96 - 1);
-                e.Graphics.DrawImage(allyImages[3], Model.Data[0x0296C1] - 128, Model.Data[0x0296C2] - 96 - 1);
+                e.Graphics.DrawImage(allyImages[0], Model.ROM[0x0296BD] - 128, Model.ROM[0x0296BE] - 96 - 1);
+                e.Graphics.DrawImage(allyImages[2], Model.ROM[0x0296BF] - 128, Model.ROM[0x0296C0] - 96 - 1);
+                e.Graphics.DrawImage(allyImages[3], Model.ROM[0x0296C1] - 128, Model.ROM[0x0296C2] - 96 - 1);
                 // draw HPs
                 e.Graphics.DrawImage(statImages[0], 24, 94);
                 e.Graphics.DrawImage(statImages[2], 48, 70);

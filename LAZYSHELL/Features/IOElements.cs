@@ -209,10 +209,9 @@ namespace LAZYSHELL
                         return;
                     }
                     Model.Levels[currentIndex].Layer = sLevel.levelLayer;
-                    Model.Levels[currentIndex].Layer.Data = Model.Data;
                     Model.Levels[currentIndex].Layer.Index = currentIndex;
                     Model.Levels[currentIndex].LevelMap = sLevel.levelMapNum;
-                    LevelMap lMap = sLevel.levelMap; lMap.Data = Model.Data;
+                    LevelMap lMap = sLevel.levelMap;
                     Model.LevelMaps[Model.Levels[currentIndex].LevelMap] = lMap;
                     Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevel.tileSetL1;
                     Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevel.tileSetL2;
@@ -232,10 +231,6 @@ namespace LAZYSHELL
                     Model.Levels[currentIndex].LevelExits = sLevel.levelExits;
                     Model.Levels[currentIndex].LevelEvents = sLevel.levelEvents;
                     Model.Levels[currentIndex].LevelOverlaps = sLevel.levelOverlaps;
-                    Model.Levels[currentIndex].LevelNPCs.Data = Model.Data;
-                    Model.Levels[currentIndex].LevelExits.Data = Model.Data;
-                    Model.Levels[currentIndex].LevelEvents.Data = Model.Data;
-                    Model.Levels[currentIndex].LevelOverlaps.Data = Model.Data;
                     Model.Levels[currentIndex].LevelNPCs.Index = currentIndex;
                     Model.Levels[currentIndex].LevelExits.Index = currentIndex;
                     Model.Levels[currentIndex].LevelEvents.Index = currentIndex;
@@ -258,10 +253,9 @@ namespace LAZYSHELL
                     for (int i = 0; i < sLevels.Length; i++)
                     {
                         Model.Levels[i].Layer = sLevels[i].levelLayer;
-                        Model.Levels[i].Layer.Data = Model.Data;
                         Model.Levels[i].Layer.Index = currentIndex;
                         Model.Levels[i].LevelMap = sLevels[i].levelMapNum;
-                        LevelMap lMap = sLevels[i].levelMap; lMap.Data = Model.Data;
+                        LevelMap lMap = sLevels[i].levelMap;
                         Model.LevelMaps[Model.Levels[i].LevelMap] = lMap;
                         Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevels[i].tileSetL1;
                         Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevels[i].tileSetL2;
@@ -281,10 +275,6 @@ namespace LAZYSHELL
                         Model.Levels[i].LevelExits = sLevels[i].levelExits;
                         Model.Levels[i].LevelEvents = sLevels[i].levelEvents;
                         Model.Levels[i].LevelOverlaps = sLevels[i].levelOverlaps;
-                        Model.Levels[i].LevelNPCs.Data = Model.Data;
-                        Model.Levels[i].LevelExits.Data = Model.Data;
-                        Model.Levels[i].LevelEvents.Data = Model.Data;
-                        Model.Levels[i].LevelOverlaps.Data = Model.Data;
                         Model.Levels[i].LevelNPCs.Index = currentIndex;
                         Model.Levels[i].LevelExits.Index = currentIndex;
                         Model.Levels[i].LevelEvents.Index = currentIndex;
@@ -301,7 +291,7 @@ namespace LAZYSHELL
                 PaletteSet[] paletteSets = Model.PaletteSetsBF;
                 int i = 0;
                 foreach (Battlefield battlefield in battlefields)
-                    serialized[i] = new SerializedBattlefield(Model.TileSetsBF[battlefields[i].TileSet],
+                    serialized[i] = new SerializedBattlefield(Model.TilesetsBF[battlefields[i].TileSet],
                         paletteSets[battlefields[i++].PaletteSet], battlefield);
                 if (radioButtonCurrent.Checked)
                     Do.Export(serialized[currentIndex], null, fullPath);
@@ -325,7 +315,7 @@ namespace LAZYSHELL
                         MessageBox.Show("File not a battlefield data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    Model.TileSetsBF[battlefields[currentIndex].TileSet] = battlefield.tileset;
+                    Model.TilesetsBF[battlefields[currentIndex].TileSet] = battlefield.tileset;
                     battlefields[currentIndex].GraphicSetA = battlefield.graphicSetA;
                     battlefields[currentIndex].GraphicSetB = battlefield.graphicSetB;
                     battlefields[currentIndex].GraphicSetC = battlefield.graphicSetC;
@@ -350,7 +340,7 @@ namespace LAZYSHELL
                     }
                     for (int i = 0; i < battlefield.Length; i++)
                     {
-                        Model.TileSetsBF[battlefields[i].TileSet] = battlefield[i].tileset;
+                        Model.TilesetsBF[battlefields[i].TileSet] = battlefield[i].tileset;
                         battlefields[i].GraphicSetA = battlefield[i].graphicSetA;
                         battlefields[i].GraphicSetB = battlefield[i].graphicSetB;
                         battlefields[i].GraphicSetC = battlefield[i].graphicSetC;
@@ -495,7 +485,6 @@ namespace LAZYSHELL
                         MessageBox.Show("File not an SPC data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    spc.Data = Model.Data;
                     spc.CreateCommands();
                     Model.SPCs[currentIndex] = spc;
                 }
@@ -516,7 +505,6 @@ namespace LAZYSHELL
                     for (int i = 0; i < spcs.Length; i++)
                     {
                         Model.SPCs[i] = spcs[i];
-                        Model.SPCs[i].Data = Model.Data;
                         Model.SPCs[i].CreateCommands();
                     }
                 }
@@ -529,7 +517,6 @@ namespace LAZYSHELL
             try
             {
                 Element[] array = (Element[])element;
-                TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
                 string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4);
                 if (this.Text.Substring(0, 6) == "EXPORT")
                 {
@@ -538,7 +525,7 @@ namespace LAZYSHELL
                     else
                         Do.Export(array,
                             fullPath + "\\" + Model.GetFileNameWithoutPath() + " - " +
-                            textInfo.ToTitleCase(name) + "s" + "\\" + name,
+                            Lists.ToTitleCase(name) + "s" + "\\" + name,
                             name.ToUpper(), true);
                 }
                 if (this.Text.Substring(0, 6) == "IMPORT")
@@ -555,7 +542,6 @@ namespace LAZYSHELL
                             return;
                         }
                         array[currentIndex].Index = currentIndex;
-                        array[currentIndex].Data = Model.Data;
                     }
                     else
                     {
@@ -571,7 +557,6 @@ namespace LAZYSHELL
                         int i = 0;
                         foreach (Element item in array)
                         {
-                            item.Data = Model.Data;
                             item.Index = i++;
                         }
                     }

@@ -344,13 +344,13 @@ namespace LAZYSHELL
         private void panel109_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyData == (Keys.Shift | Keys.Left))
-                widthDecrease_Click(null, null);
+                widthDecrease.PerformClick();
             else if (e.KeyData == (Keys.Shift | Keys.Right))
-                widthIncrease_Click(null, null);
+                widthIncrease.PerformClick();
             else if (e.KeyData == (Keys.Shift | Keys.Up))
-                heightDecrease_Click(null, null);
+                heightDecrease.PerformClick();
             else if (e.KeyData == (Keys.Shift | Keys.Down))
-                heightIncrease_Click(null, null);
+                heightIncrease.PerformClick();
         }
         private void panel109_MouseDown(object sender, MouseEventArgs e)
         {
@@ -601,7 +601,7 @@ namespace LAZYSHELL
         // closing/saving
         private void GraphicEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            buttonReset_Click(null, null);
+            buttonReset.PerformClick();
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {

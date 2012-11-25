@@ -55,8 +55,8 @@ namespace LAZYSHELL
             this.openMonsters = new System.Windows.Forms.ToolStripButton();
             this.openSprites = new System.Windows.Forms.ToolStripButton();
             this.openWorldMaps = new System.Windows.Forms.ToolStripButton();
-            this.openPatches = new System.Windows.Forms.ToolStripButton();
             this.openNotes = new System.Windows.Forms.ToolStripButton();
+            this.openPatches = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -104,13 +104,12 @@ namespace LAZYSHELL
             this.panel4.AutoSize = true;
             this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel4.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Controls.Add(this.toolStrip1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 25);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(583, 79);
+            this.panel4.Size = new System.Drawing.Size(583, 75);
             this.panel4.TabIndex = 1;
             // 
             // panel1
@@ -120,7 +119,7 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(579, 50);
+            this.panel1.Size = new System.Drawing.Size(583, 50);
             this.panel1.TabIndex = 1;
             // 
             // romInfo
@@ -132,7 +131,7 @@ namespace LAZYSHELL
             this.romInfo.ReadOnly = true;
             this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.romInfo.Size = new System.Drawing.Size(485, 50);
+            this.romInfo.Size = new System.Drawing.Size(489, 50);
             this.romInfo.TabIndex = 1;
             this.romInfo.Text = "";
             this.romInfo.WordWrap = false;
@@ -164,7 +163,7 @@ namespace LAZYSHELL
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(579, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(583, 25);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -187,7 +186,7 @@ namespace LAZYSHELL
             this.loadRomTextBox.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadRomTextBox.Name = "loadRomTextBox";
             this.loadRomTextBox.ReadOnly = true;
-            this.loadRomTextBox.Size = new System.Drawing.Size(484, 18);
+            this.loadRomTextBox.Size = new System.Drawing.Size(488, 18);
             // 
             // removeHeader
             // 
@@ -226,13 +225,13 @@ namespace LAZYSHELL
             this.openSprites,
             this.openWorldMaps,
             this.toolStripSeparator1,
-            this.openPatches,
-            this.openNotes});
+            this.openNotes,
+            this.openPatches});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolStrip2.Location = new System.Drawing.Point(0, 104);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 100);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(96, 489);
+            this.toolStrip2.Size = new System.Drawing.Size(96, 485);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -454,8 +453,21 @@ namespace LAZYSHELL
             this.openWorldMaps.Size = new System.Drawing.Size(94, 22);
             this.openWorldMaps.Text = "World Maps";
             this.openWorldMaps.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openWorldMaps.ToolTipText = "Edit world maps, map point locations, palettes, and graphics";
+            this.openWorldMaps.ToolTipText = "Edit world maps, locations, palettes, and graphics";
             this.openWorldMaps.Click += new System.EventHandler(this.openWorldMaps_Click);
+            // 
+            // openNotes
+            // 
+            this.openNotes.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
+            this.openNotes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openNotes.Name = "openNotes";
+            this.openNotes.Size = new System.Drawing.Size(94, 22);
+            this.openNotes.Text = "Project";
+            this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openNotes.ToolTipText = "Open the project manager";
+            this.openNotes.Click += new System.EventHandler(this.openNotes_Click);
             // 
             // openPatches
             // 
@@ -469,19 +481,6 @@ namespace LAZYSHELL
             this.openPatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openPatches.ToolTipText = "Apply a hack from the patch HTTP server";
             this.openPatches.Click += new System.EventHandler(this.openPatches_Click);
-            // 
-            // openNotes
-            // 
-            this.openNotes.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
-            this.openNotes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(94, 22);
-            this.openNotes.Text = "Notes";
-            this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openNotes.ToolTipText = "Open the notes database";
-            this.openNotes.Click += new System.EventHandler(this.openNotes_Click);
             // 
             // toolStripSeparator10
             // 
@@ -500,9 +499,9 @@ namespace LAZYSHELL
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(96, 129);
+            this.panel2.Location = new System.Drawing.Point(96, 125);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 464);
+            this.panel2.Size = new System.Drawing.Size(487, 460);
             this.panel2.TabIndex = 4;
             // 
             // toolStrip4
@@ -695,7 +694,7 @@ namespace LAZYSHELL
             this.toolStripSeparator3,
             this.loadAllData,
             this.clearModel});
-            this.toolStrip3.Location = new System.Drawing.Point(96, 104);
+            this.toolStrip3.Location = new System.Drawing.Point(96, 100);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip3.Size = new System.Drawing.Size(487, 25);
@@ -800,7 +799,7 @@ namespace LAZYSHELL
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 593);
+            this.ClientSize = new System.Drawing.Size(583, 585);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
@@ -851,7 +850,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openEffects;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton openPatches;
-        private System.Windows.Forms.ToolStripButton openNotes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton openAttacks;
         private System.Windows.Forms.ToolStripButton openItems;
@@ -866,9 +864,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton restoreElementsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripButton info;
-        private System.Windows.Forms.ToolStripButton openSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripButton showROMInfo;
         private System.Windows.Forms.ToolStripButton docking;
@@ -891,6 +887,9 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openMenus;
         private System.Windows.Forms.ToolStripButton openMiniGames;
         private System.Windows.Forms.ToolStripButton help;
+        private System.Windows.Forms.ToolStripButton openNotes;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripButton openSettings;
     }
 }
 

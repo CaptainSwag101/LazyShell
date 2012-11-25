@@ -24,16 +24,16 @@ namespace LAZYSHELL
         private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Bitmap descriptionFrame;
         private Bitmap descriptionText;
+        private EditLabel labelWindow;
         #endregion
         // constructor
         public Spells()
         {
-            this.settings.KeystrokesMenu[0x20] = "\x20";
-            this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();
             InitializeStrings();
             RefreshSpells();
             RefreshTimingSpellsTwo();
+            labelWindow = new EditLabel(spellName, spellNum, "Spells", false);
         }
         #region Functions
         public void RefreshSpells()
@@ -41,7 +41,7 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.WaitCursor;
             if (updating) return;
             updating = true;
-            this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
+            this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             this.spellFPCost.Value = spell.FPCost;
             this.spellMagPower.Value = spell.MagicPower;
             this.spellHitRate.Value = spell.HitRate;
@@ -49,9 +49,9 @@ namespace LAZYSHELL
             this.spellNameIcon.SelectedIndex = (int)(spell.Name[0] - 0x20);
             this.spellNameIcon.Invalidate();
             if (index < 64)
-                this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, settings.KeystrokesMenu).Substring(1);
+                this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, Lists.KeystrokesMenu).Substring(1);
             else
-                this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, settings.Keystrokes).Substring(1);
+                this.textBoxSpellName.Text = Do.RawToASCII(spell.Name, Lists.Keystrokes).Substring(1);
             if (index > 26)
             {
                 this.textBoxSpellDescription.Text = " This spell[1] cannot have a[1] description";
@@ -189,7 +189,7 @@ namespace LAZYSHELL
         {
             this.spellName.Items.Clear();
             this.spellName.Items.AddRange(Model.SpellNames.Names);
-            this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
+            this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             string[] temp = new string[96];
             for (int i = 0; i < 96; i++)
                 temp[i] = i.ToString();
@@ -203,9 +203,9 @@ namespace LAZYSHELL
             toInsert.CopyTo(0, newText, textBoxSpellDescription.SelectionStart, toInsert.Length);
             textBoxSpellDescription.Text.CopyTo(textBoxSpellDescription.SelectionStart, newText, textBoxSpellDescription.SelectionStart + toInsert.Length, this.textBoxSpellDescription.Text.Length - this.textBoxSpellDescription.SelectionStart);
             if (byteView)
-                spell.CaretPositionByteView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
+                spell.CaretPosByteView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
             else
-                spell.CaretPositionTextView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
+                spell.CaretPosTextView = this.textBoxSpellDescription.SelectionStart + toInsert.Length;
             spell.SetDescription(new string(newText), byteView);
             textBoxSpellDescription.Text = spell.GetDescription(byteView);
         }
@@ -218,27 +218,27 @@ namespace LAZYSHELL
         }
         private void spellName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.spellNum.Value = Model.SpellNames.GetNumFromIndex(spellName.SelectedIndex);
+            this.spellNum.Value = Model.SpellNames.GetUnsortedIndex(spellName.SelectedIndex);
         }
         private void spellName_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.SpellNames,
-                Model.SpellNames.GetNumFromIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
+                Model.SpellNames.GetUnsortedIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
         private void spellNameIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
             spell.Name[0] = (char)(spellNameIcon.SelectedIndex + 0x20);
-            if (Model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
+            if (Model.SpellNames.GetUnsortedName(index).CompareTo(this.textBoxSpellName.Text) != 0)
             {
-                Model.SpellNames.SwapName(
+                Model.SpellNames.SetName(
                     index, new string(spell.Name));
-                Model.SpellNames.SortAlpha();
+                Model.SpellNames.SortAlphabetically();
                 this.spellName.Items.Clear();
-                this.spellName.Items.AddRange(Model.SpellNames.GetNames());
-                this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
+                this.spellName.Items.AddRange(Model.SpellNames.Names);
+                this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             }
         }
         private void spellNameIcon_DrawItem(object sender, DrawItemEventArgs e)
@@ -250,28 +250,28 @@ namespace LAZYSHELL
             char[] raw = new char[15];
             char[] temp;
             if (spellNum.Value < 64)
-                temp = Do.ASCIIToRaw(this.textBoxSpellName.Text, settings.KeystrokesMenu, 14);
+                temp = Do.ASCIIToRaw(this.textBoxSpellName.Text, Lists.KeystrokesMenu, 14);
             else
-                temp = Do.ASCIIToRaw(this.textBoxSpellName.Text, settings.Keystrokes, 14);
+                temp = Do.ASCIIToRaw(this.textBoxSpellName.Text, Lists.Keystrokes, 14);
             for (int i = 0; i < 14; i++)
                 raw[i + 1] = temp[i];
             raw[0] = (char)(spellNameIcon.SelectedIndex + 32);
-            if (Model.SpellNames.GetNameByNum(index).CompareTo(this.textBoxSpellName.Text) != 0)
+            if (Model.SpellNames.GetUnsortedName(index).CompareTo(this.textBoxSpellName.Text) != 0)
             {
                 spell.Name = raw;
-                Model.SpellNames.SwapName(
+                Model.SpellNames.SetName(
                     index, new string(spell.Name));
-                Model.SpellNames.SortAlpha();
+                Model.SpellNames.SortAlphabetically();
                 this.spellName.Items.Clear();
-                this.spellName.Items.AddRange(Model.SpellNames.GetNames());
-                this.spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
+                this.spellName.Items.AddRange(Model.SpellNames.Names);
+                this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             }
         }
         private void textBoxSpellName_Leave(object sender, EventArgs e)
         {
             spellName.Items.Clear();
-            spellName.Items.AddRange(Model.SpellNames.GetNames());
-            spellName.SelectedIndex = Model.SpellNames.GetIndexFromNum(index);
+            spellName.Items.AddRange(Model.SpellNames.Names);
+            spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             InitializeStrings();
         }
         private void spellFPCost_ValueChanged(object sender, EventArgs e)
@@ -376,7 +376,7 @@ namespace LAZYSHELL
                     textBoxSpellDescription.SelectionStart = tempSel + 2;
                 }
             }
-            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxSpellDescription.Text.ToCharArray(), byteView);
+            bool flag = textHelper.VerifySymbols(this.textBoxSpellDescription.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.textBoxSpellDescription.BackColor = Color.FromArgb(255, 255, 255, 255);

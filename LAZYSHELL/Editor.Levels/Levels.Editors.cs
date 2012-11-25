@@ -116,11 +116,11 @@ namespace LAZYSHELL
         {
             if (lp == null)
             {
-                lp = new Previewer(Index, PreviewType.Level);
+                lp = new Previewer(Index, EType.Level);
                 lp.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                lp.Reload((int)this.levelNum.Value, PreviewType.Level);
+                lp.Reload((int)this.levelNum.Value, EType.Level);
         }
         #endregion
         #region Event handlers

@@ -100,7 +100,8 @@
             // 
             this.matchCase.Checked = false;
             this.matchCase.Name = "matchCase";
-            this.matchCase.Size = new System.Drawing.Size(79, 22);
+            this.matchCase.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.matchCase.Size = new System.Drawing.Size(83, 22);
             this.matchCase.Text = "Match case";
             this.matchCase.CheckedChanged += new System.EventHandler(this.matchCase_CheckedChanged);
             // 
@@ -108,7 +109,8 @@
             // 
             this.matchWholeWord.Checked = false;
             this.matchWholeWord.Name = "matchWholeWord";
-            this.matchWholeWord.Size = new System.Drawing.Size(114, 22);
+            this.matchWholeWord.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
+            this.matchWholeWord.Size = new System.Drawing.Size(118, 22);
             this.matchWholeWord.Text = "Match whole word";
             this.matchWholeWord.CheckedChanged += new System.EventHandler(this.matchWholeWord_CheckedChanged);
             // 
@@ -159,6 +161,7 @@
             this.Name = "Search";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SEARCH";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Search_FormClosing);

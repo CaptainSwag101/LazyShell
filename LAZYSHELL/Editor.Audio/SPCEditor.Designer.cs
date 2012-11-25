@@ -318,6 +318,7 @@
             // trackNum
             // 
             this.trackNum.AutoSize = false;
+            this.trackNum.ContextMenuStrip = null;
             this.trackNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trackNum.Hexadecimal = false;
             this.trackNum.Increment = new decimal(new int[] {
@@ -1326,6 +1327,7 @@
             this.groupBoxSV.TabStop = false;
             this.groupBoxSV.Text = "Staff Viewer";
             this.groupBoxSV.Visible = false;
+            this.groupBoxSV.Resize += new System.EventHandler(this.groupBoxSV_Resize);
             // 
             // panel2
             // 
@@ -1418,6 +1420,7 @@
             // staffHeightSV
             // 
             this.staffHeightSV.AutoSize = false;
+            this.staffHeightSV.ContextMenuStrip = null;
             this.staffHeightSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffHeightSV.Hexadecimal = false;
             this.staffHeightSV.Increment = new decimal(new int[] {
@@ -1455,6 +1458,7 @@
             // timeBeatsSV
             // 
             this.timeBeatsSV.AutoSize = false;
+            this.timeBeatsSV.ContextMenuStrip = null;
             this.timeBeatsSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeBeatsSV.Hexadecimal = false;
             this.timeBeatsSV.Increment = new decimal(new int[] {
@@ -1486,6 +1490,7 @@
             // timeValueSV
             // 
             this.timeValueSV.AutoSize = false;
+            this.timeValueSV.ContextMenuStrip = null;
             this.timeValueSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeValueSV.Hexadecimal = false;
             this.timeValueSV.Increment = new decimal(new int[] {
@@ -1523,6 +1528,7 @@
             // noteSpacingSV
             // 
             this.noteSpacingSV.AutoSize = false;
+            this.noteSpacingSV.ContextMenuStrip = null;
             this.noteSpacingSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noteSpacingSV.Hexadecimal = false;
             this.noteSpacingSV.Increment = new decimal(new int[] {
@@ -2214,6 +2220,7 @@
             // staffHeightSW
             // 
             this.staffHeightSW.AutoSize = false;
+            this.staffHeightSW.ContextMenuStrip = null;
             this.staffHeightSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffHeightSW.Hexadecimal = false;
             this.staffHeightSW.Increment = new decimal(new int[] {
@@ -2251,6 +2258,7 @@
             // timeBeatsSW
             // 
             this.timeBeatsSW.AutoSize = false;
+            this.timeBeatsSW.ContextMenuStrip = null;
             this.timeBeatsSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeBeatsSW.Hexadecimal = false;
             this.timeBeatsSW.Increment = new decimal(new int[] {
@@ -2282,6 +2290,7 @@
             // timeValueSW
             // 
             this.timeValueSW.AutoSize = false;
+            this.timeValueSW.ContextMenuStrip = null;
             this.timeValueSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeValueSW.Hexadecimal = false;
             this.timeValueSW.Increment = new decimal(new int[] {
@@ -2319,6 +2328,7 @@
             // noteSpacingSW
             // 
             this.noteSpacingSW.AutoSize = false;
+            this.noteSpacingSW.ContextMenuStrip = null;
             this.noteSpacingSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noteSpacingSW.Hexadecimal = false;
             this.noteSpacingSW.Increment = new decimal(new int[] {

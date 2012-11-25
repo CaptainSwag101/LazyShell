@@ -1,9 +1,56 @@
 Major changes/additions are indicated by ***
 
+v3.15.0 (2012-11-24)
+--------------------------------------
+Additions:
+***New project database manager replaces old notes manager***
+*Context menus added to most editors to edit label and/or add to project
+*Animations: command list to choose from to replace existing command(s)
+*Animations: undo/redo feature added
+*Animations: added support for a few more commands
+*Audio: search sample names feature added
+*Event Scripts: added support for several more commands
+*Event Scripts: editing a command now highlights command in list
+*Menus: option to change X coord of texts in overworld status menu
+*Monsters: dump battle script text feature added
+*Sprites: new support exporting sequences to animated GIFS
+
+Changes:
+*Renamed and reorganized all classes and elements in classes
+*Renamed and moved around a few GUI controls/labels
+*Animations: now only shows controls relevant to selected command
+*Dialogues: font tables all same size, keystroke fields changed to table
+*Event Scripts: now only shows controls relevant to selected command
+*Event Scripts: reorganized and renamed most commands, more interactive
+*Monsters: now only shows controls relevant to selected command
+
+Fixes:
+*Changing commands in scripts editors now much cleaner, less flickering
+*Audio: growling command not loading opcode to numeric control
+*Audio: ties not being sized correctly if note spacing not 100%
+*Dialogues: no text view labels for some symbols creates "ERROR: " message
+*Event Scripts: inserting a new command multiple times not de-referencing
+*Event Scripts: audio commands not tagged with correct index count
+*Event Scripts: some category lists crash if selected last commands
+*Event Scripts: crash when reset if selected command > old script size
+*Hex editor: crash if try to go to address when cursor at offset 0
+*Import Elements: menu pointers, sequences not written into import code
+*Levels: crash when undo/redo if solid mods enabled on level w/o any
+*Levels: mouseDownTile not resetting when tileset subwindow reloaded
+*Menus: crash when set select game menu sprite to sequence with 0 frames
+*Mini-games: palette not updating for side-scroller canyon background
+*Previewer: previewing event from entrance event setting has no event
+*Previewer: level 3 is no longer corrupted when previewing
+*Sprites: fixed incorrect boundaries of sequence frame images
+*Sprites: crash if change X,Y if more than 1 tile selected
+*Sprites: crash if paste when nothing copied
+*Sprites: importing images as molds should've been ignoring empty tiles
+
+
 v3.14.0 (2012-09-24)
 --------------------------------------
 Additions:
-***NEW Help Database in XML format create***
+***NEW Help Database in XML format created***
 *Animations: expand/collapse all nodes in treeview
 *Audio: undo/redo for score writer
 *Audio: now shows ties for hold notes for score viewer/writer
@@ -776,8 +823,8 @@ Fixes:
 v3.0.1b (2010-07-26)
 --------------------------------------
 Fixes:
-*major bug involving saving after an editor window has been closed
-*publish button in main form didn't do anything special, so it's been removed
+*Major bug involving saving after an editor window has been closed
+*Publish button in main form didn't do anything special, so it's been removed
 
 
 v3.0b (2010-07-25)
@@ -868,15 +915,15 @@ Changes:
 v2.4b (2010-05-31)
 --------------------------------------
 Changes:
-*names of items,spells,attacks,monsters are read from 3 diff keystroke tables
-*removed notes textboxes because can now use database, moved controls around
+*Names of items,spells,attacks,monsters are read from 3 diff keystroke tables
+*Removed notes textboxes because can now use database, moved controls around
 
 Additions:
-***notes database builder, right click menus or values to add elements to DB***
-*warning when trying to run in 64-bit OS
+***Notes database builder, right click menus or values to add elements to DB***
+*Warning when trying to run in 64-bit OS
 
 Fixes:
-*settings weren't saving every time they should
+*Settings weren't saving every time they should
 *Scripts: right-clicking "Run dialogue" node wouldn't always open the menu
 *Scripts: updating problem when editing memory commands in battle scripts
 *Stats: timing for Ultra Jumps was saving wrong
@@ -885,14 +932,14 @@ Fixes:
 v2.3b (2010-05-23)
 --------------------------------------
 Changes:
-*clearing elements now more versatile, can clear within range now
-*everything is in decimal now (except for a few things like memory addresses)
-*import/export uses new window
+*Clearing elements now more versatile, can clear within range now
+*Everything is in decimal now (except for a few things like memory addresses)
+*Import/export uses new window
 *Levels: progress bar for importing/exporting now separate window, used by events too
 
 Additions:
-*base conversion tool for converting between hexadecimal and decimal
-*tool to quickly import elements from other ROM
+*Base conversion tool for converting between hexadecimal and decimal
+*Tool to quickly import elements from other ROM
 *Scripts: pointer recalibration tool for adding/subtracting from pointers en masse
 
 Fixes:
@@ -903,16 +950,16 @@ Fixes:
 v2.2
 --------------------------------------
 Changes:
-*changed almost all indexes to decimal (ie. level, sprite #'s are in decimal)
-*option of dumping NPC, event/action script text to a specific directory
+*Changed almost all indexes to decimal (ie. level, sprite #'s are in decimal)
+*Option of dumping NPC, event/action script text to a specific directory
 *Levels: edit NPCs auto-loads current NPC ID into the sub-editor
 *Scripts: event, battle, and action scripts are exported to much smaller binaries
 
 Additions:
-*base convertor for converting hex to/from decimal
-*element importer; can import elements en masse from another ROM
-*press F2 in any editor for a label showing a hex <> dec conversion for values
-*preview support for SNES9X; must manually load save however
+*Base convertor for converting hex to/from decimal
+*Element importer; can import elements en masse from another ROM
+*Press F2 in any editor for a label showing a hex <> dec conversion for values
+*Preview support for SNES9X; must manually load save however
 *SNES9X support for previewing
 *Levels: more editing options for editing NPCs
 
@@ -935,8 +982,8 @@ v2.1
 Additions:
 ***Scripts: animation script editor for several types of animations***
 ***Sprites: a spell effect editor***
-*an optional Help Tip label that shows when the mouse moves over a control
-*export/import features remember last used directory
+*An optional Help Tip label that shows when the mouse moves over a control
+*Export/import features remember last used directory
 *Levels: 16x16 tile editor is now a panel that can be easily accessed through toggle
 *Levels: a quick jump to event and action script editor from NPC's - click the buttons
 *Levels: a quick jump to event editor from entrance event and event field event

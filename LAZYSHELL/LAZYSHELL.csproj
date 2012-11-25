@@ -91,7 +91,7 @@
     <Compile Include="Editor.Audio\PickInstruments.Designer.cs">
       <DependentUpon>PickInstruments.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Audio\Interpreter.SPCScripts.cs" />
+    <Compile Include="Editor.Audio\Interpreter.SPC.cs" />
     <Compile Include="Editor.Audio\PickNativeSPC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,7 +160,7 @@
       <DependentUpon>BattleScripts.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Dialogues\DTE.cs" />
-    <Compile Include="Editor.Event Scripts\EventScripts.Action.cs">
+    <Compile Include="Editor.Event Scripts\EventScripts.Controls.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.Event Scripts\EventScripts.cs">
@@ -174,13 +174,25 @@
     </Compile>
     <Compile Include="Editor.Levels\Levels\LevelSolidMods.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTileMods.cs" />
+    <Compile Include="Editor.Monsters\Interpreter.Battle.cs" />
     <Compile Include="Editor.Sprites\CoordAdjust.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor.Sprites\CoordAdjust.Designer.cs">
       <DependentUpon>CoordAdjust.cs</DependentUpon>
     </Compile>
-    <Compile Include="Feature.Undo\ScoreEditCommand.cs" />
+    <Compile Include="Feature.Project\ProjectDB.cs" />
+    <Compile Include="Feature.Undo\AnimationEdit.cs" />
+    <Compile Include="Feature.Undo\ScoreEdit.cs" />
+    <Compile Include="Features\AnimatedGifEncoder.cs" />
+    <Compile Include="Features\EditLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\EditLabel.Designer.cs">
+      <DependentUpon>EditLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\LZWEncoder.cs" />
+    <Compile Include="Features\NeuQuant.cs" />
     <Compile Include="Features\NewExceptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,7 +232,7 @@
     <Compile Include="Features\IOArchitecture.Designer.cs">
       <DependentUpon>IOArchitecture.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\ListViewColumnSorter.cs" />
+    <Compile Include="!Universal\ListViewColumnSorter.cs" />
     <Compile Include="Features\NewControls.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -248,7 +260,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Feature.Previewer\Preview.cs" />
+    <Compile Include="Feature.Preview\Preview.cs" />
     <Compile Include="Editor.Allies\Allies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,7 +383,6 @@
     <Compile Include="Editor.Formations\FormationsEditor.Designer.cs">
       <DependentUpon>FormationsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataStructures\StreamBuf.cs" />
     <Compile Include="!Static\Bits.cs" />
     <Compile Include="!Static\Comp.cs" />
     <Compile Include="Features\FixPointers.cs">
@@ -464,7 +475,7 @@
     </Compile>
     <Compile Include="Editor.Levels\Levels\LevelOverlaps.cs" />
     <Compile Include="Editor.Levels\Levels\NPCProperties.cs" />
-    <Compile Include="Editor.Levels\Levels\NPCSpritePartitions.cs" />
+    <Compile Include="Editor.Levels\Levels\Partitions.cs" />
     <Compile Include="Editors\SpritePartitions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,10 +504,10 @@
     <Compile Include="Editors\NPCEditor.Designer.cs">
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\SearchSolidTile.cs">
+    <Compile Include="Editor.Levels\SearchSolidTile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\SearchSolidTile.Designer.cs">
+    <Compile Include="Editor.Levels\SearchSolidTile.Designer.cs">
       <DependentUpon>SearchSolidTile.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.Levels\Levels\SerializedLevel.cs" />
@@ -506,7 +517,7 @@
     <Compile Include="Editor.Levels\SpaceAnalyzer.Designer.cs">
       <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Battlefields\BattlefieldTileSet.cs">
+    <Compile Include="Editor.Battlefields\BattlefieldTileset.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Editor.Levels\Levels\OverlapTileset.cs" />
@@ -527,13 +538,13 @@
     </Compile>
     <Compile Include="!Static\Model.cs" />
     <Compile Include="MRUManager.cs" />
-    <Compile Include="Features\Notes.cs">
+    <Compile Include="Feature.Project\Project.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\Notes.Designer.cs">
-      <DependentUpon>Notes.cs</DependentUpon>
+    <Compile Include="Feature.Project\Project.Designer.cs">
+      <DependentUpon>Project.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\NotesDB.cs" />
+    <Compile Include="Feature.Project\NotesDB.cs" />
     <Compile Include="Feature.Patches\GamePatches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,11 +553,11 @@
     </Compile>
     <Compile Include="Feature.Patches\IPSPatch.cs" />
     <Compile Include="Feature.Patches\Patch.cs" />
-    <Compile Include="Feature.Previewer\MenuTextPreview.cs" />
-    <Compile Include="Feature.Previewer\Previewer.cs">
+    <Compile Include="Feature.Preview\MenuTextPreview.cs" />
+    <Compile Include="Feature.Preview\Previewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Feature.Previewer\Previewer.Designer.cs">
+    <Compile Include="Feature.Preview\Previewer.Designer.cs">
       <DependentUpon>Previewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -558,6 +569,9 @@
       <DependentUpon>ProgressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="!Universal\ToolTipLabel.resx">
+      <DependentUpon>ToolTipLabel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
@@ -594,6 +608,9 @@
       <DependentUpon>Levels.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\EditLabel.resx">
+      <DependentUpon>EditLabel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Form1.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -628,24 +645,22 @@
     <Compile Include="Features\Restore.Designer.cs">
       <DependentUpon>Restore.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.Event Scripts\ActionQueue.cs" />
+    <Compile Include="Editor.Event Scripts\ActionScript.cs" />
     <Compile Include="Editor.Animations\AnimationScript.cs" />
-    <Compile Include="Editor.Animations\AnimationScriptCommand.cs" />
+    <Compile Include="Editor.Animations\AnimationCommand.cs" />
     <Compile Include="Editor.Animations\A_ScriptEnums.cs" />
     <Compile Include="Editor.Animations\A_ScriptIterator.cs" />
     <Compile Include="Editor.Animations\A_TreeViewWrapper.cs">
     </Compile>
-    <Compile Include="Editor.Animations\Interpreter.AnimationScripts.cs" />
+    <Compile Include="Editor.Animations\Interpreter.Animation.cs" />
     <Compile Include="Editor.Monsters\BattleScript.cs" />
-    <Compile Include="Editor.Event Scripts\ActionQueueCommand.cs" />
-    <Compile Include="Editor.Monsters\BattleCommands.cs" />
-    <Compile Include="Editor.Monsters\BattleScriptCommand.cs" />
+    <Compile Include="Editor.Event Scripts\ActionCommand.cs" />
+    <Compile Include="Editor.Monsters\BattleCommand.cs" />
     <Compile Include="Editor.Event Scripts\EventActionCommand.cs" />
-    <Compile Include="Editor.Event Scripts\Interpreter.ActionQueues.cs" />
+    <Compile Include="Editor.Event Scripts\Interpreter.Action.cs" />
     <Compile Include="Editor.Event Scripts\Interpreter.cs" />
-    <Compile Include="Editor.Event Scripts\EventScriptCommand.cs" />
-    <Compile Include="Editor.Event Scripts\Interpreter.EventScripts.cs" />
-    <Compile Include="Editor.Monsters\ScriptCommand.cs" />
+    <Compile Include="Editor.Event Scripts\EventCommand.cs" />
+    <Compile Include="Editor.Event Scripts\Interpreter.Event.cs" />
     <Compile Include="Editor.Event Scripts\ScriptIterator.cs" />
     <Compile Include="Editor.Event Scripts\EventScript.cs" />
     <Compile Include="Editor.Event Scripts\TreeViewWrapper.cs">
@@ -687,7 +702,7 @@
     <Compile Include="Editor.Sprites\Mold.cs" />
     <Compile Include="Editor.Sprites\Sequence.cs" />
     <Compile Include="Editor.Sprites\Sprite.cs" />
-    <Compile Include="Editor.Sprites\GraphicPalette.cs" />
+    <Compile Include="Editor.Sprites\ImagePacket.cs" />
     <Compile Include="Editor.Sprites\Sprites.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -696,8 +711,8 @@
     </Compile>
     <Compile Include="Editor.Sprites\Animation.cs" />
     <Compile Include="!Static\State.cs" />
-    <Compile Include="Feature.Previewer\BattleDialoguePreview.cs" />
-    <Compile Include="Feature.Previewer\MenuDescriptionPreview.cs" />
+    <Compile Include="Feature.Preview\BattleDialoguePreview.cs" />
+    <Compile Include="Feature.Preview\DescriptionPreview.cs" />
     <Compile Include="Editor.Attacks\Attack.cs" />
     <Compile Include="Editor.Allies\Character.cs" />
     <Compile Include="Editor.Formations\Formation.cs" />
@@ -707,8 +722,8 @@
     <Compile Include="Editor.Items\Shop.cs" />
     <Compile Include="Editor.Allies\Slot.cs" />
     <Compile Include="Editor.Attacks\Spell.cs" />
-    <Compile Include="!Universal\DDlistName.cs" />
-    <Compile Include="Feature.Previewer\DialoguePreview.cs" />
+    <Compile Include="!Universal\SortedList.cs" />
+    <Compile Include="Feature.Preview\DialoguePreview.cs" />
     <Compile Include="Editor.Dialogues\BattleDialogue.cs" />
     <Compile Include="Editor.Dialogues\Dialogue.cs" />
     <Compile Include="Editor.Dialogues\TextHelper.cs">
@@ -717,8 +732,8 @@
     <Compile Include="Editor.Dialogues\FontCharacter.cs" />
     <Compile Include="Feature.Undo\Command.cs" />
     <Compile Include="Feature.Undo\CommandStack.cs" />
-    <Compile Include="Feature.Undo\SolidityEditCommand.cs" />
-    <Compile Include="Feature.Undo\TilemapEditCommand.cs" />
+    <Compile Include="Feature.Undo\SolidityEdit.cs" />
+    <Compile Include="Feature.Undo\TilemapEdit.cs" />
     <Compile Include="Editor.World Maps\WorldMaps.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -733,6 +748,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\addFromNotes.gif" />
+    <None Include="Resources\addToNotes.gif" />
+    <None Include="Resources\keystrokes.gif" />
+    <None Include="Resources\importTextAll.gif" />
+    <None Include="Resources\exportTextAll.gif" />
+    <None Include="Resources\overlapRemove.gif" />
+    <None Include="Resources\overlapAdd.gif" />
+    <None Include="Resources\exitRemove.gif" />
+    <None Include="Resources\exitAdd.gif" />
+    <None Include="Resources\eventRemove.gif" />
+    <None Include="Resources\eventAdd.gif" />
     <None Include="Resources\Data\camera.gif" />
     <None Include="Resources\Data\invalid.gif" />
     <None Include="Resources\Data\warning.gif" />
@@ -950,7 +976,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>NPCEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\SearchSolidTile.resx">
+    <EmbeddedResource Include="Editor.Levels\SearchSolidTile.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SearchSolidTile.cs</DependentUpon>
     </EmbeddedResource>
@@ -958,8 +984,8 @@
       <SubType>Designer</SubType>
       <DependentUpon>SpaceAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Notes.resx">
-      <DependentUpon>Notes.cs</DependentUpon>
+    <EmbeddedResource Include="Feature.Project\Project.resx">
+      <DependentUpon>Project.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editors\TileEditor.resx">
@@ -974,7 +1000,7 @@
       <DependentUpon>GamePatches.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Feature.Previewer\Previewer.resx">
+    <EmbeddedResource Include="Feature.Preview\Previewer.resx">
       <DependentUpon>Previewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

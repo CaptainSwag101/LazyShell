@@ -8,49 +8,52 @@ namespace LAZYSHELL
     [Serializable()]
     public class DialogueTileset
     {
+        // variables
         [NonSerialized()]
-                private byte[] graphicSet;
-        private PaletteSet paletteSet;
-        private Tile[] tilesetLayer; public Tile[] TilesetLayer { get { return tilesetLayer; } }
-
-        public DialogueTileset(PaletteSet paletteSet)
+        private byte[] graphics;
+        private PaletteSet palettes;
+        private Tile[] tileset_tiles; 
+        public Tile[] Tileset_tiles { get { return tileset_tiles; } }
+        // constructor
+        public DialogueTileset(PaletteSet palettes)
         {
-            this.graphicSet = Model.DialogueGraphics;
-            this.paletteSet = paletteSet;
-
-            tilesetLayer = new Tile[16 * 4];
-            for (int i = 0; i < tilesetLayer.Length; i++)
-                tilesetLayer[i] = new Tile(i);
-            DrawTileset(tilesetLayer);
+            this.graphics = Model.DialogueGraphics;
+            this.palettes = palettes;
+            //
+            tileset_tiles = new Tile[16 * 4];
+            for (int i = 0; i < tileset_tiles.Length; i++)
+                tileset_tiles[i] = new Tile(i);
+            DrawTileset(tileset_tiles);
         }
-        public void DrawTileset(Tile[] tilesetLayer)
+        // assemblers
+        private void Assemble()
         {
-            byte temp, tile;
-            Subtile source;
+        }
+        // class functions
+        public void DrawTileset(Tile[] tileset_tiles)
+        {
             for (int y = 0; y < 4; y++)
             {
                 for (int x = 0; x < 4; x++)
                 {
                     for (int z = 0; z < 4; z++)
                     {
-                        temp = 0x04;    // for palette index 1
-                        tile = (byte)(y * 16 + (x * 2) + (z % 2));
-                        tile += z >= 2 ? (byte)8 : (byte)0;
-                        source = Do.DrawSubtile(tile, temp, graphicSet, paletteSet.Palettes, 0x20);
-                        tilesetLayer[y * 16 + x].Subtiles[z] = source;
-                        tilesetLayer[y * 16 + x + 8].Subtiles[z] = source;
-
-                        temp = 0x44;    // for palette index 1
-                        tile ^= 7;
-                        source = Do.DrawSubtile(tile, temp, graphicSet, paletteSet.Palettes, 0x20);
-                        tilesetLayer[y * 16 + x + 4].Subtiles[z] = source;
-                        tilesetLayer[y * 16 + x + 12].Subtiles[z] = source;
+                        // for palette index 1
+                        byte status = 0x04;
+                        byte index = (byte)(y * 16 + (x * 2) + (z % 2));
+                        index += z >= 2 ? (byte)8 : (byte)0;
+                        Subtile source = Do.DrawSubtile(index, status, graphics, palettes.Palettes, 0x20);
+                        tileset_tiles[y * 16 + x].Subtiles[z] = source;
+                        tileset_tiles[y * 16 + x + 8].Subtiles[z] = source;
+                        // for palette index 1
+                        status = 0x44;
+                        index ^= 7;
+                        source = Do.DrawSubtile(index, status, graphics, palettes.Palettes, 0x20);
+                        tileset_tiles[y * 16 + x + 4].Subtiles[z] = source;
+                        tileset_tiles[y * 16 + x + 12].Subtiles[z] = source;
                     }
                 }
             }
-        }
-        private void Assemble()
-        {
         }
     }
 }

@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Audio : Form
+    public partial class Audio : NewForm
     {
         private long checksum;
         private SampleEditor sampleEditor;
@@ -60,7 +60,7 @@ namespace LAZYSHELL
               "Audio has not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
               MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
-                save_Click(null, null);
+                save.PerformClick();
             else if (result == DialogResult.No)
             {
                 Model.AudioSamples = null;

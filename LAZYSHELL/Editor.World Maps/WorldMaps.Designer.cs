@@ -195,16 +195,6 @@
             this.worldMapName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.worldMapName.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.worldMapName.IntegralHeight = false;
-            this.worldMapName.Items.AddRange(new object[] {
-            "Bowser\'s Keep",
-            "Mushroom Kingdom",
-            "Rose Town",
-            "Booster Tower",
-            "Seaside Town",
-            "Land\'s End",
-            "Nimbus Land",
-            "Barrel Volcano",
-            "Yo\'ster Isle"});
             this.worldMapName.Name = "worldMapName";
             this.worldMapName.Size = new System.Drawing.Size(150, 25);
             this.worldMapName.SelectedIndexChanged += new System.EventHandler(this.worldMapName_SelectedIndexChanged);
@@ -213,6 +203,7 @@
             // 
             this.locationNum.AutoSize = false;
             this.locationNum.BackColor = this.worldMapName.BackColor;
+            this.locationNum.ContextMenuStrip = null;
             this.locationNum.Font = this.worldMapName.Font;
             this.locationNum.ForeColor = this.worldMapName.ForeColor;
             this.locationNum.Hexadecimal = false;
@@ -1228,7 +1219,7 @@
             this.resetLocationToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.resetLocationToolStripMenuItem.Name = "resetLocationToolStripMenuItem";
             this.resetLocationToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.resetLocationToolStripMenuItem.Text = "Reset map point";
+            this.resetLocationToolStripMenuItem.Text = "Reset location";
             this.resetLocationToolStripMenuItem.Click += new System.EventHandler(this.resetLocationToolStripMenuItem_Click);
             // 
             // toolStripSeparator8

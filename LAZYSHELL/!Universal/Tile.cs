@@ -11,16 +11,15 @@ namespace LAZYSHELL
     [Serializable()]
     public class Tile
     {
+        // tile properties
         private Subtile[] subtiles = new Subtile[4];
         public Subtile[] Subtiles { get { return subtiles; } set { subtiles = value; } }
-
         private int tileIndex;
         public int TileIndex { get { return tileIndex; } set { tileIndex = value; } }
-
         private bool mirror, invert;
         public bool Mirror { get { return mirror; } set { mirror = value; } }
         public bool Invert { get { return invert; } set { invert = value; } }
-
+        // accessors
         private int[] pixels = new int[256];
         public int[] Pixels
         {
@@ -75,7 +74,7 @@ namespace LAZYSHELL
                 return pixels;
             }
         }
-
+        // constructors
         public Tile(int tileIndex)
         {
             this.tileIndex = tileIndex; // set tile Number
@@ -83,7 +82,7 @@ namespace LAZYSHELL
             for (int p = 0; p < 4; p++)
                 subtiles[p] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, false);
         }
-
+        // spawning
         public Tile Copy()
         {
             Tile copy = new Tile(this.tileIndex);
@@ -96,6 +95,7 @@ namespace LAZYSHELL
             copy.Invert = invert;
             return copy;
         }
+        // universal functions
         public void Clear()
         {
             foreach (Subtile tile in subtiles)

@@ -9,12 +9,8 @@ namespace LAZYSHELL
     [Serializable()]
     public class E_Mold
     {
+        private byte[] buffer;
         private ushort moldOffset; public ushort MoldOffset { get { return moldOffset; } set { moldOffset = value; } }
-
-        // Tile properties
-        private byte[] sm;
-
-        // Local
         private byte[] mold; public byte[] Mold { get { return mold; } set { mold = value; } }
         public bool Empty
         {
@@ -26,19 +22,18 @@ namespace LAZYSHELL
                 return true;
             }
         }
-        // Start
-        public void InitializeMold(byte[] sm, int offset, ushort end)
+        // disassemblers
+        public void Disassemble(byte[] buffer, int offset, ushort end)
         {
-            this.sm = sm;
+            this.buffer = buffer;
             moldOffset = (ushort)offset;
-
-            offset = Bits.GetShort(sm, offset); ;
-
+            offset = Bits.GetShort(buffer, offset);
             mold = new byte[256];
             byte[] compressed = new byte[end - offset];
-            Buffer.BlockCopy(sm, offset, compressed, 0, end - offset);
+            Buffer.BlockCopy(buffer, offset, compressed, 0, end - offset);
             Decompress(compressed, mold);
         }
+        // compression
         public void Decompress(byte[] src, byte[] dst)
         {
             int srcOffset = 0;
@@ -97,6 +92,7 @@ namespace LAZYSHELL
             Bits.SetByteArray(temp, 0, dst);
             return temp;
         }
+        // drawing
         public int[] MoldPixels(E_Animation animation, E_Tileset tileset)
         {
             int[] pixels = new int[(animation.Width * 16) * (animation.Height * 16)];
@@ -119,6 +115,7 @@ namespace LAZYSHELL
             }
             return pixels;
         }
+        // spawning
         public E_Mold New()
         {
             E_Mold empty = new E_Mold();

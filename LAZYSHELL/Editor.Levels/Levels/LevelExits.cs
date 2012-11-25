@@ -9,12 +9,15 @@ namespace LAZYSHELL
     [Serializable()]
     public class LevelExits
     {
-        // Local Variables
-        [NonSerialized()]
-        private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
-
-        private List<Exit> exits = new List<Exit>(); public List<Exit> Exits { get { return exits; } }
+        // class variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public int Index { get { return index; } set { index = value; } }
+        private List<Exit> exits = new List<Exit>();
+        private Exit exit;
         private int currentExit = 0;
+        private int selectedExit;
+        // accessors        
+        public List<Exit> Exits { get { return exits; } }
         public int CurrentExit
         {
             get
@@ -30,27 +33,102 @@ namespace LAZYSHELL
                 }
             }
         }
-        private int selectedExit; public int SelectedExit { get { return this.selectedExit; } set { selectedExit = value; } }
-
-        private Exit exit; public Exit Exit_ { get { return exit; } }
-
-        private int index; public int Index { get { return index; } set { index = value; } }
-
-        public int Count { get { return exits.Count; } }
-        public void RemoveCurrentExit()
+        public int SelectedExit { get { return this.selectedExit; } set { selectedExit = value; } }
+        public Exit Exit_ { get { return exit; } }
+        public int Length
         {
-            if (currentExit < exits.Count)
+            get
             {
-                exits.Remove(exits[currentExit]);
-                this.currentExit = 0;
+                int length = 5;
+                if (ExitType == 0)
+                    length += 3;
+                if (Width > 0)
+                    length++;
+                return length;
             }
         }
+        public int Count { get { return exits.Count; } }
+        // exit properties
+        public ushort Destination { get { return exit.Destination; } set { exit.Destination = value; } }
+        public byte ExitType { get { return exit.ExitType; } set { exit.ExitType = value; } }
+        public bool ShowMessage { get { return exit.ShowMessage; } set { exit.ShowMessage = value; } }
+        public byte X { get { return exit.X; } set { exit.X = value; } }
+        public byte Y { get { return exit.Y; } set { exit.Y = value; } }
+        public byte Z { get { return exit.Z; } set { exit.Z = value; } }
+        public byte F { get { return exit.F; } set { exit.F = value; } }
+        public byte Height { get { return exit.Height; } set { exit.Height = value; } }
+        public byte Width { get { return exit.Width; } set { exit.Width = value; } }
+        public bool X_Half { get { return exit.X_Half; } set { exit.X_Half = value; } }
+        public bool Y_Half { get { return exit.Y_Half; } set { exit.Y_Half = value; } }
+        // destination properties
+        public byte DstX { get { return exit.DstX; } set { exit.DstX = value; } }
+        public byte DstY { get { return exit.DstY; } set { exit.DstY = value; } }
+        public byte DstZ { get { return exit.DstZ; } set { exit.DstZ = value; } }
+        public byte DstF { get { return exit.DstFace; } set { exit.DstFace = value; } }
+        public bool DstXb7 { get { return exit.DstXb7; } set { exit.DstXb7 = value; } }
+        public bool DstYb7 { get { return exit.DstYb7; } set { exit.DstYb7 = value; } }
+        // constructor, functions
+        public LevelExits(int index)
+        {
+            this.index = index;
+            Disassemble();
+        }
+        public LevelExits()
+        {
+        }
+        private void Disassemble()
+        {
+            int pointerOffset = (index * 2) + 0x1D2D64;
+            ushort offsetStart = Bits.GetShort(rom, pointerOffset);
+            ushort offsetEnd = Bits.GetShort(rom, pointerOffset + 2);
+            if (index == 0x1FF)
+                offsetEnd = 0;
+            // no exit fields for level
+            if (offsetStart >= offsetEnd)
+                return;
+            int offset = offsetStart + 0x1D0000;
+            while (offset < offsetEnd + 0x1D0000)
+            {
+                Exit tExit = new Exit();
+                tExit.Disassemble(offset);
+                exits.Add(tExit);
+                offset += 5;
+                if (tExit.ExitType == 0)
+                    offset += 3;
+                if (tExit.Width > 0)
+                    offset += 1;
+            }
+        }
+        public void Assemble(ref int offsetStart)
+        {
+            int offset = 0;
+            int pointerOffset = (index * 2) + 0x1D2D64;
+            // set the new pointer for the fields
+            Bits.SetShort(rom, pointerOffset, offsetStart);
+            // no exit fields for level
+            if (exits.Count == 0)
+                return;
+            offset = offsetStart + 0x1D0000;
+            foreach (Exit exit in exits)
+            {
+                exit.Assemble(offset);
+                offset += 5;
+                if (exit.ExitType == 0) offset += 3;
+                if (exit.Width > 0) offset += 1;
+            }
+            offsetStart = (ushort)(offset - 0x1D0000);
+        }
+        public void Assemble(int offsetStart)
+        {
+            Assemble(ref offsetStart);
+        }
+        // list managers
         public void Clear()
         {
             exits.Clear();
             this.currentExit = 0;
         }
-        public void AddNewExit(int index, Point p)
+        public void New(int index, Point p)
         {
             Exit e = new Exit();
             e.X = (byte)p.X;
@@ -60,206 +138,131 @@ namespace LAZYSHELL
             else
                 exits.Add(e);
         }
-        public void AddNewExit(int index, Exit copy)
+        public void New(int index, Exit copy)
         {
             if (index < exits.Count)
                 exits.Insert(index, copy);
             else
                 exits.Add(copy);
         }
-        public ushort Destination { get { return exit.Destination; } set { exit.Destination = value; } }
-        public byte ExitType { get { return exit.ExitType; } set { exit.ExitType = value; } }
-        public bool ShowMessage { get { return exit.ShowMessage; } set { exit.ShowMessage = value; } }
-
-        public byte X { get { return exit.X; } set { exit.X = value; } }
-        public byte Y { get { return exit.Y; } set { exit.Y = value; } }
-        public byte Z { get { return exit.Z; } set { exit.Z = value; } }
-        public byte Height { get { return exit.Height; } set { exit.Height = value; } }
-        public bool WidthXPlusHalf { get { return exit.X_Half; } set { exit.X_Half = value; } }
-        public bool WidthYPlusHalf { get { return exit.Y_Half; } set { exit.Y_Half = value; } }
-
-        public byte DestX { get { return exit.DestX; } set { exit.DestX = value; } }
-        public byte DestY { get { return exit.DestY; } set { exit.DestY = value; } }
-        public byte DestZ { get { return exit.DestZ; } set { exit.DestZ = value; } }
-        public byte DestFace { get { return exit.DestFace; } set { exit.DestFace = value; } }
-        public bool DestXb7 { get { return exit.DestXb7; } set { exit.DestXb7 = value; } }
-        public bool DestYb7 { get { return exit.DestYb7; } set { exit.DestYb7 = value; } }
-
-        public byte Width { get { return exit.Width; } set { exit.Width = value; } }
-        public byte Face { get { return exit.Face; } set { exit.Face = value; } }
-
-        public LevelExits(byte[] data, int index)
+        public void Remove()
         {
-            this.data = data;
-            this.index = index;
-            InitializeLevel(data);
-        }
-        public LevelExits(byte[] data)
-        {
-            // Used as storage for the Events Previewer
-            this.data = data;
-        }
-        private void InitializeLevel(byte[] data)
-        {
-            int offset;
-            ushort offsetStart = 0;
-            ushort offsetEnd = 0;
-            Exit tExit;
-
-            int pointerOffset = (index * 2) + 0x1D2D64;
-
-            offsetStart = Bits.GetShort(data, pointerOffset); pointerOffset += 2;
-            offsetEnd = Bits.GetShort(data, pointerOffset);
-
-            if (index == 0x1FF) offsetEnd = 0;
-
-            if (offsetStart >= offsetEnd) return; // no exit fields for level
-
-            offset = offsetStart + 0x1D0000;
-
-            while (offset < offsetEnd + 0x1D0000)
+            if (currentExit < exits.Count)
             {
-                tExit = new Exit();
-                tExit.InitializeExit(data, offset);
-                exits.Add(tExit);
-
-                offset += 5;
-                if (tExit.ExitType == 0) offset += 3;
-                if (tExit.Width > 0) offset += 1;
+                exits.Remove(exits[currentExit]);
+                this.currentExit = 0;
             }
-        }
-        public ushort Assemble(ushort offsetStart)
-        {
-            int offset = 0;
-            int pointerOffset = (index * 2) + 0x1D2D64;
-
-            Bits.SetShort(data, pointerOffset, offsetStart);  // set the new pointer for the fields
-
-            if (exits.Count == 0) return offsetStart; // no exit fields for level
-
-            offset = offsetStart + 0x1D0000;
-
-            foreach (Exit exit in exits)
-            {
-                exit.AssembleExit(data, offset);
-                offset += 5;
-                if (exit.ExitType == 0) offset += 3;
-                if (exit.Width > 0) offset += 1;
-            }
-
-            offsetStart = (ushort)(offset - 0x1D0000);
-
-            return offsetStart;
-        }
-
-        public int GetExitLength()
-        {
-            int length = 5;
-            if (ExitType == 0)
-                length += 3;
-            if (Width > 0)
-                length++;
-            return length;
         }
     }
     [Serializable()]
     public class Exit
     {
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        public int Index = 0;
+        public bool Hilite = false;
+        public int Length
+        {
+            get
+            {
+                int length = 5;
+                if (exitType == 0)
+                    length += 3;
+                if (width > 0)
+                    length++;
+                return length;
+            }
+        }
+        // field properties
         private ushort destination; public ushort Destination { get { return destination; } set { destination = value; } }
         private byte exitType; public byte ExitType { get { return exitType; } set { exitType = value; } }
         private bool showMessage; public bool ShowMessage { get { return showMessage; } set { showMessage = value; } }
-        public int Index = 0;
-        public bool Hilite = false;
-
         private byte x; public byte X { get { return x; } set { x = value; } }
         private byte y; public byte Y { get { return y; } set { y = value; } }
         private byte z; public byte Z { get { return z; } set { z = value; } }
+        private byte f; public byte F { get { return f; } set { f = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
+        private byte width; public byte Width { get { return width; } set { width = value; } }
         private bool x_half; public bool X_Half { get { return x_half; } set { x_half = value; } }
         private bool y_half; public bool Y_Half { get { return y_half; } set { y_half = value; } }
-
-        private byte destX; public byte DestX { get { return destX; } set { destX = value; } }
-        private byte destY; public byte DestY { get { return destY; } set { destY = value; } }
-        private byte destZ; public byte DestZ { get { return destZ; } set { destZ = value; } }
-        private byte destFace; public byte DestFace { get { return destFace; } set { destFace = value; } }
-        private bool destXb7; public bool DestXb7 { get { return destXb7; } set { destXb7 = value; } }
-        private bool destYb7; public bool DestYb7 { get { return destYb7; } set { destYb7 = value; } }
-
-        private byte width; public byte Width { get { return width; } set { width = value; } }
-        private byte face; public byte Face { get { return face; } set { face = value; } }
-        public void InitializeExit(byte[] data, int offset)
+        // destination properties
+        private byte dstX; public byte DstX { get { return dstX; } set { dstX = value; } }
+        private byte dstY; public byte DstY { get { return dstY; } set { dstY = value; } }
+        private byte dstZ; public byte DstZ { get { return dstZ; } set { dstZ = value; } }
+        private byte dstFace; public byte DstFace { get { return dstFace; } set { dstFace = value; } }
+        private bool dstXb7; public bool DstXb7 { get { return dstXb7; } set { dstXb7 = value; } }
+        private bool dstYb7; public bool DstYb7 { get { return dstYb7; } set { dstYb7 = value; } }
+        // assemblers
+        public void Disassemble(int offset)
         {
             byte temp = 0;
-            ushort tempShort = 0;
-
-            tempShort = Bits.GetShort(data, offset); offset++;
-            destination = (ushort)(tempShort & 0x01FF);
-            temp = data[offset]; offset++;
-            if ((temp & 0x08) == 0x08) showMessage = true;
+            destination = (ushort)(Bits.GetShort(rom, offset++) & 0x01FF);
+            temp = rom[offset++];
+            showMessage = (temp & 0x08) == 0x08;
             exitType = (byte)((temp & 0x60) >> 6);
             bool lengthOverOne = (temp & 0x80) == 0x80;
-
-            temp = data[offset];
-            if ((temp & 0x80) == 0x80) x_half = true;
-            x = (byte)(temp & 0x7F); offset++;
-            temp = data[offset];
-            if ((temp & 0x80) == 0x80) y_half = true;
-            y = (byte)(temp & 0x7F); offset++;
-            temp = data[offset]; offset++;
+            //
+            temp = rom[offset++];
+            x_half = (temp & 0x80) == 0x80;
+            x = (byte)(temp & 0x7F);
+            temp = rom[offset++];
+            y_half = (temp & 0x80) == 0x80;
+            y = (byte)(temp & 0x7F);
+            temp = rom[offset++];
             z = (byte)(temp & 0x1F);
             height = (byte)((temp & 0xF0) >> 5);
-
+            //
             if (exitType == 0)
             {
-                temp = data[offset];
-                destX = (byte)(temp & 0x7F); offset++;
-                if ((temp & 0x80) == 0x80) destXb7 = true;
-                temp = data[offset];
-                destY = (byte)(temp & 0x7F); offset++;
-                if ((temp & 0x80) == 0x80) destYb7 = true;
-                temp = data[offset];
-                destZ = (byte)(temp & 0x1F);
-                destFace = (byte)((temp & 0xF0) >> 5); offset++;
+                temp = rom[offset++];
+                dstX = (byte)(temp & 0x7F);
+                dstXb7 = (temp & 0x80) == 0x80;
+                temp = rom[offset++];
+                dstY = (byte)(temp & 0x7F);
+                dstYb7 = (temp & 0x80) == 0x80;
+                temp = rom[offset++];
+                dstZ = (byte)(temp & 0x1F);
+                dstFace = (byte)((temp & 0xF0) >> 5);
             }
             else if (exitType == 1)
                 destination &= 0xFF;
             if (lengthOverOne)
             {
-                temp = data[offset];
+                temp = rom[offset++];
                 width = (byte)(temp & 0x0F);
-                face = (byte)((temp & 0x80) >> 7); offset++;
+                f = (byte)((temp & 0x80) >> 7);
             }
         }
-        public void AssembleExit(byte[] data, int offset)
+        public void Assemble(int offset)
         {
-            Bits.SetShort(data, offset, destination); offset++;
-            Bits.SetBit(data, offset, 3, showMessage);
-            if (exitType == 0) Bits.SetBit(data, offset, 5, true);
-            else if (exitType == 1) Bits.SetBit(data, offset, 6, true);
-            Bits.SetBit(data, offset, 7, width > 0); offset++;
-
-            Bits.SetByte(data, offset, x);
-            Bits.SetBit(data, offset, 7, x_half); offset++;
-            Bits.SetByte(data, offset, y);
-            Bits.SetBit(data, offset, 7, y_half); offset++;
-            Bits.SetByte(data, offset, z);
-            Bits.SetBitsByByte(data, offset, (byte)(height << 5), true); offset++;
-
+            Bits.SetShort(rom, offset++, destination);
+            Bits.SetBit(rom, offset, 3, showMessage);
+            if (exitType == 0)
+                Bits.SetBit(rom, offset, 5, true);
+            else if (exitType == 1)
+                Bits.SetBit(rom, offset, 6, true);
+            Bits.SetBit(rom, offset++, 7, width > 0);
+            rom[offset] = x;
+            Bits.SetBit(rom, offset++, 7, x_half);
+            rom[offset] = y;
+            Bits.SetBit(rom, offset++, 7, y_half);
+            rom[offset] = z;
+            Bits.SetBitsByByte(rom, offset++, (byte)(height << 5), true);
             if (exitType == 0)
             {
-                Bits.SetByte(data, offset, destX);
-                Bits.SetBit(data, offset, 7, destXb7); offset++;
-                Bits.SetByte(data, offset, destY);
-                Bits.SetBit(data, offset, 7, destYb7); offset++;
-                Bits.SetByte(data, offset, destZ);
-                Bits.SetBitsByByte(data, offset, (byte)(destFace << 5), true); offset++;
+                rom[offset] = dstX;
+                Bits.SetBit(rom, offset++, 7, dstXb7);
+                rom[offset] = dstY;
+                Bits.SetBit(rom, offset++, 7, dstYb7);
+                rom[offset] = dstZ;
+                Bits.SetBitsByByte(rom, offset++, (byte)(dstFace << 5), true);
             }
             if (width > 0)
             {
-                Bits.SetByte(data, offset, width);
-                Bits.SetBitsByByte(data, offset, (byte)(face << 7), true); offset++;
+                rom[offset] = width;
+                Bits.SetBitsByByte(rom, offset++, (byte)(f << 7), true);
             }
         }
+        // spawning
         public Exit Copy()
         {
             Exit copy = new Exit();
@@ -272,24 +275,15 @@ namespace LAZYSHELL
             copy.Height = height;
             copy.X_Half = x_half;
             copy.Y_Half = y_half;
-            copy.DestX = destX;
-            copy.DestY = destY;
-            copy.DestZ = destZ;
-            copy.DestFace = destFace;
-            copy.DestXb7 = destXb7;
-            copy.DestYb7 = destYb7;
+            copy.DstX = dstX;
+            copy.DstY = dstY;
+            copy.DstZ = dstZ;
+            copy.DstFace = dstFace;
+            copy.DstXb7 = dstXb7;
+            copy.DstYb7 = dstYb7;
             copy.Width = width;
-            copy.Face = face;
+            copy.F = f;
             return copy;
-        }
-        public int GetExitLength()
-        {
-            int length = 5;
-            if (exitType == 0)
-                length += 3;
-            if (width > 0)
-                length++;
-            return length;
         }
     }
 }

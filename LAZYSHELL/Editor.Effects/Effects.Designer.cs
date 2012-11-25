@@ -86,6 +86,7 @@
             // number
             // 
             this.number.AutoSize = false;
+            this.number.ContextMenuStrip = null;
             this.number.Hexadecimal = false;
             this.number.Increment = new decimal(new int[] {
             1,

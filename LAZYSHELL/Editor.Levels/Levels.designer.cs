@@ -89,8 +89,6 @@ namespace LAZYSHELL
             this.npcObjectTree = new System.Windows.Forms.TreeView();
             this.mapNum = new System.Windows.Forms.NumericUpDown();
             this.label33 = new System.Windows.Forms.Label();
-            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addThisLevelToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -127,10 +125,8 @@ namespace LAZYSHELL
             this.eventGotoA = new System.Windows.Forms.Button();
             this.eventsWidthXPlusHalf = new System.Windows.Forms.CheckBox();
             this.eventLength = new System.Windows.Forms.NumericUpDown();
-            this.label137 = new System.Windows.Forms.Label();
             this.eventY = new System.Windows.Forms.NumericUpDown();
             this.label127 = new System.Windows.Forms.Label();
-            this.label135 = new System.Windows.Forms.Label();
             this.label133 = new System.Windows.Forms.Label();
             this.eventX = new System.Windows.Forms.NumericUpDown();
             this.eventZ = new System.Windows.Forms.NumericUpDown();
@@ -149,34 +145,32 @@ namespace LAZYSHELL
             this.label63 = new System.Windows.Forms.Label();
             this.panel52 = new System.Windows.Forms.Panel();
             this.exitsFieldTree = new System.Windows.Forms.TreeView();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.exitDestFace = new System.Windows.Forms.ComboBox();
+            this.exitType = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.marioZCoordPlusHalf = new System.Windows.Forms.CheckBox();
+            this.exitDest = new System.Windows.Forms.ComboBox();
             this.label59 = new System.Windows.Forms.Label();
             this.exitDestY = new System.Windows.Forms.NumericUpDown();
+            this.exitsShowMessage = new System.Windows.Forms.CheckBox();
             this.label124 = new System.Windows.Forms.Label();
             this.label122 = new System.Windows.Forms.Label();
-            this.exitDestX = new System.Windows.Forms.NumericUpDown();
             this.exitDestZ = new System.Windows.Forms.NumericUpDown();
-            this.panel68 = new System.Windows.Forms.Panel();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.exitDestX = new System.Windows.Forms.NumericUpDown();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.exits135LengthPlusHalf = new System.Windows.Forms.CheckBox();
-            this.exitFace = new System.Windows.Forms.ComboBox();
-            this.exits45LengthPlusHalf = new System.Windows.Forms.CheckBox();
             this.label119 = new System.Windows.Forms.Label();
-            this.exitType = new System.Windows.Forms.ComboBox();
-            this.exitLength = new System.Windows.Forms.NumericUpDown();
-            this.exitZ = new System.Windows.Forms.NumericUpDown();
-            this.exitDest = new System.Windows.Forms.ComboBox();
             this.exitY = new System.Windows.Forms.NumericUpDown();
-            this.exitsShowMessage = new System.Windows.Forms.CheckBox();
+            this.exitFace = new System.Windows.Forms.ComboBox();
             this.exitX = new System.Windows.Forms.NumericUpDown();
             this.exitHeight = new System.Windows.Forms.NumericUpDown();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label105 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label120 = new System.Windows.Forms.Label();
+            this.exits45LengthPlusHalf = new System.Windows.Forms.CheckBox();
+            this.exitZ = new System.Windows.Forms.NumericUpDown();
             this.label57 = new System.Windows.Forms.Label();
+            this.label105 = new System.Windows.Forms.Label();
+            this.exitLength = new System.Windows.Forms.NumericUpDown();
+            this.panel68 = new System.Windows.Forms.Panel();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.exitsInsertField = new System.Windows.Forms.ToolStripButton();
             this.exitsDeleteField = new System.Windows.Forms.ToolStripButton();
@@ -350,9 +344,6 @@ namespace LAZYSHELL
             this.toolStripLevel = new System.Windows.Forms.ToolStrip();
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
-            this.changeLevelName = new System.Windows.Forms.ToolStripButton();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.reset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
@@ -450,7 +441,6 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).BeginInit();
-            this.contextMenuStrip4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -472,16 +462,16 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.eventHeight)).BeginInit();
             this.toolStrip6.SuspendLayout();
             this.panel52.SuspendLayout();
-            this.groupBox17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestZ)).BeginInit();
             this.groupBox16.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitLength)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).BeginInit();
+            this.groupBox17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitLength)).BeginInit();
             this.toolStrip5.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -544,6 +534,7 @@ namespace LAZYSHELL
             // levelNum
             // 
             this.levelNum.AutoSize = false;
+            this.levelNum.ContextMenuStrip = null;
             this.levelNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.levelNum.Hexadecimal = false;
             this.levelNum.Increment = new decimal(new int[] {
@@ -637,7 +628,7 @@ namespace LAZYSHELL
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.npcAttributes);
-            this.groupBox14.Location = new System.Drawing.Point(0, 460);
+            this.groupBox14.Location = new System.Drawing.Point(0, 456);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.Size = new System.Drawing.Size(260, 158);
             this.groupBox14.TabIndex = 8;
@@ -824,7 +815,7 @@ namespace LAZYSHELL
             this.groupBox13.Controls.Add(this.label56);
             this.groupBox13.Location = new System.Drawing.Point(128, 360);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(132, 94);
+            this.groupBox13.Size = new System.Drawing.Size(132, 90);
             this.groupBox13.TabIndex = 7;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Isometric Coordinates";
@@ -841,9 +832,9 @@ namespace LAZYSHELL
             "NW",
             "N",
             "NE"});
-            this.npcFace.Location = new System.Drawing.Point(50, 66);
+            this.npcFace.Location = new System.Drawing.Point(35, 62);
             this.npcFace.Name = "npcFace";
-            this.npcFace.Size = new System.Drawing.Size(75, 21);
+            this.npcFace.Size = new System.Drawing.Size(45, 21);
             this.npcFace.TabIndex = 7;
             this.npcFace.SelectedIndexChanged += new System.EventHandler(this.npcRadialPosition_SelectedIndexChanged);
             // 
@@ -904,11 +895,11 @@ namespace LAZYSHELL
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(6, 69);
+            this.label30.Location = new System.Drawing.Point(6, 65);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(38, 13);
+            this.label30.Size = new System.Drawing.Size(13, 13);
             this.label30.TabIndex = 6;
-            this.label30.Text = "Facing";
+            this.label30.Text = "F";
             // 
             // npcZ
             // 
@@ -1237,7 +1228,7 @@ namespace LAZYSHELL
             this.npcObjectTree.Name = "npcObjectTree";
             this.npcObjectTree.ShowPlusMinus = false;
             this.npcObjectTree.ShowRootLines = false;
-            this.npcObjectTree.Size = new System.Drawing.Size(126, 403);
+            this.npcObjectTree.Size = new System.Drawing.Size(126, 399);
             this.npcObjectTree.TabIndex = 2;
             this.npcObjectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.npcObjectTree_AfterSelect);
             // 
@@ -1263,22 +1254,6 @@ namespace LAZYSHELL
             this.label33.Size = new System.Drawing.Size(38, 13);
             this.label33.TabIndex = 0;
             this.label33.Text = "Map #";
-            // 
-            // contextMenuStrip4
-            // 
-            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addThisLevelToNotesDatabaseToolStripMenuItem});
-            this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip4.ShowImageMargin = false;
-            this.contextMenuStrip4.Size = new System.Drawing.Size(217, 48);
-            // 
-            // addThisLevelToNotesDatabaseToolStripMenuItem
-            // 
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Name = "addThisLevelToNotesDatabaseToolStripMenuItem";
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Text = "Add this level to notes database...";
-            this.addThisLevelToNotesDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addThisLevelToNotesDatabaseToolStripMenuItem_Click);
             // 
             // label19
             // 
@@ -1374,7 +1349,7 @@ namespace LAZYSHELL
             this.overlapCoordZPlusHalf.ForeColor = System.Drawing.Color.Gray;
             this.overlapCoordZPlusHalf.Location = new System.Drawing.Point(83, 67);
             this.overlapCoordZPlusHalf.Name = "overlapCoordZPlusHalf";
-            this.overlapCoordZPlusHalf.Size = new System.Drawing.Size(43, 21);
+            this.overlapCoordZPlusHalf.Size = new System.Drawing.Size(43, 19);
             this.overlapCoordZPlusHalf.TabIndex = 7;
             this.overlapCoordZPlusHalf.Text = "+1/2";
             this.overlapCoordZPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1518,8 +1493,7 @@ namespace LAZYSHELL
             // overlapFieldInsert
             // 
             this.overlapFieldInsert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.overlapFieldInsert.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.overlapFieldInsert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.overlapFieldInsert.Image = global::LAZYSHELL.Properties.Resources.overlapAdd;
             this.overlapFieldInsert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.overlapFieldInsert.Name = "overlapFieldInsert";
             this.overlapFieldInsert.Size = new System.Drawing.Size(23, 22);
@@ -1529,8 +1503,7 @@ namespace LAZYSHELL
             // overlapFieldDelete
             // 
             this.overlapFieldDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.overlapFieldDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.overlapFieldDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.overlapFieldDelete.Image = global::LAZYSHELL.Properties.Resources.overlapRemove;
             this.overlapFieldDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.overlapFieldDelete.Name = "overlapFieldDelete";
             this.overlapFieldDelete.Size = new System.Drawing.Size(23, 22);
@@ -1626,9 +1599,9 @@ namespace LAZYSHELL
             this.panel2.Controls.Add(this.label63);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(0, 388);
+            this.panel2.Location = new System.Drawing.Point(0, 362);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(260, 252);
+            this.panel2.Size = new System.Drawing.Size(260, 278);
             this.panel2.TabIndex = 1;
             // 
             // groupBox18
@@ -1638,10 +1611,8 @@ namespace LAZYSHELL
             this.groupBox18.Controls.Add(this.eventGotoA);
             this.groupBox18.Controls.Add(this.eventsWidthXPlusHalf);
             this.groupBox18.Controls.Add(this.eventLength);
-            this.groupBox18.Controls.Add(this.label137);
             this.groupBox18.Controls.Add(this.eventY);
             this.groupBox18.Controls.Add(this.label127);
-            this.groupBox18.Controls.Add(this.label135);
             this.groupBox18.Controls.Add(this.label133);
             this.groupBox18.Controls.Add(this.eventX);
             this.groupBox18.Controls.Add(this.eventZ);
@@ -1650,21 +1621,20 @@ namespace LAZYSHELL
             this.groupBox18.Controls.Add(this.eventHeight);
             this.groupBox18.Location = new System.Drawing.Point(127, 47);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(133, 187);
+            this.groupBox18.Size = new System.Drawing.Size(133, 167);
             this.groupBox18.TabIndex = 3;
             this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Exit Properties";
+            this.groupBox18.Text = "Event Properties";
             // 
             // eventFace
             // 
             this.eventFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.eventFace.DropDownWidth = 60;
             this.eventFace.Items.AddRange(new object[] {
-            "UR to DL",
-            "DR to UL"});
-            this.eventFace.Location = new System.Drawing.Point(52, 132);
+            "SE",
+            "SW"});
+            this.eventFace.Location = new System.Drawing.Point(82, 66);
             this.eventFace.Name = "eventFace";
-            this.eventFace.Size = new System.Drawing.Size(75, 21);
+            this.eventFace.Size = new System.Drawing.Size(45, 21);
             this.eventFace.TabIndex = 12;
             this.eventFace.SelectedIndexChanged += new System.EventHandler(this.eventsFieldRadialPosition_SelectedIndexChanged);
             // 
@@ -1675,11 +1645,11 @@ namespace LAZYSHELL
             this.eventsWidthYPlusHalf.FlatAppearance.BorderSize = 0;
             this.eventsWidthYPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventsWidthYPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.eventsWidthYPlusHalf.Location = new System.Drawing.Point(69, 159);
+            this.eventsWidthYPlusHalf.Location = new System.Drawing.Point(6, 139);
             this.eventsWidthYPlusHalf.Name = "eventsWidthYPlusHalf";
-            this.eventsWidthYPlusHalf.Size = new System.Drawing.Size(58, 21);
+            this.eventsWidthYPlusHalf.Size = new System.Drawing.Size(121, 21);
             this.eventsWidthYPlusHalf.TabIndex = 14;
-            this.eventsWidthYPlusHalf.Text = "135°+½";
+            this.eventsWidthYPlusHalf.Text = "NE/SW edge active";
             this.eventsWidthYPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.eventsWidthYPlusHalf.UseCompatibleTextRendering = true;
             this.eventsWidthYPlusHalf.UseVisualStyleBackColor = false;
@@ -1708,11 +1678,11 @@ namespace LAZYSHELL
             this.eventsWidthXPlusHalf.FlatAppearance.BorderSize = 0;
             this.eventsWidthXPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventsWidthXPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.eventsWidthXPlusHalf.Location = new System.Drawing.Point(6, 159);
+            this.eventsWidthXPlusHalf.Location = new System.Drawing.Point(6, 114);
             this.eventsWidthXPlusHalf.Name = "eventsWidthXPlusHalf";
-            this.eventsWidthXPlusHalf.Size = new System.Drawing.Size(58, 21);
+            this.eventsWidthXPlusHalf.Size = new System.Drawing.Size(121, 21);
             this.eventsWidthXPlusHalf.TabIndex = 13;
-            this.eventsWidthXPlusHalf.Text = "45°+½";
+            this.eventsWidthXPlusHalf.Text = "NW/SE edge active";
             this.eventsWidthXPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.eventsWidthXPlusHalf.UseCompatibleTextRendering = true;
             this.eventsWidthXPlusHalf.UseVisualStyleBackColor = false;
@@ -1720,7 +1690,7 @@ namespace LAZYSHELL
             // 
             // eventLength
             // 
-            this.eventLength.Location = new System.Drawing.Point(52, 91);
+            this.eventLength.Location = new System.Drawing.Point(37, 87);
             this.eventLength.Maximum = new decimal(new int[] {
             16,
             0,
@@ -1732,7 +1702,7 @@ namespace LAZYSHELL
             0,
             0});
             this.eventLength.Name = "eventLength";
-            this.eventLength.Size = new System.Drawing.Size(75, 21);
+            this.eventLength.Size = new System.Drawing.Size(45, 21);
             this.eventLength.TabIndex = 8;
             this.eventLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventLength.Value = new decimal(new int[] {
@@ -1741,15 +1711,6 @@ namespace LAZYSHELL
             0,
             0});
             this.eventLength.ValueChanged += new System.EventHandler(this.eventsFieldLength_ValueChanged);
-            // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.Location = new System.Drawing.Point(6, 137);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(38, 13);
-            this.label137.TabIndex = 11;
-            this.label137.Text = "Facing";
             // 
             // eventY
             // 
@@ -1774,23 +1735,14 @@ namespace LAZYSHELL
             this.label127.TabIndex = 2;
             this.label127.Text = "X,Y";
             // 
-            // label135
-            // 
-            this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(6, 116);
-            this.label135.Name = "label135";
-            this.label135.Size = new System.Drawing.Size(38, 13);
-            this.label135.TabIndex = 9;
-            this.label135.Text = "Height";
-            // 
             // label133
             // 
             this.label133.AutoSize = true;
             this.label133.Location = new System.Drawing.Point(6, 70);
             this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(13, 13);
+            this.label133.Size = new System.Drawing.Size(23, 13);
             this.label133.TabIndex = 5;
-            this.label133.Text = "Z";
+            this.label133.Text = "Z,F";
             // 
             // eventX
             // 
@@ -1823,11 +1775,11 @@ namespace LAZYSHELL
             // label131
             // 
             this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(6, 95);
+            this.label131.Location = new System.Drawing.Point(6, 90);
             this.label131.Name = "label131";
-            this.label131.Size = new System.Drawing.Size(40, 13);
+            this.label131.Size = new System.Drawing.Size(23, 13);
             this.label131.TabIndex = 7;
-            this.label131.Text = "Length";
+            this.label131.Text = "L/H";
             // 
             // eventEvent
             // 
@@ -1845,14 +1797,14 @@ namespace LAZYSHELL
             // 
             // eventHeight
             // 
-            this.eventHeight.Location = new System.Drawing.Point(52, 112);
+            this.eventHeight.Location = new System.Drawing.Point(82, 87);
             this.eventHeight.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.eventHeight.Name = "eventHeight";
-            this.eventHeight.Size = new System.Drawing.Size(75, 21);
+            this.eventHeight.Size = new System.Drawing.Size(45, 21);
             this.eventHeight.TabIndex = 10;
             this.eventHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.eventHeight.ValueChanged += new System.EventHandler(this.eventsFieldHeight_ValueChanged);
@@ -1865,7 +1817,7 @@ namespace LAZYSHELL
             this.eventsList.Location = new System.Drawing.Point(0, 44);
             this.eventsList.Name = "eventsList";
             this.eventsList.ShowRootLines = false;
-            this.eventsList.Size = new System.Drawing.Size(125, 208);
+            this.eventsList.Size = new System.Drawing.Size(125, 234);
             this.eventsList.TabIndex = 2;
             this.eventsList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.eventsFieldTree_AfterSelect);
             // 
@@ -1891,8 +1843,7 @@ namespace LAZYSHELL
             // eventsInsertField
             // 
             this.eventsInsertField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eventsInsertField.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.eventsInsertField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eventsInsertField.Image = global::LAZYSHELL.Properties.Resources.eventAdd;
             this.eventsInsertField.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.eventsInsertField.Name = "eventsInsertField";
             this.eventsInsertField.Size = new System.Drawing.Size(23, 22);
@@ -1902,8 +1853,7 @@ namespace LAZYSHELL
             // eventsDeleteField
             // 
             this.eventsDeleteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.eventsDeleteField.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.eventsDeleteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.eventsDeleteField.Image = global::LAZYSHELL.Properties.Resources.eventRemove;
             this.eventsDeleteField.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.eventsDeleteField.Name = "eventsDeleteField";
             this.eventsDeleteField.Size = new System.Drawing.Size(23, 22);
@@ -1971,16 +1921,16 @@ namespace LAZYSHELL
             // panel52
             // 
             this.panel52.Controls.Add(this.exitsFieldTree);
+            this.panel52.Controls.Add(this.groupBox16);
             this.panel52.Controls.Add(this.groupBox17);
             this.panel52.Controls.Add(this.panel68);
-            this.panel52.Controls.Add(this.groupBox16);
             this.panel52.Controls.Add(this.toolStrip5);
             this.panel52.Controls.Add(this.label61);
             this.panel52.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel52.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel52.Location = new System.Drawing.Point(0, 0);
             this.panel52.Name = "panel52";
-            this.panel52.Size = new System.Drawing.Size(260, 388);
+            this.panel52.Size = new System.Drawing.Size(260, 362);
             this.panel52.TabIndex = 0;
             // 
             // exitsFieldTree
@@ -1991,45 +1941,70 @@ namespace LAZYSHELL
             this.exitsFieldTree.Location = new System.Drawing.Point(0, 44);
             this.exitsFieldTree.Name = "exitsFieldTree";
             this.exitsFieldTree.ShowRootLines = false;
-            this.exitsFieldTree.Size = new System.Drawing.Size(125, 344);
+            this.exitsFieldTree.Size = new System.Drawing.Size(125, 318);
             this.exitsFieldTree.TabIndex = 2;
             this.exitsFieldTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.exitsFieldTree_AfterSelect);
             // 
-            // groupBox17
+            // groupBox16
             // 
-            this.groupBox17.Controls.Add(this.exitDestFace);
-            this.groupBox17.Controls.Add(this.marioZCoordPlusHalf);
-            this.groupBox17.Controls.Add(this.label59);
-            this.groupBox17.Controls.Add(this.exitDestY);
-            this.groupBox17.Controls.Add(this.label124);
-            this.groupBox17.Controls.Add(this.label122);
-            this.groupBox17.Controls.Add(this.exitDestX);
-            this.groupBox17.Controls.Add(this.exitDestZ);
-            this.groupBox17.Location = new System.Drawing.Point(127, 292);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(133, 93);
-            this.groupBox17.TabIndex = 4;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "Coordinates";
+            this.groupBox16.Controls.Add(this.exitDestFace);
+            this.groupBox16.Controls.Add(this.exitType);
+            this.groupBox16.Controls.Add(this.label37);
+            this.groupBox16.Controls.Add(this.marioZCoordPlusHalf);
+            this.groupBox16.Controls.Add(this.exitDest);
+            this.groupBox16.Controls.Add(this.label59);
+            this.groupBox16.Controls.Add(this.exitDestY);
+            this.groupBox16.Controls.Add(this.exitsShowMessage);
+            this.groupBox16.Controls.Add(this.label124);
+            this.groupBox16.Controls.Add(this.label122);
+            this.groupBox16.Controls.Add(this.exitDestZ);
+            this.groupBox16.Controls.Add(this.exitDestX);
+            this.groupBox16.Location = new System.Drawing.Point(127, 195);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(133, 165);
+            this.groupBox16.TabIndex = 3;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Destination Properties";
             // 
             // exitDestFace
             // 
             this.exitDestFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.exitDestFace.DropDownWidth = 70;
             this.exitDestFace.Items.AddRange(new object[] {
-            "East",
-            "Southeast",
-            "South",
-            "Southwest",
-            "West",
-            "Northwest",
-            "North",
-            "Northeast"});
-            this.exitDestFace.Location = new System.Drawing.Point(49, 66);
+            "E",
+            "SE",
+            "S",
+            "SW",
+            "W",
+            "NW",
+            "N",
+            "NE"});
+            this.exitDestFace.Location = new System.Drawing.Point(37, 138);
             this.exitDestFace.Name = "exitDestFace";
-            this.exitDestFace.Size = new System.Drawing.Size(78, 21);
+            this.exitDestFace.Size = new System.Drawing.Size(45, 21);
             this.exitDestFace.TabIndex = 7;
             this.exitDestFace.SelectedIndexChanged += new System.EventHandler(this.exitsMarioRadialPosition_SelectedIndexChanged);
+            // 
+            // exitType
+            // 
+            this.exitType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exitType.DropDownWidth = 80;
+            this.exitType.Items.AddRange(new object[] {
+            "Level",
+            "Location"});
+            this.exitType.Location = new System.Drawing.Point(43, 20);
+            this.exitType.Name = "exitType";
+            this.exitType.Size = new System.Drawing.Size(84, 21);
+            this.exitType.TabIndex = 3;
+            this.exitType.SelectedIndexChanged += new System.EventHandler(this.exitsType_SelectedIndexChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(6, 23);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(31, 13);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "Type";
             // 
             // marioZCoordPlusHalf
             // 
@@ -2038,9 +2013,9 @@ namespace LAZYSHELL
             this.marioZCoordPlusHalf.FlatAppearance.BorderSize = 0;
             this.marioZCoordPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.marioZCoordPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.marioZCoordPlusHalf.Location = new System.Drawing.Point(83, 42);
+            this.marioZCoordPlusHalf.Location = new System.Drawing.Point(83, 118);
             this.marioZCoordPlusHalf.Name = "marioZCoordPlusHalf";
-            this.marioZCoordPlusHalf.Size = new System.Drawing.Size(43, 20);
+            this.marioZCoordPlusHalf.Size = new System.Drawing.Size(43, 19);
             this.marioZCoordPlusHalf.TabIndex = 5;
             this.marioZCoordPlusHalf.Text = "+1/2";
             this.marioZCoordPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2048,10 +2023,24 @@ namespace LAZYSHELL
             this.marioZCoordPlusHalf.UseVisualStyleBackColor = false;
             this.marioZCoordPlusHalf.CheckedChanged += new System.EventHandler(this.marioZCoordPlusHalf_CheckedChanged);
             // 
+            // exitDest
+            // 
+            this.exitDest.DropDownHeight = 431;
+            this.exitDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exitDest.DropDownWidth = 490;
+            this.exitDest.IntegralHeight = false;
+            this.exitDest.Items.AddRange(new object[] {
+            ""});
+            this.exitDest.Location = new System.Drawing.Point(6, 44);
+            this.exitDest.Name = "exitDest";
+            this.exitDest.Size = new System.Drawing.Size(121, 21);
+            this.exitDest.TabIndex = 0;
+            this.exitDest.SelectedIndexChanged += new System.EventHandler(this.exitsDestination_SelectedIndexChanged);
+            // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(6, 22);
+            this.label59.Location = new System.Drawing.Point(6, 98);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(23, 13);
             this.label59.TabIndex = 0;
@@ -2059,7 +2048,7 @@ namespace LAZYSHELL
             // 
             // exitDestY
             // 
-            this.exitDestY.Location = new System.Drawing.Point(82, 20);
+            this.exitDestY.Location = new System.Drawing.Point(82, 96);
             this.exitDestY.Maximum = new decimal(new int[] {
             127,
             0,
@@ -2071,41 +2060,43 @@ namespace LAZYSHELL
             this.exitDestY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitDestY.ValueChanged += new System.EventHandler(this.exitsMarioYCoord_ValueChanged);
             // 
+            // exitsShowMessage
+            // 
+            this.exitsShowMessage.Appearance = System.Windows.Forms.Appearance.Button;
+            this.exitsShowMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.exitsShowMessage.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitsShowMessage.ForeColor = System.Drawing.Color.Gray;
+            this.exitsShowMessage.Location = new System.Drawing.Point(6, 69);
+            this.exitsShowMessage.Name = "exitsShowMessage";
+            this.exitsShowMessage.Size = new System.Drawing.Size(121, 21);
+            this.exitsShowMessage.TabIndex = 1;
+            this.exitsShowMessage.Text = "SHOW MESSAGE";
+            this.exitsShowMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.exitsShowMessage.UseCompatibleTextRendering = true;
+            this.exitsShowMessage.UseVisualStyleBackColor = false;
+            this.exitsShowMessage.CheckedChanged += new System.EventHandler(this.exitsShowMessage_CheckedChanged);
+            // 
             // label124
             // 
             this.label124.AutoSize = true;
-            this.label124.Location = new System.Drawing.Point(6, 68);
+            this.label124.Location = new System.Drawing.Point(6, 141);
             this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(38, 13);
+            this.label124.Size = new System.Drawing.Size(13, 13);
             this.label124.TabIndex = 6;
-            this.label124.Text = "Facing";
+            this.label124.Text = "F";
             // 
             // label122
             // 
             this.label122.AutoSize = true;
-            this.label122.Location = new System.Drawing.Point(6, 43);
+            this.label122.Location = new System.Drawing.Point(6, 119);
             this.label122.Name = "label122";
             this.label122.Size = new System.Drawing.Size(13, 13);
             this.label122.TabIndex = 3;
             this.label122.Text = "Z";
             // 
-            // exitDestX
-            // 
-            this.exitDestX.Location = new System.Drawing.Point(37, 20);
-            this.exitDestX.Maximum = new decimal(new int[] {
-            63,
-            0,
-            0,
-            0});
-            this.exitDestX.Name = "exitDestX";
-            this.exitDestX.Size = new System.Drawing.Size(45, 21);
-            this.exitDestX.TabIndex = 1;
-            this.exitDestX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.exitDestX.ValueChanged += new System.EventHandler(this.exitsMarioXCoord_ValueChanged);
-            // 
             // exitDestZ
             // 
-            this.exitDestZ.Location = new System.Drawing.Point(37, 41);
+            this.exitDestZ.Location = new System.Drawing.Point(37, 117);
             this.exitDestZ.Maximum = new decimal(new int[] {
             31,
             0,
@@ -2117,41 +2108,39 @@ namespace LAZYSHELL
             this.exitDestZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitDestZ.ValueChanged += new System.EventHandler(this.exitsMarioZCoord_ValueChanged);
             // 
-            // panel68
+            // exitDestX
             // 
-            this.panel68.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel68.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
-            this.panel68.Location = new System.Drawing.Point(119, 608);
-            this.panel68.Name = "panel68";
-            this.panel68.Size = new System.Drawing.Size(121, 61);
-            this.panel68.TabIndex = 0;
+            this.exitDestX.Location = new System.Drawing.Point(37, 96);
+            this.exitDestX.Maximum = new decimal(new int[] {
+            63,
+            0,
+            0,
+            0});
+            this.exitDestX.Name = "exitDestX";
+            this.exitDestX.Size = new System.Drawing.Size(45, 21);
+            this.exitDestX.TabIndex = 1;
+            this.exitDestX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.exitDestX.ValueChanged += new System.EventHandler(this.exitsMarioXCoord_ValueChanged);
             // 
-            // groupBox16
+            // groupBox17
             // 
-            this.groupBox16.Controls.Add(this.exits135LengthPlusHalf);
-            this.groupBox16.Controls.Add(this.exitFace);
-            this.groupBox16.Controls.Add(this.exits45LengthPlusHalf);
-            this.groupBox16.Controls.Add(this.label119);
-            this.groupBox16.Controls.Add(this.exitType);
-            this.groupBox16.Controls.Add(this.exitLength);
-            this.groupBox16.Controls.Add(this.exitZ);
-            this.groupBox16.Controls.Add(this.exitDest);
-            this.groupBox16.Controls.Add(this.exitY);
-            this.groupBox16.Controls.Add(this.exitsShowMessage);
-            this.groupBox16.Controls.Add(this.exitX);
-            this.groupBox16.Controls.Add(this.exitHeight);
-            this.groupBox16.Controls.Add(this.label37);
-            this.groupBox16.Controls.Add(this.label105);
-            this.groupBox16.Controls.Add(this.label47);
-            this.groupBox16.Controls.Add(this.label120);
-            this.groupBox16.Controls.Add(this.label57);
-            this.groupBox16.Location = new System.Drawing.Point(127, 47);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(133, 239);
-            this.groupBox16.TabIndex = 3;
-            this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Destination Properties";
+            this.groupBox17.Controls.Add(this.exits135LengthPlusHalf);
+            this.groupBox17.Controls.Add(this.label119);
+            this.groupBox17.Controls.Add(this.exitY);
+            this.groupBox17.Controls.Add(this.exitFace);
+            this.groupBox17.Controls.Add(this.exitX);
+            this.groupBox17.Controls.Add(this.exitHeight);
+            this.groupBox17.Controls.Add(this.exits45LengthPlusHalf);
+            this.groupBox17.Controls.Add(this.exitZ);
+            this.groupBox17.Controls.Add(this.label57);
+            this.groupBox17.Controls.Add(this.label105);
+            this.groupBox17.Controls.Add(this.exitLength);
+            this.groupBox17.Location = new System.Drawing.Point(127, 47);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(133, 142);
+            this.groupBox17.TabIndex = 4;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "Exit Coordinates";
             // 
             // exits135LengthPlusHalf
             // 
@@ -2160,123 +2149,28 @@ namespace LAZYSHELL
             this.exits135LengthPlusHalf.FlatAppearance.BorderSize = 0;
             this.exits135LengthPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exits135LengthPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.exits135LengthPlusHalf.Location = new System.Drawing.Point(69, 211);
+            this.exits135LengthPlusHalf.Location = new System.Drawing.Point(6, 114);
             this.exits135LengthPlusHalf.Name = "exits135LengthPlusHalf";
-            this.exits135LengthPlusHalf.Size = new System.Drawing.Size(58, 21);
+            this.exits135LengthPlusHalf.Size = new System.Drawing.Size(121, 21);
             this.exits135LengthPlusHalf.TabIndex = 16;
-            this.exits135LengthPlusHalf.Text = "135°+½";
+            this.exits135LengthPlusHalf.Text = "NE/SW edge active";
             this.exits135LengthPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exits135LengthPlusHalf.UseCompatibleTextRendering = true;
             this.exits135LengthPlusHalf.UseVisualStyleBackColor = false;
             this.exits135LengthPlusHalf.CheckedChanged += new System.EventHandler(this.exits135LengthPlusHalf_CheckedChanged);
             // 
-            // exitFace
-            // 
-            this.exitFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.exitFace.DropDownWidth = 60;
-            this.exitFace.Items.AddRange(new object[] {
-            "UR to DL",
-            "DR to UL"});
-            this.exitFace.Location = new System.Drawing.Point(50, 184);
-            this.exitFace.Name = "exitFace";
-            this.exitFace.Size = new System.Drawing.Size(77, 21);
-            this.exitFace.TabIndex = 14;
-            this.exitFace.SelectedIndexChanged += new System.EventHandler(this.exitsFace_SelectedIndexChanged);
-            // 
-            // exits45LengthPlusHalf
-            // 
-            this.exits45LengthPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
-            this.exits45LengthPlusHalf.BackColor = System.Drawing.SystemColors.Control;
-            this.exits45LengthPlusHalf.FlatAppearance.BorderSize = 0;
-            this.exits45LengthPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exits45LengthPlusHalf.ForeColor = System.Drawing.Color.Gray;
-            this.exits45LengthPlusHalf.Location = new System.Drawing.Point(6, 211);
-            this.exits45LengthPlusHalf.Name = "exits45LengthPlusHalf";
-            this.exits45LengthPlusHalf.Size = new System.Drawing.Size(58, 21);
-            this.exits45LengthPlusHalf.TabIndex = 15;
-            this.exits45LengthPlusHalf.Text = "45°+½";
-            this.exits45LengthPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.exits45LengthPlusHalf.UseCompatibleTextRendering = true;
-            this.exits45LengthPlusHalf.UseVisualStyleBackColor = false;
-            this.exits45LengthPlusHalf.CheckedChanged += new System.EventHandler(this.exits45LengthPlusHalf_CheckedChanged);
-            // 
             // label119
             // 
             this.label119.AutoSize = true;
-            this.label119.Location = new System.Drawing.Point(6, 99);
+            this.label119.Location = new System.Drawing.Point(6, 23);
             this.label119.Name = "label119";
             this.label119.Size = new System.Drawing.Size(23, 13);
             this.label119.TabIndex = 4;
             this.label119.Text = "X,Y";
             // 
-            // exitType
-            // 
-            this.exitType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.exitType.DropDownWidth = 80;
-            this.exitType.Items.AddRange(new object[] {
-            "Overworld",
-            "Map Point"});
-            this.exitType.Location = new System.Drawing.Point(50, 71);
-            this.exitType.Name = "exitType";
-            this.exitType.Size = new System.Drawing.Size(77, 21);
-            this.exitType.TabIndex = 3;
-            this.exitType.SelectedIndexChanged += new System.EventHandler(this.exitsType_SelectedIndexChanged);
-            // 
-            // exitLength
-            // 
-            this.exitLength.Location = new System.Drawing.Point(50, 142);
-            this.exitLength.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.exitLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.exitLength.Name = "exitLength";
-            this.exitLength.Size = new System.Drawing.Size(77, 21);
-            this.exitLength.TabIndex = 10;
-            this.exitLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.exitLength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.exitLength.ValueChanged += new System.EventHandler(this.exitsFieldLength_ValueChanged);
-            // 
-            // exitZ
-            // 
-            this.exitZ.Location = new System.Drawing.Point(37, 117);
-            this.exitZ.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.exitZ.Name = "exitZ";
-            this.exitZ.Size = new System.Drawing.Size(45, 21);
-            this.exitZ.TabIndex = 8;
-            this.exitZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.exitZ.ValueChanged += new System.EventHandler(this.exitsZ_ValueChanged);
-            // 
-            // exitDest
-            // 
-            this.exitDest.DropDownHeight = 431;
-            this.exitDest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.exitDest.DropDownWidth = 490;
-            this.exitDest.IntegralHeight = false;
-            this.exitDest.Items.AddRange(new object[] {
-            ""});
-            this.exitDest.Location = new System.Drawing.Point(6, 20);
-            this.exitDest.Name = "exitDest";
-            this.exitDest.Size = new System.Drawing.Size(121, 21);
-            this.exitDest.TabIndex = 0;
-            this.exitDest.SelectedIndexChanged += new System.EventHandler(this.exitsDestination_SelectedIndexChanged);
-            // 
             // exitY
             // 
-            this.exitY.Location = new System.Drawing.Point(82, 96);
+            this.exitY.Location = new System.Drawing.Point(82, 20);
             this.exitY.Maximum = new decimal(new int[] {
             127,
             0,
@@ -2288,25 +2182,21 @@ namespace LAZYSHELL
             this.exitY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitY.ValueChanged += new System.EventHandler(this.exitsY_ValueChanged);
             // 
-            // exitsShowMessage
+            // exitFace
             // 
-            this.exitsShowMessage.Appearance = System.Windows.Forms.Appearance.Button;
-            this.exitsShowMessage.BackColor = System.Drawing.SystemColors.Control;
-            this.exitsShowMessage.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitsShowMessage.ForeColor = System.Drawing.Color.Gray;
-            this.exitsShowMessage.Location = new System.Drawing.Point(6, 45);
-            this.exitsShowMessage.Name = "exitsShowMessage";
-            this.exitsShowMessage.Size = new System.Drawing.Size(121, 21);
-            this.exitsShowMessage.TabIndex = 1;
-            this.exitsShowMessage.Text = "SHOW MESSAGE";
-            this.exitsShowMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.exitsShowMessage.UseCompatibleTextRendering = true;
-            this.exitsShowMessage.UseVisualStyleBackColor = false;
-            this.exitsShowMessage.CheckedChanged += new System.EventHandler(this.exitsShowMessage_CheckedChanged);
+            this.exitFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exitFace.Items.AddRange(new object[] {
+            "SE",
+            "SW"});
+            this.exitFace.Location = new System.Drawing.Point(82, 41);
+            this.exitFace.Name = "exitFace";
+            this.exitFace.Size = new System.Drawing.Size(45, 21);
+            this.exitFace.TabIndex = 14;
+            this.exitFace.SelectedIndexChanged += new System.EventHandler(this.exitsFace_SelectedIndexChanged);
             // 
             // exitX
             // 
-            this.exitX.Location = new System.Drawing.Point(37, 96);
+            this.exitX.Location = new System.Drawing.Point(37, 20);
             this.exitX.Maximum = new decimal(new int[] {
             63,
             0,
@@ -2320,62 +2210,100 @@ namespace LAZYSHELL
             // 
             // exitHeight
             // 
-            this.exitHeight.Location = new System.Drawing.Point(50, 163);
+            this.exitHeight.Location = new System.Drawing.Point(82, 62);
             this.exitHeight.Maximum = new decimal(new int[] {
             7,
             0,
             0,
             0});
             this.exitHeight.Name = "exitHeight";
-            this.exitHeight.Size = new System.Drawing.Size(77, 21);
+            this.exitHeight.Size = new System.Drawing.Size(45, 21);
             this.exitHeight.TabIndex = 12;
             this.exitHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.exitHeight.ValueChanged += new System.EventHandler(this.exitsFieldHeight_ValueChanged);
             // 
-            // label37
+            // exits45LengthPlusHalf
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(6, 74);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(31, 13);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "Type";
+            this.exits45LengthPlusHalf.Appearance = System.Windows.Forms.Appearance.Button;
+            this.exits45LengthPlusHalf.BackColor = System.Drawing.SystemColors.Control;
+            this.exits45LengthPlusHalf.FlatAppearance.BorderSize = 0;
+            this.exits45LengthPlusHalf.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exits45LengthPlusHalf.ForeColor = System.Drawing.Color.Gray;
+            this.exits45LengthPlusHalf.Location = new System.Drawing.Point(6, 89);
+            this.exits45LengthPlusHalf.Name = "exits45LengthPlusHalf";
+            this.exits45LengthPlusHalf.Size = new System.Drawing.Size(121, 21);
+            this.exits45LengthPlusHalf.TabIndex = 15;
+            this.exits45LengthPlusHalf.Text = "NW/SE edge active";
+            this.exits45LengthPlusHalf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.exits45LengthPlusHalf.UseCompatibleTextRendering = true;
+            this.exits45LengthPlusHalf.UseVisualStyleBackColor = false;
+            this.exits45LengthPlusHalf.CheckedChanged += new System.EventHandler(this.exits45LengthPlusHalf_CheckedChanged);
             // 
-            // label105
+            // exitZ
             // 
-            this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(6, 145);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(40, 13);
-            this.label105.TabIndex = 9;
-            this.label105.Text = "Length";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(6, 187);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(38, 13);
-            this.label47.TabIndex = 13;
-            this.label47.Text = "Facing";
-            // 
-            // label120
-            // 
-            this.label120.AutoSize = true;
-            this.label120.Location = new System.Drawing.Point(6, 166);
-            this.label120.Name = "label120";
-            this.label120.Size = new System.Drawing.Size(38, 13);
-            this.label120.TabIndex = 11;
-            this.label120.Text = "Height";
+            this.exitZ.Location = new System.Drawing.Point(37, 41);
+            this.exitZ.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.exitZ.Name = "exitZ";
+            this.exitZ.Size = new System.Drawing.Size(45, 21);
+            this.exitZ.TabIndex = 8;
+            this.exitZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.exitZ.ValueChanged += new System.EventHandler(this.exitsZ_ValueChanged);
             // 
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(6, 120);
+            this.label57.Location = new System.Drawing.Point(6, 44);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(13, 13);
+            this.label57.Size = new System.Drawing.Size(23, 13);
             this.label57.TabIndex = 7;
-            this.label57.Text = "Z";
+            this.label57.Text = "Z,F";
+            // 
+            // label105
+            // 
+            this.label105.AutoSize = true;
+            this.label105.Location = new System.Drawing.Point(6, 65);
+            this.label105.Name = "label105";
+            this.label105.Size = new System.Drawing.Size(23, 13);
+            this.label105.TabIndex = 9;
+            this.label105.Text = "L/H";
+            // 
+            // exitLength
+            // 
+            this.exitLength.Location = new System.Drawing.Point(37, 62);
+            this.exitLength.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.exitLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.exitLength.Name = "exitLength";
+            this.exitLength.Size = new System.Drawing.Size(45, 21);
+            this.exitLength.TabIndex = 10;
+            this.exitLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.exitLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.exitLength.ValueChanged += new System.EventHandler(this.exitsFieldLength_ValueChanged);
+            // 
+            // panel68
+            // 
+            this.panel68.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel68.BackgroundImage = global::LAZYSHELL.Properties.Resources._bg;
+            this.panel68.Location = new System.Drawing.Point(119, 608);
+            this.panel68.Name = "panel68";
+            this.panel68.Size = new System.Drawing.Size(121, 35);
+            this.panel68.TabIndex = 0;
             // 
             // toolStrip5
             // 
@@ -2399,8 +2327,7 @@ namespace LAZYSHELL
             // exitsInsertField
             // 
             this.exitsInsertField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsInsertField.Image = global::LAZYSHELL.Properties.Resources.new_small;
-            this.exitsInsertField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsInsertField.Image = global::LAZYSHELL.Properties.Resources.exitAdd;
             this.exitsInsertField.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exitsInsertField.Name = "exitsInsertField";
             this.exitsInsertField.Size = new System.Drawing.Size(23, 22);
@@ -2410,8 +2337,7 @@ namespace LAZYSHELL
             // exitsDeleteField
             // 
             this.exitsDeleteField.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exitsDeleteField.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.exitsDeleteField.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exitsDeleteField.Image = global::LAZYSHELL.Properties.Resources.exitRemove;
             this.exitsDeleteField.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exitsDeleteField.Name = "exitsDeleteField";
             this.exitsDeleteField.Size = new System.Drawing.Size(23, 22);
@@ -4766,9 +4692,6 @@ namespace LAZYSHELL
             this.levelNum,
             this.navigateBck,
             this.navigateFwd,
-            this.changeLevelName,
-            this.toolStripTextBox1,
-            this.reset,
             this.toolStripSeparator17,
             this.nameTextBox,
             this.searchLevelNames,
@@ -4806,37 +4729,6 @@ namespace LAZYSHELL
             this.navigateFwd.Size = new System.Drawing.Size(23, 22);
             this.navigateFwd.ToolTipText = "Navigate Forward";
             this.navigateFwd.Click += new System.EventHandler(this.navigateFwd_Click);
-            // 
-            // changeLevelName
-            // 
-            this.changeLevelName.CheckOnClick = true;
-            this.changeLevelName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.changeLevelName.Image = global::LAZYSHELL.Properties.Resources.label;
-            this.changeLevelName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.changeLevelName.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.changeLevelName.Name = "changeLevelName";
-            this.changeLevelName.Size = new System.Drawing.Size(23, 22);
-            this.changeLevelName.Text = "Edit level name";
-            this.changeLevelName.Click += new System.EventHandler(this.changeLevelName_Click);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(145, 25);
-            this.toolStripTextBox1.Visible = false;
-            this.toolStripTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyDown);
-            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
-            // 
-            // reset
-            // 
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
-            this.reset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.ToolTipText = "Reset";
-            this.reset.Visible = false;
-            this.reset.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator17
             // 
@@ -4876,6 +4768,7 @@ namespace LAZYSHELL
             // eventExit
             // 
             this.eventExit.AutoSize = false;
+            this.eventExit.ContextMenuStrip = null;
             this.eventExit.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventExit.Hexadecimal = false;
             this.eventExit.Increment = new decimal(new int[] {
@@ -4883,7 +4776,7 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.eventExit.Location = new System.Drawing.Point(742, 2);
+            this.eventExit.Location = new System.Drawing.Point(549, 2);
             this.eventExit.Maximum = new decimal(new int[] {
             4095,
             0,
@@ -5636,7 +5529,6 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.npcPropertyC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).EndInit();
-            this.contextMenuStrip4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -5665,18 +5557,18 @@ namespace LAZYSHELL
             this.toolStrip6.PerformLayout();
             this.panel52.ResumeLayout(false);
             this.panel52.PerformLayout();
-            this.groupBox17.ResumeLayout(false);
-            this.groupBox17.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitDestZ)).EndInit();
             this.groupBox16.ResumeLayout(false);
             this.groupBox16.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitLength)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exitZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitDestX)).EndInit();
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitLength)).EndInit();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -5832,7 +5724,6 @@ namespace LAZYSHELL
         private ComboBox npcEngageTrigger;
         private ComboBox npcEngageType;
         private ComboBox npcFace;
-        private ContextMenuStrip contextMenuStrip4;
         private Label label103;
         private Label label104;
         private Label label105;
@@ -5842,14 +5733,11 @@ namespace LAZYSHELL
         private Label label116;
         private Label label119;
         private Label label12;
-        private Label label120;
         private Label label122;
         private Label label124;
         private Label label127;
         private Label label131;
         private Label label133;
-        private Label label135;
-        private Label label137;
         private Label label16;
         private Label label17;
         private Label label18;
@@ -5876,7 +5764,6 @@ namespace LAZYSHELL
         private Label label44;
         private Label label45;
         private Label label46;
-        private Label label47;
         private Label label53;
         private Label label54;
         private Label label56;
@@ -5957,7 +5844,6 @@ namespace LAZYSHELL
         private ToolStripButton openPaletteEditor;
         private ToolStripButton openTilemap;
         private ToolStripButton openTileset;
-        private ToolStripMenuItem addThisLevelToNotesDatabaseToolStripMenuItem;
         private ToolStripMenuItem allToolStripMenuItem;
         private ToolStripMenuItem arraysToolStripMenuItem;
         private ToolStripMenuItem arraysToolStripMenuItem1;
@@ -5995,10 +5881,7 @@ namespace LAZYSHELL
         private Panel panel2;
         private Panel panelLevels;
         private System.Windows.Forms.ToolStripComboBox levelName;
-        private ToolStripButton changeLevelName;
         private ToolStripButton searchLevelNames;
-        private ToolStripTextBox toolStripTextBox1;
-        private ToolStripButton reset;
         private ToolStripTextBox nameTextBox;
         private ToolStrip toolStripToggle;
         private ToolStripButton save;

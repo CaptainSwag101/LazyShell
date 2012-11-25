@@ -229,7 +229,13 @@
             // formationNum
             // 
             this.formationNum.AutoSize = false;
+            this.formationNum.ContextMenuStrip = null;
             this.formationNum.Hexadecimal = false;
+            this.formationNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.formationNum.Location = new System.Drawing.Point(267, 2);
             this.formationNum.Maximum = new decimal(new int[] {
             511,

@@ -12,7 +12,6 @@ namespace LAZYSHELL
     public partial class MainTitle : Form
     {
         #region Variables
-
         private long checksum;
         // main
         private delegate void Function();
@@ -55,17 +54,29 @@ namespace LAZYSHELL
             //
             checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
         }
+        // assemblers
+        public void Assemble()
+        {
+            // Palette set
+            paletteSet.Assemble();
+            spritePaletteSet.Assemble();
+            tileset.Assemble(16);
+            // Tilesets
+            if (Model.Compress(Model.TitleData, 0x3F216E, 0xDA60, 0x7E92, "Main title"))
+                checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+        }
+        // drawing
         private void SetTilesetImages()
         {
-            int[] pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[0], 16, 32, 0, false);
+            int[] pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[0], 16, 32, 0, false);
             tilesetImage[0] = new Bitmap(Do.PixelsToImage(pixels, 256, 512));
-            pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[1], 16, 32, 0, false);
+            pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[1], 16, 32, 0, false);
             tilesetImage[1] = new Bitmap(Do.PixelsToImage(pixels, 256, 512));
-            pixels = Do.TilesetToPixels(tileset.Tilesets_Tiles[2], 16, 6, 0, false);
+            pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[2], 16, 6, 0, false);
             tilesetImage[2] = new Bitmap(Do.PixelsToImage(pixels, 256, 96));
             pictureBoxTitle.Invalidate();
         }
-        // tile editor
+        // loading
         private void LoadTilesetEditor()
         {
             if (tilesetEditor == null)
@@ -125,6 +136,7 @@ namespace LAZYSHELL
                 spriteGraphicEditor.Reload(new Function(SpriteGraphicUpdate),
                     Model.TitleSpriteGraphics, Model.TitleSpriteGraphics.Length, 0, spritePaletteSet, 0, 0x20);
         }
+        // updating
         private void PaletteUpdate()
         {
             tileset = new Tileset(paletteSet, "title");
@@ -151,16 +163,6 @@ namespace LAZYSHELL
         {
             tileset.Assemble(16);
             SetTilesetImages();
-        }
-        public void Assemble()
-        {
-            // Palette set
-            paletteSet.Assemble();
-            spritePaletteSet.Assemble();
-            tileset.Assemble(16);
-            // Tilesets
-            if (Model.Compress(Model.TitleData, 0x3F216E, 0xDA60, 0x7E92, "Main title"))
-                checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
         }
         #endregion
         #region Event Handlers

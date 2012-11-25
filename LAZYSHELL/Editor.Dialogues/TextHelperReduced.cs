@@ -10,15 +10,14 @@ namespace LAZYSHELL
     [Serializable()]
     public sealed class TextHelperReduced
     {
+        // static variables
         static TextHelperReduced instance = null;
         static readonly object padlock = new object();
-        private bool error = false; public bool Error { get { return error; } }
         private Settings settings = Settings.Default;
-
-        TextHelperReduced()
-        {
-
-        }
+        // class variables
+        private bool error = false;
+        // accessors
+        public bool Error { get { return error; } }
         public static TextHelperReduced Instance
         {
             get
@@ -31,168 +30,148 @@ namespace LAZYSHELL
                 }
             }
         }
-
-        // STRINGS (57)
-        private const string code00 = "end"; // SURROUNDED BY {   }
-        private const string code01 = "newLine"; // SURROUNDED BY {   }
-        private const string code02 = "pauseInput"; // SURROUNDED BY {   }
-        private const string code03 = "delayInput"; // SURROUNDED BY {   }
-        private const string code0C = "delay";  // SURROUNDED BY {   }
-        private const string code1C = "memNum..."; // no idea
-
-        public char[] DecodeText(char[] decode, bool byteView, int textType, StringCollection keystrokes)
+        // textView variables
+        private const string code00 = "end";
+        private const string code01 = "newLine";
+        private const string code02 = "pauseInput";
+        private const string code03 = "delayInput";
+        private const string code0C = "delay"; 
+        private const string code24 = "heart";
+        private const string code25 = "note";
+        private const string code2A = "bullet";
+        private const string code2B = "bullets";
+        private const string code3B = "cornerLeft";
+        private const string code3C = "cornerRight";
+        private const string code3D = "cornerLeftBold";
+        private const string code3E = "cornerRightBold";
+        private const string code92 = "ellipsis";
+        private const string code97 = "arrowUp";
+        private const string code98 = "arrowRight";
+        private const string code99 = "arrowLeft";
+        // constructor
+        TextHelperReduced()
         {
-            int count = keystrokes.Count - 1;
-            ArrayList arrayList = new ArrayList();
+
+        }
+        // public functions
+        public char[] Decode(char[] text, bool byteView, int textType, string[] keystrokes)
+        {
+            int count = keystrokes.Length - 1;
+            List<char> letters = new List<char>();
             bool lastBrace = true;
-            for (int i = 0; i < decode.Length; i++) // For every character of text
+            for (int i = 0; i < text.Length; i++) // For every character of text
             {
                 // skip if out of bounds
-                if (decode[i] >= keystrokes.Count)
+                if (text[i] >= keystrokes.Length)
                     continue;
                 if (byteView) // We are decoding to numbers
                 {
-                    if (keystrokes[decode[i]] == "") // Is encoded character
+                    if (keystrokes[text[i]] == "") // Is encoded character
                     {
-                        switch ((byte)decode[i]) // Since the byte is encoded, it musts coorespond to one of these cases
-                        // All case numbers are for decoding to text for the plain text
+                        switch ((byte)text[i])
                         {
                             case 0x1C:
-                                string tem = ((byte)decode[i]).ToString();
-
-                                char[] dec = tem.ToCharArray();
-                                arrayList.Add('[');
-                                for (int z = 0; z < dec.Length; z++)
-                                {
-                                    arrayList.Add(dec[z]);
-                                }
-                                arrayList.Add(']');
-                                if (decode.Length > i + 1)
+                                letters.Add('[');
+                                letters.AddRange(((byte)text[i]).ToString());
+                                letters.Add(']');
+                                if (text.Length > i + 1)
                                 {
                                     i++;
                                     goto default;
                                 }
                                 break;
                             default:
-                                string temp = ((byte)decode[i]).ToString();
-                                char[] decoded = temp.ToCharArray();
-                                arrayList.Add('[');
-                                for (int z = 0; z < decoded.Length; z++)
-                                    arrayList.Add(decoded[z]);
-                                arrayList.Add(']');
+                                letters.Add('[');
+                                letters.AddRange(((byte)text[i]).ToString());
+                                letters.Add(']');
                                 break;
                         }
                     }
                     else // Not encoded character
-                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
+                        letters.Add(Convert.ToChar(keystrokes[text[i]]));
                 }
                 else // We are decoding to words
                 {
-                    if (keystrokes[decode[i]] == "") // Current byte is encoded
+                    if (keystrokes[text[i]] == "") // Current byte is encoded
                     {
                         lastBrace = true;
-                        switch ((byte)decode[i])
+                        switch ((byte)text[i])
                         {
-                            case 0x00:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code00.ToCharArray());
-                                break;
-                            case 0x01:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code01.ToCharArray());
-                                break;
-                            case 0x02:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code02.ToCharArray());
-                                break;
-                            case 0x03:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code03.ToCharArray());
-                                break;
-                            case 0x0C:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code0C.ToCharArray());
-                                break;
-                            case 0x1C:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, code1C.ToCharArray());
-                                arrayList.Add(']');
-                                arrayList.Add('[');
-                                arrayList.Add(' ');
-                                i++;
-                                string te = ((byte)decode[i]).ToString();
-
-                                char[] de = te.ToCharArray();
-                                for (int z = 0; z < de.Length; z++)
-                                {
-                                    arrayList.Add(de[z]);
-                                }
-                                break;
+                            case 0x00: letters.Add('['); letters.AddRange(code00); break;
+                            case 0x01: letters.Add('['); letters.AddRange(code01); break;
+                            case 0x02: letters.Add('['); letters.AddRange(code02); break;
+                            case 0x03: letters.Add('['); letters.AddRange(code03); break;
+                            case 0x0C: letters.Add('['); letters.AddRange(code0C); break;
+                            case 0x24: letters.Add('['); letters.AddRange(code24); break;
+                            case 0x25: letters.Add('['); letters.AddRange(code25); break;
+                            case 0x2A: letters.Add('['); letters.AddRange(code2A); break;
+                            case 0x2B: letters.Add('['); letters.AddRange(code2B); break;
+                            case 0x3B: letters.Add('['); letters.AddRange(code3B); break;
+                            case 0x3C: letters.Add('['); letters.AddRange(code3C); break;
+                            case 0x3D: letters.Add('['); letters.AddRange(code3D); break;
+                            case 0x3E: letters.Add('['); letters.AddRange(code3E); break;
+                            case 0x92: letters.Add('['); letters.AddRange(code92); break;
+                            case 0x97: letters.Add('['); letters.AddRange(code97); break;
+                            case 0x98: letters.Add('['); letters.AddRange(code98); break;
+                            case 0x99: letters.Add('['); letters.AddRange(code99); break;
                             default:
-                                arrayList.Add('[');
-                                AddCharsToArrayList(arrayList, "THIS IS A BUG: ".ToCharArray());
-                                string temp = ((byte)decode[i]).ToString();
-                                AddCharsToArrayList(arrayList, temp.ToCharArray());
+                                letters.Add('[');
+                                letters.AddRange("ERROR: ");
+                                letters.AddRange(((byte)text[i]).ToString());
                                 break;
                         }
                         if (lastBrace)
-                            arrayList.Add(']');
+                            letters.Add(']');
                     }
                     else
-                        arrayList.Add(Convert.ToChar(keystrokes[decode[i]]));
+                        letters.Add(Convert.ToChar(keystrokes[text[i]]));
                 }
             }
-
-            char[] decodedStr = new char[arrayList.Count];
-            arrayList.CopyTo(decodedStr);
-
-            return decodedStr;
+            return letters.ToArray();
         }
-        public char[] EncodeText(char[] array, bool byteView, int textType, StringCollection keystrokes)
+        public char[] Encode(char[] text, bool byteView, int textType, string[] keystrokes)
         {
+            char[] backup = text;
             bool openQuote = true;
-            ArrayList arrayList = new ArrayList();
-            char[] backup = array;
-
-            for (int i = 0; i < array.Length; i++)
+            List<char> letters = new List<char>();
+            for (int i = 0; i < text.Length; i++)
             {
                 if (byteView)
                 {
-                    if (array[i] == '[' ||
-                        array[i] == '\x20' ||
-                        array[i] == '\x22' ||
-                        array[i] == '\x2D' ||
-                        array[i] == '\x27')
+                    if (text[i] == '[' ||
+                        text[i] == '\x20' ||
+                        text[i] == '\x22' ||
+                        text[i] == '\x2D' ||
+                        text[i] == '\x27')
                     {
-                        switch (array[i])
+                        switch (text[i])
                         {
-                            case '[':// Encode {123] to bytes
-                                // Can get rid of by using 2 digit hex characters
-                                if (array.Length > i + 1)
+                            case '[':
+                                if (text.Length > i + 1)
                                 {
-                                    if (array[i + 1] != ']') // would make 1
+                                    if (text[i + 1] != ']') // would make 1
                                     {
-                                        char digitOne = (char)(array[i + 1] - 0x30);
+                                        char digitOne = (char)(text[i + 1] - 0x30);
 
-                                        if (array.Length > i + 2 && array[i + 2] != ']') // would make 2 digits
+                                        if (text.Length > i + 2 && text[i + 2] != ']') // would make 2 digits
                                         {
-                                            char digitTwo = (char)(array[i + 2] - 0x30);
+                                            char digitTwo = (char)(text[i + 2] - 0x30);
 
-                                            if (array.Length > i + 3 && array[i + 3] != ']') // would make 3 digits
+                                            if (text.Length > i + 3 && text[i + 3] != ']') // would make 3 digits
                                             {
-                                                char digitThree = (char)(array[i + 3] - 0x30);
-                                                arrayList.Add((char)((digitOne * 100) + (digitTwo * 10) + digitThree));
+                                                char digitThree = (char)(text[i + 3] - 0x30);
+                                                letters.Add((char)((digitOne * 100) + (digitTwo * 10) + digitThree));
                                                 i += 4;
                                                 break;
                                             }
                                             else // 2 digits
                                             {
-                                                arrayList.Add((char)((digitOne * 10) + digitTwo));
+                                                letters.Add((char)((digitOne * 10) + digitTwo));
                                                 i += 3;
                                                 break;
                                             }
                                         }
-                                        arrayList.Add((char)(digitOne));
+                                        letters.Add((char)(digitOne));
                                         i += 2;
                                         break;
                                     }
@@ -201,191 +180,138 @@ namespace LAZYSHELL
                                 break;
                             case '\x2D':
                                 if (textType == 0)      // Battle Dialogue
-                                    arrayList.Add('\x2D');
+                                    letters.Add('\x2D');
                                 else if (textType == 1) // Item/Spell Desc.
-                                    arrayList.Add('\x7D');
+                                    letters.Add('\x7D');
                                 break;
                             case '\x27':
                                 if (textType == 0)      // Battle Dialogue
-                                    arrayList.Add('\x9B');
+                                    letters.Add('\x9B');
                                 else if (textType == 1) // Item/Spell Desc.
-                                    arrayList.Add('\x7E');
+                                    letters.Add('\x7E');
                                 break;
                             case '\x22':
                                 if (openQuote)
                                 {
-                                    arrayList.Add('\x22');
+                                    letters.Add('\x22');
                                     openQuote = false;
                                 }
                                 else
                                 {
-                                    arrayList.Add('\x23');
+                                    letters.Add('\x23');
                                     openQuote = true;
                                 }
                                 break;
-                            default: arrayList.Add('\x20'); break;
+                            default: letters.Add('\x20'); break;
                         }
                     }
                     else
                     {
                         if (textType == 0)
-                            arrayList.Add(StringIndex(settings.Keystrokes, array[i]));
+                            letters.Add(StringIndex(Lists.Keystrokes, text[i]));
                         else if (textType == 1)
-                            arrayList.Add(StringIndex(settings.KeystrokesDesc, array[i]));
+                            letters.Add(StringIndex(Lists.KeystrokesDesc, text[i]));
                     }
                 }
                 else
                 {
-                    if (array[i] == '[' ||
-                        array[i] == '\x22' ||
-                        array[i] == '\x2D' ||
-                        array[i] == '\x27')
+                    if (text[i] == '[' ||
+                        text[i] == '\x22' ||
+                        text[i] == '\x2D' ||
+                        text[i] == '\x27')
                     {
-                        switch (array[i])
+                        switch (text[i])
                         {
                             case '[':
-                                int len;
                                 i++;
-                                for (len = 0; len < array.Length - i && array[i + len] != ']'; len++) ;
-                                char[] codeChar = new char[len];
-                                for (int z = 0; z < len; z++)
-                                    codeChar[z] = array[i + z];
-                                string codeStr = new string(codeChar);
-
-                                switch (codeStr)
+                                int length = 0;
+                                while (length < text.Length - i && text[i + length] != ']')
+                                    length++;
+                                char[] code = new char[length];
+                                for (int z = 0; z < length; z++)
+                                    code[z] = text[i + z];
+                                switch (new string(code))
                                 {
-                                    case code00: arrayList.Add('\x00'); break;
-                                    case code01: arrayList.Add('\x01'); break;
-                                    case code02: arrayList.Add('\x02'); break;
-                                    case code03: arrayList.Add('\x03'); break;
-                                    case code0C: arrayList.Add('\x0C'); break;
+                                    case code00: letters.Add('\x00'); break;
+                                    case code01: letters.Add('\x01'); break;
+                                    case code02: letters.Add('\x02'); break;
+                                    case code03: letters.Add('\x03'); break;
+                                    case code0C: letters.Add('\x0C'); break;
+                                    case code24: letters.Add('\x24'); break;
+                                    case code25: letters.Add('\x25'); break;
+                                    case code2A: letters.Add('\x2A'); break;
+                                    case code2B: letters.Add('\x2B'); break;
+                                    case code3B: letters.Add('\x3B'); break;
+                                    case code3C: letters.Add('\x3C'); break;
+                                    case code3D: letters.Add('\x3D'); break;
+                                    case code3E: letters.Add('\x3E'); break;
+                                    case code92: letters.Add('\x92'); break;
+                                    case code97: letters.Add('\x97'); break;
+                                    case code98: letters.Add('\x98'); break;
+                                    case code99: letters.Add('\x99'); break;
                                     default: break;
                                 }
-                                i += len;
+                                i += length;
                                 break;
                             case '\x2D':
                                 if (textType == 0)      // Battle Dialogue
-                                    arrayList.Add('\x2D');
+                                    letters.Add('\x2D');
                                 else if (textType == 1) // Item/Spell Desc.
-                                    arrayList.Add('\x7D');
+                                    letters.Add('\x7D');
                                 break;
                             case '\x27':
                                 if (textType == 0)      // Battle Dialogue
-                                    arrayList.Add('\x9B');
+                                    letters.Add('\x9B');
                                 else if (textType == 1) // Item/Spell Desc.
-                                    arrayList.Add('\x7E');
+                                    letters.Add('\x7E');
                                 break;
                             case '\x22': // handles user input quotes
                                 if (openQuote)
                                 {
-                                    arrayList.Add('\x22');
+                                    letters.Add('\x22');
                                     openQuote = false;
                                 }
                                 else
                                 {
-                                    arrayList.Add('\x23');
+                                    letters.Add('\x23');
                                     openQuote = true;
                                 }
                                 break;
-                            default: arrayList.Add('\x20'); break;
+                            default: letters.Add('\x20'); break;
                         }
                     }
                     else
-                        arrayList.Add(StringIndex(keystrokes, array[i]));
+                        letters.Add(StringIndex(keystrokes, text[i]));
                 }
             }
-
-            char[] encodedStr = new char[arrayList.Count];
+            char[] encoded = new char[letters.Count];
             try
             {
-                arrayList.CopyTo(encodedStr);
+                letters.CopyTo(encoded);
             }
             catch
             {
-                //MessageBox.Show("Input Error, text not valid. You probably entered a character that Super Mario RPG cannot parse. This text will not be saved unless the error is fixed.");
                 error = true;
                 return backup;
             }
-
-            if (!VerifyText(encodedStr))
+            if (!VerifyText(encoded))
             {
-                //MessageBox.Show("The text input is invalid. Please verify '[' and ']' brackets.\n\nIt may also be a character in the text that the ROM cannot parse.\nThis text will not be saved unless the error is fixed.", "LAZY SHELL");
                 error = true;
                 return backup;
             }
             error = false;
-
-
-            return encodedStr;
+            return encoded;
         }
-        public void AddCharsToArrayList(ArrayList arrayList, char[] chars)
-        {
-            for (int i = 0; i < chars.Length; i++)
-            {
-                arrayList.Add(chars[i]);
-            }
-        }
-        public bool SearchForSubstring(char[] array, int index, string substring)
-        {
-            char[] subStr = substring.ToCharArray();
-            if (array.Length < substring.Length + index)
-                return false;
-            for (int i = 0; i < subStr.Length; i++)
-            {
-                if (subStr[i] != array[i + index])
-                    return false;
-            }
-            return true;
-        }
-        public bool VerifyText(char[] toTest)
-        {
-            bool openBracket = false;
-            if (toTest.Length == 0)
-            {
-                return true;
-            }
-            for (int i = 0; i < toTest.Length; i++)
-            {
-                if (toTest[i] != '[' && toTest[i] != ']' && IsValidChar(toTest[i]) == false)
-                    if (i == 0 || (toTest[i - 1] != '\x0B' && toTest[i - 1] != '\x0D'))
-                        return false;
-
-                if (toTest[i] == '[')
-                {
-                    if (openBracket == true)
-                        return false;
-                    openBracket = true;
-                }
-                if (toTest[i] == ']')
-                {
-                    if (openBracket == false)
-                        return false;
-                    openBracket = false;
-                }
-            }
-            if (openBracket == false)
-                return true;
-            return false;
-        }
-        public bool IsValidChar(char toTest)
-        {
-            if (toTest >= '\x00' && toTest <= '\x1C') return true;
-            if (toTest >= '\x20' && toTest <= '\x5A') return true;
-            if (toTest >= '\x5C' && toTest <= '\x9F') return true;
-            foreach (string temp in settings.Keystrokes)
-                if (temp != "" && Convert.ToChar(temp) == toTest) return true;
-            return false;
-        }
-        public bool VerifyCorrectSymbols(char[] toVerify, bool byteView)
+        public bool VerifySymbols(char[] symbols, bool byteView)
         {
             bool symbol = false, found = false;
             try
             {
-                for (int i = 0; i < toVerify.Length; i++)
+                for (int i = 0; i < symbols.Length; i++)
                 {
-                    if (toVerify[i] == '[')
+                    if (symbols[i] == '[')
                     {
-                        if (toVerify[i + 1] >= '\x30' && toVerify[i + 1] <= '\x39')
+                        if (symbols[i + 1] >= '\x30' && symbols[i + 1] <= '\x39')
                             symbol = true;
                         else
                             symbol = false;
@@ -401,9 +327,49 @@ namespace LAZYSHELL
                 return false;
             }
         }
-        public char StringIndex(StringCollection strings, char character)
+        public bool IsValidSymbol(char symbol)
         {
-            for (char i = (char)0; i < strings.Count; i++)
+            if (symbol >= '\x00' && symbol <= '\x1C') return true;
+            if (symbol >= '\x20' && symbol <= '\x5A') return true;
+            if (symbol >= '\x5C' && symbol <= '\x9F') return true;
+            foreach (string keystroke in Lists.Keystrokes)
+                if (keystroke != "" && Convert.ToChar(keystroke) == symbol) return true;
+            return false;
+        }
+        // class functions
+        private bool VerifyText(char[] text)
+        {
+            bool openBracket = false;
+            if (text.Length == 0)
+            {
+                return true;
+            }
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] != '[' && text[i] != ']' && IsValidSymbol(text[i]) == false)
+                    if (i == 0 || (text[i - 1] != '\x0B' && text[i - 1] != '\x0D'))
+                        return false;
+
+                if (text[i] == '[')
+                {
+                    if (openBracket == true)
+                        return false;
+                    openBracket = true;
+                }
+                if (text[i] == ']')
+                {
+                    if (openBracket == false)
+                        return false;
+                    openBracket = false;
+                }
+            }
+            if (openBracket == false)
+                return true;
+            return false;
+        }
+        private char StringIndex(string[] strings, char character)
+        {
+            for (char i = (char)0; i < strings.Length; i++)
             {
                 if (strings[i] == character.ToString())
                     return i;

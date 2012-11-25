@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatusCalculator));
             this.LabelMonsterValMgDef = new System.Windows.Forms.Label();
             this.LabelMonsterValMgAtk = new System.Windows.Forms.Label();
             this.LabelMonsterValAtk = new System.Windows.Forms.Label();

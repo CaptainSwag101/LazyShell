@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
@@ -12,6 +14,7 @@ namespace LAZYSHELL
     public partial class SettingsEditor : Form
     {
         private Settings settings = Settings.Default;
+        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         // constructor
         public SettingsEditor()
         {
@@ -52,8 +55,7 @@ namespace LAZYSHELL
                 visualThemeStandard.Checked = true;
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
-            this.undoStackSize.Value = this.settings.UndoStackSize;
-            this.patchHTTPServer.Text = this.settings.patchServerURL;
+            this.patchHTTPServer.Text = this.settings.PatchServerURL;
         }
         // event handlers
         private void buttonCustomDirectory_Click(object sender, EventArgs e)
@@ -89,13 +91,12 @@ namespace LAZYSHELL
             else if (romDirectory.Checked)
                 settings.BackupROMDirectory = "";
             settings.VisualThemeSystem = visualThemeSystem.Checked;
-            settings.UndoStackSize = (int)undoStackSize.Value;
-            settings.patchServerURL = patchHTTPServer.Text;
+            settings.PatchServerURL = patchHTTPServer.Text;
             settings.Save();
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            buttonApply_Click(null, null);
+            buttonApply.PerformClick();
             this.Close();
         }
         private void buttonClose_Click(object sender, EventArgs e)

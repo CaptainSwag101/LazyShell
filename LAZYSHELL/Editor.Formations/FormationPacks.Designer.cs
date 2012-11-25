@@ -69,7 +69,13 @@
             // packNum
             // 
             this.packNum.AutoSize = false;
+            this.packNum.ContextMenuStrip = null;
             this.packNum.Hexadecimal = false;
+            this.packNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.packNum.Location = new System.Drawing.Point(7, 2);
             this.packNum.Maximum = new decimal(new int[] {
             255,

@@ -7,6 +7,7 @@ namespace LAZYSHELL
     [Serializable()]
     public class SerializedBattlefield
     {
+        // class variables
         public Battlefield battlefield;
         public byte[] tileset;
         public byte graphicSetA;
@@ -15,6 +16,7 @@ namespace LAZYSHELL
         public byte graphicSetD;
         public byte graphicSetE;
         public PaletteSet paletteSet;
+        // constructors
         public SerializedBattlefield(byte[] tileset, PaletteSet paletteSet, Battlefield battlefield)
         {
             this.tileset = tileset;

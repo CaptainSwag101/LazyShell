@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AttacksEditor : Form
+    public partial class AttacksEditor : NewForm
     {
         // variables
         
@@ -20,8 +20,6 @@ namespace LAZYSHELL
         // constructor
         public AttacksEditor()
         {
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
@@ -55,12 +53,12 @@ namespace LAZYSHELL
                 a.Assemble();
             // Assemble the Model.Spells
             int i;
-            ushort len = 0x2bb6; // offset to the start of spell descriptions
-            for (i = 0; i < Model.Spells.Length && len + (Model.Spells[i].RawDescription != null ? Model.Spells[i].RawDescription.Length : 0) < (0x2bb6 + 0x36A); i++)
-                len += Model.Spells[i].Assemble(len);
-            len = 0x55f0; // offset for extra space
-            for (; i < Model.Spells.Length && len + (Model.Spells[i].RawDescription != null ? Model.Spells[i].RawDescription.Length : 0) < (0x55f0 + 0xa10); i++)
-                len += Model.Spells[i].Assemble(len);
+            int length = 0x2BB6; // offset to the start of spell descriptions
+            for (i = 0; i < Model.Spells.Length && length + (Model.Spells[i].RawDescription != null ? Model.Spells[i].RawDescription.Length : 0) < (0x2bb6 + 0x36A); i++)
+                 Model.Spells[i].Assemble(ref length);
+            length = 0x55f0; // offset for extra space
+            for (; i < Model.Spells.Length && length + (Model.Spells[i].RawDescription != null ? Model.Spells[i].RawDescription.Length : 0) < (0x55f0 + 0xa10); i++)
+                 Model.Spells[i].Assemble(ref length);
             if (i != Model.Spells.Length)
                 System.Windows.Forms.MessageBox.Show("Spell Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
             checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
@@ -140,7 +138,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current spell. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            spellsEditor.Spell = new Spell(Model.Data, spellsEditor.Index);
+            spellsEditor.Spell = new Spell(spellsEditor.Index);
             spellsEditor.RefreshSpells();
         }
         private void resetAttackToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,7 +146,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current attack. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            attacksEditor.Attack = new Attack(Model.Data, attacksEditor.Index);
+            attacksEditor.Attack = new Attack(attacksEditor.Index);
             attacksEditor.RefreshAttacks();
         }
     }

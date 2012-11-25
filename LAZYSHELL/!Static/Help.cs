@@ -9,6 +9,7 @@ namespace LAZYSHELL
 {
     public static class Help
     {
+        // txt document
         public static void CreateHelp(XmlDocument LAZYSHELL_xml, bool readme)
         {
             StringWriter writer = new StringWriter();

@@ -21,11 +21,9 @@ namespace LAZYSHELL
         public LevelExits levelExits;
         public LevelEvents levelEvents;
         public LevelOverlaps levelOverlaps;
-
         public SerializedLevel()
         {
 
         }
-
     }
 }

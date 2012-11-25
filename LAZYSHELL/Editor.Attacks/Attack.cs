@@ -9,12 +9,10 @@ namespace LAZYSHELL
     [Serializable()]
     public class Attack : Element
     {
-        [NonSerialized()]
-        private byte[] data; 
-        public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index;} set { index = value;} }
-
-        #region Attack Stats
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        public override int Index { get { return index; } set { index = value; } }
+        #region class variables
         private int index;
         private char[] name;
         private byte hitRate;
@@ -26,17 +24,16 @@ namespace LAZYSHELL
         private bool effectMushroom;
         private bool effectScarecrow;
         private bool effectInvincible;
-        private bool changeAttack;
-        private bool changeDefense;
-        private bool changeMagicAttack;
-        private bool changeMagicDefense;
-        private bool maxAttack;
+        private bool upAttack;
+        private bool upDefense;
+        private bool upMagicAttack;
+        private bool upMagicDefense;
+        private bool instantDeath;
         private bool noDamageA;
         private bool noDamageB;
         private bool hideDigits;
         #endregion
-
-        #region Accessors
+        #region public accessors
         public char[] Name { get { return this.name; } set { this.name = value; } }
         public byte HitRate { get { return this.hitRate; } set { this.hitRate = value; } }
         public byte AttackLevel { get { return this.attackLevel; } set { this.attackLevel = value; } }
@@ -47,93 +44,79 @@ namespace LAZYSHELL
         public bool EffectMushroom { get { return this.effectMushroom; } set { this.effectMushroom = value; } }
         public bool EffectScarecrow { get { return this.effectScarecrow; } set { this.effectScarecrow = value; } }
         public bool EffectInvincible { get { return this.effectInvincible; } set { this.effectInvincible = value; } }
-        public bool ChangeAttack { get { return this.changeAttack; } set { this.changeAttack = value; } }
-        public bool ChangeDefense { get { return this.changeDefense; } set { this.changeDefense = value; } }
-        public bool ChangeMagicAttack { get { return this.changeMagicAttack; } set { this.changeMagicAttack = value; } }
-        public bool ChangeMagicDefense { get { return this.changeMagicDefense; } set { this.changeMagicDefense = value; } }
-        public bool MaxAttack { get { return this.maxAttack; } set { this.maxAttack = value; } }
+        public bool UpAttack { get { return this.upAttack; } set { this.upAttack = value; } }
+        public bool UpDefense { get { return this.upDefense; } set { this.upDefense = value; } }
+        public bool UpMagicAttack { get { return this.upMagicAttack; } set { this.upMagicAttack = value; } }
+        public bool UpMagicDefense { get { return this.upMagicDefense; } set { this.upMagicDefense = value; } }
+        public bool InstantDeath { get { return this.instantDeath; } set { this.instantDeath = value; } }
         public bool NoDamageA { get { return this.noDamageA; } set { this.noDamageA = value; } }
         public bool NoDamageB { get { return this.noDamageB; } set { this.noDamageB = value; } }
         public bool HideDigits { get { return this.hideDigits; } set { this.hideDigits = value; } }
         #endregion
-
-        public Attack(byte[] data, int index)
+        // constructor
+        public Attack(int index)
         {
-            this.data = data;
             this.index = index;
-            InitializeAttack();
+            Disassemble();
         }
-
-        private void InitializeAttack()
+        // assemblers
+        private void Disassemble()
         {
-            byte temp = 0;
-
             name = new char[13];
             for (int i = 0; i < name.Length; i++)
-                name[i] = (char)data[(index * 13) + 0x3959F4 + i];
+                name[i] = (char)rom[(index * 13) + 0x3959F4 + i];
 
             int offset = (index * 4) + 0x391226;
 
-            temp = data[offset]; offset++;
-
+            int temp = rom[offset++];
             attackLevel = (byte)(temp & 0x07);
-
-            maxAttack = (temp & 0x08) == 0x08;
+            instantDeath = (temp & 0x08) == 0x08;
             noDamageA = (temp & 0x10) == 0x10;
             hideDigits = (temp & 0x20) == 0x20;
             noDamageB = (temp & 0x40) == 0x40;
-
-            hitRate = data[offset]; offset++;
-
-            temp = data[offset]; offset++;
-
-            // STATUS EFFECT
-
-            effectMute = (temp & 0x01) == 0x01;		// Mute
-            effectSleep = (temp & 0x02) == 0x02;		// Sleep
-            effectPoison = (temp & 0x04) == 0x04;		// Poison
-            effectFear = (temp & 0x08) == 0x08;		// Fear
-            effectMushroom = (temp & 0x20) == 0x20;	// Mushroom
-            effectScarecrow = (temp & 0x40) == 0x40;	// Scarecrow
-            effectInvincible = (temp & 0x80) == 0x80;	// Invincible
-
-            temp = data[offset]; offset++;
-
-            // STATUS CHANGE
-
-            changeMagicAttack = (temp & 0x08) == 0x08;		// Magic Attack
-            changeAttack = (temp & 0x10) == 0x10;			// Attack
-            changeMagicDefense = (temp & 0x20) == 0x20;		// Magic Defense
-            changeDefense = (temp & 0x40) == 0x40;			// Defense
+            hitRate = rom[offset++];
+            // status effect
+            Status status = (Status)rom[offset++];
+            effectMute = (status & Status.Mute) == Status.Mute;
+            effectSleep = (status & Status.Sleep) == Status.Sleep;
+            effectPoison = (status & Status.Poison) == Status.Poison;
+            effectFear = (status & Status.Fear) == Status.Fear;
+            effectMushroom = (status & Status.Mushroom) == Status.Mushroom;
+            effectScarecrow = (status & Status.Scarecrow) == Status.Scarecrow;
+            effectInvincible = (status & Status.Invincible) == Status.Invincible;
+            // status change
+            temp = rom[offset++];
+            upMagicAttack = (temp & 0x08) == 0x08;		// Magic Attack
+            upAttack = (temp & 0x10) == 0x10;			// Attack
+            upMagicDefense = (temp & 0x20) == 0x20;		// Magic Defense
+            upDefense = (temp & 0x40) == 0x40;			// Defense
         }
         public void Assemble()
         {
-            Bits.SetCharArray(data, 0x3959F4 + (index * 13), name);
-
+            Bits.SetCharArray(rom, 0x3959F4 + (index * 13), name);
+            //
             int offset = (index * 4) + 0x391226;
-            Bits.SetByte(data, offset, attackLevel);
-            Bits.SetBit(data, offset, 3, maxAttack);
-            Bits.SetBit(data, offset, 4, noDamageA);
-            Bits.SetBit(data, offset, 5, hideDigits);
-            Bits.SetBit(data, offset, 6, noDamageB);
-            offset++;
-
-            Bits.SetByte(data, offset, hitRate); offset++;
-
-            Bits.SetBit(data, offset, 0, effectMute);
-            Bits.SetBit(data, offset, 1, effectSleep);
-            Bits.SetBit(data, offset, 2, effectPoison);
-            Bits.SetBit(data, offset, 3, effectFear);
-            Bits.SetBit(data, offset, 5, effectMushroom);
-            Bits.SetBit(data, offset, 6, effectScarecrow);
-            Bits.SetBit(data, offset, 7, effectInvincible);
-            offset++;
-
-            Bits.SetBit(data, offset, 3, changeMagicAttack);
-            Bits.SetBit(data, offset, 4, changeAttack);
-            Bits.SetBit(data, offset, 5, changeMagicDefense);
-            Bits.SetBit(data, offset, 6, changeDefense);
+            rom[offset] = attackLevel;
+            Bits.SetBit(rom, offset, 3, instantDeath);
+            Bits.SetBit(rom, offset, 4, noDamageA);
+            Bits.SetBit(rom, offset, 5, hideDigits);
+            Bits.SetBit(rom, offset++, 6, noDamageB);
+            //
+            rom[offset++] = hitRate;
+            Bits.SetBit(rom, offset, 0, effectMute);
+            Bits.SetBit(rom, offset, 1, effectSleep);
+            Bits.SetBit(rom, offset, 2, effectPoison);
+            Bits.SetBit(rom, offset, 3, effectFear);
+            Bits.SetBit(rom, offset, 5, effectMushroom);
+            Bits.SetBit(rom, offset, 6, effectScarecrow);
+            Bits.SetBit(rom, offset++, 7, effectInvincible);
+            //
+            Bits.SetBit(rom, offset, 3, upMagicAttack);
+            Bits.SetBit(rom, offset, 4, upAttack);
+            Bits.SetBit(rom, offset, 5, upMagicDefense);
+            Bits.SetBit(rom, offset, 6, upDefense);
         }
+        // universal functions
         public override void Clear()
         {
             Bits.Fill(name, '\x20');
@@ -146,11 +129,11 @@ namespace LAZYSHELL
             effectMushroom = false;
             effectScarecrow = false;
             effectInvincible = false;
-            changeAttack = false;
-            changeDefense = false;
-            changeMagicAttack = false;
-            changeMagicDefense = false;
-            maxAttack = false;
+            upAttack = false;
+            upDefense = false;
+            upMagicAttack = false;
+            upMagicDefense = false;
+            instantDeath = false;
             noDamageA = false;
             noDamageB = false;
             hideDigits = false;

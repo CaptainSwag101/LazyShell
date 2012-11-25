@@ -93,6 +93,11 @@
             // fontSize
             // 
             this.fontSize.Hexadecimal = false;
+            this.fontSize.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.fontSize.Location = new System.Drawing.Point(189, 3);
             this.fontSize.Maximum = new decimal(new int[] {
             20,
@@ -184,6 +189,11 @@
             // 
             this.characterHeight.AutoSize = false;
             this.characterHeight.Hexadecimal = false;
+            this.characterHeight.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.characterHeight.Location = new System.Drawing.Point(130, 3);
             this.characterHeight.Maximum = new decimal(new int[] {
             24,
@@ -259,6 +269,11 @@
             // 
             this.padding.AutoSize = false;
             this.padding.Hexadecimal = false;
+            this.padding.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.padding.Location = new System.Drawing.Point(34, 3);
             this.padding.Maximum = new decimal(new int[] {
             16,

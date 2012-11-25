@@ -10,8 +10,7 @@ namespace LAZYSHELL
     [Serializable()]
     public class Battlefield
     {
-        [NonSerialized()]
-        private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private int index; public int Index { get { return index; } set { index = value; } }
         private byte graphicSetA; public byte GraphicSetA { get { return graphicSetA; } set { graphicSetA = value; } }
         private byte graphicSetB; public byte GraphicSetB { get { return graphicSetB; } set { graphicSetB = value; } }
@@ -20,54 +19,44 @@ namespace LAZYSHELL
         private byte graphicSetE; public byte GraphicSetE { get { return graphicSetE; } set { graphicSetE = value; } }
         private byte tileSet; public byte TileSet { get { return tileSet; } set { tileSet = value; } }
         private byte paletteSet; public byte PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
-        //
-        public int PaletteSetOffset { get { return GetPaletteSetOffset(); } }
-        public Battlefield(byte[] data, int battlefieldNum)
+        // constructor
+        public Battlefield(int index)
         {
-            this.data = data;
-            this.index = battlefieldNum;
-            InitializeBattlefield(data);
+            this.index = index;
+            Disassemble();
         }
-        private void InitializeBattlefield(byte[] data)
+        // assemblers
+        private void Disassemble()
         {
             int offset = (index * 8) + 0x39B644;
-
-            graphicSetA = data[offset]; offset++;
-            graphicSetB = data[offset]; offset++;
-            graphicSetC = data[offset]; offset++;
-            graphicSetD = data[offset]; offset++;
-            graphicSetE = data[offset]; offset += 2;
-
+            graphicSetA = rom[offset++];
+            graphicSetB = rom[offset++];
+            graphicSetC = rom[offset++];
+            graphicSetD = rom[offset++];
+            graphicSetE = rom[offset]; offset += 2;
             if (graphicSetA > 0xC7) graphicSetA = 0xC8;
             if (graphicSetB > 0xC7) graphicSetB = 0xC8;
             if (graphicSetC > 0xC7) graphicSetC = 0xC8;
             if (graphicSetD > 0xC7) graphicSetD = 0xC8;
             if (graphicSetE > 0xC7) graphicSetE = 0xC8;
-
-            tileSet = data[offset]; offset++;
-            paletteSet = data[offset]; offset++;
-        }
-        private int GetPaletteSetOffset()
-        {
-            return (paletteSet * 0xB6) + 0x34D000 - 30;
+            tileSet = rom[offset++];
+            paletteSet = rom[offset++];
         }
         public void Assemble()
         {
             int offset = (index * 8) + 0x39B644;
-
-            if (graphicSetA == 0xC8) Bits.SetByte(data, offset, 0xFF);
-            else Bits.SetByte(data, offset, graphicSetA); offset++;
-            if (graphicSetB == 0xC8) Bits.SetByte(data, offset, 0xFF);
-            else Bits.SetByte(data, offset, graphicSetB); offset++;
-            if (graphicSetC == 0xC8) Bits.SetByte(data, offset, 0xFF);
-            else Bits.SetByte(data, offset, graphicSetC); offset++;
-            if (graphicSetD == 0xC8) Bits.SetByte(data, offset, 0xFF);
-            else Bits.SetByte(data, offset, graphicSetD); offset++;
-            if (graphicSetE == 0xC8) Bits.SetByte(data, offset, 0xFF);
-            else Bits.SetByte(data, offset, graphicSetE); offset += 2;
-
-            Bits.SetByte(data, offset, tileSet); offset++;
-            Bits.SetByte(data, offset, paletteSet); offset++;
+            if (graphicSetA == 0xC8) rom[offset] = 0xFF;
+            else rom[offset] = graphicSetA; offset++;
+            if (graphicSetB == 0xC8) rom[offset] = 0xFF;
+            else rom[offset] = graphicSetB; offset++;
+            if (graphicSetC == 0xC8) rom[offset] = 0xFF;
+            else rom[offset] = graphicSetC; offset++;
+            if (graphicSetD == 0xC8) rom[offset] = 0xFF;
+            else rom[offset] = graphicSetD; offset++;
+            if (graphicSetE == 0xC8) rom[offset] = 0xFF;
+            else rom[offset] = graphicSetE; offset += 2;
+            rom[offset] = tileSet; offset++;
+            rom[offset] = paletteSet; offset++;
         }
     }
 }

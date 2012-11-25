@@ -457,8 +457,8 @@ namespace LAZYSHELL
                 tiles[1][i] = Bits.GetShort(template.Tilemaps[1], i * 2);
                 tiles[2][i] = template.Tilemaps[2][i];
             }
-            commandStack.Push(new TilemapEditCommand(this.levels, tilemap, 0, tL, bR, tiles, true, true, true));
-            commandStack_S.Push(new SolidityEditCommand(this.levels, this.solidityMap, tL, bR, template.Start, template.Soliditymap));
+            commandStack.Push(new TilemapEdit(this.levels, tilemap, 0, tL, bR, tiles, true, true, true));
+            commandStack_S.Push(new SolidityEdit(this.levels, this.solidityMap, tL, bR, template.Start, template.Soliditymap));
             solidityMap.Image = null;
             tilemap.RedrawTilemaps();
             tileMods.RedrawTilemaps();
@@ -492,7 +492,7 @@ namespace LAZYSHELL
                 // cancel if writing same tile over itself
                 if (CompareTiles(x, y, layer)) return;
                 // cancel if layer doesn't exist
-                if (this.tileset.Tilesets_Tiles[layer] == null) return;
+                if (this.tileset.Tilesets_tiles[layer] == null) return;
                 p1Image = null;
                 Point location = new Point(x, y);
                 Point terminal = new Point(
@@ -501,7 +501,7 @@ namespace LAZYSHELL
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TilemapEditCommand(
+                    new TilemapEdit(
                         levels, tilemap, layer, location, terminal,
                         tilesetEditor.SelectedTiles.Copies, false, transparent, editAllLayers.Checked));
                 if (state.TileMods)
@@ -537,7 +537,7 @@ namespace LAZYSHELL
                 byte[] temp = new byte[0x20C2];
                 Bits.SetShort(temp, mouseOverSolidTile * 2, (ushort)levelsSolidTiles.Index);
                 CommandStack commandStack_S = state.SolidMods ? this.commandStack_SM : this.commandStack_S;
-                commandStack_S.Push(new SolidityEditCommand(this.levels, map, initial, final, initial, temp));
+                commandStack_S.Push(new SolidityEdit(this.levels, map, initial, final, initial, temp));
                 if (state.SolidMods)
                     solidMods.Mod_.CopyToTiles();
                 solidity.RefreshTilemapImage(map, mouseOverSolidTile * 2);
@@ -567,13 +567,13 @@ namespace LAZYSHELL
             {
                 int layer = tilesetEditor.Layer;
                 // cancel if overwriting the same tile over itself
-                if (!editAllLayers.Checked && this.tileset.Tilesets_Tiles[layer] == null) return;
+                if (!editAllLayers.Checked && this.tileset.Tilesets_tiles[layer] == null) return;
                 if (!editAllLayers.Checked && tilemap.GetTileNum(layer, x, y) == erase) return;
                 p1Image = null;
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TilemapEditCommand(
+                    new TilemapEdit(
                         this.levels, tilemap, layer, new Point(x, y), new Point(x + 16, y + 16),
                         new int[][] { new int[] { erase }, new int[] { erase }, new int[] { erase }, new int[] { erase } },
                         false, transparent, editAllLayers.Checked));
@@ -602,7 +602,7 @@ namespace LAZYSHELL
                 Point bR = new Point(x + 1, y + 1);
                 Tilemap map = state.SolidMods ? (Tilemap)solidMods.Mod_ : solidityMap;
                 CommandStack commandStack_S = state.SolidMods ? this.commandStack_SM : this.commandStack_S;
-                commandStack_S.Push(new SolidityEditCommand(this.levels, map, tL, bR, tL, new byte[0x20C2]));
+                commandStack_S.Push(new SolidityEdit(this.levels, map, tL, bR, tL, new byte[0x20C2]));
                 if (state.SolidMods)
                     solidMods.Mod_.CopyToTiles();
                 solidity.RefreshTilemapImage(map, mouseOverSolidTile * 2);
@@ -618,7 +618,7 @@ namespace LAZYSHELL
             int layer = tilemap.GetPixelLayer(x, y);
             int tileNum = (y / 16) * (width / 16) + (x / 16);
             int placement = ((x % 16) / 8) + (((y % 16) / 8) * 2);
-            Tile tile = this.tileset.Tilesets_Tiles[layer][tilemap.GetTileNum(layer, x, y)];
+            Tile tile = this.tileset.Tilesets_tiles[layer][tilemap.GetTileNum(layer, x, y)];
             Subtile subtile = tile.Subtiles[placement];
             int multiplier = layer < 2 ? 16 : 4;
             paletteEditor.CurrentColor =
@@ -636,7 +636,7 @@ namespace LAZYSHELL
                 // cancel if writing same tile over itself
                 if (CompareTiles(x, y, layer)) return;
                 // cancel if layer doesn't exist
-                if (this.tileset.Tilesets_Tiles[layer] == null) return;
+                if (this.tileset.Tilesets_tiles[layer] == null) return;
                 p1Image = null;
                 // store changes
                 int[][] changes = new int[3][];
@@ -685,7 +685,7 @@ namespace LAZYSHELL
                     }
                 bool transparent = minecart == null || minecart.Index > 1;
                 commandStack.Push(
-                    new TilemapEditCommand(levels, tilemap, layer, location, terminal, changes, false, transparent, false));
+                    new TilemapEdit(levels, tilemap, layer, location, terminal, changes, false, transparent, false));
             }
             else
             {
@@ -714,9 +714,9 @@ namespace LAZYSHELL
                             solidity.TileCoords[index].X + 17,
                             solidity.TileCoords[index].Y + 9);
                         if (state.SolidMods)
-                            commandStack_S.Push(new SolidityEditCommand(levels, solidMods.Mod_, tL, bR, tL, changes));
+                            commandStack_S.Push(new SolidityEdit(levels, solidMods.Mod_, tL, bR, tL, changes));
                         else
-                            commandStack_S.Push(new SolidityEditCommand(levels, solidityMap, tL, bR, tL, changes));
+                            commandStack_S.Push(new SolidityEdit(levels, solidityMap, tL, bR, tL, changes));
                         pushes++;
                     }
                 }
@@ -741,7 +741,7 @@ namespace LAZYSHELL
             }
             else
             {
-                if (state.SolidMods)
+                if (state.SolidMods && solidMods.Mod_ != null)
                 {
                     commandStack_SM.UndoCommand();
                     solidMods.Mod_.CopyToTiles();
@@ -776,7 +776,7 @@ namespace LAZYSHELL
             }
             else
             {
-                if (state.SolidMods)
+                if (state.SolidMods && solidMods.Mod_ != null)
                 {
                     commandStack_SM.RedoCommand();
                     solidMods.Mod_.CopyToTiles();
@@ -939,7 +939,7 @@ namespace LAZYSHELL
             bool transparent = minecart == null || minecart.Index > 1;
             CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
             commandStack.Push(
-                new TilemapEditCommand(levels, tilemap, layer, location, terminal, buffer.Copies, true, transparent, editAllLayers.Checked));
+                new TilemapEdit(levels, tilemap, layer, location, terminal, buffer.Copies, true, transparent, editAllLayers.Checked));
             p1Image = null;
             SetLevelImage();
             if (level != null)
@@ -968,7 +968,7 @@ namespace LAZYSHELL
             if (!state.SolidityLayer && !state.SolidMods)
             {
                 int layer = tilesetEditor.Layer;
-                if (this.tileset.Tilesets_Tiles[layer] == null || overlay.Select.Size == new Size(0, 0)) return;
+                if (this.tileset.Tilesets_tiles[layer] == null || overlay.Select.Size == new Size(0, 0)) return;
                 if (overlay.Select == null) return;
                 Point location = overlay.Select.Location;
                 Point terminal = overlay.Select.Terminal;
@@ -993,7 +993,7 @@ namespace LAZYSHELL
                 bool transparent = minecart == null || minecart.Index > 1;
                 CommandStack commandStack = state.TileMods ? this.commandStack_TM : this.commandStack;
                 commandStack.Push(
-                    new TilemapEditCommand(
+                    new TilemapEdit(
                         levels, tilemap, layer, location, terminal,
                         changes, false, transparent, editAllLayers.Checked));
                 p1Image = null;
@@ -1022,7 +1022,7 @@ namespace LAZYSHELL
                             solidity.TileCoords[index].X + 17,
                             solidity.TileCoords[index].Y + 9);
                         CommandStack commandStack_S = state.SolidMods ? this.commandStack_SM : this.commandStack_S;
-                        commandStack_S.Push(new SolidityEditCommand(levels, map, tL, bR, tL, new byte[0x20C2]));
+                        commandStack_S.Push(new SolidityEdit(levels, map, tL, bR, tL, new byte[0x20C2]));
                         if (!state.SolidMods)
                             pushes++;
                     }
@@ -1349,7 +1349,7 @@ namespace LAZYSHELL
                     mouseDownNPC = mouseOverNPC;
                     npcs.CurrentNPC = mouseDownNPC;
                     npcs.SelectedNPC = mouseDownNPC;
-                    npcs.IsInstanceSelected = false;
+                    npcs.IsCloneSelected = false;
                     levels.NpcObjectTree.SelectedNode = levels.NpcObjectTree.Nodes[npcs.CurrentNPC];
                 }
                 if (state.NPCs && mouseOverObject == "npc instance" && mouseDownObject == null)
@@ -1360,10 +1360,10 @@ namespace LAZYSHELL
                     mouseDownNPCInstance = mouseOverNPCInstance;
                     npcs.CurrentNPC = mouseDownNPC;
                     npcs.SelectedNPC = mouseDownNPC;
-                    npcs.CurrentInstance = mouseDownNPCInstance;
-                    npcs.SelectedInstance = mouseDownNPCInstance;
-                    npcs.IsInstanceSelected = true;
-                    levels.NpcObjectTree.SelectedNode = levels.NpcObjectTree.Nodes[npcs.CurrentNPC].Nodes[npcs.CurrentInstance];
+                    npcs.CurrentClone = mouseDownNPCInstance;
+                    npcs.SelectedClone = mouseDownNPCInstance;
+                    npcs.IsCloneSelected = true;
+                    levels.NpcObjectTree.SelectedNode = levels.NpcObjectTree.Nodes[npcs.CurrentNPC].Nodes[npcs.CurrentClone];
                 }
                 if (state.Overlaps && mouseOverObject == "overlap" && mouseDownObject == null)
                 {
@@ -1410,7 +1410,7 @@ namespace LAZYSHELL
                             map = (Tilemap)solidMods.Mod_;
                         else
                             map = solidityMap;
-                        commandStack_S.Push(new SolidityEditCommand(this.levels, map, tL, bR, tL, new byte[0x20C2]));
+                        commandStack_S.Push(new SolidityEdit(this.levels, map, tL, bR, tL, new byte[0x20C2]));
                         if (state.SolidMods)
                             solidMods.Mod_.CopyToTiles();
                         solidity.RefreshTilemapImage(map, mouseDownSolidTile * 2);
@@ -1441,7 +1441,7 @@ namespace LAZYSHELL
                 byte[] temp = new byte[0x20C2];
                 Bits.SetShort(temp, mouseOverSolidTile * 2, mouseDownSolidTileIndex);
                 Tilemap map = state.SolidMods ? (Tilemap)solidMods.Mod_ : solidityMap;
-                commandStack_S.Push(new SolidityEditCommand(this.levels, map, initial, final, initial, temp));
+                commandStack_S.Push(new SolidityEdit(this.levels, map, initial, final, initial, temp));
                 if (state.SolidMods)
                     solidMods.Mod_.CopyToTiles();
                 solidity.RefreshTilemapImage(map, mouseOverSolidTile * 2);
@@ -1959,7 +1959,7 @@ namespace LAZYSHELL
         }
         private void pictureBoxLevel_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //toolStripMenuItem5_Click(null, null);
+            //toolStripMenuItem5.PerformClick();
         }
         private void pictureBoxLevel_MouseEnter(object sender, EventArgs e)
         {
@@ -1990,13 +1990,13 @@ namespace LAZYSHELL
             switch (e.KeyData)
             {
                 case Keys.Control | Keys.V:
-                    buttonEditPaste_Click(null, null); break;
+                    buttonEditPaste.PerformClick(); break;
                 case Keys.Control | Keys.C:
-                    buttonEditCopy_Click(null, null); break;
+                    buttonEditCopy.PerformClick(); break;
                 case Keys.Delete:
-                    buttonEditDelete_Click(null, null); break;
+                    buttonEditDelete.PerformClick(); break;
                 case Keys.Control | Keys.X:
-                    buttonEditCut_Click(null, null); break;
+                    buttonEditCut.PerformClick(); break;
                 case Keys.Control | Keys.D:
                     if (draggedTiles != null)
                         PasteFinal(draggedTiles);
@@ -2014,9 +2014,9 @@ namespace LAZYSHELL
                     pictureBoxLevel.Invalidate();
                     break;
                 case Keys.Control | Keys.Z:
-                    buttonEditUndo_Click(null, null); break;
+                    buttonEditUndo.PerformClick(); break;
                 case Keys.Control | Keys.Y:
-                    buttonEditRedo_Click(null, null); break;
+                    buttonEditRedo.PerformClick(); break;
             }
         }
         private void panelLevelPicture_Scroll(object sender, ScrollEventArgs e)
@@ -2290,7 +2290,7 @@ namespace LAZYSHELL
         }
         private void buttonDragSolidity_Click(object sender, EventArgs e)
         {
-            state.ClearDrawSelectErase();
+            state.ClearDrawing();
             Do.ResetToolStripButtons(toolStrip2, (ToolStripButton)sender, editAllLayers);
             PasteClear();
             pictureBoxLevel.Invalidate();
@@ -2442,9 +2442,9 @@ namespace LAZYSHELL
                     tileMods.TilemapsB[l] = tilemaps[l];
             }
             if (!instance)
-                tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.Mod_, false);
+                tileMods.TilemapA = new LevelTilemap(level, tileset, tileMods.MOD, false);
             else
-                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.Mod_, true);
+                tileMods.TilemapB = new LevelTilemap(level, tileset, tileMods.MOD, true);
             if (!toggleTileMods.Checked)
                 toggleTileMods.PerformClick();
             tileMods.UpdateTilemaps();
@@ -2475,7 +2475,7 @@ namespace LAZYSHELL
                     int tileY = overlay.Select.Y + (y * 16);
                     int index = tilemap.GetTileNum(tilesetEditor.Layer, tileX, tileY);
                     if (y < overlay.Select.Height / 16 && x < overlay.Select.Width / 16)
-                        tiles[counter] = this.tileset.Tilesets_Tiles[tilesetEditor.Layer][index].Copy();
+                        tiles[counter] = this.tileset.Tilesets_tiles[tilesetEditor.Layer][index].Copy();
                     else
                         tiles[counter] = new Tile(counter);
                     tiles[counter].TileIndex = counter;
@@ -2490,7 +2490,7 @@ namespace LAZYSHELL
                     int tileY = overlay.Select.Y + (y * 16);
                     int index = tilemap.GetTileNum(tilesetEditor.Layer, tileX, tileY);
                     if (y < overlay.Select.Height / 16 && x < overlay.Select.Width / 16)
-                        tiles[counter] = this.tileset.Tilesets_Tiles[tilesetEditor.Layer][index].Copy();
+                        tiles[counter] = this.tileset.Tilesets_tiles[tilesetEditor.Layer][index].Copy();
                     else
                         tiles[counter] = new Tile(counter);
                     tiles[counter].TileIndex = counter;
@@ -2505,7 +2505,7 @@ namespace LAZYSHELL
                     int tileY = overlay.Select.Y + (y * 16);
                     int index = tilemap.GetTileNum(tilesetEditor.Layer, tileX, tileY);
                     if (y < overlay.Select.Height / 16 && x < overlay.Select.Width / 16)
-                        tiles[counter] = this.tileset.Tilesets_Tiles[tilesetEditor.Layer][index].Copy();
+                        tiles[counter] = this.tileset.Tilesets_tiles[tilesetEditor.Layer][index].Copy();
                     else
                         tiles[counter] = new Tile(counter);
                     tiles[counter].TileIndex = counter;
@@ -2520,23 +2520,23 @@ namespace LAZYSHELL
                     int tileY = overlay.Select.Y + (y * 16);
                     int index = tilemap.GetTileNum(tilesetEditor.Layer, tileX, tileY);
                     if (y < overlay.Select.Height / 16 && x < overlay.Select.Width / 16)
-                        tiles[counter] = this.tileset.Tilesets_Tiles[tilesetEditor.Layer][index].Copy();
+                        tiles[counter] = this.tileset.Tilesets_tiles[tilesetEditor.Layer][index].Copy();
                     else
                         tiles[counter] = new Tile(counter);
                     tiles[counter].TileIndex = counter;
                 }
             }
-            Battlefield battlefield = new Battlefield(Model.Data, 0);
+            Battlefield battlefield = new Battlefield(0);
             battlefield.GraphicSetA = levelMap.GraphicSetA;
             battlefield.GraphicSetB = levelMap.GraphicSetB;
             battlefield.GraphicSetC = levelMap.GraphicSetC;
             battlefield.GraphicSetD = levelMap.GraphicSetD;
             battlefield.GraphicSetE = levelMap.GraphicSetE;
             PaletteSet paletteset = this.levels.PaletteSet.Copy();
-            BattlefieldTileSet battlefieldTileset = new BattlefieldTileSet(battlefield, paletteset, tiles);
+            BattlefieldTileset battlefieldTileset = new BattlefieldTileset(battlefield, paletteset, tiles);
             battlefieldTileset.Battlefield = battlefield;
-            battlefieldTileset.PaletteSet = paletteset;
-            battlefieldTileset.TileSetLayer = tiles;
+            battlefieldTileset.Palettes = paletteset;
+            battlefieldTileset.Tileset_tiles = tiles;
             Do.Export(battlefieldTileset, "tilemap_battlefield");
         }
         private void objectFunctionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2590,7 +2590,7 @@ namespace LAZYSHELL
                     Model.Program.CreateFormationsWindow();
                 int pack = npc.EventORpack + (instance == null ? npc.PropertyB : instance.PropertyB);
                 Model.Program.Formations.PackIndex = pack;
-                Model.Program.Formations.FormationIndex = Model.FormationPacks[pack].PackFormations[0];
+                Model.Program.Formations.FormationIndex = Model.FormationPacks[pack].Formations[0];
                 Model.Program.Formations.BringToFront();
             }
         }

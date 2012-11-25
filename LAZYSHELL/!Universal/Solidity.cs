@@ -8,8 +8,27 @@ namespace LAZYSHELL
 {
     public class Solidity
     {
+        // static variables
         static Solidity instance = null;
         static readonly object padlock = new object();
+        static double[] hues = new double[] 
+        { 
+            /*grey*/    0.0,    // normal
+            /*pink*/    0.0,    // solid
+            /*blue*/    240.0,  // water
+            /*green*/   120.0,   // vine
+            0.0, 0.0, 240.0, 120.0
+        };
+        static double[] sats = new double[] { 
+            0.0, 1.0, 1.0, 1.0,
+            0.0, 1.0, 1.0, 1.0
+        };
+        static double[] lums = new double[] { 
+            0.0, 0.0, 0.0, 0.0,
+            64.0, 64.0, 64.0, 64.0
+        };
+        // class variables
+        private SolidityTile tile;
         private int[][] quadBasePixels = new int[8][] { 
             new int[16 * 8], new int[16 * 8], new int[16 * 8], new int[16 * 8],
             new int[16 * 8], new int[16 * 8], new int[16 * 8], new int[16 * 8]};
@@ -31,23 +50,7 @@ namespace LAZYSHELL
         private int[][] stairsUpLeftHighPixels = new int[8][] { 
             new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24],
             new int[16 * 24], new int[16 * 24], new int[16 * 24], new int[16 * 24]};
-        private double[] hues = new double[] 
-        { 
-            /*grey*/    0.0,    // normal
-            /*pink*/    0.0,    // solid
-            /*blue*/    240.0,  // water
-            /*green*/   120.0,   // vine
-            0.0, 0.0, 240.0, 120.0
-        };
-        private double[] sats = new double[] { 
-            0.0, 1.0, 1.0, 1.0,
-            0.0, 1.0, 1.0, 1.0
-        };
-        private double[] lums = new double[] { 
-            0.0, 0.0, 0.0, 0.0,
-            64.0, 64.0, 64.0, 64.0
-        };
-        // tile assignments
+        // public accessors
         private int[] pixelTiles = new int[1024 * 1024];
         /// <summary>
         /// A tile number is assigned to each pixel (used to display the tile # in the label).
@@ -63,7 +66,7 @@ namespace LAZYSHELL
         /// A pixel is assigned to each tile number (used for selecting an orthographic tile).
         /// </summary>
         public Point[] TileCoords { get { return tileCoords; } set { tileCoords = value; } }
-        private SolidityTile tile;
+        // constructor
         public Solidity()
         {
             for (int i = 0, o = 4; i < 4; i++, o++)
@@ -127,6 +130,7 @@ namespace LAZYSHELL
                 }
             }
         }
+        // accessor functions
         public int[] GetTilePixels(SolidityTile tile, byte alpha)
         {
             this.tile = tile;
@@ -140,7 +144,7 @@ namespace LAZYSHELL
             int[] stURHi = new int[16 * 24];
             int hChange = 0;
             /******DRAW BASE TILES******/
-            if (tile.BaseTileHeight == 0 && !tile.BaseTileHeightPlusHalf && tile.StairsDirection == 0)
+            if (tile.BaseTileHeight == 0 && !tile.BaseTileHeight_Half && tile.StairsDirection == 0)
             {
                 qBase = GetQuadPixels(true, false, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
@@ -177,7 +181,7 @@ namespace LAZYSHELL
                 }
             }
             /******DRAW TILES THAT HAVE A HEIGHT PLUS 1/2 A TILE******/
-            else if (tile.BaseTileHeight == 0 && tile.BaseTileHeightPlusHalf) // total height = 1/2
+            else if (tile.BaseTileHeight == 0 && tile.BaseTileHeight_Half) // total height = 1/2
             {
                 hqBlock = GetQuadPixels(true, false, 2, halfQuadBlockPixels);
                 if (tile.SolidTopQuadrant)             // draw top quadblock
@@ -310,7 +314,7 @@ namespace LAZYSHELL
                             { if (qBlock[(y - ((0 + 752) - hChange)) * 16 + (x - 8)] != 0) tilePixels[y * 32 + x] = qBlock[(y - ((0 + 752) - hChange)) * 16 + (x - 8)]; }
                         }
                     }
-                    if (tile.BaseTileHeightPlusHalf)
+                    if (tile.BaseTileHeight_Half)
                     {
                         hChange = (b * 32) - (b * 16);
                         for (int y = (8 + 752) - hChange; y < (24 + 752) - hChange; y++) // start 16 pixels above normal base start (ie. 240 - 16)
@@ -351,7 +355,7 @@ namespace LAZYSHELL
                             { if (qBlock[(y - ((4 + 752) - hChange)) * 16 + x] != 0) tilePixels[y * 32 + x] = qBlock[(y - ((4 + 752) - hChange)) * 16 + x]; }
                         }
                     }
-                    if (tile.BaseTileHeightPlusHalf)
+                    if (tile.BaseTileHeight_Half)
                     {
                         hChange = (b * 32) - (b * 16);
                         for (int y = (12 + 752) - hChange; y < (28 + 752) - hChange; y++)
@@ -392,7 +396,7 @@ namespace LAZYSHELL
                             { if (qBlock[(y - ((4 + 752) - hChange)) * 16 + (x - 16)] != 0) tilePixels[y * 32 + x] = qBlock[(y - ((4 + 752) - hChange)) * 16 + (x - 16)]; }
                         }
                     }
-                    if (tile.BaseTileHeightPlusHalf)
+                    if (tile.BaseTileHeight_Half)
                     {
                         hChange = (b * 32) - (b * 16);
                         for (int y = (12 + 752) - hChange; y < (28 + 752) - hChange; y++)
@@ -433,7 +437,7 @@ namespace LAZYSHELL
                             { if (qBlock[(y - ((8 + 752) - hChange)) * 16 + (x - 8)] != 0) tilePixels[y * 32 + x] = qBlock[(y - ((8 + 752) - hChange)) * 16 + (x - 8)]; }
                         }
                     }
-                    if (tile.BaseTileHeightPlusHalf)
+                    if (tile.BaseTileHeight_Half)
                     {
                         hChange = (b * 32) - (b * 16);
                         for (int y = (16 + 752) - hChange; y < (32 + 752) - hChange; y++)
@@ -465,8 +469,8 @@ namespace LAZYSHELL
                 }
             }
             /******DRAW OVERHEAD WATER TILES******/
-            int overH = tile.WaterTileCoordZ * 16; int baseT = tile.BaseTileHeight * 16;
-            if (tile.WaterTileCoordZ != 0)
+            int overH = tile.WaterTileZ * 16; int baseT = tile.BaseTileHeight * 16;
+            if (tile.WaterTileZ != 0)
             {
                 qBase = GetQuadPixels(false, true, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
@@ -503,8 +507,8 @@ namespace LAZYSHELL
                 }
             }
             /******DRAW OVERHEAD TILES******/
-            overH = tile.OverheadTileCoordZ * 16; baseT = tile.BaseTileHeight * 16;
-            if (tile.OverheadTileHeight == 0 && tile.OverheadTileCoordZ != 0)
+            overH = tile.OverheadTileZ * 16; baseT = tile.BaseTileHeight * 16;
+            if (tile.OverheadTileHeight == 0 && tile.OverheadTileZ != 0)
             {
                 qBase = GetQuadPixels(false, false, 0, quadBasePixels);
                 if (tile.SolidTopQuadrant)             // draw top quadbase
@@ -656,7 +660,7 @@ namespace LAZYSHELL
                 tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                 currTilePosX = tileCoords[offset / 2].X;
                 currTilePosY = tileCoords[offset / 2].Y;
-                if (tileNum != 0 && tiles[tileNum].ObjectOnTilePriority3)
+                if (tileNum != 0 && tiles[tileNum].P3ObjectOnTile)
                 {
                     tilePixels = GetTilePixels(tiles[tileNum]);
                     for (int a = 752 - tiles[tileNum].TotalHeight; a < 784; a++)
@@ -677,6 +681,196 @@ namespace LAZYSHELL
             }
             return pixels;
         }
+        private int[] GetQuadPixels(bool isBase, bool isWater, int type, int[][] src)
+        {
+            int format = 0;
+
+            if (!isBase && !isWater) // it is an overhead tile
+            {
+                if (tile.SpecialTileFormat == 1)    // vines (green)
+                    format = 3;
+                else
+                    format = 0; // overhead (white)
+            }
+            else if (isBase && !isWater && tile.OverheadTileZ != 0) // it is a base tile and there is something overhead
+            {
+                if (tile.SpecialTileFormat == 1)    // vines (green)
+                    format = 3 + 4;
+                else if (tile.SpecialTileFormat == 2)   // water (blue)
+                    format = 2 + 4;
+                else
+                    format = 0 + 4;
+            }
+            else if (!isBase && isWater) // it is an overhead water tile
+                format = 2;
+            else if (isBase && isWater && (tile.OverheadTileZ != 0 || tile.WaterTileZ != 0)) // it is a base water tile and there is something overhead
+                format = 2 + 4;
+            else if (isBase && isWater) // it is a base water tile and there is nothing overhead
+                format = 2;
+            else // it is a base tile and there is nothing overhead
+            {
+                if (tile.SpecialTileFormat == 1)
+                    format = 3;
+                else if (tile.SpecialTileFormat == 2)
+                    format = 2;
+                else
+                    format = 0;
+            }
+            if (tile.SolidTile && !isBase && tile.OverheadTileZ != 0)
+                format = 1;
+            else if (tile.SolidTile && isBase && tile.OverheadTileZ == 0)
+                format = 1;
+
+            return src[format];
+        }
+        private void SetIsometric()
+        {
+            /*********ASSIGN AN INITIAL TOP-LEFT PIXEL X,Y COORD TO EACH TILE NUMBER*********/
+            int tileOffset = 0;
+            int counter = 0;
+            int xPixel = 0;
+            int yPixel = 0;
+
+            // Do the odd rows
+            for (int y = 0; y < 65; y++)
+            {
+                for (int x = 0; x < 33; x++)
+                {
+                    xPixel = (x * 32) - 16;
+                    yPixel = (y * 16) - 8;
+                    tileCoords[tileOffset].X = xPixel;
+                    tileCoords[tileOffset].Y = yPixel;
+
+                    tileOffset++;
+                }
+                counter += 65;
+                tileOffset = counter;
+            }
+
+            // Do the even rows
+            tileOffset = 33;
+            counter = 0;
+            for (int y = 0; y < 64; y++)
+            {
+                for (int x = 0; x < 32; x++)
+                {
+                    xPixel = (x * 32);
+                    yPixel = (y * 16);
+                    tileCoords[tileOffset].X = xPixel;
+                    tileCoords[tileOffset].Y = yPixel;
+
+                    tileOffset++;
+                }
+                counter += 65;
+                tileOffset = counter + 33;
+            }
+
+            int currTilePosX = 0;
+            int currTilePosY = 0;
+            int offset = 0;
+
+            /*********ASSIGN EACH PIXEL (1024 * 1024) A TILE NUMBER*********/
+            while (offset < 0x20C2)
+            {
+                currTilePosX = tileCoords[offset / 2].X;
+                currTilePosY = tileCoords[offset / 2].Y;
+                SetTileNum(offset, currTilePosX, currTilePosY);
+                offset += 2;
+            }
+
+            /*********ASSIGN EACH PIXEL (1024 * 1024) X,Y ORTHOGRAPHIC COORDS*********/
+            int[] orthCoord = new int[32 * 128];
+            int[] orthCoordX = new int[32];
+            int[] orthCoordY = new int[128];
+
+            for (int y = 0; y < 128; y++)
+            {
+                for (int x = 0; x < 32; x++)
+                {
+                    orthCoordX[x] = (((x & 127) * 32) + (16 * (y & 1))) - 16;
+                    orthCoordY[y] = (y * 8) - 8;
+                    SetCoords(x, y, orthCoordX[x], orthCoordY[y]);
+                }
+            }
+        }
+        private void SetTileNum(int offset, int currTilePosX, int currTilePosY)
+        {
+            int leftEdge = 14;
+            int rightEdge = 18;
+            int temp = 0;
+
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = leftEdge; x < rightEdge; x++)
+                {
+                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
+                    if (temp >= 0 && temp < (1024 * 1024) &&
+                        (x + currTilePosX) < 1024 &&
+                        (x + currTilePosX) >= 0 &&
+                        pixelTiles[temp] == 0)
+                        pixelTiles[temp] = offset / 2;
+                }
+
+                leftEdge -= 2;
+                rightEdge += 2;
+            }
+
+            leftEdge = 0;
+            rightEdge = 32;
+
+            for (int y = 8; y < 16; y++)
+            {
+                for (int x = leftEdge; x < rightEdge; x++)
+                {
+                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
+                    if (temp >= 0 && temp < (1024 * 1024) &&
+                        (x + currTilePosX) < 1024 &&
+                        (x + currTilePosX) >= 0 &&
+                        pixelTiles[temp] == 0)
+                        pixelTiles[temp] = offset / 2;
+                }
+
+                leftEdge += 2;
+                rightEdge -= 2;
+            }
+        }
+        private void SetCoords(int orthX, int orthY, int currTilePosX, int currTilePosY)
+        {
+            int leftEdge = 14;
+            int rightEdge = 18;
+            int temp = 0;
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = leftEdge; x < rightEdge; x++)
+                {
+                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
+                    if (temp >= 0 && temp < (1024 * 1024) && (x + currTilePosX) < 1024 && (x + currTilePosX) >= 0)
+                    {
+                        pixelCoords[temp].X = orthX;
+                        pixelCoords[temp].Y = orthY;
+                    }
+                }
+                leftEdge -= 2;
+                rightEdge += 2;
+            }
+            leftEdge = 0;
+            rightEdge = 32;
+            for (int y = 8; y < 16; y++)
+            {
+                for (int x = leftEdge; x < rightEdge; x++)
+                {
+                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
+                    if (temp >= 0 && temp < (1024 * 1024) && (x + currTilePosX) < 1024 && (x + currTilePosX) >= 0)
+                    {
+                        pixelCoords[temp].X = orthX;
+                        pixelCoords[temp].Y = orthY;
+                    }
+                }
+                leftEdge += 2;
+                rightEdge -= 2;
+            }
+        }
+        //
         public void RefreshTilemapImage(Tilemap map, int offset)
         {
             SolidityTile[] tiles = Model.SolidTiles;
@@ -832,195 +1026,6 @@ namespace LAZYSHELL
                     if (offset >= map.Tilemap_Bytes.Length) break;
                 }
                 twoTiles = !twoTiles;
-            }
-        }
-        private int[] GetQuadPixels(bool isBase, bool isWater, int type, int[][] src)
-        {
-            int format = 0;
-
-            if (!isBase && !isWater) // it is an overhead tile
-            {
-                if (tile.SpecialTileFormat == 1)    // vines (green)
-                    format = 3;
-                else
-                    format = 0; // overhead (white)
-            }
-            else if (isBase && !isWater && tile.OverheadTileCoordZ != 0) // it is a base tile and there is something overhead
-            {
-                if (tile.SpecialTileFormat == 1)    // vines (green)
-                    format = 3 + 4;
-                else if (tile.SpecialTileFormat == 2)   // water (blue)
-                    format = 2 + 4;
-                else
-                    format = 0 + 4;
-            }
-            else if (!isBase && isWater) // it is an overhead water tile
-                format = 2;
-            else if (isBase && isWater && (tile.OverheadTileCoordZ != 0 || tile.WaterTileCoordZ != 0)) // it is a base water tile and there is something overhead
-                format = 2 + 4;
-            else if (isBase && isWater) // it is a base water tile and there is nothing overhead
-                format = 2;
-            else // it is a base tile and there is nothing overhead
-            {
-                if (tile.SpecialTileFormat == 1)
-                    format = 3;
-                else if (tile.SpecialTileFormat == 2)
-                    format = 2;
-                else
-                    format = 0;
-            }
-            if (tile.SolidTile && !isBase && tile.OverheadTileCoordZ != 0)
-                format = 1;
-            else if (tile.SolidTile && isBase && tile.OverheadTileCoordZ == 0)
-                format = 1;
-
-            return src[format];
-        }
-        private void SetIsometric()
-        {
-            /*********ASSIGN AN INITIAL TOP-LEFT PIXEL X,Y COORD TO EACH TILE NUMBER*********/
-            int tileOffset = 0;
-            int counter = 0;
-            int xPixel = 0;
-            int yPixel = 0;
-
-            // Do the odd rows
-            for (int y = 0; y < 65; y++)
-            {
-                for (int x = 0; x < 33; x++)
-                {
-                    xPixel = (x * 32) - 16;
-                    yPixel = (y * 16) - 8;
-                    tileCoords[tileOffset].X = xPixel;
-                    tileCoords[tileOffset].Y = yPixel;
-
-                    tileOffset++;
-                }
-                counter += 65;
-                tileOffset = counter;
-            }
-
-            // Do the even rows
-            tileOffset = 33;
-            counter = 0;
-            for (int y = 0; y < 64; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    xPixel = (x * 32);
-                    yPixel = (y * 16);
-                    tileCoords[tileOffset].X = xPixel;
-                    tileCoords[tileOffset].Y = yPixel;
-
-                    tileOffset++;
-                }
-                counter += 65;
-                tileOffset = counter + 33;
-            }
-
-            int currTilePosX = 0;
-            int currTilePosY = 0;
-            int offset = 0;
-
-            /*********ASSIGN EACH PIXEL (1024 * 1024) A TILE NUMBER*********/
-            while (offset < 0x20C2)
-            {
-                currTilePosX = tileCoords[offset / 2].X;
-                currTilePosY = tileCoords[offset / 2].Y;
-                SetTileNum(offset, currTilePosX, currTilePosY);
-                offset += 2;
-            }
-
-            /*********ASSIGN EACH PIXEL (1024 * 1024) X,Y ORTHOGRAPHIC COORDS*********/
-            int[] orthCoord = new int[32 * 128];
-            int[] orthCoordX = new int[32];
-            int[] orthCoordY = new int[128];
-
-            for (int y = 0; y < 128; y++)
-            {
-                for (int x = 0; x < 32; x++)
-                {
-                    orthCoordX[x] = (((x & 127) * 32) + (16 * (y & 1))) - 16;
-                    orthCoordY[y] = (y * 8) - 8;
-                    SetCoords(x, y, orthCoordX[x], orthCoordY[y]);
-                }
-            }
-        }
-        private void SetTileNum(int offset, int currTilePosX, int currTilePosY)
-        {
-            int leftEdge = 14;
-            int rightEdge = 18;
-            int temp = 0;
-
-            for (int y = 0; y < 8; y++)
-            {
-                for (int x = leftEdge; x < rightEdge; x++)
-                {
-                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
-                    if (temp >= 0 && temp < (1024 * 1024) &&
-                        (x + currTilePosX) < 1024 &&
-                        (x + currTilePosX) >= 0 &&
-                        pixelTiles[temp] == 0)
-                        pixelTiles[temp] = offset / 2;
-                }
-
-                leftEdge -= 2;
-                rightEdge += 2;
-            }
-
-            leftEdge = 0;
-            rightEdge = 32;
-
-            for (int y = 8; y < 16; y++)
-            {
-                for (int x = leftEdge; x < rightEdge; x++)
-                {
-                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
-                    if (temp >= 0 && temp < (1024 * 1024) &&
-                        (x + currTilePosX) < 1024 &&
-                        (x + currTilePosX) >= 0 &&
-                        pixelTiles[temp] == 0)
-                        pixelTiles[temp] = offset / 2;
-                }
-
-                leftEdge += 2;
-                rightEdge -= 2;
-            }
-        }
-        private void SetCoords(int orthX, int orthY, int currTilePosX, int currTilePosY)
-        {
-            int leftEdge = 14;
-            int rightEdge = 18;
-            int temp = 0;
-            for (int y = 0; y < 8; y++)
-            {
-                for (int x = leftEdge; x < rightEdge; x++)
-                {
-                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
-                    if (temp >= 0 && temp < (1024 * 1024) && (x + currTilePosX) < 1024 && (x + currTilePosX) >= 0)
-                    {
-                        pixelCoords[temp].X = orthX;
-                        pixelCoords[temp].Y = orthY;
-                    }
-                }
-                leftEdge -= 2;
-                rightEdge += 2;
-            }
-            leftEdge = 0;
-            rightEdge = 32;
-            for (int y = 8; y < 16; y++)
-            {
-                for (int x = leftEdge; x < rightEdge; x++)
-                {
-                    temp = x + currTilePosX + ((y + currTilePosY) * 1024);
-                    if (temp >= 0 && temp < (1024 * 1024) && (x + currTilePosX) < 1024 && (x + currTilePosX) >= 0)
-                    {
-                        pixelCoords[temp].X = orthX;
-                        pixelCoords[temp].Y = orthY;
-                    }
-                }
-                leftEdge += 2;
-                rightEdge -= 2;
             }
         }
     }

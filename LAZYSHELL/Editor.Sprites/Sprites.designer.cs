@@ -44,8 +44,6 @@ namespace LAZYSHELL
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.characterNumLabel = new System.Windows.Forms.Label();
             this.panelMolds = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -92,7 +90,6 @@ namespace LAZYSHELL
             this.openGraphics = new System.Windows.Forms.ToolStripButton();
             this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSequences = new System.Windows.Forms.Panel();
-            this.contextMenuStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -109,6 +106,7 @@ namespace LAZYSHELL
             // number
             // 
             this.number.AutoSize = false;
+            this.number.ContextMenuStrip = null;
             this.number.Hexadecimal = false;
             this.number.Increment = new decimal(new int[] {
             1,
@@ -167,21 +165,6 @@ namespace LAZYSHELL
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addThisToNotesDatabaseToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.ShowImageMargin = false;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(192, 26);
-            // 
-            // addThisToNotesDatabaseToolStripMenuItem
-            // 
-            this.addThisToNotesDatabaseToolStripMenuItem.Name = "addThisToNotesDatabaseToolStripMenuItem";
-            this.addThisToNotesDatabaseToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.addThisToNotesDatabaseToolStripMenuItem.Text = "Add this to notes database...";
             // 
             // characterNumLabel
             // 
@@ -597,7 +580,7 @@ namespace LAZYSHELL
             // 
             this.name.DropDownHeight = 500;
             this.name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.name.DropDownWidth = 400;
+            this.name.DropDownWidth = 350;
             this.name.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.name.IntegralHeight = false;
             this.name.Name = "name";
@@ -718,7 +701,6 @@ namespace LAZYSHELL
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SPRITES - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sprites_FormClosing);
-            this.contextMenuStrip2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
@@ -765,8 +747,6 @@ namespace LAZYSHELL
         private Panel panelMolds;
         private ToolTip toolTip2;
         private Label characterNumLabel;
-        private ContextMenuStrip contextMenuStrip2;
-        private ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
         private ToolStrip toolStrip2;
         private ToolStripButton save;
         private ToolStripSeparator toolStripSeparator11;

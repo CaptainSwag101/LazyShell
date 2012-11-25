@@ -148,7 +148,7 @@ namespace LAZYSHELL
 
         private void TileEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            buttonReset_Click(null, null);
+            buttonReset.PerformClick();
         }
 
         private void tilePalette_ValueChanged(object sender, EventArgs e)

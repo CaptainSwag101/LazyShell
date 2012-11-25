@@ -32,6 +32,7 @@ namespace LAZYSHELL
         private SPCCommand copiedSSC;
         private Interpreter interpreter = Interpreter.Instance;
         private Previewer previewer;
+        private EditLabel labelWindow;
         // control arrays
         private ComboBox[] sampleIndexes;
         private NumericUpDown[] volumes;
@@ -48,6 +49,7 @@ namespace LAZYSHELL
             this.commandStack = new CommandStack();
             Do.AddShortcut(wToolStrip1, Keys.Control | Keys.Z, new EventHandler(undo_Click));
             Do.AddShortcut(wToolStrip1, Keys.Control | Keys.Y, new EventHandler(redo_Click));
+            labelWindow = new EditLabel(trackName, trackNum, "Songs", true);
             newCommands.Items.AddRange(Lists.SPCCommands);
             percussivePitch.Items.AddRange(Lists.Pitches);
             sampleIndexes = new ComboBox[20];
@@ -237,6 +239,7 @@ namespace LAZYSHELL
                 percussiveBalance.Value = spc.Percussives[percussives.SelectedIndex].Balance;
             }
         }
+        //
         public bool CalculateFreeSpace(int type, bool label, bool warning)
         {
             int offset = 0;
@@ -274,7 +277,7 @@ namespace LAZYSHELL
                 {
                     if (sound == null || sound.Channels == null)
                         continue;
-                    offset += sound.GetLength();
+                    offset += sound.Length();
                 }
             }
             else
@@ -285,7 +288,7 @@ namespace LAZYSHELL
                 {
                     if (sound == null || sound.Channels == null)
                         continue;
-                    offset += sound.GetLength();
+                    offset += sound.Length();
                 }
             }
             int left = endOffset - offset;
@@ -304,6 +307,20 @@ namespace LAZYSHELL
                     MessageBox.Show("Not enough space to save all battle sound effects.", "LAZY SHELL");
             }
             return left >= 0;
+        }
+        private void ResizePanels()
+        {
+            if (scoreViewer.Checked)
+            {
+                groupBoxSV.Width = (int)(0.50 * (double)panelSPC.Width);
+                groupBoxCT.Width = (int)(0.50 * (double)panelSPC.Width - 6.0);
+                groupBoxCT.Left = (int)(0.50 * (double)panelSPC.Width + 6.0);
+            }
+            else
+            {
+                groupBoxCT.Width = panelSPC.Width - 542;
+                groupBoxCT.Left = 542;
+            }
         }
         private void ControlDisassemble()
         {
@@ -493,7 +510,11 @@ namespace LAZYSHELL
                         parameterByte2.Enabled = true;
                         parameterByte2.Value = mouseDownSSC.Param2;
                         if (mouseDownSSC.Opcode == 0xF1)
+                        {
+                            labelParameter3.Text = "Delay = ";
+                            parameterByte3.Enabled = true;
                             parameterByte3.Value = mouseDownSSC.Param3;
+                        }
                         break;
                     case 0xF2:
                         if (mouseDownSSC.Opcode == 0xF2)
@@ -507,7 +528,10 @@ namespace LAZYSHELL
                     case 0xF4:
                         labelParameter1.Text = "Roughness = ";
                         labelParameter2.Text = "Wavelength = ";
+                        opcodeByte1.Value = mouseDownSSC.Opcode;
+                        parameterByte1.Enabled = true;
                         parameterByte1.Value = mouseDownSSC.Param1;
+                        parameterByte2.Enabled = true;
                         parameterByte2.Value = mouseDownSSC.Param2;
                         break;
                     case 0xF6:
@@ -643,6 +667,7 @@ namespace LAZYSHELL
                 spc.CreateNotes();
             CalculateFreeSpace(Type, true, false);
         }
+        //
         private bool ImportSPCScript(ref List<SPCCommand> sourceCommands)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -653,10 +678,10 @@ namespace LAZYSHELL
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return false;
             string path = openFileDialog.FileName;
-            TextReader tr;
-            BinaryFormatter b = new BinaryFormatter();
-            tr = new StreamReader(path);
-            string[] strings = Interpreter.SPCScriptCommands;
+            TextReader tr = new StreamReader(path);
+            string[] strings = Interpreter.SPCCommands;
+            for (int i = 0; i < strings.Length; i++)
+                strings[i] = Regex.Replace(strings[i], "\\{[^^]+", "");
             List<SPCCommand> commands = new List<SPCCommand>();
             int octave = 6;
             bool octaveIsSet = false;
@@ -784,7 +809,7 @@ namespace LAZYSHELL
                             duration = Convert.ToByte(line, 10);
                             // check if duration a standard beat length
                             for (int i = 0; i < 13; i++)
-                                if (duration == Model.Data[0x042304 + i])
+                                if (duration == Model.ROM[0x042304 + i])
                                     beat = (Beat)i;
                         }
                         if (beat == Beat.NULL)
@@ -912,7 +937,7 @@ namespace LAZYSHELL
                     }
                     #endregion
                     // create the command data
-                    length = SPCScriptEnums.SPCScriptLengths[opcode];
+                    length = SPCScriptEnums.CommandLengths[opcode];
                     command = new byte[length];
                     if (length > 0)
                         command[0] = (byte)opcode;
@@ -1579,7 +1604,7 @@ namespace LAZYSHELL
                     // create the command data
                     if (channel != -1)
                     {
-                        length = SPCScriptEnums.SPCScriptLengths[opcode];
+                        length = SPCScriptEnums.CommandLengths[opcode];
                         command = new byte[length];
                         if (length > 0) command[0] = (byte)opcode;
                         if (length > 1) command[1] = (byte)parameter1;
@@ -1974,6 +1999,7 @@ namespace LAZYSHELL
                 }
             }
         }
+        //
         private int GetNoteIndex(int x)
         {
             if (mouseDownChannel == -1)
@@ -2014,20 +2040,7 @@ namespace LAZYSHELL
             }
             return index;
         }
-        private void ResizePanels()
-        {
-            if (scoreViewer.Checked)
-            {
-                groupBoxSV.Width = (int)(0.50 * (double)panelSPC.Width);
-                groupBoxCT.Width = (int)(0.50 * (double)panelSPC.Width - 6.0);
-                groupBoxCT.Left = (int)(0.50 * (double)panelSPC.Width + 6.0);
-            }
-            else
-            {
-                groupBoxCT.Width = panelSPC.Width - 542;
-                groupBoxCT.Left = 542;
-            }
-        }
+        //
         public void Assemble(bool warning)
         {
             int offset = 0x045526;
@@ -2055,6 +2068,7 @@ namespace LAZYSHELL
                 trackName.Items.AddRange(Lists.Numerize(Lists.MusicNames));
                 for (int i = 2; i < 8; i++)
                     activeChannels[i].Visible = true;
+                labelWindow.SetElement("Songs");
             }
             else if (Type == 1)
             {
@@ -2062,6 +2076,7 @@ namespace LAZYSHELL
                 trackName.Items.AddRange(Lists.Numerize(Lists.SoundNames));
                 for (int i = 2; i < 8; i++)
                     activeChannels[i].Visible = false;
+                labelWindow.SetElement("Sound FX (Event)");
             }
             else
             {
@@ -2069,6 +2084,7 @@ namespace LAZYSHELL
                 trackName.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
                 for (int i = 2; i < 8; i++)
                     activeChannels[i].Visible = false;
+                labelWindow.SetElement("Sound FX (Battle)");
             }
             if (settings.RememberLastIndex)
                 settings.LastSoundType = soundType.SelectedIndex;
@@ -2236,7 +2252,7 @@ namespace LAZYSHELL
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
             if (Type == 0)
-                Model.SPCs[Index] = new SPCTrack(Model.Data, Index);
+                Model.SPCs[Index] = new SPCTrack(Index);
             else if (Type == 1)
                 Model.SPCEvent[Index] = new SPCSound(Index, 0);
             else
@@ -2247,11 +2263,11 @@ namespace LAZYSHELL
         {
             int offset;
             if (Type == 0)
-                offset = Bits.Get24Bit(Model.Data, Index * 3 + 0x042748);
+                offset = Bits.GetInt24(Model.ROM, Index * 3 + 0x042748);
             else if (Type == 1)
-                offset = Bits.GetShort(Model.Data, Index * 4 + 0x042826) - 0x3400 + 0x042C26;
+                offset = Bits.GetShort(Model.ROM, Index * 4 + 0x042826) - 0x3400 + 0x042C26;
             else
-                offset = Bits.GetShort(Model.Data, Index * 4 + 0x043E26) - 0x3400 + 0x044226;
+                offset = Bits.GetShort(Model.ROM, Index * 4 + 0x043E26) - 0x3400 + 0x044226;
             Model.HexViewer.Offset = offset & 0x3FFFF0;
             Model.HexViewer.SelectionStart = (offset & 15) * 3;
             Model.HexViewer.Compare();
@@ -2262,11 +2278,11 @@ namespace LAZYSHELL
             if (previewer != null && previewer.Visible)
                 previewer.Close();
             if (Type == 0)
-                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCTrack);
+                previewer = new Previewer(Index, autoLaunch.Checked, EType.SPCTrack);
             else if (Type == 1)
-                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCEvent);
+                previewer = new Previewer(Index, autoLaunch.Checked, EType.SPCEvent);
             else if (Type == 2)
-                previewer = new Previewer(Index, autoLaunch.Checked, PreviewType.SPCBattle);
+                previewer = new Previewer(Index, autoLaunch.Checked, EType.SPCBattle);
             if (!autoLaunch.Checked)
                 previewer.Show();
         }
@@ -2373,7 +2389,7 @@ namespace LAZYSHELL
                 if (index < spc.Channels[mouseOverChannel].Count)
                 {
                     mouseOverSSC = spc.Channels[mouseOverChannel][index];
-                    labelCommand.Text = interpreter.InterpretSPCCommand(mouseOverSSC);
+                    labelCommand.Text = interpreter.Interpret(mouseOverSSC);
                     labelBits.Text = "{" + BitConverter.ToString(mouseOverSSC.CommandData) + "}";
                     labelIndex.Text = "Index " + index;
                     channelTracks.Cursor = Cursors.Hand;
@@ -2505,7 +2521,7 @@ namespace LAZYSHELL
                 opcode = 0xB6;
             else
                 opcode = newCommands.SelectedIndex + 0xC2;
-            int length = SPCScriptEnums.SPCScriptLengths[opcode];
+            int length = SPCScriptEnums.CommandLengths[opcode];
             SPCCommand ssc;
             if (Type == 0)
                 ssc = new SPCCommand(new byte[length], (SPCTrack)spc, channelIndex);
@@ -2960,6 +2976,10 @@ namespace LAZYSHELL
             scoreViewPicture.Invalidate();
         }
         private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
+        {
+            scoreViewPicture.Invalidate();
+        }
+        private void groupBoxSV_Resize(object sender, EventArgs e)
         {
             scoreViewPicture.Invalidate();
         }

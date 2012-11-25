@@ -23,7 +23,7 @@ namespace LAZYSHELL
         private Sprite sprite { get { return spritesEditor.Sprite; } set { spritesEditor.Sprite = value; } }
         private SpriteMolds molds { get { return spritesEditor.Molds; } set { spritesEditor.Molds = value; } }
         private Animation animation { get { return spritesEditor.Animation; } set { spritesEditor.Animation = value; } }
-        private GraphicPalette image { get { return spritesEditor.Image; } set { spritesEditor.Image = value; } }
+        private ImagePacket image { get { return spritesEditor.Image; } set { spritesEditor.Image = value; } }
         private int[] palette { get { return spritesEditor.Palette; } }
         private int availableBytes { get { return spritesEditor.AvailableBytes; } set { spritesEditor.AvailableBytes = value; } }
         // local variables
@@ -171,6 +171,7 @@ namespace LAZYSHELL
                 pictureBoxSequence.Invalidate();
             }
         }
+        //
         private void InitializeFrames()
         {
             updating = true;
@@ -220,7 +221,7 @@ namespace LAZYSHELL
                 PictureBox frame = new PictureBox();
                 frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
-                frame.Location = new Point(i * (this.bounds.Width + 4) + 4, 
+                frame.Location = new Point(i * (this.bounds.Width + 4) + 4,
                     (this.frames.Height / 2) - (this.bounds.Height / 2));
                 frame.Name = "frame" + i;
                 frame.Size = new Size(bounds.Width, bounds.Height);
@@ -245,6 +246,7 @@ namespace LAZYSHELL
             }
             frames.Width = sequence.Frames.Count * (bounds.Width + 4) + Screen.PrimaryScreen.WorkingArea.Width;
         }
+        //
         public void InvalidateImages()
         {
             pictureBoxSequence.Invalidate();
@@ -253,9 +255,9 @@ namespace LAZYSHELL
         }
         public void SetSequenceFrameImages()
         {
-            this.bounds = new Rectangle(256, 256, 0, 0);
             this.sequenceImages.Clear();
-            int i = 0;
+            Point UL = new Point(256, 256);
+            Point BR = new Point(0, 0);
             foreach (Sequence.Frame frame in sequence.Frames)
             {
                 if (frame.Mold < animation.Molds.Count)
@@ -264,22 +266,28 @@ namespace LAZYSHELL
                     this.frameImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
                     this.sequenceImages.Add(new Bitmap(frameImage));
                     Rectangle bounds = Do.Crop(pixels, 256, 256);
-                    if (bounds.X - 2 < this.bounds.X - 2)
-                        this.bounds.X = bounds.X - 2;
-                    if (bounds.Y - 2 < this.bounds.Y - 2)
-                        this.bounds.Y = bounds.Y - 2;
-                    if (bounds.Width + 4 > this.bounds.Width + 4)
-                        this.bounds.Width = bounds.Width + 4;
-                    if (bounds.Height + 4 > this.bounds.Height + 4)
-                        this.bounds.Height = bounds.Height + 4;
+                    // if the mold is empty
+                    if (bounds.X == 0 &&
+                        bounds.Y == 0 &&
+                        bounds.Width == 1 &&
+                        bounds.Height == 1)
+                        continue;
+                    if (bounds.X < UL.X)
+                        UL.X = bounds.X;
+                    if (bounds.Y < UL.Y)
+                        UL.Y = bounds.Y;
+                    if (bounds.X + bounds.Width > BR.X)
+                        BR.X = bounds.X + bounds.Width;
+                    if (bounds.Y + bounds.Height > BR.Y)
+                        BR.Y = bounds.Y + bounds.Height;
                 }
                 else
-                {
-                    //MessageBox.Show("Mold for frame #" + i.ToString() + " is not valid. Change to lower value.", "LAZY SHELL");
                     this.sequenceImages.Add(new Bitmap(20, 20));
-                }
-                i++;
             }
+            this.bounds.X = UL.X - 1;
+            this.bounds.Y = UL.Y - 1;
+            this.bounds.Width = BR.X - UL.X + 2;
+            this.bounds.Height = BR.Y - UL.Y + 2;
             pictureBoxSequence.Size = this.bounds.Size;
             SetSequenceFrameImage();
         }
@@ -496,6 +504,31 @@ namespace LAZYSHELL
             if (updating) return;
             sequence.Active = sequenceActive.Checked;
         }
+        private void exportAnimatedGIF_Click(object sender, EventArgs e)
+        {
+            if (sequences.SelectedIndex < 0)
+                return;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Image file (*.gif)|*.gif";
+            saveFileDialog.FileName = "sequence." + sequences.SelectedIndex + ".gif";
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.Title = "Save Animated GIF";
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            else
+                Settings.Default.LastDirectory = saveFileDialog.FileName;
+            //
+            foreach (Mold m in animation.Molds)
+            {
+                foreach (Mold.Tile t in m.Tiles)
+                    t.DrawSubtiles(sprite.Graphics, sprite.Palette, m.Gridplane);
+            }
+            List<int> durations = new List<int>();
+            Bitmap[] croppedFrames = sequence.GetSequenceImages(animation, ref durations);
+            //
+            if (croppedFrames.Length > 0)
+                Do.ImagesToAnimatedGIF(croppedFrames, durations.ToArray(), saveFileDialog.FileName);
+        }
         private void newSequence_Click(object sender, EventArgs e)
         {
             if (animation.Sequences.Count == 16)
@@ -634,8 +667,8 @@ namespace LAZYSHELL
         }
         private void duplicateFrame_Click(object sender, EventArgs e)
         {
-            copy_Click(null, null);
-            paste_Click(null, null);
+            copy.PerformClick();
+            paste.PerformClick();
         }
         private void deleteFrame_Click(object sender, EventArgs e)
         {

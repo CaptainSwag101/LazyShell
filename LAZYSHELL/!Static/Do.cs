@@ -341,7 +341,7 @@ namespace LAZYSHELL
         {
             byte[] temp = new byte[src.Length];
             int o = 0;
-            switch (fontCharacters[0].FontType)
+            switch (fontCharacters[0].Type)
             {
                 case FontType.Menu: // menu
                     for (int y = 0; y < size.Height; y++)
@@ -407,14 +407,14 @@ namespace LAZYSHELL
             byte[] character;
             for (int i = 0; i * fontCharacters[0].Graphics.Length < temp.Length && i < temp.Length; i++)
             {
-                if (fontCharacters[i].FontType == FontType.Dialogue && (i == 59 || i == 61))    // skip [ and ]
+                if (fontCharacters[i].Type == FontType.Dialogue && (i == 59 || i == 61))    // skip [ and ]
                     continue;
                 character = Bits.GetByteArray(temp, i * fontCharacters[i].Graphics.Length, fontCharacters[i].Graphics.Length);
                 CopyOverBPPGraphics(
                     character, fontCharacters[i].Graphics,
                     new Rectangle(0, 0, fontCharacters[i].MaxWidth, fontCharacters[i].Height),
                     fontCharacters[i].MaxWidth / 8, 0, 0x10);
-                if (fontCharacters[i].FontType != FontType.Triangles)
+                if (fontCharacters[i].Type != FontType.Triangles)
                     fontCharacters[i].Width = (byte)(fontCharacters[i].GetRightMostPixel(palette) + 1);
             }
         }
@@ -919,15 +919,22 @@ namespace LAZYSHELL
                 for (int b = a; b < tiles_a.Count; b++)
                 {
                     Subtile tile_b = tiles_a[b];
-                    if (a == b) continue;   // cannot be duplicate of self
-                    if (Bits.Compare(tile_a.Pixels, tile_b.Pixels)) // if a duplicate...
+                    // always remove if empty
+                    if (Bits.Empty(tile_b.Pixels))
+                        tiles_b.Remove(tile_b);
+                    // cannot be duplicate of self
+                    if (a == b)
+                        continue;
+                    // if a duplicate...
+                    if (Bits.Compare(tile_a.Pixels, tile_b.Pixels))
                     {
                         // first set the tile to the one that it's a duplicate of
                         tile_b.Index = a;
                         // then remove
                         tiles_b.Remove(tile_b);
                     }
-                    if (checkIfFlipped) // if effect tileset, don't bother setting status
+                    // if effect tileset, don't bother setting status
+                    if (checkIfFlipped)
                     {
                         byte status = GetFlippedStatus(tile_a.Pixels, tile_b.Pixels);
                         if ((status & 0x40) == 0x40)
@@ -1267,6 +1274,39 @@ namespace LAZYSHELL
             Subtile tile = new Subtile(num, graphics, offset, palette);
             tile.Palette = paletteIndex;
             return tile;
+        }
+        public static int[] DrawFontTable(FontCharacter[] font, int[] palette,
+            int tableWidth, int tableHeight, int cellWidth, int cellHeight, int rowSize, int colSize)
+        {
+            return DrawFontTable(font, palette, 0, tableWidth, tableHeight, cellWidth, cellHeight, rowSize, colSize);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="font">The font character collection.</param>
+        /// <param name="palette">The palette to draw with.</param>
+        /// <param name="padding">Distance, in pixels, of letter from top-left of cell.</param>
+        /// <param name="tableWidth">Width, in pixels, of the font table.</param>
+        /// <param name="tableHeight">Height, in pixels, of the font table.</param>
+        /// <param name="cellWidth">Width, in pixels, of each table cell.</param>
+        /// <param name="cellHeight">Height, in pixels, of each table cell.</param>
+        /// <param name="rowSize">Number of cells per row.</param>
+        /// <param name="colSize">Number of cells per column.</param>
+        /// <returns></returns>
+        public static int[] DrawFontTable(FontCharacter[] font, int[] palette, int padding,
+            int tableWidth, int tableHeight, int cellWidth, int cellHeight, int rowSize, int colSize)
+        {
+            int[] pixels = new int[tableWidth * tableHeight];
+            for (int y = 0; y < colSize; y++)
+            {
+                for (int x = 0; x < rowSize; x++)
+                {
+                    int index = y * rowSize + x;
+                    Do.PixelsToPixels(font[index].GetPixels(palette), pixels, tableWidth,
+                        x * cellWidth + padding, y * cellHeight + padding, font[index].MaxWidth, font[index].Height, true);
+                }
+            }
+            return pixels;
         }
         /// <summary>
         /// Modify a single pixel in a block of 2bpp or 4bpp graphics.
@@ -1811,16 +1851,16 @@ namespace LAZYSHELL
         {
             for (int i = 0; i < 4; i++)
             {
-                tile.Subtiles[i].Mirror = !tile.Subtiles[i].Mirror;
-                FlipHorizontal(tile.Subtiles[i].Pixels, 8, 8);
-                FlipHorizontal(tile.Subtiles[i].Colors, 8, 8);
+                tile.Subtile_tiles[i].Mirror = !tile.Subtile_tiles[i].Mirror;
+                FlipHorizontal(tile.Subtile_tiles[i].Pixels, 8, 8);
+                FlipHorizontal(tile.Subtile_tiles[i].Colors, 8, 8);
             }
-            Subtile temp = tile.Subtiles[0].Copy();
-            tile.Subtiles[1].CopyTo(tile.Subtiles[0]);
-            temp.CopyTo(tile.Subtiles[1]);
-            temp = tile.Subtiles[2].Copy();
-            tile.Subtiles[3].CopyTo(tile.Subtiles[2]);
-            temp.CopyTo(tile.Subtiles[3]);
+            Subtile temp = tile.Subtile_tiles[0].Copy();
+            tile.Subtile_tiles[1].CopyTo(tile.Subtile_tiles[0]);
+            temp.CopyTo(tile.Subtile_tiles[1]);
+            temp = tile.Subtile_tiles[2].Copy();
+            tile.Subtile_tiles[3].CopyTo(tile.Subtile_tiles[2]);
+            temp.CopyTo(tile.Subtile_tiles[3]);
         }
         /// <summary>
         /// Flip vertically a 16x16 tile.
@@ -1830,16 +1870,16 @@ namespace LAZYSHELL
         {
             for (int i = 0; i < 4; i++)
             {
-                tile.Subtiles[i].Invert = !tile.Subtiles[i].Invert;
-                FlipVertical(tile.Subtiles[i].Pixels, 8, 8);
-                FlipVertical(tile.Subtiles[i].Colors, 8, 8);
+                tile.Subtile_tiles[i].Invert = !tile.Subtile_tiles[i].Invert;
+                FlipVertical(tile.Subtile_tiles[i].Pixels, 8, 8);
+                FlipVertical(tile.Subtile_tiles[i].Colors, 8, 8);
             }
-            Subtile temp = tile.Subtiles[0].Copy();
-            tile.Subtiles[2].CopyTo(tile.Subtiles[0]);
-            temp.CopyTo(tile.Subtiles[2]);
-            temp = tile.Subtiles[1].Copy();
-            tile.Subtiles[3].CopyTo(tile.Subtiles[1]);
-            temp.CopyTo(tile.Subtiles[3]);
+            Subtile temp = tile.Subtile_tiles[0].Copy();
+            tile.Subtile_tiles[2].CopyTo(tile.Subtile_tiles[0]);
+            temp.CopyTo(tile.Subtile_tiles[2]);
+            temp = tile.Subtile_tiles[1].Copy();
+            tile.Subtile_tiles[3].CopyTo(tile.Subtile_tiles[1]);
+            temp.CopyTo(tile.Subtile_tiles[3]);
         }
         /// <summary>
         /// Flip horizontally a set of 16x16 tiles.
@@ -2358,7 +2398,7 @@ namespace LAZYSHELL
                         for (int x = 0; x < width / 16; x++)
                         {
                             Mold.Tile tile = new Mold.Tile();
-                            tile.SubTiles = new ushort[4];
+                            tile.Subtile_bytes = new ushort[4];
                             tile.X = (byte)(x * 16);
                             tile.Y = (byte)(y * 16);
                             // create pixel array of 16x16 tile
@@ -2372,7 +2412,7 @@ namespace LAZYSHELL
                                 int[] dst = GetPixelRegion(dst_tile, 16, 16, 8, 8, (s % 2) * 8, (s / 2) * 8);
                                 if (Bits.Empty(dst))
                                 {
-                                    tile.SubTiles[s] = 0;
+                                    tile.Subtile_bytes[s] = 0;
                                     continue;
                                 }
                                 // read each 8x8 tile from culled graphic set and assign indexes
@@ -2385,10 +2425,10 @@ namespace LAZYSHELL
                                         if (Bits.Compare(src, dst))
                                         {
                                             // set index of subtile
-                                            tile.SubTiles[s] = (ushort)Math.Min(512, index + 1 + startingIndex);
+                                            tile.Subtile_bytes[s] = (ushort)Math.Min(512, index + 1 + startingIndex);
                                             // if index over 255, needs to be 16bit
                                             if (index > 255)
-                                                tile.TileFormat = 1;
+                                                tile.Format = 1;
                                         }
                                     }
                                 }
@@ -2413,12 +2453,12 @@ namespace LAZYSHELL
                     // create tile and initialize properties
                     Mold.Tile tile = new Mold.Tile();
                     tile.Gridplane = true;
-                    tile.TileSize = (width / 8) * (height / 8) + 1;
-                    tile.SubTiles = new ushort[16];
-                    if (width == 24 && height == 24) tile.TileFormat = 0;
-                    else if (width == 24 && height == 32) tile.TileFormat = 1;
-                    else if (width == 32 && height == 24) tile.TileFormat = 2;
-                    else if (width == 32 && height == 32) tile.TileFormat = 3;
+                    tile.Length = (width / 8) * (height / 8) + 1;
+                    tile.Subtile_bytes = new ushort[16];
+                    if (width == 24 && height == 24) tile.Format = 0;
+                    else if (width == 24 && height == 32) tile.Format = 1;
+                    else if (width == 32 && height == 24) tile.Format = 2;
+                    else if (width == 32 && height == 32) tile.Format = 3;
                     // read each 8x8 tile in mold image
                     for (int y = 0; y < height / 8; y++)
                     {
@@ -2427,7 +2467,7 @@ namespace LAZYSHELL
                             int[] dst = GetPixelRegion(pixels_image, width, height, 8, 8, x * 8, y * 8);
                             if (Bits.Empty(dst))
                             {
-                                tile.SubTiles[y * (width / 8) + x] = 0;
+                                tile.Subtile_bytes[y * (width / 8) + x] = 0;
                                 continue;
                             }
                             // read each 8x8 tile from culled graphic set and assign indexes
@@ -2440,7 +2480,7 @@ namespace LAZYSHELL
                                     if (Bits.Compare(src, dst))
                                     {
                                         // set index of subtile
-                                        tile.SubTiles[y * (width / 8) + x] = (ushort)Math.Min(512, index + 1 + startingIndex);
+                                        tile.Subtile_bytes[y * (width / 8) + x] = (ushort)Math.Min(512, index + 1 + startingIndex);
                                         // if index over 255, needs to be 16bit
                                         if (index > 255)
                                             tile.Is16bit = true;
@@ -2450,7 +2490,7 @@ namespace LAZYSHELL
                         }
                     }
                     if (tile.Is16bit)
-                        tile.TileSize += 2;
+                        tile.Length += 2;
                     //
                     mold.Tiles.Add(tile);
                 }
@@ -2840,6 +2880,14 @@ namespace LAZYSHELL
         {
             PixelsToPixels(src, dst, dstWidth, region, false, false);
         }
+        public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, int srcX, int srcY, int srcWidth, int srcHeight, bool drawAsTransparent)
+        {
+            PixelsToPixels(src, dst, dstWidth, new Rectangle(srcX, srcY, srcWidth, srcHeight), drawAsTransparent, false);
+        }
+        public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, int srcX, int srcY, int srcWidth, int srcHeight)
+        {
+            PixelsToPixels(src, dst, dstWidth, new Rectangle(srcX, srcY, srcWidth, srcHeight), false, false);
+        }
         public static void PixelsToPixels(int[] src, int[] dst, int dstWidth, Rectangle region, bool drawAsTransparent)
         {
             PixelsToPixels(src, dst, dstWidth, region, true, false);
@@ -3035,7 +3083,7 @@ namespace LAZYSHELL
             {
                 for (int a = 0; a < 2; a++)
                 {
-                    Subtile subtile = tile.Subtiles[b * 2 + a];
+                    Subtile subtile = tile.Subtile_tiles[b * 2 + a];
                     for (int y = 0; y < 8; y++)
                     {
                         for (int x = 0; x < 8; x++)
@@ -3592,13 +3640,13 @@ namespace LAZYSHELL
         /// <param name="keystrokes">The keystroke table to use.</param>
         /// <param name="length">The maximum length of the converted char array.</param>
         /// <returns></returns>
-        public static char[] ASCIIToRaw(string text, StringCollection keystrokes, int length)
+        public static char[] ASCIIToRaw(string text, string[] keystrokes, int length)
         {
             char[] temp = new char[length];
             int i = 0;
             for (; i < temp.Length && i < text.Length; i++)
             {
-                for (int a = 0; a < keystrokes.Count; a++)
+                for (int a = 0; a < keystrokes.Length; a++)
                 {
                     if (keystrokes[a] == text.Substring(i, 1))
                         temp[i] = (char)a;
@@ -3609,7 +3657,7 @@ namespace LAZYSHELL
                 temp[i] = '\x20';
             return temp;
         }
-        public static char[] ASCIIToRaw(string text, StringCollection keystrokes)
+        public static char[] ASCIIToRaw(string text, string[] keystrokes)
         {
             return ASCIIToRaw(text, keystrokes, text.Length);
         }
@@ -3619,12 +3667,12 @@ namespace LAZYSHELL
         /// <param name="chars">The char array to convert.</param>
         /// <param name="keystrokes">The keystroke table to use.</param>
         /// <returns></returns>
-        public static string RawToASCII(char[] chars, StringCollection keystrokes)
+        public static string RawToASCII(char[] chars, string[] keystrokes)
         {
             string temp = "";
             for (int i = 0; i < chars.Length; i++)
             {
-                if (chars[i] >= keystrokes.Count)
+                if (chars[i] >= keystrokes.Length)
                     continue;
                 if (keystrokes[chars[i]] == "")
                     temp += "_";
@@ -3670,49 +3718,49 @@ namespace LAZYSHELL
         public static string EventScriptToText(EventScript eventScript, int lines, int length)
         {
             StringBuilder sb = new StringBuilder();
-            ArrayList scriptCmds;
-            ArrayList actionQueues;
-            EventScriptCommand esc;
-            ActionQueueCommand aqc;
+            List<EventCommand> scriptCmds;
+            List<ActionCommand> actionQueues;
+            EventCommand esc;
+            ActionCommand asc;
             string command;
             int line = 0;
             scriptCmds = eventScript.Commands;
             for (int j = 0; j < scriptCmds.Count && line < lines; j++, line++)
             {
-                esc = (EventScriptCommand)scriptCmds[j];
-                if (esc.Opcode <= 0x2F && esc.Option <= 0xF1 && !esc.IsDummy)
+                esc = scriptCmds[j];
+                if (esc.Opcode <= 0x2F && esc.Param1 <= 0xF1 && !esc.Locked)
                 {
-                    if (esc.Option == 0xF0 || esc.Option == 0xF1)
+                    if (esc.Param1 == 0xF0 || esc.Param1 == 0xF1)
                         sb.Append("   ");
                     command = esc.ToString();
                     if (command.Length > length)
                         command = command.Remove(length) + "...";
                     sb.Append(command + "\n");
                     line++;
-                    if (esc.EmbeddedActionQueue.Commands != null)
+                    if (esc.Queue.Commands != null)
                     {
-                        actionQueues = esc.EmbeddedActionQueue.Commands;
+                        actionQueues = esc.Queue.Commands;
                         for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
                         {
-                            aqc = (ActionQueueCommand)actionQueues[k];
-                            command = aqc.ToString();
+                            asc = actionQueues[k];
+                            command = asc.ToString();
                             if (command.Length > length)
                                 command = command.Remove(length) + "...";
                             sb.Append("   " + command + "\n");
                         }
                     }
                 }
-                else if (esc.IsDummy)   // 0xd01 and 0xe91 only
+                else if (esc.Locked)   // 0xd01 and 0xe91 only
                 {
                     sb.Append("NON-EMBEDDED ACTION QUEUE\n");
                     line++;
-                    if (esc.EmbeddedActionQueue.Commands != null)
+                    if (esc.Queue.Commands != null)
                     {
-                        actionQueues = esc.EmbeddedActionQueue.Commands;
+                        actionQueues = esc.Queue.Commands;
                         for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
                         {
-                            aqc = (ActionQueueCommand)actionQueues[k];
-                            command = aqc.ToString();
+                            asc = actionQueues[k];
+                            command = asc.ToString();
                             if (command.Length > length)
                                 command = command.Remove(length) + "...";
                             sb.Append("   " + command + "\n");
@@ -4155,6 +4203,12 @@ namespace LAZYSHELL
             if (ProgressBar != null && ProgressBar.Visible)
                 ProgressBar.Close();
         }
+        public static void WriteToTXT(string text, string filename)
+        {
+            StreamWriter writer = File.CreateText(filename);
+            writer.Write(text);
+            writer.Close();
+        }
         #endregion
         #region .NET Controls
         public static void AddControl(Control parent, Form child)
@@ -4252,17 +4306,13 @@ namespace LAZYSHELL
         /// <param name="shadow">If set, a shadow will be drawn around the font characters instead of a border.
         /// This reflects the appearance of font characters in a battle menu.</param>
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette, int xOffset, int yOffset,
             int startIndex, int endIndex, bool lastEmpty, bool shadow, Bitmap bgimage)
         {
             if (e.Index < 0 || e.Index >= names.Names.Length)
                 return;
-            string name;
-            if (lastEmpty && names.GetNumFromIndex(e.Index) == names.Names.Length - 1)
-                name = "NOTHING";
-            else
-                name = names.GetName(e.Index);
+            string name = names.Names[e.Index];
             // set the pixels
             int[] temp = preview.GetPreview(fontCharacters, palette, name.ToCharArray(), shadow, false);
             int[] pixels = new int[256 * 32];
@@ -4278,10 +4328,13 @@ namespace LAZYSHELL
             }
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                 e.DrawBackground();
-            e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
+            if (lastEmpty && names.GetUnsortedIndex(e.Index) == names.Names.Length - 1)
+                e.Graphics.DrawString("/// NOTHING ///", new Font("Arial Black", 7F), Brushes.White, e.Bounds.Location);
+            else
+                e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), e.Bounds.Location);
         }
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette, int xOffset, int yOffset,
             int startIndex, int endIndex, bool lastEmpty, bool shadow)
         {
@@ -4294,11 +4347,7 @@ namespace LAZYSHELL
         {
             if (e.Index < 0 || e.Index >= names.Length)
                 return;
-            string name;
-            if (lastEmpty && e.Index == names.Length - 1)
-                name = "NOTHING";
-            else
-                name = names[e.Index];
+            string name = names[e.Index];
             // set the pixels
             int[] temp = preview.GetPreview(fontCharacters, palette, name.ToCharArray(), shadow, false);
             int[] pixels = new int[256 * 32];
@@ -4314,28 +4363,31 @@ namespace LAZYSHELL
             }
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                 e.DrawBackground();
-            e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 15)), new Point(e.Bounds.X, e.Bounds.Y));
+            if (lastEmpty && e.Index == names.Length - 1)
+                e.Graphics.DrawString("/// NOTHING ///", new Font("Arial Black", 7F), Brushes.White, e.Bounds.Location);
+            else
+                e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 15)), e.Bounds.Location);
         }
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette, bool shadow)
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow, null);
         }
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette, bool shadow, Bitmap bgimage)
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, shadow, bgimage);
         }
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette, bool shadow, bool lastEmpty, Bitmap bgimage)
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, lastEmpty, shadow, bgimage);
         }
         public static void DrawName(
-            object sender, DrawItemEventArgs e, Preview preview, DDlistName names,
+            object sender, DrawItemEventArgs e, Preview preview, SortedList names,
             FontCharacter[] fontCharacters, int[] palette)
         {
             DrawName(sender, e, preview, names, fontCharacters, palette, 0, 0, 0, names.Names.Length, false, false, null);
@@ -4357,7 +4409,7 @@ namespace LAZYSHELL
                     continue;
                 }
                 FontCharacter character = fontCharacters[(byte)letter];
-                int[] pixels = character.GetCharacterPixels(palette);
+                int[] pixels = character.GetPixels(palette);
                 PixelsToPixels(pixels, dst, dstWidth, new Rectangle(x, y, character.Width, character.Height));
                 x += character.Width;
             }
@@ -4411,20 +4463,6 @@ namespace LAZYSHELL
             return set;
         }
         private static ArrayList set = new ArrayList();
-        public static bool GetNodeIndex(TreeNode node, TreeNodeCollection nodes, ref int index)
-        {
-            if (node == null)
-                return false;
-            foreach (TreeNode tn in nodes)
-            {
-                if (tn == node)
-                    return true;
-                index++;
-                if (GetNodeIndex(node, tn.Nodes, ref index))
-                    return true;
-            }
-            return false;
-        }
         // Get / set the scrollbar position of the treeview
         [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
         public static extern int GetScrollPos(int hWnd, int nBar);
@@ -4440,10 +4478,8 @@ namespace LAZYSHELL
         }
         public static void SetTreeViewScrollPos(TreeView treeView, Point scrollPosition)
         {
-            //treeView.BeginUpdate();
             SetScrollPos((IntPtr)treeView.Handle, SB_HORZ, scrollPosition.X, true);
             SetScrollPos((IntPtr)treeView.Handle, SB_VERT, scrollPosition.Y, true);
-            //treeView.EndUpdate();
         }
         public static void RemoveClickEvent(ToolStripMenuItem b)
         {
@@ -4580,6 +4616,30 @@ namespace LAZYSHELL
             frm.Left, frm.Top, frm.Width, frm.Height,
             SWP_NOACTIVATE);
         }
+        //
+        public static void SortListView(ListView listView, ListViewColumnSorter lvwColumnSorter, int column)
+        {
+            if (column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            // Perform the sort with these new sort options.
+            listView.Sort();
+        }
         #endregion
         #region LAZYSHELL Functions
         public static bool Compare(Subtile subtileA, Subtile subtileB)
@@ -4650,7 +4710,7 @@ namespace LAZYSHELL
                     {
                         foreach (E_Animation ea in (E_Animation[])OBJECT)
                         {
-                            bytes = ea.SM;
+                            bytes = ea.BUFFER;
                             for (int i = 0; i < bytes.Length; i++)
                                 check += (byte)(bytes[i] * i + bytes[i]);
                         }
@@ -4668,11 +4728,11 @@ namespace LAZYSHELL
                         continue;
                     }
                     // Action script
-                    else if (OBJECT.GetType() == typeof(ActionQueue[]))
+                    else if (OBJECT.GetType() == typeof(ActionScript[]))
                     {
-                        foreach (ActionQueue ac in (ActionQueue[])OBJECT)
+                        foreach (ActionScript ac in (ActionScript[])OBJECT)
                         {
-                            bytes = ac.ActionQueueData;
+                            bytes = ac.Script;
                             for (int i = 0; i < bytes.Length; i++)
                                 check += (byte)(bytes[i] * i + bytes[i]);
                         }
@@ -4683,7 +4743,7 @@ namespace LAZYSHELL
                     {
                         foreach (Animation sa in (Animation[])OBJECT)
                         {
-                            bytes = sa.SM;
+                            bytes = sa.BUFFER;
                             for (int i = 0; i < bytes.Length; i++)
                                 check += (byte)(bytes[i] * i + bytes[i]);
                         }
@@ -4785,7 +4845,6 @@ namespace LAZYSHELL
         }
         public static void CompareImages()
         {
-            string results = "";
             // first, open and create directory
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
             folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
@@ -4805,6 +4864,7 @@ namespace LAZYSHELL
             string target = folderBrowserDialog1.SelectedPath;
             string[] sourceFiles = Directory.GetFiles(source);
             string[] targetFiles = Directory.GetFiles(target);
+            string results = "";
             for (int i = 0; i < sourceFiles.Length && i < targetFiles.Length; i++)
             {
                 FileStream sourceFile = File.OpenRead(sourceFiles[i]);
@@ -4821,7 +4881,10 @@ namespace LAZYSHELL
                 if (!Bits.Compare(sourceBytes, targetBytes))
                     results += "Mismatched index: " + i + "\r\n";
             }
-            NewMessage.Show("MISMATCHED INDEXES", "Found the following mismatched indexes", results);
+            if (results == "")
+                MessageBox.Show("Found no mismatched indexes.", "LAZYSHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                NewMessage.Show("MISMATCHED INDEXES", "Found the following mismatched indexes", results);
         }
         public static void CaptureScreens(Form form)
         {
@@ -4829,30 +4892,141 @@ namespace LAZYSHELL
             Bitmap screen = new Bitmap(bounds.Width, bounds.Height);
             Graphics graphics = Graphics.FromImage(screen);
             graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-            screen.Save(form.Name + "_100%.png", ImageFormat.Png);
-            int newWidth, newHeight;
-            Bitmap resized;
-            // 75%
-            newWidth = (int)((double)bounds.Width / 1.5);
-            newHeight = (int)((double)bounds.Height / 1.5);
-            resized = new Bitmap(newWidth, newHeight);
-            graphics = Graphics.FromImage(resized);
-            graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
-            resized.Save(form.Name + "_75%.png", ImageFormat.Png);
-            // half
-            newWidth = bounds.Width / 2;
-            newHeight = bounds.Height / 2;
-            resized = new Bitmap(newWidth, newHeight);
-            graphics = Graphics.FromImage(resized);
-            graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
-            resized.Save(form.Name + "_50%.png", ImageFormat.Png);
-            //// 150 pixels high
-            //newWidth = (int)(150.0 / (double)bounds.Height * (double)bounds.Width);
-            //newHeight = 150;
-            //resized = new Bitmap(newWidth, newHeight);
-            //graphics = Graphics.FromImage(resized);
-            //graphics.DrawImage(screen, 0, 0, newWidth, newHeight);
-            //resized.Save(form.Name + "_" + newHeight + ".png", ImageFormat.Png);
+            screen.Save(form.Name + ".png", ImageFormat.Png);
+            // thumbnail
+            Bitmap resized = ResizeImage(screen, 150, true);
+            resized.Save(form.Name + "_thumb.png", ImageFormat.Png);
+        }
+        private static Bitmap ResizeImage(Bitmap source, int newHeight, bool sharpen)
+        {
+            double ratio = (double)newHeight / (double)source.Height;
+            int newWidth = (int)((double)source.Width * ratio);
+            Bitmap resized = new Bitmap(newWidth, newHeight);
+            Graphics graphics = Graphics.FromImage(resized);
+            graphics.DrawImage(source, 0, 0, newWidth, newHeight);
+            if (sharpen)
+                return SharpenImage(resized, 16.0);
+            else
+                return resized;
+        }
+        public static Bitmap SharpenImage(Bitmap image, double weight)
+        {
+            ConvolutionMatrix matrix = new ConvolutionMatrix(3);
+            matrix.SetAll(1);
+            matrix.Matrix[0, 0] = 0;
+            matrix.Matrix[1, 0] = -2;
+            matrix.Matrix[2, 0] = 0;
+            matrix.Matrix[0, 1] = -2;
+            matrix.Matrix[1, 1] = weight;
+            matrix.Matrix[2, 1] = -2;
+            matrix.Matrix[0, 2] = 0;
+            matrix.Matrix[1, 2] = -2;
+            matrix.Matrix[2, 2] = 0;
+            matrix.Factor = weight - 8;
+            return Convolution3x3(image, matrix);
+        }
+        private class ConvolutionMatrix
+        {
+            public int MatrixSize = 3;
+            public double[,] Matrix;
+            public double Factor = 1;
+            public double Offset = 1;
+            public ConvolutionMatrix(int size)
+            {
+                MatrixSize = 3;
+                Matrix = new double[size, size];
+            }
+            public void SetAll(double value)
+            {
+                for (int i = 0; i < MatrixSize; i++)
+                    for (int j = 0; j < MatrixSize; j++)
+                        Matrix[i, j] = value;
+            }
+        }
+        private static Bitmap Convolution3x3(Bitmap b, ConvolutionMatrix m)
+        {
+            Bitmap newImg = (Bitmap)b.Clone();
+            Color[,] pixelColor = new Color[3, 3];
+            int A, R, G, B;
+            for (int y = 0; y < b.Height - 2; y++)
+            {
+                for (int x = 0; x < b.Width - 2; x++)
+                {
+                    pixelColor[0, 0] = b.GetPixel(x, y);
+                    pixelColor[0, 1] = b.GetPixel(x, y + 1);
+                    pixelColor[0, 2] = b.GetPixel(x, y + 2);
+                    pixelColor[1, 0] = b.GetPixel(x + 1, y);
+                    pixelColor[1, 1] = b.GetPixel(x + 1, y + 1);
+                    pixelColor[1, 2] = b.GetPixel(x + 1, y + 2);
+                    pixelColor[2, 0] = b.GetPixel(x + 2, y);
+                    pixelColor[2, 1] = b.GetPixel(x + 2, y + 1);
+                    pixelColor[2, 2] = b.GetPixel(x + 2, y + 2);
+                    A = pixelColor[1, 1].A;
+                    R = (int)((((pixelColor[0, 0].R * m.Matrix[0, 0]) +
+                                 (pixelColor[1, 0].R * m.Matrix[1, 0]) +
+                                 (pixelColor[2, 0].R * m.Matrix[2, 0]) +
+                                 (pixelColor[0, 1].R * m.Matrix[0, 1]) +
+                                 (pixelColor[1, 1].R * m.Matrix[1, 1]) +
+                                 (pixelColor[2, 1].R * m.Matrix[2, 1]) +
+                                 (pixelColor[0, 2].R * m.Matrix[0, 2]) +
+                                 (pixelColor[1, 2].R * m.Matrix[1, 2]) +
+                                 (pixelColor[2, 2].R * m.Matrix[2, 2]))
+                                        / m.Factor) + m.Offset);
+                    if (R < 0)
+                        R = 0;
+                    else if (R > 255)
+                        R = 255;
+                    G = (int)((((pixelColor[0, 0].G * m.Matrix[0, 0]) +
+                                 (pixelColor[1, 0].G * m.Matrix[1, 0]) +
+                                 (pixelColor[2, 0].G * m.Matrix[2, 0]) +
+                                 (pixelColor[0, 1].G * m.Matrix[0, 1]) +
+                                 (pixelColor[1, 1].G * m.Matrix[1, 1]) +
+                                 (pixelColor[2, 1].G * m.Matrix[2, 1]) +
+                                 (pixelColor[0, 2].G * m.Matrix[0, 2]) +
+                                 (pixelColor[1, 2].G * m.Matrix[1, 2]) +
+                                 (pixelColor[2, 2].G * m.Matrix[2, 2]))
+                                        / m.Factor) + m.Offset);
+                    if (G < 0)
+                        G = 0;
+                    else if (G > 255)
+                        G = 255;
+                    B = (int)((((pixelColor[0, 0].B * m.Matrix[0, 0]) +
+                                 (pixelColor[1, 0].B * m.Matrix[1, 0]) +
+                                 (pixelColor[2, 0].B * m.Matrix[2, 0]) +
+                                 (pixelColor[0, 1].B * m.Matrix[0, 1]) +
+                                 (pixelColor[1, 1].B * m.Matrix[1, 1]) +
+                                 (pixelColor[2, 1].B * m.Matrix[2, 1]) +
+                                 (pixelColor[0, 2].B * m.Matrix[0, 2]) +
+                                 (pixelColor[1, 2].B * m.Matrix[1, 2]) +
+                                 (pixelColor[2, 2].B * m.Matrix[2, 2]))
+                                        / m.Factor) + m.Offset);
+                    if (B < 0)
+                        B = 0;
+                    else if (B > 255)
+                        B = 255;
+                    newImg.SetPixel(x + 1, y + 1, Color.FromArgb(A, R, G, B));
+                }
+            }
+            return newImg;
+        }
+        public static void ImagesToAnimatedGIF(Bitmap[] images, int[] durations, string filename)
+        {
+            AnimatedGifEncoder e = new AnimatedGifEncoder();
+            e.Start();
+            //-1:no repeat,0:always repeat
+            e.SetQuality(1);
+            e.SetRepeat(0);
+            e.SetTransparent(Color.FromArgb(127, 127, 127));
+            for (int i = 0; i < images.Length && i < durations.Length; i++)
+            {
+                e.SetDelay(durations[i]);
+                e.AddFrame(images[i]);
+            }
+            e.Finish();
+            MemoryStream ms = e.Output();
+            FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            fs.Write(ms.ToArray(), 0, (int)ms.Length);
+            fs.Close();
         }
         #endregion
         #region Math Functions

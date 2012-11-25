@@ -7,9 +7,11 @@ namespace LAZYSHELL
 {
     public class OverlapTile
     {
-        private int tileNumber; public int TileNumber { get { return tileNumber; } }
+        // class variables
         private Tile[] subtiles = new Tile[4];
+        private int tileNumber; public int TileNumber { get { return tileNumber; } }
         private Tile[] preview;
+        // public accessors
         public int[] Pixels
         {
             get
@@ -31,12 +33,20 @@ namespace LAZYSHELL
                 subtiles[3].Pixels = Do.GetPixelRegion(value, new Rectangle(16, 16, 16, 16), 32, 32);
             }
         }
-
         public Tile GetSubtile(int placement)
         {
             if (this.isBeingModified)
                 return preview[placement];
             return subtiles[placement];
+        }
+        public void SetSubtile(Tile tile, int placement)
+        {
+            //[0][1]
+            //[2][3]
+            if (isBeingModified)
+                preview[placement] = tile;
+            else
+                subtiles[placement] = tile;
         }
         private bool isBeingModified = false;
         public bool IsBeingModified
@@ -60,27 +70,18 @@ namespace LAZYSHELL
                 }
             }
         }
+        // constructor
         public OverlapTile(int tileNumber)
         {
             this.tileNumber = tileNumber; // set tile Number
         }
-        public void SetSubtile(Tile tile, int placement)
-        {
-            //[0][1]
-            //[2][3]
-            if (isBeingModified)
-                preview[placement] = tile;
-            else
-                subtiles[placement] = tile;
-        }
+        // class functions
         public void ConfirmChanges()
         {
             if (!this.isBeingModified)
                 return;
-
             for (int i = 0; i < 4; i++)
                 subtiles[i] = preview[i];
-
             this.IsBeingModified = false;
         }
     }

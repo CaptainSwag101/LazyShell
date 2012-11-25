@@ -10,8 +10,8 @@ namespace LAZYSHELL
 {
     public partial class StatusCalculator : Form
     {
-        private DDlistName itemNames { get { return Model.ItemNames; } }
-        private DDlistName monsterNames { get { return Model.MonsterNames; } }
+        private SortedList itemNames { get { return Model.ItemNames; } }
+        private SortedList monsterNames { get { return Model.MonsterNames; } }
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
         private FontCharacter[] fontDialogue { get { return Model.FontDialogue; } }
         private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
@@ -42,18 +42,18 @@ namespace LAZYSHELL
             this.targetAccessory.Items.Clear();
             this.targetAccessory.Items.AddRange(itemNames.Names);
 
-            this.attackerWeapon.SelectedIndex = itemNames.GetIndexFromNum(255);
-            this.attackerArmor.SelectedIndex = itemNames.GetIndexFromNum(255);
-            this.attackerAccessory.SelectedIndex = itemNames.GetIndexFromNum(255);
-            this.targetWeapon.SelectedIndex = itemNames.GetIndexFromNum(255);
-            this.targetArmor.SelectedIndex = itemNames.GetIndexFromNum(255);
-            this.targetAccessory.SelectedIndex = itemNames.GetIndexFromNum(255);
+            this.attackerWeapon.SelectedIndex = itemNames.GetSortedIndex(255);
+            this.attackerArmor.SelectedIndex = itemNames.GetSortedIndex(255);
+            this.attackerAccessory.SelectedIndex = itemNames.GetSortedIndex(255);
+            this.targetWeapon.SelectedIndex = itemNames.GetSortedIndex(255);
+            this.targetArmor.SelectedIndex = itemNames.GetSortedIndex(255);
+            this.targetAccessory.SelectedIndex = itemNames.GetSortedIndex(255);
             // load entity
             for (int i = 0; i < Model.Characters.Length; i++)
                 this.attackerName.Items.Add(new string(Model.Characters[i].Name));
             this.attackerName.SelectedIndex = 0;
             this.targetName.Items.AddRange(Model.MonsterNames.Names);
-            this.targetName.SelectedIndex = monsterNames.GetIndexFromNum(0);
+            this.targetName.SelectedIndex = monsterNames.GetSortedIndex(0);
             this.attackerBonus.SelectedIndex = 0;
             this.targetBonus.SelectedIndex = 0;
             updating = false;
@@ -122,7 +122,7 @@ namespace LAZYSHELL
                     int defense = character.StartingDefense;
                     int mgAttack = character.StartingMgAttack;
                     int mgDefense = character.StartingMgDefense;
-                    foreach (Character.Level level in character.Levels)
+                    foreach (Character.LevelUp level in character.Levels)
                     {
                         if (level == null) continue;
                         if (level.Index > level_.Value) break;
@@ -170,7 +170,7 @@ namespace LAZYSHELL
             }
             else
             {
-                Monster monster = monsters[Model.MonsterNames.GetNumFromIndex(names.SelectedIndex)];
+                Monster monster = monsters[Model.MonsterNames.GetUnsortedIndex(names.SelectedIndex)];
                 hp_.Value = monster.HP;
                 attack_.Value = monster.Attack;
                 defense_.Value = monster.Defense;
@@ -178,10 +178,10 @@ namespace LAZYSHELL
                 mgDefense_.Value = monster.MagicDefense;
                 if (weakness != null)
                 {
-                    weakness.SetItemChecked(0, monster.ElemIceWeak);
-                    weakness.SetItemChecked(1, monster.ElemThunderWeak);
-                    weakness.SetItemChecked(2, monster.ElemFireWeak);
-                    weakness.SetItemChecked(3, monster.ElemJumpWeak);
+                    weakness.SetItemChecked(0, monster.ElemWeakIce);
+                    weakness.SetItemChecked(1, monster.ElemWeakThunder);
+                    weakness.SetItemChecked(2, monster.ElemWeakFire);
+                    weakness.SetItemChecked(3, monster.ElemWeakJump);
                 }
             }
             CalculatePhysical();
@@ -194,21 +194,21 @@ namespace LAZYSHELL
             double low = (double)attackerAttack.Value;
             if (attackerTypeAlly.Checked)
             {
-                low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].Attack;
-                low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].Attack;
-                low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].Attack;
+                low += items[itemNames.GetUnsortedIndex(attackerWeapon.SelectedIndex)].Attack;
+                low += items[itemNames.GetUnsortedIndex(attackerArmor.SelectedIndex)].Attack;
+                low += items[itemNames.GetUnsortedIndex(attackerAccessory.SelectedIndex)].Attack;
             }
             low -= (double)targetDefense.Value;
             if (targetTypeAlly.Checked)
             {
-                low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
-                low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
-                low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
+                low -= (double)items[itemNames.GetUnsortedIndex(targetWeapon.SelectedIndex)].MagicDefense;
+                low -= (double)items[itemNames.GetUnsortedIndex(targetArmor.SelectedIndex)].MagicDefense;
+                low -= (double)items[itemNames.GetUnsortedIndex(targetAccessory.SelectedIndex)].MagicDefense;
             }
             if (attackerTypeAlly.Checked)
             {
-                high = low + items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
-                low -= items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange;
+                high = low + items[itemNames.GetUnsortedIndex(attackerWeapon.SelectedIndex)].AttackRange;
+                low -= items[itemNames.GetUnsortedIndex(attackerWeapon.SelectedIndex)].AttackRange;
             }
             else
                 high = low;
@@ -239,7 +239,7 @@ namespace LAZYSHELL
             }
             if (low < 1)
                 low = 1;
-            if (items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].AttackRange != 0)
+            if (items[itemNames.GetUnsortedIndex(attackerWeapon.SelectedIndex)].AttackRange != 0)
                 singleAttack.Text = Math.Ceiling(low).ToString() + " to " + Math.Ceiling(high).ToString();
             else
                 singleAttack.Text = Math.Ceiling(low).ToString();
@@ -256,16 +256,16 @@ namespace LAZYSHELL
                 low += (double)attackerMgAttack.Value;
                 if (attackerTypeAlly.Checked)
                 {
-                    low += items[itemNames.GetNumFromIndex(attackerWeapon.SelectedIndex)].MagicAttack;
-                    low += items[itemNames.GetNumFromIndex(attackerArmor.SelectedIndex)].MagicAttack;
-                    low += items[itemNames.GetNumFromIndex(attackerAccessory.SelectedIndex)].MagicAttack;
+                    low += items[itemNames.GetUnsortedIndex(attackerWeapon.SelectedIndex)].MagicAttack;
+                    low += items[itemNames.GetUnsortedIndex(attackerArmor.SelectedIndex)].MagicAttack;
+                    low += items[itemNames.GetUnsortedIndex(attackerAccessory.SelectedIndex)].MagicAttack;
                 }
                 low -= (double)targetMgDefense.Value;
                 if (targetTypeAlly.Checked)
                 {
-                    low -= (double)items[itemNames.GetNumFromIndex(targetWeapon.SelectedIndex)].MagicDefense;
-                    low -= (double)items[itemNames.GetNumFromIndex(targetArmor.SelectedIndex)].MagicDefense;
-                    low -= (double)items[itemNames.GetNumFromIndex(targetAccessory.SelectedIndex)].MagicDefense;
+                    low -= (double)items[itemNames.GetUnsortedIndex(targetWeapon.SelectedIndex)].MagicDefense;
+                    low -= (double)items[itemNames.GetUnsortedIndex(targetArmor.SelectedIndex)].MagicDefense;
+                    low -= (double)items[itemNames.GetUnsortedIndex(targetAccessory.SelectedIndex)].MagicDefense;
                 }
                 if (spell.InflictElement < 4 && targetWeakness.GetItemChecked(spell.InflictElement))
                 {
@@ -297,7 +297,7 @@ namespace LAZYSHELL
                 ListViewItem item = new ListViewItem(new string[]
                 {
                     index.ToString(),
-                    Model.SpellNames.GetNameByNum(spell.Index).Substring(1),
+                    Model.SpellNames.GetUnsortedName(spell.Index).Substring(1),
                     Math.Ceiling(low).ToString()
                 });
                 listViewItems.Add(item);
@@ -324,7 +324,7 @@ namespace LAZYSHELL
             {
                 this.attackerName.Items.Clear();
                 this.attackerName.Items.AddRange(Model.MonsterNames.Names);
-                this.attackerName.SelectedIndex = monsterNames.GetIndexFromNum(0);
+                this.attackerName.SelectedIndex = monsterNames.GetSortedIndex(0);
                 this.panelAttackerProperties.Height = 21;
                 this.panelAttackerStats.Height = 105;
                 this.timedAttackL1.Visible = false;
@@ -351,7 +351,7 @@ namespace LAZYSHELL
             {
                 this.targetName.Items.Clear();
                 this.targetName.Items.AddRange(Model.MonsterNames.Names);
-                this.targetName.SelectedIndex = monsterNames.GetIndexFromNum(0);
+                this.targetName.SelectedIndex = monsterNames.GetSortedIndex(0);
                 this.panelTargetProperties.Height = 21;
                 this.panelTargetStats.Height = 105;
                 this.targetDefensePosition.Visible = false;
@@ -403,27 +403,7 @@ namespace LAZYSHELL
         }
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListView listView = (ListView)sender;
-            if (e.Column == lvwColumnSorter.SortColumn)
-            {
-                // Reverse the current sort direction for this column.
-                if (lvwColumnSorter.Order == SortOrder.Ascending)
-                {
-                    lvwColumnSorter.Order = SortOrder.Descending;
-                }
-                else
-                {
-                    lvwColumnSorter.Order = SortOrder.Ascending;
-                }
-            }
-            else
-            {
-                // Set the column number that is to be sorted; default to ascending.
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
-            }
-            // Perform the sort with these new sort options.
-            listView.Sort();
+            Do.SortListView((ListView)sender, lvwColumnSorter, e.Column);
         }
         private void buttonSwitch_Click(object sender, EventArgs e)
         {

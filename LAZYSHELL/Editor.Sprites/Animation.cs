@@ -13,122 +13,57 @@ namespace LAZYSHELL
     [Serializable()]
     public class Animation : Element
     {
-        [NonSerialized()]
-        private byte[] data;
-        public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value; } }
-        private byte[] sm; public byte[] SM { get { return sm; } set { sm = value; } }    // sequence mold data
-        private int index;
-
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // class variables and accessors
+        private byte[] buffer; public byte[] BUFFER { get { return buffer; } set { buffer = value; } }
         private int animationOffset; public int AnimationOffset { get { return animationOffset; } set { index = value; } }
-
         private ushort vramAllocation; public ushort VramAllocation { get { return vramAllocation; } set { vramAllocation = value; } }
         private ushort unknown;
-
+        // animation lists
         private List<Sequence> sequences = new List<Sequence>(); public List<Sequence> Sequences { get { return sequences; } set { sequences = value; } }
         private List<Mold> molds = new List<Mold>(); public List<Mold> Molds { get { return molds; } set { molds = value; } }
         private List<Mold.Tile> uniqueTiles = new List<Mold.Tile>(); public List<Mold.Tile> UniqueTiles { get { return uniqueTiles; } set { uniqueTiles = value; } }
-
-        // Start
-        public Animation(byte[] data, int index)
+        // constructor
+        public Animation(int index)
         {
-            this.data = data;
             this.index = index;
-
-            InitializeAnimation(data);
+            Disassemble();
         }
-        public void Refresh()
+        // assemblers
+        private void Disassemble()
         {
-            sequences = new List<Sequence>();
-            molds = new List<Mold>();
-            uniqueTiles = new List<Mold.Tile>();
-
-            Sequence tSequence;
-            Mold tMold;
-
+            animationOffset = Bits.GetInt24(rom, 0x252000 + (index * 3)) - 0xC00000;
+            int animationLength = Bits.GetShort(rom, animationOffset);
+            buffer = Bits.GetByteArray(rom, animationOffset, animationLength);
+            //
             int offset = 2;
-            ushort sequencePacketPointer = Bits.GetShort(sm, offset); offset += 2;
-            ushort moldPacketPointer = Bits.GetShort(sm, offset); offset += 2;
-            byte sequenceCount = sm[offset]; offset++;
-            byte moldCount = sm[offset]; offset++;
-            vramAllocation = (ushort)(sm[offset] << 8); offset += 2;
-            unknown = Bits.GetShort(sm, offset);
-
-            offset = sequencePacketPointer;
-            for (int i = 0; i < sequenceCount; i++)
-            {
-                tSequence = new Sequence();
-                tSequence.InitializeSequence(sm, offset);
-                sequences.Add(tSequence);
-                offset += 2;
-            }
-
-            offset = moldPacketPointer;
-            for (int i = 0; i < moldCount; i++)
-            {
-                tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles, index, animationOffset);
-                molds.Add(tMold);
-                offset += 2;
-            }
-        }
-        private void InitializeAnimation(byte[] data)
-        {
-            animationOffset = Bits.Get24Bit(data, 0x252000 + (index * 3)) - 0xC00000;
-            ushort animationLength = Bits.GetShort(data, animationOffset);
-
-            sm = Bits.GetByteArray(data, animationOffset, animationLength);
-            int offset = 2;
-            ushort sequencePacketPointer = Bits.GetShort(sm, offset); offset += 2;
-            ushort moldPacketPointer = Bits.GetShort(sm, offset); offset += 2;
-            byte sequenceCount = sm[offset]; offset++;
-            byte moldCount = sm[offset]; offset++;
-            vramAllocation = (ushort)(sm[offset] << 8); offset += 2;
-            unknown = Bits.GetShort(sm, offset);
-
+            ushort sequencePacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            ushort moldPacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            byte sequenceCount = buffer[offset++];
+            byte moldCount = buffer[offset++];
+            vramAllocation = (ushort)(buffer[offset] << 8); offset += 2;
+            unknown = Bits.GetShort(buffer, offset);
+            //
             offset = sequencePacketPointer;
             for (int i = 0; i < sequenceCount; i++)
             {
                 Sequence tSequence = new Sequence();
-                tSequence.InitializeSequence(sm, offset);
+                tSequence.Disassemble(buffer, offset);
                 sequences.Add(tSequence);
                 offset += 2;
             }
-            if (index == 180)
-                index = 180;
             offset = moldPacketPointer;
             for (int i = 0; i < moldCount; i++)
             {
                 Mold tMold = new Mold();
-                tMold.InitializeMold(sm, offset, uniqueTiles, index, animationOffset);
+                tMold.Disassemble(buffer, offset, uniqueTiles, index, animationOffset);
                 molds.Add(tMold);
                 offset += 2;
             }
         }
-        public int[] TilesetPixels()
-        {
-            int height = 16, x, y;
-            Mold.Tile temp;
-            height += (uniqueTiles.Count / 8) * 16;
-            height += (uniqueTiles.Count % 8) != 0 ? 16 : 0;
-            int[] pixels = new int[128 * height];
-            for (int b = 0; b < height / 16; b++)
-            {
-                for (int a = 0; a < 8; a++)
-                {
-                    if ((a + (b * 8)) >= uniqueTiles.Count) break;
-                    temp = uniqueTiles[a + (b * 8)];
-                    int[] theTile = temp.Get16x16TilePixels();
-                    for (y = 0; y < 16; y++)
-                    {
-                        for (x = 0; x < 16; x++)
-                            pixels[(((b * 16) + y) * 128) + ((a * 16) + x)] = theTile[(y * 16) + x];
-                    }
-                }
-            }
-            return pixels;
-        }
-        public void Assemble() // assemble data to byte[] sm
+        public void Assemble()
         {
             // set sm to new byte with largest possible size
             byte[] temp = new byte[0x10000];
@@ -136,8 +71,8 @@ namespace LAZYSHELL
             temp[6] = (byte)sequences.Count;
             temp[7] = (byte)molds.Count;
             temp[8] = (byte)(vramAllocation >> 8);
-            int offset = 12;    // where the sequences begin
             // Sequences
+            int offset = 12; // where sequences begin
             Bits.SetShort(temp, 2, (ushort)0x0C);
             int fOffset = sequences.Count * 2 + 2;  // offset of first frame packet
             foreach (Sequence s in sequences)
@@ -183,8 +118,8 @@ namespace LAZYSHELL
                     {
                         Bits.SetShort(temp, offset, (ushort)(mOffset + offset + 0x8000));
                         Mold.Tile tile = m.Tiles[0];
-                        if (tile.SubTiles != null)
-                            mOffset += tile.TileSize - 2;
+                        if (tile.Subtile_bytes != null)
+                            mOffset += tile.Length - 2;
                     }
                     else
                     {
@@ -206,24 +141,24 @@ namespace LAZYSHELL
                 if (m.Gridplane)
                 {
                     Mold.Tile tile = m.Tiles[0];
-                    if (tile.SubTiles == null)
+                    if (tile.Subtile_bytes == null)
                         continue;
-                    temp[offset] = (byte)(tile.TileFormat & 3);
+                    temp[offset] = (byte)(tile.Format & 3);
                     Bits.SetBit(temp, offset, 3, tile.Is16bit);
                     Bits.SetBit(temp, offset, 4, tile.YPlusOne == 1);
                     Bits.SetBit(temp, offset, 5, tile.YMinusOne == 1);
                     Bits.SetBit(temp, offset, 6, tile.Mirror);
                     Bits.SetBit(temp, offset++, 7, tile.Invert);
-                    int size = tile.Is16bit ? tile.TileSize - 3 : tile.TileSize - 1;
+                    int size = tile.Is16bit ? tile.Length - 3 : tile.Length - 1;
                     // set bits for tiles that are 16bit
                     if (tile.Is16bit)
                     {
                         for (int i = 0; i < size; i++)
-                            Bits.SetBit(temp, offset, i, tile.SubTiles[i] >= 0x100);
+                            Bits.SetBit(temp, offset, i, tile.Subtile_bytes[i] >= 0x100);
                         offset += 2;
                     }
                     for (int i = 0; i < size; i++)
-                        temp[offset++] = (byte)tile.SubTiles[i];
+                        temp[offset++] = (byte)tile.Subtile_bytes[i];
                 }
                 else
                 {
@@ -235,9 +170,66 @@ namespace LAZYSHELL
             }
             // finally, set the animation length
             Bits.SetShort(temp, 0, (ushort)offset);
-            sm = new byte[offset];
-            Bits.SetByteArray(sm, 0, temp);
+            buffer = new byte[offset];
+            Bits.SetByteArray(buffer, 0, temp);
         }
+        // public functions
+        public void Refresh()
+        {
+            sequences = new List<Sequence>();
+            molds = new List<Mold>();
+            uniqueTiles = new List<Mold.Tile>();
+            //
+            int offset = 2;
+            ushort sequencePacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            ushort moldPacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            byte sequenceCount = buffer[offset++];
+            byte moldCount = buffer[offset++];
+            vramAllocation = (ushort)(buffer[offset] << 8); offset += 2;
+            unknown = Bits.GetShort(buffer, offset);
+            //
+            offset = sequencePacketPointer;
+            for (int i = 0; i < sequenceCount; i++)
+            {
+                Sequence tSequence = new Sequence();
+                tSequence.Disassemble(buffer, offset);
+                sequences.Add(tSequence);
+                offset += 2;
+            }
+            offset = moldPacketPointer;
+            for (int i = 0; i < moldCount; i++)
+            {
+                Mold tMold = new Mold();
+                tMold.Disassemble(buffer, offset, uniqueTiles, index, animationOffset);
+                molds.Add(tMold);
+                offset += 2;
+            }
+        }
+        // accessor functions
+        public int[] TilesetPixels()
+        {
+            int height = 16, x, y;
+            Mold.Tile temp;
+            height += (uniqueTiles.Count / 8) * 16;
+            height += (uniqueTiles.Count % 8) != 0 ? 16 : 0;
+            int[] pixels = new int[128 * height];
+            for (int b = 0; b < height / 16; b++)
+            {
+                for (int a = 0; a < 8; a++)
+                {
+                    if ((a + (b * 8)) >= uniqueTiles.Count) break;
+                    temp = uniqueTiles[a + (b * 8)];
+                    int[] theTile = temp.Get16x16TilePixels();
+                    for (y = 0; y < 16; y++)
+                    {
+                        for (x = 0; x < 16; x++)
+                            pixels[(((b * 16) + y) * 128) + ((a * 16) + x)] = theTile[(y * 16) + x];
+                    }
+                }
+            }
+            return pixels;
+        }
+        // universal functions
         public override void Clear()
         {
             vramAllocation = 2048;

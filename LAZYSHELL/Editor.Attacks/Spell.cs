@@ -2,6 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Forms;
 using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
@@ -9,15 +10,15 @@ namespace LAZYSHELL
     [Serializable()]
     public class Spell : Element
     {
-        [NonSerialized()]
-        private byte[] data;
-        public override byte[] Data { get { return data; } set { data = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         public override int Index { get { return index; } set { index = value; } }
-
-        #region Spell Stats
+        #region class variables
         private int index;
         private char[] name;
         private char[] description;
+        private bool descriptionError = false;
+        private int caretPosByteView = 0;
+        private int caretPosTextView = 0;
         private byte fpCost;
         private byte magicPower;
         private byte hitRate;
@@ -59,37 +60,36 @@ namespace LAZYSHELL
         private byte fireballSpellOrbs;
         private byte rotationSpellStart;
         private byte rotationSpellMax;
-        private byte multipleSpellInstanceMax;
-        private byte[] multipleSpellInstanceRange;
+        private byte multipleSpellMax;
+        private byte[] multipleSpellRanges;
         private byte chargeSpellStartLevel2;
         private byte chargeSpellStartLevel3;
         private byte chargeSpellStartLevel4;
         private byte chargeSpellOverflow;
         private byte rapidSpellMax;
-
         #endregion
-        #region Accessors
+        #region public accessors
         public char[] Name { get { return this.name; } set { this.name = value; } }
-        private bool descriptionError = false; public bool DescriptionError { get { return this.descriptionError; } set { this.descriptionError = value; } }
+        // description
         private TextHelperReduced textHelperReduced { get { return TextHelperReduced.Instance; } }
-        private int caretPositionByteView = 0; public int CaretPositionByteView { get { return this.caretPositionByteView; } set { this.caretPositionByteView = value; } }
-        private int caretPositionTextView = 0; public int CaretPositionTextView { get { return this.caretPositionTextView; } set { this.caretPositionTextView = value; } }
-
+        public char[] RawDescription { get { return this.description; } set { this.description = value; } }
         public bool SetDescription(string value, bool byteView)
         {
-            this.description = textHelperReduced.EncodeText(value.ToCharArray(), byteView, 1, Settings.Default.KeystrokesDesc);
+            this.description = textHelperReduced.Encode(value.ToCharArray(), byteView, 1, Lists.KeystrokesDesc);
             this.descriptionError = textHelperReduced.Error;
-
             return !descriptionError;
         }
         public string GetDescription(bool byteView)
         {
             if (!descriptionError)
-                return new string(textHelperReduced.DecodeText(description, byteView, 1, Settings.Default.KeystrokesDesc));
+                return new string(textHelperReduced.Decode(description, byteView, 1, Lists.KeystrokesDesc));
             else
                 return new string(description);
         }
-        public char[] RawDescription { get { return this.description; } set { this.description = value; } }
+        public bool DescriptionError { get { return this.descriptionError; } set { this.descriptionError = value; } }
+        public int CaretPosByteView { get { return this.caretPosByteView; } set { this.caretPosByteView = value; } }
+        public int CaretPosTextView { get { return this.caretPosTextView; } set { this.caretPosTextView = value; } }
+        // stats
         public byte FPCost { get { return this.fpCost; } set { this.fpCost = value; } }
         public byte MagicPower { get { return this.magicPower; } set { this.magicPower = value; } }
         public byte HitRate { get { return this.hitRate; } set { this.hitRate = value; } }
@@ -131,47 +131,41 @@ namespace LAZYSHELL
         public byte FireballSpellOrbs { get { return this.fireballSpellOrbs; } set { this.fireballSpellOrbs = value; } }
         public byte RotationSpellStart { get { return this.rotationSpellStart; } set { this.rotationSpellStart = value; } }
         public byte RotationSpellMax { get { return this.rotationSpellMax; } set { this.rotationSpellMax = value; } }
-        public byte MultipleSpellInstanceMax { get { return this.multipleSpellInstanceMax; } set { this.multipleSpellInstanceMax = value; } }
-        public byte[] MultipleSpellInstanceRange { get { return this.multipleSpellInstanceRange; } set { this.multipleSpellInstanceRange = value; } }
+        public byte MultipleSpellInstanceMax { get { return this.multipleSpellMax; } set { this.multipleSpellMax = value; } }
+        public byte[] MultipleSpellInstanceRange { get { return this.multipleSpellRanges; } set { this.multipleSpellRanges = value; } }
         public byte ChargeSpellStartLevel2 { get { return this.chargeSpellStartLevel2; } set { this.chargeSpellStartLevel2 = value; } }
         public byte ChargeSpellStartLevel3 { get { return this.chargeSpellStartLevel3; } set { this.chargeSpellStartLevel3 = value; } }
         public byte ChargeSpellStartLevel4 { get { return this.chargeSpellStartLevel4; } set { this.chargeSpellStartLevel4 = value; } }
         public byte ChargeSpellOverflow { get { return this.chargeSpellOverflow; } set { this.chargeSpellOverflow = value; } }
         public byte RapidSpellMax { get { return this.rapidSpellMax; } set { this.rapidSpellMax = value; } }
         #endregion
-
-        public Spell(byte[] data, int index)
+        // constructor
+        public Spell(int index)
         {
-            this.data = data;
             this.index = index;
-            InitializeSpell(data);
+            Disassemble();
         }
-        private void InitializeSpell(byte[] data)
+        // assemblers
+        private void Disassemble()
         {
             byte temp = 0;
-
             name = new char[15];
             for (int i = 0; i < name.Length; i++)
-                name[i] = (char)data[(index * 15) + 0x3A137F + i];
-
+                name[i] = (char)rom[(index * 15) + 0x3A137F + i];
             if (index <= 0x1A)
-            {
-                description = ParseDescription(data);
-            }
+                description = ParseDescription();
             else
-            {
                 description = null;
-            }
+            //
             int offset = (index * 12) + 0x3A20F1;
-            temp = data[offset]; offset++;
-
+            //
+            temp = rom[offset++];
             checkStats = (temp & 0x01) == 0x01;
             ignoreDefense = (temp & 0x02) == 0x02;
             checkMortality = (temp & 0x20) == 0x20;
             usableOverworld = (temp & 0x80) == 0x80;
-
-            temp = data[offset]; offset++;
-
+            //
+            temp = rom[offset++];
             attackType = (byte)(temp & 0x01);
             switch (temp & 0x06)
             {
@@ -179,22 +173,19 @@ namespace LAZYSHELL
                 case 0x04: effectType = 1; break;
                 default: effectType = 2; break;
             }
-
             maxAttack = (temp & 0x08) == 0x08;
-
-            fpCost = data[offset]; offset++;
-
-            temp = data[offset]; offset++;
-
-            targetLiveAlly = (temp & 0x02) == 0x02;			// Usable on any ally
-            targetEnemy = (temp & 0x04) == 0x04;		// Usable on any enemy
-            targetAll = (temp & 0x10) == 0x10;			// Usable on on all
-            targetWoundedOnly = (temp & 0x20) == 0x20;			// Usable on wounded
-            targetOnePartyOnly = (temp & 0x40) == 0x40;		// Usable in one party only
-            targetNotSelf = (temp & 0x80) == 0x80;		// Cannot use on self
-
-            temp = data[offset]; offset++;
-
+            //
+            fpCost = rom[offset++];
+            //
+            Targetting target = (Targetting)rom[offset++];
+            targetLiveAlly = (target & Targetting.LiveAlly) == Targetting.LiveAlly;
+            targetEnemy = (target & Targetting.Enemy) == Targetting.Enemy;
+            targetAll = (target & Targetting.All) == Targetting.All;
+            targetWoundedOnly = (target & Targetting.WoundedOnly) == Targetting.WoundedOnly;
+            targetOnePartyOnly = (target & Targetting.OnePartyOnly) == Targetting.OnePartyOnly;
+            targetNotSelf = (target & Targetting.NotSelf) == Targetting.NotSelf;
+            //
+            temp = rom[offset++];
             switch (temp & 0xF0)
             {
                 case 0x10: inflictElement = 0; break;			// Ice
@@ -203,33 +194,25 @@ namespace LAZYSHELL
                 case 0x80: inflictElement = 3; break;		// Earth
                 default: inflictElement = 4; break;
             }
-
-            magicPower = data[offset]; offset++;
-            hitRate = data[offset]; offset++;
-
-            temp = data[offset]; offset++;
-
-            // STATUS EFFECT
-
-            effectMute = (temp & 0x01) == 0x01;		// Mute
-            effectSleep = (temp & 0x02) == 0x02;		// Sleep
-            effectPoison = (temp & 0x04) == 0x04;		// Poison
-            effectFear = (temp & 0x08) == 0x08;		// Fear
-            effectMushroom = (temp & 0x20) == 0x20;	// Mushroom
-            effectScarecrow = (temp & 0x40) == 0x40;	// Scarecrow
-            effectInvincible = (temp & 0x80) == 0x80;	// Invincible
-
-            temp = data[offset]; offset += 2;
-
-            // STATUS CHANGE
-
+            magicPower = rom[offset++];
+            hitRate = rom[offset++];
+            // status effect
+            Status status = (Status)rom[offset++];
+            effectMute = (status & Status.Mute) == Status.Mute;
+            effectSleep = (status & Status.Sleep) == Status.Sleep;
+            effectPoison = (status & Status.Poison) == Status.Poison;
+            effectFear = (status & Status.Fear) == Status.Fear;
+            effectMushroom = (status & Status.Mushroom) == Status.Mushroom;
+            effectScarecrow = (status & Status.Scarecrow) == Status.Scarecrow;
+            effectInvincible = (status & Status.Invincible) == Status.Invincible;
+            // status change
+            temp = rom[offset]; offset += 2;
             changeMagicAttack = (temp & 0x08) == 0x08;		// Magic Attack
             changeAttack = (temp & 0x10) == 0x10;			// Attack
             changeMagicDefense = (temp & 0x20) == 0x20;		// Magic Defense
             changeDefense = (temp & 0x40) == 0x40;			// Defense
-
-            temp = data[offset]; offset++;
-
+            //
+            temp = rom[offset++];
             switch (temp)
             {
                 case 0x00: inflictFunction = 0; break;			// Ice
@@ -239,50 +222,43 @@ namespace LAZYSHELL
                 case 0x04: inflictFunction = 4; break;		// Earth
                 default: inflictFunction = 5; break;
             }
-
-            hideDigits = data[offset] == 4;
-
+            hideDigits = rom[offset] == 4;
             // timing
             if (index == 2)  // super jump
             {
-                multipleSpellInstanceRange = new byte[14];
+                multipleSpellRanges = new byte[14];
                 for (int i = 0; i < 14; i++)
                 {
-                    switch (i)
+                    if (i == 0) multipleSpellRanges[i] = rom[0x35969D];
+                    else if (i == 13) multipleSpellRanges[i] = rom[0x359768];
+                    else
                     {
-                        case 0: multipleSpellInstanceRange[i] = data[0x35969D]; break;
-                        case 13: multipleSpellInstanceRange[i] = data[0x359768]; break;
-                        default:
-                            offset = ((i - 1) * 11) + 0x3596DE;
-                            multipleSpellInstanceRange[i] = data[offset];
-                            break;
+                        offset = ((i - 1) * 11) + 0x3596DE;
+                        multipleSpellRanges[i] = rom[offset];
                     }
-
                 }
-                multipleSpellInstanceMax = data[0x359763];
+                multipleSpellMax = rom[0x359763];
             }
             if (index == 4)  // ultra jump
             {
-                multipleSpellInstanceRange = new byte[17];
+                multipleSpellRanges = new byte[17];
                 for (int i = 0; i < 17; i++)
                 {
-                    switch (i)
+                    if (i == 0) multipleSpellRanges[i] = rom[0x359AA6];
+                    else if (i == 16) multipleSpellRanges[i] = rom[0x359B83];
+                    else
                     {
-                        case 0: multipleSpellInstanceRange[i] = data[0x359AA6]; break;
-                        case 16: multipleSpellInstanceRange[i] = data[0x359B83]; break;
-                        default:
-                            offset = ((i - 1) * 11) + 0x359AD7;
-                            multipleSpellInstanceRange[i] = data[offset];
-                            break;
+                        offset = ((i - 1) * 11) + 0x359AD7;
+                        multipleSpellRanges[i] = rom[offset];
                     }
                 }
-                multipleSpellInstanceMax = data[0x359B7E];
+                multipleSpellMax = rom[0x359B7E];
             }
             if (index == 26) // star rain
             {
-                multipleSpellInstanceRange = new byte[1];
-                multipleSpellInstanceRange[0] = data[0x35C3C5];
-                multipleSpellInstanceMax = data[0x35C407];
+                multipleSpellRanges = new byte[1];
+                multipleSpellRanges[0] = rom[0x35C3C5];
+                multipleSpellMax = rom[0x35C407];
             }
             if (index == 9 || index == 17 || index == 18 || index == 21 || index == 23)
             {
@@ -291,29 +267,28 @@ namespace LAZYSHELL
                 else if (index == 18) offset = 0x35BAE2;  // Geno Whirl
                 else if (index == 21) offset = 0x35BEDA;  // Thunderbolt
                 else if (index == 23) offset = 0x35C15E;  // Psychopath
-                oneLevelSpellStart = data[offset]; offset += 2;
-                oneLevelSpellSpan = data[offset]; offset += 2;
+                oneLevelSpellStart = rom[offset]; offset += 2;
+                oneLevelSpellSpan = rom[offset]; offset += 2;
             }
             if (index == 0 || index == 6 || index == 7 || index == 14 || index == 22 || index == 24)
             {
                 if (index == 0) offset = 0x359305;        // Jump
-                else if (index == 6 || index == 7)     // Therapy / Group Hug
-                    offset = 0x359E47;
+                else if (index == 6 || index == 7) offset = 0x359E47; // Therapy / Group Hug
                 else if (index == 14) offset = 0x35B09A;  // Crusher
                 else if (index == 22) offset = 0x35BFC6;  // HP Rain
                 else if (index == 24) offset = 0x35C2CA;  // Shocker
-                twoLevelSpellStartLevel1 = data[offset]; offset += 2;
-                twoLevelSpellStartLevel2 = data[offset]; offset++;
-                twoLevelSpellEndLevel2 = data[offset]; offset++;
-                twoLevelSpellEndLevel1 = data[offset]; offset++;
+                twoLevelSpellStartLevel1 = rom[offset]; offset += 2;
+                twoLevelSpellStartLevel2 = rom[offset++];
+                twoLevelSpellEndLevel2 = rom[offset++];
+                twoLevelSpellEndLevel1 = rom[offset++];
             }
             if (index == 1 || index == 3 || index == 5)
             {
                 if (index == 1) offset = 0x359484;       // Fire Orb
                 else if (index == 3) offset = 0x3598D8;  // Super Flame
                 else if (index == 5) offset = 0x359CF4;  // Ultra Flame
-                fireballSpellRange = data[offset]; offset += 13;
-                fireballSpellOrbs = data[offset];
+                fireballSpellRange = rom[offset]; offset += 13;
+                fireballSpellOrbs = rom[offset];
             }
             if (index == 8 || index == 10 || index == 12 || index == 13 || index == 25)
             {
@@ -322,121 +297,109 @@ namespace LAZYSHELL
                 else if (index == 12) offset = 0x35ACAF;  // Terrorize
                 else if (index == 13) offset = 0x35AE3A;  // Poison Gas
                 else if (index == 25) offset = 0x35C347;  // Snowy
-                rotationSpellStart = data[offset]; offset += 2;
-                rotationSpellMax = data[offset];
+                rotationSpellStart = rom[offset]; offset += 2;
+                rotationSpellMax = rom[offset];
             }
             if (index == 16 || index == 19 || index == 20)
             {
-                chargeSpellStartLevel2 = data[0x35B58D];
-                chargeSpellStartLevel3 = data[0x35B58E];
-                chargeSpellStartLevel4 = data[0x35B58F];
-                chargeSpellOverflow = data[0x35B590];
+                chargeSpellStartLevel2 = rom[0x35B58D];
+                chargeSpellStartLevel3 = rom[0x35B58E];
+                chargeSpellStartLevel4 = rom[0x35B58F];
+                chargeSpellOverflow = rom[0x35B590];
             }
             if (index == 11 || index == 15)
-                rapidSpellMax = data[0x35AA15];
+                rapidSpellMax = rom[0x35AA15];
         }
-        public ushort Assemble(ushort descOffset)
+        public void Assemble(ref int descriptionOffset)
         {
-            ushort retLength = 0;
-
-            Bits.SetCharArray(data, 0x3A137F + (index * 15), name);
-
+            Bits.SetCharArray(rom, 0x3A137F + (index * 15), name);
+            // description
+            int length = 0;
             if (index <= 0x1A)
             {
-                // Write offset to table
-                Bits.SetShort(data, 0x3A2B80 + index * 2, descOffset);
-
-
+                Bits.SetShort(rom, 0x3A2B80 + index * 2, descriptionOffset);
                 if (this.descriptionError)
-                    System.Windows.Forms.MessageBox.Show("There is an error with Spell " + this.index.ToString() + " Description, it has not been saved.");
+                    MessageBox.Show("Unable to save spell #" + this.index + "'s description.");
                 else
                 {
-                    retLength = (ushort)description.Length;
-                    Bits.SetCharArray(data, 0x3A0000 + descOffset, description); // Write the actual description
+                    length = description.Length;
+                    Bits.SetCharArray(rom, 0x3A0000 + descriptionOffset, description); // Write the actual description
                 }
             }
-
+            descriptionOffset += length;
+            // stats
             int offset = (index * 12) + 0x3A20F1;
-
-            Bits.SetBit(data, offset, 0, checkStats);
-            Bits.SetBit(data, offset, 1, ignoreDefense);
-            Bits.SetBit(data, offset, 5, checkMortality);
-            Bits.SetBit(data, offset, 7, usableOverworld);
-            offset++;
-
-            Bits.SetByte(data, offset, attackType);
+            Bits.SetBit(rom, offset, 0, checkStats);
+            Bits.SetBit(rom, offset, 1, ignoreDefense);
+            Bits.SetBit(rom, offset, 5, checkMortality);
+            Bits.SetBit(rom, offset++, 7, usableOverworld);
+            //
+            rom[offset] = attackType;
             if (effectType == 0) // Inflict
             {
-                Bits.SetBit(data, offset, 1, true);
-                Bits.SetBit(data, offset, 2, false);
+                Bits.SetBit(rom, offset, 1, true);
+                Bits.SetBit(rom, offset, 2, false);
             }
             else if (effectType == 1) // Nullify
             {
-                Bits.SetBit(data, offset, 1, false);
-                Bits.SetBit(data, offset, 2, true);
+                Bits.SetBit(rom, offset, 1, false);
+                Bits.SetBit(rom, offset, 2, true);
             }
             else if (effectType == 2) // {NONE}
             {
-                Bits.SetBit(data, offset, 1, false);
-                Bits.SetBit(data, offset, 2, false);
+                Bits.SetBit(rom, offset, 1, false);
+                Bits.SetBit(rom, offset, 2, false);
             }
-
-            Bits.SetBit(data, offset, 3, maxAttack);
-            offset++;
-
-            Bits.SetByte(data, offset, fpCost); offset++;
-
-            Bits.SetBit(data, offset, 1, targetLiveAlly);
-            Bits.SetBit(data, offset, 2, targetEnemy);
-            Bits.SetBit(data, offset, 4, targetAll);
-            Bits.SetBit(data, offset, 5, targetWoundedOnly);
-            Bits.SetBit(data, offset, 6, targetOnePartyOnly);
-            Bits.SetBit(data, offset, 7, targetNotSelf);
-            offset++;
-
+            Bits.SetBit(rom, offset++, 3, maxAttack);
+            //
+            rom[offset++] = fpCost;
+            Bits.SetBit(rom, offset, 1, targetLiveAlly);
+            Bits.SetBit(rom, offset, 2, targetEnemy);
+            Bits.SetBit(rom, offset, 4, targetAll);
+            Bits.SetBit(rom, offset, 5, targetWoundedOnly);
+            Bits.SetBit(rom, offset, 6, targetOnePartyOnly);
+            Bits.SetBit(rom, offset++, 7, targetNotSelf);
+            //
             switch (inflictElement)
             {
-                case 0: Bits.SetByte(data, offset, 0x10); break;
-                case 1: Bits.SetByte(data, offset, 0x20); break;
-                case 2: Bits.SetByte(data, offset, 0x40); break;
-                case 3: Bits.SetByte(data, offset, 0x80); break;
-                case 4: Bits.SetByte(data, offset, 0x00); break;
+                case 0: rom[offset] = 0x10; break;
+                case 1: rom[offset] = 0x20; break;
+                case 2: rom[offset] = 0x40; break;
+                case 3: rom[offset] = 0x80; break;
+                case 4: rom[offset] = 0x00; break;
             }
             offset++;
-
-            Bits.SetByte(data, offset, magicPower); offset++;
-            Bits.SetByte(data, offset, hitRate); offset++;
-
-            Bits.SetBit(data, offset, 0, effectMute);
-            Bits.SetBit(data, offset, 1, effectSleep);
-            Bits.SetBit(data, offset, 2, effectPoison);
-            Bits.SetBit(data, offset, 3, effectFear);
-            Bits.SetBit(data, offset, 5, effectMushroom);
-            Bits.SetBit(data, offset, 6, effectScarecrow);
-            Bits.SetBit(data, offset, 7, effectInvincible);
-            offset++;
-
-            Bits.SetBit(data, offset, 3, changeMagicAttack);
-            Bits.SetBit(data, offset, 4, changeAttack);
-            Bits.SetBit(data, offset, 5, changeMagicDefense);
-            Bits.SetBit(data, offset, 6, changeDefense);
+            //
+            rom[offset++] = magicPower;
+            rom[offset++] = hitRate;
+            Bits.SetBit(rom, offset, 0, effectMute);
+            Bits.SetBit(rom, offset, 1, effectSleep);
+            Bits.SetBit(rom, offset, 2, effectPoison);
+            Bits.SetBit(rom, offset, 3, effectFear);
+            Bits.SetBit(rom, offset, 5, effectMushroom);
+            Bits.SetBit(rom, offset, 6, effectScarecrow);
+            Bits.SetBit(rom, offset++, 7, effectInvincible);
+            //
+            Bits.SetBit(rom, offset, 3, changeMagicAttack);
+            Bits.SetBit(rom, offset, 4, changeAttack);
+            Bits.SetBit(rom, offset, 5, changeMagicDefense);
+            Bits.SetBit(rom, offset, 6, changeDefense);
             offset += 2;
-
+            //
             switch (inflictFunction)
             {
-                case 0: Bits.SetByte(data, offset, 0x00); break;
-                case 1: Bits.SetByte(data, offset, 0x01); break;
-                case 2: Bits.SetByte(data, offset, 0x02); break;
-                case 3: Bits.SetByte(data, offset, 0x03); break;
-                case 4: Bits.SetByte(data, offset, 0x04); break;
-                default: Bits.SetByte(data, offset, 0xFF); break;
+                case 0: rom[offset] = 0x00; break;
+                case 1: rom[offset] = 0x01; break;
+                case 2: rom[offset] = 0x02; break;
+                case 3: rom[offset] = 0x03; break;
+                case 4: rom[offset] = 0x04; break;
+                default: rom[offset] = 0xFF; break;
             }
             offset++;
             if (hideDigits == true)
-                Bits.SetByte(data, offset, 0x04);
+                rom[offset] = 0x04;
             else
-                Bits.SetByte(data, offset, 0x00);
-
+                rom[offset] = 0x00;
             // timing
             if (index == 2)  // super jump
             {
@@ -445,21 +408,21 @@ namespace LAZYSHELL
                     switch (i)
                     {
                         case 0:
-                            Bits.SetByte(data, 0x35969D, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, 0x35969F, multipleSpellInstanceRange[i]);
+                            rom[0x35969D] = multipleSpellRanges[i];
+                            rom[0x35969F] = multipleSpellRanges[i];
                             break;
                         case 13:
-                            Bits.SetByte(data, 0x359768, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, 0x35976A, multipleSpellInstanceRange[i]);
+                            rom[0x359768] = multipleSpellRanges[i];
+                            rom[0x35976A] = multipleSpellRanges[i];
                             break;
                         default:
                             offset = ((i - 1) * 11) + 0x3596DE;
-                            Bits.SetByte(data, offset, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, offset + 2, multipleSpellInstanceRange[i]);
+                            rom[offset] = multipleSpellRanges[i];
+                            rom[offset + 2] = multipleSpellRanges[i];
                             break;
                     }
                 }
-                Bits.SetByte(data, 0x359763, multipleSpellInstanceMax);
+                rom[0x359763] = multipleSpellMax;
             }
             if (index == 4)  // ultra jump
             {
@@ -468,25 +431,25 @@ namespace LAZYSHELL
                     switch (i)
                     {
                         case 0:
-                            Bits.SetByte(data, 0x359AA6, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, 0x359AA8, multipleSpellInstanceRange[i]); break;
+                            rom[0x359AA6] = multipleSpellRanges[i];
+                            rom[0x359AA8] = multipleSpellRanges[i]; break;
                         case 16:
-                            Bits.SetByte(data, 0x359B83, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, 0x359B85, multipleSpellInstanceRange[i]); break;
+                            rom[0x359B83] = multipleSpellRanges[i];
+                            rom[0x359B85] = multipleSpellRanges[i]; break;
                         default:
                             offset = ((i - 1) * 11) + 0x359AD7;
-                            Bits.SetByte(data, offset, multipleSpellInstanceRange[i]);
-                            Bits.SetByte(data, offset + 2, multipleSpellInstanceRange[i]);
+                            rom[offset] = multipleSpellRanges[i];
+                            rom[offset + 2] = multipleSpellRanges[i];
                             break;
                     }
                 }
-                Bits.SetByte(data, 0x359B7E, multipleSpellInstanceMax);
+                rom[0x359B7E] = multipleSpellMax;
             }
             if (index == 26) // star rain
             {
-                Bits.SetByte(data, 0x35C3C5, multipleSpellInstanceRange[0]);
-                Bits.SetByte(data, 0x35C3C7, multipleSpellInstanceRange[0]);
-                Bits.SetByte(data, 0x35C407, multipleSpellInstanceMax);
+                rom[0x35C3C5] = multipleSpellRanges[0];
+                rom[0x35C3C7] = multipleSpellRanges[0];
+                rom[0x35C407] = multipleSpellMax;
             }
             if (index == 9 || index == 17 || index == 18 || index == 21 || index == 23)
             {
@@ -495,8 +458,8 @@ namespace LAZYSHELL
                 else if (index == 18) offset = 0x35BAE2;  // Geno Whirl
                 else if (index == 21) offset = 0x35BEDA;  // Thunderbolt
                 else if (index == 23) offset = 0x35C15E;  // Psychopath
-                Bits.SetByte(data, offset, oneLevelSpellSpan); offset += 2;
-                Bits.SetByte(data, offset, oneLevelSpellSpan); offset += 2;
+                rom[offset] = oneLevelSpellSpan; offset += 2;
+                rom[offset] = oneLevelSpellSpan; offset += 2;
             }
             if (index == 0 || index == 6 || index == 7 || index == 14 || index == 22 || index == 24)
             {
@@ -506,18 +469,18 @@ namespace LAZYSHELL
                 else if (index == 14) offset = 0x35B09A;  // Crusher
                 else if (index == 22) offset = 0x35BFC6;  // HP Rain
                 else if (index == 24) offset = 0x35C2CA;  // Shocker
-                Bits.SetByte(data, offset, twoLevelSpellEndLevel1); offset += 2;
-                Bits.SetByte(data, offset, twoLevelSpellStartLevel2); offset++;
-                Bits.SetByte(data, offset, twoLevelSpellEndLevel2); offset++;
-                Bits.SetByte(data, offset, twoLevelSpellEndLevel1); offset++;
+                rom[offset] = twoLevelSpellEndLevel1; offset += 2;
+                rom[offset] = twoLevelSpellStartLevel2; offset++;
+                rom[offset] = twoLevelSpellEndLevel2; offset++;
+                rom[offset] = twoLevelSpellEndLevel1; offset++;
             }
             if (index == 1 || index == 3 || index == 5)
             {
                 if (index == 1) offset = 0x359484;       // Fire Orb
                 else if (index == 3) offset = 0x3598D8;  // Super Flame
                 else if (index == 5) offset = 0x359CF4;  // Ultra Flame
-                Bits.SetByte(data, offset, fireballSpellRange); offset += 13;
-                Bits.SetByte(data, offset, fireballSpellOrbs);
+                rom[offset] = fireballSpellRange; offset += 13;
+                rom[offset] = fireballSpellOrbs;
             }
             if (index == 8 || index == 10 || index == 12 || index == 13 || index == 25)
             {
@@ -526,46 +489,20 @@ namespace LAZYSHELL
                 else if (index == 12) offset = 0x35ACAF;  // Terrorize
                 else if (index == 13) offset = 0x35AE3A;  // Poison Gas
                 else if (index == 25) offset = 0x35C347;  // Snowy
-                Bits.SetByte(data, offset, rotationSpellStart); offset += 2;
-                Bits.SetByte(data, offset, rotationSpellMax);
+                rom[offset] = rotationSpellStart; offset += 2;
+                rom[offset] = rotationSpellMax;
             }
             if (index == 16 || index == 19 || index == 20)
             {
-                Bits.SetByte(data, 0x35B58D, chargeSpellStartLevel2);
-                Bits.SetByte(data, 0x35B58E, chargeSpellStartLevel3);
-                Bits.SetByte(data, 0x35B58F, chargeSpellStartLevel4);
-                Bits.SetByte(data, 0x35B590, chargeSpellOverflow);
+                rom[0x35B58D] = chargeSpellStartLevel2;
+                rom[0x35B58E] = chargeSpellStartLevel3;
+                rom[0x35B58F] = chargeSpellStartLevel4;
+                rom[0x35B590] = chargeSpellOverflow;
             }
             if (index == 11 || index == 15)
-                Bits.SetByte(data, 0x35AA15, rapidSpellMax);
-            return retLength;
+                rom[0x35AA15] = rapidSpellMax;
         }
-        private char[] ParseDescription(byte[] data)
-        {
-
-            int descriptionPtr = 0x3A0000 + Bits.GetShort(data, 0x3A2B80 + index * 2);
-
-            int count = descriptionPtr;
-            int len = 0;
-            byte ptr = 0x01;
-
-            while (ptr != 0x00 && ptr != 0x06)
-            {
-                ptr = data[count];
-                len++;
-                count++;
-            }
-
-            char[] descriptionMsg = new char[len];
-
-            for (int i = 0; i < len; i++)
-            {
-                descriptionMsg[i] = (char)data[descriptionPtr + i];
-            }
-
-            return descriptionMsg;
-
-        }
+        // universal functions
         public override string ToString()
         {
             return new string(name);
@@ -615,14 +552,31 @@ namespace LAZYSHELL
             fireballSpellOrbs = 0;
             rotationSpellStart = 0;
             rotationSpellMax = 0;
-            multipleSpellInstanceMax = 0;
-            if (multipleSpellInstanceRange != null)
-                multipleSpellInstanceRange = new byte[multipleSpellInstanceRange.Length];
+            multipleSpellMax = 0;
+            if (multipleSpellRanges != null)
+                multipleSpellRanges = new byte[multipleSpellRanges.Length];
             chargeSpellStartLevel2 = 0;
             chargeSpellStartLevel3 = 0;
             chargeSpellStartLevel4 = 0;
             chargeSpellOverflow = 0;
             rapidSpellMax = 0;
+        }
+        // class functions
+        private char[] ParseDescription()
+        {
+            int pointer = 0x3A0000 + Bits.GetShort(rom, 0x3A2B80 + index * 2);
+            int counter = pointer;
+            int length = 0;
+            int letter = -1;
+            while (letter != 0 && letter != 6)
+            {
+                letter = rom[counter++];
+                length++;
+            }
+            char[] description = new char[length];
+            for (int i = 0; i < length; i++)
+                description[i] = (char)rom[pointer + i];
+            return description;
         }
     }
 }

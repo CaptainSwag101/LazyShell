@@ -35,6 +35,8 @@
             this.frames = new LAZYSHELL.NewPanel();
             this.sequences = new System.Windows.Forms.ListBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.exportAnimatedGIF = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.newSequence = new System.Windows.Forms.ToolStripButton();
             this.deleteSequence = new System.Windows.Forms.ToolStripButton();
             this.duplicateSequence = new System.Windows.Forms.ToolStripButton();
@@ -180,6 +182,8 @@
             this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportAnimatedGIF,
+            this.toolStripSeparator7,
             this.newSequence,
             this.deleteSequence,
             this.duplicateSequence,
@@ -194,6 +198,22 @@
             this.toolStrip2.Size = new System.Drawing.Size(668, 25);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // exportAnimatedGIF
+            // 
+            this.exportAnimatedGIF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exportAnimatedGIF.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.exportAnimatedGIF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.exportAnimatedGIF.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exportAnimatedGIF.Name = "exportAnimatedGIF";
+            this.exportAnimatedGIF.Size = new System.Drawing.Size(23, 22);
+            this.exportAnimatedGIF.Text = "Export to Animated GIF";
+            this.exportAnimatedGIF.Click += new System.EventHandler(this.exportAnimatedGIF_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
             // newSequence
             // 
@@ -579,5 +599,7 @@
         private System.Windows.Forms.ToolStripButton newSequence;
         private System.Windows.Forms.ToolStripButton copy;
         private System.Windows.Forms.ToolStripButton paste;
+        private System.Windows.Forms.ToolStripButton exportAnimatedGIF;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

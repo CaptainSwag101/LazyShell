@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AlliesEditor : Form
+    public partial class AlliesEditor : NewForm
     {
         // variables
 
@@ -24,8 +24,6 @@ namespace LAZYSHELL
         {
             checksum = Do.GenerateChecksum(Model.Characters, Model.Slots);
             //
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);

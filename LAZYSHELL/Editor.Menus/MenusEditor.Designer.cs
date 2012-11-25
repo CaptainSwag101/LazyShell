@@ -39,6 +39,9 @@
             this.textView = new System.Windows.Forms.ToolStripButton();
             this.menuTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.charactersLeft = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.xCoord = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +67,10 @@
             this.menuTextNum,
             this.textView,
             this.menuTextBox,
-            this.charactersLeft});
+            this.charactersLeft,
+            this.toolStripSeparator2,
+            this.toolStripLabel2,
+            this.xCoord});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -110,7 +116,7 @@
             this.menuTextName.DropDownWidth = 300;
             this.menuTextName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.menuTextName.Name = "menuTextName";
-            this.menuTextName.Size = new System.Drawing.Size(200, 25);
+            this.menuTextName.Size = new System.Drawing.Size(150, 25);
             this.menuTextName.SelectedIndexChanged += new System.EventHandler(this.menuTextName_SelectedIndexChanged);
             // 
             // menuTextNum
@@ -123,7 +129,7 @@
             0,
             0,
             0});
-            this.menuTextNum.Location = new System.Drawing.Point(299, 1);
+            this.menuTextNum.Location = new System.Drawing.Point(249, 1);
             this.menuTextNum.Maximum = new decimal(new int[] {
             117,
             0,
@@ -160,7 +166,7 @@
             // menuTextBox
             // 
             this.menuTextBox.Name = "menuTextBox";
-            this.menuTextBox.Size = new System.Drawing.Size(300, 25);
+            this.menuTextBox.Size = new System.Drawing.Size(250, 25);
             this.menuTextBox.TextChanged += new System.EventHandler(this.menuTextBox_TextChanged);
             // 
             // charactersLeft
@@ -168,6 +174,51 @@
             this.charactersLeft.Name = "charactersLeft";
             this.charactersLeft.Size = new System.Drawing.Size(84, 22);
             this.charactersLeft.Text = "  characters left";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Visible = false;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(21, 22);
+            this.toolStripLabel2.Text = " X: ";
+            this.toolStripLabel2.Visible = false;
+            // 
+            // xCoord
+            // 
+            this.xCoord.AutoSize = false;
+            this.xCoord.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xCoord.Hexadecimal = false;
+            this.xCoord.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.xCoord.Location = new System.Drawing.Point(685, 1);
+            this.xCoord.Maximum = new decimal(new int[] {
+            117,
+            0,
+            0,
+            0});
+            this.xCoord.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.xCoord.Name = "menuTextNum";
+            this.xCoord.Size = new System.Drawing.Size(50, 22);
+            this.xCoord.Text = "0";
+            this.xCoord.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.xCoord.Visible = false;
+            this.xCoord.ValueChanged += new System.EventHandler(this.xCoord_ValueChanged);
             // 
             // MenusEditor
             // 
@@ -198,11 +249,14 @@
         private System.Windows.Forms.ToolStripComboBox menuTextName;
         private System.Windows.Forms.ToolStripLabel charactersLeft;
         private System.Windows.Forms.ToolStripTextBox menuTextBox;
-        private System.Windows.Forms.ToolStripButton textView;
         private ToolStripNumericUpDown menuTextNum;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.ToolStripButton textView;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private ToolStripNumericUpDown xCoord;
     }
 }

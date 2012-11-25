@@ -29,6 +29,7 @@ namespace LAZYSHELL
         public Point Location { get { return DropDownControl.Location; } set { DropDownControl.Location = value; } }
         public int SelectedIndex { get { return DropDownControl.SelectedIndex; } set { DropDownControl.SelectedIndex = value; } }
         public object SelectedItem { get { return DropDownControl.SelectedItem; } set { DropDownControl.SelectedItem = value; } }
+        public ContextMenuStrip ContextMenuStrip { get { return DropDownControl.ContextMenuStrip; } set { DropDownControl.ContextMenuStrip = value; } }
         public void BeginUpdate()
         {
             DropDownControl.BeginUpdate();
@@ -226,6 +227,7 @@ namespace LAZYSHELL
         public new string Name { get { return NumericUpDownControl.Name; } set { NumericUpDownControl.Name = value; } }
         public decimal Value { get { return NumericUpDownControl.Value; } set { NumericUpDownControl.Value = value; } }
         public decimal Increment { get { return NumericUpDownControl.Increment; } set { NumericUpDownControl.Increment = value; } }
+        public ContextMenuStrip ContextMenuStrip { get { return NumericUpDownControl.ContextMenuStrip; } set { NumericUpDownControl.ContextMenuStrip = value; } }
         protected override void OnSubscribeControlEvents(Control c)
         {
             base.OnSubscribeControlEvents(c);

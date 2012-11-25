@@ -474,7 +474,7 @@
             0,
             -2147483648});
             this.levelsReds.Name = "levelsReds";
-            this.levelsReds.Size = new System.Drawing.Size(41, 21);
+            this.levelsReds.Size = new System.Drawing.Size(45, 21);
             this.levelsReds.TabIndex = 1;
             this.levelsReds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsReds.ValueChanged += new System.EventHandler(this.levelsReds_ValueChanged);
@@ -506,7 +506,7 @@
             0,
             -2147483648});
             this.levelsBlues.Name = "levelsBlues";
-            this.levelsBlues.Size = new System.Drawing.Size(41, 21);
+            this.levelsBlues.Size = new System.Drawing.Size(45, 21);
             this.levelsBlues.TabIndex = 7;
             this.levelsBlues.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsBlues.ValueChanged += new System.EventHandler(this.levelsBlues_ValueChanged);
@@ -515,11 +515,11 @@
             // 
             this.levelsGreensBar.AutoSize = false;
             this.levelsGreensBar.LargeChange = 32;
-            this.levelsGreensBar.Location = new System.Drawing.Point(94, 41);
+            this.levelsGreensBar.Location = new System.Drawing.Point(98, 41);
             this.levelsGreensBar.Maximum = 100;
             this.levelsGreensBar.Minimum = -100;
             this.levelsGreensBar.Name = "levelsGreensBar";
-            this.levelsGreensBar.Size = new System.Drawing.Size(151, 20);
+            this.levelsGreensBar.Size = new System.Drawing.Size(147, 20);
             this.levelsGreensBar.SmallChange = 8;
             this.levelsGreensBar.TabIndex = 5;
             this.levelsGreensBar.TickFrequency = 8;
@@ -535,7 +535,7 @@
             0,
             -2147483648});
             this.levelsGreens.Name = "levelsGreens";
-            this.levelsGreens.Size = new System.Drawing.Size(41, 21);
+            this.levelsGreens.Size = new System.Drawing.Size(45, 21);
             this.levelsGreens.TabIndex = 4;
             this.levelsGreens.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.levelsGreens.ValueChanged += new System.EventHandler(this.levelsGreens_ValueChanged);
@@ -553,11 +553,11 @@
             // 
             this.levelsRedsBar.AutoSize = false;
             this.levelsRedsBar.LargeChange = 32;
-            this.levelsRedsBar.Location = new System.Drawing.Point(94, 20);
+            this.levelsRedsBar.Location = new System.Drawing.Point(98, 20);
             this.levelsRedsBar.Maximum = 100;
             this.levelsRedsBar.Minimum = -100;
             this.levelsRedsBar.Name = "levelsRedsBar";
-            this.levelsRedsBar.Size = new System.Drawing.Size(151, 20);
+            this.levelsRedsBar.Size = new System.Drawing.Size(147, 20);
             this.levelsRedsBar.SmallChange = 8;
             this.levelsRedsBar.TabIndex = 2;
             this.levelsRedsBar.TickFrequency = 8;
@@ -568,11 +568,11 @@
             // 
             this.levelsBluesBar.AutoSize = false;
             this.levelsBluesBar.LargeChange = 32;
-            this.levelsBluesBar.Location = new System.Drawing.Point(94, 62);
+            this.levelsBluesBar.Location = new System.Drawing.Point(98, 62);
             this.levelsBluesBar.Maximum = 100;
             this.levelsBluesBar.Minimum = -100;
             this.levelsBluesBar.Name = "levelsBluesBar";
-            this.levelsBluesBar.Size = new System.Drawing.Size(151, 20);
+            this.levelsBluesBar.Size = new System.Drawing.Size(147, 20);
             this.levelsBluesBar.SmallChange = 8;
             this.levelsBluesBar.TabIndex = 8;
             this.levelsBluesBar.TickFrequency = 8;
@@ -612,7 +612,7 @@
             this.colorizeApply.AutoSize = true;
             this.colorizeApply.Location = new System.Drawing.Point(6, 0);
             this.colorizeApply.Name = "colorizeApply";
-            this.colorizeApply.Size = new System.Drawing.Size(64, 17);
+            this.colorizeApply.Size = new System.Drawing.Size(63, 17);
             this.colorizeApply.TabIndex = 0;
             this.colorizeApply.Text = "Colorize";
             this.colorizeApply.UseVisualStyleBackColor = false;
@@ -865,7 +865,7 @@
             this.negative.AutoSize = true;
             this.negative.Location = new System.Drawing.Point(88, 6);
             this.negative.Name = "negative";
-            this.negative.Size = new System.Drawing.Size(102, 17);
+            this.negative.Size = new System.Drawing.Size(101, 17);
             this.negative.TabIndex = 1;
             this.negative.Text = "Negative Image";
             this.negative.Click += new System.EventHandler(this.negative_CheckedChanged);
@@ -944,7 +944,7 @@
             0,
             0});
             this.currentBlue.Name = "currentBlue";
-            this.currentBlue.Size = new System.Drawing.Size(42, 21);
+            this.currentBlue.Size = new System.Drawing.Size(44, 21);
             this.currentBlue.TabIndex = 7;
             this.currentBlue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentBlue.ValueChanged += new System.EventHandler(this.currentBlue_ValueChanged);
@@ -963,7 +963,7 @@
             0,
             0});
             this.currentGreen.Name = "currentGreen";
-            this.currentGreen.Size = new System.Drawing.Size(42, 21);
+            this.currentGreen.Size = new System.Drawing.Size(44, 21);
             this.currentGreen.TabIndex = 4;
             this.currentGreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentGreen.ValueChanged += new System.EventHandler(this.currentGreen_ValueChanged);
@@ -1000,7 +1000,7 @@
             0,
             0});
             this.currentRed.Name = "currentRed";
-            this.currentRed.Size = new System.Drawing.Size(42, 21);
+            this.currentRed.Size = new System.Drawing.Size(44, 21);
             this.currentRed.TabIndex = 1;
             this.currentRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.currentRed.ValueChanged += new System.EventHandler(this.currentRed_ValueChanged);

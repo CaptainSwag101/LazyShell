@@ -17,12 +17,12 @@ namespace LAZYSHELL
         private State state = State.Instance2;
         private int Width = 64;
         private int Height = 64;
-        public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }
-        public override int Height_p { get { return Height * 16; } set { Height = value / 16; } }
         private byte[] tilemap_Bytes;
         private Tile[] tilemap_Tiles;
         private int[] pixels = new int[1024 * 1024];
-        // accessors
+        // public accessors
+        public override int Width_p { get { return Width * 16; } set { Width = value / 16; } }
+        public override int Height_p { get { return Height * 16; } set { Height = value / 16; } }
         public Size Size { get { return new Size(Width, Height); } }
         public Size Size_p { get { return new Size(Width_p, Height_p); } }
         public override byte[] Tilemap_Bytes { get { return tilemap_Bytes; } set { tilemap_Bytes = value; } }
@@ -32,6 +32,7 @@ namespace LAZYSHELL
         public override int[] Pixels { get { return pixels; } set { pixels = value; } }
         public override Bitmap Image { get { return null; } set { } }
         #endregion
+        // constructor
         public Mode7Tilemap(byte[] tilemap, Tileset tileset, PaletteSet paletteSet)
         {
             this.tileset = tileset;
@@ -40,15 +41,17 @@ namespace LAZYSHELL
             CreateLayer(); // Create any required layers
             DrawMainscreen();
         }
+        // assemblers
         public override void Assemble()
         {
             if (tilemap_Tiles == null) return;
             for (int i = 0; i < tilemap_Tiles.Length; i++)
                 tilemap_Bytes[i] = (byte)tilemap_Tiles[i].TileIndex;
         }
+        // drawing
         private void ChangeSingleTile(int placement, int tile, int x, int y)
         {
-            this.tilemap_Tiles[placement] = tileset.Tileset_Tiles[tile]; // Change the tile in the layer map
+            this.tilemap_Tiles[placement] = tileset.Tileset_tiles[tile]; // Change the tile in the layer map
 
             Tile source = this.tilemap_Tiles[placement]; // Grab the new tile
 
@@ -113,14 +116,14 @@ namespace LAZYSHELL
         private void CreateLayer()
         {
             if (tilemap_Bytes == null) return;
-            if (tileset.Tileset_Tiles == null) return;
+            if (tileset.Tileset_tiles == null) return;
 
             tilemap_Tiles = new Tile[Width * Height]; // Create our layer here
             int offset = 0;
             for (int i = 0; i < Width * Height && i < tilemap_Bytes.Length; i++)
             {
                 byte tilenum = tilemap_Bytes[offset++];
-                tilemap_Tiles[i] = tileset.Tileset_Tiles[tilenum];
+                tilemap_Tiles[i] = tileset.Tileset_tiles[tilenum];
             }
         }
         private void DrawMainscreen()
@@ -175,6 +178,13 @@ namespace LAZYSHELL
                 }
             }
         }
+        public override void RedrawTilemaps()
+        {
+            Array.Clear(pixels, 0, pixels.Length);
+            CreateLayer();
+            DrawMainscreen();
+        }
+        // accessor functions
         public override int GetTileNum(int layer, int x, int y, bool ignoretransparent)
         {
             if (x < 0) x = 0;
@@ -205,31 +215,6 @@ namespace LAZYSHELL
         {
             throw new NotImplementedException();
         }
-        public override void SetTileNum()
-        {
-            throw new NotImplementedException();
-        }
-        public override void SetTileNum(int tilenum, int layer, int x, int y)
-        {
-            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p)
-                return;
-            y /= 16;
-            x /= 16;
-            int index = y * Width + x;
-            if (index < 0x1000)
-                ChangeSingleTile(index, tilenum, x * 16, y * 16);
-            tilemap_Bytes[y * Width + x] = (byte)tilenum;
-        }
-        public override int[] GetPriority1Pixels()
-        {
-            return new int[1024 * 1024];
-        }
-        public override void RedrawTilemaps()
-        {
-            Array.Clear(pixels, 0, pixels.Length);
-            CreateLayer();
-            DrawMainscreen();
-        }
         public override int[] GetPixels(int layer, Point p, Size s)
         {
             int[] pixels = new int[s.Width * s.Height];
@@ -257,6 +242,25 @@ namespace LAZYSHELL
         public override int GetPixelLayer(int x, int y)
         {
             return 0;
+        }
+        public override int[] GetPriority1Pixels()
+        {
+            return new int[1024 * 1024];
+        }
+        public override void SetTileNum()
+        {
+            throw new NotImplementedException();
+        }
+        public override void SetTileNum(int tilenum, int layer, int x, int y)
+        {
+            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p)
+                return;
+            y /= 16;
+            x /= 16;
+            int index = y * Width + x;
+            if (index < 0x1000)
+                ChangeSingleTile(index, tilenum, x * 16, y * 16);
+            tilemap_Bytes[y * Width + x] = (byte)tilenum;
         }
     }
 }

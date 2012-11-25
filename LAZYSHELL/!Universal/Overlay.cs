@@ -240,7 +240,7 @@ namespace LAZYSHELL
         }
         public void DrawBoundaries(Graphics g, Point location, int z)
         {
-            Pen pen = new Pen(SystemColors.ControlDark); 
+            Pen pen = new Pen(SystemColors.ControlDark);
             pen.Width = z; pen.Alignment = PenAlignment.Inset;
             location.X = location.X / 16 * 16;
             location.Y = location.Y / 16 * 16;
@@ -335,7 +335,7 @@ namespace LAZYSHELL
             // Draw the complete # of blocks
             if (exit.Width > 0)
             {
-                if (exit.Face == 0)
+                if (exit.F == 0)
                 {
                     y -= exit.Width * 8;
                     x += exit.Width * 16;
@@ -345,7 +345,7 @@ namespace LAZYSHELL
                 {
                     if (exit.Z > 0)
                     {
-                        if (exit.Face == 0)
+                        if (exit.F == 0)
                             rsrc = new Rectangle(-(w * 16) + x, w * 8 + y, 32, 16);
                         else
                             rsrc = new Rectangle(w * 16 + x, w * 8 + y, 32, 16);
@@ -375,7 +375,7 @@ namespace LAZYSHELL
                         }
                         y += 16;
                     }
-                    x += exit.Face == 0 ? -16 : 16;
+                    x += exit.F == 0 ? -16 : 16;
                     y += 8;
                 }
             }
@@ -422,9 +422,9 @@ namespace LAZYSHELL
                 r.Y = ((exit.Y & 127) * 8) - 8; r.Y *= z;
                 string name;
                 if (exit.ExitType == 0)
-                    name = "{" + exit.Destination.ToString("d3") + "} " + Lists.LevelNames[exit.Destination];
+                    name = Lists.Numerize(Lists.LevelNames, exit.Destination);
                 else
-                    name = "{" + exit.Destination.ToString("d3") + "} MAP POINT: " + Lists.MapNames[exit.Destination];
+                    name = Lists.Numerize(Lists.MapNames, exit.Destination);
                 RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                     g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
                 if (exit == exits.Exit_)
@@ -487,7 +487,7 @@ namespace LAZYSHELL
             // Draw the complete # of blocks
             if (event_.Width > 0)
             {
-                if (event_.Face == 0)
+                if (event_.F == 0)
                 {
                     y -= event_.Width * 8;
                     x += event_.Width * 16;
@@ -497,7 +497,7 @@ namespace LAZYSHELL
                 {
                     if (event_.Z > 0)
                     {
-                        if (event_.Face == 0)
+                        if (event_.F == 0)
                             rsrc = new Rectangle(-(w * 16) + x, w * 8 + y, 32, 16);
                         else
                             rsrc = new Rectangle(w * 16 + x, w * 8 + y, 32, 16);
@@ -527,7 +527,7 @@ namespace LAZYSHELL
                         }
                         y += 16;
                     }
-                    x += event_.Face == 0 ? -16 : 16;
+                    x += event_.F == 0 ? -16 : 16;
                     y += 8;
                 }
             }
@@ -564,11 +564,11 @@ namespace LAZYSHELL
             // draw event strings
             foreach (Event event_ in events.Events)
             {
-                if (event_ != events.Event_)
+                if (event_ != events.EVENT)
                     DrawLevelEventTag(g, events, event_, z);
             }
-            if (events.Event_ != null)
-                DrawLevelEventTag(g, events, events.Event_, z);
+            if (events.EVENT != null)
+                DrawLevelEventTag(g, events, events.EVENT, z);
         }
         private void DrawLevelEventTag(Graphics g, LevelEvents events, Event temp, int z)
         {
@@ -588,7 +588,7 @@ namespace LAZYSHELL
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                 g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
 
-            if (temp != events.Event_)
+            if (temp != events.EVENT)
             {
                 g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
                 g.DrawString(name, font, brush, r.X, r.Y + 24);
@@ -599,7 +599,7 @@ namespace LAZYSHELL
                 g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
                 g.DrawString(name, font_, brush_, r.X, r.Y + 24);
                 // draw commands
-                string script = Do.EventScriptToText(Model.EventScripts[events.Event_.RunEvent], 8, 40);
+                string script = Do.EventScriptToText(Model.EventScripts[events.EVENT.RunEvent], 8, 40);
                 RectangleF commandbox = new RectangleF(r.X + 2, r.Y + 40, 256, (label.Height - 2) * script.Split('\n').Length);
                 g.FillRectangle(brush_, commandbox);
                 g.DrawString(script, font_b, new SolidBrush(Color.Black), r.X + 6, r.Y + 44);
@@ -642,7 +642,7 @@ namespace LAZYSHELL
             int NPCID = engagetype == 0 ? Math.Min(511, npcid + npc.PropertyA) : Math.Min(511, (int)npcid);
             Size size = new Size(0, 0);
             Sprite sprite = Model.Sprites[npcProperties[NPCID].Sprite];
-            int[] pixels = sprite.GetPixels(false, true, 0, npc.Face, false, false, ref size);
+            int[] pixels = sprite.GetPixels(false, true, 0, npc.F, false, false, ref size);
             Bitmap image = Do.PixelsToImage(pixels, size.Width, size.Height);
             NPCImages.Add(image);
         }
@@ -653,13 +653,13 @@ namespace LAZYSHELL
             List<NPC> sorted = new List<NPC>();
             foreach (NPC npc in npcs.Npcs)
             {
-                npc.Hilite = !npcs.IsInstanceSelected && npcs.SelectedNPC == index;
+                npc.Hilite = !npcs.IsCloneSelected && npcs.SelectedNPC == index;
                 npc.Index = total++;
                 sorted.Add(npc);
                 int index_ = 0;
                 foreach (NPC instance in npc.Clones)
                 {
-                    instance.Hilite = npcs.SelectedNPC == index && npcs.IsInstanceSelected && npcs.SelectedInstance == index_;
+                    instance.Hilite = npcs.SelectedNPC == index && npcs.IsCloneSelected && npcs.SelectedClone == index_;
                     instance.Index = total++;
                     sorted.Add(instance);
                     index_++;
@@ -684,7 +684,7 @@ namespace LAZYSHELL
             else
                 g.DrawImage(fieldBaseShadowImageH, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
             y -= npc.Z * 16;
-            y -= npc.YBit7 ? 8 : 0;
+            y -= npc.Yb7 ? 8 : 0;
             rsrc = new Rectangle(x, y, 32, 16);
             rdst = new Rectangle(x * z, y * z, 32 * z, 16 * z);
             if (!npc.Hilite)
@@ -695,7 +695,7 @@ namespace LAZYSHELL
             y = y - 120 - 1;//y -= NPCImages[npc.Index].Height - 4 - 8;
             rsrc = new Rectangle(x, y, NPCImages[npc.Index].Width, NPCImages[npc.Index].Height);
             rdst = new Rectangle(x * z, y * z, rsrc.Width * z, rsrc.Height * z);
-            if (npc.XBit7)
+            if (npc.Xb7)
                 g.DrawImage(NPCImages[npc.Index], rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
         }
         public void DrawLevelNPCTags(LevelNPCs npcs, Graphics g, int z)
@@ -706,13 +706,13 @@ namespace LAZYSHELL
             int current = 0;
             foreach (NPC npc in npcs.Npcs)
             {
-                if (npc != npcs.Npc || npcs.IsInstanceSelected)
+                if (npc != npcs.Npc || npcs.IsCloneSelected)
                     DrawLevelNPCTag(npcs, g, npc, index++, null, z);
                 else
                     current = index++;
                 foreach (NPC instance in npc.Clones)
                 {
-                    if (npc != npcs.Npc || instance != npcs.Npc.Clone_ || !npcs.IsInstanceSelected)
+                    if (npc != npcs.Npc || instance != npcs.Npc.Clone_ || !npcs.IsCloneSelected)
                         DrawLevelNPCTag(npcs, g, instance, index++, null, z);
                     else
                         current = index++;
@@ -720,7 +720,7 @@ namespace LAZYSHELL
             }
             if (npcs.Npc != null)
             {
-                if (!npcs.IsInstanceSelected)
+                if (!npcs.IsCloneSelected)
                     DrawLevelNPCTag(npcs, g, npcs.Npc, current, null, z);
                 else
                     DrawLevelNPCTag(npcs, g, npcs.Npc.Clone_, current, npcs.Npc, z);
@@ -783,9 +783,9 @@ namespace LAZYSHELL
                 else   // battle
                 {
                     text = "{PACK #" + property.ToString() + "}\n";
-                    text += Model.Formations[Model.FormationPacks[property].PackFormations[0]].ToString() + "\n";
-                    text += Model.Formations[Model.FormationPacks[property].PackFormations[1]].ToString() + "\n";
-                    text += Model.Formations[Model.FormationPacks[property].PackFormations[2]].ToString() + "\n";
+                    text += Model.Formations[Model.FormationPacks[property].Formations[0]].ToString() + "\n";
+                    text += Model.Formations[Model.FormationPacks[property].Formations[1]].ToString() + "\n";
+                    text += Model.Formations[Model.FormationPacks[property].Formations[2]].ToString() + "\n";
                     commandbox = new RectangleF(r.X + 2, r.Y + 40, 512, (label.Height - 2) * 5);
                 }
                 g.FillRectangle(brush_, commandbox);
@@ -850,7 +850,7 @@ namespace LAZYSHELL
             Pen pen;
             foreach (LevelTileMods.Mod mod in tileMods.Mods)
             {
-                if (tileMods.Mod_ == mod && !tileMods.SelectedB)
+                if (tileMods.MOD == mod && !tileMods.SelectedB)
                     continue;
                 rsrc = new Rectangle(mod.X * 16, mod.Y * 16, mod.Width * 16, mod.Height * 16);
                 rdst = new Rectangle(mod.X * 16 * z, mod.Y * 16 * z, mod.Width * 16 * z, mod.Height * 16 * z);
@@ -866,7 +866,7 @@ namespace LAZYSHELL
                 g.DrawRectangle(pen, rdst);
             }
             if (tileMods.Mods.Count == 0) return;
-            LevelTileMods.Mod current = tileMods.Mod_;
+            LevelTileMods.Mod current = tileMods.MOD;
             rsrc = new Rectangle(current.X * 16, current.Y * 16, current.Width * 16, current.Height * 16);
             rdst = new Rectangle(current.X * 16 * z, current.Y * 16 * z, current.Width * 16 * z, current.Height * 16 * z);
             if (!tileMods.SelectedB)

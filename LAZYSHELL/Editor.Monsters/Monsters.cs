@@ -10,7 +10,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Monsters : Form
+    public partial class Monsters : NewForm
     {
         #region Variables
         
@@ -27,6 +27,7 @@ namespace LAZYSHELL
         //
         private BattleScripts battleScriptsEditor;
         private HackingTools hackingToolsWindow;
+        private EditLabel labelWindow;
         //
         private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         private Bitmap psychopathBGImage { get { return Model.BattleDialogueTilesetImage; } }
@@ -39,12 +40,11 @@ namespace LAZYSHELL
         #region Functions
         public Monsters()
         {
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
+            labelWindow = new EditLabel(monsterName, monsterNum, "Monsters", false);
             // create editors
             battleScriptsEditor = new BattleScripts(this);
             battleScriptsEditor.TopLevel = false;
@@ -85,52 +85,52 @@ namespace LAZYSHELL
             {
                 Cursor.Current = Cursors.WaitCursor;
                 updatingMonsters = true;
-                this.monsterName.SelectedIndex = Model.MonsterNames.GetIndexFromNum(Index);
-                this.monsterNameText.Text = Do.RawToASCII(monster.Name, settings.KeystrokesMenu);
+                this.monsterName.SelectedIndex = Model.MonsterNames.GetSortedIndex(Index);
+                this.monsterNameText.Text = Do.RawToASCII(monster.Name, Lists.KeystrokesMenu);
                 this.MonsterValHP.Value = monster.HP;
                 this.MonsterValSpeed.Value = monster.Speed;
                 this.MonsterValAtk.Value = monster.Attack;
                 this.MonsterValMgDef.Value = monster.MagicDefense;
                 this.MonsterValMgAtk.Value = monster.MagicAttack;
                 this.MonsterValDef.Value = monster.Defense;
-                this.MonsterValMgEvd.Value = monster.MagicEvadePercent;
-                this.MonsterValEvd.Value = monster.EvadePercent;
+                this.MonsterValMgEvd.Value = monster.MagicEvade;
+                this.MonsterValEvd.Value = monster.Evade;
                 this.MonsterValFP.Value = monster.FP;
                 this.MonsterValExp.Value = monster.Experience;
                 this.MonsterValCoins.Value = monster.Coins;
                 this.MonsterValElevation.Value = monster.Elevation;
                 this.MonsterFlowerOdds.Value = monster.FlowerOdds * 10;
-                this.MonsterElementsNullify.SetItemChecked(0, monster.ElemIceNull);
-                this.MonsterElementsNullify.SetItemChecked(1, monster.ElemFireNull);
-                this.MonsterElementsNullify.SetItemChecked(2, monster.ElemThunderNull);
-                this.MonsterElementsNullify.SetItemChecked(3, monster.ElemJumpNull);
+                this.MonsterElementsNullify.SetItemChecked(0, monster.ElemNullIce);
+                this.MonsterElementsNullify.SetItemChecked(1, monster.ElemNullFire);
+                this.MonsterElementsNullify.SetItemChecked(2, monster.ElemNullThunder);
+                this.MonsterElementsNullify.SetItemChecked(3, monster.ElemNullJump);
                 this.MonsterProperties.SetItemChecked(0, monster.Invincible);
                 this.MonsterProperties.SetItemChecked(1, monster.MortalityProtection);
                 this.MonsterProperties.SetItemChecked(2, monster.DisableAutoDeath);
                 this.MonsterProperties.SetItemChecked(3, monster.Palette2bpp);
-                this.MonsterEffectsNullify.SetItemChecked(0, monster.EffectMuteNull);
-                this.MonsterEffectsNullify.SetItemChecked(1, monster.EffectSleepNull);
-                this.MonsterEffectsNullify.SetItemChecked(2, monster.EffectPoisonNull);
-                this.MonsterEffectsNullify.SetItemChecked(3, monster.EffectFearNull);
-                this.MonsterEffectsNullify.SetItemChecked(4, monster.EffectMushroomNull);
-                this.MonsterEffectsNullify.SetItemChecked(5, monster.EffectScarecrowNull);
-                this.MonsterEffectsNullify.SetItemChecked(6, monster.EffectInvincibleNull);
-                this.MonsterElementsWeakness.SetItemChecked(0, monster.ElemIceWeak);
-                this.MonsterElementsWeakness.SetItemChecked(1, monster.ElemFireWeak);
-                this.MonsterElementsWeakness.SetItemChecked(2, monster.ElemThunderWeak);
-                this.MonsterElementsWeakness.SetItemChecked(3, monster.ElemJumpWeak);
+                this.MonsterEffectsNullify.SetItemChecked(0, monster.EffectNullMute);
+                this.MonsterEffectsNullify.SetItemChecked(1, monster.EffectNullSleep);
+                this.MonsterEffectsNullify.SetItemChecked(2, monster.EffectNullPoison);
+                this.MonsterEffectsNullify.SetItemChecked(3, monster.EffectNullFear);
+                this.MonsterEffectsNullify.SetItemChecked(4, monster.EffectNullMushroom);
+                this.MonsterEffectsNullify.SetItemChecked(5, monster.EffectNullScarecrow);
+                this.MonsterEffectsNullify.SetItemChecked(6, monster.EffectNullInvincible);
+                this.MonsterElementsWeakness.SetItemChecked(0, monster.ElemWeakIce);
+                this.MonsterElementsWeakness.SetItemChecked(1, monster.ElemWeakFire);
+                this.MonsterElementsWeakness.SetItemChecked(2, monster.ElemWeakThunder);
+                this.MonsterElementsWeakness.SetItemChecked(3, monster.ElemWeakJump);
                 this.MonsterFlowerBonus.SelectedIndex = monster.FlowerBonus;
-                this.MonsterMorphSuccess.SelectedIndex = monster.MorphSuccessRate;
+                this.MonsterMorphSuccess.SelectedIndex = monster.MorphSuccess;
                 this.MonsterCoinSize.SelectedIndex = monster.CoinSize;
                 this.MonsterBehavior.SelectedIndex = monster.SpriteBehavior;
                 this.MonsterEntranceStyle.SelectedIndex = monster.EntranceStyle;
                 this.MonsterSoundOther.SelectedIndex = monster.OtherSound;
                 this.MonsterSoundStrike.SelectedIndex = monster.StrikeSound;
-                this.MonsterYoshiCookie.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.YoshiCookie);
-                this.ItemWinA.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinA);
-                this.ItemWinB.SelectedIndex = Model.ItemNames.GetIndexFromNum(monster.ItemWinB);
+                this.MonsterYoshiCookie.SelectedIndex = Model.ItemNames.GetSortedIndex(monster.YoshiCookie);
+                this.ItemWinA.SelectedIndex = Model.ItemNames.GetSortedIndex(monster.ItemWinA);
+                this.ItemWinB.SelectedIndex = Model.ItemNames.GetSortedIndex(monster.ItemWinB);
                 //
-                this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
+                this.MonsterPsychopath.Text = monster.GetPsychopath(byteView);
                 this.MonsterPsychopath_TextChanged(null, null);
                 CalculateFreeSpace();
                 SetDialogueImages();
@@ -147,25 +147,25 @@ namespace LAZYSHELL
             toInsert.CopyTo(0, newText, MonsterPsychopath.SelectionStart, toInsert.Length);
             MonsterPsychopath.Text.CopyTo(MonsterPsychopath.SelectionStart, newText, MonsterPsychopath.SelectionStart + toInsert.Length, this.MonsterPsychopath.Text.Length - this.MonsterPsychopath.SelectionStart);
             if (byteView)
-                monster.CaretPositionByteView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
+                monster.CaretPosByteView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
             else
-                monster.CaretPositionTextView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
-            monster.SetPsychoMsg(new string(newText), byteView);
-            this.MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
+                monster.CaretPosTextView = this.MonsterPsychopath.SelectionStart + toInsert.Length;
+            monster.SetPsychopath(new string(newText), byteView);
+            this.MonsterPsychopath.Text = monster.GetPsychopath(byteView);
             if (byteView)
-                this.MonsterPsychopath.SelectionStart = monster.CaretPositionByteView;
+                this.MonsterPsychopath.SelectionStart = monster.CaretPosByteView;
             else
-                this.MonsterPsychopath.SelectionStart = monster.CaretPositionTextView;
+                this.MonsterPsychopath.SelectionStart = monster.CaretPosTextView;
         }
         private void CalculateFreeSpace()
         {
             int used = 0; int size = 0xb641 + 0x2229;
             for (int i = 0; i < monsters.Length - 1; i++)
             {
-                used += monsters[i].RawPsychoMsg.Length;
-                if (used + monsters[i].RawPsychoMsg.Length > size)
+                used += monsters[i].RawPsychopath.Length;
+                if (used + monsters[i].RawPsychopath.Length > size)
                 {
-                    bool test = size >= used + monsters[i].RawPsychoMsg.Length;
+                    bool test = size >= used + monsters[i].RawPsychopath.Length;
                     if (!test)
                     {
                         freeBytes.Text = "Entry " + i++.ToString() + " Too Long - Cannot Save";
@@ -184,14 +184,14 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int i = 0;
-            ushort len = 0xa1d1;
-            for (; i < monsters.Length && len + monsters[i].RawPsychoMsg.Length < 0xb641; i++)
-                len += monsters[i].Assemble(len);
-            len = 0x1c2a;
-            for (; i < monsters.Length && len + monsters[i].RawPsychoMsg.Length < 0x2229; i++)
-                len += monsters[i].Assemble(len);
+            int length = 0xA1D1;
+            for (; i < monsters.Length && length + monsters[i].RawPsychopath.Length < 0xb641; i++)
+                monsters[i].Assemble(ref length);
+            length = 0x1C2A;
+            for (; i < monsters.Length && length + monsters[i].RawPsychopath.Length < 0x2229; i++)
+                monsters[i].Assemble(ref length);
             if (i != monsters.Length)
-                System.Windows.Forms.MessageBox.Show(
+                MessageBox.Show(
                     "The allotted space for psychopath dialogues has been exceeded. Not all psychopath dialogues have been saved.",
                     "LAZY SHELL");
             battleScriptsEditor.Assemble();
@@ -235,12 +235,12 @@ namespace LAZYSHELL
         private void monsterNum_ValueChanged(object sender, EventArgs e)
         {
             RefreshMonsterTab();
-            battleScriptsEditor.InitializeBattleScriptsEditor();
+            battleScriptsEditor.Initialize();
             settings.LastMonster = Index;
         }
         private void monsterName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.monsterNum.Value = Model.MonsterNames.GetNumFromIndex(monsterName.SelectedIndex);
+            this.monsterNum.Value = Model.MonsterNames.GetUnsortedIndex(monsterName.SelectedIndex);
         }
         private void monsterName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -248,18 +248,18 @@ namespace LAZYSHELL
         }
         private void monsterNameText_TextChanged(object sender, EventArgs e)
         {
-            if (Model.MonsterNames.GetNameByNum(monster.Index).CompareTo(this.monsterNameText.Text) != 0)
+            if (Model.MonsterNames.GetUnsortedName(monster.Index).CompareTo(this.monsterNameText.Text) != 0)
             {
-                monster.Name = Do.ASCIIToRaw(this.monsterNameText.Text, settings.KeystrokesMenu, 13);
+                monster.Name = Do.ASCIIToRaw(this.monsterNameText.Text, Lists.KeystrokesMenu, 13);
 
-                Model.MonsterNames.SwapName(
+                Model.MonsterNames.SetName(
                     monster.Index,
                     new string(monster.Name));
-                Model.MonsterNames.SortAlpha();
+                Model.MonsterNames.SortAlphabetically();
 
                 this.monsterName.Items.Clear();
-                this.monsterName.Items.AddRange(Model.MonsterNames.GetNames());
-                this.monsterName.SelectedIndex = Model.MonsterNames.GetIndexFromNum(monster.Index);
+                this.monsterName.Items.AddRange(Model.MonsterNames.Names);
+                this.monsterName.SelectedIndex = Model.MonsterNames.GetSortedIndex(monster.Index);
             }
         }
         // vital stats
@@ -293,11 +293,11 @@ namespace LAZYSHELL
         }
         private void MonsterValEvd_ValueChanged(object sender, EventArgs e)
         {
-            monster.EvadePercent = (byte)MonsterValEvd.Value;
+            monster.Evade = (byte)MonsterValEvd.Value;
         }
         private void MonsterValMgEvd_ValueChanged(object sender, EventArgs e)
         {
-            monster.MagicEvadePercent = (byte)MonsterValMgEvd.Value;
+            monster.MagicEvade = (byte)MonsterValMgEvd.Value;
         }
         // reward stats
         private void MonsterValExp_ValueChanged(object sender, EventArgs e)
@@ -316,20 +316,20 @@ namespace LAZYSHELL
         }
         private void ItemWinA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ItemWinA = (byte)Model.ItemNames.GetNumFromIndex(ItemWinA.SelectedIndex);
+            monster.ItemWinA = (byte)Model.ItemNames.GetUnsortedIndex(ItemWinA.SelectedIndex);
         }
         private void ItemWinB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ItemWinB = (byte)Model.ItemNames.GetNumFromIndex(ItemWinB.SelectedIndex);
+            monster.ItemWinB = (byte)Model.ItemNames.GetUnsortedIndex(ItemWinB.SelectedIndex);
         }
         private void MonsterYoshiCookie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.YoshiCookie = (byte)Model.ItemNames.GetNumFromIndex(MonsterYoshiCookie.SelectedIndex);
+            monster.YoshiCookie = (byte)Model.ItemNames.GetUnsortedIndex(MonsterYoshiCookie.SelectedIndex);
         }
         // other properties
         private void MonsterMorphSuccess_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.MorphSuccessRate = (byte)MonsterMorphSuccess.SelectedIndex;
+            monster.MorphSuccess = (byte)MonsterMorphSuccess.SelectedIndex;
         }
         private void MonsterCoinSize_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -358,27 +358,27 @@ namespace LAZYSHELL
         // effects, elements
         private void MonsterEffectsNullify_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.EffectMuteNull = MonsterEffectsNullify.GetItemChecked(0);
-            monster.EffectSleepNull = MonsterEffectsNullify.GetItemChecked(1);
-            monster.EffectPoisonNull = MonsterEffectsNullify.GetItemChecked(2);
-            monster.EffectFearNull = MonsterEffectsNullify.GetItemChecked(3);
-            monster.EffectMushroomNull = MonsterEffectsNullify.GetItemChecked(4);
-            monster.EffectScarecrowNull = MonsterEffectsNullify.GetItemChecked(5);
-            monster.EffectInvincibleNull = MonsterEffectsNullify.GetItemChecked(6);
+            monster.EffectNullMute = MonsterEffectsNullify.GetItemChecked(0);
+            monster.EffectNullSleep = MonsterEffectsNullify.GetItemChecked(1);
+            monster.EffectNullPoison = MonsterEffectsNullify.GetItemChecked(2);
+            monster.EffectNullFear = MonsterEffectsNullify.GetItemChecked(3);
+            monster.EffectNullMushroom = MonsterEffectsNullify.GetItemChecked(4);
+            monster.EffectNullScarecrow = MonsterEffectsNullify.GetItemChecked(5);
+            monster.EffectNullInvincible = MonsterEffectsNullify.GetItemChecked(6);
         }
         private void MonsterElementsWeakness_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ElemIceWeak = MonsterElementsWeakness.GetItemChecked(0);
-            monster.ElemFireWeak = MonsterElementsWeakness.GetItemChecked(1);
-            monster.ElemThunderWeak = MonsterElementsWeakness.GetItemChecked(2);
-            monster.ElemJumpWeak = MonsterElementsWeakness.GetItemChecked(3);
+            monster.ElemWeakIce = MonsterElementsWeakness.GetItemChecked(0);
+            monster.ElemWeakFire = MonsterElementsWeakness.GetItemChecked(1);
+            monster.ElemWeakThunder = MonsterElementsWeakness.GetItemChecked(2);
+            monster.ElemWeakJump = MonsterElementsWeakness.GetItemChecked(3);
         }
         private void MonsterElementsNullify_SelectedIndexChanged(object sender, EventArgs e)
         {
-            monster.ElemIceNull = MonsterElementsNullify.GetItemChecked(0);
-            monster.ElemFireNull = MonsterElementsNullify.GetItemChecked(1);
-            monster.ElemThunderNull = MonsterElementsNullify.GetItemChecked(2);
-            monster.ElemJumpNull = MonsterElementsNullify.GetItemChecked(3);
+            monster.ElemNullIce = MonsterElementsNullify.GetItemChecked(0);
+            monster.ElemNullFire = MonsterElementsNullify.GetItemChecked(1);
+            monster.ElemNullThunder = MonsterElementsNullify.GetItemChecked(2);
+            monster.ElemNullJump = MonsterElementsNullify.GetItemChecked(3);
         }
         private void MonsterProperties_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -425,6 +425,10 @@ namespace LAZYSHELL
         {
             battleScriptsEditor.Export();
         }
+        private void dumpBattleScriptTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            battleScriptsEditor.DumpBattlescriptText();
+        }
         private void clearBattleScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             battleScriptsEditor.Clear();
@@ -440,7 +444,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current monster. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            monster = new Monster(Model.Data, Index);
+            monster = new Monster(Index);
             monsterNum_ValueChanged(null, null);
         }
         private void resetCurrentBattleScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -448,7 +452,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current battle script. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(Model.Data, battleScriptsEditor.index);
+            battleScriptsEditor.BattleScript = new LAZYSHELL.ScriptsEditor.BattleScript(battleScriptsEditor.index);
             monsterNum_ValueChanged(null, null);
         }
         private void showMonster_Click(object sender, EventArgs e)
@@ -484,22 +488,22 @@ namespace LAZYSHELL
                 }
             }
 
-            bool flag = textHelper.VerifyCorrectSymbols(this.MonsterPsychopath.Text.ToCharArray(), byteView);
+            bool flag = textHelper.VerifySymbols(this.MonsterPsychopath.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.MonsterPsychopath.BackColor = SystemColors.Window;
-                monster.SetPsychoMsg(this.MonsterPsychopath.Text, byteView);
+                monster.SetPsychopath(this.MonsterPsychopath.Text, byteView);
 
-                if (!monster.PsychoMsgError)
+                if (!monster.PsychopathError)
                 {
-                    monster.SetPsychoMsg(MonsterPsychopath.Text, byteView);
-                    int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychoMsg, false);
+                    monster.SetPsychopath(MonsterPsychopath.Text, byteView);
+                    int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychopath, false);
 
                     psychopathTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
                     pictureBoxPsychopath.Invalidate();
                 }
             }
-            if (!flag || monster.PsychoMsgError)
+            if (!flag || monster.PsychopathError)
                 this.MonsterPsychopath.BackColor = Color.Red;
             CalculateFreeSpace();
         }
@@ -517,12 +521,12 @@ namespace LAZYSHELL
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
-            battleDialoguePreview.PageDown(monster.RawPsychoMsg.Length);
+            battleDialoguePreview.PageDown(monster.RawPsychopath.Length);
             MonsterPsychopath_TextChanged(null, null);
         }
         private void byteOrTextView_Click(object sender, EventArgs e)
         {
-            MonsterPsychopath.Text = monster.GetPsychoMsg(byteView);
+            MonsterPsychopath.Text = monster.GetPsychopath(byteView);
         }
         private void newLine_Click(object sender, EventArgs e)
         {

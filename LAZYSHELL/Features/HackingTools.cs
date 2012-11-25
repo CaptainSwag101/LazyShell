@@ -59,9 +59,9 @@ namespace LAZYSHELL
                 if (checkedListBox1.GetItemChecked(5))
                     monster.MagicDefense = (byte)AddPercent(monster.MagicDefense, 255);
                 if (checkedListBox1.GetItemChecked(6))
-                    monster.EvadePercent = (byte)AddPercent(monster.EvadePercent, 100);
+                    monster.Evade = (byte)AddPercent(monster.Evade, 100);
                 if (checkedListBox1.GetItemChecked(7))
-                    monster.MagicEvadePercent = (byte)AddPercent(monster.MagicEvadePercent, 100);
+                    monster.MagicEvade = (byte)AddPercent(monster.MagicEvade, 100);
                 if (checkedListBox1.GetItemChecked(8))
                     monster.Experience = (ushort)AddPercent(monster.Experience, 65535);
                 if (checkedListBox1.GetItemChecked(9))

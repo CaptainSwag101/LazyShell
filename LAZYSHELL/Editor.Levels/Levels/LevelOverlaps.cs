@@ -9,12 +9,18 @@ namespace LAZYSHELL
     [Serializable()]
     public class LevelOverlaps
     {
-        // Local Variables
-        [NonSerialized()]
-        private byte[] data; public byte[] Data { get { return this.data; } set { this.data = value; } }
-
-        private List<Overlap> overlaps = new List<Overlap>(); public List<Overlap> Overlaps { get { return overlaps; } }
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public int Index { get { return index; } set { index = value; } }
+        // class variales
+        private List<Overlap> overlaps = new List<Overlap>();
+        public List<Overlap> Overlaps { get { return overlaps; } }
+        public int Count { get { return overlaps.Count; } }
+        // external selectors
+        private Overlap overlap;
         private int currentOverlap = 0;
+        private int selectedOverlap;
+        public Overlap Overlap { get { return overlap; } }
         public int CurrentOverlap
         {
             get
@@ -30,45 +36,8 @@ namespace LAZYSHELL
                 }
             }
         }
-        private int selectedOverlap; public int SelectedOverlap { get { return this.selectedOverlap; } set { selectedOverlap = value; } }
-
-        private Overlap overlap; public Overlap Overlap_ { get { return overlap; } }
-
-        private int index; public int Index { get { return index; } set { index = value; } }
-
-        public int Count { get { return overlaps.Count; } }
-        public void RemoveCurrentOverlap()
-        {
-            if (currentOverlap < overlaps.Count)
-            {
-                overlaps.Remove(overlaps[currentOverlap]);
-                this.currentOverlap = 0;
-            }
-        }
-        public void Clear()
-        {
-            overlaps.Clear();
-            this.currentOverlap = 0;
-        }
-        public void AddNewOverlap(int index, Point p)
-        {
-            Overlap e = new Overlap();
-            e.NullOverlap();
-            e.X = (byte)p.X;
-            e.Y = (byte)p.Y;
-            if (index < overlaps.Count)
-                overlaps.Insert(index, e);
-            else
-                overlaps.Add(e);
-        }
-        public void AddNewOverlap(int index, Overlap copy)
-        {
-            if (index < overlaps.Count)
-                overlaps.Insert(index, copy);
-            else
-                overlaps.Add(copy);
-        }
-
+        public int SelectedOverlap { get { return this.selectedOverlap; } set { selectedOverlap = value; } }
+        // overlap properties
         public byte X { get { return overlap.X; } set { overlap.X = value; } }
         public byte Y { get { return overlap.Y; } set { overlap.Y = value; } }
         public byte Z { get { return overlap.Z; } set { overlap.Z = value; } }
@@ -78,14 +47,13 @@ namespace LAZYSHELL
         public bool B2b5 { get { return overlap.B2b5; } set { overlap.B2b5 = value; } }
         public bool B2b6 { get { return overlap.B2b6; } set { overlap.B2b6 = value; } }
         public bool B2b7 { get { return overlap.B2b7; } set { overlap.B2b7 = value; } }
-
-        public LevelOverlaps(byte[] data, int index)
+        // constructor, functions
+        public LevelOverlaps(int index)
         {
-            this.data = data;
             this.index = index;
-            InitializeLevel(data);
+            Disassemble();
         }
-        private void InitializeLevel(byte[] data)
+        private void Disassemble()
         {
             int offset;
             ushort offsetStart = 0;
@@ -94,8 +62,8 @@ namespace LAZYSHELL
 
             int pointerOffset = (index * 2) + 0x1D4905;
 
-            offsetStart = Bits.GetShort(data, pointerOffset); pointerOffset += 2;
-            offsetEnd = Bits.GetShort(data, pointerOffset);
+            offsetStart = Bits.GetShort(rom, pointerOffset); pointerOffset += 2;
+            offsetEnd = Bits.GetShort(rom, pointerOffset);
 
             if (index == 0x1FF) offsetEnd = 0;
 
@@ -106,39 +74,69 @@ namespace LAZYSHELL
             while (offset < offsetEnd + 0x1D0000)
             {
                 tOverlap = new Overlap();
-                tOverlap.InitializeOverlap(data, offset);
+                tOverlap.Disassemble(offset);
                 overlaps.Add(tOverlap);
 
                 offset += 4;
             }
         }
-        public ushort Assemble(ushort offsetStart)
+        public void Assemble(ref int offsetStart)
         {
-            int offset = 0;
             int pointerOffset = (index * 2) + 0x1D4905;
-
-            Bits.SetShort(data, pointerOffset, offsetStart);
-
-            offset = offsetStart + 0x1D0000;
-
+            Bits.SetShort(rom, pointerOffset, offsetStart);
+            int offset = offsetStart + 0x1D0000;
             offsetStart = (ushort)(offset - 0x1D0000);
-
-            if (overlaps.Count == 0) return offsetStart; // no exit fields for level
-
+            // no exit fields for level
+            if (overlaps.Count == 0) return;
+            //
             foreach (Overlap overlap in overlaps)
             {
-                overlap.AssembleOverlap(data, offset);
+                overlap.Assemble(offset);
                 offset += 4;
             }
-
             offsetStart = (ushort)(offset - 0x1D0000);
-
-            return offsetStart;
+        }
+        // list managers
+        public void Clear()
+        {
+            overlaps.Clear();
+            this.currentOverlap = 0;
+        }
+        public void New(int index, Point p)
+        {
+            Overlap e = new Overlap();
+            e.Clear();
+            e.X = (byte)p.X;
+            e.Y = (byte)p.Y;
+            if (index < overlaps.Count)
+                overlaps.Insert(index, e);
+            else
+                overlaps.Add(e);
+        }
+        public void New(int index, Overlap copy)
+        {
+            if (index < overlaps.Count)
+                overlaps.Insert(index, copy);
+            else
+                overlaps.Add(copy);
+        }
+        public void Remove()
+        {
+            if (currentOverlap < overlaps.Count)
+            {
+                overlaps.Remove(overlaps[currentOverlap]);
+                this.currentOverlap = 0;
+            }
         }
     }
     [Serializable()]
     public class Overlap
     {
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        public int Index = 0;
+        public bool Hilite = false;
+        // overlap properties
         private byte x; public byte X { get { return x; } set { x = value; } }
         private byte y; public byte Y { get { return y; } set { y = value; } }
         private byte z; public byte Z { get { return z; } set { z = value; } }
@@ -148,50 +146,37 @@ namespace LAZYSHELL
         private bool b2b5; public bool B2b5 { get { return b2b5; } set { b2b5 = value; } }
         private bool b2b6; public bool B2b6 { get { return b2b6; } set { b2b6 = value; } }
         private bool b2b7; public bool B2b7 { get { return b2b7; } set { b2b7 = value; } }
-        public int Index = 0;
-        public bool Hilite = false;
-
+        // constructor
         public Overlap()
         {
 
         }
-        public void NullOverlap()
+        // assemblers
+        public void Disassemble(int offset)
         {
-            x = 0;
-            y = 0;
-            z = 0;
-            type = 0;
-            b0b7 = false;
-            b1b7 = false;
-            b2b5 = false;
-            b2b6 = false;
-            b2b7 = false;
+            x = (byte)(rom[offset] & 0x7F);
+            b0b7 = (rom[offset++] & 0x80) == 0x80;
+            y = (byte)(rom[offset] & 0x7F);
+            b1b7 = (rom[offset++] & 0x80) == 0x80;
+            z = rom[offset];
+            b2b5 = (rom[offset] & 0x20) == 0x20;
+            b2b6 = (rom[offset] & 0x40) == 0x40;
+            b2b7 = (rom[offset++] & 0x80) == 0x80;
+            type = rom[offset];
         }
-
-        public void InitializeOverlap(byte[] data, int offset)
+        public void Assemble(int offset)
         {
-            x = (byte)(data[offset] & 0x7F);
-            b0b7 = (data[offset] & 0x80) == 0x80; offset++;
-            y = (byte)(data[offset] & 0x7F);
-            b1b7 = (data[offset] & 0x80) == 0x80; offset++;
-            z = data[offset];
-            b2b5 = (data[offset] & 0x20) == 0x20;
-            b2b6 = (data[offset] & 0x40) == 0x40;
-            b2b7 = (data[offset] & 0x80) == 0x80; offset++;
-            type = data[offset];
+            rom[offset] = x;
+            Bits.SetBit(rom, offset++, 7, b0b7);
+            rom[offset] = y;
+            Bits.SetBit(rom, offset++, 7, b1b7);
+            rom[offset] = z;
+            Bits.SetBit(rom, offset, 5, b2b5);
+            Bits.SetBit(rom, offset, 6, b2b6);
+            Bits.SetBit(rom, offset++, 7, b2b7);
+            rom[offset] = type;
         }
-        public void AssembleOverlap(byte[] data, int offset)
-        {
-            data[offset] = x;
-            Bits.SetBit(data, offset, 7, b0b7); offset++;
-            data[offset] = y;
-            Bits.SetBit(data, offset, 7, b1b7); offset++;
-            data[offset] = z;
-            Bits.SetBit(data, offset, 5, b2b5);
-            Bits.SetBit(data, offset, 6, b2b6);
-            Bits.SetBit(data, offset, 7, b2b7); offset++;
-            data[offset] = type;
-        }
+        // spawning
         public Overlap Copy()
         {
             Overlap copy = new Overlap();
@@ -205,6 +190,19 @@ namespace LAZYSHELL
             copy.Z = z;
             copy.Type = type;
             return copy;
+        }
+        // universal functions
+        public void Clear()
+        {
+            x = 0;
+            y = 0;
+            z = 0;
+            type = 0;
+            b0b7 = false;
+            b1b7 = false;
+            b2b5 = false;
+            b2b6 = false;
+            b2b7 = false;
         }
     }
 }

@@ -106,9 +106,9 @@
             this.battleDlgType.Items.AddRange(new object[] {
             "Battle Dialogues",
             "Battle Messages",
-            "Flower Bonus Messages"});
+            "Flower Bonus"});
             this.battleDlgType.Name = "battleDlgType";
-            this.battleDlgType.Size = new System.Drawing.Size(151, 25);
+            this.battleDlgType.Size = new System.Drawing.Size(120, 25);
             this.battleDlgType.SelectedIndexChanged += new System.EventHandler(this.battleDlgType_SelectedIndexChanged);
             // 
             // battleDialogueNum
@@ -145,7 +145,7 @@
             // searchBox
             // 
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(145, 25);
+            this.searchBox.Size = new System.Drawing.Size(120, 25);
             // 
             // searchButton
             // 
@@ -161,7 +161,7 @@
             // 
             this.bonusTextBox.MaxLength = 16;
             this.bonusTextBox.Name = "bonusTextBox";
-            this.bonusTextBox.Size = new System.Drawing.Size(145, 25);
+            this.bonusTextBox.Size = new System.Drawing.Size(120, 25);
             this.bonusTextBox.Visible = false;
             this.bonusTextBox.TextChanged += new System.EventHandler(this.bonusTextBox_TextChanged);
             // 

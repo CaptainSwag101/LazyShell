@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class ItemsEditor : Form
+    public partial class ItemsEditor : NewForm
     {
         
         private long checksum;
@@ -20,8 +20,6 @@ namespace LAZYSHELL
         // constructor
         public ItemsEditor()
         {
-            settings.Keystrokes[0x20] = "\x20";
-            settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
@@ -48,14 +46,14 @@ namespace LAZYSHELL
         {
             // Assemble the Model.Items
             int i;
-            ushort len = 0x3120;
-            for (i = 0; i < Model.Items.Length && len + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0x40f1; i++)
-                len += Model.Items[i].Assemble(len);
-            len = 0xed44;
-            for (; i < Model.Items.Length && len + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0xffff; i++)
-                len += Model.Items[i].Assemble(len);
+            int length = 0x3120;
+            for (i = 0; i < Model.Items.Length && length + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0x40f1; i++)
+                Model.Items[i].Assemble(ref length);
+            length = 0xED44;
+            for (; i < Model.Items.Length && length + (Model.Items[i].RawDescription != null ? Model.Items[i].RawDescription.Length : 0) < 0xffff; i++)
+                Model.Items[i].Assemble(ref length);
             if (i != Model.Items.Length)
-                System.Windows.Forms.MessageBox.Show("Item Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
+                MessageBox.Show("Not enough space to save all item descriptions.");
             foreach (Shop shop in Model.Shops)
                 shop.Assemble();
             checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
@@ -119,7 +117,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current item. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            itemsEditor.Item = new Item(Model.Data, itemsEditor.Index);
+            itemsEditor.Item = new Item(itemsEditor.Index);
             itemsEditor.RefreshItems();
         }
         private void resetShopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,7 +125,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current shop. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            shopsEditor.Shop = new Shop(Model.Data, shopsEditor.Index);
+            shopsEditor.Shop = new Shop(shopsEditor.Index);
             shopsEditor.RefreshShops();
         }
         private void showItems_Click(object sender, EventArgs e)

@@ -249,6 +249,7 @@
             // battlefieldNum
             // 
             this.battlefieldNum.AutoSize = false;
+            this.battlefieldNum.ContextMenuStrip = null;
             this.battlefieldNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battlefieldNum.Hexadecimal = false;
             this.battlefieldNum.Increment = new decimal(new int[] {
@@ -279,7 +280,7 @@
             // 
             // battlefieldName
             // 
-            this.battlefieldName.DropDownHeight = 506;
+            this.battlefieldName.DropDownHeight = 500;
             this.battlefieldName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.battlefieldName.DropDownWidth = 300;
             this.battlefieldName.FlatStyle = System.Windows.Forms.FlatStyle.Standard;

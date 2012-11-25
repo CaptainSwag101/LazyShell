@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LAZYSHELL
@@ -10,6 +12,323 @@ namespace LAZYSHELL
     {
         #region Variables
         #region Other
+        public static string[] ShopNames = new string[]
+        {
+            "Mushroom Kingdom",
+            "Rose Town Items",
+            "Rose Town Armor",
+            "Frog Disciple Shop",
+            "Moleville Shop",
+            "Marrymore Shop",
+            "Frog Coin Emporium",
+            "Sea Item shop",
+            "Seaside Town Items (pre-Yaridovich)",
+            "Juice Bar (no card)",
+            "Juice Bar (alto card)",
+            "Juice Bar (tenor card)",
+            "Juice Bar (soprano card)",
+            "Seaside Weapons",
+            "Seaside Armor",
+            "Seaside Accessory",
+            "Seaside Health Foods",
+            "Monstro Town shop",
+            "Nimbus Land shop",
+            "Hinopio's Shop",
+            "Baby Goomba shop",
+            "Nimbus Land Item/Weapon",
+            "Croco's Shop 1",
+            "Croco's Shop 2",
+            "Toad's Shop",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY",
+            "___DUMMY"
+        };
+        public static string[] AnimationCommands = new string[]
+        {
+            "New object: sprite = {xx}, coords (AMEM $32)",			// 0x00
+            "AMEM $32 = coords (x,y,z)",			// 0x01
+            "{02}",			// 0x02
+            "Sprite = {xx}, coords (AMEM $32)",			// 0x03
+            "Pause script until...",			// 0x04
+            "Remove object",			// 0x05
+            "{06}",			// 0x06
+            "Return object queue",			// 0x07
+            "Move object: speed = {xx}",			// 0x08
+            "Jump to address $xxxx",			// 0x09
+            "Pause script for 1 frame",			// 0x0A
+            "AMEM $40 = coords (x,y,z)",			// 0x0B
+            "Move sprite to coords (AMEM $40)",			// 0x0C
+            "{0D}",			// 0x0D
+            "Reset target mapping memory",			// 0x0E
+            "Reset object mapping memory",			// 0x0F
+			
+            "Jump to subroutine $xxxx",			// 0x10
+            "Return subroutine",			// 0x11
+            "{12}",			// 0x12
+            "{13}",			// 0x13
+            "{14}",			// 0x14
+            "{15}",			// 0x15
+            "{16}",			// 0x16
+            "{17}",			// 0x17
+            "{18}",			// 0x18
+            "{19}",			// 0x19
+            "Visibility on",			// 0x1A
+            "Visibility off",			// 0x1B
+            "{1C}",			// 0x1C
+            "{1D}",			// 0x1D
+            "{1E}",			// 0x1E
+            "{1F}",			// 0x1F
+			
+            "AMEM (8-bit) $xx = variable {xx}",			// 0x20
+            "AMEM (16-bit) $xx = variable {xx}",			// 0x21
+            "Variable {xx} = AMEM (8-bit) $xx",			// 0x22
+            "Variable {xx} = AMEM (16-bit) $xx",			// 0x23
+            "If AMEM (8-bit) $xx = {xx} ...",			// 0x24
+            "If AMEM (16-bit) $xx = {xx} ...",			// 0x25
+            "If AMEM (8-bit) $xx != {xx} ...",			// 0x26
+            "If AMEM (16-bit) $xx != {xx} ...",			// 0x27
+            "If AMEM (8-bit) $xx < {xx} ...",			// 0x28
+            "If AMEM (16-bit) $xx < {xx} ...",			// 0x29
+            "If AMEM (8-bit) $xx >= {xx} ...",			// 0x2A
+            "If AMEM (16-bit) $xx >= {xx} ...",			// 0x2B
+            "AMEM (8-bit) $xx += {xx}",			// 0x2C
+            "AMEM (16-bit) $xx += {xx}",			// 0x2D
+            "AMEM (8-bit) $xx -= {xx}",			// 0x2E
+            "AMEM (16-bit) $xx -= {xx}",			// 0x2F
+			
+            "Increment AMEM (8-bit) $xx",			// 0x30
+            "Increment AMEM (16-bit) $xx",			// 0x31
+            "Decrement AMEM (8-bit) $xx",			// 0x32
+            "Decrement AMEM (16-bit) $xx",			// 0x33
+            "Clear AMEM (8-bit) $xx",			// 0x34
+            "Clear AMEM (16-bit) $xx",			// 0x35
+            "Set AMEM $xx bits {xx}",			// 0x36
+            "Clear AMEM $xx bits {xx}",			// 0x37
+            "If AMEM $xx bits {xx} set...",			// 0x38
+            "If AMEM $xx bits {xx} clear...",			// 0x39
+            "Attack timer begins",			// 0x3A
+            "{3B}",			// 0x3B
+            "{3C}",			// 0x3C
+            "{3D}",			// 0x3D
+            "{3E}",			// 0x3E
+            "{3F}",			// 0x3F
+			
+            "Pause script until AMEM $xx bits {xx} set",			// 0x40
+            "Pause script until AMEM $xx bits {xx} clear",			// 0x41
+            "{42}",			// 0x42
+            "Sprite sequence = {xx}",			// 0x43
+            "{44}",			// 0x44
+            "AMEM $60 = current target",			// 0x45
+            "{46}",			// 0x46
+            "{47}",			// 0x47
+            "{48}",			// 0x48
+            "{49}",			// 0x49
+            "{4A}",			// 0x4A
+            "{4B}",			// 0x4B
+            "{4C}",			// 0x4C
+            "{4D}",			// 0x4D
+            "Pause script until sprite sequence done",			// 0x4E
+            "{4F}",			// 0x4F
+			
+            "If target disabled, jump to address $xxxx",			// 0x50
+            "If target alive, jump to address $xxxx",			// 0x51
+            "{52}",			// 0x52
+            "{53}",			// 0x53
+            "{54}",			// 0x54
+            "{55}",			// 0x55
+            "{56}",			// 0x56
+            "{57}",			// 0x57
+            "{58}",			// 0x58
+            "{59}",			// 0x59
+            "{5A}",			// 0x5A
+            "{5B}",			// 0x5B
+            "{5C}",			// 0x5C
+            "Sprite queue [$offset] (sprite = {xx})",			// 0x5D
+            "Return sprite queue",			// 0x5E
+            "{5F}",			// 0x5F
+			
+            "{60}",			// 0x60
+            "{61}",			// 0x61
+            "{62}",			// 0x62
+            "Display {xx} message @ OMEM $60",			// 0x63
+            "Object queue [$offset] index = AMEM $60",			// 0x64
+            "{65}",			// 0x65
+            "{66}",			// 0x66
+            "{67}",			// 0x67
+            "Object queue [$offset, AMEM $60] index = {xx}",			// 0x68
+            "OMEM $60 = memory $072C",			// 0x69
+            "AMEM $xx = random # between 0 and {xx}",			// 0x6A
+            "AMEM $xx = random # between 0 and {xx}",			// 0x6B
+            "{6C}",			// 0x6C
+            "{6D}",			// 0x6D
+            "{6E}",			// 0x6E
+            "{6F}",			// 0x6F
+			
+            "Overlap all",			// 0x70
+            "Overlap none",			// 0x71
+            "New object: effect = ...",			// 0x72
+            "Pause script for 2 frames",			// 0x73
+            "Pause script until {xx} complete...",			// 0x74
+            "Pause script until bits clear...",			// 0x75
+            "Clear effect index",			// 0x76
+            "L3 on...",			// 0x77
+            "L3 off...",			// 0x78
+            "{79}",			// 0x79
+            "Display message...",			// 0x7A
+            "Pause script until dialogue closed",			// 0x7B
+            "{7C}",			// 0x7C
+            "{7D}",			// 0x7D
+            "Fade out object, duration = ...",			// 0x7E
+            "Reset sprite sequence",			// 0x7F
+			
+            "Shine effect...",			// 0x80
+            "{81}",			// 0x81
+            "{82}",			// 0x82
+            "{83}",			// 0x83
+            "{84}",			// 0x84
+            "Fade object {xx}, amount = ...",			// 0x85
+            "Shake object...",			// 0x86
+            "Stop shaking object",			// 0x87
+            "{88}",			// 0x88
+            "{89}",			// 0x89
+            "{8A}",			// 0x8A
+            "{8B}",			// 0x8B
+            "{8C}",			// 0x8C
+            "{8D}",			// 0x8D
+            "Screen flash {xx} color, duration = ...",			// 0x8E
+            "Screen flash {xx} color",			// 0x8F
+			
+            "{90}",			// 0x90
+            "{91}",			// 0x91
+            "{92}",			// 0x92
+            "{93}",			// 0x93
+            "{94}",			// 0x94
+            "Initialize bonus message sequence",			// 0x95
+            "Display bonus message...",			// 0x96
+            "Pause script until bonus message complete",			// 0x97
+            "{98}",			// 0x98
+            "{99}",			// 0x99
+            "{9A}",			// 0x9A
+            "{9B}",			// 0x9B
+            "{9C}",			// 0x9C
+            "{9D}",			// 0x9D
+            "{9E}",			// 0x9E
+            "{9F}",			// 0x9F
+			
+            "{A0}",			// 0xA0
+            "{A1}",			// 0xA1
+            "{A2}",			// 0xA2
+            "Screen effect...",			// 0xA3
+            "{A4}",			// 0xA4
+            "{A5}",			// 0xA5
+            "{A6}",			// 0xA6
+            "{A7}",			// 0xA7
+            "{A8}",			// 0xA8
+            "{A9}",			// 0xA9
+            "{AA}",			// 0xAA
+            "Play sound (ch.6,7)...",			// 0xAB
+            "{AC}",			// 0xAC
+            "{AD}",			// 0xAD
+            "Play sound (ch.4,5)...",			// 0xAE
+            "{AF}",			// 0xAF
+			
+            "Play music {xx} (current volume)",			// 0xB0
+            "Play music {xx} (volume = {xx})",			// 0xB1
+            "Stop current sound effect",			// 0xB2
+            "{B3}",			// 0xB3
+            "{B4}",			// 0xB4
+            "{B5}",			// 0xB5
+            "Fade out current music to {xx} volume...",			// 0xB6
+            "{B7}",			// 0xB7
+            "{B8}",			// 0xB8
+            "{B9}",			// 0xB9
+            "{BA}",			// 0xBA
+            "Set target...",			// 0xBB
+            "Modify item inventory...",			// 0xBC
+            "Modify special item inventory...",			// 0xBD
+            "Coins += ...",			// 0xBE
+            "Store to item inventory {xx}'s Yoshi Cookie",			// 0xBF
+			
+            "{C0}",			// 0xC0
+            "{C1}",			// 0xC1
+            "{C2}",			// 0xC2
+            "Mask effect...",			// 0xC3
+            "{C4}",			// 0xC4
+            "{C5}",			// 0xC5
+            "Mask coords = ...",			// 0xC6
+            "{C7}",			// 0xC7
+            "{C8}",			// 0xC8
+            "{C9}",			// 0xC9
+            "{CA}",			// 0xCA
+            "Sprite sequence speed = ...",			// 0xCB
+            "{CC}",			// 0xCC
+            "{CD}",			// 0xCD
+            "{CE}",			// 0xCE
+            "{CF}",			// 0xCF
+			
+            "{D0}",			// 0xD0
+            "{D1}",			// 0xD1
+            "{D2}",			// 0xD2
+            "{D3}",			// 0xD3
+            "{D4}",			// 0xD4
+            "{D5}",			// 0xD5
+            "{D6}",			// 0xD6
+            "{D7}",			// 0xD7
+            "{D8}",			// 0xD8
+            "Display \"Can\'t run\" dialogue",			// 0xD9
+            "{DA}",			// 0xDA
+            "{DB}",			// 0xDB
+            "{DC}",			// 0xDC
+            "{DD}",			// 0xDD
+            "{DE}",			// 0xDE
+            "{DF}",			// 0xDF
+			
+            "Store OMEM $60 to item inventory",			// 0xE0
+            "Run battle event...",			// 0xE1
+            "{E2}",			// 0xE2
+            "{E3}",			// 0xE3
+            "{E4}",			// 0xE4
+            "{E5}",			// 0xE5
+            "{E6}",			// 0xE6
+            "{E7}",			// 0xE7
+            "{E8}",			// 0xE8
+            "{E9}",			// 0xE9
+            "{EA}",			// 0xEA
+            "{EB}",			// 0xEB
+            "{EC}",			// 0xEC
+            "{ED}",			// 0xED
+            "{EE}",			// 0xEE
+            "{EF}",			// 0xEF
+			
+            "{F0}",			// 0xF0
+            "{F1}",			// 0xF1
+            "{F2}",			// 0xF2
+            "{F3}",			// 0xF3
+            "{F4}",			// 0xF4
+            "{F4}",			// 0xF4
+            "{F6}",			// 0xF6
+            "{F7}",			// 0xF7
+            "{F8}",			// 0xF8
+            "{F9}",			// 0xF9
+            "{FA}",			// 0xFA
+            "{FB}",			// 0xFB
+            "{FC}",			// 0xFC
+            "{FD}",			// 0xFD
+            "{FE}",			// 0xFE
+            "{FF}"			// 0xFF
+        };
+        public static string[] Tutorials = new string[]
+        {
+            "How to equip",
+            "How to use items",
+            "How to switch allies",
+            "How to play beetle mania"
+        };
         public static string[] EntranceNames = new string[]
         {
             "no movement for \"Escape\"",
@@ -102,29 +421,42 @@ namespace LAZYSHELL
         };
         public static string[] LayerNames = new string[] 
         { 
-            "L1", "L2", "L3", "L4", "Sprites", "BG", "½ intensity", "Minus sub" 
+            "L1", "L2", "L3", "L4", "NPC", "BG", "½ intensity", "Minus sub" 
         };
         public static string[] MenuNames = new string[]
         {
-                "choose game",
-                "overworld menu",
-                "world map",
-                "mushroom kingdom shop",
-                "save game",
-                "items maxed out",
-                "___",
-                "menu tutorial equip",
-                "new star piece",
-                "moleville mountain",
-                "___",
-                "intro moleville mountain",
-                "___",
-                "7 star pieces",
-                "flower garden intro",
-                "enter factory gate",
+                        "open game select menu",
+                        "open overworld menu",
+                        "open location",
+                        "open shop menu",
+                        "open save game menu",
+                        "open items maxed out menu",
+                        "UNKNOWN",
+                        "run menu tutorial",
+                        "add star piece",
+                        "run Moleville Mountain",
+                        "UNKNOWN",
+                        "run Moleville Mountain intro",
+                        "UNKNOWN",
+                        "run star piece end sequence",
+                        "run garden intro sequence",
+                        "enter gate to Smithy Factory",
+                        "run world map event sequence"
         };
         #endregion
         #region Maps
+        public static string[] WorldMapNames = new string[]
+        {
+            "Bowser\'s Keep",
+            "Mushroom Kingdom",
+            "Rose Town",
+            "Booster Tower",
+            "Seaside Town",
+            "Land\'s End",
+            "Nimbus Land",
+            "Barrel Volcano",
+            "Yo\'ster Isle"
+        };
         public static string[] MapNames = new string[]
         {
             "To Mario's Pad (before)",
@@ -242,12 +574,12 @@ namespace LAZYSHELL
         public static int[] SMWSamples = new int[]{
             82, 65, 104,78, 44, 66, 23, 96, 100,56,
             18, 65, 109,39, 101,17, 38, 113,65, 0,
-            0,  51, 52, 53, 67, 67, 51, 51, 51, 0
+            0,  51, 52, 53, 67, 67, 51, 51, 51, 69
         };
         public static int[] SMWPercussives = new int[]{
             -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
             0, -1,1, -1,-1,-1,-1,-1,-1,-1,
-            -1,2, 3, 4, 5, 6, 7, 8, -1,-1
+            -1,2, 3, 4, 5, 6, 7, 8, -1,9
         };
         public static int[] SMWOctaveLimits = new int[]{
             5,6,6,6,4,5,6,5,5,5,
@@ -868,7 +1200,7 @@ namespace LAZYSHELL
             "Hammer Bro hammer hit",
             "Johnnys Skewer strike",
             "casting a spell",
-            "Thunderbolt strike 2",
+            "Thunderbolt strike 1",
             "HP Rain cloud",
             "bounce",
             "dry clunk",
@@ -1038,6 +1370,43 @@ namespace LAZYSHELL
         };
         #endregion
         #region Battles
+        public static int[] BattleLengths = new int[]
+        {
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+            4,0,2,2,0,2,3,4,2,0,4,3,1,2,0,2,
+            4,2,3,3,4,0,0,0,0,0,0,1,4,1,1,1
+        };
+        public static byte[] BattleOpcodes = new byte[]
+        {
+            0xF3,0xF3,0x00,0xE0,0xF0,0xEF,0xEC,0xED,
+            0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,
+            0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,0xFC,
+            0xFC,0xFC,0xE8,0xE7,0xE6,0xE6,0xE7,0xE3,
+            0xE5,0xF1,0xF4,0xEA,0xF2,0xF2,0xEB,0xEA,
+            0xE2,0xEB,0xFD,0xFE
+        };
+        public static byte[] BattleParams = new byte[]
+        {
+            0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+            0x0A,0x05,0x01,0x04,0x03,0x02,0x07,0x13,
+            0x12,0x11,0x0D,0x0C,0x14,0x08,0x10,0x10,
+            0x06,0x09,0x00,0x01,0x01,0x00,0x00,0x00,
+            0x00,0x00,0x00,0x01,0x00,0x01,0x01,0x00,
+            0x00,0x00,0x00,0x00
+        };
         public static string[] BattlefieldNames = new string[]
             {
             "Forest Maze",
@@ -1604,7 +1973,7 @@ namespace LAZYSHELL
             "Alley Rat",
             "Chow",
             "Magmus",
-            "Li~L Boo",
+            "Li{xx}L Boo",
             "Vomer",
             "Glum Reaper",
             "Pyrosphere",
@@ -1683,7 +2052,7 @@ namespace LAZYSHELL
             "Shyster",
             "Kinklink",
             "__Toadstool (captive)",
-            "Hangin~ Shy",
+            "Hangin{xx} Shy",
             "Smelter",
             "Machine Made (Mack)",
             "Machine Made (Bowyer)",
@@ -2290,6 +2659,89 @@ namespace LAZYSHELL
             "....",
             "....",
             "...."
+        };
+        public static string[] NPCPackets = new string[]
+        {
+            "flower",
+            "mushroom",
+            "key",
+            "super star",
+            "monster face",
+            "item bag",
+            "___sparkles",
+            "___sparkles",
+            "___bomb explosion",
+            "___blue cloud",
+            "___small frog coin",
+            "___level-up text",
+            "___grey explosion",
+            "___Axem Red (mini)",
+            "___NULL",
+            "___NULL",
+            "big coin",
+            "small coin (not moving)",
+            "small coin",
+            "frog coin",
+            "water splash drops",
+            "bullet bill ignition",
+            "sparkles (move N)",
+            "sparkles (move W)",
+            "bomb explosion (+SFX)",
+            "blue cloud (+SFX)",
+            "Magikoopa (+SFX)",
+            "Terrapin",
+            "mushroom (thrown SW)",
+            "sparkle line (looped)",
+            "water splash drops (+SFX)",
+            "level-up text",
+            "blue cloud",
+            "bomb explosion",
+            "grey explosion (+SFX)",
+            "flower (jumps)",
+            "mushroom (jumps)",
+            "item bag (jumps)",
+            "mushroom (jumps)",
+            "sparkle",
+            "Axem Red",
+            "Axem Black",
+            "Axem Pink",
+            "Axem Yellow",
+            "Axem Green",
+            "Axem Red teleport (+SFX)",
+            "Axem Red (mini)",
+            "blue fire trail (follows object)",
+            "star piece (mini)",
+            "hammer sparks (+SFX)",
+            "water blast (+SFX)",
+            "Drill Bit",
+            "bomb explosion (faster)",
+            "Frog Coin (random walking)",
+            "___level-up bonus POW",
+            "___level-up bonus S",
+            "___level-up bonus HP",
+            "___donut lift",
+            "___8-bit Mario",
+            "___Booster's train",
+            "___Magikoopa",
+            "___Terrapin",
+            "___water splash drops",
+            "___river fish",
+            "big coin (rolls E)",
+            "big coin (falls SE)",
+            "big coin (rolls S)",
+            "big coin (rolls SW)",
+            "big coin (rolls W)",
+            "big coin (falls W)",
+            "big coin (falls S)",
+            "big coin (falls NE)",
+            "big coin (falls NE)",
+            "___grey brick",
+            "___bridge rails",
+            "___wooden bridge",
+            "___stone bridge",
+            "___hanging Toadstool",
+            "___plywood door",
+            "___beetle"
         };
         #endregion
         #region Effects
@@ -2903,7 +3355,7 @@ namespace LAZYSHELL
             "Factory Grounds, Area 03",
             "Smithy Factory, Area 13 (Bowyers falling down conveyor belts)",
             "Smithy Factory, Area 15 (falling Yaridovichs)",
-            "Smithy Factory, Area 12 (lots of consecutive conveyor belts and LIL~BOOS)",
+            "Smithy Factory, Area 12 (lots of consecutive conveyor belts and LIL{xx}BOOS)",
             "Bowser's Keep 2nd Time, Area 01",
             "Bowser's Keep 2nd Time, Area 02",
             "Bowser's Keep 2nd Time, Area 03 (lava room w/bridge)",
@@ -3809,113 +4261,181 @@ namespace LAZYSHELL
             "Count Down"};
         #endregion
         #region Events
-        public static int[][] EventListBoxOpcodes = new int[][]
+        public static string[] EventLabels = new string[4096];
+        public static string[] ActionLabels = new string[1024];
+        public static int[][] EventOpcodes = new int[][]
         {
-            new int[]   // 1
+            new int[]   // 0
             {
-                0x00,
-                0x30,0x31,0x32,0x39,0x3A,0x3B,0x3D,0x3E,0x3F,
-                0x42,0xF2,0xF3,0xF4,0xF5,0xF6,0xF7,0xF8,
-                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
+                0x00,0x30,0x31,0x32,0x39,0x3A,0x3B,0x3D,
+                0x3E,0x3F,0x42,0xF2,0xF3,0xF4,0xF5,0xF6,
+                0xF7,0xF8,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,
+                0xFD
             },
-            new int[]   // 2
+            new int[]   // 1
             {
                 0x34,0x35
             },
-            new int[]   // 3
+            new int[]   // 2
             {
                 0x36,0x54,0x56,0xFD,0xFD,0xFD
             },
-            new int[]   // 4
+            new int[]   // 3
             {
                 0x50,0x51,0x52,0x53,0x57,0xFD,0xFD,0xFD,
                 0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
             },
-            new int[]   // 5
+            new int[]   // 4
             {
                 0x49,0x4A
             },
-            new int[]   // 6
+            new int[]   // 5
             {
                 0x4B,0x68,0x6A,0x6B
             },
-            new int[]   // 7
+            new int[]   // 6
             {
                 0x4C,0x4F,0xFB,0xFC,0xFD,0xFD,0xFD
             },
-            new int[]   // 8
+            new int[]   // 7
             {
                 0x60,0x61,0x62,0x63,0x64,0x65,0x66,0x67
             },
+            new int[]   // 8
+            {
+                0x40,0x44,0x45,0x46,0x47,0x4E,0xD0,0xD1,
+                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
+            },
             new int[]   // 9
             {
-                0x40,0x4E,0xD0,0xD1,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
+                0xD2,0xD3,0xD4,0xD5,0xD7,0xF9,0xFA
             },
             new int[]   // 10
-            {
-                0xD2,0xD3,0xD4,0xD7,0xF9,0xFA
-            },
-            new int[]   // 11
             {
                 0x70,0x71,0x72,0x73,0x74,0x75,0x76,0x77,
                 0x78,0x79,0x7A,0x7B,0x7C,0x7D,0x7E,0x80,
                 0x81,0x82,0x83,0x84,0x89,0x8A,0x87,0x8F,
                 0xFD,0xFD
             },
-            new int[]   // 12
+            new int[]   // 11
             {
                 0x90,0x91,0x92,0x93,0x94,0x95,0x97,0x98,
-                0x9B,0x9C,0x9D,0x9E,0xFD,0xFD,0xFD,0xFD
+                0x9B,0x9C,0x9D,0x9E,0xFD,0xFD,0xFD,0xFD,
+                0xFD,0xFD
             },
-            new int[]   // 13
+            new int[]   // 12
             {
                 0xA0,0xA4,0xA8,0xA9,0xAA,0xAB,0xB0,0xB1,
                 0xB2,0xB3,0xB5,0xB7,0xBB,0xBC,0xBD,0xC2,
                 0xD6,0xD8,0xDC,0xE0,0xE1,0xE4,0xE5,0xE8,
                 0xE9,0xFD,0xFD
             },
-            new int[]   // 14
+            new int[]   // 13
             {
                 0x37,0x38,0x55,0x58,0xA3,0xA7,0xAC,0xAD,
                 0xAE,0xAF,0xB4,0xB6,0xB8,0xB9,0xBA,0xC0,
-                0xC1,0xC3,0xC4,0xC5,0xC6,0xCA,0xCB,0xDB,
-                0xDF,0xE2,0xE3,0xE6,0xE7,0xEA,0xEB,0xEC,
-                0xED,0xEE,0xEF,0xFD,0xFD,0xFD,0xFD,0xFD,
-                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD
+                0xC1,0xC3,0xC4,0xC5,0xC6,0xC7,0xC8,0xC9,
+                0xCA,0xCB,0xDB,0xDF,0xE2,0xE3,0xE6,0xE7,
+                0xEA,0xEB,0xEC,0xED,0xEE,0xEF,0xFD,0xFD,
+                0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,0xFD,
+                0xFD,0xFD,0xFD
+            },
+            new int[]   // 14
+            {
+                0x5B,0x7F,0xF0,0xF1,0xFD,0xFD
             },
             new int[]   // 15
-            {
-                0xF0,0xF1,0xFD,0xFD
-            },
-            new int[]   // 16
             {
                 0xFE,0xFF
             }
         };
-        public static int[][] EventListBoxFDOpcodes = new int[][]
+        public static int[][] EventParams = new int[][]
         {
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x32,0x33,0x34,0x3D,0x3E,0xF9},
-            new int[0x02],
-            new int[]{0,0,0,0x4B,0x5B,0x64},
-            new int[]{0,0,0,0,0,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x5C},
-            new int[0x02],
-            new int[0x04],
-            new int[]{0,0,0,0,0x4A,0x4C,0x65},
-            new int[0x08],
-            new int[]{0,0,0,0,0x4D,0x4E,0x4F,0x66,0x67,0xF8},
-            new int[0x06],
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x30,0x31},
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0x94,0x96,0x97,0x9C,0xA4,0xA5},
-            new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0xB6,0xB7},
-            new int[]
+            new int[]   // 0
             {
-                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                0x58,0x59,0x5A,0x5D,0x5E,0xAC,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB8
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x32,0x33,0x34,0x3D,0x3E,0xF0,
+                0xF9
             },
-            new int[]{0,0,0x60,0x61},
-            new int[0x02],
+            new int[]   // 1
+            {
+                0x00,0x00
+            },
+            new int[]   // 2
+            {
+                0x00,0x00,0x00,0x4B,0x5B,0x64
+            },
+            new int[]   // 3
+            {
+                0x00,0x00,0x00,0x00,0x00,0x50,0x51,0x52,
+                0x53,0x54,0x55,0x56,0x57,0x5C
+            },
+            new int[]   // 4
+            {
+                0x00,0x00
+            },
+            new int[]   // 5
+            {
+                0x00,0x00,0x00,0x00
+            },
+            new int[]   // 6
+            {
+                0x00,0x00,0x00,0x00,0x4A,0x4C,0x65
+            },
+            new int[]   // 7
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+            },
+            new int[]   // 8
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x43,0x46,0x4D,0x4E,0x4F,0x66,0x67,0xF8
+            },
+            new int[]   // 9
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00
+            },
+            new int[]   // 10
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x30,0x31
+            },
+            new int[]   // 11
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x94,0x96,0x97,0x9C,
+                0xA4,0xA5
+            },
+            new int[]   // 12
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0xB6,0xB7
+            },
+            new int[]   // 13
+            {
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                0x00,0x00,0x00,0x00,0x00,0x00,0x58,0x59,
+                0x5A,0x5D,0x5E,0xAC,0xB0,0xB1,0xB2,0xB3,
+                0xB4,0xB5,0xB8
+            },
+            new int[]   // 14
+            {
+                0x00,0x00,0x00,0x00,0x60,0x61
+            },
+            new int[]   // 15
+            {
+                0x00,0x00
+            }
         };
-        public static int[][] ActionListBoxOpcodes = new int[][]
+        public static int[][] ActionOpcodes = new int[][]
             {
                 new int[]   // 0
                 {
@@ -3998,141 +4518,536 @@ namespace LAZYSHELL
                     0xFE,0xFF
                 }
             };
-        public static int[][] ActionListBoxFDOpcodes = new int[][]
+        public static int[][] ActionParams = new int[][]
             {
-                new int[]{
-                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                    0x00,0x01,0x02,0x03,0x0F},
-                new int[3],
-                new int[3],
-                new int[3],
-                new int[11],
-                new int[16],
-                new int[12],
-                new int[14],
-                new int[12],
-                new int[4],
-                new int[]{
-                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                    0,0,0,0,0,0,0,0,0,0,0,0xB6},
-                new int[]{
-                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                    0,0,0,0,0,0,0,0,0,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5},
-                new int[4],
-                new int[]{
-                    0,0,0,0,0,0,0,0x04,0x05,0x06,0x07,
-                    0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E},
-                new int[2],
-                new int[2],
+                new int[]   // 0
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x01,0x02,0x03,0x0F
+                },
+                new int[]   // 1
+                {
+                    0x00,0x00,0x00
+                },
+                new int[]   // 2
+                {
+                    0x00,0x00,0x00
+                },
+                new int[]   // 3
+                {
+                    0x00,0x00,0x00
+                },
+                new int[]   // 4
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00
+                },
+                new int[]   // 5
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+                },
+                new int[]   // 6
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00
+                },
+                new int[]   // 7
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00
+                },
+                new int[]   // 8
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00
+                },
+                new int[]   // 9
+                {
+                    0x00,0x00,0x00,0x00
+                },
+                new int[]   // 10
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0xB6
+                },
+                new int[]   // 11
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB0,
+                    0xB1,0xB2,0xB3,0xB4,0xB5
+                },
+                new int[]   // 12
+                {
+                    0x00,0x00,0x00,0x00
+                },
+                new int[]   // 13
+                {
+                    0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x04,
+                    0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,
+                    0x0D,0x0E
+                },
+                new int[]   // 14
+                {
+                    0x00,0x00
+                },
+                new int[]   // 15
+                {
+                    0x00,0x00
+                },
             };
-        public static string[] ActionListBoxNames(int index)
+        public static string[] EventNames(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return new string[] 
+                    {
+                    "Objects (allies, NPCs, screens)...",      // 0x00 - 0x2F
+                    "Freeze all NPCs until return",			// 0x30
+                    "Unfreeze all NPCs",			// 0x31
+                    "If object {xx} present in current level...", // 0x32
+                    "If Mario on top of object {xx}...",    // 0x39
+                    "If object A & B < (x,y) steps apart...",			// 0x3A
+                    "If object A & B < (x,y) steps apart & same Z coord...",			// 0x3B
+                    "If Mario is in the air...",			// 0x3D
+                    "Create NPC @ object {xx}'s (x,y,z)...",			// 0x3E
+                    "Create NPC @ (x,y,z) of $7010-15...",			// 0x3F
+                    "If Mario is on top of an object...",			// 0x42
+                    "Object {xx}'s presence in level {xx} is...",			// 0xF2
+                    "Object {xx}'s event trigger in level {xx} is...",			// 0xF3
+                    "Summon object @ $70A8 to current level",			// 0xF4
+                    "Remove object @ $70A8 in current level",			// 0xF5
+                    "Enable event trigger for object @ 70A8",			// 0xF6
+                    "Disable event trigger for object @ 70A8",			// 0xF7
+                    "If object {xx} is present in level {xx}...",			// 0xF8
+
+                    /********FD OPTIONS********/
+
+                    "Remember last object",			// 0x32
+                    "If object {xx}'s action script running...",			// 0x33
+                    "If object {xx} is underwater...",			// 0x34
+                    "If object {xx} is in the air...",			// 0x3D
+                    "Create NPC + event {xx} @ (x,y,z) of $7010-15...",			// 0x3E
+                    "If object {xx}'s event trigger in level {xx} is...",  // 0xF0
+                    "Mario glows"			// 0xF9
+                                        };
+
+                case 1:
+                    return new string[] 
+                    {
+                    "Enable buttons {xx} only...",			// 0x34
+                    "Enable buttons {xx} only, reset @ return...",			// 0x35
+                                        };
+
+                case 2:
+                    return new string[] 
+                    { 
+                    "Add or remove character {xx} in party...",			// 0x36
+                    "Equip item {xx} to character {xx}...",			// 0x54
+                    "Character {xx}'s HP -= memory $7000",			// 0x56
+
+                    /********FD OPTIONS********/
+
+                    "Experience += experience packet",			// 0x4B
+                    "Restore all HP",			// 0x5B
+                    "Experience packet = memory $7000"			// 0x64
+                    };
+
+                case 3:
+                    return new string[] 
+                    { 
+                    "Store 1 of item {xx} to inventory...",			// 0x50
+                    "Remove 1 of item {xx} from inventory...",			// 0x51
+                    "Coins += ...",			// 0x52
+                    "Frog coins += ...",			// 0x53
+                    "FP -= memory $7000",			// 0x57
+
+                    /********FD OPTIONS********/
+
+                    "Store memory $70A7 to item inventory",			// 0x50
+                    "Store memory $70A7 to equipment inventory",			// 0x51
+                    "Coins += memory $7000",			// 0x52
+                    "Coins -= memory $7000",			// 0x53
+                    "Frog coins += memory $7000",			// 0x54
+                    "Frog coins -= memory $7000",			// 0x55
+                    "Current FP += memory $7000",			// 0x56
+                    "Maximum FP += memory $7000",			// 0x57
+                    "Restore all FP"			// 0x5C
+                    };
+
+                case 4:
+                    return new string[] 
+                    { 
+                    "Engage in battle with pack @ $700E",			// 0x49
+                    "Engage in battle with pack {xx}..."			// 0x4A
+                    };
+
+                case 5:
+                    return new string[] 
+                    { 
+                    "Open location...",			// 0x4B
+                    "Open level...",			// 0x68
+                    "Apply tile mod to level...",			// 0x6A
+                    "Apply solid mod to level..."			// 0x6B
+                    };
+
+                case 6:
+                    return new string[] 
+                    { 
+                    "Open shop menu...",			// 0x4C
+                    "Open menu/run event sequence...",			// 0x4F
+                    "Reset game, choose game",			// 0xFB
+                    "Reset game",			// 0xFC
+
+                    /********FD OPTIONS********/
+
+                    "Open save game menu",			// 0x4A
+                    "Run menu tutorial...",			// 0x4C
+                    "Run level-up bonus sequence"			// 0x65
+                    };
+
+                case 7:
+                    return new string[] 
+                    { 
+                    "Run dialogue...",			// 0x60
+                    "Run dialogue @ memory $7000...",			// 0x61
+                    "Run dialogue for {xx} duration...",			// 0x62
+                    "Append to dialogue @ memory $7000...",			// 0x63
+                    "Close dialogue",			// 0x64
+                    "Un-sync dialogue",			// 0x65
+                    "If dialogue option B selected...",			// 0x66
+                    "If dialogue option B / C selected..."			// 0x67
+                    };
+
+                case 8:
+                    return new string[] 
+                    { 
+                    "Run background event...",			// 0x40
+                    "Run background event, pause...",         // 0x44
+                    "Run background event, pause (return on exit)...",         // 0x45
+                    "Stop background event...",  // 0x46
+                    "Resume background event...", // 0x47
+                    "Run event sequence...",			// 0x4E
+                    "Run event...",			// 0xD0
+                    "Run event as subroutine...",			// 0xD1
+
+                    /********FD OPTIONS********/
+
+                    "Stop all background events", // 0x43
+                    "Run event at return...",  // 0x46
+                    "Run star piece sequence...",			// 0x4D
+                    "Run moleville mountain sequence",			// 0x4E
+                    "Run moleville mountain intro sequence",			// 0x4F
+                    "Display pre-game intro title...",			// 0x66
+                    "Run ending credit sequence",			// 0x67
+                    "Exor crashes into keep"			// 0xF8
+                    };
+
+                case 9:
+                    return new string[] 
+                    { 
+                    "Jump to address...",			// 0xD2
+                    "Jump to subroutine...",			// 0xD3
+                    "Loop start, count = ...",			// 0xD4
+                    "Loop start, timer = ...",          // 0xD5
+                    "Loop end",			// 0xD7
+                    "Jump to start of script",			// 0xF9
+                    "Jump to start of script"			// 0xFA
+                    };
+
+                case 10:
+                    return new string[] 
+                    {
+                    "Fade in from black (sync)",			// 0x70
+                    "Fade in from black (async)",			// 0x71
+                    "Fade in from black (sync) for {xx} duration...",			// 0x72
+                    "Fade in from black (async) for {xx} duration...",			// 0x73
+                    "Fade out to black (sync)",			// 0x74
+                    "Fade out to black (async)",			// 0x75
+                    "Fade out to black (sync) for {xx} duration...",			// 0x76
+                    "Fade out to black (async) for {xx} duration...",			// 0x77
+                    "Fade in from {xx} color...",			// 0x78
+                    "Fade out to {xx} color...",			// 0x79
+                    "Star mask, expand from screen center",			// 0x7A
+                    "Star mask, shrink to screen center",			// 0x7B
+                    "Circle mask, expand from screen center",			// 0x7C
+                    "Circle mask, shrink to screen center",			// 0x7D
+                    "Initiate battle mask",			// 0x7E
+                    "Tint layers {xx} with {xx} color...",			// 0x80
+                    "Priority set = ...",			// 0x81
+                    "Reset priority set",			// 0x82
+                    "Screen flashes with {xx} color...",			// 0x83
+                    "Pixellate layers {xx} by {xx} amount...",			// 0x84
+                    "Palette set morphs to {xx} set...",			// 0x89
+                    "Palette set = ...",			// 0x8A
+                    "Circle mask, shrink to object {xx} (non-static)...", // 0x87
+                    "Circle mask, shrink to object {xx} (static)...",	    // 0x8F
+
+                    /********FD OPTIONS********/
+
+                    "Unfreeze screen",			// 0x30
+                    "Freeze screen"			// 0x31
+                    };
+
+                case 11:
+                    return new string[] 
+                    {
+                    "Play music {xx} at current volume...",			// 0x90
+                    "Play music {xx} at default volume...",			// 0x91
+                    "Fade in music {xx} ...",			// 0x92
+                    "Fade out current music",			// 0x93
+                    "Stop current music",			// 0x94
+                    "Fade out current music to {xx} volume...",			// 0x95
+                    "Adjust music tempo by {xx} amount...",			// 0x97
+                    "Adjust music pitch by {xx} amount...",			// 0x98
+                    "Stop current sound",			// 0x9B
+                    "Play {xx} sound (ch.6,7)...",			// 0x9C
+                    "Play {xx} sound (ch.6,7) with {xx} speaker balance...",			// 0x9D
+                    "Fade out current sound to {xx} volume...",			// 0x9E
+
+                    /********FD OPTIONS********/
+
+                    "Deactivate {xx} sound channels...",        // 0x94
+                    "If audio memory $69 >= ...",        // 0x96
+                    "If audio memory $69 = ...",        // 0x97
+                    "Play {xx} sound (ch.4,5)...",             // 0x9C
+                    "Lower current music tempo",			// 0xA4
+                    "Slide current music tempo to default"			// 0xA5
+                    };
+
+                case 12:
+                    return new string[] 
+                    { 
+                    "Memory $704x bit {xx} set...",			// 0xA0-0xA2
+                    "Memory $704x bit {xx} clear...",			// 0xA4-0xA6
+                    "Memory $70Ax = ...",			// 0xA8
+                    "Memory $70Ax += ...",			// 0xA9
+                    "Memory $70Ax += 1...",			// 0xAA
+                    "Memory $70Ax -= 1...",			// 0xAB
+                    "Memory $7xxx = ...",         // 0xB0
+                    "Memory $7xxx += ...",			// 0xB1
+                    "Memory $7xxx += 1...",// 0xB2
+                    "Memory $7xxx -= 1...",// 0xB3
+                    "Memory $70Ax = memory $7xxx...",         // 0xB5
+                    "Memory $7xxx = random # between 0 and {xx}...",			// 0xB7
+                    "Memory $7xxx = memory $7000...",        // 0xBB
+                    "Memory $7xxx = memory $7xxx...",      // 0xBC
+                    "Memory $7xxx <=> memory $7xxx...",			// 0xBD
+                    "Memory $7xxx compare to {xx}...",			// 0xC2
+                    "Object memory = memory $7xxx...",   // 0xD6
+                    "If memory $704x bit {xx} set...",			// 0xD8-0xDA
+                    "If memory $704x bit {xx} clear...",// 0xDC-0xDE
+                    "If memory $70Ax = ...",			// 0xE0
+                    "If memory $70Ax != ...",			// 0xE1
+                    "If memory $7xxx = ...",			// 0xE4
+                    "If memory $7xxx != ...",			// 0xE5
+                    "If random # between 0 and 255 > 128...",			// 0xE8
+                    "If random # between 0 and 255 > 66...",			// 0xE9
+
+                    /********FD OPTIONS********/
+
+                    "Memory $7xxx shift left {xx} times...",			// 0xB6
+                    "Generate random # between 0 and memory $7xxx..."			// 0xB7
+                    };
+
+                case 13:
+                    return new string[] 
+                    {
+                    "Memory $7000 = party capacity",			// 0x37
+                    "Memory $7000 = character in {xx} slot...",			// 0x38
+                    "Memory $7000 = # of open item slots",			// 0x55
+                    "Memory $7000 = current FP",			// 0x58
+                    "Memory $704x [x is @ $7000] bit {xx} set...",			// 0xA3
+                    "Memory $704x [x is @ $7000] bit {xx} clear...",			// 0xA7
+                    "Memory $7000 = ...",			// 0xAC
+                    "Memory $7000 += ...",			// 0xAD
+                    "Memory $7000 += 1",			// 0xAE
+                    "Memory $7000 -= 1",			// 0xAF
+                    "Memory $7000 = memory $70Ax...",			// 0xB4
+                    "Memory $7000 = random # between 0 and {xx}...",			// 0xB6
+                    "Memory $7000 += memory $7xxx...",			// 0xB8
+                    "Memory $7000 -= memory $7xxx...",			// 0xB9
+                    "Memory $7000 = memory $7xxx...",			// 0xBA
+                    "Memory $7000 compare to {xx}...",			// 0xC0
+                    "Memory $7000 compare to $7xxx...",			// 0xC1
+                    "Memory $7000 = current level",			// 0xC3
+                    "Memory $7000 = object's X coord...",			// 0xC4
+                    "Memory $7000 = object's Y coord...",			// 0xC5
+                    "Memory $7000 = object's Z coord...",			// 0xC6
+                    "Memory $7010-15 = (x,y,z) of object...",          // 0xC7
+                    "Memory $7016-1B = (x,y,z) of object...",          // 0xC8
+                    "Memory $7000 = F coord of object...",            // 0xC9
+                    "Memory $7000 = pressed button",			// 0xCA
+                    "Memory $7000 = tapped button",			// 0xCB
+                    "If Memory $704x [x @ $7000] bit {xx} set...",			// 0xDB
+                    "If Memory $704x [x @ $7000] bit {xx} clear...",			// 0xDF
+                    "If memory $7000 =...",			// 0xE2
+                    "If memory $7000 !=...",			// 0xE3
+                    "If memory $7000 all bits {xx} clear...",			// 0xE6
+                    "If memory $7000 any bits {xx} set...",			// 0xE7
+                    "If loaded memory = 0...",			// 0xEA
+                    "If loaded memory != 0...",			// 0xEB
+                    "If comparison result is: >=...",			// 0xEC
+                    "If comparison result is: <...",			// 0xED
+                    "If loaded memory < 0...",			// 0xEE
+                    "If loaded memory >= 0...",			// 0xEF
+
+                    /********FD OPTIONS********/
+
+                    "Memory $7000 = quantity of item {xx} in inventory...",			// 0x58
+                    "Memory $7000 = coins",			// 0x59
+                    "Memory $7000 = frog coins",			// 0x5A
+                    "Memory $7000 = equipment {xx} of {xx} character...",			// 0x5D
+                    "Memory $70A7 = quantity of item @ memory $7000",			// 0x5E
+                    "Memory $7000 = memory $7Fxxxx...",			// 0xAC
+                    "Memory $7000 &= {xx}...",			// 0xB0
+                    "Memory $7000 |= {xx}...",			// 0xB1
+                    "Memory $7000 ^= {xx}...",			// 0xB2
+                    "Memory $7000 &= memory $7xxx...",			// 0xB3
+                    "Memory $7000 |= memory $7xxx...",			// 0xB4
+                    "Memory $7000 ^= memory $7xxx...",			// 0xB5
+                    "Memory $7000 = Moleville Mountain timer"			// 0xB8
+                    };
+
+                case 14:
+                    return new string[] 
+                    { 
+                    "Pause script if menu open",           // 0x5B
+                    "Pause script until screen effect done", // 0x7F
+                    "Pause script for {xx} frames...",			// 0xF0
+                    "Pause script for {xxxx} frames...",			// 0xF1
+
+                    /********FD OPTIONS********/
+
+                    "Pause script, resume on next dialogue page A",			// 0x60
+                    "Pause script, resume on next dialogue page B",			// 0x61
+                    };
+
+                case 15:
+                    return new string[] 
+                    {
+                    "Return",			// 0xFE
+                    "Return all"			// 0xFF
+                    };
+
+                default:
+                    return new string[] { };
+            }
+        }
+        public static string[] ActionNames(int index)
         {
             switch (index)
             {
                 case 0:
                     return new string[] 
                     { 
-                    "Visibility = true",			// 0x00
-                    "Visibility = false",			// 0x01
-                    "Seq playback = true",			// 0x02
-                    "Seq playback = false",			// 0x03
-                    "Infinite seq playback = true",			// 0x04
-                    "Infinite seq playback = false",			// 0x05
-                    "Fixed faced direction = true",			// 0x06
-                    "Fixed faced direction = false",			// 0x07
-                    "Solidity properties =...",			// 0x0A
-                    "Solidity properties, set bits...",			// 0x0B
-                    "Solidity properties, clear bits...",			// 0x0C
-                    "Sprite priority, set =...",			// 0x13
-                    "Movement properties |=...",			// 0x15
-                    "If in air, jump to...",			// 0x3D
-                    "Reset all properties",			// 0x09
+                    "Visibility on",			// 0x00
+                    "Visibility off",			// 0x01
+                    "Sequence playback on",			// 0x02
+                    "Sequence playback off",			// 0x03
+                    "Sequence looping on",			// 0x04
+                    "Sequence looping off",			// 0x05
+                    "Fixed F coord on",			// 0x06
+                    "Fixed F coord off",			// 0x07
+                    "Solidity bits = ...",			// 0x0A
+                    "Solidity set {xx} bits...",			// 0x0B
+                    "Solidity clear {xx} bits...",			// 0x0C
+                    "VRAM priority = ...",			// 0x13
+                    "Movement set {xx} bits...",			// 0x15
+                    "If in air...",			// 0x3D
+                    "Reset properties",			// 0x09
 
                     /********FD OPTIONS********/
 
-                    "Sprite shadow = true",			// 0x00
-                    "Sprite shadow = false",			// 0x01
-                    "Floating = false",			// 0x02
-                    "Floating = true",			// 0x03
-                    "Layer priority =...",			// 0x0F
+                    "Shadow on",			// 0x00
+                    "Shadow off",			// 0x01
+                    "Floating on",			// 0x02
+                    "Floating off",			// 0x03
+                    "Priority = ...",			// 0x0F
                     };
 
                 case 1:
                     return new string[] 
                     { 
-                    "Palette index, set =...",			// 0x0D
-                    "Palette index, shift =...",			// 0x0E
-                    "Palette index, shift x1",			// 0x0F
+                    "Palette row = ...",			// 0x0D
+                    "Palette row += ...",			// 0x0E
+                    "Palette row += 1",			// 0x0F
                     };
 
                 case 2:
                     return new string[] 
                     { 
-                    "Seq playback, sprite +=...",			// 0x08
-                    "Playback, set speed =...",			// 0x10
-                    "Set action script =...",			// 0xD0
+                    "Animation/sequence = ...",			// 0x08
+                    "Walking/sequence speed = ...",			// 0x10
+                    "Action script = ...",			// 0xD0
                     };
 
                 case 3:
                     return new string[] 
                     { 
-                    "Animation string A...",			// 0x26
-                    "Animation string B...",			// 0x27
-                    "Animation string C...",			// 0x28
+                    "Embedded animation routine ($26)...",			// 0x26
+                    "Embedded animation routine ($27)...",			// 0x27
+                    "Embedded animation routine ($28)...",			// 0x28
                     };
 
                 case 4:
                     return new string[] 
                     { 
-                    "Shift x1 step east",			// 0x40
-                    "Shift x1 step southeast",			// 0x41
-                    "Shift x1 step south",			// 0x42
-                    "Shift x1 step southwest",			// 0x43
-                    "Shift x1 step west",			// 0x44
-                    "Shift x1 step northwest",			// 0x45
-                    "Shift x1 step north",			// 0x46
-                    "Shift x1 step northeast",			// 0x47
-                    "Shift x1 step in facing direction",			// 0x48
-                    "Elevate x1 step up",			// 0x4A
-                    "Elevate x1 step down",			// 0x4B
+                    "Walk 1 step east",			// 0x40
+                    "Walk 1 step southeast",			// 0x41
+                    "Walk 1 step south",			// 0x42
+                    "Walk 1 step southwest",			// 0x43
+                    "Walk 1 step west",			// 0x44
+                    "Walk 1 step northwest",			// 0x45
+                    "Walk 1 step north",			// 0x46
+                    "Walk 1 step northeast",			// 0x47
+                    "Walk 1 step in F direction",			// 0x48
+                    "Z coord += 1 step",			// 0x4A
+                    "Z coord -= 1 step",			// 0x4B
                     };
 
                 case 5:
                     return new string[] 
                     { 
-                    "Shift east, isometric units =...",			// 0x50
-                    "Shift southeast, isometric units =...",			// 0x51
-                    "Shift south, isometric units =...",			// 0x52
-                    "Shift southwest, isometric units =...",			// 0x53
-                    "Shift west, isometric units =...",			// 0x54
-                    "Shift northwest, isometric units =...",			// 0x55
-                    "Shift north, isometric units =...",			// 0x56
-                    "Shift northeast, isometric units =...",			// 0x57
-                    "Shift in facing direction, isometric units =...",			// 0x58
-                    "Shift 20 isometric units in facing direction",			// 0x59
-                    "Elevate up, isometric units =...",			// 0x5A
-                    "Elevate down, isometric units =...",			// 0x5B
-                    "Elevate 20 isometric units up",			// 0x5C
-                    "Elevate 20 isometric units down",			// 0x5D
-                    "Jump, isometric units =...",			// 0x7E
-                    "Jump, 1px units =...",			// 0x7F
+                    "Walk {xx} steps east...",			// 0x50
+                    "Walk {xx} steps southeast...",			// 0x51
+                    "Walk {xx} steps south...",			// 0x52
+                    "Walk {xx} steps southwest...",			// 0x53
+                    "Walk {xx} steps west...",			// 0x54
+                    "Walk {xx} steps northwest...",			// 0x55
+                    "Walk {xx} steps north...",			// 0x56
+                    "Walk {xx} steps northeast...",			// 0x57
+                    "Walk {xx} steps in F direction...",			// 0x58
+                    "Walk 20 steps in F direction...",			// 0x59
+                    "Z coord += {xx} steps...",			// 0x5A
+                    "Z coord -= {xx} steps...",			// 0x5B
+                    "Z coord += 20 steps",			// 0x5C
+                    "Z coord -= 20 steps",			// 0x5D
+                    "Jump at {xx} velocity...",			// 0x7E
+                    "Jump (+SFX) at {xx} velocity...",			// 0x7F
                     };
 
                 case 6:
                     return new string[] 
                     { 
-                    "Shift east, pixels =...",			// 0x60
-                    "Shift southeast, pixels =...",			// 0x61
-                    "Shift south, pixels =...",			// 0x62
-                    "Shift southwest, pixels =...",			// 0x63
-                    "Shift west, pixels =...",			// 0x64
-                    "Shift northwest, pixels =...",			// 0x65
-                    "Shift north, pixels =...",			// 0x66
-                    "Shift northeast, pixels =...",			// 0x67
-                    "Shift in facing direction, pixels =...",			// 0x68
-                    "Shift 16px in facing direction",			// 0x69
-                    "Elevate up, pixels =...",			// 0x6A
-                    "Elevate down, pixels =...",			// 0x6B
+                    "Walk {xx} pixels east...",			// 0x60
+                    "Walk {xx} pixels southeast...",			// 0x61
+                    "Walk {xx} pixels south...",			// 0x62
+                    "Walk {xx} pixels southwest...",			// 0x63
+                    "Walk {xx} pixels west...",			// 0x64
+                    "Walk {xx} pixels northwest...",			// 0x65
+                    "Walk {xx} pixels north...",			// 0x66
+                    "Walk {xx} pixels northeast...",			// 0x67
+                    "Walk {xx} pixels in F direction...",			// 0x68
+                    "Walk 16 pixels in F direction",			// 0x69
+                    "Z coord += {xx} pixels...",			// 0x6A
+                    "Z coord -= {xx} pixels...",			// 0x6B
                     };
 
                 case 7:
@@ -4148,8 +5063,8 @@ namespace LAZYSHELL
                     "Face northeast",			// 0x77
                     "Face Mario",			// 0x78
                     "Turn clockwise 45°",			// 0x79
-                    "Face random direction",			// 0x7A
-                    "Turn clockwise 45° times...",			// 0x7B
+                    "Turn in random direction",			// 0x7A
+                    "Turn clockwise 45° {xx} times...",			// 0x7B
                     "Face east",			// 0x7C
                     "Face southwest",			// 0x7D
                     };
@@ -4157,480 +5072,154 @@ namespace LAZYSHELL
                 case 8:
                     return new string[] 
                     { 
-                    "Shift to isometric coords...",			// 0x80
-                    "Shift isometric units...",			// 0x81
-                    "Transfer to isometric coords...",			// 0x82
-                    "Transfer isometric units...",			// 0x83
-                    "Transfer isometric pixels...",			// 0x84
-                    "Transfer to coords of obj...",			// 0x87
-                    "Bounce to isometric coords...",			// 0x90
-                    "Bounce isometric units...",			// 0x91
-                    "Transfer to isometric coords...",			// 0x92
-                    "Transfer isometric units...",			// 0x93
-                    "Transfer isometric pixels (facing)...",			// 0x94
-                    "Transfer to other obj's isometric coords...",			// 0x95
+                    "Walk to (x,y)...",			// 0x80
+                    "Walk (x,y) steps...",			// 0x81
+                    "Transfer to (x,y)...",			// 0x82
+                    "Transfer (x,y) steps...",			// 0x83
+                    "Transfer (x,y) pixels...",			// 0x84
+                    "Transfer to (x,y) of object...",			// 0x87
+                    "Bounce to (x,y)...",			// 0x90
+                    "Bounce (x,y) steps...",			// 0x91
+                    "Transfer to (x,y,z)...",			// 0x92
+                    "Transfer (x,y,z) steps...",			// 0x93
+                    "Transfer (x,y,z) pixels...",			// 0x94
+                    "Transfer to (x,y,z) of object...",			// 0x95
                     };
 
                 case 9:
                     return new string[] 
                     { 
-                    "Playback stop, sound",			// 0x9B
-                    "Playback start, sound =...",			// 0x9C
-                    "Playback start (speaker balance), sound =...",			// 0x9D
-                    "Playback fade-out sound, duration...",			// 0x9E
+                    "Stop current sound",			// 0x9B
+                    "Play sound: {xx} (ch.6,7)...",			// 0x9C
+                    "Play sound: {xx} (ch.6,7), speaker balance {xx}...",			// 0x9D
+                    "Fade out current sound to volume {xx}...",			// 0x9E
                     };
 
                 case 10:
                     return new string[] 
                     { 
-                    "Set mem...",			// 0xA0-0xA2
-                    "Clear mem...",			// 0xA4-0xA6
-                    "Store to mem a value (8-bit)...",			// 0xA8
-                    "Add to mem (8-bit)...",			// 0xA9
-                    "Increment mem (8-bit)...",// 0xAA
-                    "Decrement mem (8-bit)...",// 0xAB
-                    "Store to mem a value (16-bit)...",         // 0xB0
-                    "Add to mem (16-bit)...",			// 0xB1
-                    "Increment mem (16-bit)...",// 0xB2
-                    "Decrement mem (16-bit)...",// 0xB3
-                    "Store to mem from mem $7000 (8-bit)...",         // 0xB5
-                    "Store random # to mem...",			// 0xB7
-                    "Store to mem from mem $7000 (16-bit)...",        // 0xBB
-                    "Store to mem from mem (choose both, 16-bit)...",      // 0xBC
-                    "Exchange mem...",			// 0xBD
-                    "Mem compare to...",			// 0xC2
-                    "Object memory = mem...",   // 0xD6
-                    "If set, mem...",			// 0xD8-0xDA
-                    "If clear, mem...",// 0xDC-0xDE
-                    "If mem = (8-bit)...",			// 0xE0
-                    "If mem != (8-bit)...",			// 0xE1
-                    "If mem = (16-bit)...",			// 0xE4
-                    "If mem != (16-bit)...",			// 0xE5
-                    "If random # > 128, jump to...",			// 0xE8
-                    "If random # > 66, jump to...",			// 0xE9
+                    "Memory $704x bit {xx} set...",			// 0xA0-0xA2
+                    "Memory $704x bit {xx} clear...",			// 0xA4-0xA6
+                    "Memory $70Ax = ...",			// 0xA8
+                    "Memory $70Ax += ...",			// 0xA9
+                    "Memory $70Ax += 1...",// 0xAA
+                    "Memory $70Ax -= 1...",// 0xAB
+                    "Memory $7xxx = ...",         // 0xB0
+                    "Memory $7xxx += ...",			// 0xB1
+                    "Memory $7xxx += 1...",// 0xB2
+                    "Memory $7xxx -= 1...",// 0xB3
+                    "Memory $70Ax = memory $700C...",         // 0xB5
+                    "Memory $7xxx = random # between 0 and {xx}...",			// 0xB7
+                    "Memory $7xxx = memory $700C...",        // 0xBB
+                    "Memory $7xxx = memory $7xxx...",      // 0xBC
+                    "Memory $7xxx <=> memory $7xxx...",			// 0xBD
+                    "Memory $7xxx compare to...",			// 0xC2
+                    "Memory $7xxx load...",   // 0xD6
+                    "If memory $704x bit {xx} set...",			// 0xD8-0xDA
+                    "If memory $704x bit {xx} clear...",// 0xDC-0xDE
+                    "If memory $70Ax = ...",			// 0xE0
+                    "If memory $70Ax != ...",			// 0xE1
+                    "If memory $7xxx = ...",			// 0xE4
+                    "If memory $7xxx != ...",			// 0xE5
+                    "If random # between 0 and 255 > 128...",			// 0xE8
+                    "If random # between 0 and 255 > 66...",			// 0xE9
 
                     /********FD OPTIONS********/
 
-                    "Halve mem...",			// 0xB6
+                    "Memory $7xxx shift left {xx} times...",			// 0xB6
                     };
 
                 case 11:
                     return new string[] 
                     { 
-                    "Set mem @ $700C",			// 0xA3
-                    "Clear mem @ $700C",			// 0xA7
-                    "Mem $700C =...",			// 0xAC
-                    "Mem $700C +=...",			// 0xAD
-                    "Mem $700C increment",			// 0xAE
-                    "Mem $700C decrement",			// 0xAF
-                    "Mem $700C = mem...",			// 0xB4
-                    "Mem $700C = random # less than...",			// 0xB6
-                    "Mem $700C += mem...",			// 0xB8
-                    "Mem $700C -= mem...",			// 0xB9
-                    "Mem $700C = mem...",			// 0xBA
-                    "Mem $700C compare to...",			// 0xC0
-                    "Mem $700C compare to mem...",			// 0xC1
-                    "Mem $700C = current level",			// 0xC3
-                    "Mem $700C = object X coord...",			// 0xC4
-                    "Mem $700C = object Y coord...",			// 0xC5
-                    "Mem $700C = object Z coord...",			// 0xC6
-                    "Mem $700C = held joypad register",			// 0xCA
-                    "Mem $700C = tapped joypad register",			// 0xCB
-                    "If mem $700C bit(s) set, jump to...",			// 0xDB
-                    "If mem $700C bit(s) clear, jump to...",			// 0xDF
-                    "If mem $700C =...",			// 0xE2
-                    "If mem $700C !=...",			// 0xE3
-                    "If mem $700C set, no bits...",			// 0xE6
-                    "If mem $700C set, any bits...",			// 0xE7
-                    "If equal to zero, jump to...",			// 0xEA
-                    "If not equal to zero, jump to...",			// 0xEB
-                    "If greater than / equal to, jump to...",			// 0xEC
-                    "If less than, jump to...",			// 0xED
-                    "If negative, jump to...",			// 0xEE
-                    "If positive, jump to...",			// 0xEF
+                    "Memory $704x [x is @ $700C] bit set",			// 0xA3
+                    "Memory $704x [x is @ $700C] bit clear",			// 0xA7
+                    "Memory $700C = ...",			// 0xAC
+                    "Memory $700C += ...",			// 0xAD
+                    "Memory $700C += 1",			// 0xAE
+                    "Memory $700C -= 1",			// 0xAF
+                    "Memory $700C = memory $70Ax...",			// 0xB4
+                    "Memory $700C = random # between 0 and {xx}...",			// 0xB6
+                    "Memory $700C += memory $7xxx...",			// 0xB8
+                    "Memory $700C -= memory $7xxx...",			// 0xB9
+                    "Memory $700C = memory $7xxx...",			// 0xBA
+                    "Memory $700C compare to {xx}...",			// 0xC0
+                    "Memory $700C compare to memory $7xxx...",			// 0xC1
+                    "Memory $700C = current level",			// 0xC3
+                    "Memory $700C = object's X coord...",			// 0xC4
+                    "Memory $700C = object's Y coord...",			// 0xC5
+                    "Memory $700C = object's Z coord...",			// 0xC6
+                    "Memory $700C = pressed button",			// 0xCA
+                    "Memory $700C = tapped button",			// 0xCB
+                    "If Memory $704x [x @ $700C] bit set...",			// 0xDB
+                    "If Memory $704x [x @ $700C] bit clear...",			// 0xDF
+                    "If memory $700C =...",			// 0xE2
+                    "If memory $700C !=...",			// 0xE3
+                    "If memory $700C all bits {xx} clear...",			// 0xE6
+                    "If memory $700C any bits {xx} set...",			// 0xE7
+                    "If loaded memory = 0...",			// 0xEA
+                    "If loaded memory != 0...",			// 0xEB
+                    "If comparison result is: >=...",			// 0xEC
+                    "If comparison result is: <...",			// 0xED
+                    "If loaded memory < 0...",			// 0xEE
+                    "If loaded memory >= 0...",			// 0xEF
 
                     /********FD OPTIONS********/
 
-                    "$700C, isolate bits =...",			// 0xB0
-                    "$700C, set bits =...",			// 0xB1
-                    "$700C, xor bits =...",			// 0xB2
-                    "$700C, isolate bits, from mem...",			// 0xB3
-                    "$700C, set bits, from mem...",			// 0xB4
-                    "$700C, xor bits, from mem...",			// 0xB5
+                    "Memory $700C &= {xx}...",			// 0xB0
+                    "Memory $700C |= {xx}...",			// 0xB1
+                    "Memory $700C ^= {xx}...",			// 0xB2
+                    "Memory $700C &= memory $7xxx...",			// 0xB3
+                    "Memory $700C |= memory $7xxx...",			// 0xB4
+                    "Memory $700C ^= memory $7xxx...",			// 0xB5
                     };
 
                 case 12:
                     return new string[] 
                     { 
-                    "Jump to...",			// 0xD2
+                    "Jump to address...",			// 0xD2
                     "Jump to subroutine...",			// 0xD3
-                    "Loop start, loop count...",			// 0xD4
+                    "Loop start, count = ...",			// 0xD4
                     "Loop end",			// 0xD7
                     };
 
                 case 13:
                     return new string[] 
                     { 
-                    "Set obj presence...",			// 0xF2
-                    "Set obj event trigger...",			// 0xF3
-                    "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
-                    "Set obj: mem $70A8, presence = false (current level)",			// 0xF4
-                    "Set obj: mem $70A8, event trigger = true",			// 0xF6
-                    "Set obj: mem $70A8, event trigger = false",			// 0xF7
-                    "If object in level ..., presence =...",			// 0xF8
+                    "Object {xx}'s presence in level {xx} is...",			// 0xF2
+                    "Object {xx}'s event trigger is...",			// 0xF3
+                    "Summon object @ $70A8 to current level",			// 0xF4
+                    "Remove object @ $70A8 in current level",			// 0xF4
+                    "Enable event trigger for object @ 70A8",			// 0xF6
+                    "Disable event trigger for object @ 70A8",			// 0xF7
+                    "If object {xx} is present in level {xx}...",			// 0xF8
 
                     /********FD OPTIONS********/
 
-                    "Obj mem $0E set bit 4",			// 0x04
-                    "Obj mem $0E clear bit 4",			// 0x05
-                    "Obj mem $0E set bit 5",			// 0x06
-                    "Obj mem $0E clear bit 5",			// 0x07
-                    "Obj mem $09 set bit 7",			// 0x08
-                    "Obj mem $09 clear bit 7",			// 0x09
-                    "Obj mem $08 set bit 4",			// 0x0A
-                    "Obj mem $08 clear bit 3,4",			// 0x0B
-                    "Obj mem $30 clear bit 4",			// 0x0C
-                    "Obj mem $30 set bit 4",			// 0x0D
-                    "Obj mem $09 clear bit 4,6, set bit 5",			// 0x0E
+                    "Object memory $0E set bit 4",			// 0x04
+                    "Object memory $0E clear bit 4",			// 0x05
+                    "Object memory $0E set bit 5",			// 0x06
+                    "Object memory $0E clear bit 5",			// 0x07
+                    "Object memory $09 set bit 7",			// 0x08
+                    "Object memory $09 clear bit 7",			// 0x09
+                    "Object memory $08 set bit 4",			// 0x0A
+                    "Object memory $08 clear bit 3,4",			// 0x0B
+                    "Object memory $30 clear bit 4",			// 0x0C
+                    "Object memory $30 set bit 4",			// 0x0D
+                    "Object memory $09 clear bit 4,6, set bit 5",			// 0x0E
                     };
 
                 case 14:
                     return new string[] 
                     { 
-                    "Delay, frames (8-bit)...",			// 0xF0
-                    "Delay, frames (16-bit)...",			// 0xF1
+                    "Pause script for {xx} frames...",			// 0xF0
+                    "Pause script for {xxxx} frames...",			// 0xF1
                     };
 
                 case 15:
                     return new string[] 
                     { 
                     "Return queue",			// 0xFE
-                    "Return queue all"			// 0xFF
-                    };
-
-                default:
-                    return new string[] { };
-            }
-        }
-        public static string[] EventListBoxNames(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    return new string[] 
-                    {
-                    "Action queue...",      // 0x00 - 0x2F
-                    "Freeze all objects until return",			// 0x30
-                    "Unfreeze all objects",			// 0x31
-                    "If object present...", // 0x32
-                    "If Mario on top of object, jump to...",    // 0x39
-                    "If distance between object A and...",			// 0x3A
-                    "If distance (Z==) between object A and...",			// 0x3B
-                    "If Mario in air, jump to...",			// 0x3D
-                    "Create NPC packet @ object coords...",			// 0x3E
-                    "Create NPC packet @ Mario coords...",			// 0x3F
-                    "If Mario on top of an object, jump to...",			// 0x42
-                    "Set obj presence...",			// 0xF2
-                    "Set obj event trigger...",			// 0xF3
-                    "Set obj: mem $70A8, presence = true (current level)",			// 0xF4
-                    "Set obj: mem $70A8, presence = false (current level)",			// 0xF5
-                    "Set obj: mem $70A8, event trigger = true",			// 0xF6
-                    "Set obj: mem $70A8, event trigger = false",			// 0xF7
-                    "If object in level ..., presence =...",			// 0xF8
-
-                    /********FD OPTIONS********/
-
-                    "Remember last object",			// 0x32
-                    "If running action script, object...",			// 0x33
-                    "If underwater, object...",			// 0x34
-                    "If in air, object...",			// 0x3D
-                    "Create NPC packet with event @ Mario coords...",			// 0x3E
-                    "Mario glows via super star"			// 0xF9
-                                        };
-
-                case 1:
-                    return new string[] 
-                    {
-                    "Joypad enable exclusively (reset @ return)...",			// 0x34
-                    "Joypad enable exclusively...",			// 0x35
-                                        };
-
-                case 2:
-                    return new string[] 
-                    { 
-                    "Add/remove party member...",			// 0x36
-                    "Equip item to character...",			// 0x54
-                    "HP -= mem $7000, character...",			// 0x56
-
-                    /********FD OPTIONS********/
-
-                    "Experience += experience packet data",			// 0x4B
-                    "Restore all HP",			// 0x5B
-                    "Experience packet = mem $7000"			// 0x64
-                    };
-
-                case 3:
-                    return new string[] 
-                    { 
-                    "Inventory store x1, item...",			// 0x50
-                    "Inventory remove x1, item...",			// 0x51
-                    "Add to coins...",			// 0x52
-                    "Add to frog coins...",			// 0x53
-                    "FP -= mem $7000",			// 0x57
-
-                    /********FD OPTIONS********/
-
-                    "Store mem $70A7 to item inventory",			// 0x50
-                    "Store mem $70A7 to equipment inventory",			// 0x51
-                    "Coins += mem $7000",			// 0x52
-                    "Coins -= mem $7000",			// 0x53
-                    "Frog coins += mem $7000",			// 0x54
-                    "Frog coins -= mem $7000",			// 0x55
-                    "Current FP += mem $7000",			// 0x56
-                    "Maximum FP += mem $7000",			// 0x57
-                    "Restore all FP"			// 0x5C
-                    };
-
-                case 4:
-                    return new string[] 
-                    { 
-                    "Engage battle with pack @ $700E",			// 0x49
-                    "Engage battle with pack..."			// 0x4A
-                    };
-
-                case 5:
-                    return new string[] 
-                    { 
-                    "Open, world map point...",			// 0x4B
-                    "Open level...",			// 0x68
-                    "Modify layer of level...",			// 0x69
-                    "Modify solidity of level..."			// 0x6A
-                    };
-
-                case 6:
-                    return new string[] 
-                    { 
-                    "Open, shop menu...",			// 0x4C
-                    "Open, window...",			// 0x4F
-                    "Reset game, choose game",			// 0xFB
-                    "Reset game",			// 0xFC
-
-                    /********FD OPTIONS********/
-
-                    "Open, save game",			// 0x4A
-                    "Open, menu tutorial...",			// 0x4C
-                    "Open, level-up bonus"			// 0x65
-                    };
-
-                case 7:
-                    return new string[] 
-                    { 
-                    "Run dlg...",			// 0x60
-                    "Run dlg: mem $7000...",			// 0x61
-                    "Run timed dlg...",			// 0x62
-                    "Append to dlg: mem $7000...",			// 0x63
-                    "Close dlg",			// 0x64
-                    "Un-sync dlg",			// 0x65
-                    "If dlg option B selected, jump to...",			// 0x66
-                    "If dlg option B or C selected, jump to..."			// 0x67
-                    };
-
-                case 8:
-                    return new string[] 
-                    { 
-                    "Run synchronous event...",			// 0x40
-                    "Run common event...",			// 0x4E
-                    "Run event (jump to)...",			// 0xD0
-                    "Run event (sub-routine)...",			// 0xD1
-
-                    /********FD OPTIONS********/
-
-                    "Run star piece scene...",			// 0x4D
-                    "Run moleville mountain",			// 0x4E
-                    "Run moleville mountain intro",			// 0x4F
-                    "Run character intro title...",			// 0x66
-                    "Run ending credits",			// 0x67
-                    "Run Exor crash into keep"			// 0xF8
-                    };
-
-                case 9:
-                    return new string[] 
-                    { 
-                    "Jump to...",			// 0xD2
-                    "Jump to subroutine...",			// 0xD3
-                    "Loop start, loop count...",			// 0xD4
-                    "Loop end",			// 0xD7
-                    "Jump to script start(A)",			// 0xF9
-                    "Jump to script start(B)"			// 0xFA
-                    };
-
-                case 10:
-                    return new string[] 
-                    {
-                    "Fade-in from black (sync)",			// 0x70
-                    "Fade-in from black (async)",			// 0x71
-                    "Fade-in from black (sync), for duration...",			// 0x72
-                    "Fade-in from black (async), for duration...",			// 0x73
-                    "Fade-out to black (sync)",			// 0x74
-                    "Fade-out to black (async)",			// 0x75
-                    "Fade-out to black (sync), for duration...",			// 0x76
-                    "Fade-out to black (async), for duration...",			// 0x77
-                    "Fade-in from color...",			// 0x78
-                    "Fade-out to color...",			// 0x79
-                    "BG star frame expand",			// 0x7A
-                    "BG star frame shrink",			// 0x7B
-                    "BG circle frame expand",			// 0x7C
-                    "BG circle frame shrink",			// 0x7D
-                    "BG battle frame close",			// 0x7E
-                    "Layer tinting, color...",			// 0x80
-                    "Layer priorities, set...",			// 0x81
-                    "Layer priorities, set to default",			// 0x82
-                    "Screen flash, color...",			// 0x83
-                    "Layer pixels, size: x...",			// 0x84
-                    "Palette transform, set...",			// 0x89
-                    "Palette set, set...",			// 0x8A
-                    "Closing circle effect (non-static), to object...", // 0x87
-                    "Closing circle effect (static), to object...",	    // 0x8F
-
-                    /********FD OPTIONS********/
-
-                    "Screen, unfixed",			// 0x30
-                    "Screen, fixed"			// 0x31
-                    };
-
-                case 11:
-                    return new string[] 
-                    {
-                    "Playback start current volume, track...",			// 0x90
-                    "Playback start default volume, track...",			// 0x91
-                    "Playback fade-in, track...",			// 0x92
-                    "Playback fade-out track",			// 0x93
-                    "Playback stop track",			// 0x94
-                    "Playback fade-out track, duration...",			// 0x95
-                    "Playback adjust track tempo, duration...",			// 0x97
-                    "Playback adjust track pitch, duration...",			// 0x98
-                    "Playback stop sound",			// 0x9B
-                    "Playback start, sound...",			// 0x9C
-                    "Playback start (speaker balance), sound...",			// 0x9D
-                    "Playback fade-out sound, duration...",			// 0x9E
-
-                    /********FD OPTIONS********/
-
-                    "Set inactive sound channels...",        // 0x94
-                    "If audio mem $69 >= ...",        // 0x96
-                    "If audio mem $69 =...",        // 0x97
-                    "Playback start, sound (sync)...",             // 0x9C
-                    "Playback, slow down track",			// 0xA4
-                    "Playback, speed up track to normal"			// 0xA5
-                    };
-
-                case 12:
-                    return new string[] 
-                    { 
-                    "Set mem...",			// 0xA0-0xA2
-                    "Clear mem...",			// 0xA4-0xA6
-                    "Store to mem a value (8-bit)...",			// 0xA8
-                    "Add to mem (8-bit)...",			// 0xA9
-                    "Increment mem (8-bit)...",// 0xAA
-                    "Decrement mem (8-bit)...",// 0xAB
-                    "Store to mem a value (16-bit)...",         // 0xB0
-                    "Add to mem (16-bit)...",			// 0xB1
-                    "Increment mem (16-bit)...",// 0xB2
-                    "Decrement mem (16-bit)...",// 0xB3
-                    "Store to mem from mem $7000 (8-bit)...",         // 0xB5
-                    "Store random # to mem...",			// 0xB7
-                    "Store to mem from mem $7000 (16-bit)...",        // 0xBB
-                    "Store to mem from mem (choose both, 16-bit)...",      // 0xBC
-                    "Exchange mem...",			// 0xBD
-                    "Mem compare to...",			// 0xC2
-                    "Object memory = mem...",   // 0xD6
-                    "If set, mem...",			// 0xD8-0xDA
-                    "If clear, mem...",// 0xDC-0xDE
-                    "If mem = (8-bit)...",			// 0xE0
-                    "If mem != (8-bit)...",			// 0xE1
-                    "If mem = (16-bit)...",			// 0xE4
-                    "If mem != (16-bit)...",			// 0xE5
-                    "If random # > 128, jump to...",			// 0xE8
-                    "If random # > 66, jump to...",			// 0xE9
-
-                    /********FD OPTIONS********/
-
-                    "Double mem...",			// 0xB6
-                    "Generate random # < mem..."			// 0xB7
-                    };
-
-                case 13:
-                    return new string[] 
-                    {
-                    "Mem $7000 = party capacity",			// 0x37
-                    "Mem $7000 = character @ slot...",			// 0x38
-                    "Mem $7000 = open item slots",			// 0x55
-                    "Mem $7000 = current FP",			// 0x58
-                    "Set mem @ mem $7000",			// 0xA3
-                    "Clear mem @ mem $7000",			// 0xA7
-                    "Mem $7000 =...",			// 0xAC
-                    "Mem $7000 +=...",			// 0xAD
-                    "Mem $7000 increment",			// 0xAE
-                    "Mem $7000 decrement",			// 0xAF
-                    "Mem $7000 = mem (8-bit)...",			// 0xB4
-                    "Mem $7000 = random # less than...",			// 0xB6
-                    "Mem $7000 += mem...",			// 0xB8
-                    "Mem $7000 -= mem...",			// 0xB9
-                    "Mem $7000 = mem (16-bit)...",			// 0xBA
-                    "Mem $7000 compare to...",			// 0xC0
-                    "Mem $7000 compare to mem...",			// 0xC1
-                    "Mem $7000 = current level",			// 0xC3
-                    "Mem $7000 = object X coord...",			// 0xC4
-                    "Mem $7000 = object Y coord...",			// 0xC5
-                    "Mem $7000 = object Z coord...",			// 0xC6
-                    "Mem $7000 = held joypad register",			// 0xCA
-                    "Mem $7000 = tapped joypad register",			// 0xCB
-                    "If mem $7000 bit(s) set, jump to...",			// 0xDB
-                    "If mem $7000 bit(s) clear, jump to...",			// 0xDF
-                    "If mem $7000 =...",			// 0xE2
-                    "If mem $7000 !=...",			// 0xE3
-                    "If mem $7000 set, no bits...",			// 0xE6
-                    "If mem $7000 set, any bits...",			// 0xE7
-                    "If equal to zero, jump to...",			// 0xEA
-                    "If not equal to zero, jump to...",			// 0xEB
-                    "If greater than / equal to, jump to...",			// 0xEC
-                    "If less than, jump to...",			// 0xED
-                    "If negative, jump to...",			// 0xEE
-                    "If positive, jump to...",			// 0xEF
-
-                    /********FD OPTIONS********/
-
-                    "Mem $7000 = quantity of item...",			// 0x58
-                    "Mem $7000 = coins",			// 0x59
-                    "Mem $7000 = frog coins",			// 0x5A
-                    "Mem $7000 = equipment of character...",			// 0x5D
-                    "Mem $70A7 = quantity of item @ mem $7000",			// 0x5E
-                    "Mem $7000 = mem 7F:...",			// 0xAC
-                    "Mem $7000 isolate bits =...",			// 0xB0
-                    "Mem $7000 set bits =...",			// 0xB1
-                    "Mem $7000 xor bits =...",			// 0xB2
-                    "Mem $7000 isolate bits = mem...",			// 0xB3
-                    "Mem $7000 set bits = mem...",			// 0xB4
-                    "Mem $7000 xor bits = mem...",			// 0xB5
-                    "Mem $7000 = Moleville Mountain timer"			// 0xB8
-                    };
-
-                case 14:
-                    return new string[] 
-                    { 
-                    "Delay, frames (8-bit)...",			// 0xF0
-                    "Delay, frames (16-bit)...",			// 0xF1
-
-                    /********FD OPTIONS********/
-
-                    "Pause script, resume on next dlg page(A)",			// 0x60
-                    "Pause script, resume on next dlg page(B)"			// 0x61
-                    };
-
-                case 15:
-                    return new string[] 
-                    {
-                    "Return",			// 0xFE
                     "Return all"			// 0xFF
                     };
 
@@ -4639,8 +5228,73 @@ namespace LAZYSHELL
             }
         }
         #endregion
+        #region Keystrokes
+        public static string[] Keystrokes = new string[]
+        {
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            " ","!","“","”","", "", "‘","’","(",")","", "", ",","-",".","/",
+			"0","1","2","3","4","5","6","7","8","9","~","", "", "", "", "?",
+            "@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+			"P","Q","R","S","T","U","V","W","X","Y","Z","", "", "", "", "", 
+            "", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+			"p","q","r","s","t","u","v","w","x","y","z","", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", ":",";",
+			"<",">","", "#","+","×","%","", "", "", "*","'","&","", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+        };
+        public static string[] KeystrokesMenu = new string[]
+        {
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            " ","", "", "", "", "", "", "", "", "", ".",":",",","", ".","/",
+            "0","1","2","3","4","5","6","7","8","9","~","", "", "", "", "?",
+            "", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+            "P","Q","R","S","T","U","V","W","X","Y","Z","", "", "", "", "", 
+            "", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+            "p","q","r","s","t","u","v","w","x","y","z","!","#","-","’","", 
+            ":",".","“","”","", "", "", "", "", "", "", "", "", "", ":",";",
+            "<",">","", "#","+","×","%","", "", "", "*","'","", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+        };
+        public static string[] KeystrokesDesc = new string[]
+        {
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            " ","!","“","”","", "", "‘","’","(",")","", "", ",","-",".","/",
+            "0","1","2","h","4","5","6","7","8","9","~","", "", "", "", "?",
+            "", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+            "P","Q","R","S","T","U","V","W","X","Y","Z","", "", "", "", "", 
+            "", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+            "p","q","r","s","t","u","v","w","x","y","z","", "", "-","’","", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "&","", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 
+        };
+        public static string[] KeystrokesBonus = new string[]
+        {
+			"G","H","E","F","C","D","A","B","I","J","K","L","M","N","O","P",
+			"W","X","U","V","S","T","Q","R","Y","Z","!","?",".","*","@",""
+        };
+        #endregion
         #endregion
         #region Functions
+        // numerize
         public static string Numerize(string item, int index, int length)
         {
             return "{" + index.ToString("d" + length) + "}  " + item;
@@ -4683,13 +5337,7 @@ namespace LAZYSHELL
         {
             return Numerize(Convert(list));
         }
-        public static string[] Resize(string[] list, int count)
-        {
-            string[] temp = new string[count];
-            for (int i = 0; i < list.Length && i < count; i++)
-                temp[i] = list[i];
-            return temp;
-        }
+        // conversion
         public static string[] Convert(StringCollection list)
         {
             string[] temp = new string[list.Count];
@@ -4726,6 +5374,34 @@ namespace LAZYSHELL
             object[] array = new object[list.Count];
             list.CopyTo(array, 0);
             return Convert(array, list.Count, 0);
+        }
+        // transformation
+        public static string[] Resize(string[] list, int count)
+        {
+            string[] temp = new string[count];
+            for (int i = 0; i < list.Length && i < count; i++)
+                temp[i] = list[i];
+            return temp;
+        }
+        public static string[] Copy(string[] source)
+        {
+            if (source == null)
+                return null;
+            string[] temp = new string[source.Length];
+            source.CopyTo(temp, 0);
+            return temp;
+        }
+        public static string ToTitleCase(string source)
+        {
+            TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
+            return textInfo.ToTitleCase(source.ToLower());
+        }
+        public static int IndexOf(string[] list, string item)
+        {
+            for (int i = 0; i < list.Length; i++)
+                if (list[i] == item)
+                    return i;
+            return -1;
         }
         #endregion
     }

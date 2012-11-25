@@ -9,18 +9,18 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class SpritePartitions : Form
+    public partial class SpritePartitions : NewForm
     {
         private Levels level;
         private int index { get { return (int)partitionNum.Value; } set { partitionNum.Value = value; } }
-        private NPCSpritePartitions[] partitions;
-        private NPCSpritePartitions partition { get { return partitions[index]; } set { partitions[index] = value; } }
+        private Partitions[] partitions;
+        private Partitions partition { get { return partitions[index]; } set { partitions[index] = value; } }
         //private Bitmap previewImage;
         private LevelNPCs levelNPCs { get { return level.Level.LevelNPCs; } }
         private List<NPC> npcs { get { return levelNPCs.Npcs; } }
         private bool updating;
         // constructor
-        public SpritePartitions(Levels level, NPCSpritePartitions[] partitions, int index)
+        public SpritePartitions(Levels level, Partitions[] partitions, int index)
         {
             InitializeComponent();
             this.level = level;
@@ -43,7 +43,7 @@ namespace LAZYSHELL
             noWaterPalettes.Checked = partition.FullPaletteBuffer;
             byte2a.SelectedIndex = partition.CloneASprite;
             byte2b.SelectedIndex = partition.CloneAMain;
-            byte2.Checked = partition.Byte2bit7;
+            byte2.Checked = partition.CloneAIndexing;
             byte3a.SelectedIndex = partition.CloneBSprite;
             byte3b.SelectedIndex = partition.CloneBMain;
             byte3.Checked = partition.CloneBIndexing;
@@ -110,7 +110,7 @@ namespace LAZYSHELL
         {
             Sprite sprite = Model.Sprites[spriteIndex];
             Animation animation = Model.Animations[sprite.AnimationPacket];
-            GraphicPalette image = Model.GraphicPalettes[sprite.GraphicPalettePacket];
+            ImagePacket image = Model.GraphicPalettes[sprite.Image];
             byte[] graphics = image.Graphics(Model.SpriteGraphics);
             int[] palette = Model.SpritePalettes[image.PaletteNum + sprite.PaletteIndex].Palette;
             //
@@ -126,7 +126,7 @@ namespace LAZYSHELL
                 int counter = 3;
                 foreach (Mold.Tile tile in mold.Tiles)
                 {
-                    tile.Set8x8Tiles(graphics, palette, mold.Gridplane);
+                    tile.DrawSubtiles(graphics, palette, mold.Gridplane);
                     Rectangle srcRegion;
                     Rectangle dstRegion;
                     int[] src = mold.Gridplane ? tile.GetGridplanePixels() : tile.Get16x16TilePixels();
@@ -184,20 +184,20 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void FindIdentical(NPCSpritePartitions partition, StreamWriter total)
+        private void FindIdentical(Partitions partition, StreamWriter total)
         {
-            foreach (NPCSpritePartitions p in partitions)
+            foreach (Partitions p in partitions)
             {
                 if (p.Index <= partition.Index)
                     continue;
                 if (p.AllySpriteBuffer == partition.AllySpriteBuffer &&
-                    p.Byte1bit0 == partition.Byte1bit0 &&
-                    p.Byte1bit1 == partition.Byte1bit1 &&
-                    p.Byte1bit2 == partition.Byte1bit2 &&
-                    p.Byte1bit3 == partition.Byte1bit3 &&
+                    p.Byte1b0 == partition.Byte1b0 &&
+                    p.Byte1b1 == partition.Byte1b1 &&
+                    p.Byte1b2 == partition.Byte1b2 &&
+                    p.Byte1b3 == partition.Byte1b3 &&
                     p.CloneASprite == partition.CloneASprite &&
                     p.CloneAMain == partition.CloneAMain &&
-                    p.Byte2bit7 == partition.Byte2bit7 &&
+                    p.CloneAIndexing == partition.CloneAIndexing &&
                     p.CloneBSprite == partition.CloneBSprite &&
                     p.CloneBMain == partition.CloneBMain &&
                     p.CloneBIndexing == partition.CloneBIndexing &&
@@ -265,7 +265,7 @@ namespace LAZYSHELL
         private void byte2_CheckedChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            partition.Byte2bit7 = byte2.Checked;
+            partition.CloneAIndexing = byte2.Checked;
             SetPreviewImage();
         }
         private void byte3a_SelectedIndexChanged(object sender, EventArgs e)

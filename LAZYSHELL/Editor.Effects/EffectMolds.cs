@@ -26,7 +26,7 @@ namespace LAZYSHELL
         private int availableBytes { get { return effectsEditor.AvailableBytes; } set { effectsEditor.AvailableBytes = value; } }
         public bool ShowBG { get { return showBG.Checked; } }
         // local variables
-        private E_Tileset tileset { get { return animation.Tileset; } set { animation.Tileset = value; } }
+        private E_Tileset tileset { get { return animation.Tileset_tiles; } set { animation.Tileset_tiles = value; } }
         private List<E_Mold> molds { get { return animation.Molds; } }
         private E_Mold mold { get { return animation.Molds[e_molds.SelectedIndex]; } }
         private int index { get { return e_molds.SelectedIndex; } set { e_molds.SelectedIndex = value; } }
@@ -71,7 +71,7 @@ namespace LAZYSHELL
             this.e_molds.SelectedIndex = 0;
             e_moldWidth.Value = animation.Width;
             e_moldHeight.Value = animation.Height;
-            e_tileSetSize.Value = animation.TileSetLength;
+            e_tileSetSize.Value = animation.TilesetLength;
             updating = false;
             SetTilesetImage();
             SetTilemapImage();
@@ -94,7 +94,7 @@ namespace LAZYSHELL
             this.e_molds.SelectedIndex = 0;
             e_moldWidth.Value = animation.Width;
             e_moldHeight.Value = animation.Height;
-            e_tileSetSize.Value = animation.TileSetLength;
+            e_tileSetSize.Value = animation.TilesetLength;
             updating = false;
             SetTilesetImage();
             SetTilemapImage();
@@ -700,13 +700,13 @@ namespace LAZYSHELL
             switch (e.KeyData)
             {
                 case Keys.Control | Keys.V:
-                    paste_Click(null, null); break;
+                    paste.PerformClick(); break;
                 case Keys.Control | Keys.C:
-                    copy_Click(null, null); break;
+                    copy.PerformClick(); break;
                 case Keys.Delete:
-                    delete_Click(null, null); break;
+                    delete.PerformClick(); break;
                 case Keys.Control | Keys.X:
-                    cut_Click(null, null); break;
+                    cut.PerformClick(); break;
                 case Keys.Control | Keys.D:
                     if (draggedTiles != null)
                         PasteFinal(draggedTiles);
@@ -717,11 +717,11 @@ namespace LAZYSHELL
                     }
                     break;
                 case Keys.Control | Keys.A:
-                    selectAll_Click(null, null); break;
+                    selectAll.PerformClick(); break;
                 case Keys.Control | Keys.Z:
-                    undoButton_Click(null, null); break;
+                    undoButton.PerformClick(); break;
                 case Keys.Control | Keys.Y:
-                    redoButton_Click(null, null); break;
+                    redoButton.PerformClick(); break;
             }
         }
         private void e_molds_SelectedIndexChanged(object sender, EventArgs e)
@@ -751,7 +751,7 @@ namespace LAZYSHELL
                 e_tileSetSize.Value = (int)e_tileSetSize.Value & 0xFFE0;
             else
                 e_tileSetSize.Value = (int)e_tileSetSize.Value & 0xFFF0;
-            animation.TileSetLength = (int)e_tileSetSize.Value;
+            animation.TilesetLength = (int)e_tileSetSize.Value;
             SetTilesetImage();
             // update free space
             animation.Assemble();
@@ -1064,27 +1064,27 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // set tileset length
             int temp = tiles.Length * 8;
-            animation.TileSetLength = Math.Min(tiles.Length * 8, 512);
-            animation.TileSetLength = animation.TileSetLength / 64 * 64;
-            if (animation.TileSetLength == 0)
-                animation.TileSetLength += 64;
-            else if (animation.TileSetLength <= 512 - 64 && temp % 64 != 0)
-                animation.TileSetLength += 64;
-            e_tileSetSize.Value = animation.TileSetLength;
+            animation.TilesetLength = Math.Min(tiles.Length * 8, 512);
+            animation.TilesetLength = animation.TilesetLength / 64 * 64;
+            if (animation.TilesetLength == 0)
+                animation.TilesetLength += 64;
+            else if (animation.TilesetLength <= 512 - 64 && temp % 64 != 0)
+                animation.TilesetLength += 64;
+            e_tileSetSize.Value = animation.TilesetLength;
             if (tiles.Length * 8 > 512)
                 MessageBox.Show("Not enough space to draw the necessary amount of tiles in the tileset for the imported images. The total required space (" +
                     (tiles.Length * 8).ToString() + " bytes) for the new tileset exceeds 512 bytes.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // redraw data
-            animation.Tileset.DrawTileset(animation.TileSet, tiles);
-            animation.Tileset = new E_Tileset(animation, effect.PaletteIndex);
+            animation.Tileset_tiles.DrawTileset(animation.Tileset_bytes, tiles);
+            animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             for (int i = 0; i < tilemaps.Length; i++)
             {
                 // add another mold if not enough
                 if (i >= molds.Count)
                 {
                     index = molds.Count - 1;
-                    newMold_Click(null, null);
+                    newMold.PerformClick();
                 }
                 Bits.Fill(molds[i].Mold, (byte)0xFF);
                 Buffer.BlockCopy(tilemaps[i], 0, molds[i].Mold, 0, Math.Min(tilemaps[i].Length, molds[i].Mold.Length));

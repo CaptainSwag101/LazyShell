@@ -10,6 +10,7 @@ namespace LAZYSHELL
 {
     public static class Comp
     {
+        // external variables
         [DllImport("Lunar Compress.dll")]
         static extern int LunarOpenRAMFile([MarshalAs(UnmanagedType.LPArray)] byte[] data, int fileMode, int size);
         [DllImport("Lunar Compress.dll")]
@@ -18,7 +19,7 @@ namespace LAZYSHELL
         static extern int LunarSaveRAMFile(string fileName);
         [DllImport("Lunar Compress.dll")]
         static extern int LunarRecompress([MarshalAs(UnmanagedType.LPArray)] byte[] source, [MarshalAs(UnmanagedType.LPArray)] byte[] destination, uint dataSize, uint maxDataSize, uint format, uint format2);
-        //
+        // compression functions
         public static int Compress(byte[] src, byte[] dst)
         {
             if (!LunarCompressExists())
@@ -57,6 +58,7 @@ namespace LAZYSHELL
             int size = LunarDecompress(dst, 0, dst.Length, 3, 0, 0);
             return size;
         }
+        // accessor functions
         public static bool LunarCompressExists()
         {
             if (!File.Exists("Lunar Compress.dll"))

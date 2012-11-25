@@ -170,9 +170,9 @@ namespace LAZYSHELL
                 if (overlaps.Count < 28)
                 {
                     if (overlapFieldTree.Nodes.Count > 0)
-                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, overlap);
+                        overlaps.New(overlapFieldTree.SelectedNode.Index + 1, overlap);
                     else
-                        overlaps.AddNewOverlap(0, overlap);
+                        overlaps.New(0, overlap);
 
                     int reselect;
 
@@ -221,9 +221,9 @@ namespace LAZYSHELL
                 if (overlaps.Count < 28)
                 {
                     if (overlapFieldTree.Nodes.Count > 0)
-                        overlaps.AddNewOverlap(overlapFieldTree.SelectedNode.Index + 1, p);
+                        overlaps.New(overlapFieldTree.SelectedNode.Index + 1, p);
                     else
-                        overlaps.AddNewOverlap(0, p);
+                        overlaps.New(0, p);
 
                     int reselect;
 
@@ -254,7 +254,7 @@ namespace LAZYSHELL
             this.overlapFieldTree.Focus();
             if (this.overlapFieldTree.SelectedNode != null && overlaps.CurrentOverlap == this.overlapFieldTree.SelectedNode.Index)
             {
-                overlaps.RemoveCurrentOverlap();
+                overlaps.Remove();
 
                 int reselect = overlapFieldTree.SelectedNode.Index;
                 if (reselect == overlapFieldTree.Nodes.Count - 1)
@@ -361,7 +361,7 @@ namespace LAZYSHELL
         private void overlapFieldCopy_Click(object sender, EventArgs e)
         {
             if (overlapFieldTree.SelectedNode != null)
-                copyOverlap = overlaps.Overlap_.Copy();
+                copyOverlap = overlaps.Overlap.Copy();
         }
         private void overlapFieldPaste_Click(object sender, EventArgs e)
         {
@@ -369,7 +369,7 @@ namespace LAZYSHELL
         }
         private void overlapFieldDuplicate_Click(object sender, EventArgs e)
         {
-            AddNewOverlap(overlaps.Overlap_.Copy());
+            AddNewOverlap(overlaps.Overlap.Copy());
         }
         #endregion
     }

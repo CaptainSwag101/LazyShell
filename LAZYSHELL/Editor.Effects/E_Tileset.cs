@@ -11,11 +11,12 @@ namespace LAZYSHELL
     [Serializable()]
     public class E_Tileset
     {
+        // variables
         private E_Animation animation;
         private int[] palette; public int[] Palette { get { return palette; } set { palette = value; } }
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
         private Tile[] tileset; public Tile[] Tileset { get { return tileset; } set { tileset = value; } }
-
+        // constructor
         public E_Tileset(E_Animation animation, int index)
         {
             this.animation = animation;
@@ -26,8 +27,9 @@ namespace LAZYSHELL
             for (int i = 0; i < tileset.Length; i++)
                 tileset[i] = new Tile(i);
 
-            DrawTileset(tileset, animation.TileSet);
+            DrawTileset(tileset, animation.Tileset_bytes);
         }
+        // class functions
         public void RedrawTileset(E_Animation animation, int length)
         {
             this.graphics = animation.GraphicSet;

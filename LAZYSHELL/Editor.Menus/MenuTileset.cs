@@ -8,12 +8,12 @@ namespace LAZYSHELL
 {
     class MenuTileset
     {
+        // class variables and accessors
         public PaletteSet paletteSet;
         private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
+        private Tile[] tileset; public Tile[] Tileset { get { return tileset; } }
         private byte[] graphicSet; public byte[] GraphicSet { get { return graphicSet; } set { graphicSet = value; } }
-
-        Tile[] tileset; public Tile[] Tileset { get { return tileset; } }
-
+        // constructor
         public MenuTileset(PaletteSet paletteSet, byte[] tileSet, byte[] graphicSet)
         {
             this.paletteSet = paletteSet; // grab the current Palette Set
@@ -28,7 +28,7 @@ namespace LAZYSHELL
 
             DrawTileset(tileSet, tileset);
         }
-
+        // drawing functions
         public void DrawTileset(byte[] tileset, Tile[] tileSet)
         {
             byte temp, tile;
@@ -39,16 +39,16 @@ namespace LAZYSHELL
             {
                 for (int z = 0; z < 2; z++)
                 {
-                    tile = tileset[offset]; offset++; // GFX set?
-                    temp = tileset[offset]; offset++; // Palette Set?
+                    tile = tileset[offset++]; // GFX set?
+                    temp = tileset[offset++]; // Palette Set?
                     source = Do.DrawSubtile(tile, temp, graphicSet, paletteSet.Palettes, 0x20);
                     tileSet[i].Subtiles[z] = source;
                 }
                 offset += 60; // jump forward in buffer to grab correct 8x8 tiles
                 for (int a = 2; a < 4; a++)
                 {
-                    tile = tileset[offset]; offset++;
-                    temp = tileset[offset]; offset++;
+                    tile = tileset[offset++];
+                    temp = tileset[offset++];
                     source = Do.DrawSubtile(tile, temp, graphicSet, paletteSet.Palettes, 0x20);
                     tileSet[i].Subtiles[a] = source; ;
                 }
@@ -61,10 +61,12 @@ namespace LAZYSHELL
         {
             DrawTileset(tileSet, tileset);
         }
+        // accessor functions
         public int GetTileNumber(int x, int y)
         {
             return tileset[x + y * 16].TileIndex;
         }
+        // universal functions
         public void Clear(int count)
         {
             Model.EditMenuTileSet = true;

@@ -10,9 +10,9 @@ namespace LAZYSHELL
 {
     public class History
     {
-        //
+        // variables
         private Form form;
-        //
+        // constructor
         public History(Form form)
         {
             this.form = form;
@@ -23,6 +23,7 @@ namespace LAZYSHELL
                 SetEventHandlers(c);
             }
         }
+        // functions
         private void SetEventHandlers(Control control)
         {
             if (control.GetType() == typeof(ToolStrip))

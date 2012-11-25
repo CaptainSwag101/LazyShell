@@ -26,7 +26,6 @@ namespace LAZYSHELL
         #region Functions
         public Allies()
         {
-            this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             InitializeStrings();
             RefreshCharacter();
@@ -35,10 +34,10 @@ namespace LAZYSHELL
             this.startingFrogCoins.Value = characters[0].StartingFrogCoins;
             this.startingCurrentFP.Value = characters[0].StartingCurrentFP;
             this.startingMaximumFP.Value = characters[0].StartingMaximumFP;
-            this.lvl1TimingStart.Value = characters[0].DefenseStartLevel1;
-            this.lvl2TimingStart.Value = characters[0].DefenseStartLevel2;
-            this.lvl2TimingEnd.Value = characters[0].DefenseEndLevel2;
-            this.lvl1TimingEnd.Value = characters[0].DefenseEndLevel1;
+            this.lvl1TimingStart.Value = characters[0].DefenseStartL1;
+            this.lvl2TimingStart.Value = characters[0].DefenseStartL2;
+            this.lvl2TimingEnd.Value = characters[0].DefenseEndL2;
+            this.lvl1TimingEnd.Value = characters[0].DefenseEndL1;
         }
         private void InitializeStrings()
         {
@@ -53,17 +52,17 @@ namespace LAZYSHELL
                 this.startingMagic.Items.Add(new string(Model.Spells[i].Name));
 
             this.startingWeapon.Items.Clear();
-            this.startingWeapon.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingWeapon.Items.AddRange(Model.ItemNames.Names);
             this.startingAccessory.Items.Clear();
-            this.startingAccessory.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingAccessory.Items.AddRange(Model.ItemNames.Names);
             this.startingArmor.Items.Clear();
-            this.startingArmor.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingArmor.Items.AddRange(Model.ItemNames.Names);
             this.startingItem.Items.Clear();
-            this.startingItem.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingItem.Items.AddRange(Model.ItemNames.Names);
             this.startingSpecialItem.Items.Clear();
-            this.startingSpecialItem.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingSpecialItem.Items.AddRange(Model.ItemNames.Names);
             this.startingEquipment.Items.Clear();
-            this.startingEquipment.Items.AddRange(Model.ItemNames.GetNames());
+            this.startingEquipment.Items.AddRange(Model.ItemNames.Names);
             updating = false;
         }
         public void RefreshCharacter()
@@ -72,7 +71,7 @@ namespace LAZYSHELL
             updating = true;
 
             this.characterName.SelectedIndex = index;
-            this.textBoxCharacterName.Text = Do.RawToASCII(character.Name, settings.KeystrokesMenu);
+            this.textBoxCharacterName.Text = Do.RawToASCII(character.Name, Lists.KeystrokesMenu);
 
             this.startingLevel.Value = character.StartingLevel;
             this.startingAttack.Value = character.StartingAttack;
@@ -81,64 +80,34 @@ namespace LAZYSHELL
             this.startingMgDefense.Value = character.StartingMgDefense;
             this.startingSpeed.Value = character.StartingSpeed;
 
-            this.startingWeapon.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingWeapon);
-            this.startingArmor.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingArmor);
-            this.startingAccessory.SelectedIndex = Model.ItemNames.GetIndexFromNum(character.StartingAccessory);
+            this.startingWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingWeapon);
+            this.startingArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingArmor);
+            this.startingAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingAccessory);
 
             this.startingExperience.Value = character.StartingExperience;
             this.startingCurrentHP.Value = character.StartingCurrentHP;
             this.startingMaximumHP.Value = character.StartingMaxHP;
             // All selected Magic
-            this.startingMagic.SetItemChecked(0, character.Jump);
-            this.startingMagic.SetItemChecked(1, character.FireOrb);
-            this.startingMagic.SetItemChecked(2, character.SuperJump);
-            this.startingMagic.SetItemChecked(3, character.SuperFlame);
-            this.startingMagic.SetItemChecked(4, character.UltraJump);
-            this.startingMagic.SetItemChecked(5, character.UltraFlame);
-            this.startingMagic.SetItemChecked(6, character.Therapy);
-            this.startingMagic.SetItemChecked(7, character.GroupHug);
-            this.startingMagic.SetItemChecked(8, character.SleepyTime);
-            this.startingMagic.SetItemChecked(9, character.ComeBack);
-            this.startingMagic.SetItemChecked(10, character.Mute);
-            this.startingMagic.SetItemChecked(11, character.PsychBomb);
-            this.startingMagic.SetItemChecked(12, character.Terrorize);
-            this.startingMagic.SetItemChecked(13, character.PoisonGas);
-            this.startingMagic.SetItemChecked(14, character.Crusher);
-            this.startingMagic.SetItemChecked(15, character.BowserCrush);
-            this.startingMagic.SetItemChecked(16, character.GenoBeam);
-            this.startingMagic.SetItemChecked(17, character.GenoBoost);
-            this.startingMagic.SetItemChecked(18, character.GenoWhirl);
-            this.startingMagic.SetItemChecked(19, character.GenoBlast);
-            this.startingMagic.SetItemChecked(20, character.GenoFlash);
-            this.startingMagic.SetItemChecked(21, character.Thunderbolt);
-            this.startingMagic.SetItemChecked(22, character.HPRain);
-            this.startingMagic.SetItemChecked(23, character.Psychopath);
-            this.startingMagic.SetItemChecked(24, character.Shocker);
-            this.startingMagic.SetItemChecked(25, character.Snowy);
-            this.startingMagic.SetItemChecked(26, character.StarRain);
-            this.startingMagic.SetItemChecked(27, character.Dummy27);
-            this.startingMagic.SetItemChecked(28, character.Dummy28);
-            this.startingMagic.SetItemChecked(29, character.Dummy29);
-            this.startingMagic.SetItemChecked(30, character.Dummy30);
-            this.startingMagic.SetItemChecked(31, character.Dummy31);
+            for (int i = 0; i < character.StartingMagic.Length; i++)
+                this.startingMagic.SetItemChecked(i, character.StartingMagic[i]);
             this.characterName.Invalidate();
 
             updating = false;
         }
         private void RefreshSlots()
         {
-            this.startingItem.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.Item);
+            this.startingItem.SelectedIndex = Model.ItemNames.GetSortedIndex(slot.Item);
             if (this.slotNum.Value <= 14)
             {
                 this.startingSpecialItem.Enabled = true;
-                this.startingSpecialItem.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.SpecialItem);
+                this.startingSpecialItem.SelectedIndex = Model.ItemNames.GetSortedIndex(slot.SpecialItem);
             }
             else
             {
                 this.startingSpecialItem.Enabled = false;
                 this.startingSpecialItem.SelectedIndex = 0;
             }
-            this.startingEquipment.SelectedIndex = Model.ItemNames.GetIndexFromNum(slot.Equipment);
+            this.startingEquipment.SelectedIndex = Model.ItemNames.GetSortedIndex(slot.Equipment);
         }
         #endregion
         #region Event Handlers
@@ -164,7 +133,7 @@ namespace LAZYSHELL
         private void textBoxCharacterName_TextChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            character.Name = Do.ASCIIToRaw(textBoxCharacterName.Text, settings.KeystrokesMenu, 10);
+            character.Name = Do.ASCIIToRaw(textBoxCharacterName.Text, Lists.KeystrokesMenu, 10);
             updating = true;
             this.characterName.Items.Clear();
             for (int i = 0; i < characters.Length; i++)
@@ -202,15 +171,15 @@ namespace LAZYSHELL
         }
         private void startingWeapon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingWeapon = (byte)Model.ItemNames.GetNumFromIndex(this.startingWeapon.SelectedIndex);
+            character.StartingWeapon = (byte)Model.ItemNames.GetUnsortedIndex(this.startingWeapon.SelectedIndex);
         }
         private void startingArmor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingArmor = (byte)Model.ItemNames.GetNumFromIndex(this.startingArmor.SelectedIndex);
+            character.StartingArmor = (byte)Model.ItemNames.GetUnsortedIndex(this.startingArmor.SelectedIndex);
         }
         private void startingAccessory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.StartingAccessory = (byte)Model.ItemNames.GetNumFromIndex(this.startingAccessory.SelectedIndex);
+            character.StartingAccessory = (byte)Model.ItemNames.GetUnsortedIndex(this.startingAccessory.SelectedIndex);
         }
         private void startingExperience_ValueChanged(object sender, EventArgs e)
         {
@@ -226,38 +195,8 @@ namespace LAZYSHELL
         }
         private void startingMagic_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character.Jump = this.startingMagic.GetItemChecked(0);
-            character.FireOrb = this.startingMagic.GetItemChecked(1);
-            character.SuperJump = this.startingMagic.GetItemChecked(2);
-            character.SuperFlame = this.startingMagic.GetItemChecked(3);
-            character.UltraJump = this.startingMagic.GetItemChecked(4);
-            character.UltraFlame = this.startingMagic.GetItemChecked(5);
-            character.Therapy = this.startingMagic.GetItemChecked(6);
-            character.GroupHug = this.startingMagic.GetItemChecked(7);
-            character.SleepyTime = this.startingMagic.GetItemChecked(8);
-            character.ComeBack = this.startingMagic.GetItemChecked(9);
-            character.Mute = this.startingMagic.GetItemChecked(10);
-            character.PsychBomb = this.startingMagic.GetItemChecked(11);
-            character.Terrorize = this.startingMagic.GetItemChecked(12);
-            character.PoisonGas = this.startingMagic.GetItemChecked(13);
-            character.Crusher = this.startingMagic.GetItemChecked(14);
-            character.BowserCrush = this.startingMagic.GetItemChecked(15);
-            character.GenoBeam = this.startingMagic.GetItemChecked(16);
-            character.GenoBoost = this.startingMagic.GetItemChecked(17);
-            character.GenoWhirl = this.startingMagic.GetItemChecked(18);
-            character.GenoBlast = this.startingMagic.GetItemChecked(19);
-            character.GenoFlash = this.startingMagic.GetItemChecked(20);
-            character.Thunderbolt = this.startingMagic.GetItemChecked(21);
-            character.HPRain = this.startingMagic.GetItemChecked(22);
-            character.Psychopath = this.startingMagic.GetItemChecked(23);
-            character.Shocker = this.startingMagic.GetItemChecked(24);
-            character.Snowy = this.startingMagic.GetItemChecked(25);
-            character.StarRain = this.startingMagic.GetItemChecked(26);
-            character.Dummy27 = this.startingMagic.GetItemChecked(27);
-            character.Dummy28 = this.startingMagic.GetItemChecked(28);
-            character.Dummy29 = this.startingMagic.GetItemChecked(29);
-            character.Dummy30 = this.startingMagic.GetItemChecked(30);
-            character.Dummy31 = this.startingMagic.GetItemChecked(31);
+            for (int i = 0; i < character.StartingMagic.Length; i++)
+                character.StartingMagic[i] = this.startingMagic.GetItemChecked(i);
         }
         private void startingMagic_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -285,19 +224,19 @@ namespace LAZYSHELL
         // defense timing
         private void lvl1TimingStart_ValueChanged(object sender, EventArgs e)
         {
-            characters[0].DefenseStartLevel1 = (byte)this.lvl1TimingStart.Value;
+            characters[0].DefenseStartL1 = (byte)this.lvl1TimingStart.Value;
         }
         private void lvl2TimingStart_ValueChanged(object sender, EventArgs e)
         {
-            characters[0].DefenseStartLevel2 = (byte)this.lvl2TimingStart.Value;
+            characters[0].DefenseStartL2 = (byte)this.lvl2TimingStart.Value;
         }
         private void lvl2TimingEnd_ValueChanged(object sender, EventArgs e)
         {
-            characters[0].DefenseEndLevel2 = (byte)this.lvl2TimingEnd.Value;
+            characters[0].DefenseEndL2 = (byte)this.lvl2TimingEnd.Value;
         }
         private void lvl1TimingEnd_ValueChanged(object sender, EventArgs e)
         {
-            characters[0].DefenseEndLevel1 = (byte)this.lvl1TimingEnd.Value;
+            characters[0].DefenseEndL1 = (byte)this.lvl1TimingEnd.Value;
         }
         // slots
         private void slotNum_ValueChanged(object sender, EventArgs e)
@@ -306,15 +245,15 @@ namespace LAZYSHELL
         }
         private void startingItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.Item = (byte)Model.ItemNames.GetNumFromIndex(this.startingItem.SelectedIndex);
+            slot.Item = (byte)Model.ItemNames.GetUnsortedIndex(this.startingItem.SelectedIndex);
         }
         private void startingSpecialItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.SpecialItem = (byte)Model.ItemNames.GetNumFromIndex(this.startingSpecialItem.SelectedIndex);
+            slot.SpecialItem = (byte)Model.ItemNames.GetUnsortedIndex(this.startingSpecialItem.SelectedIndex);
         }
         private void startingEquipment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            slot.Equipment = (byte)Model.ItemNames.GetNumFromIndex(this.startingEquipment.SelectedIndex);
+            slot.Equipment = (byte)Model.ItemNames.GetUnsortedIndex(this.startingEquipment.SelectedIndex);
         }
         //
         private void reset_Click(object sender, EventArgs e)
@@ -322,7 +261,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current character. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            character = new Character(Model.Data, index);
+            character = new Character(index);
             characterName_SelectedIndexChanged(null, null);
         }
         #endregion

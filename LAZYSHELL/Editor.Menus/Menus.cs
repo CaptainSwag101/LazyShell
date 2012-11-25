@@ -123,7 +123,7 @@ namespace LAZYSHELL
             this.menusEditor = menusEditor;
             InitializeComponent();
             this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-            this.music.SelectedIndex = Model.Data[0x03462D];
+            this.music.SelectedIndex = Model.ROM[0x03462D];
             //
             cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
             CursorSprites = new CursorSprite[5];
@@ -146,7 +146,7 @@ namespace LAZYSHELL
         public void Reload(MenusEditor menusEditor)
         {
             this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-            this.music.SelectedIndex = Model.Data[0x03462D];
+            this.music.SelectedIndex = Model.ROM[0x03462D];
             //
             cursorSpriteNum.Items.AddRange(Lists.Resize(Lists.Numerize(3, Lists.SpriteNames), 256));
             CursorSprites = new CursorSprite[5];
@@ -199,11 +199,16 @@ namespace LAZYSHELL
             Sequence sequence = null;
             if (cursorSprite.Sequence < animation.Sequences.Count)
                 sequence = animation.Sequences[cursorSprite.Sequence];
-            int moldIndex = 0;
-            if (sequence != null && sequence.Frames.Count >= 0)
+            int moldIndex = -1;
+            if (sequence != null && sequence.Frames.Count > 0)
                 moldIndex = sequence.Frames[0].Mold;
-            int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, null, false, true, ref size);
-            cursorImage = Do.PixelsToImage(pixels, size.Width, size.Height);
+            if (moldIndex != -1)
+            {
+                int[] pixels = sprite.GetPixels(true, false, moldIndex, 0, null, false, true, ref size);
+                cursorImage = Do.PixelsToImage(pixels, size.Width, size.Height);
+            }
+            else
+                cursorImage = new Bitmap(1, 1);
         }
         private void SetCursorImages()
         {
@@ -226,11 +231,11 @@ namespace LAZYSHELL
             for (int i = 0; i < allyImages.Length; i++)
             {
                 Size size = new Size(0, 0);
-                int index = Model.Data[0x0318A3 + i];
+                int index = Model.ROM[0x0318A3 + i];
                 Sprite sprite = Model.Sprites[index];
                 Animation animation = Model.Animations[sprite.AnimationPacket];
                 Sequence sequence = null;
-                int sequenceIndex = Model.Data[0x031881];
+                int sequenceIndex = Model.ROM[0x031881];
                 if (sequenceIndex < animation.Sequences.Count)
                     sequence = animation.Sequences[sequenceIndex];
                 int moldIndex = 0;
@@ -386,7 +391,7 @@ namespace LAZYSHELL
             previewImage = Do.PixelsToImage(bgPixels, 256, 224);
             pictureBoxPreview.Invalidate();
         }
-        private void SetTextObjects()
+        public void SetTextObjects()
         {
             textObjects = new List<TextObject>();
             switch (index)
@@ -454,12 +459,12 @@ namespace LAZYSHELL
                     }
                     else if (index == MenuType.OverworldStatus) // Overworld - status
                     {
-                        textObjects.Add(new TextObject(19, 168, 12));
-                        textObjects.Add(new TextObject(15, 160, 48));
-                        textObjects.Add(new TextObject(16, 151, 72));
-                        textObjects.Add(new TextObject(17, 135, 96));
-                        textObjects.Add(new TextObject(18, 135, 120));
-                        textObjects.Add(new TextObject(14, 135, 156));
+                        textObjects.Add(new TextObject(19, Model.MenuTexts[19].X * 8 - 2, 12));
+                        textObjects.Add(new TextObject(15, Model.MenuTexts[15].X * 8 - 2, 48));
+                        textObjects.Add(new TextObject(16, Model.MenuTexts[16].X * 8 - 2, 72));
+                        textObjects.Add(new TextObject(17, Model.MenuTexts[17].X * 8 - 2, 96));
+                        textObjects.Add(new TextObject(18, Model.MenuTexts[18].X * 8 - 2, 120));
+                        textObjects.Add(new TextObject(14, Model.MenuTexts[14].X * 8 - 2, 156));
                     }
                     else if (index == MenuType.OverworldSpecial) // Overworld - special
                     {
@@ -758,7 +763,7 @@ namespace LAZYSHELL
         //
         public void Assemble()
         {
-            Model.Data[0x03462D] = (byte)this.music.SelectedIndex;
+            Model.ROM[0x03462D] = (byte)this.music.SelectedIndex;
             Model.Compress(Model.GameSelectGraphics, 0x3E9A49, 0x2000, 0x3EB2CD - 0x3E9A49, "Game select graphics");
             if (editTileset)
                 Model.Compress(Model.GameSelectTileset, 0x3EB2CD, 0x800, 0x3EB50F - 0x3EB2CD, "Game select tileset");
@@ -778,7 +783,7 @@ namespace LAZYSHELL
             byte[] dst = new byte[0x2E81];
             // copy uncompressed world map logo graphics
             Bits.SetShort(dst, 0x00, 0x4C);
-            Buffer.BlockCopy(Model.Data, 0x3E004C, dst, 0x4C, 0xE1C);
+            Buffer.BlockCopy(Model.ROM, 0x3E004C, dst, 0x4C, 0xE1C);
             offset += 0xE1C;
             //
             Bits.SetShort(dst, 0x02, offset);
@@ -794,9 +799,9 @@ namespace LAZYSHELL
             Bits.SetShort(dst, 0x0C, offset);
             if (!Model.Compress(Model.MenuPalettes, dst, ref offset, 0x2E81, "Menu palettes")) return;
             // set pointers (just the first 7 for menu data)
-            Buffer.BlockCopy(dst, 0, Model.Data, 0x3E0000, 0x0E);
+            Buffer.BlockCopy(dst, 0, Model.ROM, 0x3E0000, 0x0E);
             // store compressed data (starting at start of data)
-            Buffer.BlockCopy(dst, 0x4C, Model.Data, 0x3E004C, dst.Length - 0x4C);
+            Buffer.BlockCopy(dst, 0x4C, Model.ROM, 0x3E004C, dst.Length - 0x4C);
             //
             checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
                 Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, CursorSprites);
@@ -1017,12 +1022,12 @@ namespace LAZYSHELL
                     }
                     else if (index == MenuType.OverworldStatus) // Overworld - status
                     {
-                        Do.DrawText(Model.MenuTexts[19].ToString(), 168, 12, e.Graphics, pre, Model.FontMenu, pal);
-                        Do.DrawText(Model.MenuTexts[15].ToString(), 160, 48, e.Graphics, pre, Model.FontMenu, pal);
-                        Do.DrawText(Model.MenuTexts[16].ToString(), 151, 72, e.Graphics, pre, Model.FontMenu, pal);
-                        Do.DrawText(Model.MenuTexts[17].ToString(), 135, 96, e.Graphics, pre, Model.FontMenu, pal);
-                        Do.DrawText(Model.MenuTexts[18].ToString(), 135, 120, e.Graphics, pre, Model.FontMenu, pal);
-                        Do.DrawText(Model.MenuTexts[14].ToString(), 135, 156, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[19].ToString(), Model.MenuTexts[19].X * 8 - 2, 12, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[15].ToString(), Model.MenuTexts[15].X * 8 - 2, 48, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[16].ToString(), Model.MenuTexts[16].X * 8 - 2, 72, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[17].ToString(), Model.MenuTexts[17].X * 8 - 2, 96, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[18].ToString(), Model.MenuTexts[18].X * 8 - 2, 120, e.Graphics, pre, Model.FontMenu, pal);
+                        Do.DrawText(Model.MenuTexts[14].ToString(), Model.MenuTexts[14].X * 8 - 2, 156, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("255", 216, 12, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("255", 216, 24, e.Graphics, pre, Model.FontMenu, pal);
                         Do.DrawText("255", 216, 48, e.Graphics, pre, Model.FontMenu, pal);
@@ -1223,24 +1228,24 @@ namespace LAZYSHELL
                 switch (index)
                 {
                     case 0:
-                        Sprite = Bits.GetShort(Model.Data, 0x034757);
-                        Sequence = Bits.GetShort(Model.Data, 0x03475C);
+                        Sprite = Bits.GetShort(Model.ROM, 0x034757);
+                        Sequence = Bits.GetShort(Model.ROM, 0x03475C);
                         break;
                     case 1:
-                        Sprite = Bits.GetShort(Model.Data, 0x03489A);
-                        Sequence = Bits.GetShort(Model.Data, 0x03489F);
+                        Sprite = Bits.GetShort(Model.ROM, 0x03489A);
+                        Sequence = Bits.GetShort(Model.ROM, 0x03489F);
                         break;
                     case 2:
-                        Sprite = Bits.GetShort(Model.Data, 0x034EE7);
-                        Sequence = Bits.GetShort(Model.Data, 0x034EEC);
+                        Sprite = Bits.GetShort(Model.ROM, 0x034EE7);
+                        Sequence = Bits.GetShort(Model.ROM, 0x034EEC);
                         break;
                     case 3:
-                        Sprite = Bits.GetShort(Model.Data, 0x0340AA);
-                        Sequence = Bits.GetShort(Model.Data, 0x0340AF);
+                        Sprite = Bits.GetShort(Model.ROM, 0x0340AA);
+                        Sequence = Bits.GetShort(Model.ROM, 0x0340AF);
                         break;
                     case 4:
-                        Sprite = Bits.GetShort(Model.Data, 0x03501E);
-                        Sequence = Bits.GetShort(Model.Data, 0x035021);
+                        Sprite = Bits.GetShort(Model.ROM, 0x03501E);
+                        Sequence = Bits.GetShort(Model.ROM, 0x035021);
                         break;
                 }
             }
@@ -1249,24 +1254,24 @@ namespace LAZYSHELL
                 switch (index)
                 {
                     case 0:
-                        Bits.SetShort(Model.Data, 0x034757, Sprite);
-                        Bits.SetShort(Model.Data, 0x03475C, Sequence);
+                        Bits.SetShort(Model.ROM, 0x034757, Sprite);
+                        Bits.SetShort(Model.ROM, 0x03475C, Sequence);
                         break;
                     case 1:
-                        Bits.SetShort(Model.Data, 0x03489A, Sprite);
-                        Bits.SetShort(Model.Data, 0x03489F, Sequence);
+                        Bits.SetShort(Model.ROM, 0x03489A, Sprite);
+                        Bits.SetShort(Model.ROM, 0x03489F, Sequence);
                         break;
                     case 2:
-                        Bits.SetShort(Model.Data, 0x034EE7, Sprite);
-                        Bits.SetShort(Model.Data, 0x034EEC, Sequence);
+                        Bits.SetShort(Model.ROM, 0x034EE7, Sprite);
+                        Bits.SetShort(Model.ROM, 0x034EEC, Sequence);
                         break;
                     case 3:
-                        Bits.SetShort(Model.Data, 0x0340AA, Sprite);
-                        Bits.SetShort(Model.Data, 0x0340AF, Sequence);
+                        Bits.SetShort(Model.ROM, 0x0340AA, Sprite);
+                        Bits.SetShort(Model.ROM, 0x0340AF, Sequence);
                         break;
                     case 4:
-                        Bits.SetShort(Model.Data, 0x03501E, Sprite);
-                        Bits.SetShort(Model.Data, 0x035021, Sequence);
+                        Bits.SetShort(Model.ROM, 0x03501E, Sprite);
+                        Bits.SetShort(Model.ROM, 0x035021, Sequence);
                         break;
                 }
             }

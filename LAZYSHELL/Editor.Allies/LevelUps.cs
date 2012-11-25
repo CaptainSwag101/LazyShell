@@ -45,7 +45,7 @@ namespace LAZYSHELL
         public void RefreshLevel()
         {
             if (updating) return;
-            character.CurrentLevel = (byte)levelNum.Value;
+            character.IndexLevel = (byte)levelNum.Value;
             this.hpPlus.Value = character.LevelHpPlus;
             this.attackPlus.Value = character.LevelAttackPlus;
             this.defensePlus.Value = character.LevelDefensePlus;
@@ -59,7 +59,7 @@ namespace LAZYSHELL
             this.expNeeded.Value = characters[0].LevelExpNeeded;
             this.levelUpSpellLearned.SelectedIndex = character.LevelSpellLearned;
             this.characterName.Invalidate();
-            character_ = new Character(Model.Data, index);
+            character_ = new Character(index);
         }
         #region Event Handlers
         private void characterName_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace LAZYSHELL
         private void levelNum_ValueChanged(object sender, EventArgs e)
         {
             foreach (Character character in characters)
-                character.CurrentLevel = (byte)levelNum.Value;
+                character.IndexLevel = (byte)levelNum.Value;
             RefreshLevel();
         }
         private void expNeeded_ValueChanged(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current character's level-up index. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            character = new Character(Model.Data, index);
+            character = new Character(index);
             characterName_SelectedIndexChanged(null, null);
         }
         #endregion

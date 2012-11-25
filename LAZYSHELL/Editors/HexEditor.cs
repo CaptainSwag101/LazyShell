@@ -180,7 +180,7 @@ namespace LAZYSHELL
         {
             info_offset.Text = "Offset: " + selection.ToString("X6");
             if (ROMData.SelectionLength / 3 == 3)
-                info_value.Text = "Value: " + Bits.Get24Bit(data, selection).ToString();
+                info_value.Text = "Value: " + Bits.GetInt24(data, selection).ToString();
             else if (ROMData.SelectionLength / 3 == 2)
                 info_value.Text = "Value: " + Bits.GetShort(data, selection).ToString();
             else if (ROMData.SelectionLength / 3 <= 1)
@@ -245,13 +245,13 @@ namespace LAZYSHELL
             switch (e.KeyData)
             {
                 case Keys.Control | Keys.Z:
-                    undo_Click(null, null);
+                    undo.PerformClick();
                     break;
                 case Keys.Control | Keys.Y:
-                    redo_Click(null, null);
+                    redo.PerformClick();
                     break;
                 case Keys.Control | Keys.S:
-                    save_Click(null, null);
+                    save.PerformClick();
                     break;
                 case Keys.Down:
                     if (line != line_count - 1)
@@ -490,7 +490,7 @@ namespace LAZYSHELL
                     offset = input & 0xFFFFF0;
                     if (line_count * 16 + offset >= 0x400000)
                         offset = 0x400000 - (line_count * 16);
-                    selectionStart = (input - offset - 1) * 3;
+                    selectionStart = Math.Max(0, (input - offset - 1) * 3);
                 }
                 else if (input < 0x000000)
                 {

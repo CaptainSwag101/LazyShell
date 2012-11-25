@@ -8,9 +8,10 @@ namespace LAZYSHELL
     [Serializable()]
     public class SPCSound : SPC
     {
-        [NonSerialized()]
-        private byte[] data;
-        private int index;
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // class variables
         private int type;
         public byte delayTime;
         public byte decayFactor;
@@ -18,25 +19,27 @@ namespace LAZYSHELL
         private List<SPCCommand>[] channels;
         private List<Note>[] notes;
         private bool[] activeChannels;
-        //
-        public override int Index { get { return index; } set { index = value; } }
+        // public accessors
         public int Type { get { return type; } set { type = value; } }
-        public override byte[] Data { get { return data; } set { data = value; } }
+        public override List<SPCCommand>[] Channels { get { return channels; } set { channels = value; } }
+        public override bool[] ActiveChannels { get { return activeChannels; } set { activeChannels = value; } }
+        // unused but mandatory accessors
         public override SampleIndex[] Samples { get { return null; } set { } }
         public override List<Percussives> Percussives { get { return null; } set { } }
-        public override List<SPCCommand>[] Channels { get { return channels; } set { channels = value; } }
         public override List<Note>[] Notes { get { return notes; } set { notes = value; } }
-        public override bool[] ActiveChannels { get { return activeChannels; } set { activeChannels = value; } }
         public override byte DelayTime { get { return delayTime; } set { delayTime = value; } }
         public override byte DecayFactor { get { return decayFactor; } set { decayFactor = value; } }
         public override byte Echo { get { return echo; } set { echo = value; } }
-        //
+        // constructor
         public SPCSound(int index, int type)
         {
-            this.data = Model.Data;
             this.index = index;
             this.type = type;
-            //
+            Disassemble();
+        }
+        // assemblers
+        private void Disassemble()
+        {
             int offset;
             if (type == 0)
                 offset = index * 4 + 0x042826;
@@ -48,7 +51,7 @@ namespace LAZYSHELL
             for (int i = 0; i < 2; i++)
             {
                 channels[i] = new List<SPCCommand>();
-                int soundOffset = Bits.GetShort(Model.Data, offset);
+                int soundOffset = Bits.GetShort(Model.ROM, offset);
                 offset += 2;
                 if (soundOffset == 0)
                 {
@@ -64,19 +67,13 @@ namespace LAZYSHELL
                 do
                 {
                     soundOffset += length;
-                    int opcode = data[soundOffset];
-                    length = SPCScriptEnums.SPCScriptLengths[opcode];
-                    byte[] commandData = Bits.GetByteArray(data, soundOffset, length);
+                    int opcode = rom[soundOffset];
+                    length = SPCScriptEnums.CommandLengths[opcode];
+                    byte[] commandData = Bits.GetByteArray(rom, soundOffset, length);
                     channels[i].Add(new SPCCommand(commandData, this, i));
                 }
-                while (data[soundOffset] != 0xD0 && data[soundOffset] != 0xCD && data[soundOffset] != 0xCE);
+                while (rom[soundOffset] != 0xD0 && rom[soundOffset] != 0xCD && rom[soundOffset] != 0xCE);
             }
-        }
-        public override void CreateNotes()
-        {
-        }
-        public override void Assemble()
-        {
         }
         public void Assemble(ref int offset)
         {
@@ -124,35 +121,35 @@ namespace LAZYSHELL
             if (type == 0)
             {
                 if (offsetStart1 == 0)
-                    Bits.SetShort(data, index * 4 + 0x042826, 0);
+                    Bits.SetShort(rom, index * 4 + 0x042826, 0);
                 else
-                    Bits.SetShort(data, index * 4 + 0x042826, offsetStart1 - 0x042C26 + 0x3400);
+                    Bits.SetShort(rom, index * 4 + 0x042826, offsetStart1 - 0x042C26 + 0x3400);
                 if (offsetStart2 == 0)
-                    Bits.SetShort(data, index * 4 + 0x042826 + 2, 0);
+                    Bits.SetShort(rom, index * 4 + 0x042826 + 2, 0);
                 else
-                    Bits.SetShort(data, index * 4 + 0x042826 + 2, offsetStart2 - 0x042C26 + 0x3400);
+                    Bits.SetShort(rom, index * 4 + 0x042826 + 2, offsetStart2 - 0x042C26 + 0x3400);
             }
             else
             {
                 if (offsetStart1 == 0)
-                    Bits.SetShort(data, index * 4 + 0x043E26, 0);
+                    Bits.SetShort(rom, index * 4 + 0x043E26, 0);
                 else
-                    Bits.SetShort(data, index * 4 + 0x043E26, offsetStart1 - 0x044226 + 0x3400);
+                    Bits.SetShort(rom, index * 4 + 0x043E26, offsetStart1 - 0x044226 + 0x3400);
                 if (offsetStart2 == 0)
-                    Bits.SetShort(data, index * 4 + 0x043E26 + 2, 0);
+                    Bits.SetShort(rom, index * 4 + 0x043E26 + 2, 0);
                 else
-                    Bits.SetShort(data, index * 4 + 0x043E26 + 2, offsetStart2 - 0x044226 + 0x3400);
+                    Bits.SetShort(rom, index * 4 + 0x043E26 + 2, offsetStart2 - 0x044226 + 0x3400);
             }
             if (channels[0] != null && activeChannels[0])
                 foreach (SPCCommand ssc in channels[0])
                 {
-                    Bits.SetByteArray(data, offsetStart1, ssc.CommandData);
+                    Bits.SetByteArray(rom, offsetStart1, ssc.CommandData);
                     offsetStart1 += ssc.Length;
                 }
             if (channels[1] != null && activeChannels[1])
                 foreach (SPCCommand ssc in channels[1])
                 {
-                    Bits.SetByteArray(data, offsetStart2, ssc.CommandData);
+                    Bits.SetByteArray(rom, offsetStart2, ssc.CommandData);
                     offsetStart2 += ssc.Length;
                 }
             if (channel2in1)
@@ -160,7 +157,23 @@ namespace LAZYSHELL
             else
                 offset += channelSize1 + channelSize2;
         }
-        public int GetLength()
+        // unused but mandatory functions
+        public override void Assemble()
+        {
+        }
+        public override void CreateNotes()
+        {
+        }
+        // universal functions
+        public override void Clear()
+        {
+            activeChannels = new bool[2];
+            channels = new List<SPCCommand>[2];
+            channels[0] = new List<SPCCommand>();
+            channels[1] = new List<SPCCommand>();
+        }
+        // class functions
+        public int Length()
         {
             int length = 0;
             // first make sure each channel ends with a termination command
@@ -185,7 +198,7 @@ namespace LAZYSHELL
             //
             bool channel2in1 = true;
             if (channels[0] != null && channels[1] != null &&
-                activeChannels[0] && activeChannels[1] && 
+                activeChannels[0] && activeChannels[1] &&
                 channelSize2 <= channelSize1)
             {
                 for (int a = channels[0].Count - 1, b = channels[1].Count - 1; a >= 0 && b >= 0; a--, b--)
@@ -202,13 +215,6 @@ namespace LAZYSHELL
             else
                 length += channelSize1 + channelSize2;
             return length;
-        }
-        public override void Clear()
-        {
-            activeChannels = new bool[2];
-            channels = new List<SPCCommand>[2];
-            channels[0] = new List<SPCCommand>();
-            channels[1] = new List<SPCCommand>();
         }
     }
 }

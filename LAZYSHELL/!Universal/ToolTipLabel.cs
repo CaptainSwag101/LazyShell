@@ -11,8 +11,11 @@ namespace LAZYSHELL
 {
     public class ToolTipForm : Form
     {
+        // constructor
         public ToolTipForm(Color backColor)
         {
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.BackColor = backColor;
             this.ControlBox = false;
             this.DoubleBuffered = true;
@@ -21,13 +24,14 @@ namespace LAZYSHELL
             this.MinimizeBox = false;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Size = new Size(300, 300);
             this.TopMost = true;
         }
+        // overrides
         protected override bool ShowWithoutActivation { get { return true; } }
     }
     public class ToolTipLabel
     {
+        // variables
         private Form form;
         private Point location;
         private Label labelConvertor = new Label();
@@ -38,9 +42,10 @@ namespace LAZYSHELL
         private ToolTipForm formToolTip;
         private string toolTipTitle;
         private string toolTipDesc;
-        private FlowLayoutPanel panelToolTip = new FlowLayoutPanel();
+        private Panel panelToolTip = new Panel();
         private ToolStripButton baseConvertor;
         private ToolStripButton helpTips;
+        // constructor
         public ToolTipLabel(Form form, ToolStripButton baseConvertor, ToolStripButton helpTips)
         {
             this.form = form;
@@ -70,28 +75,37 @@ namespace LAZYSHELL
             labelConvertor.Font = new Font("Lucida Console", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelConvertor.Location = new Point(0, 0);
             labelConvertor.Margin = Padding.Empty;
-            //
+            // tooltips
             formToolTip = new ToolTipForm(SystemColors.Info);
+            titleToolTip.AutoSize = true;
+            titleToolTip.Font = new Font(form.Font, FontStyle.Bold);
+            titleToolTip.Location = new Point(0, 0);
+            titleToolTip.Margin = Padding.Empty;
+            titleToolTip.MaximumSize = new Size(300, 0);
+            titleToolTip.Padding = Padding.Empty;
+            //
+            labelToolTip.AutoSize = true;
+            labelToolTip.Font = form.Font;
+            labelToolTip.Location = new Point(0, 13);
+            labelToolTip.Margin = Padding.Empty;
+            labelToolTip.MaximumSize = new Size(300, 0);
+            labelToolTip.Padding = Padding.Empty;
+            //
+            panelToolTip.AutoSize = true;
+            panelToolTip.AutoSizeMode = AutoSizeMode.GrowOnly;
             panelToolTip.BackColor = SystemColors.Info;
             panelToolTip.BorderStyle = BorderStyle.FixedSingle;
             panelToolTip.Controls.Add(titleToolTip);
             panelToolTip.Controls.Add(labelToolTip);
-            panelToolTip.Dock = DockStyle.Fill;
             panelToolTip.Margin = Padding.Empty;
+            panelToolTip.MaximumSize = new Size(300, 0);
             panelToolTip.Padding = Padding.Empty;
-            labelToolTip.AutoSize = true;
-            labelToolTip.Font = form.Font;
-            labelToolTip.Margin = Padding.Empty;
-            labelToolTip.Padding = Padding.Empty;
-            titleToolTip.Font = new Font(form.Font, FontStyle.Bold);
-            titleToolTip.Margin = Padding.Empty;
-            titleToolTip.Padding = Padding.Empty;
-            titleToolTip.Size = new Size(300, 13);
             //
             formConvertor.Controls.Add(labelConvertor);
             formToolTip.Controls.Add(panelToolTip);
         }
-        public static string GetToolTipText(object item, string caption)
+        // functions
+        private string GetToolTipText(object item, string caption)
         {
             Form form = null;
             string control = "";
@@ -154,6 +168,7 @@ namespace LAZYSHELL
                 }
             }
         }
+        // event handlers
         public void ControlMouseMove(object sender, MouseEventArgs e)
         {
             if (sender == form) return;
@@ -172,9 +187,9 @@ namespace LAZYSHELL
                 }
                 ToolStripNumericUpDown toolStripNumericUpDown = (ToolStripNumericUpDown)sender;
                 if (toolStripNumericUpDown.Hexadecimal)
-                    labelConvertor.Text = "DEC:  " + toolStripNumericUpDown.Value.ToString();
+                    labelConvertor.Text = "DEC:  " + ((int)toolStripNumericUpDown.Value).ToString();
                 else
-                    labelConvertor.Text = "HEX:  0x" + toolStripNumericUpDown.Value.ToString("X4");
+                    labelConvertor.Text = "HEX:  0x" + ((int)toolStripNumericUpDown.Value).ToString("X4");
                 //
                 formConvertor.Width = labelConvertor.Width;
                 formConvertor.Height = labelConvertor.Height;
@@ -199,14 +214,8 @@ namespace LAZYSHELL
                 {
                     if (mouseOverControl != control)
                     {
-                        formToolTip.Width = 300;
-                        labelToolTip.Text = toolTipDesc;
                         titleToolTip.Text = toolTipTitle;
-                        formToolTip.Height = titleToolTip.Height + labelToolTip.Height + 4;
-                        if (formToolTip.Height <= 30)
-                            formToolTip.Width = labelToolTip.Width + 2;
-                        else
-                            formToolTip.Width = 300;
+                        labelToolTip.Text = toolTipDesc;
                     }
                     //
                     if (location.X + formToolTip.Width > Screen.PrimaryScreen.WorkingArea.Width - 10)

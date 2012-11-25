@@ -19,13 +19,14 @@ namespace LAZYSHELL
         public Attack Attack { get { return attacks[index]; } set { attacks[index] = value; } }
         private int index { get { return (int)attackNum.Value; } set { attackNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
+        private EditLabel labelWindow;
         // constructor
         public Attacks()
         {
-            this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             InitializeStrings();
             RefreshAttacks();
+            labelWindow = new EditLabel(attackName, attackNum, "Attacks", false);
         }
         // functions
         private void InitializeStrings()
@@ -37,10 +38,10 @@ namespace LAZYSHELL
         {
             if (updating) return;
             updating = true;
-            this.attackName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
+            this.attackName.SelectedIndex = Model.AttackNames.GetSortedIndex(index);
             this.attackHitRate.Value = attacks[index].HitRate;
             this.attackAtkLevel.Value = attacks[index].AttackLevel;
-            this.textBoxAttackName.Text = Do.RawToASCII(attacks[index].Name, settings.Keystrokes);
+            this.textBoxAttackName.Text = Do.RawToASCII(attacks[index].Name, Lists.Keystrokes);
             this.attackStatusEffect.SetItemChecked(0, attacks[index].EffectMute);
             this.attackStatusEffect.SetItemChecked(1, attacks[index].EffectSleep);
             this.attackStatusEffect.SetItemChecked(2, attacks[index].EffectPoison);
@@ -48,11 +49,11 @@ namespace LAZYSHELL
             this.attackStatusEffect.SetItemChecked(4, attacks[index].EffectMushroom);
             this.attackStatusEffect.SetItemChecked(5, attacks[index].EffectScarecrow);
             this.attackStatusEffect.SetItemChecked(6, attacks[index].EffectInvincible);
-            this.attackStatusUp.SetItemChecked(0, attacks[index].ChangeAttack);
-            this.attackStatusUp.SetItemChecked(1, attacks[index].ChangeDefense);
-            this.attackStatusUp.SetItemChecked(2, attacks[index].ChangeMagicAttack);
-            this.attackStatusUp.SetItemChecked(3, attacks[index].ChangeMagicDefense);
-            this.attackAtkType.SetItemChecked(0, attacks[index].MaxAttack);
+            this.attackStatusUp.SetItemChecked(0, attacks[index].UpAttack);
+            this.attackStatusUp.SetItemChecked(1, attacks[index].UpDefense);
+            this.attackStatusUp.SetItemChecked(2, attacks[index].UpMagicAttack);
+            this.attackStatusUp.SetItemChecked(3, attacks[index].UpMagicDefense);
+            this.attackAtkType.SetItemChecked(0, attacks[index].InstantDeath);
             this.attackAtkType.SetItemChecked(1, attacks[index].NoDamageA);
             this.attackAtkType.SetItemChecked(2, attacks[index].HideDigits);
             this.attackAtkType.SetItemChecked(3, attacks[index].NoDamageB);
@@ -66,7 +67,7 @@ namespace LAZYSHELL
         }
         private void attackName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.attackNum.Value = Model.AttackNames.GetNumFromIndex(attackName.SelectedIndex);
+            this.attackNum.Value = Model.AttackNames.GetUnsortedIndex(attackName.SelectedIndex);
         }
         private void attackName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -77,15 +78,15 @@ namespace LAZYSHELL
         }
         private void textBoxAttackName_TextChanged(object sender, EventArgs e)
         {
-            if (Model.AttackNames.GetNameByNum(index).CompareTo(this.textBoxAttackName.Text) != 0)
+            if (Model.AttackNames.GetUnsortedName(index).CompareTo(this.textBoxAttackName.Text) != 0)
             {
-                attacks[index].Name = Do.ASCIIToRaw(this.textBoxAttackName.Text, settings.Keystrokes, 13);
-                Model.AttackNames.SwapName(
+                attacks[index].Name = Do.ASCIIToRaw(this.textBoxAttackName.Text, Lists.Keystrokes, 13);
+                Model.AttackNames.SetName(
                     index, new string(attacks[index].Name));
-                Model.AttackNames.SortAlpha();
+                Model.AttackNames.SortAlphabetically();
                 this.attackName.Items.Clear();
-                this.attackName.Items.AddRange(Model.AttackNames.GetNames());
-                this.attackName.SelectedIndex = Model.AttackNames.GetIndexFromNum(index);
+                this.attackName.Items.AddRange(Model.AttackNames.Names);
+                this.attackName.SelectedIndex = Model.AttackNames.GetSortedIndex(index);
             }
         }
         private void attackHitRate_ValueChanged(object sender, EventArgs e)
@@ -108,14 +109,14 @@ namespace LAZYSHELL
         }
         private void attackStatusUp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            attacks[index].ChangeAttack = this.attackStatusUp.GetItemChecked(0);
-            attacks[index].ChangeDefense = this.attackStatusUp.GetItemChecked(1);
-            attacks[index].ChangeMagicAttack = this.attackStatusUp.GetItemChecked(2);
-            attacks[index].ChangeMagicDefense = this.attackStatusUp.GetItemChecked(3);
+            attacks[index].UpAttack = this.attackStatusUp.GetItemChecked(0);
+            attacks[index].UpDefense = this.attackStatusUp.GetItemChecked(1);
+            attacks[index].UpMagicAttack = this.attackStatusUp.GetItemChecked(2);
+            attacks[index].UpMagicDefense = this.attackStatusUp.GetItemChecked(3);
         }
         private void attackAtkType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            attacks[index].MaxAttack = this.attackAtkType.GetItemChecked(0);
+            attacks[index].InstantDeath = this.attackAtkType.GetItemChecked(0);
             attacks[index].NoDamageA = this.attackAtkType.GetItemChecked(1);
             attacks[index].HideDigits = this.attackAtkType.GetItemChecked(2);
             attacks[index].NoDamageB = this.attackAtkType.GetItemChecked(3);

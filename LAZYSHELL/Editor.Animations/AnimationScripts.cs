@@ -9,15 +9,15 @@ using System.Windows.Forms;
 using LAZYSHELL.ScriptsEditor;
 using LAZYSHELL.ScriptsEditor.Commands;
 using LAZYSHELL.Properties;
+using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
     public partial class AnimationScripts : Form
     {
         #region Variables
-
         private long checksum;
-        private A_TreeViewWrapper a_treeViewWrapper;
+        private A_TreeViewWrapper wrapper;
         private AnimationScript[] animationScripts
         {
             get
@@ -50,22 +50,24 @@ namespace LAZYSHELL
                 }
             }
         }
-        private AnimationScriptCommand asc;
+        private AnimationCommand asc; public AnimationCommand ASC { get { return asc; } set { asc = value; } }
+        private AnimationCommand ascCopy;
         public int Index { get { return (int)animationNum.Value; } set { animationNum.Value = value; } }
         public int Category { get { return animationCategory.SelectedIndex; } set { animationCategory.SelectedIndex = value; } }
+        private CommandStack commandStack;
         private Settings settings = Settings.Default;
         private BattleDialoguePreview battleDialoguePreview;
         private MenuTextPreview menuTextPreview;
         private ToolTipLabel toolTipLabel;
+        private EditLabel labelWindow;
         private byte[] animationBank, battleBank;
-        private bool updatingAnimations = false;
+        private bool updating = false;
+        private bool updatingControls = false;
         Previewer ap;
         #endregion
         // constructor
         public AnimationScripts()
         {
-            this.settings.Keystrokes[0x20] = "\x20";
-            this.settings.KeystrokesMenu[0x20] = "\x20";
             InitializeComponent();
             this.animationCategory.Items.AddRange(new object[] {
             "Monster Behaviors",
@@ -80,6 +82,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip4, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
             toolTipLabel = new ToolTipLabel(this, baseConvertor, helpTips);
+            labelWindow = new EditLabel(animationName, animationNum, "Battle Events", true);
             for (int i = 0; i < 9; i++)
             {
                 ToolStripNumericUpDown numUpDown = new ToolStripNumericUpDown();
@@ -87,46 +90,47 @@ namespace LAZYSHELL
                 numUpDown.Maximum = 255;
                 numUpDown.MouseMove += new MouseEventHandler(toolTipLabel.ControlMouseMove);
                 numUpDown.Width = 40;
-                toolStrip2.Items.Insert(i + 6, numUpDown);
+                toolStripCommands.Items.Insert(i + 9, numUpDown);
             }
-            InitializeAnimationScriptsEditor();
+            InitializeEditor();
             new History(this);
             //
-            if (settings.RememberLastIndex)
-            {
-                updatingAnimations = true;
-                animationCategory.SelectedIndex = settings.LastAnimationCat;
-                updatingAnimations = false;
-                RefreshAnimationScriptsEditor();
-                animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
-            }
+            commands.Items.AddRange(Lists.AnimationCommands);
             checksum = Do.GenerateChecksum(animationBank, battleBank);
         }
         #region Methods
-        private void InitializeAnimationScriptsEditor()
+        private void InitializeEditor()
         {
-            updatingAnimations = true;
-
-            animationBank = Bits.GetByteArray(Model.Data, 0x350000, 0x10000);
-            battleBank = Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000);
+            updating = true;
+            //
+            this.commandStack = new CommandStack();
+            animationBank = Bits.GetByteArray(Model.ROM, 0x350000, 0x10000);
+            battleBank = Bits.GetByteArray(Model.ROM, 0x3A6000, 0xA000);
             //
             this.menuTextPreview = new MenuTextPreview();
             this.battleDialoguePreview = new BattleDialoguePreview();
-
-            this.a_treeViewWrapper = new A_TreeViewWrapper(this.animationScriptTree);
-            this.animationCategory.SelectedIndex = 1;
-
-            RefreshAnimationScriptsEditor();
-
-            updatingAnimations = false;
+            this.wrapper = new A_TreeViewWrapper(this.commandTree);
+            //
+            if (settings.RememberLastIndex)
+                animationCategory.SelectedIndex = settings.LastAnimationCat;
+            else
+                animationCategory.SelectedIndex = 1;
+            RefreshEditor();
+            if (settings.RememberLastIndex)
+                animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
+            //
+            updating = false;
         }
-        private void RefreshAnimationScriptsEditor()
+        private void RefreshEditor()
         {
-            animationScripts[(int)animationNum.Value].RefreshAnimationScript();
+            animationName.ContextMenuStrip.Enabled = animationCategory.SelectedIndex == 7;
+            animationNum.ContextMenuStrip.Enabled = animationCategory.SelectedIndex == 7;
+            //
+            animationScripts[(int)animationNum.Value].RefreshScript();
             switch (animationCategory.SelectedIndex)
             {
                 case 0:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
                         this.animationName.Items.Add("Script #" + i.ToString());
@@ -136,17 +140,17 @@ namespace LAZYSHELL
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 1:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i + 0x40));
+                        this.animationName.Items.Add(Model.SpellNames.GetUnsortedName(i + 0x40));
                     animationName.DropDownWidth = animationName.Width;
                     animationName.DrawMode = DrawMode.OwnerDrawFixed;
                     animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 2:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(Model.AttackNames.Names);
                     animationName.DropDownWidth = animationName.Width;
@@ -155,7 +159,7 @@ namespace LAZYSHELL
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 3:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(new object[] {
                         "none",
@@ -180,717 +184,254 @@ namespace LAZYSHELL
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 4:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i + 0x60));
+                        this.animationName.Items.Add(Model.ItemNames.GetUnsortedName(i + 0x60));
                     animationName.DropDownWidth = animationName.Width;
                     animationName.DrawMode = DrawMode.OwnerDrawFixed;
                     animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 5:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(Model.SpellNames.GetNameByNum(i));
+                        this.animationName.Items.Add(Model.SpellNames.GetUnsortedName(i));
                     animationName.DropDownWidth = animationName.Width;
                     animationName.DrawMode = DrawMode.OwnerDrawFixed;
                     animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 6:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     for (int i = 0; i < animationScripts.Length; i++)
-                        this.animationName.Items.Add(Model.ItemNames.GetNameByNum(i));
+                        this.animationName.Items.Add(Model.ItemNames.GetUnsortedName(i));
                     animationName.DropDownWidth = animationName.Width;
                     animationName.DrawMode = DrawMode.OwnerDrawFixed;
                     animationName.BackColor = SystemColors.ControlDarkDark;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
                 case 7:
-                    a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                    wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
                     animationName.Items.Clear();
                     this.animationName.Items.AddRange(Lists.Numerize(Lists.BattleEventNames));
-                    animationName.DropDownWidth = 500;
+                    animationName.DropDownWidth = 400;
                     animationName.DrawMode = DrawMode.Normal;
                     animationName.BackColor = SystemColors.Window;
                     animationNum.Maximum = animationScripts.Length - 1;
                     break;
             }
             this.animationName.SelectedIndex = 0;
-            if (this.animationScriptTree.Nodes.Count > 0)
-                this.animationScriptTree.SelectedNode = this.animationScriptTree.Nodes[0];
+            if (this.commandTree.Nodes.Count > 0)
+                this.commandTree.SelectedNode = this.commandTree.Nodes[0];
         }
-
-        private void ControlAniDisasmMethod()
+        private void RedrawTree()
         {
-            updatingAnimations = true;
-
+            commandTree.BeginUpdate();
+            // redraw the treeview
+            int fullParentIndex = commandTree.GetFullParentIndex();
+            animationScripts[(int)animationNum.Value].RefreshScript();
+            wrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
+            // set the selected node
+            wrapper.SelectNode(asc.InternalOffset, fullParentIndex);
+            commandTree.EndUpdate();
+        }
+        //
+        private void ControlDisassemble(AnimationCommand asc)
+        {
+            updatingControls = true;
+            panelAniControls.SuspendDrawing();
+            ResetControls();
+            //
             switch (asc.Opcode)
             {
                 case 0x00:
-                    aniTitleA.Text = "Set current action object...";
-                    aniLabelA.Text = "Sprite";
-                    aniLabelC.Text = "Sequence";
-                    aniLabelD.Text = "VRAM";
-                    aniTitleB.Text = "Properties...";
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
-                    aniNameA.Enabled = true;
-                    aniNumA.Maximum = 0x3FF; aniNumA.Enabled = true;
-                    aniNumC.Maximum = 15; aniNumC.Enabled = true;
-                    aniNumD.Hexadecimal = true; aniNumD.Maximum = 0xFFFF; aniNumD.Enabled = true;
+                    aniLabelA1.Text = "Sprite";
+                    aniLabelA2.Text = "Sequence";
+                    aniLabelB1.Text = "Priority";
+                    aniLabelB2.Text = "VRAM address";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 300;
+                    aniNumA1.Maximum = 0x3FF; aniNumA1.Enabled = true;
+                    aniNumA2.Maximum = 15; aniNumA2.Enabled = true;
+                    aniNumB1.Maximum = 3; aniNumB1.Enabled = true;
+                    aniNumB2.Hexadecimal = true; aniNumB2.Maximum = 0xFFFF; aniNumB2.Enabled = true;
                     aniBits.Items.AddRange(new object[]{
-                        "store to VRAM",
-                        "infinite seq playback",
-                        "store palette",
-                        "playback only once",
+                        "overwrite VRAM",
+                        "looping on",
+                        "overwrite palette",
+                        "use palette row 4",
                         "mirror",
                         "invert"});
                     aniBits.Enabled = true;
 
-                    aniNumA.Value = aniNameA.SelectedIndex = Bits.GetShort(asc.AnimationData, 3) & 0x3FF;
-                    aniNumC.Value = asc.AnimationData[5];
-                    aniNumD.Value = Bits.GetShort(asc.AnimationData, 7);
-                    aniBits.SetItemChecked(0, (asc.AnimationData[1] & 0x01) == 0x01);
-                    aniBits.SetItemChecked(1, (asc.AnimationData[2] & 0x08) == 0x08);
-                    aniBits.SetItemChecked(2, (asc.AnimationData[2] & 0x20) == 0x20);
-                    aniBits.SetItemChecked(3, (asc.AnimationData[6] & 0x10) == 0x10);
-                    aniBits.SetItemChecked(4, (asc.AnimationData[6] & 0x40) == 0x40);
-                    aniBits.SetItemChecked(5, (asc.AnimationData[6] & 0x80) == 0x80);
+                    aniNumA1.Value = aniNameA1.SelectedIndex = Bits.GetShort(asc.CommandData, 3) & 0x3FF;
+                    aniNumA2.Value = asc.Param5;
+                    aniNumB1.Value = (asc.Param6 & 0x30) >> 4;
+                    aniNumB2.Value = Bits.GetShort(asc.CommandData, 7);
+                    aniBits.SetItemChecked(0, (asc.Param1 & 0x01) == 0x01);
+                    aniBits.SetItemChecked(1, (asc.Param2 & 0x08) == 0x08);
+                    aniBits.SetItemChecked(2, (asc.Param2 & 0x20) == 0x20);
+                    aniBits.SetItemChecked(3, (asc.Param6 & 0x08) == 0x08);
+                    aniBits.SetItemChecked(4, (asc.Param6 & 0x40) == 0x40);
+                    aniBits.SetItemChecked(5, (asc.Param6 & 0x80) == 0x80);
                     break;
                 case 0x01:
                 case 0x0B:
-                    aniTitleA.Text = asc.Opcode == 0x0B ?
-                        "Store coords to action mem $40..." : "Store coords to mem $32...";
-                    aniLabelA.Text = "Add to coords:";
-                    aniLabelB.Text = "Z coord";
-                    aniLabelC.Text = "X coord";
-                    aniLabelD.Text = "Y coord";
-                    aniTitleB.Text = "Set coords...";
-                    aniNameA.Items.AddRange(new object[]{
-                        "absolute coords",
-                        "caster's original coords",
-                        "target's current coords",
-                        "caster's current coords"});
-                    aniNameA.Enabled = true;
-                    aniNumB.Enabled = true; aniNumB.Minimum = -0x8000; aniNumB.Maximum = 0x7FFF;
-                    aniNumC.Enabled = true; aniNumC.Minimum = -0x8000; aniNumC.Maximum = 0x7FFF;
-                    aniNumD.Enabled = true; aniNumD.Minimum = -0x8000; aniNumD.Maximum = 0x7FFF;
+                    aniLabelA1.Text = "Origin";
+                    aniLabelB1.Text = "X coord";
+                    aniLabelB2.Text = "Y coord";
+                    aniLabelC1.Text = "Z coord";
+                    aniNameA1.Items.AddRange(new object[]{
+                        "absolute position",
+                        "caster's initial position",
+                        "target's current position",
+                        "caster's current position"});
+                    aniNameA1.Enabled = true;
+                    aniNumB1.Enabled = true; aniNumB1.Minimum = -0x8000; aniNumB1.Maximum = 0x7FFF;
+                    aniNumB2.Enabled = true; aniNumB2.Minimum = -0x8000; aniNumB2.Maximum = 0x7FFF;
+                    aniNumC1.Enabled = true; aniNumC1.Minimum = -0x8000; aniNumC1.Maximum = 0x7FFF;
                     aniBits.Enabled = true;
                     aniBits.Items.AddRange(new object[] { "set X coord", "set Y coord", "set Z coord" });
 
-                    aniNameA.SelectedIndex = (int)(asc.Option >> 4);
-                    aniNumB.Value = (short)Bits.GetShort(asc.AnimationData, 6);
-                    aniNumC.Value = (short)Bits.GetShort(asc.AnimationData, 2);
-                    aniNumD.Value = (short)Bits.GetShort(asc.AnimationData, 4);
-                    aniBits.SetItemChecked(0, (asc.Option & 0x01) == 0x01);
-                    aniBits.SetItemChecked(1, (asc.Option & 0x02) == 0x02);
-                    aniBits.SetItemChecked(2, (asc.Option & 0x04) == 0x04);
+                    aniNameA1.SelectedIndex = (int)(asc.Param1 >> 4);
+                    aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
+                    aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
+                    aniNumC1.Value = (short)Bits.GetShort(asc.CommandData, 6);
+                    aniBits.SetItemChecked(0, (asc.Param1 & 0x01) == 0x01);
+                    aniBits.SetItemChecked(1, (asc.Param1 & 0x02) == 0x02);
+                    aniBits.SetItemChecked(2, (asc.Param1 & 0x04) == 0x04);
                     break;
                 case 0x03:
-                    aniTitleA.Text = "Set sprite of current action object...";
-                    aniLabelA.Text = "Sprite";
-                    aniLabelC.Text = "Sequence";
-                    aniTitleB.Text = "Properties...";
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
-                    aniNameA.Enabled = true;
-                    aniNumA.Maximum = 0x3FF; aniNumA.Enabled = true;
-                    aniNumC.Maximum = 15; aniNumC.Enabled = true;
+                    aniLabelA1.Text = "Sprite";
+                    aniLabelB1.Text = "Sequence";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 300;
+                    aniNumA1.Maximum = 0x3FF; aniNumA1.Enabled = true;
+                    aniNumB1.Maximum = 15; aniNumB1.Enabled = true;
                     aniBits.Items.AddRange(new object[]{
                         "store to VRAM",
-                        "infinite seq playback",
+                        "looping on",
                         "store palette"});
                     aniBits.Enabled = true;
 
-                    aniNumA.Value = aniNameA.SelectedIndex = Bits.GetShort(asc.AnimationData, 3) & 0x3FF;
-                    aniNumC.Value = asc.AnimationData[5] & 15;
-                    aniBits.SetItemChecked(0, (asc.AnimationData[1] & 0x01) == 0x01);
-                    aniBits.SetItemChecked(1, (asc.AnimationData[2] & 0x08) == 0x08);
-                    aniBits.SetItemChecked(2, (asc.AnimationData[2] & 0x20) == 0x20);
+                    aniNumA1.Value = aniNameA1.SelectedIndex = Bits.GetShort(asc.CommandData, 3) & 0x3FF;
+                    aniNumB1.Value = asc.Param5 & 15;
+                    aniBits.SetItemChecked(0, (asc.Param1 & 0x01) == 0x01);
+                    aniBits.SetItemChecked(1, (asc.Param2 & 0x08) == 0x08);
+                    aniBits.SetItemChecked(2, (asc.Param2 & 0x20) == 0x20);
                     break;
                 case 0x04:
-                    aniTitleA.Text = "Pause script...";
-                    aniLabelA.Text = "until...";
-                    aniLabelC.Text = "# of frames";
-                    aniNameA.Items.AddRange(new object[]{"{00}","{01}","{02}","{03}","{04}","{05}",
+                    aniLabelA1.Text = "Resume after";
+                    aniLabelA2.Text = "# frames";
+                    aniNameA1.Items.AddRange(new object[]{
+                        "{00}","{01}","{02}","{03}","{04}","{05}",
                         "sprite shift complete",
                         "{07}","{08}","{09}","{0A}","{0B}","{0C}","{0D}","{0E}","{0F}",
-                        "# of frames have passed"});
-                    aniNameA.Enabled = true;
-                    aniNameA.SelectedIndex = asc.Option;
-                    aniNumC.Enabled = true; aniNumC.Maximum = 0xFFFF;
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 2);
+                        "# frames elapsed"});
+                    aniNameA1.Enabled = true;
+                    aniNameA1.SelectedIndex = asc.Param1;
+                    aniNumA2.Enabled = true; aniNumA2.Maximum = 0xFFFF;
+                    aniNumA2.Value = Bits.GetShort(asc.CommandData, 2);
                     break;
                 case 0x08:
-                    aniTitleA.Text = "Shift current action object...";
-                    aniLabelB.Text = "Acceleration";
-                    aniLabelC.Text = "Start value";
-                    aniLabelD.Text = "End value";
-                    aniTitleB.Text = "Set properties...";
+                    aniLabelA2.Text = "Speed";
+                    aniLabelB1.Text = "Start position";
+                    aniLabelB2.Text = "End position";
 
-                    aniNumB.Enabled = true; aniNumB.Maximum = 0x7FFF; aniNumB.Minimum = -0x8000;
-                    aniNumC.Enabled = true; aniNumC.Maximum = 0x7FFF; aniNumC.Minimum = -0x8000;
-                    aniNumD.Enabled = true; aniNumD.Maximum = 0x7FFF; aniNumD.Minimum = -0x8000;
+                    aniNumA2.Enabled = true; aniNumA2.Maximum = 0x7FFF; aniNumA2.Minimum = -0x8000;
+                    aniNumB1.Enabled = true; aniNumB1.Maximum = 0x7FFF; aniNumB1.Minimum = -0x8000;
+                    aniNumB2.Enabled = true; aniNumB2.Maximum = 0x7FFF; aniNumB2.Minimum = -0x8000;
                     aniBits.Items.AddRange(new object[]{
-                        "do Z shift","do Y shift","do X shift",
-                        "set start value","set end value","set acceleration"});
+                        "apply to Z axis","apply to Y axis","apply to X axis",
+                        "set start position","set end position","set speed"});
                     aniBits.Enabled = true;
 
-                    aniNumB.Value = (short)Bits.GetShort(asc.AnimationData, 6);
-                    aniNumC.Value = (short)Bits.GetShort(asc.AnimationData, 2);
-                    aniNumD.Value = (short)Bits.GetShort(asc.AnimationData, 4);
-                    aniBits.SetItemChecked(0, (asc.Option & 0x01) == 0x01);
-                    aniBits.SetItemChecked(1, (asc.Option & 0x02) == 0x02);
-                    aniBits.SetItemChecked(2, (asc.Option & 0x04) == 0x04);
-                    aniBits.SetItemChecked(3, (asc.Option & 0x20) == 0x20);
-                    aniBits.SetItemChecked(4, (asc.Option & 0x40) == 0x40);
-                    aniBits.SetItemChecked(5, (asc.Option & 0x80) == 0x80);
+                    aniNumA2.Value = (short)Bits.GetShort(asc.CommandData, 6);
+                    aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
+                    aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
+                    aniBits.SetItemChecked(0, (asc.Param1 & 0x01) == 0x01);
+                    aniBits.SetItemChecked(1, (asc.Param1 & 0x02) == 0x02);
+                    aniBits.SetItemChecked(2, (asc.Param1 & 0x04) == 0x04);
+                    aniBits.SetItemChecked(3, (asc.Param1 & 0x20) == 0x20);
+                    aniBits.SetItemChecked(4, (asc.Param1 & 0x40) == 0x40);
+                    aniBits.SetItemChecked(5, (asc.Param1 & 0x80) == 0x80);
                     break;
                 case 0x09:
-                    aniTitleA.Text = "Jump to address...";
-                    aniLabelC.Text = "Address";
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
+                case 0x10:
+                case 0x50:
+                case 0x51:
+                case 0x64:
+                    aniLabelB1.Text = "Address";
+                    aniNumB1.Maximum = 0xFFFF; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
 
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0x0C:
-                    aniTitleA.Text = "Shift current sprite to coords @ action mem $40...";
-                    aniLabelA.Text = "Shift type";
-                    aniLabelC.Text = "Speed";
-                    aniLabelD.Text = "Jump height";
+                    aniLabelA1.Text = "Type";
+                    aniLabelB1.Text = "Speed";
+                    aniLabelB2.Text = "Arch height";
 
-                    aniNameA.Enabled = true;
-                    aniNameA.Items.AddRange(new object[] { "{00}", "shift", "transfer", "{04}", "{08}" });
-                    aniNumC.Enabled = true; aniNumC.Maximum = 0x7FFF; aniNumC.Minimum = -0x8000;
-                    aniNumD.Enabled = true; aniNumD.Maximum = 0x7FFF; aniNumD.Minimum = -0x8000;
+                    aniNameA1.Enabled = true;
+                    aniNameA1.Items.AddRange(new object[] { "{00}", "shift", "transfer", "{04}", "{08}" });
+                    aniNumB1.Enabled = true; aniNumB1.Maximum = 0x7FFF; aniNumB1.Minimum = -0x8000;
+                    aniNumB2.Enabled = true; aniNumB2.Maximum = 0x7FFF; aniNumB2.Minimum = -0x8000;
 
-                    aniNameA.SelectedIndex = asc.Option / 2;
-                    aniNumC.Value = (short)Bits.GetShort(asc.AnimationData, 2);
-                    aniNumD.Value = (short)Bits.GetShort(asc.AnimationData, 4);
-                    break;
-                case 0x10:
-                    aniTitleA.Text = "Jump to subroutine...";
-                    aniLabelC.Text = "Address";
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
+                    aniNameA1.SelectedIndex = asc.Param1 / 2;
+                    aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
+                    aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
                     break;
                 case 0x20:
                 case 0x21:
-                    aniTitleA.Text = "Store from source to action mem...";
-                    aniLabelB.Text = "Mem addr"; aniLabelC.Text = "Source"; goto case 0x2F;
                 case 0x22:
                 case 0x23:
-                    aniTitleA.Text = "Store from source to action mem...";
-                    aniLabelB.Text = "Source"; aniLabelC.Text = "Destination"; goto case 0x2F;
                 case 0x2C:
                 case 0x2D:
-                    aniTitleA.Text = "Add source to object mem..."; goto case 0x2F;
                 case 0x2E:
                 case 0x2F:
-                    if (asc.Opcode == 0x2E || asc.Opcode == 0x2F)
-                        aniTitleA.Text = "Subtract source from object mem...";
-                    aniLabelB.Text = (asc.Opcode < 0x22) ? "Mem addr" : "Source";
-                    aniLabelC.Text = (asc.Opcode < 0x22) ? "Source" : "Destination";
-                    aniLabelA.Text = "Source type";
+                    aniLabelA1.Text = "Variable type";
+                    aniLabelB1.Text = "AMEM";
+                    aniLabelB2.Text = "Variable";
 
-                    aniNameA.Items.AddRange(new object[]{
-                        "absolute value",
-                        "mem 7E:xxxx (xxxx == source)",
-                        "mem 7F:xxxx (xxxx == source)",
-                        "AMEM",
-                        "OMEM (current)",
-                        "mem 7E:0000,x",
-                        "OMEM (main)",
-                        "{07}",
-                        "{08}",
-                        "{09}",
-                        "{0A}",
-                        "{0B}"});
-                    aniNameA.Enabled = true;
-                    aniNumB.Maximum = 0x0F; aniNumB.Enabled = true; aniNumB.Hexadecimal = true;
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Enabled = true; aniNumC.Hexadecimal = true;
-
-                    aniNameA.SelectedIndex = asc.Option >> 4;
-                    aniNumB.Value = asc.Option & 0x0F;
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 2);
-                    break;
-                case 0x24: aniTitleA.Text = "If value at OMEM == source... (8-bit)"; goto case 0x2B;
-                case 0x25: aniTitleA.Text = "If value at OMEM == source... (16-bit)"; goto case 0x2B;
-                case 0x26: aniTitleA.Text = "If value at OMEM != source... (8-bit)"; goto case 0x2B;
-                case 0x27: aniTitleA.Text = "If value at OMEM != source... (16-bit)"; goto case 0x2B;
-                case 0x28: aniTitleA.Text = "If value at OMEM < source... (8-bit)"; goto case 0x2B;
-                case 0x29: aniTitleA.Text = "If value at OMEM < source... (16-bit)"; goto case 0x2B;
-                case 0x2A: aniTitleA.Text = "If value at OMEM >= source... (8-bit)"; goto case 0x2B;
-                case 0x2B:
-                    if (asc.Opcode == 0x2B)
-                        aniTitleA.Text = "If value at OMEM >= source... (16-bit)";
-                    aniLabelA.Text = "Source type";
-                    aniLabelB.Text = "Mem addr";
-                    aniLabelC.Text = "Source";
-                    aniLabelD.Text = "Jump to";
-
-                    aniNameA.Items.AddRange(new object[]{
-                        "absolute value",
-                        "mem 7E:xxxx (xxxx == source)",
-                        "mem 7F:xxxx (xxxx == source)",
-                        "AMEM",
-                        "OMEM (current)",
-                        "mem 7E:0000,x",
-                        "OMEM (main)",
-                        "{07}",
-                        "{08}",
-                        "{09}",
-                        "{0A}",
-                        "{0B}"});
-                    aniNameA.Enabled = true;
-                    aniNumB.Maximum = 0x0F; aniNumB.Enabled = true; aniNumB.Hexadecimal = true;
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Enabled = true; aniNumC.Hexadecimal = true;
-                    aniNumD.Maximum = 0xFFFF; aniNumD.Enabled = true; aniNumD.Hexadecimal = true;
-
-                    aniNameA.SelectedIndex = asc.Option >> 4;
-                    aniNumB.Value = asc.Option & 0x0F;
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 2);
-                    aniNumD.Value = Bits.GetShort(asc.AnimationData, 4);
-                    break;
-                case 0x30:
-                case 0x31: aniTitleA.Text = "Increment object mem..."; goto case 0x35;
-                case 0x32:
-                case 0x33: aniTitleA.Text = "Decrement object mem..."; goto case 0x35;
-                case 0x34:
-                case 0x35:
-                    if (asc.Opcode == 0x34 || asc.Opcode == 0x35)
-                        aniTitleA.Text = "Clear object mem...";
-                    aniLabelC.Text = "Mem addr";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-
-                    aniNumC.Value = asc.Option & 0x0F;
-                    break;
-                case 0x36: aniTitleA.Text = "Set obj mem bits..."; goto case 0x37;
-                case 0x37:
-                    if (asc.Opcode == 0x37)
-                        aniTitleA.Text = "Clear object mem bits...";
-
-                    aniLabelC.Text = "Mem addr";
-                    aniTitleB.Text = "Bits";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
-                    aniBits.Enabled = true;
-
-                    aniNumC.Value = asc.Option & 0x0F;
-                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.AnimationData[2] & i) == i);
-                    break;
-                case 0x38: aniTitleA.Text = "If object mem bits set..."; break;
-                case 0x39:
-                    if (asc.Opcode == 0x39)
-                        aniTitleA.Text = "If object mem bits clear...";
-
-                    aniLabelC.Text = "Mem addr";
-                    aniTitleB.Text = "Bits";
-                    aniLabelE.Text = "Jump to";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
-                    aniBits.Enabled = true;
-                    aniNumE.Maximum = 0xFFFF; aniNumE.Enabled = true; aniNumE.Hexadecimal = true;
-
-                    aniNumC.Value = asc.Option & 0x0F;
-                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.AnimationData[2] & i) == i);
-                    aniNumE.Value = Bits.GetShort(asc.AnimationData, 3);
-                    break;
-                case 0x40: aniTitleA.Text = "Pause script until object mem bits set..."; goto case 0x41;
-                case 0x41:
-                    if (asc.Opcode == 0x41)
-                        aniTitleA.Text = "Pause script until object mem bits clear...";
-                    aniLabelC.Text = "Mem addr";
-                    aniTitleB.Text = "Bits";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Enabled = true; aniNumC.Hexadecimal = true;
-                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
-                    aniBits.Enabled = true;
-
-                    aniNumC.Value = asc.Option;
-                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.AnimationData[2] & i) == i);
-                    break;
-                case 0x43:
-                    aniTitleA.Text = "Playback sprite sequence for current object...";
-                    aniLabelC.Text = "Sequence";
-                    aniTitleB.Text = "Properties...";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Enabled = true;
-                    aniBits.Items.AddRange(new object[] { "infinite playback", "playback once", "b6", "mirror" });
-                    aniBits.Enabled = true;
-
-                    aniNumC.Value = asc.Option & 0x0F;
-                    for (int i = 0x10, j = 0; j < 4; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.Option & i) == i);
-                    break;
-                case 0x5D:
-                    aniTitleA.Text = "Run object queue at address...";
-                    aniTitleB.Text = "Object type...";
-                    aniLabelC.Text = "Object #";
-                    aniLabelD.Text = "Address";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-                    aniNumD.Maximum = 0xFFFF; aniNumD.Hexadecimal = true; aniNumD.Enabled = true;
-                    aniBits.Items.AddRange(new object[] { 
-                        "b0", "b1", "b2", "character slot", 
-                        "b4", "b5", "current target", "b7" });
-                    aniBits.Enabled = true;
-
-                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.Option & i) == i);
-                    aniNumC.Value = asc.AnimationData[2];
-                    aniNumD.Value = Bits.GetShort(asc.AnimationData, 3);
-                    break;
-                case 0x63:
-                    aniTitleA.Text = "Run dialogue message...";
-                    aniLabelA.Text = "Type";
-
-                    aniNameA.Items.AddRange(new object[] { "attack name", "spell name", "item name" });
-                    aniNameA.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    break;
-                case 0x64:
-                    aniTitleA.Text = "Run synchronous code packet from OMEM $60 at...";
-                    aniLabelC.Text = "Address";
-
-                    aniNumC.Hexadecimal = true; aniNumC.Maximum = 0xFFFF; aniNumC.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
-                    break;
-                case 0x68:
-                    aniTitleA.Text = "Run synchronous code packet from OMEM $60 at...";
-                    aniLabelC.Text = "Address";
-                    aniLabelD.Text = "Sub-packet";
-
-                    aniNumC.Hexadecimal = true; aniNumC.Maximum = 0xFFFF; aniNumC.Enabled = true;
-                    aniNumD.Maximum = 255; aniNumD.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
-                    aniNumD.Value = asc.AnimationData[3];
-                    break;
-                case 0x6A:
-                case 0x6B:
-                    aniTitleA.Text = "Store random # between 0 and value to object mem...";
-                    aniLabelC.Text = "Mem addr";
-                    aniLabelD.Text = "Value";
-
-                    aniNumC.Maximum = 0x0F; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-                    aniNumD.Maximum = asc.Opcode == 0x6A ? 0xFF : 0xFFFF; aniNumD.Enabled = true;
-
-                    aniNumC.Value = asc.Option;
-                    aniNumD.Value = asc.Opcode == 0x6A ? asc.AnimationData[2] : Bits.GetShort(asc.AnimationData, 2);
-                    break;
-                case 0x72:
-                    aniTitleA.Text = "Start spell effect...";
-                    aniLabelA.Text = "Effect";
-                    aniTitleB.Text = "Properties...";
-
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.EffectNames));
-                    aniNameA.Enabled = true;
-                    aniBits.Items.AddRange(new object[]{
-                        "infinite seq playback","show only 1st frame","playback once","b3"});
-                    aniBits.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.AnimationData[2];
-                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.Option & i) == i);
-                    break;
-                case 0x74:
-                case 0x75:
-                    aniTitleA.Text = "Pause script until bits ";
-                    aniTitleA.Text += asc.Opcode == 0x74 ? "set..." : "clear...";
-                    aniLabelC.Text = "Bits";
-
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Hexadecimal = true; aniNumC.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
-                    break;
-                case 0x77:
-                    aniTitleA.Text = "Set obj graphic properties...";
-                    aniLabelA.Text = "Overlap";
-                    aniTitleB.Text = "Properties...";
-
-                    aniNameA.Items.AddRange(new object[] { 
-                        "no transparency", "overlap all", "overlap none", "overlap all, not ally sprites" });
-                    aniNameA.Enabled = true;
-                    aniBits.Items.AddRange(new object[]{
-                        "b0","4bpp","2bpp","b3"});
-                    aniBits.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option >> 4;
-                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
-                        aniBits.SetItemChecked(j, (asc.Option & i) == i);
-                    break;
-                case 0x78:
-                    aniTitleA.Text = "Set obj layer priority...";
-                    aniLabelC.Text = "Low bits";
-                    aniLabelD.Text = "High bits";
-
-                    aniNumC.Maximum = 15; aniNumC.Enabled = true;
-                    aniNumD.Maximum = 15; aniNumD.Enabled = true;
-
-                    aniNumC.Value = asc.Option & 0x0F;
-                    aniNumD.Value = asc.Option >> 4;
-                    break;
-                case 0x7A:
-                    aniTitleA.Text = "Run dialogue...";
-                    aniLabelA.Text = "Type";
-                    aniLabelC.Text = "Dialogue";
-
-                    aniNameA.Items.AddRange(new object[] { "battle dialogue", "psychopath message", "special dialogue" });
-                    aniNameA.Enabled = true;
-                    aniNumC.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option & 3;
-                    aniNumC.Value = asc.AnimationData[2];
-                    break;
-                case 0x96:
-                    aniTitleA.Text = "Display bonus message...";
-                    aniLabelA.Text = "Message";
-                    aniLabelC.Text = "X";
-                    aniLabelD.Text = "Y";
-                    foreach (BonusMessage message in Model.BonusMessages)
-                        aniNameA.Items.Add(message.Text);
-                    aniNameA.Enabled = true;
-                    aniNumC.Enabled = true;
-                    aniNumD.Enabled = true;
-                    aniNumC.Maximum = 127; aniNumC.Minimum = -128;
-                    aniNumD.Maximum = 127; aniNumD.Minimum = -128;
-                    aniNameA.SelectedIndex = asc.AnimationData[2];
-                    aniNumC.Value = (sbyte)asc.AnimationData[3];
-                    aniNumD.Value = (sbyte)asc.AnimationData[4];
-                    break;
-                case 0x7E:
-                    aniTitleA.Text = "Fade out object...";
-                    aniLabelC.Text = "Duration";
-
-                    aniNumC.Enabled = true;
-                    aniNumC.Value = asc.Option;
-                    break;
-                case 0x85:
-                    aniTitleA.Text = "Fade effect on object...";
-                    aniLabelA.Text = "Type";
-                    aniLabelB.Text = "Object";
-                    aniLabelC.Text = "Duration";
-
-                    aniNameA.Items.AddRange(new object[] { "fade out", "fade in" }); aniNameA.Enabled = true;
-                    aniNameB.Items.AddRange(new object[] { "{00}", "{01}", "screen" }); aniNameB.Enabled = true;
-                    aniNumC.Enabled = true;
-
-                    aniNameA.SelectedIndex = (asc.Option & 0x0F) >> 1;
-                    aniNameB.SelectedIndex = asc.Option >> 4;
-                    aniNumC.Value = asc.AnimationData[2];
-                    break;
-                case 0x8E:
-                case 0x8F:
-                    aniTitleA.Text = "Screen flash color...";
-                    aniLabelA.Text = "Color";
-                    aniLabelC.Text = "Duration";
-
-                    aniNameA.Items.AddRange(new object[] { 
-                        "{none}", "red", "green", "yellow", "blue", "pink", "aqua", "white" });
-                    aniNameA.Enabled = true;
-                    aniNameA.SelectedIndex = asc.Option & 0x07;
-
-                    if (asc.Opcode == 0x8E)
+                    aniNameA1.Items.AddRange(Interpreter.VariableNames);
+                    aniNameA1.Enabled = true;
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Enabled = true; aniNumB1.Hexadecimal = true;
+                    aniNumB2.Enabled = true;
+                    aniNumB2.Hexadecimal = asc.Param1 >> 4 != 0;
+                    switch (asc.Param1 >> 4)
                     {
-                        aniNumC.Enabled = true;
-                        aniNumC.Value = asc.AnimationData[2];
+                        case 0:
+                            aniNumB2.Maximum = 0xFFFF;
+                            aniNumB2.Value = Bits.GetShort(asc.CommandData, 2);
+                            break;
+                        case 1:
+                        case 5:
+                            aniNumB2.Maximum = 0x7EFFFF;
+                            aniNumB2.Minimum = 0x7E0000;
+                            aniNumB2.Value = Bits.GetShort(asc.CommandData, 2) + 0x7E0000;
+                            break;
+                        case 2:
+                            aniNumB2.Maximum = 0x7FFFFF;
+                            aniNumB2.Minimum = 0x7F0000;
+                            aniNumB2.Value = Bits.GetShort(asc.CommandData, 2) + 0x7F0000;
+                            break;
+                        case 3:
+                            aniNumB2.Minimum = 0x60;
+                            aniNumB2.Maximum = 0x6F;
+                            aniNumB2.Value = (asc.Param2 & 0x0F) + 0x60;
+                            break;
+                        case 4:
+                        case 6:
+                            aniNumB2.Maximum = 0xFF;
+                            aniNumB2.Value = asc.Param2;
+                            break;
                     }
-                    break;
-                case 0xAB:
-                case 0xAE:
-                    aniTitleA.Text = "Playback sound effect";
-                    aniTitleA.Text += asc.Opcode == 0xAB ? "..." : " (sync)...";
-                    aniLabelA.Text = "Sound";
+                    aniNameA1.SelectedIndex = asc.Param1 >> 4;
 
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
-                    aniNameA.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    break;
-                case 0xB0:
-                    aniTitleA.Text = "Playback music";
-                    aniLabelA.Text = "Music";
-
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-                    aniNameA.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    break;
-                case 0xB1:
-                    aniTitleA.Text = "Playback music";
-                    aniLabelA.Text = "Music";
-
-                    aniNameA.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-                    aniNameA.Enabled = true;
-                    aniNumC.Enabled = true; aniNumC.Maximum = 0xFFFF;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 2);
-                    break;
-                case 0xB6:
-                    aniTitleA.Text = "Fade out current music...";
-                    aniLabelC.Text = "Speed";
-                    aniLabelD.Text = "Volume";
-
-                    aniNumC.Enabled = true;
-                    aniNumD.Enabled = true;
-
-                    aniNumC.Value = asc.Option;
-                    aniNumD.Value = asc.AnimationData[2];
-                    break;
-                case 0xBB:
-                    aniTitleA.Text = "Set target...";
-                    aniLabelA.Text = "Target";
-                    aniNameA.Items.AddRange(Lists.TargetNames);
-                    aniNameA.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    break;
-                case 0xBC:
-                case 0xBD:
-                    aniTitleA.Text = asc.Opcode == 0xBC ?
-                        "Store / remove item to item inventory..." : "Store / remove item to special item inventory...";
-                    aniLabelA.Text = "Item";
-
-                    aniNameA.Items.AddRange(Model.ItemNames.GetNames());
-                    aniNameA.Enabled = true;
-                    aniNumA.Maximum = 0xB0; aniNumA.Enabled = true;
-                    aniBits.Items.Add("remove"); aniBits.Enabled = true;
-
-                    aniNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum(
-                        Math.Abs((short)Bits.GetShort(asc.AnimationData, 1)));
-                    aniNumA.Value = Math.Abs((short)Bits.GetShort(asc.AnimationData, 1));
-                    aniBits.SetItemChecked(0, asc.AnimationData[2] == 0xFF);
-                    break;
-                case 0xBE:
-                    aniTitleA.Text = "Add value to current coins...";
-                    aniLabelC.Text = "Value";
-
-                    aniNumC.Maximum = 0xFFFF; aniNumC.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
-                    break;
-                case 0xBF:
-                    aniTitleA.Text = "Store target's Yoshi Cookie to item inventory...";
-                    aniLabelA.Text = "Target";
-
-                    aniNameA.Items.AddRange(Lists.TargetNames);
-                    aniNameA.Enabled = true;
-
-                    aniNameA.SelectedIndex = asc.Option;
-                    break;
-                case 0xC3:
-                    aniTitleA.Text = "Mask effect...";
-                    aniLabelC.Text = "Mask";
-
-                    aniNumC.Enabled = true;
-
-                    aniNumC.Value = asc.Option;
-                    break;
-                case 0xCB:
-                    aniTitleA.Text = "Sprite playback speed...";
-                    aniLabelC.Text = "Speed";
-
-                    aniNumC.Maximum = 15; aniNumC.Enabled = true;
-
-                    aniNumC.Value = asc.Option;
-                    break;
-                case 0xE1:
-                    aniTitleA.Text = "Run battle event...";
-                    aniLabelC.Text = "Event #";
-                    aniLabelD.Text = "Offset";
-
-                    aniNumC.Maximum = 0xFFFF;
-                    aniNumC.Enabled = true;
-                    aniNumD.Enabled = true;
-
-                    aniNumC.Value = Bits.GetShort(asc.AnimationData, 1);
-                    aniNumD.Value = asc.AnimationData[2];
-                    break;
-            }
-
-            updatingAnimations = false;
-        }
-        private void ControlAniAsmMethod()
-        {
-            switch (asc.Opcode)
-            {
-                case 0x00:
-                    Bits.SetShort(asc.AnimationData, 3, (ushort)aniNumA.Value);
-                    asc.AnimationData[5] = (byte)aniNumC.Value;
-                    Bits.SetShort(asc.AnimationData, 7, (ushort)aniNumD.Value);
-                    Bits.SetBit(asc.AnimationData, 1, 0, aniBits.GetItemChecked(0));
-                    Bits.SetBit(asc.AnimationData, 2, 3, aniBits.GetItemChecked(1));
-                    Bits.SetBit(asc.AnimationData, 2, 5, aniBits.GetItemChecked(2));
-                    Bits.SetBit(asc.AnimationData, 6, 4, aniBits.GetItemChecked(3));
-                    Bits.SetBit(asc.AnimationData, 6, 6, aniBits.GetItemChecked(4));
-                    Bits.SetBit(asc.AnimationData, 6, 7, aniBits.GetItemChecked(5));
-                    break;
-                case 0x01:
-                case 0x0B:
-                    asc.Option = (byte)(aniNameA.SelectedIndex << 4);
-                    Bits.SetBit(asc.AnimationData, 1, 0, aniBits.GetItemChecked(0));
-                    Bits.SetBit(asc.AnimationData, 1, 1, aniBits.GetItemChecked(1));
-                    Bits.SetBit(asc.AnimationData, 1, 2, aniBits.GetItemChecked(2));
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)((short)aniNumC.Value));
-                    Bits.SetShort(asc.AnimationData, 4, (ushort)((short)aniNumD.Value));
-                    Bits.SetShort(asc.AnimationData, 6, (ushort)((short)aniNumB.Value));
-                    break;
-                case 0x03:
-                    Bits.SetShort(asc.AnimationData, 3, (ushort)aniNumA.Value);
-                    asc.AnimationData[5] = (byte)aniNumC.Value;
-                    Bits.SetBit(asc.AnimationData, 1, 0, aniBits.GetItemChecked(0));
-                    Bits.SetBit(asc.AnimationData, 2, 3, aniBits.GetItemChecked(1));
-                    Bits.SetBit(asc.AnimationData, 2, 5, aniBits.GetItemChecked(2));
-                    break;
-                case 0x04:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)aniNumC.Value);
-                    break;
-                case 0x08:
-                    Bits.SetBit(asc.AnimationData, 1, 0, aniBits.GetItemChecked(0));
-                    Bits.SetBit(asc.AnimationData, 1, 1, aniBits.GetItemChecked(1));
-                    Bits.SetBit(asc.AnimationData, 1, 2, aniBits.GetItemChecked(2));
-                    Bits.SetBit(asc.AnimationData, 1, 5, aniBits.GetItemChecked(3));
-                    Bits.SetBit(asc.AnimationData, 1, 6, aniBits.GetItemChecked(4));
-                    Bits.SetBit(asc.AnimationData, 1, 7, aniBits.GetItemChecked(5));
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)((short)aniNumC.Value));
-                    Bits.SetShort(asc.AnimationData, 4, (ushort)((short)aniNumD.Value));
-                    Bits.SetShort(asc.AnimationData, 6, (ushort)((short)aniNumB.Value));
-                    break;
-                case 0x09:
-                case 0x10:
-                case 0x64:
-                    Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumC.Value);
-                    break;
-                case 0x0C:
-                    asc.Option = (byte)(aniNameA.SelectedIndex * 2);
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)((short)aniNumC.Value));
-                    Bits.SetShort(asc.AnimationData, 4, (ushort)((short)aniNumD.Value));
-                    break;
-                case 0x20:
-                case 0x21:
-                case 0x22:
-                case 0x23:
-                case 0x2C:
-                case 0x2D:
-                case 0x2E:
-                case 0x2F:
-                    asc.Option = (byte)aniNumB.Value;
-                    asc.Option |= (byte)(aniNameA.SelectedIndex << 4);
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)aniNumC.Value);
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     break;
                 case 0x24:
                 case 0x25:
@@ -900,166 +441,790 @@ namespace LAZYSHELL
                 case 0x29:
                 case 0x2A:
                 case 0x2B:
-                    Bits.SetShort(asc.AnimationData, 4, (ushort)aniNumD.Value); goto case 0x23;
+                    aniLabelA1.Text = "Variable type";
+                    aniLabelA2.Text = "AMEM";
+                    aniLabelB1.Text = "Variable";
+                    aniLabelB2.Text = "Jump to";
+
+                    aniNameA1.Items.AddRange(Interpreter.VariableNames);
+                    aniNameA1.Enabled = true;
+                    aniNumA2.Minimum = 0x60; aniNumA2.Maximum = 0x6F;
+                    aniNumA2.Enabled = true; aniNumA2.Hexadecimal = true;
+                    aniNumB1.Enabled = true; aniNumB1.Hexadecimal = asc.Param1 >> 4 != 0;
+                    switch (asc.Param1 >> 4)
+                    {
+                        case 0:
+                            aniNumB1.Maximum = 0xFFFF;
+                            aniNumB1.Value = Bits.GetShort(asc.CommandData, 2);
+                            break;
+                        case 1:
+                        case 5:
+                            aniNumB1.Maximum = 0x7EFFFF;
+                            aniNumB1.Minimum = 0x7E0000;
+                            aniNumB1.Value = Bits.GetShort(asc.CommandData, 2) + 0x7E0000;
+                            break;
+                        case 2:
+                            aniNumB1.Maximum = 0x7FFFFF;
+                            aniNumB1.Minimum = 0x7F0000;
+                            aniNumB1.Value = Bits.GetShort(asc.CommandData, 2) + 0x7F0000;
+                            break;
+                        case 3:
+                            aniNumB1.Minimum = 0x60;
+                            aniNumB1.Maximum = 0x6F;
+                            aniNumB1.Value = (asc.Param2 & 0x0F) + 0x60;
+                            break;
+                        case 4:
+                        case 6:
+                            aniNumB1.Maximum = 0xFF;
+                            aniNumB1.Value = asc.Param2;
+                            break;
+                    }
+                    aniNumB2.Maximum = 0xFFFF; aniNumB2.Enabled = true; aniNumB2.Hexadecimal = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1 >> 4;
+                    aniNumA2.Value = (asc.Param1 & 0x0F) + 0x60;
+                    aniNumB2.Value = Bits.GetShort(asc.CommandData, 4);
+                    break;
                 case 0x30:
                 case 0x31:
                 case 0x32:
                 case 0x33:
                 case 0x34:
                 case 0x35:
-                case 0x7E:
-                    asc.Option = (byte)aniNumC.Value; break;
+                    aniLabelB1.Text = "AMEM";
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
+                    break;
                 case 0x36:
                 case 0x37:
-                    asc.Option = (byte)aniNumC.Value;
+                    aniLabelB1.Text = "AMEM";
+                    aniTitleD.Text = "Bits";
+
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
+                    aniBits.Enabled = true;
+
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 2, j, aniBits.GetItemChecked(j));
+                        aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
                     break;
                 case 0x38:
                 case 0x39:
-                    asc.Option = (byte)aniNumC.Value;
+                    aniLabelB1.Text = "AMEM";
+                    aniTitleD.Text = "Bits";
+                    aniLabelC1.Text = "Jump to";
+
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
+                    aniBits.Enabled = true;
+                    aniNumC1.Maximum = 0xFFFF; aniNumC1.Enabled = true; aniNumC1.Hexadecimal = true;
+
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 2, j, aniBits.GetItemChecked(j));
-                    Bits.SetShort(asc.AnimationData, 3, (ushort)aniNumE.Value);
+                        aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
+                    aniNumC1.Value = Bits.GetShort(asc.CommandData, 3);
                     break;
                 case 0x40:
                 case 0x41:
-                    asc.Option = (byte)aniNumC.Value;
+                    aniLabelB1.Text = "AMEM";
+                    aniTitleD.Text = "Bits";
+
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Enabled = true; aniNumB1.Hexadecimal = true;
+                    aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
+                    aniBits.Enabled = true;
+
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 2, j, aniBits.GetItemChecked(j));
+                        aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
                     break;
                 case 0x43:
-                    asc.Option = (byte)aniNumC.Value;
-                    for (int i = 0, j = 0; j < 4; i++, j++)
-                        Bits.SetBit(asc.AnimationData, 1, j + 4, aniBits.GetItemChecked(j));
+                    aniLabelB1.Text = "Sequence";
+                    aniNumB1.Maximum = 0x0F; aniNumB1.Enabled = true;
+                    aniBits.Items.AddRange(new object[] { "looping on", "looping off", "b6", "mirror" });
+                    aniBits.Enabled = true;
+
+                    aniNumB1.Value = asc.Param1 & 0x0F;
+                    for (int i = 0x10, j = 0; j < 4; i *= 2, j++)
+                        aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
                     break;
                 case 0x5D:
+                    aniLabelB1.Text = "Object #";
+                    aniLabelB2.Text = "Address";
+
+                    aniNumB1.Maximum = 0x0F; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+                    aniNumB2.Maximum = 0xFFFF; aniNumB2.Hexadecimal = true; aniNumB2.Enabled = true;
+                    aniBits.Items.AddRange(new object[] { 
+                        "b0", "b1", "b2", "character slot", 
+                        "b4", "b5", "current target", "b7" });
+                    aniBits.Enabled = true;
+
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 1, j, aniBits.GetItemChecked(j));
-                    asc.AnimationData[2] = (byte)aniNumC.Value;
-                    Bits.SetShort(asc.AnimationData, 3, (ushort)aniNumD.Value);
+                        aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
+                    aniNumB1.Value = asc.Param2;
+                    aniNumB2.Value = Bits.GetShort(asc.CommandData, 3);
                     break;
                 case 0x63:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
+                    aniLabelA1.Text = "Type";
+                    aniNameA1.Items.AddRange(new object[] { "attack name", "spell name", "item name" });
+                    aniNameA1.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0x68:
-                    Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumC.Value);
-                    asc.AnimationData[3] = (byte)aniNumD.Value;
+                    aniLabelB1.Text = "Address";
+                    aniLabelB2.Text = "Index";
+                    aniNumB1.Hexadecimal = true; aniNumB1.Maximum = 0xFFFF; aniNumB1.Enabled = true;
+                    aniNumB2.Maximum = 255; aniNumB2.Enabled = true;
+
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
+                    aniNumB2.Value = asc.CommandData[3];
                     break;
                 case 0x6A:
                 case 0x6B:
-                    asc.Option = (byte)aniNumC.Value;
-                    if (asc.Opcode == 0x6B)
-                        Bits.SetShort(asc.AnimationData, 2, (ushort)aniNumD.Value);
-                    else
-                        asc.AnimationData[2] = (byte)aniNumD.Value;
+                    aniLabelB1.Text = "Memory";
+                    aniLabelB2.Text = "Value";
+                    aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
+                    aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+                    aniNumB2.Maximum = asc.Opcode == 0x6A ? 0xFF : 0xFFFF; aniNumB2.Enabled = true;
+
+                    aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
+                    aniNumB2.Value = asc.Opcode == 0x6A ? asc.Param2 : Bits.GetShort(asc.CommandData, 2);
                     break;
                 case 0x72:
-                    asc.AnimationData[2] = (byte)aniNameA.SelectedIndex;
+                    aniLabelA1.Text = "Effect";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.EffectNames));
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 250;
+                    aniBits.Items.AddRange(new object[]{
+                        "looping on","playback off","looping off","b3"});
+                    aniBits.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param2;
                     for (int i = 1, j = 0; j < 4; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 1, j, aniBits.GetItemChecked(j));
+                        aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
                     break;
                 case 0x74:
+                    aniLabelA1.Text = "Pause until";
+                    aniNameA1.Items.AddRange(new object[]{
+                        "sequence complete (4bpp)",
+                        "sequence complete (2bpp)",
+                        "fade in complete",
+                        "fade complete (4bpp)",
+                        "fade complete (2bpp)"});
+                    aniNameA1.Enabled = true;
+                    switch (Bits.GetShort(asc.CommandData, 1))
+                    {
+                        case 0x0004:
+                            aniNameA1.SelectedIndex = 0; break;
+                        case 0x0008:
+                            aniNameA1.SelectedIndex = 1; break;
+                        case 0x0200:
+                            aniNameA1.SelectedIndex = 2; break;
+                        case 0x0400:
+                            aniNameA1.SelectedIndex = 3; break;
+                        case 0x0800:
+                            aniNameA1.SelectedIndex = 4; break;
+                        default:
+                            break;
+                    }
+                    break;
                 case 0x75:
-                    Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumC.Value);
+                    aniLabelB1.Text = "Bits";
+                    aniNumB1.Maximum = 0xFFFF; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
+
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0x77:
-                    asc.Option = (byte)(aniNameA.SelectedIndex << 4);
-                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
-                        Bits.SetBit(asc.AnimationData, 1, j, aniBits.GetItemChecked(j));
-                    break;
                 case 0x78:
-                    asc.Option = (byte)aniNumC.Value;
-                    asc.Option |= (byte)((byte)aniNumD.Value << 4);
+                    aniLabelA1.Text = "Overlap";
+                    aniNameA1.Items.AddRange(new object[] { 
+                        "transparency off", "overlap all", "overlap none", "overlap all except allies" });
+                    aniNameA1.Enabled = true;
+                    aniBits.Items.AddRange(new object[]{
+                        "b0","4bpp","2bpp","invisible"});
+                    aniBits.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1 >> 4;
+                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
+                        aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
                     break;
                 case 0x7A:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
-                    asc.AnimationData[2] = (byte)aniNumC.Value;
+                    aniLabelA1.Text = "Type";
+                    aniLabelA2.Text = "Dialogue #";
+                    aniNameA1.Items.AddRange(new object[] { "battle dialogue", "psychopath message", "battle message" });
+                    aniNameA1.Enabled = true;
+                    aniNumA2.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1 & 3;
+                    aniNumA2.Value = asc.Param2;
                     break;
                 case 0x96:
-                    asc.AnimationData[2] = (byte)aniNameA.SelectedIndex;
-                    asc.AnimationData[3] = (byte)((sbyte)aniNumC.Value);
-                    asc.AnimationData[4] = (byte)((sbyte)aniNumD.Value);
+                    aniLabelA1.Text = "Message";
+                    aniLabelB1.Text = "X";
+                    aniLabelB2.Text = "Y";
+                    foreach (BonusMessage message in Model.BonusMessages)
+                        aniNameA1.Items.Add(message.Text);
+                    aniNameA1.Enabled = true;
+                    aniNumB1.Enabled = true;
+                    aniNumB2.Enabled = true;
+                    aniNumB1.Maximum = 127; aniNumB1.Minimum = -128;
+                    aniNumB2.Maximum = 127; aniNumB2.Minimum = -128;
+                    aniNameA1.SelectedIndex = asc.Param2;
+                    aniNumB1.Value = (sbyte)asc.CommandData[3];
+                    aniNumB2.Value = (sbyte)asc.Param4;
+                    break;
+                case 0x7E:
+                    aniLabelB1.Text = "Duration";
+                    aniNumB1.Enabled = true;
+
+                    aniNumB1.Value = asc.Param1;
+                    break;
+                case 0x80:
+                    aniLabelA1.Text = "Type";
+                    aniLabelB1.Text = "Color count";
+                    aniLabelB2.Text = "Starting color index";
+                    aniLabelC1.Text = "Glow duration";
+                    //
+                    aniNameA1.Enabled = true;
+                    aniNameA1.Items.AddRange(new string[] { "eastward reflection", "westward reflection" });
+                    aniNumB1.Maximum = 15; aniNumB1.Enabled = true;
+                    aniNumB2.Maximum = 15; aniNumB2.Enabled = true;
+                    aniNumC1.Enabled = true;
+                    //
+                    aniNameA1.SelectedIndex = asc.Param1 & 0x01;
+                    aniNumB1.Value = asc.Param2 & 0x0F;
+                    aniNumB2.Value = asc.Param2 >> 4;
+                    aniNumC1.Value = asc.Param3;
                     break;
                 case 0x85:
-                    asc.Option = (byte)(aniNameA.SelectedIndex << 1);
-                    asc.Option |= (byte)(aniNameB.SelectedIndex << 4);
-                    asc.AnimationData[2] = (byte)aniNumC.Value;
+                    aniLabelA1.Text = "Type";
+                    aniLabelA2.Text = "Object";
+                    aniLabelB1.Text = "Duration";
+                    aniNameA1.Items.AddRange(new object[] { "fade out", "fade in" }); aniNameA1.Enabled = true;
+                    aniNameA2.Items.AddRange(new object[] { "effect", "sprite", "screen" }); aniNameA2.Enabled = true;
+                    aniNumB1.Enabled = true;
+
+                    aniNameA1.SelectedIndex = (asc.Param1 & 0x0F) >> 1;
+                    aniNameA2.SelectedIndex = asc.Param1 >> 4;
+                    aniNumB1.Value = asc.Param2;
+                    break;
+                case 0x86:
+                    aniLabelA1.Text = "Object";
+                    aniLabelB1.Text = "Amount";
+                    aniLabelB2.Text = "Speed";
+                    aniNameA1.Enabled = true;
+                    aniNameA1.Items.AddRange(new string[] { "none", "screen", "sprites", "...", "all" });
+                    aniNumB1.Enabled = true;
+                    aniNumB2.Enabled = true; aniNumB2.Maximum = 256;
+                    //
+                    aniNameA1.SelectedIndex = asc.Param1;
+                    aniNumB1.Value = asc.Param4;
+                    aniNumB2.Value = Bits.GetShort(asc.CommandData, 5);
                     break;
                 case 0x8E:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
-                    asc.AnimationData[2] = (byte)aniNumC.Value;
+                case 0x8F:
+                    aniLabelA1.Text = "Color";
+                    aniLabelB1.Text = "Duration";
+                    aniNameA1.Items.AddRange(new object[] { 
+                        "{none}", "red", "green", "yellow", "blue", "pink", "aqua", "white" });
+                    aniNameA1.Enabled = true;
+                    aniNameA1.SelectedIndex = asc.Param1 & 0x07;
+
+                    if (asc.Opcode == 0x8E)
+                    {
+                        aniNumB1.Enabled = true;
+                        aniNumB1.Value = asc.Param2;
+                    }
+                    break;
+                case 0xA3:
+                    aniLabelA1.Text = "Effect";
+                    aniNameA1.Items.AddRange(Interpreter.ScreenEffects);
+                    aniNameA1.Enabled = true;
+                    //
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xAB:
                 case 0xAE:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
+                    aniLabelA1.Text = "Sound";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 250;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xB0:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
+                    aniLabelA1.Text = "Music";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+                    aniNameA1.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xB1:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
-                    Bits.SetShort(asc.AnimationData, 2, (ushort)aniNumC.Value);
+                    aniLabelA1.Text = "Music";
+                    aniNameA1.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 250;
+                    aniNumB1.Enabled = true; aniNumB1.Maximum = 0xFFFF;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 2);
                     break;
                 case 0xB6:
-                    asc.Option = (byte)aniNumC.Value;
-                    asc.AnimationData[2] = (byte)aniNumD.Value;
+                    aniLabelB1.Text = "Speed";
+                    aniLabelB2.Text = "Volume";
+                    aniNumB1.Enabled = true;
+                    aniNumB2.Enabled = true;
+
+                    aniNumB1.Value = asc.Param1;
+                    aniNumB2.Value = asc.Param2;
                     break;
                 case 0xBB:
-                case 0xBF:
-                    asc.Option = (byte)aniNameA.SelectedIndex;
+                    aniLabelA1.Text = "Target";
+                    aniNameA1.Items.AddRange(Lists.TargetNames);
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 200;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xBC:
                 case 0xBD:
-                    short temp = (short)(-(ushort)aniNumA.Value);
-                    if (aniBits.GetItemChecked(0))
-                        Bits.SetShort(asc.AnimationData, 1, (ushort)temp);
-                    else
-                        Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumA.Value);
+                    aniLabelA1.Text = "Item";
+                    aniNameA1.Items.AddRange(Model.ItemNames.Names);
+                    aniNameA1.Enabled = true;
+                    aniNameA1.BackColor = SystemColors.ControlDarkDark;
+                    aniNameA1.DrawMode = DrawMode.OwnerDrawFixed;
+                    aniNameA1.ItemHeight = 15;
+                    aniNumA1.Maximum = 0xB0; aniNumA1.Enabled = true;
+                    aniBits.Items.Add("remove"); aniBits.Enabled = true;
+
+                    aniNameA1.SelectedIndex = Model.ItemNames.GetSortedIndex(
+                        Math.Abs((short)Bits.GetShort(asc.CommandData, 1)));
+                    aniNumA1.Value = Math.Abs((short)Bits.GetShort(asc.CommandData, 1));
+                    aniBits.SetItemChecked(0, asc.Param2 == 0xFF);
                     break;
                 case 0xBE:
-                    Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumC.Value);
+                    aniLabelB1.Text = "Value";
+                    aniNumB1.Maximum = 0xFFFF; aniNumB1.Enabled = true;
+
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
+                    break;
+                case 0xBF:
+                    aniLabelA1.Text = "Target";
+                    aniNameA1.Items.AddRange(Lists.TargetNames);
+                    aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 200;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xC3:
+                    aniLabelA1.Text = "Mask";
+                    aniNameA1.Items.AddRange(new string[] { 
+                        "...", "incline", "incline", "circle", "dome", 
+                        "polygon", "wavy circle", "cylinder" });
+                    aniNameA1.Enabled = true;
+
+                    aniNameA1.SelectedIndex = asc.Param1;
+                    break;
                 case 0xCB:
-                    asc.Option = (byte)aniNumC.Value;
+                    aniLabelB1.Text = "Speed";
+                    aniNumB1.Maximum = 15; aniNumB1.Enabled = true;
+
+                    aniNumB1.Value = asc.Param1;
                     break;
                 case 0xE1:
-                    Bits.SetShort(asc.AnimationData, 1, (ushort)aniNumC.Value);
-                    asc.AnimationData[3] = (byte)aniNumD.Value;
+                    aniLabelB1.Text = "Event #";
+                    aniLabelB2.Text = "Offset";
+                    aniNumB1.Maximum = 0xFFFF;
+                    aniNumB1.Enabled = true;
+                    aniNumB2.Enabled = true;
+
+                    aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
+                    aniNumB2.Value = asc.Param2;
+                    break;
+            }
+            OrganizeControls();
+            commands.SelectedIndex = -1;
+            //
+            panelAniControls.ResumeDrawing();
+            updatingControls = false;
+        }
+        private void ControlAssemble()
+        {
+            switch (asc.Opcode)
+            {
+                case 0x00:
+                    Bits.SetShort(asc.CommandData, 3, (ushort)aniNumA1.Value);
+                    asc.Param5 = (byte)aniNumA2.Value;
+                    asc.Param6 = (byte)((byte)aniNumB1.Value << 4);
+                    Bits.SetShort(asc.CommandData, 7, (ushort)aniNumB2.Value);
+                    Bits.SetBit(asc.CommandData, 1, 0, aniBits.GetItemChecked(0));
+                    Bits.SetBit(asc.CommandData, 2, 3, aniBits.GetItemChecked(1));
+                    Bits.SetBit(asc.CommandData, 2, 5, aniBits.GetItemChecked(2));
+                    Bits.SetBit(asc.CommandData, 6, 3, aniBits.GetItemChecked(3));
+                    Bits.SetBit(asc.CommandData, 6, 6, aniBits.GetItemChecked(4));
+                    Bits.SetBit(asc.CommandData, 6, 7, aniBits.GetItemChecked(5));
+                    break;
+                case 0x01:
+                case 0x0B:
+                    asc.Param1 = (byte)(aniNameA1.SelectedIndex << 4);
+                    Bits.SetBit(asc.CommandData, 1, 0, aniBits.GetItemChecked(0));
+                    Bits.SetBit(asc.CommandData, 1, 1, aniBits.GetItemChecked(1));
+                    Bits.SetBit(asc.CommandData, 1, 2, aniBits.GetItemChecked(2));
+                    Bits.SetShort(asc.CommandData, 2, (ushort)((short)aniNumB1.Value));
+                    Bits.SetShort(asc.CommandData, 4, (ushort)((short)aniNumB2.Value));
+                    Bits.SetShort(asc.CommandData, 6, (ushort)((short)aniNumC1.Value));
+                    break;
+                case 0x03:
+                    Bits.SetShort(asc.CommandData, 3, (ushort)aniNumA1.Value);
+                    asc.Param5 = (byte)aniNumB1.Value;
+                    Bits.SetBit(asc.CommandData, 1, 0, aniBits.GetItemChecked(0));
+                    Bits.SetBit(asc.CommandData, 2, 3, aniBits.GetItemChecked(1));
+                    Bits.SetBit(asc.CommandData, 2, 5, aniBits.GetItemChecked(2));
+                    break;
+                case 0x04:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    Bits.SetShort(asc.CommandData, 2, (ushort)aniNumA2.Value);
+                    break;
+                case 0x08:
+                    Bits.SetBit(asc.CommandData, 1, 0, aniBits.GetItemChecked(0));
+                    Bits.SetBit(asc.CommandData, 1, 1, aniBits.GetItemChecked(1));
+                    Bits.SetBit(asc.CommandData, 1, 2, aniBits.GetItemChecked(2));
+                    Bits.SetBit(asc.CommandData, 1, 5, aniBits.GetItemChecked(3));
+                    Bits.SetBit(asc.CommandData, 1, 6, aniBits.GetItemChecked(4));
+                    Bits.SetBit(asc.CommandData, 1, 7, aniBits.GetItemChecked(5));
+                    Bits.SetShort(asc.CommandData, 2, (ushort)((short)aniNumB1.Value));
+                    Bits.SetShort(asc.CommandData, 4, (ushort)((short)aniNumB2.Value));
+                    Bits.SetShort(asc.CommandData, 6, (ushort)((short)aniNumA2.Value));
+                    break;
+                case 0x09:
+                case 0x10:
+                case 0x50:
+                case 0x51:
+                case 0x64:
+                    Bits.SetShort(asc.CommandData, 1, (ushort)aniNumB1.Value);
+                    break;
+                case 0x0C:
+                    asc.Param1 = (byte)(aniNameA1.SelectedIndex * 2);
+                    Bits.SetShort(asc.CommandData, 2, (ushort)((short)aniNumB1.Value));
+                    Bits.SetShort(asc.CommandData, 4, (ushort)((short)aniNumB2.Value));
+                    break;
+                case 0x20:
+                case 0x21:
+                case 0x22:
+                case 0x23:
+                case 0x2C:
+                case 0x2D:
+                case 0x2E:
+                case 0x2F:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    asc.Param1 |= (byte)(aniNameA1.SelectedIndex << 4);
+                    switch (asc.Param1 >> 4)
+                    {
+                        case 0:
+                        case 4:
+                        case 6:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)aniNumB2.Value);
+                            break;
+                        case 1:
+                        case 5:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB2.Value - 0x7E0000));
+                            break;
+                        case 2:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB2.Value - 0x7F0000));
+                            break;
+                        case 3:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB2.Value - 0x60));
+                            break;
+                    }
+                    break;
+                case 0x24:
+                case 0x25:
+                case 0x26:
+                case 0x27:
+                case 0x28:
+                case 0x29:
+                case 0x2A:
+                case 0x2B:
+                    asc.Param1 = (byte)(aniNumA2.Value - 0x60);
+                    asc.Param1 |= (byte)(aniNameA1.SelectedIndex << 4);
+                    switch (asc.Param1 >> 4)
+                    {
+                        case 0:
+                        case 4:
+                        case 6:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)aniNumB1.Value);
+                            break;
+                        case 1:
+                        case 5:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB1.Value - 0x7E0000));
+                            break;
+                        case 2:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB1.Value - 0x7F0000));
+                            break;
+                        case 3:
+                            Bits.SetShort(asc.CommandData, 2, (ushort)(aniNumB1.Value - 0x60));
+                            break;
+                    }
+                    Bits.SetShort(asc.CommandData, 4, (ushort)aniNumB2.Value);
+                    break;
+                case 0x30:
+                case 0x31:
+                case 0x32:
+                case 0x33:
+                case 0x34:
+                case 0x35:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    break;
+                case 0x7E:
+                    asc.Param1 = (byte)aniNumB1.Value; break;
+                case 0x36:
+                case 0x37:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 2, j, aniBits.GetItemChecked(j));
+                    break;
+                case 0x38:
+                case 0x39:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 2, j, aniBits.GetItemChecked(j));
+                    Bits.SetShort(asc.CommandData, 3, (ushort)aniNumC1.Value);
+                    break;
+                case 0x40:
+                case 0x41:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 2, j, aniBits.GetItemChecked(j));
+                    break;
+                case 0x43:
+                    asc.Param1 = (byte)aniNumB1.Value;
+                    for (int i = 0, j = 0; j < 4; i++, j++)
+                        Bits.SetBit(asc.CommandData, 1, j + 4, aniBits.GetItemChecked(j));
+                    break;
+                case 0x5D:
+                    for (int i = 1, j = 0; j < 8; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 1, j, aniBits.GetItemChecked(j));
+                    asc.Param2 = (byte)aniNumB1.Value;
+                    Bits.SetShort(asc.CommandData, 3, (ushort)aniNumB2.Value);
+                    break;
+                case 0x63:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0x68:
+                    Bits.SetShort(asc.CommandData, 1, (ushort)aniNumB1.Value);
+                    asc.CommandData[3] = (byte)aniNumB2.Value;
+                    break;
+                case 0x6A:
+                case 0x6B:
+                    asc.Param1 = (byte)(aniNumB1.Value - 0x60);
+                    if (asc.Opcode == 0x6B)
+                        Bits.SetShort(asc.CommandData, 2, (ushort)aniNumB2.Value);
+                    else
+                        asc.Param2 = (byte)aniNumB2.Value;
+                    break;
+                case 0x72:
+                    asc.Param2 = (byte)aniNameA1.SelectedIndex;
+                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 1, j, aniBits.GetItemChecked(j));
+                    break;
+                case 0x74:
+                    switch (aniNameA1.SelectedIndex)
+                    {
+                        case 0:
+                            Bits.SetShort(asc.CommandData, 1, 0x0004); break;
+                        case 1:
+                            Bits.SetShort(asc.CommandData, 1, 0x0008); break;
+                        case 2:
+                            Bits.SetShort(asc.CommandData, 1, 0x0200); break;
+                        case 3:
+                            Bits.SetShort(asc.CommandData, 1, 0x0400); break;
+                        case 4:
+                            Bits.SetShort(asc.CommandData, 1, 0x0800); break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 0x75:
+                    Bits.SetShort(asc.CommandData, 1, (ushort)aniNumB1.Value);
+                    break;
+                case 0x77:
+                case 0x78:
+                    asc.Param1 = (byte)(aniNameA1.SelectedIndex << 4);
+                    for (int i = 1, j = 0; j < 4; i *= 2, j++)
+                        Bits.SetBit(asc.CommandData, 1, j, aniBits.GetItemChecked(j));
+                    break;
+                case 0x7A:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    asc.Param2 = (byte)aniNumA2.Value;
+                    break;
+                case 0x80:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    asc.Param2 = (byte)aniNumB1.Value;
+                    asc.Param2 |= (byte)((byte)aniNumB2.Value << 4);
+                    asc.Param3 = (byte)aniNumC1.Value;
+                    break;
+                case 0x96:
+                    asc.Param2 = (byte)aniNameA1.SelectedIndex;
+                    asc.CommandData[3] = (byte)((sbyte)aniNumB1.Value);
+                    asc.Param4 = (byte)((sbyte)aniNumB2.Value);
+                    break;
+                case 0x85:
+                    asc.Param1 = (byte)(aniNameA1.SelectedIndex << 1);
+                    asc.Param1 |= (byte)(aniNameA2.SelectedIndex << 4);
+                    asc.Param2 = (byte)aniNumB1.Value;
+                    break;
+                case 0x86:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    asc.Param4 = (byte)aniNumB1.Value;
+                    Bits.SetShort(asc.CommandData, 5, (ushort)aniNumB2.Value);
+                    break;
+                case 0x8E:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    asc.Param2 = (byte)aniNumB1.Value;
+                    break;
+                case 0xA3:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0xAB:
+                case 0xAE:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0xB0:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0xB1:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    Bits.SetShort(asc.CommandData, 2, (ushort)aniNumB1.Value);
+                    break;
+                case 0xB6:
+                    asc.Param1 = (byte)aniNumB1.Value;
+                    asc.Param2 = (byte)aniNumB2.Value;
+                    break;
+                case 0xBB:
+                case 0xBF:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0xBC:
+                case 0xBD:
+                    short temp = (short)(-(ushort)aniNumA1.Value);
+                    if (aniBits.GetItemChecked(0))
+                        Bits.SetShort(asc.CommandData, 1, (ushort)temp);
+                    else
+                        Bits.SetShort(asc.CommandData, 1, (ushort)aniNumA1.Value);
+                    break;
+                case 0xBE:
+                    Bits.SetShort(asc.CommandData, 1, (ushort)aniNumB1.Value);
+                    break;
+                case 0xC3:
+                    asc.Param1 = (byte)aniNameA1.SelectedIndex;
+                    break;
+                case 0xCB:
+                    asc.Param1 = (byte)aniNumB1.Value;
+                    break;
+                case 0xE1:
+                    Bits.SetShort(asc.CommandData, 1, (ushort)aniNumB1.Value);
+                    asc.CommandData[3] = (byte)aniNumB2.Value;
                     break;
             }
         }
-        private void ResetAllAniControls()
+        private void ResetControls()
         {
-            updatingAnimations = true;
+            updatingControls = true;
 
-            aniNameA.Items.Clear(); aniNameA.ResetText(); aniNameA.Enabled = false;
-            aniNameB.Items.Clear(); aniNameB.ResetText(); aniNameB.Enabled = false;
-            aniNumA.Maximum = 255; aniNumA.Hexadecimal = false; aniNumA.Value = 0; aniNumA.Enabled = false;
-            aniNumB.Maximum = 255; aniNumB.Hexadecimal = false; aniNumB.Value = 0; aniNumB.Enabled = false;
-            aniNumC.Maximum = 255; aniNumC.Hexadecimal = false; aniNumC.Minimum = 0; aniNumC.Increment = 1; aniNumC.Value = 0; aniNumC.Enabled = false;
-            aniNumD.Maximum = 255; aniNumD.Hexadecimal = false; aniNumD.Minimum = 0; aniNumD.Increment = 1; aniNumD.Value = 0; aniNumD.Enabled = false;
-            aniNumE.Maximum = 255; aniNumE.Hexadecimal = false; aniNumE.Value = 0; aniNumE.Enabled = false;
-            aniNumF.Maximum = 255; aniNumF.Value = 0; aniNumF.Enabled = false;
-            aniBits.ColumnWidth = 138; aniBits.Items.Clear(); aniBits.Enabled = false;
+            aniNameA1.DrawMode = DrawMode.Normal; aniNameA1.ItemHeight = 13; aniNameA1.BackColor = SystemColors.Window;
+            aniNameA1.Items.Clear(); aniNameA1.ResetText(); aniNameA1.Enabled = false; aniNameA1.DropDownWidth = aniNameA1.Width;
+            aniNameA2.Items.Clear(); aniNameA2.ResetText(); aniNameA2.Enabled = false; aniNameA2.DropDownWidth = aniNameA2.Width;
+            aniNumA1.Maximum = 255; aniNumA1.Hexadecimal = false; aniNumA1.Minimum = 0; aniNumA1.Value = 0; aniNumA1.Enabled = false;
+            aniNumA2.Maximum = 255; aniNumA2.Hexadecimal = false; aniNumA2.Minimum = 0; aniNumA2.Value = 0; aniNumA2.Enabled = false;
+            aniNumB1.Maximum = 255; aniNumB1.Hexadecimal = false; aniNumB1.Minimum = 0; aniNumB1.Increment = 1; aniNumB1.Value = 0; aniNumB1.Enabled = false;
+            aniNumB2.Maximum = 255; aniNumB2.Hexadecimal = false; aniNumB2.Minimum = 0; aniNumB2.Increment = 1; aniNumB2.Value = 0; aniNumB2.Enabled = false;
+            aniNumC1.Maximum = 255; aniNumC1.Hexadecimal = false; aniNumC1.Value = 0; aniNumC1.Enabled = false;
+            aniNumC2.Maximum = 255; aniNumC2.Value = 0; aniNumC2.Enabled = false;
+            aniBits.ColumnWidth = 134; aniBits.Items.Clear(); aniBits.Enabled = false;
 
             aniTitleA.Text = "";
-            aniTitleC.Text = "";
             aniTitleB.Text = "";
-            aniLabelA.Text = "";
-            aniLabelB.Text = "";
-            aniLabelC.Text = "";
-            aniLabelD.Text = "";
-            aniLabelE.Text = "";
-            aniLabelF.Text = "";
+            aniTitleC.Text = "";
+            aniTitleD.Text = "";
+            aniLabelA1.Text = "";
+            aniLabelA2.Text = "";
+            aniLabelB1.Text = "";
+            aniLabelB2.Text = "";
+            aniLabelC1.Text = "";
+            aniLabelC2.Text = "";
 
-            updatingAnimations = false;
+            updatingControls = false;
+        }
+        private void OrganizeControls()
+        {
+            aniTitleA.Visible = aniTitleA.Enabled =
+                aniTitleA.Text != "" ||
+                aniLabelA1.Text != "" ||
+                aniLabelA2.Text != "";
+            aniTitleB.Visible = aniTitleB.Enabled =
+                aniTitleB.Text != "" ||
+                aniLabelB1.Text != "" ||
+                aniLabelB2.Text != "";
+            aniTitleC.Visible = aniTitleC.Enabled =
+                aniTitleC.Text != "" ||
+                aniLabelC1.Text != "" ||
+                aniLabelC2.Text != "";
+            aniTitleD.Visible = aniTitleD.Enabled =
+                aniTitleD.Text != "" ||
+                aniBits.Items.Count > 0;
+            aniPanelA1.Visible = aniNumA1.Enabled || aniNameA1.Enabled;
+            aniPanelA2.Visible = aniNumA2.Enabled || aniNameA2.Enabled;
+            aniPanelB1.Visible = aniNumB1.Enabled;
+            aniPanelB2.Visible = aniNumB2.Enabled;
+            aniPanelC1.Visible = aniNumC1.Enabled;
+            aniPanelC2.Visible = aniNumC2.Enabled;
+            aniNameA1.Visible = aniNameA1.Enabled;
+            aniNameA2.Visible = aniNameA2.Enabled;
+            aniNumA1.Visible = aniNumA1.Enabled;
+            aniNumA2.Visible = aniNumA2.Enabled;
+            if (aniBits.Items.Count < 8)
+                aniBits.Height = aniBits.Items.Count * 16 + 4;
+            else
+                aniBits.Height = 8 * 16 + 4;
+            //
+            aniTitleA.BringToFront();
+            aniTitleB.BringToFront();
+            aniTitleC.BringToFront();
+            aniTitleD.BringToFront();
+            panel1.BringToFront();
+            aniPanelA1.BringToFront();
+            aniPanelA2.BringToFront();
+            aniPanelB1.BringToFront();
+            aniPanelB2.BringToFront();
+            aniPanelC1.BringToFront();
+            aniPanelC2.BringToFront();
+            aniLabelA1.BringToFront();
+            aniNameA1.BringToFront();
+            aniNumA1.BringToFront();
+            aniLabelA2.BringToFront();
+            aniNameA2.BringToFront();
+            aniNumA2.BringToFront();
+            //
+            if (aniTitleA.Enabled)
+                aniTitleA.Text = Lists.AnimationCommands[asc.Opcode];
+            else if (aniTitleB.Enabled)
+                aniTitleB.Text = Lists.AnimationCommands[asc.Opcode];
+            else if (aniTitleC.Enabled)
+                aniTitleC.Text = Lists.AnimationCommands[asc.Opcode];
+            else if (aniTitleD.Enabled)
+                aniTitleD.Text = Lists.AnimationCommands[asc.Opcode];
         }
         private void UpdateCommandData()
         {
         }
-
+        private void NotEnoughSpace()
+        {
+            MessageBox.Show("Not enough space to replace the selected command(s) with the new command.\n\n" +
+                "Try selecting a smaller command from the list or selecting an earlier command within the routine in the tree.",
+                "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            commands.SelectedIndex = -1;
+        }
+        //
         public void Assemble()
         {
         }
@@ -1071,10 +1236,10 @@ namespace LAZYSHELL
                 animationCategory.SelectedIndex == 1 ||
                 animationCategory.SelectedIndex == 2 ||
                 animationCategory.SelectedIndex == 4;
-            if (updatingAnimations) return;
-
+            if (updating)
+                return;
             animationNum.Value = 0;
-            RefreshAnimationScriptsEditor();
+            RefreshEditor();
             //
             settings.LastAnimationCat = animationCategory.SelectedIndex;
             settings.LastAnimation = (int)animationNum.Value;
@@ -1082,20 +1247,20 @@ namespace LAZYSHELL
         private void animationNum_ValueChanged(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-
+            animationScripts[(int)animationNum.Value].RefreshScript();
+            //
             if (animationCategory.SelectedIndex == 2)
             {
-                animationName.SelectedIndex = Model.AttackNames.GetIndexFromNum(Index);
-                a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                animationName.SelectedIndex = Model.AttackNames.GetSortedIndex(Index);
+                wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
             }
             else
             {
                 animationName.SelectedIndex = Index;
-                a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
+                wrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
             }
-            if (this.animationScriptTree.Nodes.Count > 0)
-                this.animationScriptTree.SelectedNode = this.animationScriptTree.Nodes[0];
+            if (this.commandTree.Nodes.Count > 0)
+                this.commandTree.SelectedNode = this.commandTree.Nodes[0];
             Cursor.Current = Cursors.Arrow;
             //
             settings.LastAnimationCat = animationCategory.SelectedIndex;
@@ -1104,7 +1269,7 @@ namespace LAZYSHELL
         private void animationName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (animationCategory.SelectedIndex == 2)
-                animationNum.Value = Model.AttackNames.GetNumFromIndex(animationName.SelectedIndex);
+                animationNum.Value = Model.AttackNames.GetUnsortedIndex(animationName.SelectedIndex);
             else
                 animationNum.Value = animationName.SelectedIndex;
         }
@@ -1129,41 +1294,39 @@ namespace LAZYSHELL
                 animationCategory.SelectedIndex == 5 ||
                 animationCategory.SelectedIndex == 6)
             {
-                char[] arr;
-
+                char[] name;
                 switch (animationCategory.SelectedIndex)
                 {
                     case 1: // monster spells
-                        arr = Model.SpellNames.GetNameByNum(e.Index + 0x40).ToCharArray();
-                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, arr, false);
+                        name = Model.SpellNames.GetUnsortedName(e.Index + 0x40).ToCharArray();
+                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, name, false);
                         break;
                     case 2: // monster attacks
-                        arr = Model.AttackNames.GetName(e.Index).ToCharArray();
-                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, arr, false);
+                        name = Model.AttackNames.Names[e.Index].ToCharArray();
+                        temp = battleDialoguePreview.GetPreview(Model.FontDialogue, Model.FontPaletteBattle.Palette, name, false);
                         break;
                     case 4: // items
-                        arr = Model.ItemNames.GetNameByNum(e.Index + 0x60).ToCharArray();
-                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        name = Model.ItemNames.GetUnsortedName(e.Index + 0x60).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, name, true);
                         break;
                     case 5: // ally spells
-                        arr = Model.SpellNames.GetNameByNum(e.Index).ToCharArray();
-                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        name = Model.SpellNames.GetUnsortedName(e.Index).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, name, true);
                         break;
                     case 6: // weapons
-                        arr = Model.ItemNames.GetNameByNum(e.Index).ToCharArray();
-                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true);
+                        name = Model.ItemNames.GetUnsortedName(e.Index).ToCharArray();
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, name, true);
                         break;
                     default:
-                        arr = new char[1];
-                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, arr, true); break;
+                        name = new char[1];
+                        temp = menuTextPreview.GetPreview(Model.FontMenu, Model.FontPaletteBattle.Palette, name, true); break;
                 }
-
+                //
                 Rectangle background = new Rectangle(0, e.Index * 15 % bgimage.Height, bgimage.Width, 15);
                 e.Graphics.DrawImage(bgimage, e.Bounds.X, e.Bounds.Y, background, GraphicsUnit.Pixel);
                 // set the pixels
                 if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                     e.DrawBackground();
-
                 int[] pixels;
                 Bitmap icon;
                 if (animationCategory.SelectedIndex == 1 || animationCategory.SelectedIndex == 2)
@@ -1197,34 +1360,35 @@ namespace LAZYSHELL
         //
         private void animationScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //if (asc == (AnimationScriptCommand)e.Node.Tag)
-            //    return;
-            a_treeViewWrapper.SelectedNode = e.Node;
-            asc = (AnimationScriptCommand)e.Node.Tag;
-
+            wrapper.SelectedNode = e.Node;
+            asc = (AnimationCommand)e.Node.Tag;
+            ascCopy = null;
+            //
+            toolStripCommands.SuspendDrawing();
             ToolStripNumericUpDown numUpDown;
-            int i = 6;
-            for (int a = 0; a < asc.AnimationData.Length && a < 9; a++, i++)
+            int i = 9;
+            for (int a = 0; a < asc.CommandData.Length && a < 9; a++, i++)
             {
-                numUpDown = (ToolStripNumericUpDown)toolStrip2.Items[i];
+                numUpDown = (ToolStripNumericUpDown)toolStripCommands.Items[i];
                 numUpDown.Tag = asc;
-                numUpDown.Value = asc.AnimationData[a];
+                numUpDown.Value = asc.CommandData[a];
                 numUpDown.Visible = true;
             }
-            for (; i < 4 + 9; i++)
+            for (; i < 18; i++)
             {
-                numUpDown = (ToolStripNumericUpDown)toolStrip2.Items[i];
+                numUpDown = (ToolStripNumericUpDown)toolStripCommands.Items[i];
                 numUpDown.Visible = false;
             }
+            toolStripCommands.ResumeDrawing();
+            //
             emptyAnimationMods.Enabled = true;
             applyAnimationMods.Enabled = true;
             aniMoveDown.Enabled = true;
             aniMoveUp.Enabled = true;
-
+            //
             panelAniControls.Enabled = true;
             applyAnimation.Enabled = true;
-            ResetAllAniControls();
-            ControlAniDisasmMethod();
+            ControlDisassemble(asc);
         }
         private void animationScriptTree_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1232,88 +1396,91 @@ namespace LAZYSHELL
             {
                 case Keys.Control | Keys.Up:
                 case Keys.Shift | Keys.Up:
-                    aniMoveUp_Click(null, null);
-                    break;
+                    e.SuppressKeyPress = true;
+                    aniMoveUp.PerformClick(); break;
                 case Keys.Control | Keys.Down:
                 case Keys.Shift | Keys.Down:
-                    aniMoveDown_Click(null, null);
-                    break;
+                    e.SuppressKeyPress = true;
+                    aniMoveDown.PerformClick(); break;
+                case Keys.Control | Keys.Z:
+                    undo.PerformClick(); break;
+                case Keys.Control | Keys.Y:
+                    redo.PerformClick(); break;
             }
         }
         //
         private void aniMoveDown_Click(object sender, EventArgs e)
         {
-            a_treeViewWrapper.MoveDown(asc);
+            int topOffset = 0;
+            AnimationCommand copy = asc.Copy();
+            byte[] changes = wrapper.MoveDown(asc, ref topOffset);
+            if (changes == null)
+                return;
+            commandStack.Push(new AnimationEdit(this, copy, topOffset, changes));
+            //
+            RedrawTree();
         }
         private void aniMoveUp_Click(object sender, EventArgs e)
         {
-            a_treeViewWrapper.MoveUp(asc);
+            int topOffset = 0;
+            AnimationCommand copy = asc.Copy();
+            byte[] changes = wrapper.MoveUp(asc, ref topOffset);
+            if (changes == null)
+                return;
+            commandStack.Push(new AnimationEdit(this, copy, topOffset, changes));
+            //
+            RedrawTree();
         }
         private void expandAll_Click(object sender, EventArgs e)
         {
-            a_treeViewWrapper.ExpandAll();
+            wrapper.ExpandAll();
             UpdateCommandData();
         }
         private void collapseAll_Click(object sender, EventArgs e)
         {
-            a_treeViewWrapper.CollapseAll();
+            wrapper.CollapseAll();
             UpdateCommandData();
         }
         private void applyAnimationMods_Click(object sender, EventArgs e)
         {
-            Point p = Do.GetTreeViewScrollPos(animationScriptTree);
-            animationScriptTree.BeginUpdate();
-            animationScriptTree.EnablePaint = false;
-
-            int tmp = asc.InternalOffset;
-            byte[] temp = new byte[asc.AnimationData.Length];
-            asc.AnimationData.CopyTo(temp, 0);
+            int offset = asc.InternalOffset;
+            byte[] temp = new byte[asc.CommandData.Length];
+            asc.CommandData.CopyTo(temp, 0);
             try
             {
-                foreach (ToolStripItem item in toolStrip2.Items)
+                int available = asc.Length;
+                byte[] changes = new byte[available];
+                foreach (ToolStripItem item in toolStripCommands.Items)
                 {
                     if (!item.Visible || item.GetType() != typeof(ToolStripNumericUpDown))
                         continue;
                     ToolStripNumericUpDown numUpDown = (ToolStripNumericUpDown)item;
-                    int index = toolStrip2.Items.IndexOf(numUpDown) - 6;
+                    int index = toolStripCommands.Items.IndexOf(numUpDown) - 9;
                     // set the new value for the command
-                    asc.AnimationData[index] = (byte)numUpDown.Value;
-                    Model.Data[asc.InternalOffset + index] = (byte)numUpDown.Value;
+                    asc.CommandData[index] = (byte)numUpDown.Value;
+                    changes[index] = (byte)numUpDown.Value;
                 }
+                commandStack.Push(new AnimationEdit(this, asc, asc.InternalOffset, changes));
                 // check multiple instances of command in current script, and change each accordingly
-                animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-
+                animationScripts[(int)animationNum.Value].RefreshScript();
+                ControlDisassemble(asc);
             }
             catch
             {
                 for (int i = 0; i < temp.Length; i++)
-                    Model.Data[tmp + i] = temp[i];
-
+                    Model.ROM[offset + i] = temp[i];
+                temp.CopyTo(asc.CommandData, 0);
                 // check multiple instances of command in current script, and change each accordingly
-                animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-
-                //// redraw the treeview
-                //a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value]);
-
-                MessageBox.Show("Setting this byte to this value causes errors.",
-                    "LAZY SHELL");
+                animationScripts[(int)animationNum.Value].RefreshScript();
+                MessageBox.Show("Could not change command values -- the modified command cannot be parsed. Reverting back to original command.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ControlDisassemble(asc);
             }
-            finally
-            {
-                // redraw the treeview
-                a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
-            }
-            animationScriptTree.EnablePaint = true;
-            animationScriptTree.EndUpdate();
-
-            // set the selected node
-            a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
-            p.X = 0;
-            Do.SetTreeViewScrollPos(animationScriptTree, p);
+            RedrawTree();
         }
         private void emptyAnimationMods_Click(object sender, EventArgs e)
         {
-            foreach (ToolStripItem item in toolStrip2.Items)
+            foreach (ToolStripItem item in toolStripCommands.Items)
             {
                 if (item.GetType() == typeof(ToolStripNumericUpDown))
                     ((ToolStripNumericUpDown)item).Value = 0x0A;
@@ -1329,64 +1496,191 @@ namespace LAZYSHELL
             ap.BringToFront();
         }
         //
+        private void commands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updating)
+                return;
+            if (commands.SelectedIndex == -1)
+                return;
+            if (asc == null)
+            {
+                MessageBox.Show("Must select a command in the tree to change.");
+                commands.SelectedIndex = -1;
+                return;
+            }
+            // get total available space to replace w/new command
+            int needed = A_ScriptEnums.GetCommandLength(commands.SelectedIndex, 0);
+            if (needed > asc.AvailableSpace(needed, false))
+            {
+                NotEnoughSpace();
+                return;
+            }
+            //
+            ascCopy = asc.Copy();
+            byte opcode = (byte)commands.SelectedIndex;
+            int length = A_ScriptEnums.GetCommandLength(opcode, 0);
+            ascCopy.CommandData = new byte[length];
+            Bits.Fill(ascCopy.CommandData, 0x0A);
+            ascCopy.Opcode = opcode;
+            for (int i = 1; i < ascCopy.Length; i++)
+                ascCopy.CommandData[i] = 0;
+            ControlDisassemble(ascCopy);
+        }
         private void applyAnimation_Click(object sender, EventArgs e)
         {
-            Point p = Do.GetTreeViewScrollPos(animationScriptTree);
-            animationScriptTree.BeginUpdate();
-            animationScriptTree.EnablePaint = false;
+            int available = asc.Length;
+            if (ascCopy != null)
+            {
+                available = asc.AvailableSpace(ascCopy.Length, false); // number of bytes to replace and/or wipe clean w/0x0A's
+                if (ascCopy.Length > available)
+                {
+                    NotEnoughSpace();
+                    return;
+                }
+                int lastNeeded = asc.AvailableSpace(ascCopy.Length, true); // the last command index needed for space
+                if (MessageBox.Show("CAUTION: you are about to replace the selected command " +
+                    "in the tree and the following " + (lastNeeded - asc.Index) + " commands.\n\n" +
+                    "Continue?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
+                asc = ascCopy;
+            }
+            ascCopy = null;
+            //
+            ControlAssemble();
 
-            ControlAniAsmMethod();
-
-            for (int i = 0; i < asc.AnimationData.Length; i++)
-                Model.Data[asc.InternalOffset + i] = asc.AnimationData[i];
-
-            // redraw the treeview
-            animationScripts[(int)animationNum.Value].RefreshAnimationScript();
-            a_treeViewWrapper.ChangeScript(animationScripts[(int)animationNum.Value], false);
-            animationScriptTree.EnablePaint = true;
-            animationScriptTree.EndUpdate();
-
-            // set the selected node
-            a_treeViewWrapper.SetSelectedNode(asc.InternalOffset);
-            p.X = 0;
-            Do.SetTreeViewScrollPos(animationScriptTree, p);
+            byte[] changes = new byte[available];
+            for (int i = 0; i < available; i++)
+                changes[i] = (byte)(i < asc.Length ? asc.CommandData[i] : 0x0A);
+            commandStack.Push(new AnimationEdit(this, asc, asc.InternalOffset, changes));
+            //
+            RedrawTree();
         }
-        private void aniNameA_SelectedIndexChanged(object sender, EventArgs e)
+        private void undo_Click(object sender, EventArgs e)
         {
-            if (updatingAnimations) return;
+            if (!commandStack.UndoCommand())
+                return;
+            RedrawTree();
+        }
+        private void redo_Click(object sender, EventArgs e)
+        {
+            if (!commandStack.RedoCommand())
+                return;
+            RedrawTree();
+        }
+        private void aniNameA1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (updatingControls) return;
 
             switch (asc.Opcode)
             {
                 case 0x00:
                 case 0x03:
-                    aniNumA.Value = aniNameA.SelectedIndex;
+                    aniNumA1.Value = aniNameA1.SelectedIndex;
+                    break;
+                case 0x20:
+                case 0x21:
+                case 0x22:
+                case 0x23:
+                case 0x2C:
+                case 0x2D:
+                case 0x2E:
+                case 0x2F:
+                    aniNumB2.Hexadecimal = aniNameA1.SelectedIndex != 0;
+                    switch (aniNameA1.SelectedIndex)
+                    {
+                        case 0:
+                            aniNumB2.Minimum = 0;
+                            aniNumB2.Maximum = 0xFFFF;
+                            break;
+                        case 1:
+                        case 5:
+                            aniNumB2.Maximum = 0x7EFFFF;
+                            aniNumB2.Minimum = 0x7E0000;
+                            break;
+                        case 2:
+                            aniNumB2.Maximum = 0x7FFFFF;
+                            aniNumB2.Minimum = 0x7F0000;
+                            break;
+                        case 3:
+                            aniNumB2.Minimum = 0x60;
+                            aniNumB2.Maximum = 0x6F;
+                            break;
+                        case 4:
+                        case 6:
+                            aniNumB2.Minimum = 0;
+                            aniNumB2.Maximum = 0xFF;
+                            break;
+                    }
+                    break;
+                case 0x24:
+                case 0x25:
+                case 0x26:
+                case 0x27:
+                case 0x28:
+                case 0x29:
+                case 0x2A:
+                case 0x2B:
+                    aniNumB1.Hexadecimal = aniNameA1.SelectedIndex != 0;
+                    switch (aniNameA1.SelectedIndex)
+                    {
+                        case 0:
+                            aniNumB1.Minimum = 0;
+                            aniNumB1.Maximum = 0xFFFF;
+                            break;
+                        case 1:
+                        case 5:
+                            aniNumB1.Maximum = 0x7EFFFF;
+                            aniNumB1.Minimum = 0x7E0000;
+                            break;
+                        case 2:
+                            aniNumB1.Maximum = 0x7FFFFF;
+                            aniNumB1.Minimum = 0x7F0000;
+                            break;
+                        case 3:
+                            aniNumB1.Minimum = 0x60;
+                            aniNumB1.Maximum = 0x6F;
+                            break;
+                        case 4:
+                        case 6:
+                            aniNumB1.Minimum = 0;
+                            aniNumB1.Maximum = 0xFF;
+                            break;
+                    }
                     break;
                 case 0xBC:
                 case 0xBD:
-                    aniNumA.Value = Model.ItemNames.GetNumFromIndex(aniNameA.SelectedIndex);
+                    aniNumA1.Value = Model.ItemNames.GetUnsortedIndex(aniNameA1.SelectedIndex);
                     break;
             }
         }
-        private void aniNumA_ValueChanged(object sender, EventArgs e)
+        private void aniNameA1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (updatingAnimations) return;
+            if (e.Index < 0) return;
+            Do.DrawName(
+                sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
+                Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
+        }
+        private void aniNumA1_ValueChanged(object sender, EventArgs e)
+        {
+            if (updatingControls) return;
 
+            AnimationCommand asc = ascCopy != null ? ascCopy : this.asc;
             switch (asc.Opcode)
             {
                 case 0x00:
                 case 0x03:
-                    aniNameA.SelectedIndex = (int)aniNumA.Value;
+                    aniNameA1.SelectedIndex = (int)aniNumA1.Value;
                     break;
                 case 0xBC:
                 case 0xBD:
-                    aniNameA.SelectedIndex = Model.ItemNames.GetIndexFromNum((int)aniNumA.Value);
+                    aniNameA1.SelectedIndex = Model.ItemNames.GetSortedIndex((int)aniNumA1.Value);
                     break;
             }
         }
         //
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Bits.GetByteArray(Model.Data, 0x350000, 0x10000), Bits.GetByteArray(Model.Data, 0x3A6000, 0xA000)) == this.checksum)
+            if (Do.GenerateChecksum(Bits.GetByteArray(Model.ROM, 0x350000, 0x10000), Bits.GetByteArray(Model.ROM, 0x3A6000, 0xA000)) == this.checksum)
                 goto Close;
             DialogResult result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -1395,8 +1689,8 @@ namespace LAZYSHELL
             }
             else if (result == DialogResult.No)
             {
-                Buffer.BlockCopy(animationBank, 0, Model.Data, 0x350000, 0x10000);
-                Buffer.BlockCopy(battleBank, 0, Model.Data, 0x3A6000, 0xA000);
+                Buffer.BlockCopy(animationBank, 0, Model.ROM, 0x350000, 0x10000);
+                Buffer.BlockCopy(battleBank, 0, Model.ROM, 0x3A6000, 0xA000);
                 Model.SpellAnimMonsters = null;
                 Model.SpellAnimAllies = null;
                 Model.AttackAnimations = null;
@@ -1436,12 +1730,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("**************\n");
             foreach (AnimationScript ans in Model.SpellAnimMonsters)
             {
-                evtscr.WriteLine("\nMONSTER SPELL [" + i.ToString("d3") + "] " + Model.SpellNames.GetNameByNum(i + 64).Substring(1).Trim() +
+                evtscr.WriteLine("\nMONSTER SPELL {" + i.ToString("d3") + "} " + Model.SpellNames.GetUnsortedName(i + 64).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1453,12 +1747,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("***********\n");
             foreach (AnimationScript ans in Model.SpellAnimAllies)
             {
-                evtscr.WriteLine("\nALLY SPELL [" + i.ToString("d3") + "] " + Model.SpellNames.GetNameByNum(i).Substring(1).Trim() +
+                evtscr.WriteLine("\nALLY SPELL {" + i.ToString("d3") + "} " + Model.SpellNames.GetUnsortedName(i).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1470,12 +1764,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("*******\n");
             foreach (AnimationScript ans in Model.AttackAnimations)
             {
-                evtscr.WriteLine("\nATTACK [" + i.ToString("d3") + "] " + Model.AttackNames.GetNameByNum(i).Trim() +
+                evtscr.WriteLine("\nATTACK {" + i.ToString("d3") + "} " + Model.AttackNames.GetUnsortedName(i).Trim() +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1487,12 +1781,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("*****\n");
             foreach (AnimationScript ans in Model.ItemAnimations)
             {
-                evtscr.WriteLine("\nITEM [" + i.ToString("d3") + "] " + Model.ItemNames.GetNameByNum(i + 96).Substring(1).Trim() +
+                evtscr.WriteLine("\nITEM {" + i.ToString("d3") + "} " + Model.ItemNames.GetUnsortedName(i + 96).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1504,12 +1798,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("*************\n");
             foreach (AnimationScript ans in Model.BattleEvents)
             {
-                evtscr.WriteLine("\nBATTLE EVENT [" + i.ToString("d3") + "] " +
+                evtscr.WriteLine("\nBATTLE EVENT {" + i.ToString("d3") + "} " +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1521,12 +1815,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("*********\n");
             foreach (AnimationScript ans in Model.BehaviorAnimations)
             {
-                evtscr.WriteLine("\nBEHAVIOR [" + i.ToString("d3") + "] " +
+                evtscr.WriteLine("\nBEHAVIOR {" + i.ToString("d3") + "} " +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1538,12 +1832,12 @@ namespace LAZYSHELL
             evtscr.WriteLine("*********\n");
             foreach (AnimationScript ans in Model.EntranceAnimations)
             {
-                evtscr.WriteLine("\nENTRANCE [" + i.ToString("d3") + "] " +
+                evtscr.WriteLine("\nENTRANCE {" + i.ToString("d3") + "} " +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
@@ -1555,27 +1849,27 @@ namespace LAZYSHELL
             evtscr.WriteLine("*******\n");
             foreach (AnimationScript ans in Model.WeaponAnimations)
             {
-                evtscr.WriteLine("\nWEAPON [" + i.ToString("d3") + "] " + Model.ItemNames.GetNameByNum(i).Substring(1).Trim() +
+                evtscr.WriteLine("\nWEAPON {" + i.ToString("d3") + "} " + Model.ItemNames.GetUnsortedName(i).Substring(1).Trim() +
                     "------------------------------------------------------------>\n");
-                foreach (AnimationScriptCommand asc in ans.Commands)
+                foreach (AnimationCommand asc in ans.Commands)
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                    evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                    evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
             }
         }
-        private void dumpAnimationLoop(AnimationScriptCommand com, StreamWriter evtscr, int level)
+        private void dumpAnimationLoop(AnimationCommand com, StreamWriter evtscr, int level)
         {
-            foreach (AnimationScriptCommand asc in com.Commands)
+            foreach (AnimationCommand asc in com.Commands)
             {
                 for (int i = 0; i < level; i++)
                     evtscr.Write("\t");
 
                 evtscr.Write((asc.Offset).ToString("X6") + ": ");
-                evtscr.Write("{" + BitConverter.ToString(asc.AnimationData) + "}\n");
+                evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
 
                 dumpAnimationLoop(asc, evtscr, level + 1);
             }

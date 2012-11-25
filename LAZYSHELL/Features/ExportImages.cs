@@ -19,7 +19,7 @@ namespace LAZYSHELL
         private Sprite[] sprites { get { return Model.Sprites; } }
         private Animation[] animations { get { return Model.Animations; } }
         private PaletteSet[] palettes { get { return Model.SpritePalettes; } }
-        private GraphicPalette[] images { get { return Model.GraphicPalettes; } }
+        private ImagePacket[] images { get { return Model.GraphicPalettes; } }
         private byte[] spriteGraphics { get { return Model.SpriteGraphics; } }
         private Level[] levels { get { return Model.Levels; } }
         private LevelMap[] levelMaps { get { return Model.LevelMaps; } }
@@ -45,11 +45,13 @@ namespace LAZYSHELL
                 this.maximumWidth.Visible = false;
                 this.label2.Visible = false;
                 this.oneSpriteSheet.Visible = false;
+                this.oneAnimatedGIF.Visible = false;
             }
         }
         // functions
         private void Export()
         {
+            bool gif = oneAnimatedGIF.Checked;
             bool crop = oneImageCropped.Checked || oneSpriteSheet.Checked;
             bool contact = oneSpriteSheet.Checked;
             int maxwidth = (int)maximumWidth.Value;
@@ -91,7 +93,7 @@ namespace LAZYSHELL
             else
             {
                 start = (int)fromIndex.Value;
-                end = (int)toIndex.Value;
+                end = (int)(toIndex.Value + 1);
                 // first, open and create directory
                 FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
                 folderBrowserDialog1.SelectedPath = Settings.Default.LastDirectory;
@@ -109,7 +111,7 @@ namespace LAZYSHELL
                     di.Create();
             }
             // set the backgroundworker properties
-            Export_Worker.DoWork += (s, e) => Export_Worker_DoWork(s, e, fullPath, crop, contact, maxwidth, start, end, current.Checked);
+            Export_Worker.DoWork += (s, e) => Export_Worker_DoWork(s, e, fullPath, crop, contact, gif, maxwidth, start, end, current.Checked);
             Export_Worker.ProgressChanged += new ProgressChangedEventHandler(Export_Worker_ProgressChanged);
             Export_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Export_Worker_RunWorkerCompleted);
             if (element == "levels")
@@ -123,7 +125,8 @@ namespace LAZYSHELL
                 Application.DoEvents();
             this.Enabled = true;
         }
-        private void Export_Worker_DoWork(object sender, DoWorkEventArgs e, string fullPath, bool crop, bool contact, int maxwidth, int start, int end, bool current)
+        private void Export_Worker_DoWork(object sender, DoWorkEventArgs e, string fullPath,
+            bool crop, bool contact, bool gif, int maxwidth, int start, int end, bool current)
         {
             for (int a = start; a < end; a++)
             {
@@ -137,6 +140,7 @@ namespace LAZYSHELL
                     s = sprites[a];
                     Export_Worker.ReportProgress(s.Index);
                 }
+                // if NOT sprite sheet or animated gif (ie. if NOT single image for each element)
                 if (!contact && element == "sprites")
                 {
                     DirectoryInfo di = new DirectoryInfo(fullPath + "Sprite #" + s.Index.ToString("d4"));
@@ -175,16 +179,36 @@ namespace LAZYSHELL
                             IntPtr ip = new IntPtr(firstPixel);
                             if (image != null)
                                 image.Dispose();
-                            image = new Bitmap(region.Width, region.Height, region.Width * 4, System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
+                            image = new Bitmap(region.Width, region.Height, region.Width * 4, PixelFormat.Format32bppPArgb, ip);
                         }
                     }
                     if (!current)
-                        image.Save(fullPath + "Level #" + a.ToString("d3") + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                        image.Save(fullPath + "Level #" + a.ToString("d3") + ".png", ImageFormat.Png);
                     else
-                        image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Png);
+                        image.Save(fullPath, ImageFormat.Png);
                     continue;
                 }
                 // sprites
+                if (gif)
+                {
+                    Animation animation = animations[s.AnimationPacket];
+                    foreach (Mold m in animation.Molds)
+                    {
+                        foreach (Mold.Tile t in m.Tiles)
+                            t.DrawSubtiles(s.Graphics, s.Palette, m.Gridplane);
+                    }
+                    foreach (Sequence sequence in animation.Sequences)
+                    {
+                        List<int> durations = new List<int>();
+                        Bitmap[] croppedFrames = sequence.GetSequenceImages(animation, ref durations);
+                        //
+                        string path = fullPath + "Sprite #" + s.Index.ToString("d4") + "\\sequence." + index.ToString("d2") + ".gif";
+                        if (croppedFrames.Length > 0)
+                            Do.ImagesToAnimatedGIF(croppedFrames, durations.ToArray(), path);
+                        index++;
+                    }
+                    continue;
+                }
                 int[][] molds = new int[animations[s.AnimationPacket].Molds.Count][];
                 int[] sheet;
                 int biggestHeight = 0;
@@ -193,9 +217,9 @@ namespace LAZYSHELL
                 foreach (Mold m in animations[s.AnimationPacket].Molds)
                 {
                     foreach (Mold.Tile t in m.Tiles)
-                        t.Set8x8Tiles(
-                            images[s.GraphicPalettePacket].Graphics(spriteGraphics),
-                            palettes[images[s.GraphicPalettePacket].PaletteNum + s.PaletteIndex].Palette,
+                        t.DrawSubtiles(
+                            images[s.Image].Graphics(spriteGraphics),
+                            palettes[images[s.Image].PaletteNum + s.PaletteIndex].Palette,
                             m.Gridplane);
                     Rectangle region;
                     if (crop)

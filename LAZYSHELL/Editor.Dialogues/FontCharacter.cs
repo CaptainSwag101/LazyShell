@@ -8,59 +8,84 @@ namespace LAZYSHELL
     [Serializable()]
     public class FontCharacter
     {
-        [NonSerialized()]
-        private byte[] data;
-
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private int index; public int Index { get { return index; } }
-        private FontType fontType; public FontType FontType { get { return fontType; } }
-
+        // class variables, accessors
+        private FontType type; public FontType Type { get { return type; } }
         private byte width; public byte Width { get { return width; } set { width = value; } }
         private byte height; public byte Height { get { return height; } }
         private byte[] graphics; public byte[] Graphics { get { return graphics; } set { graphics = value; } }
-
         private byte maxWidth; public byte MaxWidth { get { return maxWidth; } }
-
-        public FontCharacter(byte[] data, int fontNum, FontType fontType)
+        // constructor
+        public FontCharacter(int index, FontType type)
         {
-            this.data = data;
-            this.index = fontNum;
-            this.fontType = fontType;
-
-            InitializeFontCharacter();
+            this.index = index;
+            this.type = type;
+            Disassemble();
         }
-        private void InitializeFontCharacter()
+        // assemblers
+        private void Disassemble()
         {
-            switch (fontType)
+            switch (type)
             {
                 case FontType.Menu: // menu font
-                    width = (byte)data[index + 0x249300]; maxWidth = 8; height = 12;
-                    graphics = Bits.GetByteArray(data, index * 0x18 + 0x249400, 0x18);
+                    width = (byte)rom[index + 0x249300]; maxWidth = 8; height = 12;
+                    graphics = Bits.GetByteArray(rom, index * 0x18 + 0x249400, 0x18);
                     break;
                 case FontType.Dialogue: // dialogue font
-                    width = (byte)data[index + 0x249280]; maxWidth = 16; height = 12;
-                    graphics = Bits.GetByteArray(data, index * 0x30 + 0x37C000, 0x30);
+                    width = (byte)rom[index + 0x249280]; maxWidth = 16; height = 12;
+                    graphics = Bits.GetByteArray(rom, index * 0x30 + 0x37C000, 0x30);
                     break;
                 case FontType.Description: // description font
-                    width = (byte)data[index + 0x249380]; maxWidth = 8; height = 8;
-                    graphics = Bits.GetByteArray(data, index * 0x10 + 0x37D800, 0x10);
+                    width = (byte)rom[index + 0x249380]; maxWidth = 8; height = 8;
+                    graphics = Bits.GetByteArray(rom, index * 0x10 + 0x37D800, 0x10);
                     break;
                 case FontType.Triangles: // triangles
                     if (index < 7) { width = maxWidth = 8; height = 16; }
                     else { width = maxWidth = 16; height = 8; }
-                    graphics = Bits.GetByteArray(data, index * 0x20 + 0x3DFA00, 0x20);
+                    graphics = Bits.GetByteArray(rom, index * 0x20 + 0x3DFA00, 0x20);
                     break;
                 case FontType.BattleMenu: // battle menu font
+                    width = 8; maxWidth = 8; height = 8;
+                    graphics = Bits.GetByteArray(Model.BattleMenuGraphics, index * 0x20, 0x20);
+                    break;
                 case FontType.FlowerBonus: // flower bonus font
                     width = 8; maxWidth = 8; height = 8;
-                    graphics = Bits.GetByteArray(data, index * 0x20, 0x20);
+                    graphics = Bits.GetByteArray(Model.BonusFontGraphics, index * 0x20, 0x20);
                     break;
             }
         }
-        public int[] GetCharacterPixels(int[] palette)
+        public void Assemble()
+        {
+            switch (type)
+            {
+                case FontType.Menu: // menu font
+                    rom[index + 0x249300] = width;
+                    Bits.SetByteArray(rom, index * 0x18 + 0x249400, graphics);
+                    break;
+                case FontType.Dialogue: // dialogue font
+                    rom[index + 0x249280] = width;
+                    Bits.SetByteArray(rom, index * 0x30 + 0x37C000, graphics);
+                    break;
+                case FontType.Description: // description font
+                    rom[index + 0x249380] = width;
+                    Bits.SetByteArray(rom, index * 0x10 + 0x37D800, graphics);
+                    break;
+                case FontType.Triangles: // triangles
+                    Bits.SetByteArray(rom, index * 0x20 + 0x3DFA00, graphics);
+                    break;
+                case FontType.BattleMenu: // battle menu font
+                    Bits.SetByteArray(rom, index * 0x20, graphics);
+                    break;
+            }
+        }
+        // class functions
+        public int[] GetPixels(int[] palette)
         {
             int offset = 0;
             int[] pixels = new int[maxWidth * height];
-            if ((int)fontType < 4)
+            if ((int)type < 4)
             {
                 byte b1, b2, t1, t2, col = 0;
                 for (int a = 0; a < maxWidth / 8; a++)
@@ -75,7 +100,7 @@ namespace LAZYSHELL
                             t2 = (byte)((b2 >> z) & 1);
                             if (t2 * 2 + t1 != 0)
                             {
-                                if (fontType != FontType.Triangles)
+                                if (type != FontType.Triangles)
                                     pixels[(i * maxWidth) + col] = palette[(t2 * 2) + t1];
                                 else
                                     pixels[(i * maxWidth) + col] = palette[(t2 * 2) + t1 + 4];
@@ -117,7 +142,7 @@ namespace LAZYSHELL
         }
         public int GetLeftMostPixel(int[] palette)
         {
-            int[] pixels = GetCharacterPixels(palette);
+            int[] pixels = GetPixels(palette);
             int right = 0;
 
             for (int x = 0; x < maxWidth; x++)
@@ -135,7 +160,7 @@ namespace LAZYSHELL
         }
         public int GetRightMostPixel(int[] palette)
         {
-            int[] pixels = GetCharacterPixels(palette);
+            int[] pixels = GetPixels(palette);
             int left = maxWidth;
 
             for (int x = maxWidth - 1; x >= 0; x--)
@@ -153,7 +178,7 @@ namespace LAZYSHELL
         }
         public int GetTopMostPixel(int[] palette)
         {
-            int[] pixels = GetCharacterPixels(palette);
+            int[] pixels = GetPixels(palette);
             int bottom = 0;
 
             for (int y = 0; y < height; y++)
@@ -171,7 +196,7 @@ namespace LAZYSHELL
         }
         public int GetBottomMostPixel(int[] palette)
         {
-            int[] pixels = GetCharacterPixels(palette);
+            int[] pixels = GetPixels(palette);
             int top = height;
 
             for (int y = height - 1; y >= 0; y--)
@@ -205,7 +230,7 @@ namespace LAZYSHELL
                     byte colB = (byte)b;
                     byte bitB = (byte)((colB & 7) ^ 7);
                     int offsetB = rowB * 2;
-                    switch (FontType)
+                    switch (Type)
                     {
                         case FontType.Menu:
                         case FontType.Description:
@@ -246,7 +271,7 @@ namespace LAZYSHELL
                     byte colB = (byte)x;
                     byte bitB = (byte)((colB & 7) ^ 7);
                     int offsetB = rowB * 2;
-                    switch (FontType)
+                    switch (Type)
                     {
                         case FontType.Menu:
                         case FontType.Description:
@@ -267,30 +292,6 @@ namespace LAZYSHELL
                             goto case 0;
                     }
                 }
-            }
-        }
-        public void Assemble()
-        {
-            switch (fontType)
-            {
-                case FontType.Menu: // menu font
-                    data[index + 0x249300] = width;
-                    Bits.SetByteArray(data, index * 0x18 + 0x249400, graphics);
-                    break;
-                case FontType.Dialogue: // dialogue font
-                    data[index + 0x249280] = width;
-                    Bits.SetByteArray(data, index * 0x30 + 0x37C000, graphics);
-                    break;
-                case FontType.Description: // description font
-                    data[index + 0x249380] = width;
-                    Bits.SetByteArray(data, index * 0x10 + 0x37D800, graphics);
-                    break;
-                case FontType.Triangles: // triangles
-                    Bits.SetByteArray(data, index * 0x20 + 0x3DFA00, graphics);
-                    break;
-                case FontType.BattleMenu: // battle menu font
-                    Bits.SetByteArray(data, index * 0x20, graphics);
-                    break;
             }
         }
     }

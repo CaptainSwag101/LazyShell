@@ -631,7 +631,13 @@
             // 
             // itemNum
             // 
+            this.itemNum.ContextMenuStrip = null;
             this.itemNum.Hexadecimal = false;
+            this.itemNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.itemNum.Location = new System.Drawing.Point(177, 1);
             this.itemNum.Maximum = new decimal(new int[] {
             255,

@@ -25,7 +25,7 @@ namespace LAZYSHELL
         // functions
         private void Initialize()
         {
-            ProgressBar pBar = new ProgressBar(Model.Data, "CALCULATING...", 428);
+            ProgressBar pBar = new ProgressBar(Model.ROM, "CALCULATING...", 428);
             pBar.Show();
 
             int bank, index, size, bankIndex;

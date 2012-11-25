@@ -8,39 +8,42 @@ namespace LAZYSHELL
     [Serializable()]
     public class BattleDialogueTileset
     {
+        // non-serialized variables
         [NonSerialized()]
-                private PaletteSet palettes;
+        private PaletteSet palettes;
+        // class variables and accessors
         private byte[] graphics; public byte[] GraphicSet { get { return graphics; } set { graphics = value; } }
-        private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
-        private Tile[] tileSetLayer; public Tile[] TileSetLayer { get { return tileSetLayer; } }
-
+        private byte[] tileset_bytes; public byte[] Tileset_bytes { get { return tileset_bytes; } set { tileset_bytes = value; } }
+        private Tile[] tileset_tiles; public Tile[] Tileset_tiles { get { return tileset_tiles; } }
+        // constructors
         public BattleDialogueTileset(PaletteSet paletteSet)
         {
             this.graphics = Model.DialogueGraphics;
-            this.tileSet = Model.BattleDialogueTileSet;
             this.palettes = paletteSet;
-
-            tileSetLayer = new Tile[16 * 2];
-            for (int i = 0; i < tileSetLayer.Length; i++)
-                tileSetLayer[i] = new Tile(i);
-
-            DrawTileset(tileSet, tileSetLayer);
+            this.tileset_bytes = Model.BattleDialogueTileset_bytes;
+            this.tileset_tiles = new Tile[16 * 2];
+            for (int i = 0; i < tileset_tiles.Length; i++)
+                tileset_tiles[i] = new Tile(i);
+            DrawTileset(tileset_bytes, tileset_tiles);
         }
-        public BattleDialogueTileset(byte[] graphics, byte[] tileSet, PaletteSet paletteSet)
+        public BattleDialogueTileset(byte[] graphics, byte[] tileset_bytes, PaletteSet paletteSet)
         {
             this.graphics = graphics;
-            this.tileSet = tileSet;
             this.palettes = paletteSet;
-
-            tileSetLayer = new Tile[16 * 2];
-            for (int i = 0; i < tileSetLayer.Length; i++)
-                tileSetLayer[i] = new Tile(i);
-
-            DrawTileset(tileSet, tileSetLayer);
+            this.tileset_bytes = tileset_bytes;
+            this.tileset_tiles = new Tile[16 * 2];
+            for (int i = 0; i < tileset_tiles.Length; i++)
+                tileset_tiles[i] = new Tile(i);
+            DrawTileset(tileset_bytes, tileset_tiles);
         }
+        // assemblers
+        private void Assemble()
+        {
+        }
+        // class functions
         public void RedrawTileset()
         {
-            DrawTileset(tileSet, tileSetLayer);
+            DrawTileset(tileset_bytes, tileset_tiles);
         }
         public void DrawTileset(byte[] src, Tile[] dst)
         {
@@ -54,7 +57,7 @@ namespace LAZYSHELL
                 for (int z = 0; z < 2; z++)
                 {
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
-                    temp = src[offset]; offset++;
+                    temp = src[offset++];
                     source = Do.DrawSubtile(tile, temp, graphics, palettes.Palettes, 0x20);
                     dst[i].Subtiles[z] = source;
                 }
@@ -62,7 +65,7 @@ namespace LAZYSHELL
                 for (int a = 2; a < 4; a++)
                 {
                     tile = (ushort)(Bits.GetShort(src, offset) & 0x03FF); offset++;
-                    temp = src[offset]; offset++;
+                    temp = src[offset++];
                     source = Do.DrawSubtile(tile, temp, graphics, palettes.Palettes, 0x20);
                     dst[i].Subtiles[a] = source;
                 }
@@ -103,9 +106,6 @@ namespace LAZYSHELL
                     offset += 64;
                 offset -= 64; // jump back in buffer so that we can start the next 16x16 tile
             }
-        }
-        private void Assemble()
-        {
         }
     }
 }

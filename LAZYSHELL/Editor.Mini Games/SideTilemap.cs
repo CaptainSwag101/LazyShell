@@ -37,6 +37,7 @@ namespace LAZYSHELL
         public override int[] Pixels { get { return pixels; } set { pixels = value; } }
         public override Bitmap Image { get { return null; } set { } }
         #endregion
+        // constructor
         public SideTilemap(byte[] tilemapL1, byte[] tilemapL2, Tileset tileset, PaletteSet paletteSet)
         {
             this.tileset = tileset;
@@ -57,6 +58,7 @@ namespace LAZYSHELL
             DrawAllLayers();
             CreateMainscreen();
         }
+        // assemblers
         public override void Assemble()
         {
             for (int a = 0; a < Width / 16; a++)
@@ -71,9 +73,10 @@ namespace LAZYSHELL
                 }
             }
         }
+        // drawing
         private void ChangeSingleTile(int placement, int tile, int x, int y)
         {
-            this.tilemaps_Tiles[0][placement] = tileset.Tileset_Tiles[tile]; // Change the tile in the layer map
+            this.tilemaps_Tiles[0][placement] = tileset.Tileset_tiles[tile]; // Change the tile in the layer map
 
             Tile source = this.tilemaps_Tiles[0][placement]; // Grab the new tile
 
@@ -136,7 +139,7 @@ namespace LAZYSHELL
         private void CreateLayer(int layer)
         {
             if (tilemaps_Bytes[layer] == null) return;
-            if (tileset.Tileset_Tiles == null) return;
+            if (tileset.Tileset_tiles == null) return;
 
             tilemaps_Tiles[layer] = new Tile[Width * Height]; // Create our layer here
             for (int a = 0; a < Width / 16; a++)
@@ -147,7 +150,7 @@ namespace LAZYSHELL
                     {
                         int offset = (y * 16 + x) + (a * 256);
                         byte tilenum = tilemaps_Bytes[layer][offset];
-                        tilemaps_Tiles[layer][y * Width + x + (a * 16)] = tileset.Tileset_Tiles[tilenum];
+                        tilemaps_Tiles[layer][y * Width + x + (a * 16)] = tileset.Tileset_tiles[tilenum];
                     }
                 }
             }
@@ -215,6 +218,13 @@ namespace LAZYSHELL
                 }
             }
         }
+        public override void RedrawTilemaps()
+        {
+            Array.Clear(pixels, 0, pixels.Length);
+            DrawAllLayers();
+            CreateMainscreen();
+        }
+        // accessor functions
         public override int[] GetPriority1Pixels()
         {
             int[] pixels = new int[Width_p * Height_p];
@@ -259,28 +269,6 @@ namespace LAZYSHELL
         {
             throw new NotImplementedException();
         }
-        public override void SetTileNum()
-        {
-            throw new NotImplementedException();
-        }
-        public override void SetTileNum(int tilenum, int layer, int x, int y)
-        {
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            if (x >= Width_p) x = Width_p - 1;
-            if (y >= Height_p) y = Height_p - 1;
-            y /= 16;
-            x /= 16;
-            int index = y * Width + x;
-            if (index < 0x1000)
-                ChangeSingleTile(index, tilenum, x * 16, y * 16);
-        }
-        public override void RedrawTilemaps()
-        {
-            Array.Clear(pixels, 0, pixels.Length);
-            DrawAllLayers();
-            CreateMainscreen();
-        }
         public override int[] GetPixels(int layer, Point location, Size size)
         {
             int[] pixels = new int[size.Width * size.Height];
@@ -298,6 +286,22 @@ namespace LAZYSHELL
         public override int GetPixelLayer(int x, int y)
         {
             return 0;
+        }
+        public override void SetTileNum()
+        {
+            throw new NotImplementedException();
+        }
+        public override void SetTileNum(int tilenum, int layer, int x, int y)
+        {
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (x >= Width_p) x = Width_p - 1;
+            if (y >= Height_p) y = Height_p - 1;
+            y /= 16;
+            x /= 16;
+            int index = y * Width + x;
+            if (index < 0x1000)
+                ChangeSingleTile(index, tilenum, x * 16, y * 16);
         }
     }
 }

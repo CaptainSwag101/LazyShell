@@ -7,9 +7,10 @@ namespace LAZYSHELL
 {
     public class OverlapTileset
     {
+        // class variables and accessors
         private OverlapTile[] overlapTiles; public OverlapTile[] OverlapTiles { get { return overlapTiles; } }
         public byte[] graphicSet;
-
+        // constructor
         public OverlapTileset()
         {
             overlapTiles = new OverlapTile[104];
@@ -20,7 +21,7 @@ namespace LAZYSHELL
             DrawOverlapsGraphicSet();
             DrawOverlapsTileSet(overlapTiles);
         }
-
+        // public functions
         public void DrawOverlapsGraphicSet()
         {
             graphicSet = new byte[128 * 96];
@@ -37,31 +38,31 @@ namespace LAZYSHELL
                 int a = 0, b = 0;
                 for (int i = 0; i < 8; i++, a++, b += 2)
                 {
-                    graphicSet[b + loc] = Model.Data[offset + a];
-                    graphicSet[b + 1 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x10 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x11 + loc] = Model.Data[offset + a];
+                    graphicSet[b + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 1 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x10 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x11 + loc] = Model.ROM[offset + a];
                 }
                 for (int i = 0; i < 8; i++, a++, b += 2)
                 {
-                    graphicSet[b + 0x10 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x11 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x20 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x21 + loc] = Model.Data[offset + a];
+                    graphicSet[b + 0x10 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x11 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x20 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x21 + loc] = Model.ROM[offset + a];
                 }
                 for (int i = 0; i < 8; i++, a++, b += 2)
                 {
-                    graphicSet[b + 0x1E0 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x1E1 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x1F0 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x1F1 + loc] = Model.Data[offset + a];
+                    graphicSet[b + 0x1E0 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x1E1 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x1F0 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x1F1 + loc] = Model.ROM[offset + a];
                 }
                 for (int i = 0; i < 8; i++, a++, b += 2)
                 {
-                    graphicSet[b + 0x1F0 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x1F1 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x200 + loc] = Model.Data[offset + a];
-                    graphicSet[b + 0x201 + loc] = Model.Data[offset + a];
+                    graphicSet[b + 0x1F0 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x1F1 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x200 + loc] = Model.ROM[offset + a];
+                    graphicSet[b + 0x201 + loc] = Model.ROM[offset + a];
                 }
             }
         }
@@ -83,12 +84,12 @@ namespace LAZYSHELL
 
                 for (int a = 0; a < 4; a++) // the four 16x16 tiles in an overlap tile
                 {
-                    index = Model.Data[i * 5 + a + offset];
+                    index = Model.ROM[i * 5 + a + offset];
                     place = (i / 8) * 32;
                     place += ((i % 8) * 2) + (a % 2) + ((a / 2) * 16);
 
-                    subtiles[a].Mirror = Bits.GetBit(Model.Data, i * 5 + 4 + offset, ((a * 2) + 1) ^ 7);
-                    subtiles[a].Invert = Bits.GetBit(Model.Data, i * 5 + 4 + offset, (a * 2) ^ 7);
+                    subtiles[a].Mirror = Bits.GetBit(Model.ROM, i * 5 + 4 + offset, ((a * 2) + 1) ^ 7);
+                    subtiles[a].Invert = Bits.GetBit(Model.ROM, i * 5 + 4 + offset, (a * 2) ^ 7);
 
                     if (index != 0)
                     {

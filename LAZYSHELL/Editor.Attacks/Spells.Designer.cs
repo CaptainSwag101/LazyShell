@@ -484,15 +484,21 @@
             this.spellName.Name = "spellName";
             this.spellName.SelectedIndex = -1;
             this.spellName.SelectedItem = null;
-            this.spellName.Size = new System.Drawing.Size(150, 22);
+            this.spellName.Size = new System.Drawing.Size(148, 22);
             this.spellName.SelectedIndexChanged += new System.EventHandler(this.spellName_SelectedIndexChanged);
             this.spellName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.spellName_DrawItem);
             // 
             // spellNum
             // 
+            this.spellNum.ContextMenuStrip = null;
             this.spellNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spellNum.Hexadecimal = false;
-            this.spellNum.Location = new System.Drawing.Point(157, 1);
+            this.spellNum.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.spellNum.Location = new System.Drawing.Point(155, 1);
             this.spellNum.Maximum = new decimal(new int[] {
             127,
             0,
@@ -527,7 +533,7 @@
             this.spellNameIcon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.spellNameIcon.DropDownWidth = 40;
             this.spellNameIcon.ItemHeight = 15;
-            this.spellNameIcon.Location = new System.Drawing.Point(208, 2);
+            this.spellNameIcon.Location = new System.Drawing.Point(206, 2);
             this.spellNameIcon.Name = "spellNameIcon";
             this.spellNameIcon.SelectedIndex = -1;
             this.spellNameIcon.SelectedItem = null;

@@ -62,6 +62,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.searchText = new System.Windows.Forms.ToolStripTextBox();
+            this.searchNames = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loopStart)).BeginInit();
@@ -79,6 +81,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sampleName,
             this.sampleNum,
+            this.searchText,
+            this.searchNames,
             this.toolStripSeparator4,
             this.import,
             this.export,
@@ -102,12 +106,13 @@
             this.sampleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sampleName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.sampleName.Name = "sampleName";
-            this.sampleName.Size = new System.Drawing.Size(200, 25);
+            this.sampleName.Size = new System.Drawing.Size(170, 25);
             this.sampleName.SelectedIndexChanged += new System.EventHandler(this.sampleName_SelectedIndexChanged);
             // 
             // sampleNum
             // 
             this.sampleNum.AutoSize = false;
+            this.sampleNum.ContextMenuStrip = null;
             this.sampleNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sampleNum.Hexadecimal = false;
             this.sampleNum.Increment = new decimal(new int[] {
@@ -115,7 +120,7 @@
             0,
             0,
             0});
-            this.sampleNum.Location = new System.Drawing.Point(209, 2);
+            this.sampleNum.Location = new System.Drawing.Point(179, 2);
             this.sampleNum.Maximum = new decimal(new int[] {
             115,
             0,
@@ -127,7 +132,7 @@
             0,
             0});
             this.sampleNum.Name = "sampleNum";
-            this.sampleNum.Size = new System.Drawing.Size(60, 21);
+            this.sampleNum.Size = new System.Drawing.Size(50, 21);
             this.sampleNum.Text = "0";
             this.sampleNum.Value = new decimal(new int[] {
             0,
@@ -486,6 +491,21 @@
             this.groupBox2.Text = "Rate";
             this.groupBox2.Visible = false;
             // 
+            // searchText
+            // 
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(150, 25);
+            // 
+            // searchEffectNames
+            // 
+            this.searchNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchNames.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.searchNames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.searchNames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchNames.Name = "searchEffectNames";
+            this.searchNames.Size = new System.Drawing.Size(23, 22);
+            this.searchNames.Text = "Search for effect";
+            // 
             // SampleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,5 +571,7 @@
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.NumericUpDown relFreq;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripTextBox searchText;
+        private System.Windows.Forms.ToolStripButton searchNames;
     }
 }

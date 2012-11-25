@@ -22,7 +22,7 @@ namespace LAZYSHELL
         private int availableBytes { get { return effectsEditor.AvailableBytes; } set { effectsEditor.AvailableBytes = value; } }
         // local variables
         private bool updating = false;
-        private E_Tileset tileset { get { return animation.Tileset; } set { animation.Tileset = value; } }
+        private E_Tileset tileset { get { return animation.Tileset_tiles; } set { animation.Tileset_tiles = value; } }
         private E_Mold mold { get { return (E_Mold)animation.Molds[(int)frameMold.Value]; } }
         private E_Sequence sequence { get { return (E_Sequence)animation.Sequences[0]; } }
         private E_Sequence.Frame frame { get { return (E_Sequence.Frame)sequence.Frames[index]; } }
@@ -47,7 +47,7 @@ namespace LAZYSHELL
                     picture.Invalidate();
             }
         }
-        private ArrayList sequenceImages = new ArrayList();
+        private List<Bitmap> sequenceImages = new List<Bitmap>();
         private Bitmap sequenceImage;
         private Bitmap frameImage;
         private int width { get { return animation.Width * 16; } }
@@ -207,7 +207,7 @@ namespace LAZYSHELL
             Rectangle dst = new Rectangle(0, 0, frame.Width, frame.Height);
             Rectangle src = new Rectangle(0, 0, width, height);
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
-            e.Graphics.DrawImage((Bitmap)sequenceImages[(int)frame.Tag], dst, src, GraphicsUnit.Pixel);
+            e.Graphics.DrawImage(sequenceImages[(int)frame.Tag], dst, src, GraphicsUnit.Pixel);
             //
             if (sequence.Frames[(int)frame.Tag].Mold >= animation.Molds.Count)
             {
@@ -251,7 +251,7 @@ namespace LAZYSHELL
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
                 index--;
             if (e.KeyData == Keys.Delete)
-                deleteFrame_Click(null, null);
+                deleteFrame.PerformClick();
         }
         private void panelFrames_SizeChanged(object sender, EventArgs e)
         {
@@ -315,7 +315,7 @@ namespace LAZYSHELL
         }
         private void PlaybackSequence_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            sequenceImage = new Bitmap((Bitmap)sequenceImages[e.ProgressPercentage]);
+            sequenceImage = new Bitmap(sequenceImages[e.ProgressPercentage]);
             pictureBoxSequence.Invalidate();
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

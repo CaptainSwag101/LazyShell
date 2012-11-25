@@ -45,7 +45,19 @@ namespace LAZYSHELL
         public override int[] Pixels { get { return pixels; } set { } }
         public override byte[] Tilemap_Bytes { get { return null; } set { } }
         public override byte[][] Tilemaps_Bytes { get { return tilemaps_Bytes; } set { tilemaps_Bytes = value; } }
+        public override Bitmap Image
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
         #endregion
+        // constructors
         public LevelTilemap(Level level, Tileset tileset)
         {
             this.tileset = tileset;
@@ -142,6 +154,8 @@ namespace LAZYSHELL
             }
             CreateMainscreen();
         }
+        #region Functions
+        // assemblers
         public override void Assemble()
         {
             for (int l = 0; l < 3; l++)
@@ -156,9 +170,10 @@ namespace LAZYSHELL
                 }
             }
         }
+        // class functions
         private void ChangeSingleTile(int layer, int placement, int tile, int x, int y)
         {
-            tilemaps_Tiles[layer][placement] = tileset.Tilesets_Tiles[layer][tile]; // Change the tile in the layer map
+            tilemaps_Tiles[layer][placement] = tileset.Tilesets_tiles[layer][tile]; // Change the tile in the layer map
 
             Tile source = tilemaps_Tiles[layer][placement]; // Grab the new tile
 
@@ -213,31 +228,6 @@ namespace LAZYSHELL
             ClearSingleTile(pixels, x, y);
             DrawSingleMainscreenTile(x, y);
         }
-        public void Clear(int count)
-        {
-            if (count == 1)
-            {
-                Model.Tilemaps[levelMap.TilemapL1 + 0x40] = new byte[0x2000];
-                Model.Tilemaps[levelMap.TilemapL2 + 0x40] = new byte[0x2000];
-                Model.Tilemaps[levelMap.TilemapL3] = new byte[0x1000];
-
-                Model.EditTileMaps[levelMap.TilemapL1 + 0x40] = true;
-                Model.EditTileMaps[levelMap.TilemapL2 + 0x40] = true;
-                Model.EditTileMaps[levelMap.TilemapL3] = true;
-            }
-            else
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    if (i < 0x40)
-                        Model.Tilemaps[i] = new byte[0x1000];
-                    else
-                        Model.Tilemaps[i] = new byte[0x2000];
-                    Model.EditTileMaps[i] = true;
-                }
-            }
-            RedrawTilemaps();
-        }
         private void ClearSingleTile(int[] arr, int x, int y)
         {
             int counter = 0;
@@ -286,7 +276,7 @@ namespace LAZYSHELL
         private void CreateLayer(int layer)
         {
             if (tilemaps_Bytes[layer] == null) return;
-            if (tileset.Tilesets_Tiles[layer] == null) return;
+            if (tileset.Tilesets_tiles[layer] == null) return;
 
             int offset = 0;
             ushort tileNum;
@@ -304,7 +294,7 @@ namespace LAZYSHELL
                     if (tileNum > 0x1FF)
                         tileNum = 0;
                     offset += increment;
-                    tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][tileNum];
+                    tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][tileNum];
                 }
             }
             else // Layer 3
@@ -315,7 +305,7 @@ namespace LAZYSHELL
                     if (tileNum > 0xFF)
                         tileNum = 0;
                     offset += increment;
-                    tilemaps_Tiles[layer][i] = tileset.Tilesets_Tiles[layer][tileNum];
+                    tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][tileNum];
                 }
             }
         }
@@ -854,6 +844,7 @@ namespace LAZYSHELL
                 }
             }
         }
+        // accessor functions
         public override int[] GetPriority1Pixels()
         {
             int[] pixels = new int[Width_p * Height_p];
@@ -1005,19 +996,9 @@ namespace LAZYSHELL
             return tile;
 
         }
-        private bool HaveSubscreen()
-        {
-            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
-                (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
-                return true;
-
-            return false;
-        }
         public override void SetTileNum(int tilenum, int layer, int x, int y)
         {
-            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p) 
+            if (x < 0 || y < 0 || x >= Width_p || y >= Height_p)
                 return;
             y /= 16;
             x /= 16;
@@ -1043,17 +1024,18 @@ namespace LAZYSHELL
         {
 
         }
-        public override Bitmap Image
+        // boolean functions
+        private bool HaveSubscreen()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||
+                (prioritySets[levelLayer.PrioritySet].SubscreenOBJ && state.NPCs))
+                return true;
+
+            return false;
         }
+        // universal variables
         public override void RedrawTilemaps()
         {
             L1Priority1 = new int[Width_p * Height_p];
@@ -1077,5 +1059,31 @@ namespace LAZYSHELL
             }
             CreateMainscreen();
         }
+        public void Clear(int count)
+        {
+            if (count == 1)
+            {
+                Model.Tilemaps[levelMap.TilemapL1 + 0x40] = new byte[0x2000];
+                Model.Tilemaps[levelMap.TilemapL2 + 0x40] = new byte[0x2000];
+                Model.Tilemaps[levelMap.TilemapL3] = new byte[0x1000];
+
+                Model.EditTileMaps[levelMap.TilemapL1 + 0x40] = true;
+                Model.EditTileMaps[levelMap.TilemapL2 + 0x40] = true;
+                Model.EditTileMaps[levelMap.TilemapL3] = true;
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (i < 0x40)
+                        Model.Tilemaps[i] = new byte[0x1000];
+                    else
+                        Model.Tilemaps[i] = new byte[0x2000];
+                    Model.EditTileMaps[i] = true;
+                }
+            }
+            RedrawTilemaps();
+        }
+        #endregion
     }
 }

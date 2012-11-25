@@ -39,7 +39,7 @@ namespace LAZYSHELL
             else if (type == null && this.Text == "CLEAR SOLIDITY MAPS...")
                 toIndex.Value = toIndex.Maximum = Model.SolidityMaps.Length - 1;
             else if (type == null && this.Text == "CLEAR BATTLEFIELD TILESETS...")
-                toIndex.Value = toIndex.Maximum = Model.TileSetsBF.Length - 1;
+                toIndex.Value = toIndex.Maximum = Model.TilesetsBF.Length - 1;
             start = end = currentIndex;
         }
         // event handlers
@@ -125,8 +125,8 @@ namespace LAZYSHELL
             {
                 for (int i = start; i <= end; i++)
                 {
-                    Model.TileSetsBF[i] = new byte[0x2000];
-                    Model.EditTileSetsBF[i] = true;
+                    Model.TilesetsBF[i] = new byte[0x2000];
+                    Model.EditTilesetsBF[i] = true;
                 }
             }
 

@@ -27,15 +27,15 @@ namespace LAZYSHELL
         private MenuDescriptionPreview menuDescPreview = new MenuDescriptionPreview();
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
         private Shops shopsEditor;
+        private EditLabel labelWindow;
         #endregion
         // constructor
         public Items(Shops shopsEditor)
         {
             this.shopsEditor = shopsEditor;
-            this.settings.KeystrokesMenu[0x20] = "\x20";
-            this.settings.KeystrokesDesc[0x20] = "\x20";
             InitializeComponent();
             itemName.BackgroundImage = Model.MenuBG;
+            labelWindow = new EditLabel(itemName, itemNum, "Items", false);
             InitializeStrings();
             RefreshItems();
             if (settings.RememberLastIndex)
@@ -57,9 +57,9 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.WaitCursor;
             if (updating) return;
             updating = true;
-            this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(index);
+            this.itemName.SelectedIndex = Model.ItemNames.GetSortedIndex(index);
             this.itemName.Invalidate();
-            this.itemCoinValue.Value = item.CoinValue;
+            this.itemCoinValue.Value = item.Price;
             this.itemSpeed.Value = item.Speed;
             this.itemAttack.Value = item.Attack;
             this.itemDefense.Value = item.Defense;
@@ -69,7 +69,7 @@ namespace LAZYSHELL
             this.itemPower.Value = item.InflictionAmount;
             this.itemNameIcon.SelectedIndex = (int)(item.Name[0] - 0x20);
             this.itemNameIcon.Invalidate();
-            this.textBoxItemName.Text = Do.RawToASCII(item.Name, settings.KeystrokesMenu).Substring(1);
+            this.textBoxItemName.Text = Do.RawToASCII(item.Name, Lists.KeystrokesMenu).Substring(1);
             if (this.itemNum.Value > 0xB0)
             {
                 this.textBoxItemDescription.Text = " This item[1] cannot have a[1] description";
@@ -93,14 +93,14 @@ namespace LAZYSHELL
             this.itemStatusChange.SetItemChecked(1, item.ChangeDefense);
             this.itemStatusChange.SetItemChecked(2, item.ChangeMagicAttack);
             this.itemStatusChange.SetItemChecked(3, item.ChangeMagicDefense);
-            this.itemElemNull.SetItemChecked(0, item.ElemIceNull);
-            this.itemElemNull.SetItemChecked(1, item.ElemFireNull);
-            this.itemElemNull.SetItemChecked(2, item.ElemThunderNull);
-            this.itemElemNull.SetItemChecked(3, item.ElemJumpNull);
-            this.itemElemWeak.SetItemChecked(0, item.ElemIceWeak);
-            this.itemElemWeak.SetItemChecked(1, item.ElemFireWeak);
-            this.itemElemWeak.SetItemChecked(2, item.ElemThunderWeak);
-            this.itemElemWeak.SetItemChecked(3, item.ElemJumpWeak);
+            this.itemElemNull.SetItemChecked(0, item.ElemNullIce);
+            this.itemElemNull.SetItemChecked(1, item.ElemNullFire);
+            this.itemElemNull.SetItemChecked(2, item.ElemNullThunder);
+            this.itemElemNull.SetItemChecked(3, item.ElemNullJump);
+            this.itemElemWeak.SetItemChecked(0, item.ElemWeakIce);
+            this.itemElemWeak.SetItemChecked(1, item.ElemWeakFire);
+            this.itemElemWeak.SetItemChecked(2, item.ElemWeakThunder);
+            this.itemElemWeak.SetItemChecked(3, item.ElemWeakJump);
             this.itemWhoEquip.SetItemChecked(0, item.EquipMario);
             this.itemWhoEquip.SetItemChecked(1, item.EquipToadstool);
             this.itemWhoEquip.SetItemChecked(2, item.EquipBowser);
@@ -217,7 +217,7 @@ namespace LAZYSHELL
         }
         private void itemName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            itemNum.Value = Model.ItemNames.GetNumFromIndex(itemName.SelectedIndex);
+            itemNum.Value = Model.ItemNames.GetUnsortedIndex(itemName.SelectedIndex);
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -229,34 +229,34 @@ namespace LAZYSHELL
         private void textBoxItemName_TextChanged(object sender, EventArgs e)
         {
             char[] raw = new char[15];
-            char[] temp = Do.ASCIIToRaw(this.textBoxItemName.Text, settings.KeystrokesMenu, 14);
+            char[] temp = Do.ASCIIToRaw(this.textBoxItemName.Text, Lists.KeystrokesMenu, 14);
             for (int i = 0; i < 14; i++)
                 raw[i + 1] = temp[i];
             raw[0] = (char)(itemNameIcon.SelectedIndex + 32);
             if (item.Name != raw)
             {
                 item.Name = raw;
-                Model.ItemNames.SwapName(
+                Model.ItemNames.SetName(
                     item.Index,
                     new string(item.Name));
-                Model.ItemNames.SortAlpha();
+                Model.ItemNames.SortAlphabetically();
                 this.itemName.Items.Clear();
-                this.itemName.Items.AddRange(Model.ItemNames.GetNames());
-                this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(item.Index);
+                this.itemName.Items.AddRange(Model.ItemNames.Names);
+                this.itemName.SelectedIndex = Model.ItemNames.GetSortedIndex(item.Index);
                 shopsEditor.ResortStrings();
             }
         }
         private void itemNameIcon_SelectedIndexChanged(object sender, EventArgs e)
         {
             item.Name[0] = (char)(itemNameIcon.SelectedIndex + 0x20);
-            if (Model.ItemNames.GetNameByNum(index).CompareTo(this.textBoxItemName.Text) != 0)
+            if (Model.ItemNames.GetUnsortedName(index).CompareTo(this.textBoxItemName.Text) != 0)
             {
-                Model.ItemNames.SwapName(
+                Model.ItemNames.SetName(
                     item.Index, new string(item.Name));
-                Model.ItemNames.SortAlpha();
+                Model.ItemNames.SortAlphabetically();
                 this.itemName.Items.Clear();
-                this.itemName.Items.AddRange(Model.ItemNames.GetNames());
-                this.itemName.SelectedIndex = Model.ItemNames.GetIndexFromNum(item.Index);
+                this.itemName.Items.AddRange(Model.ItemNames.Names);
+                this.itemName.SelectedIndex = Model.ItemNames.GetSortedIndex(item.Index);
             }
         }
         private void itemNameIcon_DrawItem(object sender, DrawItemEventArgs e)
@@ -265,7 +265,7 @@ namespace LAZYSHELL
         }
         private void itemCoinValue_ValueChanged(object sender, EventArgs e)
         {
-            item.CoinValue = (ushort)this.itemCoinValue.Value;
+            item.Price = (ushort)this.itemCoinValue.Value;
         }
         private void itemSpeed_ValueChanged(object sender, EventArgs e)
         {
@@ -333,17 +333,17 @@ namespace LAZYSHELL
         }
         private void itemElemNull_SelectedIndexChanged(object sender, EventArgs e)
         {
-            item.ElemIceNull = itemElemNull.GetItemChecked(0);
-            item.ElemFireNull = itemElemNull.GetItemChecked(1);
-            item.ElemThunderNull = itemElemNull.GetItemChecked(2);
-            item.ElemJumpNull = itemElemNull.GetItemChecked(3);
+            item.ElemNullIce = itemElemNull.GetItemChecked(0);
+            item.ElemNullFire = itemElemNull.GetItemChecked(1);
+            item.ElemNullThunder = itemElemNull.GetItemChecked(2);
+            item.ElemNullJump = itemElemNull.GetItemChecked(3);
         }
         private void itemElemWeak_SelectedIndexChanged(object sender, EventArgs e)
         {
-            item.ElemIceWeak = itemElemWeak.GetItemChecked(0);
-            item.ElemFireWeak = itemElemWeak.GetItemChecked(1);
-            item.ElemThunderWeak = itemElemWeak.GetItemChecked(2);
-            item.ElemJumpWeak = itemElemWeak.GetItemChecked(3);
+            item.ElemWeakIce = itemElemWeak.GetItemChecked(0);
+            item.ElemWeakFire = itemElemWeak.GetItemChecked(1);
+            item.ElemWeakThunder = itemElemWeak.GetItemChecked(2);
+            item.ElemWeakJump = itemElemWeak.GetItemChecked(3);
         }
         private void itemStatusChange_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -403,7 +403,7 @@ namespace LAZYSHELL
                 }
             }
 
-            bool flag = textHelper.VerifyCorrectSymbols(this.textBoxItemDescription.Text.ToCharArray(), byteView);
+            bool flag = textHelper.VerifySymbols(this.textBoxItemDescription.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.textBoxItemDescription.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);

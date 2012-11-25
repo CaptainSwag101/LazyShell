@@ -13,102 +13,95 @@ namespace LAZYSHELL
     [Serializable()]
     public class E_Animation : Element
     {
-        #region Variables
-        [NonSerialized()]
-        private byte[] data;
-        public override byte[] Data { get { return this.data; } set { this.data = value; } }
-        public override int Index { get { return index; } set { index = value; } }
-        private byte[] sm; public byte[] SM { get { return sm; } set { sm = value; } }    // sequence mold data
-        private int index;
+        #region variables
+        // universal variales
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
+        // properties
+        private byte[] buffer; public byte[] BUFFER { get { return buffer; } set { buffer = value; } }    // sequence mold data       
         private int animationOffset; public int AnimationOffset { get { return animationOffset; } set { index = value; } }
         private byte width; public byte Width { get { return width; } set { width = value; } }
         private byte height; public byte Height { get { return height; } set { height = value; } }
         private ushort codec; public ushort Codec { get { return codec; } set { codec = value; } }
+        // collections
         private List<E_Sequence> sequences = new List<E_Sequence>();
         public List<E_Sequence> Sequences { get { return sequences; } set { sequences = value; } }
         private List<E_Mold> molds = new List<E_Mold>();
         public List<E_Mold> Molds { get { return molds; } set { molds = value; } }
-        // Tileset
-        private int tileSetLength; public int TileSetLength { get { return tileSetLength; } set { tileSetLength = value; } }
-        private byte[] tileSet; public byte[] TileSet { get { return tileSet; } set { tileSet = value; } }
-        private E_Tileset tileset; public E_Tileset Tileset { get { return tileset; } set { tileset = value; } }
-        // Graphics
+        // tileset
+        private int tilesetLength; public int TilesetLength { get { return tilesetLength; } set { tilesetLength = value; } }
+        private byte[] tileset_bytes; public byte[] Tileset_bytes { get { return tileset_bytes; } set { tileset_bytes = value; } }
+        private E_Tileset tileset_tiles; public E_Tileset Tileset_tiles { get { return tileset_tiles; } set { tileset_tiles = value; } }
+        // graphics
         private byte[] graphicSet; public byte[] GraphicSet { get { return graphicSet; } set { graphicSet = value; } }
         private int graphicSetLength;
         public int GraphicSetLength { get { return graphicSetLength; } set { graphicSetLength = value; } }
-        // Palettes
+        // palettes
         private PaletteSet paletteSet; public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
         private ushort paletteSetLength;
         public ushort PaletteSetLength { get { return paletteSetLength; } set { paletteSetLength = value; } }
         #endregion
-        #region Functions
-        public E_Animation(byte[] data, int animationNum)
+        // constructor
+        public E_Animation(int index)
         {
-            this.data = data;
-            this.index = animationNum;
-
-            InitializeAnimation(data);
+            this.index = index;
+            Disassemble();
         }
-        private void InitializeAnimation(byte[] data)
+        #region functions
+        // assemblers
+        private void Disassemble()
         {
-            E_Sequence tSequence;
-            E_Mold tMold;
-
-            animationOffset = Bits.Get24Bit(data, 0x252C00 + (index * 3)) - 0xC00000;
-            ushort animationLength = Bits.GetShort(data, animationOffset);
-
-            sm = Bits.GetByteArray(data, animationOffset, Bits.GetShort(data, animationOffset));
-
+            animationOffset = Bits.GetInt24(rom, 0x252C00 + (index * 3)) - 0xC00000;
+            ushort animationLength = Bits.GetShort(rom, animationOffset);
+            buffer = Bits.GetByteArray(rom, animationOffset, Bits.GetShort(rom, animationOffset));
+            //
             int offset = 2;
-            ushort graphicSetPointer = Bits.GetShort(sm, offset); offset += 2;
-            ushort paletteSetPointer = Bits.GetShort(sm, offset); offset += 2;
-            ushort sequencePacketPointer = Bits.GetShort(sm, offset); offset += 2;
-            ushort moldPacketPointer = Bits.GetShort(sm, offset); offset += 2;
-
-            /** here are two unknown bytes, we'll just skip them **/
+            ushort graphicSetPointer = Bits.GetShort(buffer, offset); offset += 2;
+            ushort paletteSetPointer = Bits.GetShort(buffer, offset); offset += 2;
+            ushort sequencePacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            ushort moldPacketPointer = Bits.GetShort(buffer, offset); offset += 2;
+            // skip 2 unknown bytes
             offset += 2;
-
-            width = sm[offset]; offset++;
-            height = sm[offset]; offset++;
-
-            codec = Bits.GetShort(sm, offset); offset += 2;
-
-            int tileSetPointer = Bits.GetShort(sm, offset);
-
+            //
+            width = buffer[offset++];
+            height = buffer[offset++];
+            codec = Bits.GetShort(buffer, offset); offset += 2;
+            //
+            int tileSetPointer = Bits.GetShort(buffer, offset);
             graphicSetLength = paletteSetPointer - graphicSetPointer;
             graphicSet = new byte[0x2000];
-            Buffer.BlockCopy(sm, graphicSetPointer, graphicSet, 0, graphicSetLength);
+            Buffer.BlockCopy(buffer, graphicSetPointer, graphicSet, 0, graphicSetLength);
             paletteSetLength = (ushort)(tileSetPointer - paletteSetPointer);
-            paletteSet = new PaletteSet(sm, 0, paletteSetPointer, 8, 16, 32);
-            tileSetLength = sequencePacketPointer - tileSetPointer - 2;
-            tileSet = new byte[64 * 4 * 2 * 4];
-            Buffer.BlockCopy(sm, tileSetPointer, tileSet, 0, tileSetLength);
-
+            paletteSet = new PaletteSet(buffer, 0, paletteSetPointer, 8, 16, 32);
+            tilesetLength = sequencePacketPointer - tileSetPointer - 2;
+            tileset_bytes = new byte[64 * 4 * 2 * 4];
+            Buffer.BlockCopy(buffer, tileSetPointer, tileset_bytes, 0, tilesetLength);
+            //
             offset = sequencePacketPointer;
-            for (int i = 0; Bits.GetShort(sm, offset) != 0x0000; i++)
+            for (int i = 0; Bits.GetShort(buffer, offset) != 0x0000; i++)
             {
-                tSequence = new E_Sequence();
-                tSequence.InitializeSequence(sm, offset);
+                E_Sequence tSequence = new E_Sequence();
+                tSequence.Disassemble(buffer, offset);
                 sequences.Add(tSequence);
                 offset += 2;
             }
             offset = moldPacketPointer;
             ushort end = 0;
-            for (int i = 0; Bits.GetShort(sm, offset) != 0x0000; i++)
+            for (int i = 0; Bits.GetShort(buffer, offset) != 0x0000; i++)
             {
-                if (Bits.GetShort(sm, offset + 2) == 0x0000)
+                if (Bits.GetShort(buffer, offset + 2) == 0x0000)
                     end = animationLength;
                 else
-                    end = Bits.GetShort(sm, offset + 2);
-                tMold = new E_Mold();
-                tMold.InitializeMold(sm, offset, end);
+                    end = Bits.GetShort(buffer, offset + 2);
+                E_Mold tMold = new E_Mold();
+                tMold.Disassemble(buffer, offset, end);
                 molds.Add(tMold);
                 offset += 2;
             }
         }
         public int Assemble()
         {
-            int size = sm.Length;
+            int size = this.buffer.Length;
             // set sm to new byte with largest possible size
             byte[] temp = new byte[0x10000];
             // not dynamic, can set before others
@@ -128,14 +121,12 @@ namespace LAZYSHELL
             // Tileset
             Bits.SetShort(temp, 16, (ushort)offset);
             int tilesetoffset = offset;
-            foreach (Tile t in tileset.Tileset)
+            foreach (Tile t in tileset_tiles.Tileset)
             {
-                if (t.TileIndex >= tileSetLength / 8)
+                if (t.TileIndex >= tilesetLength / 8)
                     break;
-
                 if (t.TileIndex > 0 && t.TileIndex % 8 == 0)
                     offset += 32;
-
                 for (int i = 0; i < 4; i++)
                 {
                     Bits.SetShort(temp, offset, (byte)t.Subtiles[i].Index); offset++;
@@ -150,7 +141,7 @@ namespace LAZYSHELL
                         offset -= 31;
                 }
             }
-            Buffer.BlockCopy(temp, tilesetoffset, tileSet, 0, tileSet.Length);
+            Buffer.BlockCopy(temp, tilesetoffset, tileset_bytes, 0, tileset_bytes.Length);
             //
             offset += 32;
             Bits.SetShort(temp, offset, 0xFFFF); offset += 2;
@@ -204,11 +195,12 @@ namespace LAZYSHELL
             }
             // finally, set the animation length
             Bits.SetShort(temp, 0, (ushort)offset);
-            sm = new byte[offset];
-            Bits.SetByteArray(sm, 0, temp);
+            this.buffer = new byte[offset];
+            Bits.SetByteArray(this.buffer, 0, temp);
             //Do.Export(sm, "test.bin");
-            return size - sm.Length;
+            return size - this.buffer.Length;
         }
+        // universal functions
         public override void Clear()
         {
             foreach (E_Sequence s in sequences)
@@ -216,16 +208,16 @@ namespace LAZYSHELL
             int moldCount = molds.Count;
             for (int i = 1; i < moldCount; i++)
                 molds.RemoveAt(1);
-            tileSet = new byte[tileSet.Length];
+            tileset_bytes = new byte[tileset_bytes.Length];
             paletteSetLength = 32;
             graphicSetLength = 32;
-            tileSetLength = 64;
+            tilesetLength = 64;
             graphicSet = new byte[graphicSet.Length];
             paletteSet = new PaletteSet(new byte[256], 0, 0, 8, 16, 32);
             codec = 0;
             width = 1;
             height = 1;
-            foreach (Tile tile in tileset.Tileset)
+            foreach (Tile tile in tileset_tiles.Tileset)
                 for (int i = 0; i < 4; i++)
                     tile.Subtiles[i] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, codec == 1);
         }

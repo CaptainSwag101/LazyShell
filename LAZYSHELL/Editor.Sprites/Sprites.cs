@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
@@ -24,14 +26,14 @@ namespace LAZYSHELL
         public long Checksum { get { return checksum; } set { checksum = value; } }
         // main
         private delegate void Function();
-        private byte[] data;
+        private byte[] data { get { return Model.ROM; } set { Model.ROM = value; } }
         private Settings settings = Settings.Default;
         private Overlay overlay;
         private bool updating = false;
         private Sprite[] sprites;
         private Animation[] animations;
         private PaletteSet[] palettes;
-        private GraphicPalette[] images;
+        private ImagePacket[] images;
         private int availableBytes = 0;
         private byte[] graphics;
         public byte[] Graphics
@@ -47,12 +49,12 @@ namespace LAZYSHELL
         // indexed variables
         public int Index { get { return (int)number.Value; } set { number.Value = value; } }
         private Sprite sprite { get { return sprites[Index]; } set { sprites[Index] = value; } }
-        private GraphicPalette image { get { return images[sprite.GraphicPalettePacket]; } set { images[sprite.GraphicPalettePacket] = value; } }
+        private ImagePacket image { get { return images[sprite.Image]; } set { images[sprite.Image] = value; } }
         private Animation animation { get { return animations[sprite.AnimationPacket]; } set { animations[sprite.AnimationPacket] = value; } }
         private PaletteSet paletteSet { get { return palettes[image.PaletteNum + sprite.PaletteIndex]; } set { palettes[image.PaletteNum + sprite.PaletteIndex] = value; } }
         // public variables
         public Sprite Sprite { get { return sprite; } set { sprite = value; } }
-        public GraphicPalette Image { get { return image; } set { image = value; } }
+        public ImagePacket Image { get { return image; } set { image = value; } }
         public Animation Animation { get { return animation; } set { animation = value; } }
         public int[] Palette { get { return paletteSet.Palette; } }
         public PaletteSet PaletteSet { get { return paletteSet; } set { paletteSet = value; } }
@@ -65,6 +67,7 @@ namespace LAZYSHELL
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
         private Search searchWindow;
+        private EditLabel labelWindow;
         // special controls
         #endregion
         #region Methods
@@ -77,8 +80,9 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
             searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
+            labelWindow = new EditLabel(name, number, "Sprites", true);
             // set data
-            this.data = Model.Data;
+            this.data = Model.ROM;
             this.sprites = Model.Sprites;
             this.animations = Model.Animations;
             this.palettes = Model.SpritePalettes;
@@ -87,7 +91,17 @@ namespace LAZYSHELL
             graphics = image.Graphics(spriteGraphics);
             // controls
             updating = true;
-            name.Items.AddRange(Lists.Numerize(Lists.SpriteNames));
+            for (int i = 0; i < Lists.SpriteNames.Length; i++)
+            {
+                string itemName = Lists.SpriteNames[i];
+                if (i >= 256 && i <= 511)
+                {
+                    string monsterName = Do.RawToASCII(Model.Monsters[i - 256].Name, Lists.KeystrokesMenu);
+                    if (monsterName.Trim() != "")
+                        itemName = Lists.ToTitleCase(monsterName);
+                }
+                name.Items.Add(Lists.Numerize(itemName, i, 4));
+            }
             if (settings.RememberLastIndex)
             {
                 name.SelectedIndex = settings.LastSprite;
@@ -123,7 +137,7 @@ namespace LAZYSHELL
             Cursor.Current = Cursors.WaitCursor;
             updating = true;
             paletteIndex.Value = sprite.PaletteIndex;
-            imageNum.Value = sprite.GraphicPalettePacket;
+            imageNum.Value = sprite.Image;
             paletteOffset.Value = image.PaletteNum;
             graphicOffset.Value = image.GraphicOffset;
             graphics = image.Graphics(spriteGraphics);
@@ -160,7 +174,7 @@ namespace LAZYSHELL
                 totalSize = 0xFFFF; min = 249; max = 444;
             }
             for (int i = min; i < max; i++)
-                length += animations[i].SM.Length;
+                length += animations[i].BUFFER.Length;
             availableBytes = totalSize - length;
             animationAvailableBytes.BackColor = availableBytes > 0 ? Color.Lime : Color.Red;
             animationAvailableBytes.Text = availableBytes.ToString() + " bytes free (animations)";
@@ -182,55 +196,55 @@ namespace LAZYSHELL
             int offset = 0x259000;
             for (; i < 42 && offset < 0x25FFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x25FFFF)
+                if (animations[i].BUFFER.Length + offset > 0x25FFFF)
                     break;
                 Bits.SetShort(data, pointer, (ushort)offset);
-                Bits.SetByte(data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 42)
-                MessageBox.Show("The available space for animation data in bank 0x250000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 41 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
+                MessageBox.Show("The available space for animation data in bank 0x250000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 41 were not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
             offset = 0x260000;
             for (; i < 107 && offset < 0x26FFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x26FFFF)
+                if (animations[i].BUFFER.Length + offset > 0x26FFFF)
                     break;
                 Bits.SetShort(data, pointer, (ushort)offset);
-                Bits.SetByte(data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 107)
-                MessageBox.Show("The available space for animation data in bank 0x260000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 107 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
+                MessageBox.Show("The available space for animation data in bank 0x260000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 107 were not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
             offset = 0x270000;
             for (; i < 249 && offset < 0x27FFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x27FFFF)
+                if (animations[i].BUFFER.Length + offset > 0x27FFFF)
                     break;
                 Bits.SetShort(data, pointer, (ushort)offset);
-                Bits.SetByte(data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 249)
                 MessageBox.Show("The available space for animation data in bank 0x270000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 249 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
             offset = 0x360000;
             for (; i < 444 && offset < 0x36FFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x36FFFF)
+                if (animations[i].BUFFER.Length + offset > 0x36FFFF)
                     break;
                 Bits.SetShort(data, pointer, (ushort)offset);
-                Bits.SetByte(data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 444)
                 MessageBox.Show("The available space for animation data in bank 0x360000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 444 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
 
             foreach (Sprite s in sprites)
                 s.Assemble();
-            foreach (GraphicPalette gp in images)
+            foreach (ImagePacket gp in images)
                 gp.Assemble();
             foreach (PaletteSet p in palettes)
                 p.Assemble(0);
@@ -266,11 +280,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSet, 1, 0,1);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), paletteSet, 1, 0, 1);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 1, 0,1);
+                paletteEditor.Reload(new Function(PaletteUpdate), paletteSet, 1, 0, 1);
         }
         public void LoadGraphicEditor()
         {
@@ -303,7 +317,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -317,7 +331,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -384,7 +398,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -395,13 +409,13 @@ namespace LAZYSHELL
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            sprite.GraphicPalettePacket = (ushort)imageNum.Value;
+            sprite.Image = (ushort)imageNum.Value;
             paletteOffset.Value = image.PaletteNum;
             graphicOffset.Value = image.GraphicOffset;
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -416,7 +430,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -433,7 +447,7 @@ namespace LAZYSHELL
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tile.Set8x8Tiles(graphics, paletteSet.Palette, tile.Gridplane);
+                    tile.DrawSubtiles(graphics, paletteSet.Palette, tile.Gridplane);
             }
             molds.SetTilesetImage();
             molds.SetTilemapImage();
@@ -515,12 +529,12 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current sprite and animation index. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            animation = new Animation(Model.Data, sprite.AnimationPacket);
-            image = new GraphicPalette(Model.Data, sprite.GraphicPalettePacket);
-            sprite = new Sprite(Model.Data, Index);
+            animation = new Animation(sprite.AnimationPacket);
+            image = new ImagePacket(sprite.Image);
+            sprite = new Sprite(Index);
             for (int i = image.PaletteNum; i < image.PaletteNum + 8; i++)
-                palettes[i] = new PaletteSet(Model.Data, i, 0x252FFE + (i * 30), 1, 16, 30);
-            Buffer.BlockCopy(Model.Data, image.GraphicOffset, Model.SpriteGraphics, image.GraphicOffset - 0x280000, 0x4000);
+                palettes[i] = new PaletteSet(Model.ROM, i, 0x252FFE + (i * 30), 1, 16, 30);
+            Buffer.BlockCopy(Model.ROM, image.GraphicOffset, Model.SpriteGraphics, image.GraphicOffset - 0x280000, 0x4000);
             number_ValueChanged(null, null);
         }
         private void hexViewer_Click(object sender, EventArgs e)

@@ -83,6 +83,8 @@
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.export = new System.Windows.Forms.ToolStripMenuItem();
             this.exportBattleScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dumpBattleScriptTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
             this.resetCurrentMonsterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetCurrentBattleScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -694,6 +696,7 @@
             // monsterNum
             // 
             this.monsterNum.AutoSize = false;
+            this.monsterNum.ContextMenuStrip = null;
             this.monsterNum.Hexadecimal = false;
             this.monsterNum.Increment = new decimal(new int[] {
             1,
@@ -807,7 +810,9 @@
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.export,
-            this.exportBattleScriptsToolStripMenuItem});
+            this.exportBattleScriptsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.dumpBattleScriptTextToolStripMenuItem});
             this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -819,7 +824,7 @@
             this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.export.Name = "export";
-            this.export.Size = new System.Drawing.Size(190, 22);
+            this.export.Size = new System.Drawing.Size(193, 22);
             this.export.Text = "Export monster(s)...";
             this.export.Click += new System.EventHandler(this.export_Click);
             // 
@@ -828,9 +833,22 @@
             this.exportBattleScriptsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportData;
             this.exportBattleScriptsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exportBattleScriptsToolStripMenuItem.Name = "exportBattleScriptsToolStripMenuItem";
-            this.exportBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.exportBattleScriptsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.exportBattleScriptsToolStripMenuItem.Text = "Export battle script(s)...";
             this.exportBattleScriptsToolStripMenuItem.Click += new System.EventHandler(this.exportBattleScriptsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(190, 6);
+            // 
+            // dumpBattleScriptTextToolStripMenuItem
+            // 
+            this.dumpBattleScriptTextToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.notepad;
+            this.dumpBattleScriptTextToolStripMenuItem.Name = "dumpBattleScriptTextToolStripMenuItem";
+            this.dumpBattleScriptTextToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.dumpBattleScriptTextToolStripMenuItem.Text = "Dump battle script text...";
+            this.dumpBattleScriptTextToolStripMenuItem.Click += new System.EventHandler(this.dumpBattleScriptTextToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton4
             // 
@@ -1060,7 +1078,7 @@
             // 
             // MonsterEntranceStyle
             // 
-            this.MonsterEntranceStyle.DropDownHeight = 210;
+            this.MonsterEntranceStyle.DropDownHeight = 150;
             this.MonsterEntranceStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MonsterEntranceStyle.DropDownWidth = 200;
             this.MonsterEntranceStyle.IntegralHeight = false;
@@ -1607,5 +1625,7 @@
         private System.Windows.Forms.ToolStripLabel freeBytes;
         private System.Windows.Forms.PictureBox pictureBoxPsychopath;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem dumpBattleScriptTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

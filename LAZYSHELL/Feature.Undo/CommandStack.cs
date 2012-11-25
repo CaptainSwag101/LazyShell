@@ -5,24 +5,15 @@ using System.Collections;
 
 namespace LAZYSHELL.Undo
 {
-    /*
-     * This class completely encapsulates the undo and redo functionality for a window.
-     * Just create a command object after each change and push it onto the CommandStack
-     * 
-     * To undo a command, just call CommandStack.UndoCommand()
-     * to redo a command, just call CommandStack.RedoCommand()
-     * 
-     * If there are no commands to redo/undo nothing will happen
-     */
     class CommandStack
     {
+        // class variables and accessors
         private Command[] commands;
-        public Command[] Commands { get { return commands; } set { commands = value; } }
         private Stack<Command> redoStack;
         private int index = 0;
         private int undo = 0;
         private bool undoing = false, redoing = false;
-
+        // constructor
         public CommandStack()
         {
             commands = new Command[65535];
@@ -33,31 +24,31 @@ namespace LAZYSHELL.Undo
             commands = new Command[initialSize];
             redoStack = new Stack<Command>();
         }
+        // accessor functions
         public void SetTilemaps(Tilemap tilemap)
         {
-            foreach (TilemapEditCommand command in commands)
+            foreach (TilemapEdit command in commands)
                 if (command != null)
                     command.Tilemap = tilemap;
         }
         public void SetSolidityMaps(Tilemap tilemap)
         {
-            foreach (SolidityEditCommand command in commands)
+            foreach (SolidityEdit command in commands)
                 if (command != null)
                     command.Tilemap = tilemap;
         }
-        public void UndoCommand()
+        // public functions
+        public bool UndoCommand()
         {
             if (commands.Length < 1 || commands[index] == null || undo <= 0)
-                return;
-
+                return false;
+            //
             undoing = true;
-
             if (index > 0 && commands[index] != null) // not going to wrap
             {
                 commands[index].Execute();
                 if (!commands[index].AutoRedo())
                     redoStack.Push(commands[index]);
-
                 index--;
                 undo--;
             }
@@ -66,27 +57,26 @@ namespace LAZYSHELL.Undo
                 commands[index].Execute();
                 if (!commands[index].AutoRedo())
                     redoStack.Push(commands[index]);
-
                 index = commands.Length - 1;
                 undo--;
             }
-
             undoing = false;
+            //
+            return true;
         }
-        public void RedoCommand()
+        public bool RedoCommand()
         {
+            if (redoStack.Count == 0)
+                return false;
+            //
             redoing = true;
-            Command cmd;
-
-            if (redoStack.Count > 0)
-            {
-                cmd = redoStack.Pop();
-                cmd.Execute();
-                if (!cmd.AutoRedo())
-                    Push(cmd);
-            }
-
+            Command cmd = redoStack.Pop();
+            cmd.Execute();
+            if (!cmd.AutoRedo())
+                Push(cmd);
             redoing = false;
+            //
+            return true;
         }
         public void Push(Command cmd)
         {
@@ -101,24 +91,21 @@ namespace LAZYSHELL.Undo
             }
             if (redoStack.Count != 0 && !redoing)
                 redoStack.Clear();
-
+            //
             index++;
             if (index < commands.Length)
             {
                 commands[index] = cmd;
-
                 if (undo < commands.Length)
                     undo++;
             }
             else if (index >= commands.Length)
             {
-
-                index = 0; // We have filled the whole array and are now overwriting the old commands
+                // We have filled the whole array and are now overwriting the old commands
+                index = 0;
                 commands[index] = cmd;
-
                 if (undo < commands.Length)
                     undo++;
-
             }
         }
         public void Clear()
@@ -126,7 +113,7 @@ namespace LAZYSHELL.Undo
             for (int i = 0; i < commands.Length; i++)
                 commands[i] = null;
             redoStack.Clear();
-
+            //
             index = 0;
             undo = 0;
         }

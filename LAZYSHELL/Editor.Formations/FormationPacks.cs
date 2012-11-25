@@ -23,6 +23,7 @@ namespace LAZYSHELL
         private Formation[] formations { get { return Model.Formations; } }
         private Formations formationsEditor;
         public Search searchWindow;
+        private EditLabel labelWindow;
         #endregion
         // constructor
         public FormationPacks(Formations formationsEditor)
@@ -30,6 +31,7 @@ namespace LAZYSHELL
             this.formationsEditor = formationsEditor;
             InitializeComponent();
             searchWindow = new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
+            labelWindow = new EditLabel(null, packNum, "Packs", false);
             RefreshFormationPacks();
         }
         // functions
@@ -37,17 +39,17 @@ namespace LAZYSHELL
         {
             if (updating) return;
             updating = true;
-            this.packFormation1.Value = pack.PackFormations[0];
-            this.packFormation2.Value = pack.PackFormations[1];
-            this.packFormation3.Value = pack.PackFormations[2];
+            this.packFormation1.Value = pack.Formations[0];
+            this.packFormation2.Value = pack.Formations[1];
+            this.packFormation3.Value = pack.Formations[2];
             RefreshFormationPackStrings();
             updating = false;
         }
         private void RefreshFormationPackStrings()
         {
-            this.richTextBox2.Text = formations[pack.PackFormations[0]].FormationListSet;
-            this.richTextBox3.Text = formations[pack.PackFormations[1]].FormationListSet;
-            this.richTextBox4.Text = formations[pack.PackFormations[2]].FormationListSet;
+            this.richTextBox2.Text = formations[pack.Formations[0]].NamePack;
+            this.richTextBox3.Text = formations[pack.Formations[1]].NamePack;
+            this.richTextBox4.Text = formations[pack.Formations[2]].NamePack;
         }
         private void LoadSearch(TreeView treeView, StringComparison stringComparison, bool matchWholeWord)
         {
@@ -63,37 +65,37 @@ namespace LAZYSHELL
             foreach (FormationPack fp in packs)
             {
                 if (Do.Contains(
-                    formations[fp.PackFormations[0]].ToString(),
+                    formations[fp.Formations[0]].ToString(),
                     packNameTextBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
-                    formations[fp.PackFormations[1]].ToString(),
+                    formations[fp.Formations[1]].ToString(),
                     packNameTextBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
-                    formations[fp.PackFormations[2]].ToString(),
+                    formations[fp.Formations[2]].ToString(),
                     packNameTextBox.Text, stringComparison, matchWholeWord))
                 {
                     tn = treeView.Nodes.Add("PACK #" + fp.Index);
                     tn.Tag = (int)fp.Index;
 
                     if (Do.Contains(
-                        formations[fp.PackFormations[0]].ToString(),
+                        formations[fp.Formations[0]].ToString(),
                         packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
-                        cn = tn.Nodes.Add(formations[fp.PackFormations[0]].ToString());
+                        cn = tn.Nodes.Add(formations[fp.Formations[0]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
-                        formations[fp.PackFormations[1]].ToString(),
+                        formations[fp.Formations[1]].ToString(),
                         packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
-                        cn = tn.Nodes.Add(formations[fp.PackFormations[1]].ToString());
+                        cn = tn.Nodes.Add(formations[fp.Formations[1]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
-                        formations[fp.PackFormations[2]].ToString(),
+                        formations[fp.Formations[2]].ToString(),
                         packNameTextBox.Text, stringComparison, matchWholeWord))
                     {
-                        cn = tn.Nodes.Add(formations[fp.PackFormations[2]].ToString());
+                        cn = tn.Nodes.Add(formations[fp.Formations[2]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                 }
@@ -111,7 +113,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            pack.PackFormations[0] = (ushort)packFormation1.Value;
+            pack.Formations[0] = (ushort)packFormation1.Value;
 
             RefreshFormationPackStrings();
         }
@@ -119,7 +121,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            pack.PackFormations[1] = (ushort)packFormation2.Value;
+            pack.Formations[1] = (ushort)packFormation2.Value;
 
             RefreshFormationPackStrings();
         }
@@ -127,7 +129,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
 
-            pack.PackFormations[2] = (ushort)packFormation3.Value;
+            pack.Formations[2] = (ushort)packFormation3.Value;
 
             RefreshFormationPackStrings();
         }

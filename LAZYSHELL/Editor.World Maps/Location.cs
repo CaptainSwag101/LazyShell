@@ -8,141 +8,127 @@ namespace LAZYSHELL
     [Serializable()]
     public class Location
     {
-        [NonSerialized()]
-        private byte[] data;
+        #region variables
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private int index; public int Index { get { return index; } }
+        // class variables and accessors
         private char[] name; public char[] Name { get { return name; } set { name = value; } }
-
         private byte x; public byte X { get { return x; } set { x = value; } }
         private byte y; public byte Y { get { return y; } set { y = value; } }
-
+        //
         private byte showCheckBit; public byte ShowCheckBit { get { return showCheckBit; } set { showCheckBit = value; } }
         private ushort showCheckAddress; public ushort ShowCheckAddress { get { return showCheckAddress; } set { showCheckAddress = value; } }
-
         private bool goLocation; public bool GoLocation { get { return goLocation; } set { goLocation = value; } }
-
         private ushort runEvent; public ushort RunEvent { get { return runEvent; } set { runEvent = value; } }
-
         private byte whichLocationCheckBit; public byte WhichLocationCheckBit { get { return whichLocationCheckBit; } set { whichLocationCheckBit = value; } }
         private ushort whichLocationCheckAddress; public ushort WhichLocationCheckAddress { get { return whichLocationCheckAddress; } set { whichLocationCheckAddress = value; } }
-
         private byte goLocationA; public byte GoLocationA { get { return goLocationA; } set { goLocationA = value; } }
         private byte goLocationB; public byte GoLocationB { get { return goLocationB; } set { goLocationB = value; } }
-
-        private bool toEastEnabled; public bool ToEastEnabled { get { return toEastEnabled; } set { toEastEnabled = value; } }
-        private bool toSouthEnabled; public bool ToSouthEnabled { get { return toSouthEnabled; } set { toSouthEnabled = value; } }
-        private bool toWestEnabled; public bool ToWestEnabled { get { return toWestEnabled; } set { toWestEnabled = value; } }
-        private bool toNorthEnabled; public bool ToNorthEnabled { get { return toNorthEnabled; } set { toNorthEnabled = value; } }
-
-        private byte toEastCheckBit; public byte ToEastCheckBit { get { return toEastCheckBit; } set { toEastCheckBit = value; } }
-        private byte toSouthCheckBit; public byte ToSouthCheckBit { get { return toSouthCheckBit; } set { toSouthCheckBit = value; } }
-        private byte toWestCheckBit; public byte ToWestCheckBit { get { return toWestCheckBit; } set { toWestCheckBit = value; } }
-        private byte toNorthCheckBit; public byte ToNorthCheckBit { get { return toNorthCheckBit; } set { toNorthCheckBit = value; } }
-        private ushort toEastCheckAddress; public ushort ToEastCheckAddress { get { return toEastCheckAddress; } set { toEastCheckAddress = value; } }
-        private ushort toSouthCheckAddress; public ushort ToSouthCheckAddress { get { return toSouthCheckAddress; } set { toSouthCheckAddress = value; } }
-        private ushort toWestCheckAddress; public ushort ToWestCheckAddress { get { return toWestCheckAddress; } set { toWestCheckAddress = value; } }
-        private ushort toNorthCheckAddress; public ushort ToNorthCheckAddress { get { return toNorthCheckAddress; } set { toNorthCheckAddress = value; } }
-        private byte toEastLocation; public byte ToEastLocation { get { return toEastLocation; } set { toEastLocation = value; } }
-        private byte toSouthLocation; public byte ToSouthLocation { get { return toSouthLocation; } set { toSouthLocation = value; } }
-        private byte toWestLocation; public byte ToWestLocation { get { return toWestLocation; } set { toWestLocation = value; } }
-        private byte toNorthLocation; public byte ToNorthLocation { get { return toNorthLocation; } set { toNorthLocation = value; } }
-
-        public Location(byte[] data, int index)
+        //
+        private bool enabledToEast; public bool EnabledToEast { get { return enabledToEast; } set { enabledToEast = value; } }
+        private bool enabledToSouth; public bool EnabledToSouth { get { return enabledToSouth; } set { enabledToSouth = value; } }
+        private bool enabledToWest; public bool EnabledToWest { get { return enabledToWest; } set { enabledToWest = value; } }
+        private bool enabledToNorth; public bool EnabledToNorth { get { return enabledToNorth; } set { enabledToNorth = value; } }
+        //
+        private byte checkBitToEast; public byte CheckBitToEast { get { return checkBitToEast; } set { checkBitToEast = value; } }
+        private byte checkBitToSouth; public byte CheckBitToSouth { get { return checkBitToSouth; } set { checkBitToSouth = value; } }
+        private byte checkBitToWest; public byte CheckBitToWest { get { return checkBitToWest; } set { checkBitToWest = value; } }
+        private byte checkBitToNorth; public byte CheckBitToNorth { get { return checkBitToNorth; } set { checkBitToNorth = value; } }
+        private ushort checkAddressToEast; public ushort CheckAddressToEast { get { return checkAddressToEast; } set { checkAddressToEast = value; } }
+        private ushort checkAddressToSouth; public ushort CheckAddressToSouth { get { return checkAddressToSouth; } set { checkAddressToSouth = value; } }
+        private ushort checkAddressToWest; public ushort CheckAddressToWest { get { return checkAddressToWest; } set { checkAddressToWest = value; } }
+        private ushort checkAddressToNorth; public ushort CheckAddressToNorth { get { return checkAddressToNorth; } set { checkAddressToNorth = value; } }
+        private byte locationToEast; public byte LocationToEast { get { return locationToEast; } set { locationToEast = value; } }
+        private byte locationToSouth; public byte LocationToSouth { get { return locationToSouth; } set { locationToSouth = value; } }
+        private byte locationToWest; public byte LocationToWest { get { return locationToWest; } set { locationToWest = value; } }
+        private byte locationToNorth; public byte LocationToNorth { get { return locationToNorth; } set { locationToNorth = value; } }
+        #endregion
+        // constructor
+        public Location(int index)
         {
-            this.data = data;
             this.index = index;
-
-            InitializeLocation(data);
+            Disassemble();
         }
-        private void InitializeLocation(byte[] data)
+        // assemblers
+        private void Disassemble()
         {
             int offset = index * 16 + 0x3EF830;
-
-            x = (byte)data[offset]; offset++;
-            y = (byte)data[offset]; offset++;
-
-            showCheckBit = (byte)(data[offset] & 0x07);
-            showCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-
-            goLocation = (data[offset] & 0x40) == 0x40; offset++;
-
+            x = (byte)rom[offset++];
+            y = (byte)rom[offset++];
+            showCheckBit = (byte)(rom[offset] & 0x07);
+            showCheckAddress = (ushort)(((Bits.GetShort(rom, offset++) & 0x1FF) >> 3) + 0x7045);
+            goLocation = (rom[offset++] & 0x40) == 0x40;
             if (!goLocation)
             {
-                runEvent = Bits.GetShort(data, offset);
+                runEvent = Bits.GetShort(rom, offset);
                 offset += 4;
             }
             else
             {
-                whichLocationCheckBit = (byte)(data[offset] & 0x07);
-                whichLocationCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset += 2;
-                goLocationA = data[offset]; offset++;
-                goLocationB = data[offset]; offset++;
+                whichLocationCheckBit = (byte)(rom[offset] & 0x07);
+                whichLocationCheckAddress = (ushort)(((Bits.GetShort(rom, offset) & 0x1FF) >> 3) + 0x7045); offset += 2;
+                goLocationA = rom[offset++];
+                goLocationB = rom[offset++];
             }
-
-            if (Bits.GetShort(data, offset) == 0xFFFF)
+            if (Bits.GetShort(rom, offset) == 0xFFFF)
             {
-                toEastEnabled = false;
-                toEastCheckAddress = 0x7045;
+                enabledToEast = false;
+                checkAddressToEast = 0x7045;
                 offset += 2;
             }
             else
             {
-                toEastEnabled = true;
-                toEastCheckBit = (byte)(data[offset] & 0x07);
-                toEastCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toEastLocation = (byte)(data[offset] >> 1); offset++;
+                enabledToEast = true;
+                checkBitToEast = (byte)(rom[offset] & 0x07);
+                checkAddressToEast = (ushort)(((Bits.GetShort(rom, offset) & 0x1FF) >> 3) + 0x7045); offset++;
+                locationToEast = (byte)(rom[offset] >> 1); offset++;
             }
-
-            if (Bits.GetShort(data, offset) == 0xFFFF)
+            if (Bits.GetShort(rom, offset) == 0xFFFF)
             {
-                toSouthEnabled = false;
-                toSouthCheckAddress = 0x7045;
+                enabledToSouth = false;
+                checkAddressToSouth = 0x7045;
                 offset += 2;
             }
             else
             {
-                toSouthEnabled = true;
-                toSouthCheckBit = (byte)(data[offset] & 0x07);
-                toSouthCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toSouthLocation = (byte)(data[offset] >> 1); offset++;
+                enabledToSouth = true;
+                checkBitToSouth = (byte)(rom[offset] & 0x07);
+                checkAddressToSouth = (ushort)(((Bits.GetShort(rom, offset++) & 0x1FF) >> 3) + 0x7045);
+                locationToSouth = (byte)(rom[offset++] >> 1);
             }
-
-            if (Bits.GetShort(data, offset) == 0xFFFF)
+            if (Bits.GetShort(rom, offset) == 0xFFFF)
             {
-                toWestEnabled = false;
-                toWestCheckAddress = 0x7045;
+                enabledToWest = false;
+                checkAddressToWest = 0x7045;
                 offset += 2;
             }
             else
             {
-                toWestEnabled = true;
-                toWestCheckBit = (byte)(data[offset] & 0x07);
-                toWestCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toWestLocation = (byte)(data[offset] >> 1); offset++;
+                enabledToWest = true;
+                checkBitToWest = (byte)(rom[offset] & 0x07);
+                checkAddressToWest = (ushort)(((Bits.GetShort(rom, offset++) & 0x1FF) >> 3) + 0x7045);
+                locationToWest = (byte)(rom[offset++] >> 1);
             }
-
-            if (Bits.GetShort(data, offset) == 0xFFFF)
+            if (Bits.GetShort(rom, offset) == 0xFFFF)
             {
-                toNorthEnabled = false;
-                toNorthCheckAddress = 0x7045;
+                enabledToNorth = false;
+                checkAddressToNorth = 0x7045;
                 offset += 2;
             }
             else
             {
-                toNorthEnabled = true;
-                toNorthCheckBit = (byte)(data[offset] & 0x07);
-                toNorthCheckAddress = (ushort)(((Bits.GetShort(data, offset) & 0x1FF) >> 3) + 0x7045); offset++;
-                toNorthLocation = (byte)(data[offset] >> 1);
+                enabledToNorth = true;
+                checkBitToNorth = (byte)(rom[offset] & 0x07);
+                checkAddressToNorth = (ushort)(((Bits.GetShort(rom, offset++) & 0x1FF) >> 3) + 0x7045);
+                locationToNorth = (byte)(rom[offset] >> 1);
             }
-
-            int pointer = Bits.GetShort(data, index * 2 + 0x3EFD00);
+            //
+            int pointer = Bits.GetShort(rom, index * 2 + 0x3EFD00);
             offset = pointer + 0x3EFD80;
             ArrayList temp = new ArrayList();
-
-            for (int i = 0; data[offset] != 0x06 && data[offset] != 0x00; i++)
-            {
-                temp.Add((char)data[offset]); offset++;
-            }
+            for (int i = 0; rom[offset] != 0x06 && rom[offset] != 0x00; i++)
+                temp.Add((char)rom[offset++]);
             name = new char[temp.Count];
             int a = 0;
             foreach (char c in temp)
@@ -151,76 +137,69 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int offset = index * 16 + 0x3EF830;
-
-            data[offset] = x; offset++;
-            data[offset] = y; offset++;
-
-            Bits.SetShort(data, offset, (ushort)((showCheckAddress - 0x7045) << 3));
-            data[offset] |= showCheckBit; offset++;
-
-            Bits.SetBit(data, offset, 6, goLocation); offset++;
-
+            rom[offset++] = x;
+            rom[offset++] = y;
+            Bits.SetShort(rom, offset, (ushort)((showCheckAddress - 0x7045) << 3));
+            rom[offset++] |= showCheckBit;
+            Bits.SetBit(rom, offset++, 6, goLocation);
             if (!goLocation)
             {
-                Bits.SetShort(data, offset, runEvent); offset += 2;
-                Bits.SetShort(data, offset, 0xFFFF); offset += 2;
+                Bits.SetShort(rom, offset, runEvent); offset += 2;
+                Bits.SetShort(rom, offset, 0xFFFF); offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((whichLocationCheckAddress - 0x7045) << 3));
-                data[offset] |= whichLocationCheckBit; offset += 2;
-                data[offset] = goLocationA; offset++;
-                data[offset] = goLocationB; offset++;
+                Bits.SetShort(rom, offset, (ushort)((whichLocationCheckAddress - 0x7045) << 3));
+                rom[offset] |= whichLocationCheckBit; offset += 2;
+                rom[offset++] = goLocationA;
+                rom[offset++] = goLocationB;
             }
-
-            if (!toEastEnabled)
+            if (!enabledToEast)
             {
-                Bits.SetShort(data, offset, 0xFFFF);
+                Bits.SetShort(rom, offset, 0xFFFF);
                 offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((toEastCheckAddress - 0x7045) << 3));
-                data[offset] |= toEastCheckBit; offset++;
-                data[offset] |= (byte)(toEastLocation << 1); offset++;
+                Bits.SetShort(rom, offset, (ushort)((checkAddressToEast - 0x7045) << 3));
+                rom[offset++] |= checkBitToEast;
+                rom[offset++] |= (byte)(locationToEast << 1);
             }
-
-            if (!toSouthEnabled)
+            if (!enabledToSouth)
             {
-                Bits.SetShort(data, offset, 0xFFFF);
+                Bits.SetShort(rom, offset, 0xFFFF);
                 offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((toSouthCheckAddress - 0x7045) << 3));
-                data[offset] |= toSouthCheckBit; offset++;
-                data[offset] |= (byte)(toSouthLocation << 1); offset++;
+                Bits.SetShort(rom, offset, (ushort)((checkAddressToSouth - 0x7045) << 3));
+                rom[offset++] |= checkBitToSouth;
+                rom[offset++] |= (byte)(locationToSouth << 1);
             }
-
-            if (!toWestEnabled)
+            if (!enabledToWest)
             {
-                Bits.SetShort(data, offset, 0xFFFF);
+                Bits.SetShort(rom, offset, 0xFFFF);
                 offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((toWestCheckAddress - 0x7045) << 3));
-                data[offset] |= toWestCheckBit; offset++;
-                data[offset] |= (byte)(toWestLocation << 1); offset++;
+                Bits.SetShort(rom, offset, (ushort)((checkAddressToWest - 0x7045) << 3));
+                rom[offset++] |= checkBitToWest;
+                rom[offset++] |= (byte)(locationToWest << 1);
             }
-
-            if (!toNorthEnabled)
+            if (!enabledToNorth)
             {
-                Bits.SetShort(data, offset, 0xFFFF);
+                Bits.SetShort(rom, offset, 0xFFFF);
                 offset += 2;
             }
             else
             {
-                Bits.SetShort(data, offset, (ushort)((toNorthCheckAddress - 0x7045) << 3));
-                data[offset] |= toNorthCheckBit; offset++;
-                data[offset] |= (byte)(toNorthLocation << 1); offset++;
+                Bits.SetShort(rom, offset, (ushort)((checkAddressToNorth - 0x7045) << 3));
+                rom[offset++] |= checkBitToNorth;
+                rom[offset++] |= (byte)(locationToNorth << 1);
             }
         }
+        // universal functions
         public void Clear()
         {
             x = 0;
@@ -233,15 +212,15 @@ namespace LAZYSHELL
             whichLocationCheckBit = 0;
             goLocationA = 0;
             goLocationB = 0;
-            toEastEnabled = false;
-            toSouthEnabled = false;
-            toWestEnabled = false;
-            toNorthEnabled = false;
+            enabledToEast = false;
+            enabledToSouth = false;
+            enabledToWest = false;
+            enabledToNorth = false;
             name = new char[0];
         }
         public override string ToString()
         {
-            return Do.RawToASCII(name, LAZYSHELL.Properties.Settings.Default.Keystrokes);
+            return Do.RawToASCII(name, Lists.Keystrokes);
         }
     }
 }

@@ -13,7 +13,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Dialogues : Form
+    public partial class Dialogues : NewForm
     {
         #region Variables
 
@@ -67,14 +67,11 @@ namespace LAZYSHELL
         private Fonts fonts;
         public Fonts Fonts { get { return fonts; } set { fonts = value; } }
         private Search searchWindow;
+        private EditLabel labelWindow;
         #endregion
         #region Functions
         public Dialogues()
         {
-            Settings.Default.Keystrokes[0x20] = "\x20";
-            Settings.Default.KeystrokesMenu[0x20] = "\x20";
-            Settings.Default.KeystrokesDesc[0x20] = "\x20";
-            Settings.Default.KeystrokesBonus[0x1F] = "\x20";
             // 
             dteStrByte = Model.DTEStr(true);
             dteStrText = Model.DTEStr(false);
@@ -86,6 +83,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             searchWindow = new Search(dialogueNum, textBoxSearch, search, new Function(LoadSearch), "richTextBox");
+            labelWindow = new EditLabel(null, dialogueNum, "Dialogues", false);
             // tileset
             textHelper = TextHelper.Instance;
             dialoguePreview = new DialoguePreview();
@@ -93,22 +91,22 @@ namespace LAZYSHELL
             SetTilesetImage();
             // compression table
             updatingDialogue = true;
-            this.dct0E.Text = dte[0].GetDialogue(byteView); dct0E.Tag = 0;
-            this.dct0F.Text = dte[1].GetDialogue(byteView); dct0F.Tag = 1;
-            this.dct10.Text = dte[2].GetDialogue(byteView); dct10.Tag = 2;
-            this.dct11.Text = dte[3].GetDialogue(byteView); dct11.Tag = 3;
-            this.dct12.Text = dte[4].GetDialogue(byteView); dct12.Tag = 4;
-            this.dct13.Text = dte[5].GetDialogue(byteView); dct13.Tag = 5;
-            this.dct14.Text = dte[6].GetDialogue(byteView); dct14.Tag = 6;
-            this.dct15.Text = dte[7].GetDialogue(byteView); dct15.Tag = 7;
-            this.dct16.Text = dte[8].GetDialogue(byteView); dct16.Tag = 8;
-            this.dct17.Text = dte[9].GetDialogue(byteView); dct17.Tag = 9;
-            this.dct18.Text = dte[10].GetDialogue(byteView); dct18.Tag = 10;
-            this.dct19.Text = dte[11].GetDialogue(byteView); dct19.Tag = 11;
+            this.dct0E.Text = dte[0].GetText(byteView); dct0E.Tag = 0;
+            this.dct0F.Text = dte[1].GetText(byteView); dct0F.Tag = 1;
+            this.dct10.Text = dte[2].GetText(byteView); dct10.Tag = 2;
+            this.dct11.Text = dte[3].GetText(byteView); dct11.Tag = 3;
+            this.dct12.Text = dte[4].GetText(byteView); dct12.Tag = 4;
+            this.dct13.Text = dte[5].GetText(byteView); dct13.Tag = 5;
+            this.dct14.Text = dte[6].GetText(byteView); dct14.Tag = 6;
+            this.dct15.Text = dte[7].GetText(byteView); dct15.Tag = 7;
+            this.dct16.Text = dte[8].GetText(byteView); dct16.Tag = 8;
+            this.dct17.Text = dte[9].GetText(byteView); dct17.Tag = 9;
+            this.dct18.Text = dte[10].GetText(byteView); dct18.Tag = 10;
+            this.dct19.Text = dte[11].GetText(byteView); dct19.Tag = 11;
             updatingDialogue = false;
             // editors
             LoadFontEditor();
-            option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetCharacterPixels(fontPalette.Palettes[1]), 8, 16));
+            option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16));
             battleDialogues = new BattleDialogues(this);
             battleDialogues.TopLevel = false;
             battleDialogues.Dock = DockStyle.Bottom;
@@ -137,11 +135,11 @@ namespace LAZYSHELL
         {
             updatingDialogue = true;
 
-            if (dialogue.DuplicateOfDialogue != index)
+            if (dialogue.Reference != index)
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
                 dialogueTextBox.BackColor = SystemColors.Window;
-            this.dialogueTextBox.Text = dialogue.GetDialogue(byteView, dteStr);
+            this.dialogueTextBox.Text = dialogue.GetText(byteView, dteStr);
             this.dialogueTextBox.SelectionStart = dialogue.GetCaretPosition(byteView);
 
             int temp = CalculateFreeSpace();
@@ -153,7 +151,7 @@ namespace LAZYSHELL
         private void SetTilesetImage()
         {
             dialogueBGImage = new Bitmap(Do.PixelsToImage(
-                Do.TilesetToPixels(dialogueTileset.TilesetLayer, 16, 4, 0, false), 256, 56));
+                Do.TilesetToPixels(dialogueTileset.Tileset_tiles, 16, 4, 0, false), 256, 56));
             pictureBoxDialogue.Invalidate();
         }
         private void SetTextImage()
@@ -177,7 +175,7 @@ namespace LAZYSHELL
                 else if (preview == false && text[i] == ']') // Close bracket after open bracket
                     preview = true;
                 else if (preview == true && valid == true)
-                    valid = textHelper.IsValidChar(text[i]);
+                    valid = textHelper.IsValidSymbol(text[i]);
                 if (i < text.Length && text[i] == '\n')
                 {
                     int tempSel = dialogueTextBox.SelectionStart;
@@ -197,8 +195,8 @@ namespace LAZYSHELL
             }
             if (preview && valid && !fail)
             {
-                dialogue.SetDialogue(dialogueTextBox.Text, byteView, dteStr);
-                int[] pixels = dialoguePreview.GetPreview(fontDialogue, fontTriangle, fontPalette.Palettes[1], fontPalette.Palettes[1], dialogue.RawDialogue, 16);
+                dialogue.SetText(dialogueTextBox.Text, byteView, dteStr);
+                int[] pixels = dialoguePreview.GetPreview(fontDialogue, fontTriangle, fontPalette.Palettes[1], fontPalette.Palettes[1], dialogue.Text, 16);
                 dialogueTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 56));
             }
             pictureBoxDialogue.Invalidate();
@@ -229,10 +227,10 @@ namespace LAZYSHELL
             }
             for (int i = index; i < end; i++)
             {
-                if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
+                if (i == dialogues[i].Reference && dialogues[i].Position == 0)
                 {
                     used += dialogues[i].Length;
-                    if (i < end - 1 && used + dialogues[i + 1].Length > size && i + 1 == dialogues[i + 1].DuplicateOfDialogue && dialogues[i + 1].IndexInDialogue == 0)
+                    if (i < end - 1 && used + dialogues[i + 1].Length > size && i + 1 == dialogues[i + 1].Reference && dialogues[i + 1].Position == 0)
                     {
                         bool test = false;
                         test = (size >= used + dialogues[i + 1].Length);
@@ -280,11 +278,11 @@ namespace LAZYSHELL
 
             for (int i = index; i < end; i++)
             {
-                if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
+                if (i == dialogues[i].Reference && dialogues[i].Position == 0)
                 {
                     used += dialogues[i].Length;
 
-                    if (i < end - 1 && used + dialogues[i + 1].Length > size && i + 1 == dialogues[i + 1].DuplicateOfDialogue && dialogues[i + 1].IndexInDialogue == 0)
+                    if (i < end - 1 && used + dialogues[i + 1].Length > size && i + 1 == dialogues[i + 1].Reference && dialogues[i + 1].Position == 0)
                     {
                         bool test = false;
                         test = (size >= used + dialogues[i + 1].Length);
@@ -311,7 +309,7 @@ namespace LAZYSHELL
             dialogueTextBox.Text.CopyTo(dialogueTextBox.SelectionStart, newText, dialogueTextBox.SelectionStart + toInsert.Length, this.dialogueTextBox.Text.Length - this.dialogueTextBox.SelectionStart);
 
             dialogue.SetCaretPosition(this.dialogueTextBox.SelectionStart + toInsert.Length, byteView);
-            dialogue.SetDialogue(new string(newText), byteView, dteStr);
+            dialogue.SetText(new string(newText), byteView, dteStr);
             RefreshDialogueEditor();
             SetTextImage();
         }
@@ -345,7 +343,7 @@ namespace LAZYSHELL
                 else if (preview == false && text[i] == ']') // Close bracket after open bracket
                     preview = true;
                 else if (preview == true && valid == true)
-                    valid = textHelper.IsValidChar(text[i]);
+                    valid = textHelper.IsValidSymbol(text[i]);
 
                 if (i < text.Length && text[i] == '\n')
                 {
@@ -365,7 +363,7 @@ namespace LAZYSHELL
                 }
             }
             if (preview && valid && !fail)
-                dte[(int)textBox.Tag].SetDialogue(textBox.Text, byteView);
+                dte[(int)textBox.Tag].SetText(textBox.Text, byteView);
             CalculateFreeTableSpace();
         }
         private void EncodeDialogues_()
@@ -378,30 +376,30 @@ namespace LAZYSHELL
             for (i = 0; i < 0x800; i++)
             {
                 if (i < 0x7FF) diff = dialogues[i + 1].Pointer - dialogues[i].Pointer;
-                if (i < 0x7FF && dialogues[i].RawDialogue.Length > diff && diff > 0)
+                if (i < 0x7FF && dialogues[i].Text.Length > diff && diff > 0)
                 {
-                    dialogues[i + 1].WithinDialogue = i;
-                    dialogues[i + 1].IndexInDialogue = diff;
+                    dialogues[i + 1].Parent = i;
+                    dialogues[i + 1].Position = diff;
                 }
             }
             i = 0; diff = 0;
             for (i = 0x800; i < 0xC00; i++)
             {
                 if (i < 0xBFF) diff = dialogues[i + 1].Pointer - dialogues[i].Pointer;
-                if (i < 0xBFF && dialogues[i].RawDialogue.Length > diff && diff > 0)
+                if (i < 0xBFF && dialogues[i].Text.Length > diff && diff > 0)
                 {
-                    dialogues[i + 1].WithinDialogue = i;
-                    dialogues[i + 1].IndexInDialogue = diff;
+                    dialogues[i + 1].Parent = i;
+                    dialogues[i + 1].Position = diff;
                 }
             }
             i = 0; diff = 0;
             for (i = 0xC00; i < 0x1000; i++)
             {
                 if (i < 0xFFF) diff = dialogues[i + 1].Pointer - dialogues[i].Pointer;
-                if (i < 0xFFF && dialogues[i].RawDialogue.Length > diff && diff > 0)
+                if (i < 0xFFF && dialogues[i].Text.Length > diff && diff > 0)
                 {
-                    dialogues[i + 1].WithinDialogue = i;
-                    dialogues[i + 1].IndexInDialogue = diff;
+                    dialogues[i + 1].Parent = i;
+                    dialogues[i + 1].Position = diff;
                 }
             }
         }
@@ -413,45 +411,45 @@ namespace LAZYSHELL
                 a = i;
                 if (dialogues[i + 1].Pointer == dialogues[a].Pointer)
                 {
-                    dialogues[i].DuplicateOfDialogue = i; i++;
+                    dialogues[i].Reference = i; i++;
                     while (i < 0x800 && dialogues[i].Pointer == dialogues[a].Pointer)
                     {
-                        dialogues[i].DuplicateOfDialogue = a;
+                        dialogues[i].Reference = a;
                         i++;
                     }
                     i--;
                 }
-                else dialogues[i].DuplicateOfDialogue = i;
+                else dialogues[i].Reference = i;
             }
             for (i = 0x800; i < 0xC00; i++)
             {
                 a = i;
                 if (dialogues[i + 1].Pointer == dialogues[a].Pointer)
                 {
-                    dialogues[i].DuplicateOfDialogue = i; i++;
+                    dialogues[i].Reference = i; i++;
                     while (i < 0xC00 && dialogues[i].Pointer == dialogues[a].Pointer)
                     {
-                        dialogues[i].DuplicateOfDialogue = a;
+                        dialogues[i].Reference = a;
                         i++;
                     }
                     i--;
                 }
-                else dialogues[i].DuplicateOfDialogue = i;
+                else dialogues[i].Reference = i;
             }
             for (i = 0xC00; i < 0x1000; i++)
             {
                 a = i;
                 if (dialogues[i + 1].Pointer == dialogues[a].Pointer)
                 {
-                    dialogues[i].DuplicateOfDialogue = i; i++;
+                    dialogues[i].Reference = i; i++;
                     while (i < 0x1000 && dialogues[i].Pointer == dialogues[a].Pointer)
                     {
-                        dialogues[i].DuplicateOfDialogue = a;
+                        dialogues[i].Reference = a;
                         i++;
                     }
                     i--;
                 }
-                else dialogues[i].DuplicateOfDialogue = i;
+                else dialogues[i].Reference = i;
             }
         }
         private void LoadSearch(RichTextBox searchResults, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith)
@@ -461,7 +459,7 @@ namespace LAZYSHELL
 
             for (int i = 0; i < dialogues.Length; i++)
             {
-                string dialogue = dialogues[i].GetDialogue(byteView, dteStr);
+                string dialogue = dialogues[i].GetText(byteView, dteStr);
                 int index = dialogue.IndexOf(textBoxSearch.Text, stringComparison);
                 if (index >= 0)
                 {
@@ -476,10 +474,10 @@ namespace LAZYSHELL
                     if (replaceAll)
                     {
                         dialogue = dialogue.Replace(textBoxSearch.Text, replaceWith);
-                        dialogues[i].SetDialogue(dialogue, byteView, dteStr);
+                        dialogues[i].SetText(dialogue, byteView, dteStr);
                     }
                     dialogueSearch += "[" + dialogues[i].Index.ToString() + "]\n";
-                    dialogueSearch += dialogues[i].GetDialogue(byteView, dteStr) + "\n\n";
+                    dialogueSearch += dialogues[i].GetText(byteView, dteStr) + "\n\n";
                 }
             }
             searchResults.Text = j.ToString() + " results...\n\n" + dialogueSearch;
@@ -526,7 +524,7 @@ namespace LAZYSHELL
                     totalSize + " bytes) exceeds 302 bytes.\n\n" + "The menu palettes were not saved.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                Bits.SetByteArray(Model.Data, 0x3E2D54, compressed, 0, totalSize - 1);
+                Bits.SetByteArray(Model.ROM, 0x3E2D54, compressed, 0, totalSize - 1);
             //
             fonts.Assemble();
             battleDialogues.Assemble();
@@ -537,14 +535,13 @@ namespace LAZYSHELL
             }
             // Assemble the dialogue
             string original, within;
-            int temp = index;
-            ushort len = 0;
+            int length = 0;
             int i = 0;
             // assemble table
             if (CalculateFreeTableSpace() >= 0)
             {
-                for (i = 0; i < dte.Length && len + dte[i].Length < 0x40; i++)
-                    len += dte[i].Assemble(len);
+                for (i = 0; i < dte.Length && length + dte[i].Length < 0x40; i++)
+                    dte[i].Assemble(ref length);
             }
             else
                 MessageBox.Show("The dialogue table was not saved. Please delete the necessary number of bytes for space.",
@@ -552,19 +549,19 @@ namespace LAZYSHELL
             // 000 - 1ff
             if (FreeSpace(0))
             {
-                len = 0x0008;
-                for (i = 0; i < 0x0800 && (len + dialogues[i].Length < 0xFD18 || (i != dialogues[i].DuplicateOfDialogue && !isDialogueChanged[i])); i++)
+                length = 0x0008;
+                for (i = 0; i < 0x0800 && (length + dialogues[i].Length < 0xFD18 || (i != dialogues[i].Reference && !isDialogueChanged[i])); i++)
                 {
-                    if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
-                        len += dialogues[i].Assemble(len);
-                    else if (dialogues[i].IndexInDialogue != 0)
+                    if (i == dialogues[i].Reference && dialogues[i].Position == 0)
+                        dialogues[i].Assemble(ref length);
+                    else if (dialogues[i].Position != 0)
                     {
-                        original = new string(dialogues[dialogues[i].WithinDialogue].RawDialogue);
-                        within = new string(dialogues[i].RawDialogue);
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].WithinDialogue].Pointer + original.IndexOf(within) + 8));
+                        original = new string(dialogues[dialogues[i].Parent].Text);
+                        within = new string(dialogues[i].Text);
+                        dialogues[i].Assemble(dialogues[dialogues[i].Parent].Pointer + original.IndexOf(within) + 8);
                     }
                     else
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].DuplicateOfDialogue].Pointer + 8));
+                        dialogues[i].Assemble(dialogues[dialogues[i].Reference].Pointer + 8);
                     // if the next dialogue has a smaller pointer or points to a place in the current dialogue, and both the current and next dialogues haven't changed
                 }
             }
@@ -574,19 +571,19 @@ namespace LAZYSHELL
 
             if (FreeSpace(0x800))
             {
-                len = 0x0004;
-                for (i = 0x0800; i < 0x0C00 && (len + dialogues[i].Length < 0xF2D5 || (i != dialogues[i].DuplicateOfDialogue && !isDialogueChanged[i])); i++)
+                length = 0x0004;
+                for (i = 0x0800; i < 0x0C00 && (length + dialogues[i].Length < 0xF2D5 || (i != dialogues[i].Reference && !isDialogueChanged[i])); i++)
                 {
-                    if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
-                        len += dialogues[i].Assemble(len);
-                    else if (dialogues[i].IndexInDialogue != 0)
+                    if (i == dialogues[i].Reference && dialogues[i].Position == 0)
+                        dialogues[i].Assemble(ref length);
+                    else if (dialogues[i].Position != 0)
                     {
-                        original = new string(dialogues[dialogues[i].WithinDialogue].RawDialogue);
-                        within = new string(dialogues[i].RawDialogue);
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].WithinDialogue].Pointer + original.IndexOf(within) + 4));
+                        original = new string(dialogues[dialogues[i].Parent].Text);
+                        within = new string(dialogues[i].Text);
+                        dialogues[i].Assemble(dialogues[dialogues[i].Parent].Pointer + original.IndexOf(within) + 4);
                     }
                     else
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].DuplicateOfDialogue].Pointer + 4));
+                        dialogues[i].Assemble(dialogues[dialogues[i].Reference].Pointer + 4);
                 }
             }
             else
@@ -595,34 +592,34 @@ namespace LAZYSHELL
 
             if (FreeSpace(0xC00))
             {
-                len = 0x0004;
-                for (i = 0x0C00; i < 0x1000 && len + dialogues[i].Length < 0x8FFF; i++)
+                length = 0x0004;
+                for (i = 0x0C00; i < 0x1000 && length + dialogues[i].Length < 0x8FFF; i++)
                 {
-                    if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
-                        len += dialogues[i].Assemble(len);
-                    else if (dialogues[i].IndexInDialogue != 0)
+                    if (i == dialogues[i].Reference && dialogues[i].Position == 0)
+                        dialogues[i].Assemble(ref length);
+                    else if (dialogues[i].Position != 0)
                     {
-                        original = new string(dialogues[dialogues[i].WithinDialogue].RawDialogue);
-                        within = new string(dialogues[i].RawDialogue);
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].WithinDialogue].Pointer + original.IndexOf(within) + 4));
+                        original = new string(dialogues[dialogues[i].Parent].Text);
+                        within = new string(dialogues[i].Text);
+                        dialogues[i].Assemble(dialogues[dialogues[i].Parent].Pointer + original.IndexOf(within) + 4);
                     }
                     else
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].DuplicateOfDialogue].Pointer + 4));
+                        dialogues[i].Assemble(dialogues[dialogues[i].Reference].Pointer + 4);
                 }
 
-                len = 0xEDE0;
-                for (; i < 0x1000 && len + dialogues[i].Length < 0xFFFF; i++)
+                length = 0xEDE0;
+                for (; i < 0x1000 && length + dialogues[i].Length < 0xFFFF; i++)
                 {
-                    if (i == dialogues[i].DuplicateOfDialogue && dialogues[i].IndexInDialogue == 0)
-                        len += dialogues[i].Assemble(len);
-                    else if (dialogues[i].IndexInDialogue != 0)
+                    if (i == dialogues[i].Reference && dialogues[i].Position == 0)
+                        dialogues[i].Assemble(ref length);
+                    else if (dialogues[i].Position != 0)
                     {
-                        original = new string(dialogues[dialogues[i].WithinDialogue].RawDialogue);
-                        within = new string(dialogues[i].RawDialogue);
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].WithinDialogue].Pointer + original.IndexOf(within) + 4));
+                        original = new string(dialogues[dialogues[i].Parent].Text);
+                        within = new string(dialogues[i].Text);
+                        dialogues[i].Assemble(dialogues[dialogues[i].Parent].Pointer + original.IndexOf(within) + 4);
                     }
                     else
-                        dialogues[i].Assemble((ushort)(dialogues[dialogues[i].DuplicateOfDialogue].Pointer + 4));
+                        dialogues[i].Assemble(dialogues[dialogues[i].Reference].Pointer + 4);
                 }
             }
             else
@@ -655,7 +652,7 @@ namespace LAZYSHELL
                 Model.BattleDialogues = null;
                 Model.BattleMessages = null;
                 Model.DialogueGraphics = null;
-                Model.BattleDialogueTileSet = null;
+                Model.BattleDialogueTileset_bytes = null;
                 Model.FontDescription = null;
                 Model.FontDialogue = null;
                 Model.FontMenu = null;
@@ -698,7 +695,7 @@ namespace LAZYSHELL
         }
         private void textView_Click(object sender, EventArgs e)
         {
-            this.dialogueTextBox.Text = dialogue.GetDialogue(byteView, dteStr);
+            this.dialogueTextBox.Text = dialogue.GetText(byteView, dteStr);
         }
         private void syncDupes_CheckedChanged(object sender, EventArgs e)
         {
@@ -739,7 +736,7 @@ namespace LAZYSHELL
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
-            dialoguePreview.PageDown(dialogue.RawDialogue.Length);
+            dialoguePreview.PageDown(dialogue.Text.Length);
             SetTextImage();
         }
         private void toolStripButton11_Click(object sender, EventArgs e)
@@ -755,7 +752,7 @@ namespace LAZYSHELL
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
-            if (dialogue.DuplicateOfDialogue != index)
+            if (dialogue.Reference != index)
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
                 dialogueTextBox.BackColor = SystemColors.Window;
@@ -766,46 +763,46 @@ namespace LAZYSHELL
                 return;    // if ctrl+some other key, cancel
             if (e.KeyValue >= 0xA0)
                 return;
-            int temp = dialogue.DuplicateOfDialogue;
+            int temp = dialogue.Reference;
             //DialogResult result;
             if (!syncDupes.Checked)
-                dialogue.DuplicateOfDialogue = index;
+                dialogue.Reference = index;
             if (!isDialogueChanged[index])
             {
                 if (index < 0x800)
                 {
                     for (int i = 0; i < 0x800; i++)
                     {
-                        if (!syncDupes.Checked && dialogues[i].DuplicateOfDialogue == index)
-                            dialogues[i].DuplicateOfDialogue = i;
-                        else if (syncDupes.Checked && dialogues[i].DuplicateOfDialogue == dialogues[index].DuplicateOfDialogue)
-                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
-                        if (dialogues[i].WithinDialogue == index)
-                            dialogues[i].WithinDialogue = 0;
+                        if (!syncDupes.Checked && dialogues[i].Reference == index)
+                            dialogues[i].Reference = i;
+                        else if (syncDupes.Checked && dialogues[i].Reference == dialogues[index].Reference)
+                            dialogues[i].Text = dialogues[index].Text;
+                        if (dialogues[i].Parent == index)
+                            dialogues[i].Parent = 0;
                     }
                 }
                 else if (index < 0xC00)
                 {
                     for (int i = 0x800; i < 0xC00; i++)
                     {
-                        if (!syncDupes.Checked && dialogues[i].DuplicateOfDialogue == index)
-                            dialogues[i].DuplicateOfDialogue = i;
-                        else if (syncDupes.Checked && dialogues[i].DuplicateOfDialogue == dialogues[index].DuplicateOfDialogue)
-                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
-                        if (dialogues[i].WithinDialogue == index)
-                            dialogues[i].WithinDialogue = 0;
+                        if (!syncDupes.Checked && dialogues[i].Reference == index)
+                            dialogues[i].Reference = i;
+                        else if (syncDupes.Checked && dialogues[i].Reference == dialogues[index].Reference)
+                            dialogues[i].Text = dialogues[index].Text;
+                        if (dialogues[i].Parent == index)
+                            dialogues[i].Parent = 0;
                     }
                 }
                 else if (index < 0x1000)
                 {
                     for (int i = 0xC00; i < 0x1000; i++)
                     {
-                        if (!syncDupes.Checked && dialogues[i].DuplicateOfDialogue == index)
-                            dialogues[i].DuplicateOfDialogue = i;
-                        else if (syncDupes.Checked && dialogues[i].DuplicateOfDialogue == dialogues[index].DuplicateOfDialogue)
-                            dialogues[i].RawDialogue = dialogues[index].RawDialogue;
-                        if (dialogues[i].WithinDialogue == index)
-                            dialogues[i].WithinDialogue = 0;
+                        if (!syncDupes.Checked && dialogues[i].Reference == index)
+                            dialogues[i].Reference = i;
+                        else if (syncDupes.Checked && dialogues[i].Reference == dialogues[index].Reference)
+                            dialogues[i].Text = dialogues[index].Text;
+                        if (dialogues[i].Parent == index)
+                            dialogues[i].Parent = 0;
                     }
                 }
             }
@@ -814,7 +811,7 @@ namespace LAZYSHELL
             int freebytes = CalculateFreeSpace();
             this.freeBytes.Text = freebytes.ToString() + " characters left";
             this.freeBytes.BackColor = freebytes >= 0 ? SystemColors.Control : Color.Red;
-            if (dialogue.DuplicateOfDialogue != index)
+            if (dialogue.Reference != index)
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
                 dialogueTextBox.BackColor = SystemColors.Window;
@@ -943,7 +940,7 @@ namespace LAZYSHELL
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        this.dialogues[i].GetDialogue(true, dteStr));
+                        this.dialogues[i].GetText(true, dteStr));
                 }
                 dialogues.Close();
             }
@@ -972,8 +969,7 @@ namespace LAZYSHELL
                     line = line.Remove(0, 7);
                     if (!line.EndsWith("[0]") && !line.EndsWith("[6]"))
                         line += "[0]";
-                    dialogues[number].SetDialogue(line, true, dteStr);
-                    dialogues[number].Data = Model.Data;
+                    dialogues[number].SetText(line, true, dteStr);
                 }
                 dialogueNum_ValueChanged(null, null);
             }
@@ -1020,7 +1016,7 @@ namespace LAZYSHELL
             // reencode all dialogues
             for (int i = 0; i < dialogues.Length; i++)
             {
-                dialogues[i].SetDialogue(dialogues[i].GetDialogue(byteView, dteStr), byteView, Model.DTEStr(byteView));
+                dialogues[i].SetText(dialogues[i].GetText(byteView, dteStr), byteView, Model.DTEStr(byteView));
                 if (i % 16 == 0)
                     progressBar1.PerformStep();
             }
@@ -1080,8 +1076,7 @@ namespace LAZYSHELL
                     else
                         if (!line.EndsWith("[endInput]") && !line.EndsWith("[end]"))
                             line += "[endInput]";
-                    dialogues[index].SetDialogue(line, line.EndsWith("[0]") || line.EndsWith("[6]"), tables);
-                    dialogues[index].Data = Model.Data;
+                    dialogues[index].SetText(line, line.EndsWith("[0]") || line.EndsWith("[6]"), tables);
                     if (index % 16 == 0)
                         progressBar1.PerformStep();
                 }
@@ -1156,7 +1151,7 @@ namespace LAZYSHELL
                 {
                     dialogues.WriteLine(
                         "{" + i.ToString("d4") + "}\t" +
-                        this.dialogues[i].GetDialogue(byteView, dteStr));
+                        this.dialogues[i].GetText(byteView, dteStr));
                 }
                 dialogues.Close();
             }
@@ -1197,7 +1192,7 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current dialogue. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            dialogue = new Dialogue(Model.Data, index);
+            dialogue = new Dialogue(index);
             dialoguePreview.Reset();
             RefreshDialogueEditor();
             SetTextImage();

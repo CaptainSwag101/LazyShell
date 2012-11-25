@@ -9,6 +9,8 @@ using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -40,17 +42,15 @@ namespace LAZYSHELL
         public Editor(ProgramController controls)
         {
             this.AppControl = controls;
-            //notes = Notes.Instance;
-
+            //
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(saveToolStripMenuItem_Click));
             loadRomTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-
             // MRU
             LoadSettingsFromRegistry();
             mruManager = new MRUManager();
             mruManager.Initialize(this, recentFiles, registryPath);
-
+            //
             if (settings.LoadLastUsedROM && mruManager.MRUList.Count > 0)
             {
                 try
@@ -60,6 +60,20 @@ namespace LAZYSHELL
                 catch (Exception e)
                 {
                     MessageBox.Show("Could not load most recently used ROM.\n\n" + e.Message,
+                        "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            // create backup list collections BEFORE loading notes
+            Model.CreateListCollections();
+            if (settings.LoadNotes && settings.NotePathCustom != "")
+            {
+                try
+                {
+                    OpenProject(settings.NotePathCustom);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Could not load most recently used project database.\n\n" + e.Message,
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -154,6 +168,20 @@ namespace LAZYSHELL
             }
             if (toolStrip2.Enabled && settings.LoadAllData)
                 AppControl.LoadAll();
+        }
+        private void OpenProject(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                MessageBox.Show("Error loading last used database. The file has been moved, renamed, or no longer exists.",
+                    "LAZY SHELL");
+                return;
+            }
+            Stream s = File.OpenRead(filename);
+            BinaryFormatter b = new BinaryFormatter();
+            Model.Project = (ProjectDB)b.Deserialize(s);
+            Model.RefreshListCollections();
+            s.Close();
         }
         private void CloseROM()
         {
@@ -333,7 +361,7 @@ namespace LAZYSHELL
             FileInfo file = new FileInfo(AppControl.GetFileName());
             if ((file.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
             {
-                saveAsToolStripMenuItem_Click(null, null);
+                saveAsToolStripMenuItem.PerformClick();
                 return;
             }
             // Check if currently in use by another application
@@ -567,7 +595,7 @@ namespace LAZYSHELL
         }
         private void openAll_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("You are about to open all 15 editor windows.\n\nAre you sure you want to do this?",
+            if (MessageBox.Show("You are about to open all 17 editor windows.\n\nAre you sure you want to do this?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
                 return;
             AppControl.OpenAll();

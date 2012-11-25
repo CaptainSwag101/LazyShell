@@ -29,37 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel28 = new System.Windows.Forms.Panel();
+            this.panelRight = new LAZYSHELL.NewPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxMonster = new System.Windows.Forms.PictureBox();
             this.label119 = new System.Windows.Forms.Label();
             this.monsterTargetArrowY = new System.Windows.Forms.NumericUpDown();
             this.monsterTargetArrowX = new System.Windows.Forms.NumericUpDown();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panelDoOneOfThree = new System.Windows.Forms.GroupBox();
-            this.labelDoA = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonInsert = new System.Windows.Forms.Button();
+            this.buttonApply = new System.Windows.Forms.Button();
+            this.panelAttack = new System.Windows.Forms.GroupBox();
+            this.panelAttackC = new System.Windows.Forms.Panel();
             this.nameC = new System.Windows.Forms.ComboBox();
-            this.doNothingC = new System.Windows.Forms.CheckBox();
-            this.numA = new System.Windows.Forms.NumericUpDown();
-            this.doNothingB = new System.Windows.Forms.CheckBox();
-            this.nameB = new System.Windows.Forms.ComboBox();
-            this.doNothingA = new System.Windows.Forms.CheckBox();
-            this.numB = new System.Windows.Forms.NumericUpDown();
-            this.labelDoB = new System.Windows.Forms.Label();
-            this.nameA = new System.Windows.Forms.ComboBox();
             this.numC = new System.Windows.Forms.NumericUpDown();
-            this.panelIfTargetValue = new System.Windows.Forms.GroupBox();
-            this.target = new System.Windows.Forms.ComboBox();
-            this.labelTargetA = new System.Windows.Forms.Label();
-            this.targetNum = new System.Windows.Forms.NumericUpDown();
-            this.labelTargetC = new System.Windows.Forms.Label();
-            this.labelTargetB = new System.Windows.Forms.Label();
-            this.effects = new System.Windows.Forms.CheckedListBox();
-            this.panelMemoryCompare = new System.Windows.Forms.GroupBox();
-            this.labelMemoryB = new System.Windows.Forms.Label();
-            this.memory = new System.Windows.Forms.NumericUpDown();
-            this.labelMemoryA = new System.Windows.Forms.Label();
-            this.comparison = new System.Windows.Forms.NumericUpDown();
+            this.doNothingC = new System.Windows.Forms.CheckBox();
+            this.panelAttackB = new System.Windows.Forms.Panel();
+            this.nameB = new System.Windows.Forms.ComboBox();
+            this.numB = new System.Windows.Forms.NumericUpDown();
+            this.doNothingB = new System.Windows.Forms.CheckBox();
+            this.panelAttackA = new System.Windows.Forms.Panel();
+            this.nameA = new System.Windows.Forms.ComboBox();
+            this.doNothingA = new System.Windows.Forms.CheckBox();
+            this.numA = new System.Windows.Forms.NumericUpDown();
+            this.panelMemory = new System.Windows.Forms.GroupBox();
+            this.panelMemoryC = new System.Windows.Forms.Panel();
+            this.labelMemoryC = new System.Windows.Forms.Label();
             this.panelBits = new System.Windows.Forms.Panel();
             this.bit0 = new System.Windows.Forms.CheckBox();
             this.bit7 = new System.Windows.Forms.CheckBox();
@@ -69,10 +63,20 @@
             this.bit6 = new System.Windows.Forms.CheckBox();
             this.bit5 = new System.Windows.Forms.CheckBox();
             this.bit1 = new System.Windows.Forms.CheckBox();
-            this.labelMemoryC = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonInsert = new System.Windows.Forms.Button();
-            this.buttonApply = new System.Windows.Forms.Button();
+            this.panelMemoryB = new System.Windows.Forms.Panel();
+            this.labelMemoryB = new System.Windows.Forms.Label();
+            this.comparison = new System.Windows.Forms.NumericUpDown();
+            this.panelMemoryA = new System.Windows.Forms.Panel();
+            this.labelMemoryA = new System.Windows.Forms.Label();
+            this.memory = new System.Windows.Forms.NumericUpDown();
+            this.panelTarget = new System.Windows.Forms.GroupBox();
+            this.effects = new System.Windows.Forms.CheckedListBox();
+            this.panelTargetB = new System.Windows.Forms.Panel();
+            this.labelTargetB = new System.Windows.Forms.Label();
+            this.targetNum = new System.Windows.Forms.NumericUpDown();
+            this.panelTargetA = new System.Windows.Forms.Panel();
+            this.target = new System.Windows.Forms.ComboBox();
+            this.labelTargetA = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxCommands = new System.Windows.Forms.ComboBox();
@@ -97,39 +101,49 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BattleScriptTree = new LAZYSHELL.NewTreeView();
-            this.panel28.SuspendLayout();
+            this.commandTree = new LAZYSHELL.NewTreeView();
+            this.panelRight.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panelDoOneOfThree.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numA)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numC)).BeginInit();
-            this.panelIfTargetValue.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).BeginInit();
-            this.panelMemoryCompare.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comparison)).BeginInit();
-            this.panelBits.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panelAttack.SuspendLayout();
+            this.panelAttackC.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numC)).BeginInit();
+            this.panelAttackB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numB)).BeginInit();
+            this.panelAttackA.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numA)).BeginInit();
+            this.panelMemory.SuspendLayout();
+            this.panelMemoryC.SuspendLayout();
+            this.panelBits.SuspendLayout();
+            this.panelMemoryB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comparison)).BeginInit();
+            this.panelMemoryA.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memory)).BeginInit();
+            this.panelTarget.SuspendLayout();
+            this.panelTargetB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).BeginInit();
+            this.panelTargetA.SuspendLayout();
             this.panel4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.contextMenuStripGoto.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel28
+            // panelRight
             // 
-            this.panel28.Controls.Add(this.groupBox1);
-            this.panel28.Controls.Add(this.panel1);
-            this.panel28.Controls.Add(this.panel4);
-            this.panel28.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel28.Location = new System.Drawing.Point(466, 0);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(262, 645);
-            this.panel28.TabIndex = 1;
+            this.panelRight.Controls.Add(this.groupBox1);
+            this.panelRight.Controls.Add(this.panel2);
+            this.panelRight.Controls.Add(this.panelAttack);
+            this.panelRight.Controls.Add(this.panelMemory);
+            this.panelRight.Controls.Add(this.panelTarget);
+            this.panelRight.Controls.Add(this.panel4);
+            this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelRight.Location = new System.Drawing.Point(466, 0);
+            this.panelRight.Name = "panelRight";
+            this.panelRight.Size = new System.Drawing.Size(262, 645);
+            this.panelRight.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -138,7 +152,7 @@
             this.groupBox1.Controls.Add(this.monsterTargetArrowY);
             this.groupBox1.Controls.Add(this.monsterTargetArrowX);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 209);
+            this.groupBox1.Location = new System.Drawing.Point(0, 263);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(262, 298);
             this.groupBox1.TabIndex = 2;
@@ -197,178 +211,82 @@
             this.monsterTargetArrowX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.monsterTargetArrowX.ValueChanged += new System.EventHandler(this.monsterTargetArrowX_ValueChanged);
             // 
-            // panel1
+            // panel2
             // 
-            this.panel1.Controls.Add(this.panelDoOneOfThree);
-            this.panel1.Controls.Add(this.panelIfTargetValue);
-            this.panel1.Controls.Add(this.panelMemoryCompare);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 21);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(262, 188);
-            this.panel1.TabIndex = 1;
+            this.panel2.Controls.Add(this.buttonInsert);
+            this.panel2.Controls.Add(this.buttonApply);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 228);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(262, 35);
+            this.panel2.TabIndex = 1;
             // 
-            // panelDoOneOfThree
+            // buttonInsert
             // 
-            this.panelDoOneOfThree.Controls.Add(this.labelDoA);
-            this.panelDoOneOfThree.Controls.Add(this.nameC);
-            this.panelDoOneOfThree.Controls.Add(this.doNothingC);
-            this.panelDoOneOfThree.Controls.Add(this.numA);
-            this.panelDoOneOfThree.Controls.Add(this.doNothingB);
-            this.panelDoOneOfThree.Controls.Add(this.nameB);
-            this.panelDoOneOfThree.Controls.Add(this.doNothingA);
-            this.panelDoOneOfThree.Controls.Add(this.numB);
-            this.panelDoOneOfThree.Controls.Add(this.labelDoB);
-            this.panelDoOneOfThree.Controls.Add(this.nameA);
-            this.panelDoOneOfThree.Controls.Add(this.numC);
-            this.panelDoOneOfThree.Location = new System.Drawing.Point(3, 0);
-            this.panelDoOneOfThree.Name = "panelDoOneOfThree";
-            this.panelDoOneOfThree.Size = new System.Drawing.Size(256, 102);
-            this.panelDoOneOfThree.TabIndex = 2;
-            this.panelDoOneOfThree.TabStop = false;
-            this.panelDoOneOfThree.Visible = false;
-            this.panelDoOneOfThree.VisibleChanged += new System.EventHandler(this.panelDoOneOfThree_VisibleChanged);
+            this.buttonInsert.Enabled = false;
+            this.buttonInsert.Location = new System.Drawing.Point(7, 7);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(122, 21);
+            this.buttonInsert.TabIndex = 0;
+            this.buttonInsert.Text = "INSERT COMMAND";
+            this.buttonInsert.UseCompatibleTextRendering = true;
+            this.buttonInsert.UseVisualStyleBackColor = false;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
             // 
-            // labelDoA
+            // buttonApply
             // 
-            this.labelDoA.AutoSize = true;
-            this.labelDoA.Location = new System.Drawing.Point(6, 14);
-            this.labelDoA.Name = "labelDoA";
-            this.labelDoA.Size = new System.Drawing.Size(19, 13);
-            this.labelDoA.TabIndex = 0;
-            this.labelDoA.Text = "...";
+            this.buttonApply.Enabled = false;
+            this.buttonApply.Location = new System.Drawing.Point(134, 7);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(121, 21);
+            this.buttonApply.TabIndex = 1;
+            this.buttonApply.Text = "APPLY CHANGES";
+            this.buttonApply.UseCompatibleTextRendering = true;
+            this.buttonApply.UseVisualStyleBackColor = false;
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
+            // panelAttack
+            // 
+            this.panelAttack.AutoSize = true;
+            this.panelAttack.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelAttack.Controls.Add(this.panelAttackC);
+            this.panelAttack.Controls.Add(this.panelAttackB);
+            this.panelAttack.Controls.Add(this.panelAttackA);
+            this.panelAttack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAttack.Location = new System.Drawing.Point(0, 160);
+            this.panelAttack.Name = "panelAttack";
+            this.panelAttack.Size = new System.Drawing.Size(262, 68);
+            this.panelAttack.TabIndex = 2;
+            this.panelAttack.TabStop = false;
+            this.panelAttack.Visible = false;
+            // 
+            // panelAttackC
+            // 
+            this.panelAttackC.Controls.Add(this.nameC);
+            this.panelAttackC.Controls.Add(this.numC);
+            this.panelAttackC.Controls.Add(this.doNothingC);
+            this.panelAttackC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAttackC.Location = new System.Drawing.Point(3, 58);
+            this.panelAttackC.Name = "panelAttackC";
+            this.panelAttackC.Size = new System.Drawing.Size(256, 21);
+            this.panelAttackC.TabIndex = 3;
             // 
             // nameC
             // 
             this.nameC.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.nameC.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameC.DropDownHeight = 317;
             this.nameC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.nameC.FormattingEnabled = true;
-            this.nameC.IntegralHeight = false;
-            this.nameC.Location = new System.Drawing.Point(6, 75);
+            this.nameC.Location = new System.Drawing.Point(0, 0);
             this.nameC.Name = "nameC";
-            this.nameC.Size = new System.Drawing.Size(128, 21);
+            this.nameC.Size = new System.Drawing.Size(137, 21);
             this.nameC.TabIndex = 8;
             this.nameC.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
             this.nameC.SelectedIndexChanged += new System.EventHandler(this.nameC_SelectedIndexChanged);
             // 
-            // doNothingC
-            // 
-            this.doNothingC.Appearance = System.Windows.Forms.Appearance.Button;
-            this.doNothingC.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doNothingC.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.doNothingC.Location = new System.Drawing.Point(188, 75);
-            this.doNothingC.Name = "doNothingC";
-            this.doNothingC.Size = new System.Drawing.Size(62, 21);
-            this.doNothingC.TabIndex = 10;
-            this.doNothingC.Text = "NOTHING";
-            this.doNothingC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.doNothingC.UseCompatibleTextRendering = true;
-            this.doNothingC.UseVisualStyleBackColor = false;
-            this.doNothingC.CheckedChanged += new System.EventHandler(this.doNothingC_CheckedChanged);
-            // 
-            // numA
-            // 
-            this.numA.Location = new System.Drawing.Point(134, 33);
-            this.numA.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numA.Name = "numA";
-            this.numA.Size = new System.Drawing.Size(53, 21);
-            this.numA.TabIndex = 3;
-            this.numA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numA.ValueChanged += new System.EventHandler(this.numA_ValueChanged);
-            // 
-            // doNothingB
-            // 
-            this.doNothingB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.doNothingB.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doNothingB.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.doNothingB.Location = new System.Drawing.Point(188, 54);
-            this.doNothingB.Name = "doNothingB";
-            this.doNothingB.Size = new System.Drawing.Size(62, 21);
-            this.doNothingB.TabIndex = 7;
-            this.doNothingB.Text = "NOTHING";
-            this.doNothingB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.doNothingB.UseCompatibleTextRendering = true;
-            this.doNothingB.UseVisualStyleBackColor = false;
-            this.doNothingB.CheckedChanged += new System.EventHandler(this.doNothingB_CheckedChanged);
-            // 
-            // nameB
-            // 
-            this.nameB.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.nameB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameB.DropDownHeight = 317;
-            this.nameB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nameB.FormattingEnabled = true;
-            this.nameB.IntegralHeight = false;
-            this.nameB.Location = new System.Drawing.Point(6, 54);
-            this.nameB.Name = "nameB";
-            this.nameB.Size = new System.Drawing.Size(128, 21);
-            this.nameB.TabIndex = 5;
-            this.nameB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
-            this.nameB.SelectedIndexChanged += new System.EventHandler(this.nameB_SelectedIndexChanged);
-            // 
-            // doNothingA
-            // 
-            this.doNothingA.Appearance = System.Windows.Forms.Appearance.Button;
-            this.doNothingA.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doNothingA.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.doNothingA.Location = new System.Drawing.Point(188, 33);
-            this.doNothingA.Name = "doNothingA";
-            this.doNothingA.Size = new System.Drawing.Size(62, 21);
-            this.doNothingA.TabIndex = 4;
-            this.doNothingA.Text = "NOTHING";
-            this.doNothingA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.doNothingA.UseCompatibleTextRendering = true;
-            this.doNothingA.UseVisualStyleBackColor = false;
-            this.doNothingA.CheckedChanged += new System.EventHandler(this.doNothingA_CheckedChanged);
-            // 
-            // numB
-            // 
-            this.numB.Location = new System.Drawing.Point(134, 54);
-            this.numB.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numB.Name = "numB";
-            this.numB.Size = new System.Drawing.Size(53, 21);
-            this.numB.TabIndex = 6;
-            this.numB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numB.ValueChanged += new System.EventHandler(this.numB_ValueChanged);
-            // 
-            // labelDoB
-            // 
-            this.labelDoB.AutoSize = true;
-            this.labelDoB.Location = new System.Drawing.Point(134, 14);
-            this.labelDoB.Name = "labelDoB";
-            this.labelDoB.Size = new System.Drawing.Size(19, 13);
-            this.labelDoB.TabIndex = 1;
-            this.labelDoB.Text = "...";
-            // 
-            // nameA
-            // 
-            this.nameA.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.nameA.Cursor = System.Windows.Forms.Cursors.Default;
-            this.nameA.DropDownHeight = 317;
-            this.nameA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nameA.FormattingEnabled = true;
-            this.nameA.IntegralHeight = false;
-            this.nameA.Location = new System.Drawing.Point(6, 33);
-            this.nameA.Name = "nameA";
-            this.nameA.Size = new System.Drawing.Size(128, 21);
-            this.nameA.TabIndex = 2;
-            this.nameA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
-            this.nameA.SelectedIndexChanged += new System.EventHandler(this.nameA_SelectedIndexChanged);
-            // 
             // numC
             // 
-            this.numC.Location = new System.Drawing.Point(134, 75);
+            this.numC.Location = new System.Drawing.Point(137, 0);
             this.numC.Maximum = new decimal(new int[] {
             255,
             0,
@@ -380,132 +298,328 @@
             this.numC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numC.ValueChanged += new System.EventHandler(this.numC_ValueChanged);
             // 
-            // panelIfTargetValue
+            // doNothingC
             // 
-            this.panelIfTargetValue.Controls.Add(this.target);
-            this.panelIfTargetValue.Controls.Add(this.labelTargetA);
-            this.panelIfTargetValue.Controls.Add(this.targetNum);
-            this.panelIfTargetValue.Controls.Add(this.labelTargetC);
-            this.panelIfTargetValue.Controls.Add(this.labelTargetB);
-            this.panelIfTargetValue.Controls.Add(this.effects);
-            this.panelIfTargetValue.Location = new System.Drawing.Point(3, 0);
-            this.panelIfTargetValue.Name = "panelIfTargetValue";
-            this.panelIfTargetValue.Size = new System.Drawing.Size(256, 154);
-            this.panelIfTargetValue.TabIndex = 0;
-            this.panelIfTargetValue.TabStop = false;
-            this.panelIfTargetValue.Visible = false;
-            this.panelIfTargetValue.VisibleChanged += new System.EventHandler(this.panelIfTargetValue_VisibleChanged);
+            this.doNothingC.Appearance = System.Windows.Forms.Appearance.Button;
+            this.doNothingC.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doNothingC.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.doNothingC.Location = new System.Drawing.Point(192, 0);
+            this.doNothingC.Name = "doNothingC";
+            this.doNothingC.Size = new System.Drawing.Size(64, 21);
+            this.doNothingC.TabIndex = 10;
+            this.doNothingC.Text = "NOTHING";
+            this.doNothingC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.doNothingC.UseCompatibleTextRendering = true;
+            this.doNothingC.UseVisualStyleBackColor = false;
+            this.doNothingC.CheckedChanged += new System.EventHandler(this.doNothingC_CheckedChanged);
             // 
-            // target
+            // panelAttackB
             // 
-            this.target.BackColor = System.Drawing.SystemColors.Window;
-            this.target.Cursor = System.Windows.Forms.Cursors.Default;
-            this.target.DropDownHeight = 317;
-            this.target.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.target.DropDownWidth = 150;
-            this.target.FormattingEnabled = true;
-            this.target.IntegralHeight = false;
-            this.target.Location = new System.Drawing.Point(140, 13);
-            this.target.Name = "target";
-            this.target.Size = new System.Drawing.Size(110, 21);
-            this.target.TabIndex = 1;
-            this.target.SelectedIndexChanged += new System.EventHandler(this.target_SelectedIndexChanged);
+            this.panelAttackB.Controls.Add(this.nameB);
+            this.panelAttackB.Controls.Add(this.numB);
+            this.panelAttackB.Controls.Add(this.doNothingB);
+            this.panelAttackB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAttackB.Location = new System.Drawing.Point(3, 37);
+            this.panelAttackB.Name = "panelAttackB";
+            this.panelAttackB.Size = new System.Drawing.Size(256, 21);
+            this.panelAttackB.TabIndex = 3;
             // 
-            // labelTargetA
+            // nameB
             // 
-            this.labelTargetA.AutoSize = true;
-            this.labelTargetA.Location = new System.Drawing.Point(6, 15);
-            this.labelTargetA.Name = "labelTargetA";
-            this.labelTargetA.Size = new System.Drawing.Size(19, 13);
-            this.labelTargetA.TabIndex = 0;
-            this.labelTargetA.Text = "...";
+            this.nameB.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nameB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.nameB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nameB.FormattingEnabled = true;
+            this.nameB.Location = new System.Drawing.Point(0, 0);
+            this.nameB.Name = "nameB";
+            this.nameB.Size = new System.Drawing.Size(137, 21);
+            this.nameB.TabIndex = 5;
+            this.nameB.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
+            this.nameB.SelectedIndexChanged += new System.EventHandler(this.nameB_SelectedIndexChanged);
             // 
-            // targetNum
+            // numB
             // 
-            this.targetNum.Increment = new decimal(new int[] {
-            16,
+            this.numB.Location = new System.Drawing.Point(137, 0);
+            this.numB.Maximum = new decimal(new int[] {
+            255,
             0,
             0,
             0});
-            this.targetNum.Location = new System.Drawing.Point(140, 34);
-            this.targetNum.Maximum = new decimal(new int[] {
-            65535,
+            this.numB.Name = "numB";
+            this.numB.Size = new System.Drawing.Size(53, 21);
+            this.numB.TabIndex = 6;
+            this.numB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numB.ValueChanged += new System.EventHandler(this.numB_ValueChanged);
+            // 
+            // doNothingB
+            // 
+            this.doNothingB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.doNothingB.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doNothingB.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.doNothingB.Location = new System.Drawing.Point(192, 0);
+            this.doNothingB.Name = "doNothingB";
+            this.doNothingB.Size = new System.Drawing.Size(64, 21);
+            this.doNothingB.TabIndex = 7;
+            this.doNothingB.Text = "NOTHING";
+            this.doNothingB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.doNothingB.UseCompatibleTextRendering = true;
+            this.doNothingB.UseVisualStyleBackColor = false;
+            this.doNothingB.CheckedChanged += new System.EventHandler(this.doNothingB_CheckedChanged);
+            // 
+            // panelAttackA
+            // 
+            this.panelAttackA.Controls.Add(this.nameA);
+            this.panelAttackA.Controls.Add(this.doNothingA);
+            this.panelAttackA.Controls.Add(this.numA);
+            this.panelAttackA.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAttackA.Location = new System.Drawing.Point(3, 16);
+            this.panelAttackA.Name = "panelAttackA";
+            this.panelAttackA.Size = new System.Drawing.Size(256, 21);
+            this.panelAttackA.TabIndex = 3;
+            // 
+            // nameA
+            // 
+            this.nameA.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.nameA.Cursor = System.Windows.Forms.Cursors.Default;
+            this.nameA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.nameA.FormattingEnabled = true;
+            this.nameA.Location = new System.Drawing.Point(0, 0);
+            this.nameA.Name = "nameA";
+            this.nameA.Size = new System.Drawing.Size(137, 21);
+            this.nameA.TabIndex = 2;
+            this.nameA.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.name_DrawItem);
+            this.nameA.SelectedIndexChanged += new System.EventHandler(this.nameA_SelectedIndexChanged);
+            // 
+            // doNothingA
+            // 
+            this.doNothingA.Appearance = System.Windows.Forms.Appearance.Button;
+            this.doNothingA.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doNothingA.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.doNothingA.Location = new System.Drawing.Point(192, 0);
+            this.doNothingA.Name = "doNothingA";
+            this.doNothingA.Size = new System.Drawing.Size(64, 21);
+            this.doNothingA.TabIndex = 4;
+            this.doNothingA.Text = "NOTHING";
+            this.doNothingA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.doNothingA.UseCompatibleTextRendering = true;
+            this.doNothingA.UseVisualStyleBackColor = false;
+            this.doNothingA.CheckedChanged += new System.EventHandler(this.doNothingA_CheckedChanged);
+            // 
+            // numA
+            // 
+            this.numA.Location = new System.Drawing.Point(137, 0);
+            this.numA.Maximum = new decimal(new int[] {
+            255,
             0,
             0,
             0});
-            this.targetNum.Name = "targetNum";
-            this.targetNum.Size = new System.Drawing.Size(110, 21);
-            this.targetNum.TabIndex = 3;
-            this.targetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.targetNum.ValueChanged += new System.EventHandler(this.targetNum_ValueChanged);
+            this.numA.Name = "numA";
+            this.numA.Size = new System.Drawing.Size(53, 21);
+            this.numA.TabIndex = 3;
+            this.numA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numA.ValueChanged += new System.EventHandler(this.numA_ValueChanged);
             // 
-            // labelTargetC
+            // panelMemory
             // 
-            this.labelTargetC.AutoSize = true;
-            this.labelTargetC.Location = new System.Drawing.Point(6, 57);
-            this.labelTargetC.Name = "labelTargetC";
-            this.labelTargetC.Size = new System.Drawing.Size(19, 13);
-            this.labelTargetC.TabIndex = 4;
-            this.labelTargetC.Text = "...";
+            this.panelMemory.AutoSize = true;
+            this.panelMemory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelMemory.Controls.Add(this.panelMemoryC);
+            this.panelMemory.Controls.Add(this.panelMemoryB);
+            this.panelMemory.Controls.Add(this.panelMemoryA);
+            this.panelMemory.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMemory.Location = new System.Drawing.Point(0, 90);
+            this.panelMemory.Name = "panelMemory";
+            this.panelMemory.Size = new System.Drawing.Size(262, 70);
+            this.panelMemory.TabIndex = 1;
+            this.panelMemory.TabStop = false;
+            this.panelMemory.Visible = false;
             // 
-            // labelTargetB
+            // panelMemoryC
             // 
-            this.labelTargetB.AutoSize = true;
-            this.labelTargetB.Location = new System.Drawing.Point(6, 36);
-            this.labelTargetB.Name = "labelTargetB";
-            this.labelTargetB.Size = new System.Drawing.Size(19, 13);
-            this.labelTargetB.TabIndex = 2;
-            this.labelTargetB.Text = "...";
+            this.panelMemoryC.Controls.Add(this.labelMemoryC);
+            this.panelMemoryC.Controls.Add(this.panelBits);
+            this.panelMemoryC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMemoryC.Location = new System.Drawing.Point(3, 60);
+            this.panelMemoryC.Name = "panelMemoryC";
+            this.panelMemoryC.Size = new System.Drawing.Size(256, 21);
+            this.panelMemoryC.TabIndex = 3;
             // 
-            // effects
+            // labelMemoryC
             // 
-            this.effects.CheckOnClick = true;
-            this.effects.ColumnWidth = 120;
-            this.effects.FormattingEnabled = true;
-            this.effects.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"});
-            this.effects.Location = new System.Drawing.Point(6, 79);
-            this.effects.MultiColumn = true;
-            this.effects.Name = "effects";
-            this.effects.Size = new System.Drawing.Size(244, 68);
-            this.effects.TabIndex = 5;
-            this.effects.SelectedIndexChanged += new System.EventHandler(this.effects_SelectedIndexChanged);
+            this.labelMemoryC.AutoSize = true;
+            this.labelMemoryC.Location = new System.Drawing.Point(3, 3);
+            this.labelMemoryC.Name = "labelMemoryC";
+            this.labelMemoryC.Size = new System.Drawing.Size(19, 13);
+            this.labelMemoryC.TabIndex = 4;
+            this.labelMemoryC.Text = "...";
             // 
-            // panelMemoryCompare
+            // panelBits
             // 
-            this.panelMemoryCompare.Controls.Add(this.labelMemoryB);
-            this.panelMemoryCompare.Controls.Add(this.memory);
-            this.panelMemoryCompare.Controls.Add(this.labelMemoryA);
-            this.panelMemoryCompare.Controls.Add(this.comparison);
-            this.panelMemoryCompare.Controls.Add(this.panelBits);
-            this.panelMemoryCompare.Controls.Add(this.labelMemoryC);
-            this.panelMemoryCompare.Location = new System.Drawing.Point(3, 0);
-            this.panelMemoryCompare.Name = "panelMemoryCompare";
-            this.panelMemoryCompare.Size = new System.Drawing.Size(256, 82);
-            this.panelMemoryCompare.TabIndex = 1;
-            this.panelMemoryCompare.TabStop = false;
-            this.panelMemoryCompare.Visible = false;
-            this.panelMemoryCompare.VisibleChanged += new System.EventHandler(this.panelMemoryCompare_VisibleChanged);
+            this.panelBits.Controls.Add(this.bit0);
+            this.panelBits.Controls.Add(this.bit7);
+            this.panelBits.Controls.Add(this.bit4);
+            this.panelBits.Controls.Add(this.bit3);
+            this.panelBits.Controls.Add(this.bit2);
+            this.panelBits.Controls.Add(this.bit6);
+            this.panelBits.Controls.Add(this.bit5);
+            this.panelBits.Controls.Add(this.bit1);
+            this.panelBits.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelBits.Location = new System.Drawing.Point(135, 1);
+            this.panelBits.Name = "panelBits";
+            this.panelBits.Size = new System.Drawing.Size(122, 20);
+            this.panelBits.TabIndex = 5;
+            // 
+            // bit0
+            // 
+            this.bit0.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit0.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit0.Location = new System.Drawing.Point(1, 0);
+            this.bit0.Name = "bit0";
+            this.bit0.Size = new System.Drawing.Size(15, 20);
+            this.bit0.TabIndex = 0;
+            this.bit0.Text = "0";
+            this.bit0.UseCompatibleTextRendering = true;
+            this.bit0.UseVisualStyleBackColor = false;
+            // 
+            // bit7
+            // 
+            this.bit7.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit7.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit7.Location = new System.Drawing.Point(106, 0);
+            this.bit7.Name = "bit7";
+            this.bit7.Size = new System.Drawing.Size(15, 20);
+            this.bit7.TabIndex = 7;
+            this.bit7.Text = "7";
+            this.bit7.UseCompatibleTextRendering = true;
+            this.bit7.UseVisualStyleBackColor = false;
+            // 
+            // bit4
+            // 
+            this.bit4.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit4.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit4.Location = new System.Drawing.Point(61, 0);
+            this.bit4.Name = "bit4";
+            this.bit4.Size = new System.Drawing.Size(15, 20);
+            this.bit4.TabIndex = 4;
+            this.bit4.Text = "4";
+            this.bit4.UseCompatibleTextRendering = true;
+            this.bit4.UseVisualStyleBackColor = false;
+            // 
+            // bit3
+            // 
+            this.bit3.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit3.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit3.Location = new System.Drawing.Point(46, 0);
+            this.bit3.Name = "bit3";
+            this.bit3.Size = new System.Drawing.Size(15, 20);
+            this.bit3.TabIndex = 3;
+            this.bit3.Text = "3";
+            this.bit3.UseCompatibleTextRendering = true;
+            this.bit3.UseVisualStyleBackColor = false;
+            // 
+            // bit2
+            // 
+            this.bit2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit2.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit2.Location = new System.Drawing.Point(31, 0);
+            this.bit2.Name = "bit2";
+            this.bit2.Size = new System.Drawing.Size(15, 20);
+            this.bit2.TabIndex = 2;
+            this.bit2.Text = "2";
+            this.bit2.UseCompatibleTextRendering = true;
+            this.bit2.UseVisualStyleBackColor = false;
+            // 
+            // bit6
+            // 
+            this.bit6.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit6.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit6.Location = new System.Drawing.Point(91, 0);
+            this.bit6.Name = "bit6";
+            this.bit6.Size = new System.Drawing.Size(15, 20);
+            this.bit6.TabIndex = 6;
+            this.bit6.Text = "6";
+            this.bit6.UseCompatibleTextRendering = true;
+            this.bit6.UseVisualStyleBackColor = false;
+            // 
+            // bit5
+            // 
+            this.bit5.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit5.Location = new System.Drawing.Point(76, 0);
+            this.bit5.Name = "bit5";
+            this.bit5.Size = new System.Drawing.Size(15, 20);
+            this.bit5.TabIndex = 5;
+            this.bit5.Text = "5";
+            this.bit5.UseCompatibleTextRendering = true;
+            this.bit5.UseVisualStyleBackColor = false;
+            // 
+            // bit1
+            // 
+            this.bit1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.bit1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.bit1.Location = new System.Drawing.Point(16, 0);
+            this.bit1.Name = "bit1";
+            this.bit1.Size = new System.Drawing.Size(15, 20);
+            this.bit1.TabIndex = 1;
+            this.bit1.Text = "1";
+            this.bit1.UseCompatibleTextRendering = true;
+            this.bit1.UseVisualStyleBackColor = false;
+            // 
+            // panelMemoryB
+            // 
+            this.panelMemoryB.Controls.Add(this.labelMemoryB);
+            this.panelMemoryB.Controls.Add(this.comparison);
+            this.panelMemoryB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMemoryB.Location = new System.Drawing.Point(3, 38);
+            this.panelMemoryB.Name = "panelMemoryB";
+            this.panelMemoryB.Size = new System.Drawing.Size(256, 22);
+            this.panelMemoryB.TabIndex = 3;
             // 
             // labelMemoryB
             // 
             this.labelMemoryB.AutoSize = true;
-            this.labelMemoryB.Location = new System.Drawing.Point(6, 36);
+            this.labelMemoryB.Location = new System.Drawing.Point(3, 3);
             this.labelMemoryB.Name = "labelMemoryB";
             this.labelMemoryB.Size = new System.Drawing.Size(19, 13);
             this.labelMemoryB.TabIndex = 2;
             this.labelMemoryB.Text = "...";
             // 
+            // comparison
+            // 
+            this.comparison.Location = new System.Drawing.Point(136, 0);
+            this.comparison.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.comparison.Name = "comparison";
+            this.comparison.Size = new System.Drawing.Size(120, 21);
+            this.comparison.TabIndex = 3;
+            this.comparison.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // panelMemoryA
+            // 
+            this.panelMemoryA.Controls.Add(this.labelMemoryA);
+            this.panelMemoryA.Controls.Add(this.memory);
+            this.panelMemoryA.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMemoryA.Location = new System.Drawing.Point(3, 16);
+            this.panelMemoryA.Name = "panelMemoryA";
+            this.panelMemoryA.Size = new System.Drawing.Size(256, 22);
+            this.panelMemoryA.TabIndex = 3;
+            // 
+            // labelMemoryA
+            // 
+            this.labelMemoryA.AutoSize = true;
+            this.labelMemoryA.Location = new System.Drawing.Point(3, 3);
+            this.labelMemoryA.Name = "labelMemoryA";
+            this.labelMemoryA.Size = new System.Drawing.Size(19, 13);
+            this.labelMemoryA.TabIndex = 0;
+            this.labelMemoryA.Text = "...";
+            // 
             // memory
             // 
             this.memory.Hexadecimal = true;
-            this.memory.Location = new System.Drawing.Point(130, 13);
+            this.memory.Location = new System.Drawing.Point(136, 0);
             this.memory.Maximum = new decimal(new int[] {
             8314895,
             0,
@@ -525,192 +639,101 @@
             0,
             0,
             0});
-            this.memory.ValueChanged += new System.EventHandler(this.memory_ValueChanged);
             // 
-            // labelMemoryA
+            // panelTarget
             // 
-            this.labelMemoryA.AutoSize = true;
-            this.labelMemoryA.Location = new System.Drawing.Point(6, 15);
-            this.labelMemoryA.Name = "labelMemoryA";
-            this.labelMemoryA.Size = new System.Drawing.Size(19, 13);
-            this.labelMemoryA.TabIndex = 0;
-            this.labelMemoryA.Text = "...";
+            this.panelTarget.AutoSize = true;
+            this.panelTarget.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelTarget.Controls.Add(this.effects);
+            this.panelTarget.Controls.Add(this.panelTargetB);
+            this.panelTarget.Controls.Add(this.panelTargetA);
+            this.panelTarget.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTarget.Location = new System.Drawing.Point(0, 21);
+            this.panelTarget.Name = "panelTarget";
+            this.panelTarget.Size = new System.Drawing.Size(262, 69);
+            this.panelTarget.TabIndex = 0;
+            this.panelTarget.TabStop = false;
+            this.panelTarget.Visible = false;
             // 
-            // comparison
+            // effects
             // 
-            this.comparison.Location = new System.Drawing.Point(130, 34);
-            this.comparison.Maximum = new decimal(new int[] {
-            255,
+            this.effects.CheckOnClick = true;
+            this.effects.ColumnWidth = 120;
+            this.effects.Dock = System.Windows.Forms.DockStyle.Top;
+            this.effects.FormattingEnabled = true;
+            this.effects.Location = new System.Drawing.Point(3, 60);
+            this.effects.MultiColumn = true;
+            this.effects.Name = "effects";
+            this.effects.Size = new System.Drawing.Size(256, 20);
+            this.effects.TabIndex = 5;
+            // 
+            // panelTargetB
+            // 
+            this.panelTargetB.Controls.Add(this.labelTargetB);
+            this.panelTargetB.Controls.Add(this.targetNum);
+            this.panelTargetB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTargetB.Location = new System.Drawing.Point(3, 38);
+            this.panelTargetB.Name = "panelTargetB";
+            this.panelTargetB.Size = new System.Drawing.Size(256, 22);
+            this.panelTargetB.TabIndex = 3;
+            // 
+            // labelTargetB
+            // 
+            this.labelTargetB.AutoSize = true;
+            this.labelTargetB.Location = new System.Drawing.Point(3, 3);
+            this.labelTargetB.Name = "labelTargetB";
+            this.labelTargetB.Size = new System.Drawing.Size(19, 13);
+            this.labelTargetB.TabIndex = 2;
+            this.labelTargetB.Text = "...";
+            // 
+            // targetNum
+            // 
+            this.targetNum.Increment = new decimal(new int[] {
+            16,
             0,
             0,
             0});
-            this.comparison.Name = "comparison";
-            this.comparison.Size = new System.Drawing.Size(120, 21);
-            this.comparison.TabIndex = 3;
-            this.comparison.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.comparison.ValueChanged += new System.EventHandler(this.comparison_ValueChanged);
+            this.targetNum.Location = new System.Drawing.Point(136, 0);
+            this.targetNum.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.targetNum.Name = "targetNum";
+            this.targetNum.Size = new System.Drawing.Size(120, 21);
+            this.targetNum.TabIndex = 3;
+            this.targetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // panelBits
+            // panelTargetA
             // 
-            this.panelBits.Controls.Add(this.bit0);
-            this.panelBits.Controls.Add(this.bit7);
-            this.panelBits.Controls.Add(this.bit4);
-            this.panelBits.Controls.Add(this.bit3);
-            this.panelBits.Controls.Add(this.bit2);
-            this.panelBits.Controls.Add(this.bit6);
-            this.panelBits.Controls.Add(this.bit5);
-            this.panelBits.Controls.Add(this.bit1);
-            this.panelBits.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelBits.Location = new System.Drawing.Point(129, 55);
-            this.panelBits.Name = "panelBits";
-            this.panelBits.Size = new System.Drawing.Size(122, 20);
-            this.panelBits.TabIndex = 5;
+            this.panelTargetA.Controls.Add(this.target);
+            this.panelTargetA.Controls.Add(this.labelTargetA);
+            this.panelTargetA.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTargetA.Location = new System.Drawing.Point(3, 16);
+            this.panelTargetA.Name = "panelTargetA";
+            this.panelTargetA.Size = new System.Drawing.Size(256, 22);
+            this.panelTargetA.TabIndex = 3;
             // 
-            // bit0
+            // target
             // 
-            this.bit0.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit0.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit0.Location = new System.Drawing.Point(1, 0);
-            this.bit0.Name = "bit0";
-            this.bit0.Size = new System.Drawing.Size(15, 20);
-            this.bit0.TabIndex = 0;
-            this.bit0.Text = "0";
-            this.bit0.UseCompatibleTextRendering = true;
-            this.bit0.UseVisualStyleBackColor = false;
-            this.bit0.CheckedChanged += new System.EventHandler(this.bit0_CheckedChanged);
+            this.target.BackColor = System.Drawing.SystemColors.Window;
+            this.target.Cursor = System.Windows.Forms.Cursors.Default;
+            this.target.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.target.DropDownWidth = 150;
+            this.target.FormattingEnabled = true;
+            this.target.Location = new System.Drawing.Point(136, 0);
+            this.target.Name = "target";
+            this.target.Size = new System.Drawing.Size(120, 21);
+            this.target.TabIndex = 1;
             // 
-            // bit7
+            // labelTargetA
             // 
-            this.bit7.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit7.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit7.Location = new System.Drawing.Point(106, 0);
-            this.bit7.Name = "bit7";
-            this.bit7.Size = new System.Drawing.Size(15, 20);
-            this.bit7.TabIndex = 7;
-            this.bit7.Text = "7";
-            this.bit7.UseCompatibleTextRendering = true;
-            this.bit7.UseVisualStyleBackColor = false;
-            this.bit7.CheckedChanged += new System.EventHandler(this.bit7_CheckedChanged);
-            // 
-            // bit4
-            // 
-            this.bit4.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit4.Location = new System.Drawing.Point(61, 0);
-            this.bit4.Name = "bit4";
-            this.bit4.Size = new System.Drawing.Size(15, 20);
-            this.bit4.TabIndex = 4;
-            this.bit4.Text = "4";
-            this.bit4.UseCompatibleTextRendering = true;
-            this.bit4.UseVisualStyleBackColor = false;
-            this.bit4.CheckedChanged += new System.EventHandler(this.bit4_CheckedChanged);
-            // 
-            // bit3
-            // 
-            this.bit3.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit3.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit3.Location = new System.Drawing.Point(46, 0);
-            this.bit3.Name = "bit3";
-            this.bit3.Size = new System.Drawing.Size(15, 20);
-            this.bit3.TabIndex = 3;
-            this.bit3.Text = "3";
-            this.bit3.UseCompatibleTextRendering = true;
-            this.bit3.UseVisualStyleBackColor = false;
-            this.bit3.CheckedChanged += new System.EventHandler(this.bit3_CheckedChanged);
-            // 
-            // bit2
-            // 
-            this.bit2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit2.Location = new System.Drawing.Point(31, 0);
-            this.bit2.Name = "bit2";
-            this.bit2.Size = new System.Drawing.Size(15, 20);
-            this.bit2.TabIndex = 2;
-            this.bit2.Text = "2";
-            this.bit2.UseCompatibleTextRendering = true;
-            this.bit2.UseVisualStyleBackColor = false;
-            this.bit2.CheckedChanged += new System.EventHandler(this.bit2_CheckedChanged);
-            // 
-            // bit6
-            // 
-            this.bit6.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit6.Location = new System.Drawing.Point(91, 0);
-            this.bit6.Name = "bit6";
-            this.bit6.Size = new System.Drawing.Size(15, 20);
-            this.bit6.TabIndex = 6;
-            this.bit6.Text = "6";
-            this.bit6.UseCompatibleTextRendering = true;
-            this.bit6.UseVisualStyleBackColor = false;
-            this.bit6.CheckedChanged += new System.EventHandler(this.bit6_CheckedChanged);
-            // 
-            // bit5
-            // 
-            this.bit5.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit5.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit5.Location = new System.Drawing.Point(76, 0);
-            this.bit5.Name = "bit5";
-            this.bit5.Size = new System.Drawing.Size(15, 20);
-            this.bit5.TabIndex = 5;
-            this.bit5.Text = "5";
-            this.bit5.UseCompatibleTextRendering = true;
-            this.bit5.UseVisualStyleBackColor = false;
-            this.bit5.CheckedChanged += new System.EventHandler(this.bit5_CheckedChanged);
-            // 
-            // bit1
-            // 
-            this.bit1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.bit1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.bit1.Location = new System.Drawing.Point(16, 0);
-            this.bit1.Name = "bit1";
-            this.bit1.Size = new System.Drawing.Size(15, 20);
-            this.bit1.TabIndex = 1;
-            this.bit1.Text = "1";
-            this.bit1.UseCompatibleTextRendering = true;
-            this.bit1.UseVisualStyleBackColor = false;
-            this.bit1.CheckedChanged += new System.EventHandler(this.bit1_CheckedChanged);
-            // 
-            // labelMemoryC
-            // 
-            this.labelMemoryC.AutoSize = true;
-            this.labelMemoryC.Location = new System.Drawing.Point(6, 57);
-            this.labelMemoryC.Name = "labelMemoryC";
-            this.labelMemoryC.Size = new System.Drawing.Size(19, 13);
-            this.labelMemoryC.TabIndex = 4;
-            this.labelMemoryC.Text = "...";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.buttonInsert);
-            this.panel2.Controls.Add(this.buttonApply);
-            this.panel2.Location = new System.Drawing.Point(3, 158);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 27);
-            this.panel2.TabIndex = 1;
-            // 
-            // buttonInsert
-            // 
-            this.buttonInsert.Enabled = false;
-            this.buttonInsert.Location = new System.Drawing.Point(3, 3);
-            this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(123, 21);
-            this.buttonInsert.TabIndex = 0;
-            this.buttonInsert.Text = "INSERT COMMAND";
-            this.buttonInsert.UseCompatibleTextRendering = true;
-            this.buttonInsert.UseVisualStyleBackColor = false;
-            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
-            // 
-            // buttonApply
-            // 
-            this.buttonApply.Enabled = false;
-            this.buttonApply.Location = new System.Drawing.Point(132, 3);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(122, 21);
-            this.buttonApply.TabIndex = 1;
-            this.buttonApply.Text = "APPLY CHANGES";
-            this.buttonApply.UseCompatibleTextRendering = true;
-            this.buttonApply.UseVisualStyleBackColor = false;
-            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            this.labelTargetA.AutoSize = true;
+            this.labelTargetA.Location = new System.Drawing.Point(3, 3);
+            this.labelTargetA.Name = "labelTargetA";
+            this.labelTargetA.Size = new System.Drawing.Size(19, 13);
+            this.labelTargetA.TabIndex = 0;
+            this.labelTargetA.Text = "...";
             // 
             // panel4
             // 
@@ -743,7 +766,7 @@
             "Do 1 of 3 spells",
             "Do 1 spell",
             "Exit battle",
-            "Generate random # <",
+            "Memory = random # <",
             "If attack phase =",
             "If attacked",
             "If attacked by command",
@@ -987,23 +1010,23 @@
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
-            // BattleScriptTree
+            // commandTree
             // 
-            this.BattleScriptTree.CheckBoxes = true;
-            this.BattleScriptTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BattleScriptTree.EnablePaint = true;
-            this.BattleScriptTree.HideSelection = false;
-            this.BattleScriptTree.HotTracking = true;
-            this.BattleScriptTree.ItemHeight = 16;
-            this.BattleScriptTree.Location = new System.Drawing.Point(0, 0);
-            this.BattleScriptTree.Name = "BattleScriptTree";
-            this.BattleScriptTree.Size = new System.Drawing.Size(466, 620);
-            this.BattleScriptTree.TabIndex = 0;
-            this.BattleScriptTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterCheck);
-            this.BattleScriptTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterSelect);
-            this.BattleScriptTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
-            this.BattleScriptTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
-            this.BattleScriptTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
+            this.commandTree.CheckBoxes = true;
+            this.commandTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commandTree.HideSelection = false;
+            this.commandTree.HotTracking = true;
+            this.commandTree.ItemHeight = 16;
+            this.commandTree.Location = new System.Drawing.Point(0, 0);
+            this.commandTree.Name = "commandTree";
+            this.commandTree.Size = new System.Drawing.Size(466, 620);
+            this.commandTree.TabIndex = 0;
+            this.commandTree.BeforeCheck += new System.Windows.Forms.TreeViewCancelEventHandler(this.BattleScriptTree_BeforeCheck);
+            this.commandTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterCheck);
+            this.commandTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BattleScriptTree_AfterSelect);
+            this.commandTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
+            this.commandTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BattleScriptTree_KeyDown);
+            this.commandTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
             // 
             // BattleScripts
             // 
@@ -1011,9 +1034,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(728, 645);
             this.ControlBox = false;
-            this.Controls.Add(this.BattleScriptTree);
+            this.Controls.Add(this.commandTree);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.panel28);
+            this.Controls.Add(this.panelRight);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
@@ -1025,28 +1048,37 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BattleScripts_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Scripts_KeyDown);
-            this.panel28.ResumeLayout(false);
+            this.panelRight.ResumeLayout(false);
+            this.panelRight.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.monsterTargetArrowX)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panelDoOneOfThree.ResumeLayout(false);
-            this.panelDoOneOfThree.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numA)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numC)).EndInit();
-            this.panelIfTargetValue.ResumeLayout(false);
-            this.panelIfTargetValue.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).EndInit();
-            this.panelMemoryCompare.ResumeLayout(false);
-            this.panelMemoryCompare.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.memory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comparison)).EndInit();
-            this.panelBits.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panelAttack.ResumeLayout(false);
+            this.panelAttackC.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numC)).EndInit();
+            this.panelAttackB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numB)).EndInit();
+            this.panelAttackA.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numA)).EndInit();
+            this.panelMemory.ResumeLayout(false);
+            this.panelMemoryC.ResumeLayout(false);
+            this.panelMemoryC.PerformLayout();
+            this.panelBits.ResumeLayout(false);
+            this.panelMemoryB.ResumeLayout(false);
+            this.panelMemoryB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comparison)).EndInit();
+            this.panelMemoryA.ResumeLayout(false);
+            this.panelMemoryA.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memory)).EndInit();
+            this.panelTarget.ResumeLayout(false);
+            this.panelTargetB.ResumeLayout(false);
+            this.panelTargetB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.targetNum)).EndInit();
+            this.panelTargetA.ResumeLayout(false);
+            this.panelTargetA.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -1059,22 +1091,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel28;
+        private NewPanel panelRight;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonInsert;
         private System.Windows.Forms.Label labelTargetA;
-        private System.Windows.Forms.Label labelTargetC;
         private System.Windows.Forms.ComboBox target;
         private System.Windows.Forms.CheckedListBox effects;
         private System.Windows.Forms.Label labelTargetB;
         private System.Windows.Forms.NumericUpDown targetNum;
-        private System.Windows.Forms.Label labelDoA;
         private System.Windows.Forms.NumericUpDown numA;
         private System.Windows.Forms.NumericUpDown numB;
         private System.Windows.Forms.NumericUpDown numC;
         private System.Windows.Forms.ComboBox nameA;
         private System.Windows.Forms.ComboBox nameB;
-        private System.Windows.Forms.Label labelDoB;
         private System.Windows.Forms.ComboBox nameC;
         private System.Windows.Forms.CheckBox doNothingA;
         private System.Windows.Forms.CheckBox doNothingB;
@@ -1093,7 +1122,7 @@
         private System.Windows.Forms.CheckBox bit6;
         private System.Windows.Forms.CheckBox bit5;
         private System.Windows.Forms.CheckBox bit1;
-        private LAZYSHELL.NewTreeView BattleScriptTree;
+        private LAZYSHELL.NewTreeView commandTree;
         private System.Windows.Forms.ToolStripButton BatScrMoveUp;
         private System.Windows.Forms.ToolStripButton BatScrMoveDown;
         private System.Windows.Forms.ToolStripButton BatScrCopyCommand;
@@ -1119,14 +1148,21 @@
         private System.Windows.Forms.PictureBox pictureBoxMonster;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGoto;
         private System.Windows.Forms.ToolStripMenuItem goToToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox panelMemoryCompare;
-        private System.Windows.Forms.GroupBox panelIfTargetValue;
-        private System.Windows.Forms.GroupBox panelDoOneOfThree;
+        private System.Windows.Forms.GroupBox panelMemory;
+        private System.Windows.Forms.GroupBox panelTarget;
+        private System.Windows.Forms.GroupBox panelAttack;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox listBoxCommands;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panelMemoryC;
+        private System.Windows.Forms.Panel panelMemoryB;
+        private System.Windows.Forms.Panel panelMemoryA;
+        private System.Windows.Forms.Panel panelAttackC;
+        private System.Windows.Forms.Panel panelAttackB;
+        private System.Windows.Forms.Panel panelAttackA;
+        private System.Windows.Forms.Panel panelTargetB;
+        private System.Windows.Forms.Panel panelTargetA;
     }
 }

@@ -46,6 +46,7 @@ namespace LAZYSHELL
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
         private Search searchWindow;
+        private EditLabel labelWindow;
         // special controls
         #endregion
         #region Functions
@@ -60,14 +61,15 @@ namespace LAZYSHELL
             // tooltips
             toolTip1.InitialDelay = 0;
             searchWindow = new Search(number, searchText, searchEffectNames, name.Items);
+            labelWindow = new EditLabel(name, number, "Effects", true);
             // set control values
             updating = true;
-            this.animation.Tileset = new E_Tileset(animation, palette);
+            this.animation.Tileset_tiles = new E_Tileset(animation, palette);
             this.name.Items.AddRange(Lists.Numerize(Lists.EffectNames));
             this.name.SelectedIndex = 0;
             foreach (E_Animation a in animations)
             {
-                a.Tileset = new E_Tileset(a, 0);
+                a.Tileset_tiles = new E_Tileset(a, 0);
                 a.Assemble();
             }
             RefreshEffectsEditor();
@@ -107,7 +109,7 @@ namespace LAZYSHELL
             e_graphicSetSize.Minimum = animation.Codec == 1 ? 16 : 32;
             e_graphicSetSize.Value = animation.GraphicSetLength;
             e_codec.SelectedIndex = animation.Codec;
-            animation.Tileset = new E_Tileset(animation, palette);
+            animation.Tileset_tiles = new E_Tileset(animation, palette);
             // editors
             LoadMoldEditor();
             LoadSequenceEditor();
@@ -130,7 +132,7 @@ namespace LAZYSHELL
                 totalSize = 0xCFFF; min = 39; max = 64;
             }
             for (int i = min; i < max; i++)
-                length += animations[i].SM.Length;
+                length += animations[i].BUFFER.Length;
             availableBytes = totalSize - length;
             e_availableBytes.BackColor = availableBytes > 0 ? Color.Lime : Color.Red;
             e_availableBytes.Text = availableBytes.ToString() + " bytes free";
@@ -145,24 +147,24 @@ namespace LAZYSHELL
             int offset = 0x330000;
             for (; i < 39 && offset < 0x33FFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x33FFFF)
+                if (animations[i].BUFFER.Length + offset > 0x33FFFF)
                     break;
-                Bits.SetShort(Model.Data, pointer, (ushort)offset);
-                Bits.SetByte(Model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(Model.Data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                Bits.SetShort(Model.ROM, pointer, (ushort)offset);
+                Bits.SetByte(Model.ROM, pointer + 2, (byte)((offset >> 16) + 0xC0));
+                Bits.SetByteArray(Model.ROM, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 39)
                 MessageBox.Show("The available space for animation data in bank 0x330000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 38 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
             offset = 0x340000;
             for (; i < 64 && offset < 0x34CFFF; i++, pointer += 3)
             {
-                if (animations[i].SM.Length + offset > 0x34CFFF)
+                if (animations[i].BUFFER.Length + offset > 0x34CFFF)
                     break;
-                Bits.SetShort(Model.Data, pointer, (ushort)offset);
-                Bits.SetByte(Model.Data, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(Model.Data, offset, animations[i].SM);
-                offset += animations[i].SM.Length;
+                Bits.SetShort(Model.ROM, pointer, (ushort)offset);
+                Bits.SetByte(Model.ROM, pointer + 2, (byte)((offset >> 16) + 0xC0));
+                Bits.SetByteArray(Model.ROM, offset, animations[i].BUFFER);
+                offset += animations[i].BUFFER.Length;
             }
             if (i < 64)
                 MessageBox.Show("The available space for animation data in bank 0x340000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 63 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
@@ -227,7 +229,7 @@ namespace LAZYSHELL
         }
         private void PaletteUpdate()
         {
-            animation.Tileset = new E_Tileset(animation, palette);
+            animation.Tileset_tiles = new E_Tileset(animation, palette);
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
@@ -238,7 +240,7 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            animation.Tileset = new E_Tileset(animation, palette);
+            animation.Tileset_tiles = new E_Tileset(animation, palette);
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
@@ -281,7 +283,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
             name.SelectedIndex = (int)number.Value;
-            if (animation.Tileset != null)
+            if (animation.Tileset_tiles != null)
                 animations[(int)imageNum.Value].Assemble();
             RefreshEffectsEditor();
             settings.LastEffect = index;
@@ -296,7 +298,7 @@ namespace LAZYSHELL
         {
             if (updating) return;
             effect.PaletteIndex = (byte)e_paletteIndex.Value;
-            animation.Tileset = new E_Tileset(animation, effect.PaletteIndex);
+            animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
@@ -316,7 +318,7 @@ namespace LAZYSHELL
             if (updating) return;
             effect.AnimationPacket = (byte)imageNum.Value;
             e_codec.SelectedIndex = animation.Codec;
-            animation.Tileset = new E_Tileset(animation, effect.PaletteIndex);
+            animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             CalculateFreeSpace();
             LoadMoldEditor();
             LoadSequenceEditor();
@@ -344,7 +346,7 @@ namespace LAZYSHELL
             e_graphicSetSize.Minimum = e_codec.SelectedIndex == 1 ? 16 : 32;
             if (updating) return;
             animation.Codec = (ushort)e_codec.SelectedIndex;
-            animation.Tileset = new E_Tileset(animation, effect.PaletteIndex);
+            animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             molds.SetTilesetImage();
             molds.SetTilemapImage();
             sequences.SetSequenceFrameImages();
@@ -386,7 +388,7 @@ namespace LAZYSHELL
         private void import_Click(object sender, EventArgs e)
         {
             new IOElements(animations, (int)imageNum.Value, "IMPORT EFFECT ANIMATIONS...").ShowDialog();
-            this.animation.PaletteSet.Data = Model.Data;
+            this.animation.PaletteSet.BUFFER = Model.ROM;
             foreach (E_Animation animation in animations)
                 animation.Assemble();
             RefreshEffectsEditor();
@@ -408,8 +410,8 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current effect and animation index. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            animation = new E_Animation(Model.Data, effect.AnimationPacket);
-            effect = new Effect(Model.Data, index);
+            animation = new E_Animation(effect.AnimationPacket);
+            effect = new Effect(index);
             number_ValueChanged(null, null);
         }
         private void cullAnimations_Click(object sender, EventArgs e)
@@ -434,21 +436,21 @@ namespace LAZYSHELL
                             highestTile = mold.Mold[a] & 0x3F;
                 }
                 highestTile++;
-                if (highestTile * 8 < image.TileSetLength)
+                if (highestTile * 8 < image.TilesetLength)
                 {
                     int temp = highestTile * 8;
-                    image.TileSetLength = Math.Min(highestTile * 8, 512);
-                    image.TileSetLength = image.TileSetLength / 64 * 64;
-                    if (image.TileSetLength == 0)
-                        image.TileSetLength += 64;
-                    else if (image.TileSetLength <= 512 - 64 && temp % 64 != 0)
-                        image.TileSetLength += 64;
+                    image.TilesetLength = Math.Min(highestTile * 8, 512);
+                    image.TilesetLength = image.TilesetLength / 64 * 64;
+                    if (image.TilesetLength == 0)
+                        image.TilesetLength += 64;
+                    else if (image.TilesetLength <= 512 - 64 && temp % 64 != 0)
+                        image.TilesetLength += 64;
                 }
                 // cull graphics size
                 // find highest subtile index in tileset
-                for (int i = 0; i < image.TileSetLength; i += 2)
-                    if (image.TileSet[i] < 0xFF && image.TileSet[i] > highestSubtile)
-                        highestSubtile = image.TileSet[i];
+                for (int i = 0; i < image.TilesetLength; i += 2)
+                    if (image.Tileset_bytes[i] < 0xFF && image.Tileset_bytes[i] > highestSubtile)
+                        highestSubtile = image.Tileset_bytes[i];
                 highestSubtile++;
                 if (highestSubtile * format < image.GraphicSetLength)
                     image.GraphicSetLength = highestSubtile * format;
@@ -483,8 +485,8 @@ namespace LAZYSHELL
             }
             foreach (E_Animation animation in animations)
             {
-                if (animation.Tileset != null)
-                    animation.Tileset = new E_Tileset(animation, palette);
+                if (animation.Tileset_tiles != null)
+                    animation.Tileset_tiles = new E_Tileset(animation, palette);
                 animation.Assemble();
             }
             RefreshEffectsEditor();

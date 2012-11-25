@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class ProgressBar : Form
     {
-        private byte[] data;
+        private byte[] data { get { return Model.ROM; } set { Model.ROM = value; } }
         private BackgroundWorker backgroundWorker;
         // constructor
         public ProgressBar(byte[] data, string title, int max)

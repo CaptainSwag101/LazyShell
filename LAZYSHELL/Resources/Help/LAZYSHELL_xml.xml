@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.14.0" date="Sep. 24, 2012" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="3.15.0" date="November 24, 2012" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -173,6 +173,10 @@ romhacking community - various feedback</body>
     <entry>
       <question>The editor crashed and/or corrupted the ROM and I lost my work!</question>
       <answer>First, try clicking "Ignore Error" and saving as a separate ROM. Then, try exporting the indexes that didn't glitch out into .dat files and import those into a fresh, uncorrupted ROM. In the future, enable the back-up feature in the settings: click the grey cog icon in the main window to open the settings. There are two types of back-ups: you can back-up on load and/or save. Thus you can roll back to an earlier edit before the ROM got corrupted by the program.</answer>
+    </entry>
+    <entry>
+      <question>I loaded a hack and one of the editors crashed.</question>
+      <answer>It's possible the hack was written using an earlier version of Lazy Shell, particularly v2.x. Earlier versions of the program had badly written code and incorrectly saved certain types of data like sprites. Therefore newer versions will likely encounter errors with hacks made with earlier versions, and/or crash.</answer>
     </entry>
     <entry>
       <question>What do these "B#,b#" things mean?</question>
@@ -537,7 +541,7 @@ The level selected is the base index for all of the properties in the "Level-up 
         <title>Animation Index</title>
         <description>Select the animation to load.</description>
       </tooltip>
-      <tooltip control="animationScriptTree">
+      <tooltip control="commandTree">
         <title>Command Tree</title>
         <description>The collection of commands that comprise the animation script. Nodes are drawn in a hierarchical format for subroutines and animation packets used by the script. Check the nodes to move commands up or down--they cannot be delete, copied or pasted, however.
 
@@ -1208,7 +1212,7 @@ An event script is comprised of 0 or more commands, of which fall into two categ
         <title>Goto Address</title>
         <description>Jump to the command at or closest to the given address.</description>
       </tooltip>
-      <tooltip control="EventScriptTree">
+      <tooltip control="commandTree">
         <title>Script Commands</title>
         <description>The list of commands (aka "command tree") in the current script. Check the commands to delete, cut, or copy (using the toolstrip below), or double-click the commands to edit them in the box on the lower-right.</description>
       </tooltip>
@@ -1288,7 +1292,7 @@ Action scripts are basically the same as action queues found in event scripts, e
         </entry>
         <entry>
           <question>How do I change a character's animation during a dialogue?</question>
-          <answer>Make sure the "Run dlg: whatever" command has the dialogue property "asynchronous" unchecked so any following commands that would change a sprite's animation sequence or whatever will run while the dialogue is playing. Use the "Pause script, resume on next dlg page" commands to pause the script after the animation is complete.</answer>
+          <answer>Make sure the "Run dialogue: whatever" command has the dialogue property "asynchronous" unchecked so any following commands that would change a sprite's animation sequence or whatever will run while the dialogue is playing. Use the "Pause script, resume on next dlg page" commands to pause the script after the animation is complete.</answer>
         </entry>
         <entry>
           <question>I told my script to jump to index $11C, #284.</question>
@@ -1306,7 +1310,7 @@ Action scripts are basically the same as action queues found in event scripts, e
       </FAQ>
     </EventScripts>
     <Formations form="FormationsEditor" icon="icons/mainFormations.gif" title="Formations" type="editor">
-      <description>This editor has 2 subwindows: formations and packs.</description>
+      <description>This editor has 2 subwindows: Formations and packs.</description>
       <Formations form="Formations" icon="icons/mainFormations.gif" title="Formations" type="subwindow">
         <description>A formation is a set of monsters encountered in battle. A formation is chosen when a battle is called through either an event script or through the property of an NPC in a level.</description>
         <tooltip control="formationNameList" control2="formationNum">
@@ -2041,8 +2045,8 @@ If "Type" is set to "Battle", this value is added to the "Pack #". The purpose o
           <description>If enabled, the Z coord is increased by half a unit.</description>
         </tooltip>
         <tooltip control="npcFace">
-          <title>Facing</title>
-          <description>The direction the NPC faces.</description>
+          <title>F</title>
+          <description>The F coord, ie. the direction the NPC faces.</description>
         </tooltip>
         <tooltip control="npcAttributes">
           <title>Other Properties</title>
@@ -2151,7 +2155,7 @@ NOTE: the two treasure chest options are ALWAYS stored to clone buffer A, and th
           </tooltip>
           <tooltip control="vramStore">
             <title>Store</title>
-            <description>What molds of the NPC's sprite to store to VRAM based on facing direction.</description>
+            <description>What molds of the NPC's sprite to store to VRAM based on F direction (F coord).</description>
           </tooltip>
           <tooltip control="vramSize">
             <title>Size</title>
@@ -2201,7 +2205,7 @@ Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit
         </tooltip>
         <tooltip control="exitDest">
           <title>Destination Properties</title>
-          <description>The level or world map point (depending on the value "Type" is set to) that will open when the exit is triggered.</description>
+          <description>The level or location (depending on the value "Type" is set to) that will open when the exit is triggered.</description>
         </tooltip>
         <tooltip control="exitsShowMessage">
           <title>Show Message</title>
@@ -2209,7 +2213,7 @@ Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit
         </tooltip>
         <tooltip control="exitType">
           <title>Type</title>
-          <description>Determines whether the destination is a level or world map point.</description>
+          <description>Determines whether the destination is a level or location.</description>
         </tooltip>
         <tooltip control="exitX">
           <title>X</title>
@@ -2232,16 +2236,16 @@ Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit
           <description>The height, in isometric units, of the field.</description>
         </tooltip>
         <tooltip control="exitFace">
-          <title>Facing</title>
-          <description>The direction or orientation the Exit. UR to DL means "up- right to down-left". DR to UL means "down-right" to "up- left".</description>
+          <title>F</title>
+          <description>The F coord, ie. the direction or orientation the Exit.</description>
         </tooltip>
         <tooltip control="exits45LengthPlusHalf">
-          <title>45°+1/2</title>
-          <description>This will make the field slightly larger on the top-left and bottom-right sides.</description>
+          <title>NW/SE edge active</title>
+          <description>This will enable the trigger on the NW/SE edges of the field.</description>
         </tooltip>
         <tooltip control="exits135LengthPlusHalf">
-          <title>135°+1/2</title>
-          <description>This will make the field slightly larger on the top-right and bottom-left sides.</description>
+          <title>NE/SW edge active</title>
+          <description>This will enable the trigger on the NE/SW edges of the field.</description>
         </tooltip>
         <tooltip control="exitDestX">
           <title>X</title>
@@ -2256,8 +2260,8 @@ Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit
           <description>Mario's initial isometric Z coord, or elevation, in the destination level.</description>
         </tooltip>
         <tooltip control="exitDestFace">
-          <title>Facing</title>
-          <description>Mario's initial facing direction in the destination level.</description>
+          <title>F</title>
+          <description>Mario's initial F coord (F direction) in the destination level.</description>
         </tooltip>
         <tooltip control="marioZCoordPlusHalf">
           <title>+1/2</title>
@@ -2301,16 +2305,16 @@ Add, remove, copy, paste, and duplicate event fields using the toolstrip above t
           <description>The height, in isometric units, of the event field.</description>
         </tooltip>
         <tooltip control="eventFace">
-          <title>Facing</title>
-          <description>The direction or orientation the event field. UR to DL means "up-right to down-left". DR to UL means "down-right" to "up-left".</description>
+          <title>F</title>
+          <description>The F coord, ie. the direction or orientation the event field.</description>
         </tooltip>
         <tooltip control="eventsWidthXPlusHalf">
-          <title>45°+1/2</title>
-          <description>This will make the event field slightly larger on the top-left and bottom-right sides.</description>
+          <title>NW/SE edge active</title>
+          <description>This will enable the trigger on the NW/SE edges of the field.</description>
         </tooltip>
         <tooltip control="eventsWidthYPlusHalf">
-          <title>135°+1/2</title>
-          <description>This will make the event field slightly larger on the top-right and bottom-left sides.</description>
+          <title>NE/SW edge active</title>
+          <description>This will enable the trigger on the NE/SW edges of the field.</description>
         </tooltip>
       </Events>
       <Overlaps title="Overlaps" type="section">
@@ -3008,6 +3012,10 @@ A sequence is a collection of frames, where each frame is assigned a mold from t
           <title>Duration</title>
           <description>The duration of the currently selected frame, or how long the frame will pause before the next frame starts. This value refers to the # of frames based on a 60-frames-per- second unit.</description>
         </tooltip>
+        <tooltip control="sequenceActive">
+          <title>Active</title>
+          <description>This must be checked for a sprite sequence to be usable. If not checked, the sequence data will save but not be accessible in game--or the next time the editor opens.</description>
+        </tooltip>
       </SpriteSequences>
       <FAQ title="SPRITES EDITOR">
         <entry>
@@ -3060,7 +3068,7 @@ A separate layer for the banner displaying the location's name. This and the loc
         <title>World Map Index</title>
         <description>Select the world map to load. There are 8 maps total.
 
-The map may appear disoriented in correlation with the map points, because the game engine stretches the map.</description>
+The map may appear disoriented in correlation with the locations, because the game engine stretches the map.</description>
       </tooltip>
       <tooltip control="showLocations">
         <title>Show Locations</title>
@@ -3087,13 +3095,13 @@ To edit a tile in the tileset, click on the tile in the image above to edit it i
         <description>The Y coordinate of the map.</description>
       </tooltip>
       <Locations title="Locations" type="section">
-        <description>A location set, or collection of map points which lead to a level or another location, is included in each world map. When the locations are toggled on, the map image transforms to comply with the mode 7 transformation applied by the game. In order to provide accurate coordinates for the location points the image must be drawn this way in the editor.</description>
+        <description>A location set, or collection of locations which lead to a level or another location, is included in each world map. When the locations are toggled on, the map image transforms to comply with the mode 7 transformation applied by the game. In order to provide accurate coordinates for the location points the image must be drawn this way in the editor.</description>
         <tooltip control="locationNum" control2="locationName">
-          <title>Map Point Index</title>
+          <title>Location Index</title>
           <description>Select the location to load. If the location is in the currently selected world map, then it will be highlighted in the map.</description>
         </tooltip>
         <tooltip control="textBoxLocation">
-          <title>Map Point Name</title>
+          <title>Location Name</title>
           <description>Edit the location's name, as it appears at the bottom of the screen when the Mario sprite is over the location.</description>
         </tooltip>
         <tooltip control="locationXCoord">
@@ -3134,7 +3142,7 @@ These bits are always set in an event script.</description>
         </tooltip>
         <tooltip control="runEvent">
           <title>Assigned event #</title>
-          <description>The event to run when entering the map point. This is ignored if "LOCATION" is disabled.</description>
+          <description>The event to run when entering the location. This is ignored if "LOCATION" is disabled.</description>
         </tooltip>
         <tooltip control="runEventEdit">
           <title>Edit</title>

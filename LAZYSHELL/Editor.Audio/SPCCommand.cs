@@ -8,8 +8,12 @@ namespace LAZYSHELL
     [Serializable()]
     public class SPCCommand
     {
-        private byte[] commandData; public byte[] CommandData { get { return this.commandData; } set { this.commandData = value; } }
-        public int Length { get { return commandData.Length; } }
+        // class variables
+        private SPC spc;
+        private int channel;
+        private byte[] commandData; 
+        private List<SPCCommand> commands = new List<SPCCommand>();
+        // public accessors
         public byte Opcode
         {
             get
@@ -64,24 +68,26 @@ namespace LAZYSHELL
                     return ((SPCSound)spc).Type + 1;
             }
         }
-        private List<SPCCommand> commands = new List<SPCCommand>();
+        public int Length { get { return commandData.Length; } }
+        public int Channel { get { return this.channel; } set { this.channel = value; } }
+        public byte[] CommandData { get { return this.commandData; } set { this.commandData = value; } }
         public List<SPCCommand> Commands { get { return this.commands; } set { this.commands = value; } }
-        private SPC spc;
-        private int channel; public int Channel { get { return this.channel; } set { this.channel = value; } }
-        //
+        // constructor
         public SPCCommand(byte[] commandData, SPC spc, int channel)
         {
             this.spc = spc;
             this.commandData = commandData;
             this.channel = channel;
         }
+        // class functions
         public SPCCommand Copy()
         {
             return new SPCCommand(Bits.Copy(commandData), this.spc, this.channel);
         }
+        // universal functions
         public override string ToString()
         {
-            return Interpreter.Instance.InterpretSPCCommand(this);
+            return Interpreter.Instance.Interpret(this);
         }
     }
 }

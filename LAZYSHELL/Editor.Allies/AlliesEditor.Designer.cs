@@ -19,7 +19,6 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -41,7 +40,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showNewGameStats = new System.Windows.Forms.ToolStripButton();
             this.showLevelUps = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new LAZYSHELL.NewPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
@@ -192,6 +191,7 @@
             this.ClientSize = new System.Drawing.Size(688, 469);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip3);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.KeyPreview = true;
@@ -218,7 +218,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton showNewGameStats;
         private System.Windows.Forms.ToolStripButton showLevelUps;
-        private System.Windows.Forms.Panel panel1;
+        private NewPanel panel1;
         private System.Windows.Forms.ToolStripButton helpTips;
         private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

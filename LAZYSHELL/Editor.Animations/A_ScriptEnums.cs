@@ -6,7 +6,7 @@ namespace LAZYSHELL.ScriptsEditor
 {
     static class A_ScriptEnums
     {
-        private static int[] AnimationScriptLengths = new int[]
+        private static int[] CommandLengths = new int[]
         {
          // 0 1 2 3 4 5 6 7   8 9 A B C D E F
             9,8,1,6,4,1,6,1,  8,3,1,8,6,0,1,1,  // 0x00
@@ -33,20 +33,16 @@ namespace LAZYSHELL.ScriptsEditor
             1,4,1,0,1,2,1,0,  0,0,0,0,0,0,0,0,  // 0xE0
             0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,1   // 0xF0
         };
-        public static int GetAnimationOpcodeLength(int script, int option)
+        public static int GetCommandLength(int opcode, int param1)
         {
-            int len = AnimationScriptLengths[script];
-
-            if (len == 0 && script == 0xBA)
-                len = 2 + (option * 2);
-            if (len == 0 && script == 0xC6)
-                len = 2 + option;
-
-            if (len == 0)
+            int length = CommandLengths[opcode];
+            if (length == 0 && opcode == 0xBA)
+                length = 2 + (param1 * 2);
+            if (length == 0 && opcode == 0xC6)
+                length = 2 + param1;
+            if (length == 0)
                 return 1;
-                //throw new Exception("Invalid Length");
-
-            return len;
+            return length;
         }
     }
 }

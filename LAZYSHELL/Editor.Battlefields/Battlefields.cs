@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Battlefields : Form
+    public partial class Battlefields : NewForm
     {
         #region Variables
 
@@ -25,6 +25,7 @@ namespace LAZYSHELL
             get { return (int)battlefieldNum.Value; }
             set { battlefieldNum.Value = value; }
         }
+        public int Index { get { return index; } set { index = value; } }
         private int palette
         {
             get { return battlefields[(int)battlefieldNum.Value].PaletteSet; }
@@ -39,7 +40,7 @@ namespace LAZYSHELL
             get { return battlefields[index]; }
             set { battlefields[index] = value; }
         }
-        private BattlefieldTileSet tileset;
+        private BattlefieldTileset tileset;
         private PaletteSet[] paletteSets
         {
             get { return Model.PaletteSetsBF; }
@@ -71,6 +72,7 @@ namespace LAZYSHELL
         private CopyBuffer copiedTiles;
         private CommandStack commandStack = new CommandStack();
         // special controls
+        private EditLabel labelWindow;
         #endregion
         #region Functions
         // Main
@@ -82,6 +84,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
+            labelWindow = new EditLabel(battlefieldName, battlefieldNum, "Battlefields", true);
             this.battlefieldName.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
             this.battlefieldGFXSet1Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames)); battlefieldGFXSet1Name.Items.Add("{NONE}");
             this.battlefieldGFXSet2Name.Items.AddRange(Lists.Numerize(Lists.GraphicSetNames)); battlefieldGFXSet2Name.Items.Add("{NONE}");
@@ -97,13 +100,13 @@ namespace LAZYSHELL
             if (settings.RememberLastIndex)
                 index = settings.LastBattlefield;
             //
-            checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
+            checksum = Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets);
         }
         public void RefreshBattlefield()
         {
             Cursor.Current = Cursors.WaitCursor;
             updating = true;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[battlefield.PaletteSet]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[battlefield.PaletteSet]);
             // Update fields
             battlefieldName.SelectedIndex = index;
             battlefieldGFXSet1Name.SelectedIndex = battlefield.GraphicSetA;
@@ -130,10 +133,10 @@ namespace LAZYSHELL
         }
         private void SetBattlefieldImage()
         {
-            int[] battlefieldPixelsQ1 = Do.TilesetToPixels(tileset.TileSetLayer, 16, 16, 0, false);
-            int[] battlefieldPixelsQ2 = Do.TilesetToPixels(tileset.TileSetLayer, 16, 16, 256, false);
-            int[] battlefieldPixelsQ3 = Do.TilesetToPixels(tileset.TileSetLayer, 16, 16, 512, false);
-            int[] battlefieldPixelsQ4 = Do.TilesetToPixels(tileset.TileSetLayer, 16, 16, 768, false);
+            int[] battlefieldPixelsQ1 = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 16, 0, false);
+            int[] battlefieldPixelsQ2 = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 16, 256, false);
+            int[] battlefieldPixelsQ3 = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 16, 512, false);
+            int[] battlefieldPixelsQ4 = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 16, 768, false);
             int[] battlefieldPixels = new int[512 * 512];
             Do.PixelsToPixels(battlefieldPixelsQ1, battlefieldPixels, 512, new Rectangle(0, 0, 256, 256));
             Do.PixelsToPixels(battlefieldPixelsQ2, battlefieldPixels, 512, new Rectangle(256, 0, 256, 256));
@@ -144,8 +147,8 @@ namespace LAZYSHELL
         }
         private void Clear()
         {
-            Model.TileSetsBF[battlefield.TileSet] = new byte[0x2000];
-            Model.EditTileSetsBF[battlefield.TileSet] = true;
+            Model.TilesetsBF[battlefield.TileSet] = new byte[0x2000];
+            Model.EditTilesetsBF[battlefield.TileSet] = true;
         }
         public void Assemble()
         {
@@ -154,8 +157,8 @@ namespace LAZYSHELL
                 ps.Assemble(2);
             foreach (Battlefield bf in battlefields)
                 bf.Assemble();
-            Model.Compress(Model.TileSetsBF, Model.EditTileSetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
-            checksum = Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets);
+            Model.Compress(Model.TilesetsBF, Model.EditTilesetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
+            checksum = Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets);
         }
         // Editor loading
         private void LoadPaletteEditor()
@@ -185,19 +188,19 @@ namespace LAZYSHELL
             if (tileEditor == null)
             {
                 tileEditor = new TileEditor(new Function(TileUpdate),
-                this.tileset.TileSetLayer[mouseDownTile],
+                this.tileset.Tileset_tiles[mouseDownTile],
                 tileset.Graphics, paletteSets[battlefield.PaletteSet], 0x20);
                 tileEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
                 tileEditor.Reload(new Function(TileUpdate),
-                this.tileset.TileSetLayer[mouseDownTile],
+                this.tileset.Tileset_tiles[mouseDownTile],
                 tileset.Graphics, paletteSets[battlefield.PaletteSet], 0x20);
         }
         // Editor updating
         private void TileUpdate()
         {
-            tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
+            tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
         private void PaletteUpdate()
@@ -243,9 +246,9 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length) continue;
+                    if (index >= tileset.Tileset_tiles.Length) continue;
                     copiedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.TileSetLayer[index].Copy();
+                        tileset.Tileset_tiles[index].Copy();
                 }
             }
             this.copiedTiles.Tiles = copiedTiles;
@@ -270,9 +273,9 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length) continue;
+                    if (index >= tileset.Tileset_tiles.Length) continue;
                     draggedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.TileSetLayer[index].Copy();
+                        tileset.Tileset_tiles[index].Copy();
                 }
             }
             this.draggedTiles.Tiles = draggedTiles;
@@ -312,14 +315,14 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length || index < 0) continue;
+                    if (index >= tileset.Tileset_tiles.Length || index < 0) continue;
                     if (y < 0 || x < 0) continue;
                     Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
-                    tileset.TileSetLayer[index] = tile.Copy();
-                    tileset.TileSetLayer[index].TileIndex = index;
+                    tileset.Tileset_tiles[index] = tile.Copy();
+                    tileset.Tileset_tiles[index].TileIndex = index;
                 }
             }
-            tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
+            tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
         private void PasteClear()
@@ -350,12 +353,12 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length) continue;
-                    tileset.TileSetLayer[index].Clear();
-                    tileset.TileSet[index * 2] = 0;
+                    if (index >= tileset.Tileset_tiles.Length) continue;
+                    tileset.Tileset_tiles[index].Clear();
+                    tileset.Tileset_bytes[index * 2] = 0;
                 }
             }
-            tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
+            tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
         private void Flip(string type)
@@ -376,9 +379,9 @@ namespace LAZYSHELL
                     int index = y__ * 16 + x__;
                     index += ((x + x_) >> 4) * 256;
                     index += ((y + y_) >> 4) * 512;
-                    if (index >= tileset.TileSetLayer.Length) continue;
+                    if (index >= tileset.Tileset_tiles.Length) continue;
                     copiedTiles[y * (overlay.SelectTS.Width / 16) + x] =
-                        tileset.TileSetLayer[index].Copy();
+                        tileset.Tileset_tiles[index].Copy();
                 }
             }
             if (type == "mirror")
@@ -387,7 +390,7 @@ namespace LAZYSHELL
                 Do.FlipVertical(copiedTiles, overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16);
             buffer.Tiles = copiedTiles;
             PasteFinal(buffer);
-            tileset.DrawTileset(tileset.TileSetLayer, tileset.TileSet);
+            tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
         #endregion
@@ -400,7 +403,7 @@ namespace LAZYSHELL
         }
         private void Battlefields_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(battlefields, Model.TileSetsBF, paletteSets) == checksum)
+            if (Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets) == checksum)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Battlefields have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -410,7 +413,7 @@ namespace LAZYSHELL
             else if (result == DialogResult.No)
             {
                 Model.Battlefields = null;
-                Model.TileSetsBF[0] = null;
+                Model.TilesetsBF[0] = null;
                 Model.PaletteSetsBF = null;
             }
             else if (result == DialogResult.Cancel)
@@ -446,7 +449,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.PaletteSet = (byte)battlefieldPaletteSetNum.Value;
             battlefieldPaletteSetName.SelectedIndex = (int)battlefieldPaletteSetNum.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -463,7 +466,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.GraphicSetA = (byte)battlefieldGFXSet1Num.Value;
             battlefieldGFXSet1Name.SelectedIndex = (int)battlefieldGFXSet1Num.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -480,7 +483,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.GraphicSetB = (byte)battlefieldGFXSet2Num.Value;
             battlefieldGFXSet2Name.SelectedIndex = (int)battlefieldGFXSet2Num.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -497,7 +500,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.GraphicSetC = (byte)battlefieldGFXSet3Num.Value;
             battlefieldGFXSet3Name.SelectedIndex = (int)battlefieldGFXSet3Num.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -514,7 +517,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.GraphicSetD = (byte)battlefieldGFXSet4Num.Value;
             battlefieldGFXSet4Name.SelectedIndex = (int)battlefieldGFXSet4Num.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -531,7 +534,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.GraphicSetE = (byte)battlefieldGFXSet5Num.Value;
             battlefieldGFXSet5Name.SelectedIndex = (int)battlefieldGFXSet5Num.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -548,7 +551,7 @@ namespace LAZYSHELL
             if (updating) return;
             battlefield.TileSet = (byte)battlefieldTilesetNum.Value;
             battlefieldTilesetName.SelectedIndex = (int)battlefieldTilesetNum.Value;
-            tileset = new BattlefieldTileSet(battlefield, paletteSets[palette]);
+            tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
             SetBattlefieldImage();
             // reload editors
             LoadPaletteEditor();
@@ -815,7 +818,7 @@ namespace LAZYSHELL
         {
             new IOElements(this, index, "IMPORT BATTLEFIELDS...").ShowDialog();
             foreach (PaletteSet paletteSet in Model.PaletteSetsBF)
-                paletteSet.Data = Model.Data;
+                paletteSet.BUFFER = Model.ROM;
             RefreshBattlefield();
         }
         private void export_Click(object sender, EventArgs e)
@@ -848,27 +851,27 @@ namespace LAZYSHELL
             Tile[] tileset = new Tile[32 * 32];
             tileset = (Tile[])Do.Import(tileset);
             for (int i = 0; i < 32 * 32; i++)
-                this.tileset.TileSetLayer[i] = tileset[i].Copy();
-            this.tileset.DrawTileset(this.tileset.TileSetLayer, this.tileset.TileSet);
+                this.tileset.Tileset_tiles[i] = tileset[i].Copy();
+            this.tileset.DrawTileset(this.tileset.Tileset_tiles, this.tileset.Tileset_bytes);
         }
         private void importTilesetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BattlefieldTileSet tileset = new BattlefieldTileSet();
-            tileset = (BattlefieldTileSet)Do.Import(tileset);
+            BattlefieldTileset tileset = new BattlefieldTileset();
+            tileset = (BattlefieldTileset)Do.Import(tileset);
             if (tileset == null)
                 return;
             //
-            tileset.PaletteSet.Data = Model.Data;
+            tileset.Palettes.BUFFER = Model.ROM;
             this.battlefield.GraphicSetA = tileset.Battlefield.GraphicSetA;
             this.battlefield.GraphicSetB = tileset.Battlefield.GraphicSetB;
             this.battlefield.GraphicSetC = tileset.Battlefield.GraphicSetC;
             this.battlefield.GraphicSetD = tileset.Battlefield.GraphicSetD;
             this.battlefield.GraphicSetE = tileset.Battlefield.GraphicSetE;
-            this.tileset.PaletteSet = tileset.PaletteSet;
-            this.tileset.PaletteSet.CopyTo(Model.PaletteSetsBF[palette]);
+            this.tileset.Palettes = tileset.Palettes;
+            this.tileset.Palettes.CopyTo(Model.PaletteSetsBF[palette]);
             this.tileset.Graphics = tileset.Graphics;
-            this.tileset.TileSetLayer = tileset.TileSetLayer;
-            this.tileset.DrawTileset(this.tileset.TileSetLayer, this.tileset.TileSet);
+            this.tileset.Tileset_tiles = tileset.Tileset_tiles;
+            this.tileset.DrawTileset(this.tileset.Tileset_tiles, this.tileset.Tileset_bytes);
 
             this.tileset.Assemble(16, 16);
 
@@ -879,8 +882,8 @@ namespace LAZYSHELL
             if (MessageBox.Show("You're about to undo all changes to the current battlefield. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            battlefield = new Battlefield(Model.Data, index);
-            Model.Decompress(Model.TileSetsBF, 0x150000, 0x160000, 0x2000, "", index, index + 1, false);
+            battlefield = new Battlefield(index);
+            Model.Decompress(Model.TilesetsBF, 0x150000, 0x160000, 0x2000, "", index, index + 1, false);
             RefreshBattlefield();
         }
         #endregion

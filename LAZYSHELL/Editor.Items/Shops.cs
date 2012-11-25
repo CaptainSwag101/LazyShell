@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class Shops : Form
     {
-        
+
         private Settings settings = Settings.Default;
         private Shop[] shops { get { return Model.Shops; } set { Model.Shops = value; } }
         private Shop shop { get { return shops[index]; } set { shops[index] = value; } }
@@ -19,93 +19,62 @@ namespace LAZYSHELL
         private bool updating = false;
         private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
         public int Index { get { return index; } set { index = value; } }
+        private ComboBox[] shopItems = new ComboBox[15];
         private ComboBox selectedItem;
         private ItemsEditor itemsEditor;
+        private EditLabel labelWindow;
         // Constructor
         public Shops(ItemsEditor itemsEditor)
         {
             this.itemsEditor = itemsEditor;
             InitializeComponent();
+            for (int i = 0; i < 15; i++)
+            {
+                this.shopItems[i] = new ComboBox();
+                this.shopItems[i].BackColor = System.Drawing.SystemColors.ControlDarkDark;
+                this.shopItems[i].DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+                this.shopItems[i].DropDownHeight = 317;
+                this.shopItems[i].DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+                this.shopItems[i].IntegralHeight = false;
+                this.shopItems[i].ItemHeight = 15;
+                this.shopItems[i].Location = new System.Drawing.Point(6, i * 21 + 20);
+                this.shopItems[i].Name = "shopItem" + i;
+                this.shopItems[i].Size = new System.Drawing.Size(173, 21);
+                this.shopItems[i].TabIndex = i;
+                this.shopItems[i].Tag = i;
+                this.shopItems[i].DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.itemName_DrawItem);
+                this.shopItems[i].SelectedIndexChanged += new System.EventHandler(this.shopItem_SelectedIndexChanged);
+                this.shopItems[i].Click += new System.EventHandler(this.shopItem_Click);
+                this.groupBoxItems.Controls.Add(this.shopItems[i]);
+            }
             InitializeStrings();
             index = 0;
             RefreshShops();
+            labelWindow = new EditLabel(shopName, null, "Shops", true);
         }
         // functions
         private void InitializeStrings()
         {
-            for (int i = 0; i < settings.ShopNames.Count; i++)
-                shopName.Items.Add(settings.ShopNames[i]);
-            this.shopItem1.Items.Clear();
-            this.shopItem2.Items.Clear();
-            this.shopItem3.Items.Clear();
-            this.shopItem4.Items.Clear();
-            this.shopItem5.Items.Clear();
-            this.shopItem6.Items.Clear();
-            this.shopItem7.Items.Clear();
-            this.shopItem8.Items.Clear();
-            this.shopItem9.Items.Clear();
-            this.shopItem10.Items.Clear();
-            this.shopItem11.Items.Clear();
-            this.shopItem12.Items.Clear();
-            this.shopItem13.Items.Clear();
-            this.shopItem14.Items.Clear();
-            this.shopItem15.Items.Clear();
-            this.shopItem1.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem2.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem3.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem4.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem5.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem6.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem7.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem8.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem9.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem10.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem11.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem12.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem13.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem14.Items.AddRange(Model.ItemNames.Names);
-            this.shopItem15.Items.AddRange(Model.ItemNames.Names);
+            shopName.Items.AddRange(Lists.ShopNames);
+            for (int i = 0; i < shopItems.Length; i++)
+            {
+                shopItems[i].Items.Clear();
+                shopItems[i].Items.AddRange(Model.ItemNames.Names);
+            }
         }
         public void ResortStrings()
         {
             updating = true;
-            this.shopItem1.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[0]);
-            this.shopItem2.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[1]);
-            this.shopItem3.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[2]);
-            this.shopItem4.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[3]);
-            this.shopItem5.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[4]);
-            this.shopItem6.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[5]);
-            this.shopItem7.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[6]);
-            this.shopItem8.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[7]);
-            this.shopItem9.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[8]);
-            this.shopItem10.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[9]);
-            this.shopItem11.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[10]);
-            this.shopItem12.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[11]);
-            this.shopItem13.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[12]);
-            this.shopItem14.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[13]);
-            this.shopItem15.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[14]);
+            for (int i = 0; i < shopItems.Length; i++)
+                shopItems[i].SelectedIndex = Model.ItemNames.GetSortedIndex(shop.Items[i]);
             updating = false;
         }
         public void RefreshShops()
         {
             if (updating) return;
             updating = true;
-            this.shopLabel.Text = settings.ShopNames[index];
-            this.shopItem1.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[0]);
-            this.shopItem2.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[1]);
-            this.shopItem3.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[2]);
-            this.shopItem4.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[3]);
-            this.shopItem5.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[4]);
-            this.shopItem6.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[5]);
-            this.shopItem7.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[6]);
-            this.shopItem8.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[7]);
-            this.shopItem9.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[8]);
-            this.shopItem10.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[9]);
-            this.shopItem11.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[10]);
-            this.shopItem12.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[11]);
-            this.shopItem13.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[12]);
-            this.shopItem14.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[13]);
-            this.shopItem15.SelectedIndex = Model.ItemNames.GetIndexFromNum(shop.Items[14]);
+            for (int i = 0; i < shopItems.Length; i++)
+                shopItems[i].SelectedIndex = Model.ItemNames.GetSortedIndex(shop.Items[i]);
             this.shopBuyOptions.SetItemChecked(0, shop.BuyFrogCoinOne);
             this.shopBuyOptions.SetItemChecked(1, shop.BuyFrogCoin);
             this.shopBuyOptions.SetItemChecked(2, shop.BuyOnlyA);
@@ -124,22 +93,8 @@ namespace LAZYSHELL
         private void shopName_DrawItem(object sender, DrawItemEventArgs e)
         {
             Do.DrawName(
-                sender, e, new BattleDialoguePreview(), Lists.Convert(settings.ShopNames),
+                sender, e, new BattleDialoguePreview(), Lists.ShopNames,
                 Model.FontDialogue, Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 0, false, false, Model.MenuBG_);
-        }
-        private void shopLabel_TextChanged(object sender, EventArgs e)
-        {
-            int index = this.index;
-            if (settings.ShopNames[index].CompareTo(shopLabel.Text) != 0)
-            {
-                settings.ShopNames[index] = this.shopLabel.Text;
-                shopName.BeginUpdate();
-                shopName.Items.Clear();
-                for (int i = 0; i < settings.ShopNames.Count; i++)
-                    shopName.Items.Add(settings.ShopNames[i]);
-                shopName.SelectedIndex = index;
-                shopName.EndUpdate();
-            }
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -148,65 +103,14 @@ namespace LAZYSHELL
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
         }
-        private void shopItem1_SelectedIndexChanged(object sender, EventArgs e)
+        private void shopItem_SelectedIndexChanged(object sender, EventArgs e)
         {
-            shop.Items[0] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem1.SelectedIndex);
+            int index = (int)((ComboBox)sender).Tag;
+            shop.Items[index] = (byte)Model.ItemNames.GetUnsortedIndex(shopItems[index].SelectedIndex);
         }
-        private void shopItem2_SelectedIndexChanged(object sender, EventArgs e)
+        private void shopItem_Click(object sender, EventArgs e)
         {
-            shop.Items[1] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem2.SelectedIndex);
-        }
-        private void shopItem3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[2] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem3.SelectedIndex);
-        }
-        private void shopItem4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[3] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem4.SelectedIndex);
-        }
-        private void shopItem5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[4] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem5.SelectedIndex);
-        }
-        private void shopItem6_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[5] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem6.SelectedIndex);
-        }
-        private void shopItem7_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[6] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem7.SelectedIndex);
-        }
-        private void shopItem8_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[7] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem8.SelectedIndex);
-        }
-        private void shopItem9_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[8] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem9.SelectedIndex);
-        }
-        private void shopItem10_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[9] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem10.SelectedIndex);
-        }
-        private void shopItem11_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[10] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem11.SelectedIndex);
-        }
-        private void shopItem12_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[11] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem12.SelectedIndex);
-        }
-        private void shopItem13_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[12] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem13.SelectedIndex);
-        }
-        private void shopItem14_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[13] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem14.SelectedIndex);
-        }
-        private void shopItem15_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            shop.Items[14] = (byte)Model.ItemNames.GetNumFromIndex(this.shopItem15.SelectedIndex);
+            selectedItem = (ComboBox)sender;
         }
         private void shopBuyOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -229,12 +133,13 @@ namespace LAZYSHELL
                 MessageBox.Show("Must select an item first.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            int index = Convert.ToInt32(selectedItem.Name.Substring(8)) - 1;
-            if (index == 0) return;
+            int index = Convert.ToInt32(selectedItem.Name.Substring(8));
+            if (index == 0) 
+                return;
             int temp = shop.Items[index - 1];
             shop.Items[index - 1] = shop.Items[index];
             shop.Items[index] = (byte)temp;
-            selectedItem = (ComboBox)this.Controls.Find("shopItem" + index.ToString(), true)[0];
+            selectedItem = (ComboBox)this.Controls.Find("shopItem" + (index - 1).ToString(), true)[0];
             RefreshShops();
             selectedItem.Focus();
         }
@@ -245,18 +150,15 @@ namespace LAZYSHELL
                 MessageBox.Show("Must select an item first.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            int index = Convert.ToInt32(selectedItem.Name.Substring(8)) - 1;
-            if (index == 14) return;
+            int index = Convert.ToInt32(selectedItem.Name.Substring(8));
+            if (index == 14)
+                return;
             int temp = shop.Items[index + 1];
             shop.Items[index + 1] = shop.Items[index];
             shop.Items[index] = (byte)temp;
-            selectedItem = (ComboBox)this.Controls.Find("shopItem" + (index + 2).ToString(), true)[0];
+            selectedItem = (ComboBox)this.Controls.Find("shopItem" + (index + 1).ToString(), true)[0];
             RefreshShops();
             selectedItem.Focus();
-        }
-        private void shopItem_Click(object sender, EventArgs e)
-        {
-            selectedItem = (ComboBox)sender;
         }
         #endregion
     }

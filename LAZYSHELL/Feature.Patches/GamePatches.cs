@@ -45,7 +45,7 @@ namespace LAZYSHELL.Patches
         {
             try
             {
-                Uri link = new Uri(settings.patchServerURL + "patch" + pn.ToString() + "/patch" + pn.ToString() + ".bin");
+                Uri link = new Uri(settings.PatchServerURL + "patch" + pn.ToString() + "/patch" + pn.ToString() + ".bin");
                 WebRequest.DefaultWebProxy = null;
                 client.DownloadDataAsync(link);
             }
@@ -167,7 +167,7 @@ namespace LAZYSHELL.Patches
                         "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        if (ips.ApplyTo(Model.Data))
+                        if (ips.ApplyTo(Model.ROM))
                         {
                             // Needed to reset state for new rom image
                             Model.ClearModel();

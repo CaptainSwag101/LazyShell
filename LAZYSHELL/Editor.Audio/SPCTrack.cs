@@ -8,24 +8,24 @@ namespace LAZYSHELL
     [Serializable()]
     public class SPCTrack : SPC
     {
-        [NonSerialized()]
-        private byte[] data;
-        private int index;
+        // universal variables
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
+        private int index; public override int Index { get { return index; } set { index = value; } }
         private byte[] spcData;
         private SampleIndex[] samples;
         private List<Percussives> percussives;
         private byte delayTime;
         private byte decayFactor;
         private byte echo;
+        private bool[] activeChannels;
+        public int Length;
+        // non-serialized variables
         [NonSerialized()]
         private List<SPCCommand>[] channels;
         [NonSerialized()]
         private List<Note>[] notes;
-        private bool[] activeChannels;
-        public int Length;
-        // Accessors
-        public override byte[] Data { get { return data; } set { data = value; } }
-        public override int Index { get { return index; } set { index = value; } }
+        // public accessors        
+        public byte[] SPCData { get { return spcData; } }
         public override SampleIndex[] Samples { get { return samples; } set { samples = value; } }
         public override List<Percussives> Percussives { get { return percussives; } set { percussives = value; } }
         public override List<SPCCommand>[] Channels { get { return channels; } set { channels = value; } }
@@ -34,31 +34,33 @@ namespace LAZYSHELL
         public override byte DelayTime { get { return delayTime; } set { delayTime = value; } }
         public override byte DecayFactor { get { return decayFactor; } set { decayFactor = value; } }
         public override byte Echo { get { return echo; } set { echo = value; } }
-        public byte[] SPCData { get { return spcData; } }
-        //
-        public SPCTrack(byte[] data, int index)
+        // constructors
+        public SPCTrack(int index)
         {
-            this.data = data;
             this.index = index;
             if (index == 0) // "current" track has nothing
                 return;
-            //
-            int offset = Bits.Get24Bit(data, index * 3 + 0x042748) - 0xC00000;
-            DelayTime = data[offset++];
-            DecayFactor = data[offset++];
-            Echo = data[offset++];
-            samples = new SampleIndex[20];
-            int i = 0;
-            while (data[offset] != 0xFF && i < 20)
-                samples[i++] = new SampleIndex(data[offset++], data[offset++]);
-            offset++;
-            Length = Bits.GetShort(data, offset); offset += 2;
-            spcData = Bits.GetByteArray(data, offset, Length);
-            //
-            CreateCommands();
+            Disassemble();
         }
         public SPCTrack()
         {
+        }
+        // assemblers
+        private void Disassemble()
+        {
+            int offset = Bits.GetInt24(rom, index * 3 + 0x042748) - 0xC00000;
+            delayTime = rom[offset++];
+            decayFactor = rom[offset++];
+            echo = rom[offset++];
+            samples = new SampleIndex[20];
+            int i = 0;
+            while (rom[offset] != 0xFF && i < 20)
+                samples[i++] = new SampleIndex(rom[offset++], rom[offset++]);
+            offset++;
+            Length = Bits.GetShort(rom, offset); offset += 2;
+            spcData = Bits.GetByteArray(rom, offset, Length);
+            //
+            CreateCommands();
         }
         public void CreateCommands()
         {
@@ -87,13 +89,78 @@ namespace LAZYSHELL
                 {
                     spcOffset += length;
                     int opcode = spcData[spcOffset];
-                    length = SPCScriptEnums.SPCScriptLengths[opcode];
+                    length = SPCScriptEnums.CommandLengths[opcode];
                     byte[] commandData = Bits.GetByteArray(spcData, spcOffset, length);
                     channels[i].Add(new SPCCommand(commandData, this, i));
                 }
                 while (spcData[spcOffset] != 0xD0 && spcData[spcOffset] != 0xCE);
             }
         }
+        public void Assemble(ref int offset)
+        {
+            if (index == 0)
+                return;
+            //int offset = Bits.Get24Bit(data, index * 3 + 0x042748) - 0xC00000;
+            Bits.SetInt24(rom, index * 3 + 0x42748, offset + 0xC00000);
+            rom[offset++] = DelayTime;
+            rom[offset++] = DecayFactor;
+            rom[offset++] = Echo;
+            foreach (SampleIndex sample in samples)
+            {
+                if (sample == null || !sample.Active)
+                    continue;
+                rom[offset++] = (byte)sample.Sample;
+                rom[offset++] = (byte)sample.Volume;
+            }
+            rom[offset++] = 0xFF;
+            Bits.SetShort(rom, offset, Length); offset += 2;
+            //
+            AssembleSPCData();
+            Bits.SetByteArray(rom, offset, spcData);
+            offset += spcData.Length;
+        }
+        public void AssembleSPCData()
+        {
+            int offset = 0;
+            spcData = new byte[percussives.Count * 5 + 1];
+            foreach (Percussives percussive in percussives)
+            {
+                spcData[offset++] = (byte)percussive.PitchIndex;
+                spcData[offset++] = percussive.Sample;
+                spcData[offset++] = percussive.Pitch;
+                spcData[offset++] = percussive.Volume;
+                spcData[offset++] = percussive.Balance;
+            }
+            spcData[offset++] = 0xFF;
+            int spcOffset = offset + 16;
+            int length = spcOffset;
+            for (int i = 0; i < channels.Length; i++)
+                if (activeChannels[i] && channels[i] != null)
+                    foreach (SPCCommand ssc in channels[i])
+                        length += ssc.Length;
+            this.Length = length;
+            Array.Resize<byte>(ref spcData, length);
+            for (int i = 0; i < 8; i++)
+            {
+                if (activeChannels[i] && channels[i] != null)
+                    Bits.SetShort(spcData, offset, spcOffset + 0x2000);
+                else
+                    Bits.SetShort(spcData, offset, 0);
+                offset += 2;
+                if (!activeChannels[i] || channels[i] == null)
+                    continue;
+                foreach (SPCCommand ssc in channels[i])
+                {
+                    Bits.SetByteArray(spcData, spcOffset, ssc.CommandData);
+                    spcOffset += ssc.Length;
+                }
+            }
+        }
+        public override void Assemble()
+        {
+
+        }
+        // notation functions
         public override void CreateNotes()
         {
             notes = new List<Note>[8];
@@ -115,7 +182,7 @@ namespace LAZYSHELL
                         case 0xC5: thisOctave--; break;
                         case 0xC6: thisOctave = ssc.Param1; break;
                         case 0xD4:
-                            SequenceLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
+                            RepeatLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
                             break;
                         case 0xD5: break;
                         case 0xDE: sample = ssc.Param1; goto default;
@@ -129,7 +196,7 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void SequenceLoop(int c, ref int i, int start, int count, ref int octave, ref bool percussive, ref int sample)
+        private void RepeatLoop(int c, ref int i, int start, int count, ref int octave, ref bool percussive, ref int sample)
         {
             int end = i;
             int thisOctave = octave;
@@ -149,7 +216,7 @@ namespace LAZYSHELL
                     case 0xC5: thisOctave--; break;
                     case 0xC6: thisOctave = ssc.Param1; break;
                     case 0xD4:
-                        SequenceLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
+                        RepeatLoop(c, ref i, i, ssc.Param1, ref thisOctave, ref percussive, ref sample);
                         break;
                     case 0xD5:
                         end = i;
@@ -172,6 +239,7 @@ namespace LAZYSHELL
             }
             octave = thisOctave;
         }
+        // conversion functions
         public List<SPCCommand>[] DecompToMML(NativeSPC nativeFormat)
         {
             List<SPCCommand>[] commands = new List<SPCCommand>[8];
@@ -287,70 +355,7 @@ namespace LAZYSHELL
             }
             octave = thisOctave;
         }
-        public override void Assemble()
-        {
-
-        }
-        public void Assemble(ref int offset)
-        {
-            if (index == 0)
-                return;
-            //int offset = Bits.Get24Bit(data, index * 3 + 0x042748) - 0xC00000;
-            Bits.Set24Bit(data, index * 3 + 0x42748, offset + 0xC00000);
-            data[offset++] = DelayTime;
-            data[offset++] = DecayFactor;
-            data[offset++] = Echo;
-            foreach (SampleIndex sample in samples)
-            {
-                if (sample == null || !sample.Active)
-                    continue;
-                data[offset++] = (byte)sample.Sample;
-                data[offset++] = (byte)sample.Volume;
-            }
-            data[offset++] = 0xFF;
-            Bits.SetShort(data, offset, Length); offset += 2;
-            //
-            AssembleSPCData();
-            Bits.SetByteArray(data, offset, spcData);
-            offset += spcData.Length;
-        }
-        public void AssembleSPCData()
-        {
-            int offset = 0;
-            spcData = new byte[percussives.Count * 5 + 1];
-            foreach (Percussives percussive in percussives)
-            {
-                spcData[offset++] = (byte)percussive.PitchIndex;
-                spcData[offset++] = percussive.Sample;
-                spcData[offset++] = percussive.Pitch;
-                spcData[offset++] = percussive.Volume;
-                spcData[offset++] = percussive.Balance;
-            }
-            spcData[offset++] = 0xFF;
-            int spcOffset = offset + 16;
-            int length = spcOffset;
-            for (int i = 0; i < channels.Length; i++)
-                if (activeChannels[i] && channels[i] != null)
-                    foreach (SPCCommand ssc in channels[i])
-                        length += ssc.Length;
-            this.Length = length;
-            Array.Resize<byte>(ref spcData, length);
-            for (int i = 0; i < 8; i++)
-            {
-                if (activeChannels[i] && channels[i] != null)
-                    Bits.SetShort(spcData, offset, spcOffset + 0x2000);
-                else
-                    Bits.SetShort(spcData, offset, 0);
-                offset += 2;
-                if (!activeChannels[i] || channels[i] == null)
-                    continue;
-                foreach (SPCCommand ssc in channels[i])
-                {
-                    Bits.SetByteArray(spcData, spcOffset, ssc.CommandData);
-                    spcOffset += ssc.Length;
-                }
-            }
-        }
+        // universal functions
         public override void Clear()
         {
             delayTime = 0;
@@ -367,12 +372,15 @@ namespace LAZYSHELL
                 channels[i] = new List<SPCCommand>();
         }
     }
+    // SPC classes
     [Serializable()]
     public class SampleIndex
     {
         public int Sample;
         public int Volume;
         public bool Active;
+        // constructor
+        // each SPC can have between 0 and 20 sample indexes/instruments
         public SampleIndex(int sample, int volume)
         {
             this.Sample = sample;
@@ -388,6 +396,7 @@ namespace LAZYSHELL
         public byte Pitch;
         public byte Volume;
         public byte Balance;
+        // constructor
         public Percussives(byte pitchIndex, byte sample, byte pitch, byte volume, byte balance)
         {
             PitchIndex = (Pitch)pitchIndex;
@@ -400,17 +409,20 @@ namespace LAZYSHELL
     [Serializable()]
     public class Note
     {
+        // class variables
         public SPCCommand Command;
+        public int Sample;
+        public bool Percussive;
+        // public accessors
         public Pitch Pitch { get { return (Pitch)(Command.Opcode % 14); } }
         public Beat Beat { get { return (Beat)(Command.Opcode / 14); } }
         public int Octave; // max is 8 (9 octaves)
-        public bool Percussive;
         public int Ticks
         {
             get
             {
                 if (Command.Opcode < 0xB6)
-                    return Model.Data[(int)Beat + 0x042304];
+                    return Model.ROM[(int)Beat + 0x042304];
                 else if (Command.Opcode < 0xC4)
                     return Command.Param1;
                 else
@@ -432,6 +444,30 @@ namespace LAZYSHELL
                     case Pitch.Gs: return true;
                     default: return false;
                 }
+            }
+        }
+        public int Line
+        {
+            get
+            {
+                int line = 0;
+                switch (Pitch)
+                {
+                    case Pitch.C:  // C
+                    case Pitch.Cs: line = 0; break; // C#
+                    case Pitch.D:  // D
+                    case Pitch.Ds: line = 1; break; // D#
+                    case Pitch.E: line = 2; break; // E
+                    case Pitch.F: // F
+                    case Pitch.Fs: line = 3; break; // F# (middle line)
+                    case Pitch.G: // G
+                    case Pitch.Gs: line = 4; break; // G#
+                    case Pitch.A: // A
+                    case Pitch.As: line = 5; break; // A#
+                    case Pitch.B: line = 6; break; // B
+                    default: line = 0; break; // silence/pause
+                }
+                return line;
             }
         }
         public int Y
@@ -462,30 +498,6 @@ namespace LAZYSHELL
                     y = -(octave * 28) + y;
                 }
                 return y;
-            }
-        }
-        public int Line
-        {
-            get
-            {
-                int line = 0;
-                switch (Pitch)
-                {
-                    case Pitch.C:  // C
-                    case Pitch.Cs: line = 0; break; // C#
-                    case Pitch.D:  // D
-                    case Pitch.Ds: line = 1; break; // D#
-                    case Pitch.E: line = 2; break; // E
-                    case Pitch.F: // F
-                    case Pitch.Fs: line = 3; break; // F# (middle line)
-                    case Pitch.G: // G
-                    case Pitch.Gs: line = 4; break; // G#
-                    case Pitch.A: // A
-                    case Pitch.As: line = 5; break; // A#
-                    case Pitch.B: line = 6; break; // B
-                    default: line = 0; break; // silence/pause
-                }
-                return line;
             }
         }
         /// <summary>
@@ -540,7 +552,7 @@ namespace LAZYSHELL
             }
             return Accidental.Natural; // Natural
         }
-        public int Sample;
+        // constructors
         public Note(SPCCommand command, int octave, bool percussive, int sample)
         {
             this.Command = command;
@@ -555,6 +567,7 @@ namespace LAZYSHELL
             this.Percussive = false;
             this.Sample = 0;
         }
+        // universal functions
         public string ToString(bool showOctave)
         {
             string description = "";
