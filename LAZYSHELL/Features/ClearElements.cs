@@ -77,7 +77,6 @@ namespace LAZYSHELL
             for (int i = start; type != null && i <= end; i++)
                 ((Element[])element)[i].Clear();
 
-            // LEVELS
             if (type == null && this.Text == "CLEAR LEVEL DATA...")
             {
                 for (int i = start; i <= end; i++)
@@ -130,6 +129,7 @@ namespace LAZYSHELL
                 }
             }
 
+            this.Tag = new Point(start, end);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

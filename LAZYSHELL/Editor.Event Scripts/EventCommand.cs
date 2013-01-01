@@ -165,7 +165,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
 
             conditionOffset &= 0xFFFF; // convert to pointer
 
-            if (commandData[0] == 0xE9 || commandData[0] == 0x42 || commandData[0] == 0x67)
+            if (commandData[0] == 0x42 || commandData[0] == 0x67 || commandData[0] == 0xE9)
             {
                 pointer = ReadPointerSpecial(0);
                 if (pointer >= conditionOffset)

@@ -251,6 +251,81 @@ namespace LAZYSHELL.ScriptsEditor
             commands[index1] = commands[index2];
             commands[index2] = esc;
         }
+        public void Refresh()
+        {
+            if (commands == null)
+                return;
+            // refresh offsets
+            int offset = baseOffset;
+            foreach (EventCommand esc in commands)
+            {
+                esc.RefreshOffsets(offset);
+                offset += esc.Length;
+            }
+            // update internal pointers
+            EventActionCommand eac;
+            ScriptIterator it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                eac.PointerChangedA = false;
+                eac.PointerChangedB = false;
+            }
+            it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                if (State.Instance.AutoPointerUpdate)
+                    UpdatePointersToCommand(eac);
+                eac.InternalOffset = eac.Offset;
+            }
+        }
+        private void UpdatePointersToCommand(EventActionCommand reference)
+        {
+            ushort pointer;
+            EventActionCommand eac;
+            ScriptIterator it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
+                {
+                    if (eac.GetType() == typeof(EventCommand) || eac.Opcode == 0xE9)
+                    {
+                        pointer = eac.ReadPointerSpecial(0);
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        {
+                            eac.WritePointerSpecial(0, (ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedA = true;
+                        }
+                        pointer = eac.ReadPointerSpecial(1);
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedB)
+                        {
+                            eac.WritePointerSpecial(1, (ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedB = true;
+                        }
+                    }
+                    else
+                    {
+                        pointer = eac.ReadPointer();
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        {
+                            eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedA = true;
+                        }
+                    }
+                }
+                else
+                {
+                    pointer = eac.ReadPointer();
+                    if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                    {
+                        eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
+                        eac.PointerChangedA = true;
+                    }
+                }
+            }
+        }
         public override void Clear()
         {
             if (commands != null)

@@ -216,7 +216,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Memory compare $700C to {0}",			// 0xC0
             "Memory compare $7000 to memory ${0}",			// 0xC1
             "Memory ${0} compare {1}",			// 0xC2
-            "memory $700C = current level",			// 0xC3
+            "Memory $700C = current level",			// 0xC3
             "Memory $700C = X ({1}) coord of {0}",			// 0xC4
             "Memory $700C = Y ({1}) coord of {0}",			// 0xC5
             "Memory $700C = Z ({1}) coord of {0}",			// 0xC6

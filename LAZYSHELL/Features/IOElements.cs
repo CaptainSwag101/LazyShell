@@ -69,15 +69,15 @@ namespace LAZYSHELL
         private void browseCurrent_Click(object sender, EventArgs e)
         {
             TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
-            string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4).Replace(" ", "");
+            string name = this.Text.ToLower().Substring(7, this.Text.Length - 7 - 4);
             string ext = ".dat";
             string filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
-            if (name == "samplewav")
+            if (name == "sample wav")
             {
                 ext = ".wav";
                 filter = "WAV files (*.wav)|*.wav|All files (*.*)|*.*";
             }
-            else if (name == "samplebrr")
+            else if (name == "sample brr")
             {
                 ext = ".brr";
                 filter = "BRR files (*.brr)|*.brr|All files (*.*)|*.*";
@@ -564,6 +564,7 @@ namespace LAZYSHELL
             }
             catch { }
             #endregion
+            this.Tag = radioButtonAll.Checked;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

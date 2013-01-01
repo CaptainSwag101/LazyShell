@@ -32,16 +32,14 @@ namespace LAZYSHELL.Patches
         public void StartDownloadingPatches()
         {
             this.Update();
-
-            this.downloadingLabel.Text = "            ...DOWNLOADING...            ";
+            this.downloadingLabel.Text = "...DOWNLOADING INFO...";
             clock.RunWorkerAsync();
-
             client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(client_DownloadDataCompleted);
             IPSClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(IPSClient_DownloadDataCompleted);
-
-            DownloadPatches(1);
+            DownloadPatchInfo(1);
+            clock.CancelAsync();
         }
-        private void DownloadPatches(int pn)
+        private void DownloadPatchInfo(int pn)
         {
             try
             {
@@ -97,9 +95,9 @@ namespace LAZYSHELL.Patches
         private void StartIPSDownload()
         {
             downloadingIPS = true;
+            this.downloadingLabel.Text = "...DOWNLOADING PATCH...";
             this.downloadingLabel.Visible = true;
             clock.RunWorkerAsync();
-
             this.applyButton.Text = "CANCEL PATCH";
             IPSClient.DownloadDataAsync(((Patch)patches[PatchListBox.SelectedIndex]).PatchURI);
         }
@@ -130,7 +128,7 @@ namespace LAZYSHELL.Patches
                         throw new Exception();
                 }
                 AddNewDownload(e.Result);
-                DownloadPatches(patches.Count + 1);
+                DownloadPatchInfo(patches.Count + 1);
                 this.applyButton.Enabled = true;
             }
             catch
@@ -194,7 +192,7 @@ namespace LAZYSHELL.Patches
         }
         private void clock_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (!e.Cancel)
+            while (!clock.CancellationPending)
             {
                 Thread.Sleep(1000 / 30);
                 if (red > 185 || red < 89)

@@ -58,8 +58,12 @@ namespace LAZYSHELL
             set
             {
                 mouseDownTile = value;
-                pictureBoxTileset_MouseDown(null,
-                    new MouseEventArgs(MouseButtons.Left, 1, value % 16 * 16, value / 16 * 16, 0));
+                MouseEventArgs mouseEventArgs = new MouseEventArgs(
+                    MouseButtons.Left, 1, 
+                    value % 16 * 16, 
+                    value / 16 * 16, 0);
+                pictureBoxTileset_MouseDown(null, mouseEventArgs);
+                pictureBoxTileset_MouseUp(null, mouseEventArgs);
                 pictureBox.Invalidate();
             }
         }

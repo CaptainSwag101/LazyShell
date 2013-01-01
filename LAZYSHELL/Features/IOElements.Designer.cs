@@ -42,7 +42,7 @@
             // 
             this.radioButtonCurrent.Location = new System.Drawing.Point(12, 12);
             this.radioButtonCurrent.Name = "radioButtonCurrent";
-            this.radioButtonCurrent.Size = new System.Drawing.Size(364, 17);
+            this.radioButtonCurrent.Size = new System.Drawing.Size(445, 17);
             this.radioButtonCurrent.TabIndex = 0;
             this.radioButtonCurrent.TabStop = true;
             this.radioButtonCurrent.Text = "Current index as single file...";
@@ -53,7 +53,7 @@
             // 
             this.radioButtonAll.Location = new System.Drawing.Point(12, 64);
             this.radioButtonAll.Name = "radioButtonAll";
-            this.radioButtonAll.Size = new System.Drawing.Size(364, 17);
+            this.radioButtonAll.Size = new System.Drawing.Size(445, 17);
             this.radioButtonAll.TabIndex = 3;
             this.radioButtonAll.TabStop = true;
             this.radioButtonAll.Text = "All indexes as directory of files...";

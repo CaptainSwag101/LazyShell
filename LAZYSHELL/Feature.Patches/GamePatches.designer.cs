@@ -28,7 +28,6 @@ namespace LAZYSHELL.Patches
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GamePatches));
             this.ImagePictureBox = new System.Windows.Forms.PictureBox();
             this.PatchListBox = new System.Windows.Forms.ListBox();
             this.AuthorLabel = new System.Windows.Forms.Label();

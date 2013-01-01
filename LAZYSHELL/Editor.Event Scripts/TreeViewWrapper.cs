@@ -358,12 +358,11 @@ namespace LAZYSHELL.ScriptsEditor
                         child = parent.Nodes[a];
                         if (!child.Checked)
                             continue;
-                        this.treeView.SelectedNode = child;
-                        delta = CurrentNodeData.Length * -1;
-                        node = this.treeView.SelectedNode;
+                        delta = -((ActionCommand)child.Tag).CommandData.Length;
+                        node = child;
                         if (node == null)
                             return;
-                        index = this.treeView.SelectedNode.Index;
+                        index = child.Index;
                         node = node.Parent;
                         // Decrease queue length option byte
                         EventCommand esc = script.Commands[node.Index];
@@ -379,12 +378,14 @@ namespace LAZYSHELL.ScriptsEditor
                     }
                     if (!parent.Checked)
                         continue;
-                    this.treeView.SelectedNode = parent;
-                    delta = CurrentNodeData.Length * -1;
-                    node = this.treeView.SelectedNode;
+                    if (!actionScript)
+                        delta = -((EventCommand)parent.Tag).CommandData.Length;
+                    else
+                        delta = -((ActionCommand)parent.Tag).CommandData.Length;
+                    node = parent;
                     if (node == null)
                         return;
-                    index = this.treeView.SelectedNode.Index;
+                    index = parent.Index;
                     parent.Remove();
                     if (!actionScript)
                         this.script.RemoveAt(parent.Index);
@@ -700,8 +701,10 @@ namespace LAZYSHELL.ScriptsEditor
         //
         public void RefreshScript()
         {
-            RefreshOffsets();
-            UpdateInternalPointers();
+            if (!actionScript)
+                script.Refresh();
+            else
+                action.Refresh();
             Populate();
             //
             if (treeView.Nodes.Count != 0 && selectedNode != null)
@@ -713,104 +716,6 @@ namespace LAZYSHELL.ScriptsEditor
                 treeView.SelectedNode = selectedNode;
             }
         }
-        private void RefreshOffsets()
-        {
-            int offset = actionScript ? action.Offset : script.BaseOffset;
-
-            if (!actionScript)
-            {
-                foreach (EventCommand esc in script.Commands)
-                {
-                    esc.RefreshOffsets(offset);
-                    offset += esc.Length;
-                }
-            }
-            else
-            {
-                foreach (ActionCommand asc in action.Commands)
-                {
-                    asc.Offset = offset;
-                    offset += asc.Length;
-                }
-            }
-        }
-        private void UpdateInternalPointers()
-        {
-            ScriptIterator it;
-            EventActionCommand eac;
-            if (actionScript)
-                it = new ScriptIterator(action);
-            else
-                it = new ScriptIterator(script);
-            while (!it.IsDone)
-            {
-                eac = it.Next();
-                eac.PointerChangedA = false;
-                eac.PointerChangedB = false;
-            }
-            if (actionScript)
-                it = new ScriptIterator(action);
-            else
-                it = new ScriptIterator(script);
-            while (!it.IsDone)
-            {
-                eac = it.Next();
-                if (State.Instance.AutoPointerUpdate)
-                    UpdatePointersToCommand(eac);
-                eac.InternalOffset = eac.Offset;
-            }
-        }
-        private void UpdatePointersToCommand(EventActionCommand reference)
-        {
-            ushort pointer;
-            ScriptIterator it;
-            EventActionCommand eac;
-            if (actionScript)
-                it = new ScriptIterator(action);
-            else
-                it = new ScriptIterator(script);
-            while (!it.IsDone)
-            {
-                eac = it.Next();
-                if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
-                {
-                    if (eac.GetType() == typeof(EventCommand) || eac.Opcode == 0xE9)
-                    {
-                        pointer = eac.ReadPointerSpecial(0);
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
-                        {
-                            eac.WritePointerSpecial(0, (ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedA = true;
-                        }
-                        pointer = eac.ReadPointerSpecial(1);
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedB)
-                        {
-                            eac.WritePointerSpecial(1, (ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedB = true;
-                        }
-                    }
-                    else
-                    {
-                        pointer = eac.ReadPointer();
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
-                        {
-                            eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedA = true;
-                        }
-                    }
-                }
-                else
-                {
-                    pointer = eac.ReadPointer();
-                    if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
-                    {
-                        eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
-                        eac.PointerChangedA = true;
-                    }
-                }
-            }
-        }
-        //
         #endregion
     }
 }

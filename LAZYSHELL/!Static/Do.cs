@@ -4172,8 +4172,7 @@ namespace LAZYSHELL
                 {
                     if (!File.Exists(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".bin"))
                         continue;
-                    FileStream fs =
-                        File.OpenRead(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".bin");
+                    FileStream fs = File.OpenRead(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".bin");
                     BinaryReader br = new BinaryReader(fs);
                     elements[i] = new byte[fs.Length];
                     br.ReadBytes((int)fs.Length).CopyTo((byte[])elements[i], 0);
@@ -4185,8 +4184,7 @@ namespace LAZYSHELL
                 {
                     if (!File.Exists(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".dat"))
                         continue;
-                    Stream s =
-                        File.OpenRead(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".dat");
+                    Stream s = File.OpenRead(fullPath + "." + i.ToString("d" + elements.Length.ToString().Length) + ".dat");
                     BinaryFormatter bf = new BinaryFormatter();
                     elements[i] = bf.Deserialize(s);
                     s.Close();

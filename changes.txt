@@ -1,5 +1,16 @@
 Major changes/additions are indicated by ***
 
+v3.15.1 (2013-01-01)
+--------------------------------------
+Fixes:
+*Description keystrokes had "h" for "3"
+*Event Scripts: clear function not updating pointers/offsets at all
+*Event Scripts: import function not updating pointers/offsets at all
+*Event Scripts: deleting checked commands really slow b/c each updating
+*Levels: not triggering "MouseUp" event for "Find in tileset"
+*Patches: no longer crashes when trying to apply a patch
+
+
 v3.15.0 (2012-11-24)
 --------------------------------------
 Additions:

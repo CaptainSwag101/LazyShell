@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.15.0
-Copyright © 2007-2012  giangurgolo &amp; Omega
+    <value>Lazy Shell, Version 3.15.1
+Copyright © 2007-2013  giangurgolo &amp; Omega
 
 Created by Omega &amp; giangurgolo
 

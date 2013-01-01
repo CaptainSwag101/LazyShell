@@ -26,7 +26,7 @@ namespace LAZYSHELL.ScriptsEditor
                 return script.Length;
             }
         }
-        private int offset; public int Offset { get { return this.offset; } set { this.offset = value; } }
+        private int baseOffset; public int BaseOffset { get { return this.baseOffset; } set { this.baseOffset = value; } }
         private bool embedded = false;
         public bool Embedded { get { return this.embedded; } set { this.embedded = value; } }
         // constructors
@@ -41,7 +41,7 @@ namespace LAZYSHELL.ScriptsEditor
         {
             this.script = commandData;
             this.index = index;
-            this.offset = offset;
+            this.baseOffset = offset;
             this.embedded = true;
             Disassemble();
         }
@@ -53,7 +53,7 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 length = GetLength();
                 offset = Bits.GetShort(rom, 0x210000 + (index * 2));
-                this.offset = 0x210000 + offset;
+                this.baseOffset = 0x210000 + offset;
                 this.script = Bits.GetByteArray(rom, 0x210000 + offset, length);
             }
             this.commands = new List<ActionCommand>();
@@ -90,7 +90,7 @@ namespace LAZYSHELL.ScriptsEditor
                 if (script.Length - offset > 1)
                     param1 = script[offset + 1];
                 length = ScriptEnums.GetActionCommandLength(script[offset], param1);
-                commands.Add(new ActionCommand(Bits.GetByteArray(script, offset, length), this.offset + offset));
+                commands.Add(new ActionCommand(Bits.GetByteArray(script, offset, length), this.baseOffset + offset));
                 offset += length;
             }
         }
@@ -149,6 +149,81 @@ namespace LAZYSHELL.ScriptsEditor
             commands[index1] = commands[index2];
             commands[index2] = asc;
         }
+        public void Refresh()
+        {
+            if (commands == null)
+                return;
+            // refresh offsets
+            int offset = baseOffset;
+            foreach (ActionCommand asc in commands)
+            {
+                asc.Offset = offset;
+                offset += asc.Length;
+            }
+            // update internal offsets
+            EventActionCommand eac;
+            ScriptIterator it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                eac.PointerChangedA = false;
+                eac.PointerChangedB = false;
+            }
+            it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                if (State.Instance.AutoPointerUpdate)
+                    UpdatePointersToCommand(eac);
+                eac.InternalOffset = eac.Offset;
+            }
+        }
+        private void UpdatePointersToCommand(EventActionCommand reference)
+        {
+            ushort pointer;
+            EventActionCommand eac;
+            ScriptIterator it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                eac = it.Next();
+                if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
+                {
+                    if (eac.GetType() == typeof(EventCommand) || eac.Opcode == 0xE9)
+                    {
+                        pointer = eac.ReadPointerSpecial(0);
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        {
+                            eac.WritePointerSpecial(0, (ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedA = true;
+                        }
+                        pointer = eac.ReadPointerSpecial(1);
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedB)
+                        {
+                            eac.WritePointerSpecial(1, (ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedB = true;
+                        }
+                    }
+                    else
+                    {
+                        pointer = eac.ReadPointer();
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        {
+                            eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
+                            eac.PointerChangedA = true;
+                        }
+                    }
+                }
+                else
+                {
+                    pointer = eac.ReadPointer();
+                    if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                    {
+                        eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
+                        eac.PointerChangedA = true;
+                    }
+                }
+            }
+        }
         public override void Clear()
         {
             if (commands != null)
@@ -158,8 +233,8 @@ namespace LAZYSHELL.ScriptsEditor
         // public functions
         public void UpdateOffsets(int delta, int conditionOffset)
         {
-            if (this.offset >= conditionOffset || conditionOffset == 0x7FFFFFFF)
-                this.offset += delta;
+            if (this.baseOffset >= conditionOffset || conditionOffset == 0x7FFFFFFF)
+                this.baseOffset += delta;
             if (commands == null)
                 return;
             foreach (ActionCommand asc in commands)

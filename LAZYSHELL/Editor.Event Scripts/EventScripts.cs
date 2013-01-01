@@ -273,9 +273,11 @@ namespace LAZYSHELL
         // Update offsets
         public void UpdateScriptOffsets()
         {
-            int index = treeViewWrapper.Script.Index;
+            UpdateScriptOffsets(treeViewWrapper.Script.Index);
+        }
+        public void UpdateScriptOffsets(int index)
+        {
             int end, start;
-            int conditionOffset = 0;
             //
             if (index >= 0 && index <= 1535)
             {
@@ -292,6 +294,7 @@ namespace LAZYSHELL
             else
                 throw new Exception("Invalid event num");
             //
+            int conditionOffset = 0;
             if (index < end)
                 conditionOffset = eventScripts[index + 1].BaseOffset;
             else
@@ -305,18 +308,21 @@ namespace LAZYSHELL
                     break;
                 }
             }
-            foreach (EventScript es in eventScripts)
+            foreach (EventScript script in eventScripts)
             {
-                if (es.Index > end)
+                if (script.Index > end)
                     break;
-                if (es.Index >= start && es.Index != index)
-                    es.UpdateAllOffsets(treeViewWrapper.ScriptDelta, conditionOffset);
+                if (script.Index >= start && script.Index != index)
+                    script.UpdateAllOffsets(treeViewWrapper.ScriptDelta, conditionOffset);
             }
             treeViewWrapper.ScriptDelta = 0;
         }
         public void UpdateActionOffsets()
         {
-            int index = treeViewWrapper.Action.Index;
+            UpdateActionOffsets(treeViewWrapper.Action.Index);
+        }
+        public void UpdateActionOffsets(int index)
+        {
             int end, start;
             int conditionOffset = 0;
             //
@@ -328,9 +334,9 @@ namespace LAZYSHELL
                 throw new Exception("Invalid action num");
             //
             if (index < end)
-                conditionOffset = actionScripts[index + 1].Offset;
+                conditionOffset = actionScripts[index + 1].BaseOffset;
             else
-                conditionOffset = actionScripts[index].Offset + actionScripts[index].Length; // Dont need to update anything after this event if its the last one                    
+                conditionOffset = actionScripts[index].BaseOffset + actionScripts[index].Length; // Dont need to update anything after this event if its the last one                    
             // set the conditionOffset based on the earliest command whose offset was changed in the current script
             foreach (ActionCommand asc in actionScripts[index].Commands)
             {
@@ -468,8 +474,8 @@ namespace LAZYSHELL
             }
             else
             {
-                Model.HexViewer.Offset = actionScript.Offset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (actionScript.Offset & 15) * 3;
+                Model.HexViewer.Offset = actionScript.BaseOffset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (actionScript.BaseOffset & 15) * 3;
             }
             Model.HexViewer.Compare();
             checksum = Do.GenerateChecksum(eventScripts, actionScripts);
@@ -1444,46 +1450,6 @@ namespace LAZYSHELL
             Assemble();
             Cursor.Current = Cursors.Arrow;
         }
-        private void autoPointerUpdate_Click(object sender, EventArgs e)
-        {
-            if (autoPointerUpdate.Checked)
-            {
-                if (MessageBox.Show("AutoUpdatePointer maintains pointer references throughout the Event Scripts and Action Scripts. Disabling it can cause unexpected results. Would you like to disable it?", "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    this.autoPointerUpdate.Checked = !this.autoPointerUpdate.Checked;
-                }
-            }
-            else
-                this.autoPointerUpdate.Checked = !this.autoPointerUpdate.Checked;
-
-            this.autoPointerUpdate.Checked = this.autoPointerUpdate.Checked;
-        }
-        private void recalibratePointersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fixPointers = new FixPointers(this, treeViewWrapper);
-            fixPointers.ShowDialog();
-            if (!apply) return;
-            DialogResult result = MessageBox.Show("Pointer recalibration requires saving. Go ahead with process?",
-                "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result != DialogResult.Yes)
-            {
-                apply = false;
-                return;
-            }
-            treeViewWrapper.ScriptDelta += delta;
-            commandTree.BeginUpdate();
-            treeViewWrapper.RefreshScript();
-            commandTree.EndUpdate();
-            eventNum_ValueChanged(null, null);
-
-            apply = false;
-            if (CalculateEventScriptsLength() >= 0)
-                AssembleAllEventScripts();
-            else
-                MessageBox.Show("There is not enough available space to save the event scripts to.\n\nThe event scripts were not saved.", "LAZY SHELL");
-            this.eventScripts = Model.EventScripts;
-            InitializeEditor();
-        }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Form about = new About(this);
@@ -1498,96 +1464,114 @@ namespace LAZYSHELL
             }
             else
             {
-                Model.HexViewer.Offset = actionScript.Offset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (actionScript.Offset & 15) * 3;
+                Model.HexViewer.Offset = actionScript.BaseOffset & 0xFFFFF0;
+                Model.HexViewer.SelectionStart = (actionScript.BaseOffset & 15) * 3;
             }
             Model.HexViewer.Compare();
             Model.HexViewer.Show();
         }
         // IO elements
-        private void exportAllBattleScripts_Click(object sender, EventArgs e)
-        {
-            //ioElements = new IOElements(this, (int)monsterNumber.Value, "EXPORT BATTLE SCRIPTS...");
-            //ioElements.ShowDialog();
-        }
-        private void exportAllEventScripts_Click(object sender, EventArgs e)
-        {
-            ioElements = new IOElements(this, index, "EXPORT EVENT SCRIPTS...");
-            ioElements.ShowDialog();
-        }
-        private void exportAllActionScripts_Click(object sender, EventArgs e)
-        {
-            ioElements = new IOElements(this, index, "EXPORT ACTION SCRIPTS...");
-            ioElements.ShowDialog();
-        }
-        private void importAllBattleScripts_Click(object sender, EventArgs e)
-        {
-            //ioElements = new IOElements(this, (int)monsterNumber.Value, "IMPORT BATTLE SCRIPTS...");
-            //ioElements.ShowDialog();
-            //if (ioElements.DialogResult == DialogResult.Cancel)
-            //    return;
-        }
-        private void importAllEventScripts_Click(object sender, EventArgs e)
-        {
-            ioElements = new IOElements(this, index, "IMPORT EVENT SCRIPTS...");
-            ioElements.ShowDialog();
-            if (ioElements.DialogResult == DialogResult.Cancel)
-                return;
-            eventNum_ValueChanged(null, null);
-        }
-        private void importAllActionScripts_Click(object sender, EventArgs e)
-        {
-            ioElements = new IOElements(this, index, "IMPORT ACTION SCRIPTS...");
-            ioElements.ShowDialog();
-            if (ioElements.DialogResult == DialogResult.Cancel)
-                return;
-            eventNum_ValueChanged(null, null);
-        }
-        private void clearAllBattleScripts_Click(object sender, EventArgs e)
-        {
-            //clearElements = new ClearElements(battleScripts, (int)monsterNumber.Value, "CLEAR BATTLE SCRIPTS...");
-            //clearElements.ShowDialog();
-            //if (clearElements.DialogResult == DialogResult.Cancel)
-            //    return;
-        }
-        private void clearAllEventScripts_Click(object sender, EventArgs e)
-        {
-            if (!isActionScript)
-                clearElements = new ClearElements(eventScripts, index, "CLEAR EVENT SCRIPTS...");
-            else
-                clearElements = new ClearElements(eventScripts, 0, "CLEAR EVENT SCRIPTS...");
-            clearElements.ShowDialog();
-            if (clearElements.DialogResult == DialogResult.Cancel)
-                return;
-            eventNum_ValueChanged(null, null);
-        }
-        private void clearAllActionScripts_Click(object sender, EventArgs e)
-        {
-            if (isActionScript)
-                clearElements = new ClearElements(actionScripts, index, "CLEAR ACTION SCRIPTS...");
-            else
-                clearElements = new ClearElements(actionScripts, 0, "CLEAR ACTION SCRIPTS...");
-            clearElements.ShowDialog();
-            if (clearElements.DialogResult == DialogResult.Cancel)
-                return;
-
-            eventNum_ValueChanged(null, null);
-        }
         private void importEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int length = eventScript.Length;
-            new IOElements((Element[])Model.EventScripts, index, "IMPORT EVENT SCRIPTS...").ShowDialog();
-            treeViewWrapper.ScriptDelta += eventScript.Length - length;
-            treeViewWrapper.RefreshScript();
+            int[] baseOffsets = new int[Model.EventScripts.Length];
+            int[] lengths = new int[Model.EventScripts.Length];
+            for (int i = 0; i < lengths.Length; i++)
+            {
+                baseOffsets[i] = Model.EventScripts[i].BaseOffset;
+                lengths[i] = Model.EventScripts[i].Length;
+            }
+            //
+            IOElements ioelements = new IOElements((Element[])Model.EventScripts, index, "IMPORT EVENT SCRIPTS...");
+            ioelements.ShowDialog();
+            if (ioelements.DialogResult != DialogResult.OK)
+                return;
+            bool importAll = (bool)ioelements.Tag;
+            if (importAll)
+            {
+                // first, update offsets for any changes made in current script
+                if (treeViewWrapper.ScriptDelta != 0)
+                    UpdateScriptOffsets();
+                // now, update offsets following each newly imported script w/new length
+                int baseOffset = 0x1E0C00;
+                int lastImported = 1;
+                for (int i = 0; i < 4092; i++)
+                {
+                    int delta = Model.EventScripts[i].Length - lengths[i];
+                    treeViewWrapper.ScriptDelta += delta;
+                    Model.EventScripts[i].BaseOffset = baseOffset;
+                    // only refresh script if a new one was imported
+                    if (delta != 0 || baseOffset != baseOffsets[i])
+                        Model.EventScripts[i].Refresh();
+                    // only need to update if new length
+                    if (delta != 0 && lastImported != i - 1)
+                    {
+                        lastImported = i;
+                        UpdateScriptOffsets(i);
+                        treeViewWrapper.ScriptDelta = 0;
+                    }
+                    baseOffset += Model.EventScripts[i].Length;
+                    if (i == 1535)
+                        baseOffset = 0x1F0C00;
+                    if (i == 3071)
+                        baseOffset = 0x200800;
+                }
+            }
+            else if (!importAll) // if importing single script into current
+            {
+                UpdateScriptOffsets(index);
+                eventScript.BaseOffset = baseOffsets[index];
+            }
             treeViewWrapper.ChangeScript(eventScript);
+            treeViewWrapper.RefreshScript();
         }
         private void importActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int length = actionScript.Length;
-            new IOElements((Element[])Model.ActionScripts, index, "IMPORT ACTION SCRIPTS...").ShowDialog();
-            treeViewWrapper.ScriptDelta += actionScript.Length - length;
-            treeViewWrapper.RefreshScript();
+            int[] baseOffsets = new int[Model.ActionScripts.Length];
+            int[] lengths = new int[Model.ActionScripts.Length];
+            for (int i = 0; i < lengths.Length; i++)
+            {
+                baseOffsets[i] = Model.ActionScripts[i].BaseOffset;
+                lengths[i] = Model.ActionScripts[i].Length;
+            }
+            //
+            IOElements ioelements = new IOElements((Element[])Model.ActionScripts, index, "IMPORT ACTION SCRIPTS...");
+            ioelements.ShowDialog();
+            if (ioelements.DialogResult != DialogResult.OK)
+                return;
+            bool importAll = (bool)ioelements.Tag;
+            if (importAll)
+            {
+                // first, update offsets for any changes made in current script
+                if (treeViewWrapper.ScriptDelta != 0)
+                    UpdateActionOffsets();
+                // now, update offsets following each newly imported script w/new length
+                int baseOffset = 0x210800;
+                int lastImported = 1;
+                for (int i = 0; i < 1024; i++)
+                {
+                    int delta = Model.ActionScripts[i].Length - lengths[i];
+                    treeViewWrapper.ScriptDelta += delta;
+                    Model.ActionScripts[i].BaseOffset = baseOffset;
+                    // only refresh script if a new one was imported
+                    if (delta != 0 || baseOffset != baseOffsets[i])
+                        Model.ActionScripts[i].Refresh();
+                    // only need to update if new length
+                    if (delta != 0 && lastImported != i - 1)
+                    {
+                        lastImported = i;
+                        UpdateActionOffsets(i);
+                        treeViewWrapper.ScriptDelta = 0;
+                    }
+                    baseOffset += Model.ActionScripts[i].Length;
+                }
+            }
+            else if (!importAll) // if importing single script into current
+            {
+                UpdateActionOffsets(index);
+                actionScript.BaseOffset = baseOffsets[index];
+            }
             treeViewWrapper.ChangeScript(actionScript);
+            treeViewWrapper.RefreshScript();
         }
         private void exportEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1718,38 +1702,83 @@ namespace LAZYSHELL
         }
         private void clearEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(Model.EventScripts, index, "CLEAR EVENT SCRIPTS...").ShowDialog();
-            eventNum_ValueChanged(null, null);
+            int[] lengths = new int[Model.EventScripts.Length];
+            for (int i = 0; i < lengths.Length; i++)
+                lengths[i] = Model.EventScripts[i].Length;
+            //
+            ClearElements window = new ClearElements(Model.EventScripts, index, "CLEAR EVENT SCRIPTS...");
+            window.ShowDialog();
+            if (window.DialogResult != DialogResult.OK)
+                return;
+            //
+            Point tag = (Point)window.Tag;
+            int start = tag.X;
+            int end = tag.Y;
+            for (int i = start; i <= end; i++)
+            {
+                treeViewWrapper.ScriptDelta += Model.EventScripts[i].Length - lengths[i];
+                if (i == 1535 && end >= 1536)
+                {
+                    UpdateScriptOffsets(start);
+                    treeViewWrapper.ScriptDelta = 0;
+                    start = 1536;
+                }
+                if (i == 3071 && end >= 3072)
+                {
+                    UpdateScriptOffsets(start);
+                    treeViewWrapper.ScriptDelta = 0;
+                    start = 3072;
+                }
+            }
+            UpdateScriptOffsets(start);
+            treeViewWrapper.RefreshScript();
         }
         private void clearActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ClearElements(Model.ActionScripts, index, "CLEAR ACTION SCRIPTS...").ShowDialog();
-            eventNum_ValueChanged(null, null);
+            int[] lengths = new int[Model.ActionScripts.Length];
+            for (int i = 0; i < lengths.Length; i++)
+                lengths[i] = Model.ActionScripts[i].Length;
+            //
+            ClearElements window = new ClearElements(Model.ActionScripts, index, "CLEAR ACTION SCRIPTS...");
+            window.ShowDialog();
+            if (window.DialogResult != DialogResult.OK)
+                return;
+            //
+            Point tag = (Point)window.Tag;
+            int start = tag.X;
+            int end = tag.Y;
+            for (int i = start; i <= end; i++)
+                treeViewWrapper.ScriptDelta += Model.ActionScripts[i].Length - lengths[i];
+            UpdateActionOffsets(start);
+            treeViewWrapper.RefreshScript();
         }
         private void reset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You're about to undo all changes to the current script. Go ahead with reset?",
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
-            int length;
             commandTree.BeginUpdate();
             if (!isActionScript)
             {
-                length = eventScript.Length;
+                int length = eventScript.Length;
+                int baseOffset = eventScript.BaseOffset;
                 eventScript = new EventScript(index);
+                eventScript.BaseOffset = baseOffset;
                 treeViewWrapper.SelectedNode = null;
                 treeViewWrapper.ScriptDelta += eventScript.Length - length;
-                treeViewWrapper.RefreshScript();
                 treeViewWrapper.ChangeScript(eventScript);
+                treeViewWrapper.RefreshScript();
             }
             else
             {
-                length = actionScript.Length;
+                int length = actionScript.Length;
+                int baseOffset = actionScript.BaseOffset;
                 actionScript = new ActionScript(index);
+                actionScript.BaseOffset = baseOffset;
                 treeViewWrapper.SelectedNode = null;
                 treeViewWrapper.ScriptDelta += actionScript.Length - length;
-                treeViewWrapper.RefreshScript();
                 treeViewWrapper.ChangeScript(actionScript);
+                treeViewWrapper.RefreshScript();
             }
             commandTree.EndUpdate();
         }
@@ -1857,7 +1886,7 @@ namespace LAZYSHELL
 
             if (isActionScript)
             {
-                pointer = temp.ReadPointer() + (actionScript.Offset & 0xFF0000);
+                pointer = temp.ReadPointer() + (actionScript.BaseOffset & 0xFF0000);
                 foreach (ActionScript script in actionScripts)
                 {
                     foreach (ActionCommand action in script.Commands)

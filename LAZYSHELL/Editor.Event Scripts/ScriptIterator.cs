@@ -9,10 +9,9 @@ namespace LAZYSHELL.ScriptsEditor
     {
         private EventScript script = null;
         private ActionScript action = null;
-
         private int parentIndex = 0; public int ParentIndex { get { return this.parentIndex; } }
         private int childIndex = -1; public int ChildIndex { get { return this.childIndex; } }
-
+        //
         public ScriptIterator(EventScript script)
         {
             this.script = script;
@@ -32,39 +31,31 @@ namespace LAZYSHELL.ScriptsEditor
             if (script != null)
             {
                 esc = script.Commands[parentIndex];
-
                 if (esc.QueueTrigger && esc.Queue.Commands.Count > 0)
                 {
                     if (childIndex < esc.Queue.Commands.Count)
                     {
                         if (childIndex != -1)
                         {
-                            asc = esc.Queue.Commands[childIndex];
-
-                            childIndex++;
-
+                            asc = esc.Queue.Commands[childIndex++];
                             if (childIndex == esc.Queue.Commands.Count)
                             {
                                 childIndex = -1;
                                 parentIndex++;
                             }
-
                             return (EventActionCommand)asc;
                         }
-
                         childIndex++;
                         return (EventActionCommand)esc;
                     }
                 }
-
                 childIndex = -1;
                 parentIndex++;
                 return (EventActionCommand)esc;
             }
             else if (action != null)
             {
-                asc = action.Commands[parentIndex];
-                parentIndex++;
+                asc = action.Commands[parentIndex++];
                 return (EventActionCommand)asc;
             }
             throw new Exception("Invalid Script");
@@ -79,10 +70,8 @@ namespace LAZYSHELL.ScriptsEditor
                         return false; // if its not the last command, were not done
                     if (script.Commands.Count <= 0)
                         return true;
-
                     // Get the last command to check child index
                     EventCommand esc = script.Commands[script.Commands.Count - 1];
-
                     if (esc.QueueTrigger && esc.Queue.Commands.Count > 0)
                     {
                         if (childIndex != -1 && childIndex < esc.Queue.Commands.Count)
@@ -94,7 +83,6 @@ namespace LAZYSHELL.ScriptsEditor
                     if (parentIndex < action.Commands.Count)
                         return false;
                 }
-
                 return true;
             }
         }
