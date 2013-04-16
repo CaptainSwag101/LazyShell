@@ -98,6 +98,7 @@
             // 
             this.fontWidth.AutoSize = false;
             this.fontWidth.BackColor = System.Drawing.SystemColors.Window;
+            this.fontWidth.ContextMenuStrip = null;
             this.fontWidth.Hexadecimal = false;
             this.fontWidth.Increment = new decimal(new int[] {
             1,
@@ -463,6 +464,7 @@
             this.fontTable.Name = "fontTable";
             this.fontTable.Size = new System.Drawing.Size(128, 192);
             this.fontTable.TabIndex = 448;
+            this.fontTable.Visible = false;
             // 
             // toolStrip1
             // 
@@ -582,8 +584,8 @@
             this.fontType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fontType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.fontType.Items.AddRange(new object[] {
-            "Menu",
             "Dialogue",
+            "Menu",
             "Descriptions",
             "Triangles"});
             this.fontType.Name = "fontType";

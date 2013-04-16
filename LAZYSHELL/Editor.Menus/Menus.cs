@@ -906,8 +906,8 @@ namespace LAZYSHELL
                     Do.DrawText(Model.Items[67].ToString(), 23, 72, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.Items[94].ToString(), 23, 84, e.Graphics, pre, Model.FontMenu, pal);
                     //
-                    Do.DrawText(Model.Items[31].ToString(), 23, 108, e.Graphics, pre, Model.FontMenu, pal);
-                    Do.DrawText(Model.Items[66].ToString(), 23, 120, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[32].ToString(), 23, 108, e.Graphics, pre, Model.FontMenu, pal);
+                    Do.DrawText(Model.Items[65].ToString(), 23, 120, e.Graphics, pre, Model.FontMenu, pal);
                     Do.DrawText(Model.Items[90].ToString(), 23, 132, e.Graphics, pre, Model.FontMenu, pal);
                     //
                     if (cursorImages != null)

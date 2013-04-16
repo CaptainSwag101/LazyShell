@@ -51,7 +51,7 @@ namespace LAZYSHELL
     }
     public enum FontType
     {
-        Menu, Dialogue, Description, Triangles, BattleMenu, FlowerBonus
+        Dialogue, Menu, Description, Triangles, FlowerBonus, BattleMenu
     }
     // Audio
     public enum Pitch
@@ -119,7 +119,7 @@ namespace LAZYSHELL
     }
     public enum TilesetType
     {
-        Level, SideScrolling, Mode7, Title, WorldMap, WorldMapLogo
+        Level, SideScrolling, Mode7, Title, WorldMap, WorldMapLogo, Opening
     }
     public enum TilemapType
     {

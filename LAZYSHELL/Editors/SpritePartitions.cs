@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class SpritePartitions : NewForm
+    public partial class SpritePartitions : Form
     {
         private Levels level;
         private int index { get { return (int)partitionNum.Value; } set { partitionNum.Value = value; } }

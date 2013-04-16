@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewExceptionForm));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.close = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.LinkLabel();
@@ -43,10 +42,10 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 128);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 167);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(476, 286);
+            this.richTextBox1.Size = new System.Drawing.Size(476, 247);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -66,7 +65,7 @@
             // 
             this.label1.Location = new System.Drawing.Point(60, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(296, 79);
+            this.label1.Size = new System.Drawing.Size(296, 118);
             this.label1.TabIndex = 0;
             this.label1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.label1_LinkClicked);
             // 
@@ -83,7 +82,7 @@
             // 
             // copyContents
             // 
-            this.copyContents.Location = new System.Drawing.Point(12, 99);
+            this.copyContents.Location = new System.Drawing.Point(12, 138);
             this.copyContents.Name = "copyContents";
             this.copyContents.Size = new System.Drawing.Size(195, 23);
             this.copyContents.TabIndex = 3;

@@ -425,7 +425,7 @@ namespace LAZYSHELL
                 {
                     fontMenu = new FontCharacter[128];
                     for (int i = 0; i < fontMenu.Length; i++)
-                        fontMenu[i] = new FontCharacter(i, 0);
+                        fontMenu[i] = new FontCharacter(i, FontType.Menu);
                 }
                 return fontMenu;
             }
@@ -572,6 +572,89 @@ namespace LAZYSHELL
                 return fontFlowerBonus;
             }
             set { fontFlowerBonus = value; }
+        }
+        #endregion
+        #region Intro
+        private static byte[] titleData;
+        private static Tileset titleTileSet;
+        private static PaletteSet titlePalettes;
+        private static PaletteSet titleSpritePalettes;
+        private static byte[] titleSpriteGraphics;
+        public static byte[] TitleData
+        {
+            get
+            {
+                if (titleData == null)
+                    titleData = Comp.Decompress(rom, 0x3F216F, 0xDA60);
+                return titleData;
+            }
+            set { titleData = value; }
+        }
+        public static Tileset TitleTileSet
+        {
+            get
+            {
+                if (titleTileSet == null)
+                    titleTileSet = new Tileset(TitlePalettes, "title");
+                return titleTileSet;
+            }
+            set { titleTileSet = value; }
+        }
+        public static PaletteSet TitlePalettes
+        {
+            get
+            {
+                if (titlePalettes == null)
+                    titlePalettes = new PaletteSet(rom, 0, 0x3F0088, 8, 16, 32);
+                return titlePalettes;
+            }
+            set { titlePalettes = value; }
+        }
+        public static PaletteSet TitleSpritePalettes
+        {
+            get
+            {
+                if (titleSpritePalettes == null)
+                    titleSpritePalettes = new PaletteSet(rom, 0, 0x3F0188, 5, 16, 32);
+                return titleSpritePalettes;
+            }
+            set { titleSpritePalettes = value; }
+        }
+        public static byte[] TitleSpriteGraphics
+        {
+            get
+            {
+                if (titleSpriteGraphics == null)
+                    titleSpriteGraphics = Bits.GetByteArray(titleData, 0x2000, 0x4C00);
+                return titleSpriteGraphics;
+            }
+            set { titleSpriteGraphics = value; }
+        }
+        //
+        private static byte[] openingData;
+        private static PaletteSet openingPalette;
+        public static byte[] OpeningData
+        {
+            get
+            {
+                if (openingData == null)
+                    openingData = Comp.Decompress(rom, 0x3F1914, 0x17C0);
+                return openingData;
+            }
+            set
+            {
+                openingData = value;
+            }
+        }
+        public static PaletteSet OpeningPalette
+        {
+            get
+            {
+                if (openingPalette == null)
+                    openingPalette = new PaletteSet(rom, 0, 0x3F0080, 1, 16, 32);
+                return openingPalette;
+            }
+            set { openingPalette = value; }
         }
         #endregion
         #region Levels
@@ -1668,63 +1751,6 @@ namespace LAZYSHELL
             }
         }
         #endregion
-        #region Title
-        private static byte[] titleData;
-        private static Tileset titleTileSet;
-        private static PaletteSet titlePalettes;
-        private static PaletteSet titleSpritePalettes;
-        private static byte[] titleSpriteGraphics;
-        public static byte[] TitleData
-        {
-            get
-            {
-                if (titleData == null)
-                    titleData = Comp.Decompress(rom, 0x3F216F, 0xDA60);
-                return titleData;
-            }
-            set { titleData = value; }
-        }
-        public static Tileset TitleTileSet
-        {
-            get
-            {
-                if (titleTileSet == null)
-                    titleTileSet = new Tileset(TitlePalettes, "title");
-                return titleTileSet;
-            }
-            set { titleTileSet = value; }
-        }
-        public static PaletteSet TitlePalettes
-        {
-            get
-            {
-                if (titlePalettes == null)
-                    titlePalettes = new PaletteSet(rom, 0, 0x3F0088, 8, 16, 32);
-                return titlePalettes;
-            }
-            set { titlePalettes = value; }
-        }
-        public static PaletteSet TitleSpritePalettes
-        {
-            get
-            {
-                if (titleSpritePalettes == null)
-                    titleSpritePalettes = new PaletteSet(rom, 0, 0x3F0188, 5, 16, 32);
-                return titleSpritePalettes;
-            }
-            set { titleSpritePalettes = value; }
-        }
-        public static byte[] TitleSpriteGraphics
-        {
-            get
-            {
-                if (titleSpriteGraphics == null)
-                    titleSpriteGraphics = Bits.GetByteArray(titleData, 0x2000, 0x4C00);
-                return titleSpriteGraphics;
-            }
-            set { titleSpriteGraphics = value; }
-        }
-        #endregion
         #region World Maps
         private static WorldMap[] worldMaps;
         private static Location[] locations;
@@ -2442,6 +2468,8 @@ namespace LAZYSHELL
             dummy = NPCSpritePartitions;
             dummy = NumeralGraphics;
             dummy = NumeralPaletteSet;
+            dummy = OpeningData;
+            dummy = OpeningPalette;
             dummy = OverlapTileset;
             dummy = Palettes;
             dummy = PaletteSets;
@@ -2561,6 +2589,8 @@ namespace LAZYSHELL
             npcSpritePartitions = null;
             numeralGraphics = null;
             numeralPaletteSet = null;
+            openingData = null;
+            openingPalette = null;
             overlapTileset = null;
             palettes = null;
             paletteSets = null;

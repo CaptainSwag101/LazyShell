@@ -12,7 +12,7 @@ using LAZYSHELL.ScriptsEditor;
 
 namespace LAZYSHELL
 {
-    public partial class Previewer : NewForm
+    public partial class Previewer : Form
     {
         #region Variables
         private Settings settings = Settings.Default;

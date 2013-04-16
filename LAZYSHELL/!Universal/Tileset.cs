@@ -35,6 +35,7 @@ namespace LAZYSHELL
         public byte[] Subtile_Bytes { get { return subtile_bytes; } set { subtile_bytes = value; } }
         public byte[] Palette_Bytes { get { return palette_bytes; } set { palette_bytes = value; } }
         // constructors
+        // default tileset
         public Tileset(byte[] tileset_Bytes, byte[] graphics, PaletteSet paletteSet, int width, int height, TilesetType type)
         {
             this.paletteSet = paletteSet;
@@ -49,10 +50,12 @@ namespace LAZYSHELL
             Tileset_tiles = new Tile[Width * Height];
             for (int i = 0; i < Tileset_tiles.Length; i++)
                 Tileset_tiles[i] = new Tile(i);
-            DrawTileset(Tileset_bytes, Tileset_tiles, graphics, 0x20);
+            byte format = (byte)(type != TilesetType.Opening ? 0x20 : 0x10);
+            DrawTileset(Tileset_bytes, Tileset_tiles, graphics, format);
             this.tilesets_bytes[0] = this.Tileset_bytes;
             this.tilesets_tiles[0] = this.Tileset_tiles;
         }
+        // level tileset
         public Tileset(LevelMap levelMap, PaletteSet paletteSet)
         {
             this.levelMap = levelMap; // grab the current LevelMap
@@ -93,6 +96,7 @@ namespace LAZYSHELL
             if (levelMap.GraphicSetL3 != 0xFF)
                 DrawTileset(tilesets_bytes[2], tilesets_tiles[2], graphicsL3, 0x10);
         }
+        // main title tileset
         public Tileset(PaletteSet paletteSet, string type)
         {
             this.paletteSet = paletteSet;
@@ -122,6 +126,7 @@ namespace LAZYSHELL
             DrawTileset(tilesets_bytes[1], tilesets_tiles[1], graphics, 0x20);
             DrawTileset(tilesets_bytes[2], tilesets_tiles[2], graphicsL3, 0x20);
         }
+        // minecart M7 tileset
         public Tileset(PaletteSet paletteSet)
         {
             this.paletteSet = paletteSet; // grab the current Palette Set
@@ -261,6 +266,11 @@ namespace LAZYSHELL
                     Buffer.BlockCopy(tilesets_bytes[2], 0, Model.TitleData, 0xBBE0, 0x300);
                     Buffer.BlockCopy(graphics, 0, Model.TitleData, 0x6C00, 0x4FE0);
                     Buffer.BlockCopy(graphicsL3, 0x40, Model.TitleData, 0xBEE0, 0x1B80);
+                }
+                else if (Type == TilesetType.Opening)
+                {
+                    Buffer.BlockCopy(tilesets_bytes[0], 0, Model.OpeningData, 0, 0x480);
+                    Buffer.BlockCopy(graphics, 0, Model.OpeningData, 0x480, 0x1340);
                 }
             }
             else

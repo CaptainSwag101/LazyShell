@@ -32,8 +32,6 @@
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.openPalettes = new System.Windows.Forms.ToolStripMenuItem();
             this.openSpritePalettes = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +40,6 @@
             this.openSpriteGraphics = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.panel67.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -86,9 +83,6 @@
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.save,
-            this.helpTips,
-            this.toolStripSeparator1,
             this.toolStripDropDownButton1,
             this.toolStripDropDownButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -97,21 +91,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(538, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // save
-            // 
-            this.save.Image = global::LAZYSHELL.Properties.Resources.save_small;
-            this.save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(23, 22);
-            this.save.ToolTipText = "Save";
-            this.save.Click += new System.EventHandler(this.save_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripDropDownButton1
             // 
@@ -130,7 +109,7 @@
             this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openPalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openPalettes.Name = "openPalettes";
-            this.openPalettes.Size = new System.Drawing.Size(146, 24);
+            this.openPalettes.Size = new System.Drawing.Size(154, 24);
             this.openPalettes.Text = "Title Palettes";
             this.openPalettes.Click += new System.EventHandler(this.openPalettes_Click);
             // 
@@ -139,7 +118,7 @@
             this.openSpritePalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
             this.openSpritePalettes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openSpritePalettes.Name = "openSpritePalettes";
-            this.openSpritePalettes.Size = new System.Drawing.Size(146, 24);
+            this.openSpritePalettes.Size = new System.Drawing.Size(154, 24);
             this.openSpritePalettes.Text = "Sprite Palettes";
             this.openSpritePalettes.Click += new System.EventHandler(this.openSpritePalettes_Click);
             // 
@@ -160,7 +139,7 @@
             this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openGraphics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openGraphics.Name = "openGraphics";
-            this.openGraphics.Size = new System.Drawing.Size(148, 24);
+            this.openGraphics.Size = new System.Drawing.Size(154, 24);
             this.openGraphics.Text = "Title Graphics";
             this.openGraphics.Click += new System.EventHandler(this.openGraphics_Click);
             // 
@@ -169,7 +148,7 @@
             this.openSpriteGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
             this.openSpriteGraphics.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openSpriteGraphics.Name = "openSpriteGraphics";
-            this.openSpriteGraphics.Size = new System.Drawing.Size(148, 24);
+            this.openSpriteGraphics.Size = new System.Drawing.Size(154, 24);
             this.openSpriteGraphics.Text = "Sprite Graphics";
             this.openSpriteGraphics.Click += new System.EventHandler(this.openSpriteGraphics_Click);
             // 
@@ -193,33 +172,25 @@
             this.panel2.Size = new System.Drawing.Size(278, 625);
             this.panel2.TabIndex = 1;
             // 
-            // helpTips
-            // 
-            this.helpTips.CheckOnClick = true;
-            this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
-            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.helpTips.Name = "helpTips";
-            this.helpTips.Size = new System.Drawing.Size(23, 22);
-            this.helpTips.Text = "Help Tips";
-            // 
             // MainTitle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 650);
+            this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.Location = new System.Drawing.Point(5, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainTitle";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "MAIN TITLE - Lazy Shell";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Title_FormClosing);
             this.panel67.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -235,8 +206,6 @@
         private System.Windows.Forms.Panel panel67;
         private System.Windows.Forms.PictureBox pictureBoxTitle;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton save;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem openPalettes;
@@ -246,6 +215,5 @@
         private System.Windows.Forms.ToolStripMenuItem openSpriteGraphics;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStripButton helpTips;
     }
 }

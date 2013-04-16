@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AttacksEditor : NewForm
+    public partial class AttacksEditor : Form
     {
         // variables
         

@@ -8,7 +8,8 @@ namespace LAZYSHELL
     class BattleDialoguePreview : Preview
     {
         // class variables
-        private Point p;
+        private int page = 0;
+        private Point location;
         private int next;
         private int[] palette;
         private FontCharacter[] fontCharacters;
@@ -48,22 +49,33 @@ namespace LAZYSHELL
             next = 0;
             pages.Clear();
             pages.Push(0);
-            p = new Point(0, 0);
+            location = new Point(0, 0);
+        }
+        public void Refresh()
+        {
+            int page = this.page;
+            while (page-- >= 0)
+                PageUp();
+            page = 0;
+            while (page++ <= this.page)
+                PageDown();
         }
         public void PageUp()
         {
             if (pages.Count > 1)
             {
+                page--;
                 pages.Pop();
-                p = new Point(0, 0);
+                location = new Point(0, 0);
             }
         }
-        public void PageDown(int maxLen)
+        public void PageDown()
         {
             if (next != pages.Peek())
             {
+                page++;
                 pages.Push(next);
-                p = new Point(0, 0);
+                location = new Point(0, 0);
             }
         }
         // public accessor functions
@@ -74,70 +86,93 @@ namespace LAZYSHELL
             else
                 return GetPreview((FontCharacter[])args[0], (int[])args[1], (char[])args[2], (bool)args[3], true);
         }
-        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] dlg, bool menu, bool allowclipping)
+        public int[] GetPreview(FontCharacter[] fontCharacters, int[] palette, char[] text, bool menu, bool allowclipping)
         {
             this.fontCharacters = fontCharacters;
             this.palette = palette;
-
-            if (dlg.Length < pages.Peek())
-                Reset();
-            int charPtr = pages.Peek();
-
+            //
+            int offset = GetOffset(text, menu);
+            if (text.Length <= pages.Peek() + 1)
+                PageUp();
+            //
+            location = new Point(9, 11);
             int[] pixels = new int[256 * 32];
-
-            p = new Point(9, 11);
-
-            int width, maxWidth;
-            int[] font;
-
-            while (charPtr != dlg.Length) // while there is more characters to draw
+            while (offset != text.Length)
             {
-                if (dlg[charPtr] >= 0x20 && dlg[charPtr] <= 0x9F)
+                if (text[offset] >= 0x20 && text[offset] <= 0x9F)
                 {
-                    if (p.X + fontCharacters[dlg[charPtr] - 32].Width >= 256)
+                    if (location.X + fontCharacters[text[offset] - 32].Width >= 256)
                     {
                         AddBorder(pixels);
                         return pixels;
                     }
-
+                    int width;
                     if (!allowclipping)
-                        width = MinimumWidth(fontCharacters[dlg[charPtr] - 32]);
+                        width = MinimumWidth(fontCharacters[text[offset] - 32]);
                     else
-                        width = fontCharacters[dlg[charPtr] - 32].Width;
-                    maxWidth = fontCharacters[dlg[charPtr] - 32].MaxWidth;
-                    font = fontCharacters[dlg[charPtr] - 32].GetPixels(palette);
-
-                    for (int y = 0, b = p.Y; y < 12; y++, b++) // 12 rows per character
+                        width = fontCharacters[text[offset] - 32].Width;
+                    int maxWidth = fontCharacters[text[offset] - 32].MaxWidth;
+                    int[] font = fontCharacters[text[offset] - 32].GetPixels(palette);
+                    for (int y = 0, b = location.Y; y < 12; y++, b++) // 12 rows per character
                     {
-                        for (int x = 0, a = p.X; x < width; x++, a++) // # of pixels per row
+                        for (int x = 0, a = location.X; x < width; x++, a++) // # of pixels per row
                             pixels[b * 256 + a] = font[y * maxWidth + x];
                     }
-                    p.X += width + 1;
+                    location.X += width + 1;
                 }
                 else if (!menu)
                 {
-                    switch ((byte)dlg[charPtr])
+                    switch ((byte)text[offset])
                     {
                         case 0x00: // END (End string)
-                            charPtr++;
+                            offset++;
                             AddBorder(pixels);
                             return pixels;
                         case 0x01: // BREAK (Line break)
-                            charPtr++;
-                            next = charPtr;
+                            offset++;
+                            next = offset;
                             AddBorder(pixels);
                             return pixels;
                         case 0x1C:
-                            charPtr++;
+                            offset++;
                             break;
                         default: break;
                     }
                 }
-                charPtr++;
+                offset++;
             }
             AddBorder(pixels);
-
             return pixels;
+        }
+        public int GetOffset(char[] text, bool menu)
+        {
+            int page = 0;
+            int offset = 0;
+            while (offset != text.Length)
+            {
+                if (page == this.page)
+                    return offset;
+                if (!menu)
+                {
+                    switch ((byte)text[offset])
+                    {
+                        case 0x00: // END (End string)
+                            offset++;
+                            return offset;
+                        case 0x01: // BREAK (Line break)
+                            page++;
+                            offset++;
+                            next = offset;
+                            continue;
+                        case 0x1C:
+                            offset++;
+                            break;
+                        default: break;
+                    }
+                }
+                offset++;
+            }
+            return offset;
         }
     }
 }

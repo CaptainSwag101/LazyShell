@@ -197,7 +197,7 @@ namespace LAZYSHELL
         }
         public bool AddNewTileMod()
         {
-            Point p = new Point(Math.Abs(picture.Left) / 16, Math.Abs(picture.Top) / 16);
+            Point p = new Point(Math.Abs(picture.Left) / zoom / 16, Math.Abs(picture.Top) / zoom / 16);
             if (CalculateFreeTileModSpace() >= 8)
             {
                 this.tileModsFieldTree.Focus();

@@ -161,7 +161,6 @@
             this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
             this.toolStripDropDownButton3.Size = new System.Drawing.Size(27, 22);
-            this.toolStripDropDownButton3.Text = "toolStripDropDownButton3";
             // 
             // resetAllObjectsToolStripMenuItem
             // 

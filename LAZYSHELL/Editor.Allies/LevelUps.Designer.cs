@@ -365,6 +365,7 @@
             // characterName
             // 
             this.characterName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.characterName.ContextMenuStrip = null;
             this.characterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.characterName.DropDownHeight = 506;
             this.characterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;

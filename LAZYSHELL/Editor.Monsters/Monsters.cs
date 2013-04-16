@@ -10,7 +10,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Monsters : NewForm
+    public partial class Monsters : Form
     {
         #region Variables
         
@@ -521,7 +521,7 @@ namespace LAZYSHELL
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
-            battleDialoguePreview.PageDown(monster.RawPsychopath.Length);
+            battleDialoguePreview.PageDown();
             MonsterPsychopath_TextChanged(null, null);
         }
         private void byteOrTextView_Click(object sender, EventArgs e)

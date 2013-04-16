@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Battlefields : NewForm
+    public partial class Battlefields : Form
     {
         #region Variables
 

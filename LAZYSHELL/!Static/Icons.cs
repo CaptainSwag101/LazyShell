@@ -68,6 +68,8 @@ namespace LAZYSHELL
         public static Bitmap tieUnder = Resources.tieUnder;
         // channel track icons
         public static Bitmap sharp = Resources.sharp;
+        public static Bitmap flat = Resources.flat;
+        public static Bitmap natural = Resources.natural;
         public static Bitmap octaveUp = Resources.octaveUp;
         public static Bitmap octaveDown = Resources.octaveDown;
         public static Bitmap octaveSet = Resources.octaveSet;

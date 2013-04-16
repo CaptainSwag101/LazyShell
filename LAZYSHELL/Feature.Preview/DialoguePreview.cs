@@ -15,9 +15,10 @@ namespace LAZYSHELL
         private int[] palette_t;
         private Point location;
         private int next = 0;
+        private int page = 0;
         private bool drawPageBreak;
         private bool[] drawOptions;
-        private int[] lineNext = new int[3];
+        private int[] lineOffset = new int[3];
         private Stack<int> pages = new Stack<int>();
         // accessors
         private DTE[] tables { get { return Model.DTE; } }
@@ -27,26 +28,28 @@ namespace LAZYSHELL
             pages.Push(0);
         }
         // accessor functions
-        public int[] GetPreview(FontCharacter[] fontCharacters, FontCharacter[] fontTriangles, int[] palette, int[] palette_t, char[] text, int left)
+        public int[] GetPreview(FontCharacter[] fontCharacters, FontCharacter[] fontTriangles, 
+            int[] palette, int[] palette_t, char[] text, int left)
         {
             this.fontCharacters = fontCharacters;
             this.fontTriangles = fontTriangles;
             this.palette = palette;
             this.palette_t = palette_t;
-            int charPtr = pages.Peek();
             //
             drawOptions = new bool[3];
             drawPageBreak = false;
             location = new Point(left + 1, 6);
             //
             text = ConvertSpecialCases(text);
+            int offset = GetOffset(text, left);
+            location = new Point(left + 1, 6);
             if (text.Length <= pages.Peek() + 1)
                 PageUp();
             //
             int line = 0;
             int[] pixels = new int[256 * 56];
             ArrayList words = new ArrayList();
-            AddWords(words, text, charPtr);
+            AddWords(words, text, offset);
             foreach (List<char> word in words)
             {
                 int wordWidth = WordWidth(word);
@@ -54,13 +57,13 @@ namespace LAZYSHELL
                 {
                     if (line == 2)
                     {
-                        next = lineNext[1];
+                        next = lineOffset[1];
                         AddBorder(pixels);
                         AddTriangles(pixels);
                         return pixels;
                     }
                     line++;
-                    lineNext[line] = charPtr + 1;
+                    lineOffset[line] = offset + 1;
                     location.X = left + 1; location.Y += 16;
                 }
                 foreach (char l in word)
@@ -75,13 +78,13 @@ namespace LAZYSHELL
                         {
                             if (line == 2)
                             {
-                                next = lineNext[1];
+                                next = lineOffset[1];
                                 AddBorder(pixels);
                                 AddTriangles(pixels);
                                 return pixels;
                             }
                             line++;
-                            lineNext[line] = charPtr + 1;
+                            lineOffset[line] = offset + 1;
                             location.X = left + 1; location.Y += 16;
                             break;
                         }
@@ -103,21 +106,21 @@ namespace LAZYSHELL
                             case 0x02:
                                 if (line == 2)
                                 {
-                                    next = lineNext[1];
+                                    next = lineOffset[1];
                                     AddBorder(pixels);
                                     AddTriangles(pixels);
                                     return pixels;
                                 }
                                 line++;
-                                lineNext[line] = charPtr + 1;
+                                lineOffset[line] = offset + 1;
                                 location.X = left + 1; location.Y += 16;
                                 break;
                             case 0x03:  // Page Break Press A
                                 drawPageBreak = true;
                                 goto case 0x04;
                             case 0x04:
-                                charPtr++;
-                                next = charPtr;
+                                offset++;
+                                next = offset;
                                 AddBorder(pixels);
                                 AddTriangles(pixels);
                                 return pixels;
@@ -125,12 +128,98 @@ namespace LAZYSHELL
                             default: break;
                         }
                     }
-                    charPtr++;
+                    offset++;
                 }
             }
             AddBorder(pixels);
             AddTriangles(pixels);
             return pixels;
+        }
+        private int GetOffset(char[] text, int left)
+        {
+            int page = 0;
+            int offset = 0;
+            int line = 0;
+            ArrayList words = new ArrayList();
+            AddWords(words, text, offset);
+            foreach (List<char> word in words)
+            {
+                if (page == this.page)
+                    return offset;
+                int wordWidth = WordWidth(word);
+                if (location.X + wordWidth >= 256 - left)
+                {
+                    if (line == 2)
+                    {
+                        page++;
+                        line = 0;
+                        next = lineOffset[2];
+                        if (page == this.page)
+                            return lineOffset[2];
+                    }
+                    line++;
+                    lineOffset[line] = offset + 1;
+                    location.X = left + 1; location.Y += 16;
+                }
+                foreach (char l in word)
+                {
+                    if (l >= 0x20 && l <= 0x9F)
+                    {
+                        int width = fontCharacters[l - 32].Width;
+                        if (location.X + width >= 256 - left)
+                        {
+                            if (line == 2)
+                            {
+                                page++;
+                                line = 0;
+                                next = lineOffset[2];
+                                if (page == this.page)
+                                    return lineOffset[2];
+                            }
+                            line++;
+                            lineOffset[line] = offset + 1;
+                            location.X = left + 1; location.Y += 16;
+                            break;
+                        }
+                        location.X += width + 1;
+                    }
+                    else
+                    {
+                        switch ((byte)l)
+                        {
+                            case 0x00: // End string
+                            case 0x06:
+                                return offset;
+                            case 0x01: // Line Break
+                            case 0x02:
+                                // if line break after 3rd line
+                                if (line == 2)
+                                {
+                                    page++;
+                                    line = 0;
+                                    next = lineOffset[2];
+                                    if (page == this.page)
+                                        return lineOffset[2];
+                                }
+                                line++;
+                                lineOffset[line] = offset + 1;
+                                location.X = left + 1; location.Y += 16;
+                                break;
+                            case 0x03:  // Page Break Press A
+                            case 0x04:
+                                page++;
+                                line = 0;
+                                next = offset + 1;
+                                if (page == this.page)
+                                    return offset + 1;
+                                break;
+                            default: break;
+                        }
+                    }
+                    offset++;
+                }
+            }
+            return offset;
         }
         // class functions
         private char[] ConvertSpecialCases(char[] text)
@@ -219,29 +308,29 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void AddWords(ArrayList words, char[] dlg, int charPtr)
+        private void AddWords(ArrayList words, char[] text, int offset)
         {
             List<char> letters;
-            while (charPtr < dlg.Length)
+            while (offset < text.Length)
             {
                 letters = new List<char>();
-                if (dlg[charPtr] <= 0x20)   // create a single word from special case or 1 space
+                if (text[offset] <= 0x20)   // create a single word from special case or 1 space
                 {
-                    letters.Add(dlg[charPtr]); charPtr++;
+                    letters.Add(text[offset]); offset++;
                 }
                 else   // create word from regular characters
                 {
-                    for (; charPtr < dlg.Length; charPtr++)
+                    for (; offset < text.Length; offset++)
                     {
                         // stop adding characters if next character is...
-                        if (dlg[charPtr] >= 0x00 && dlg[charPtr] <= 0x04) break;
-                        if (dlg[charPtr] == 0x06) break;
-                        if (dlg[charPtr] >= 0x0E && dlg[charPtr] <= 0x19) break;
-                        if (dlg[charPtr] == 0x1B) break;
-                        if (dlg[charPtr] == 0x20) break;
+                        if (text[offset] >= 0x00 && text[offset] <= 0x04) break;
+                        if (text[offset] == 0x06) break;
+                        if (text[offset] >= 0x0E && text[offset] <= 0x19) break;
+                        if (text[offset] == 0x1B) break;
+                        if (text[offset] == 0x20) break;
 
                         // ...otherwise add next character
-                        letters.Add(dlg[charPtr]);
+                        letters.Add(text[offset]);
                     }
                 }
                 words.Add(letters);
@@ -259,14 +348,16 @@ namespace LAZYSHELL
         {
             if (pages.Count > 1)
             {
+                page--;
                 pages.Pop();
                 location = new Point(0, 0);
             }
         }
-        public void PageDown(int maxLen)
+        public void PageDown()
         {
             if (next != pages.Peek())
             {
+                page++;
                 pages.Push(next);
                 location = new Point(0, 0);
             }

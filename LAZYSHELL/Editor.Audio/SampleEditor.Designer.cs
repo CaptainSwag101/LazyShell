@@ -224,7 +224,7 @@
             this.reset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(23, 22);
-            this.reset.Text = "toolStripButton1";
+            this.reset.Text = "Reset sample";
             this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // toolStripSeparator2

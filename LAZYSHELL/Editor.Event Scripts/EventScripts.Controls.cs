@@ -8,7 +8,7 @@ using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
-    public partial class EventScripts : NewForm
+    public partial class EventScripts : Form
     {
         private void ControlDisassembleEvent()
         {

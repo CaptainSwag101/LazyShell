@@ -411,11 +411,30 @@ namespace LAZYSHELL
     {
         // class variables
         public SPCCommand Command;
+        /// <summary>
+        /// Index of note's command in collection
+        /// </summary>
+        public int Index
+        {
+            get
+            {
+                return Command.Index;
+            }
+        }
+        public Note Prev(List<Note> notes, bool includeRests)
+        {
+            int index = notes.IndexOf(this);
+            Note note = notes[index];
+            while (index >= 0)
+                ;
+            return null;
+        }
         public int Sample;
         public bool Percussive;
         // public accessors
         public Pitch Pitch { get { return (Pitch)(Command.Opcode % 14); } }
         public Beat Beat { get { return (Beat)(Command.Opcode / 14); } }
+        public bool IsNote { get { return Command.Opcode < 0xC4; } }
         public int Octave; // max is 8 (9 octaves)
         public int Ticks
         {
@@ -470,11 +489,11 @@ namespace LAZYSHELL
                 return line;
             }
         }
-        public int Y
+        public int Y(Key key)
         {
-            get
-            {
-                int y = 0;
+            int y = 0;
+            if ((key >= Key.CMajor && key <= Key.CsMajor) ||
+                (key >= Key.AMinor && key <= Key.AsMinor)) // sharps
                 switch (Pitch)
                 {
                     case Pitch.C:  // C
@@ -491,66 +510,31 @@ namespace LAZYSHELL
                     case Pitch.B: y = -32; break; // B
                     default: y = 0; break; // silence/pause
                 }
-                // 4 is the middle octave
-                if (!Percussive)
+            else if ((key >= Key.FMajor && key <= Key.CbMajor) ||
+                (key >= Key.DMinor && key <= Key.AbMinor)) // flats
+                switch (Pitch)
                 {
-                    int octave = Octave - 5;
-                    y = -(octave * 28) + y;
+                    case Pitch.C: y = -8; break; // C
+                    case Pitch.Cs: y = -12; break; // Db
+                    case Pitch.D: y = -12; break; // D
+                    case Pitch.Ds: y = -16; break; // Eb
+                    case Pitch.E: y = -16; break; // E
+                    case Pitch.F: y = -20; break; // F
+                    case Pitch.Fs: y = -24; break; // Gb
+                    case Pitch.G: y = -24; break; // G
+                    case Pitch.Gs: y = -28; break; // Ab
+                    case Pitch.A: y = -28; break; // A
+                    case Pitch.As: y = -32; break; // Bb
+                    case Pitch.B: y = -32; break; // B
+                    default: y = 0; break; // silence/pause
                 }
-                return y;
-            }
-        }
-        /// <summary>
-        /// Returns what accidentals need to be SHOWN based on a given key signature. Thus, only non-black keys are checked.
-        /// </summary>
-        /// <param name="key">The key signature.</param>
-        /// <returns></returns>
-        public Accidental GetAccidental(Key key)
-        {
-            switch (Pitch)
+            // 4 is the middle octave
+            if (!Percussive)
             {
-                case Pitch.A:
-                    if (key >= Key.BMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.GsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key >= Key.EbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.CMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
-                    break;
-                case Pitch.B:
-                    if (key == Key.CsMajor || key == Key.AsMinor) return Accidental.Sharp; // Sharps, major, minor
-                    if (key >= Key.FMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.DMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
-                    break;
-                case Pitch.C:
-                    if (key >= Key.DMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.BMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key >= Key.GbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.EbMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
-                    break;
-                case Pitch.D:
-                    if (key >= Key.EMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.CsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key >= Key.AbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.FMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
-                    break;
-                case Pitch.E:
-                    if (key >= Key.FsMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.DsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key >= Key.BbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.DMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, minor
-                    break;
-                case Pitch.F:
-                    if (key >= Key.GMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.EMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key == Key.CbMajor || key == Key.AbMinor) return Accidental.Flat; // Flats, major, minor
-                    break;
-                case Pitch.G:
-                    if (key >= Key.AMajor && key <= Key.CsMajor) return Accidental.Sharp; // Sharps, major
-                    if (key >= Key.FsMinor && key <= Key.AsMinor) return Accidental.Sharp; // Sharps, minor
-                    if (key >= Key.DbMajor && key <= Key.CbMajor) return Accidental.Flat; // Flats, major
-                    if (key >= Key.BbMinor && key <= Key.AbMinor) return Accidental.Flat; // Flats, major
-                    break;
+                int octave = Octave - 5;
+                y = -(octave * 28) + y;
             }
-            return Accidental.Natural; // Natural
+            return y;
         }
         // constructors
         public Note(SPCCommand command, int octave, bool percussive, int sample)
@@ -568,8 +552,15 @@ namespace LAZYSHELL
             this.Sample = 0;
         }
         // universal functions
+        public Note Copy()
+        {
+            return new Note(this.Command.Copy(), this.Octave, this.Percussive, this.Sample);
+        }
         public string ToString(bool showOctave)
         {
+            if (Command.Opcode >= 0xC4)
+                return Command.ToString();
+            //
             string description = "";
             if (Tie)
                 description += "Note tie, ";

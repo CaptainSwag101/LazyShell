@@ -182,7 +182,7 @@ namespace LAZYSHELL
         }
         public void MainTitle()
         {
-            App.CreateMainTitleWindow();
+            App.CreateIntroWindow();
         }
         public void Menus()
         {

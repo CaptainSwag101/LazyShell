@@ -16,7 +16,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class Levels : NewForm
+    public partial class Levels : Form
     {
         #region Variables
 

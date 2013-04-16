@@ -11,6 +11,7 @@ namespace LAZYSHELL
     public partial class EditLabel : Form
     {
         // variables
+        public bool Disable = false;
         private int index
         {
             get
@@ -157,15 +158,17 @@ namespace LAZYSHELL
         // event handlers
         private void number_ValueChanged(object sender, EventArgs e)
         {
+            if (Disable) return;
             RefreshLabel();
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Disable) return;
             RefreshLabel();
         }
         private void labelToolStrip_Opening(object sender, CancelEventArgs e)
         {
-            if (!CheckLoadedProject())
+            if (Disable || !CheckLoadedProject())
                 e.Cancel = true;
         }
         private void editLabel_Click(object sender, EventArgs e)

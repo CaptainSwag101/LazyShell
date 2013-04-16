@@ -1676,6 +1676,10 @@ namespace LAZYSHELL
         {
             int color = 0, bit = 0;
             int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
+            if (format == 0x20 && offset + 17 >= src.Length)
+                return -1;
+            if (format == 0x10 && offset + 1 >= src.Length)
+                return -1;
             if (Bits.GetBit(src, offset, bit)) color |= 1;
             if (Bits.GetBit(src, offset + 1, bit)) color |= 2;
             if (format == 0x20)
@@ -1689,6 +1693,10 @@ namespace LAZYSHELL
         {
             int bit = 0;
             int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
+            if (format == 0x20 && offset + 17 >= src.Length)
+                return;
+            if (format == 0x10 && offset + 1 >= src.Length)
+                return;
             Bits.SetBit(src, offset, bit, (color & 1) == 1);
             Bits.SetBit(src, offset + 1, bit, (color & 2) == 2);
             if (format == 0x20)

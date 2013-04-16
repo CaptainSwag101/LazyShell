@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Audio : NewForm
+    public partial class Audio : Form
     {
         private long checksum;
         private SampleEditor sampleEditor;

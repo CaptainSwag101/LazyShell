@@ -469,7 +469,7 @@ namespace LAZYSHELL
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
-            textPreview.PageDown(dialogue.Text.Length);
+            textPreview.PageDown();
             SetTextImage();
         }
         private void textView_Click(object sender, EventArgs e)

@@ -56,6 +56,8 @@
             this.mirror = new System.Windows.Forms.ToolStripButton();
             this.invert = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
             this.adjustCoords = new System.Windows.Forms.ToolStripButton();
             this.zoomIn = new System.Windows.Forms.ToolStripButton();
             this.zoomOut = new System.Windows.Forms.ToolStripButton();
@@ -255,7 +257,8 @@
             this.mirror,
             this.invert,
             this.toolStripSeparator12,
-            this.adjustCoords});
+            this.undo,
+            this.redo});
             this.toolStrip4.Location = new System.Drawing.Point(78, 25);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Padding = new System.Windows.Forms.Padding(0);
@@ -393,6 +396,28 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(22, 6);
             // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(22, 12);
+            this.undo.Text = "Undo";
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(22, 12);
+            this.redo.Text = "Redo";
+            this.redo.Click += new System.EventHandler(this.redo_Click);
+            // 
             // adjustCoords
             // 
             this.adjustCoords.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -400,7 +425,7 @@
             this.adjustCoords.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.adjustCoords.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.adjustCoords.Name = "adjustCoords";
-            this.adjustCoords.Size = new System.Drawing.Size(22, 15);
+            this.adjustCoords.Size = new System.Drawing.Size(23, 22);
             this.adjustCoords.Text = "Adjust all tile coords";
             this.adjustCoords.Click += new System.EventHandler(this.adjustCoords_Click);
             // 
@@ -488,6 +513,7 @@
             this.newMold,
             this.deleteMold,
             this.duplicateMold,
+            this.adjustCoords,
             this.toolStripSeparator9,
             this.moveMoldBack,
             this.moveMoldFoward,
@@ -1053,5 +1079,7 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem newTile;
         private System.Windows.Forms.ToolStripMenuItem importTile;
+        private System.Windows.Forms.ToolStripButton undo;
+        private System.Windows.Forms.ToolStripButton redo;
     }
 }

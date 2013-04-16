@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,29 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.16.0
-Copyright © 2007-2013  giangurgolo &amp; Omega
-
-Created by Omega &amp; giangurgolo
-
-Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
-
-Main Contributors and Supporters:
-ElementalPowerStar -  notable donator, principle bug-finder, positive feedback
-Yakibomb - principle bug-finder and tester, positive feedback
-Ryan H. - donator, supporter
-
-Special Thanks:
-Alex Farber - MRU list manager
-Bregalad - source code for BRR encoding and decoding
-CrispyYoshi - feedback, beta testing, documentation for audio editor
-FuSoYa - for permission to use Lunar Compress.dll
-Kevin Weiner - animated GIF encoder class
-KP9000 - beta testing, discovered many bugs with pre-release version
-MathOnNapkins - helped with some coding
-Serge Meunier - image processing function code
-spel werdz rite - original resolution for running program under a 64-bit OS
-romhacking community - various feedback</value>
-  </data>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

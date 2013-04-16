@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class ItemsEditor : NewForm
+    public partial class ItemsEditor : Form
     {
         
         private long checksum;

@@ -125,6 +125,18 @@
     </Compile>
     <Compile Include="Editor.Audio\SPCCommand.cs" />
     <Compile Include="Editor.Audio\SPCScriptEnums.cs" />
+    <Compile Include="Editor.Intro\Intro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Intro\Intro.Designer.cs">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor.Intro\Opening.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Intro\Opening.Designer.cs">
+      <DependentUpon>Opening.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor.Menus\MenuTexts.cs" />
     <Compile Include="Editor.Menus\Menus.cs">
       <SubType>Form</SubType>
@@ -184,6 +196,7 @@
     <Compile Include="Feature.Project\ProjectDB.cs" />
     <Compile Include="Feature.Undo\AnimationEdit.cs" />
     <Compile Include="Feature.Undo\ScoreEdit.cs" />
+    <Compile Include="Feature.Undo\SpriteEdit.cs" />
     <Compile Include="Features\AnimatedGifEncoder.cs" />
     <Compile Include="Features\EditLabel.cs">
       <SubType>Form</SubType>
@@ -530,10 +543,10 @@
     <Compile Include="!Universal\Tileset.cs" />
     <Compile Include="Editor.Levels\Levels\LevelTemplate.cs" />
     <Compile Include="!Static\Lists.cs" />
-    <Compile Include="Editor.Main Title\MainTitle.cs">
+    <Compile Include="Editor.Intro\MainTitle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Main Title\MainTitle.Designer.cs">
+    <Compile Include="Editor.Intro\MainTitle.Designer.cs">
       <DependentUpon>MainTitle.cs</DependentUpon>
     </Compile>
     <Compile Include="!Static\Model.cs" />
@@ -587,6 +600,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Audio\SPCEditor.resx">
       <DependentUpon>SPCEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Intro\Intro.resx">
+      <DependentUpon>Intro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Intro\Opening.resx">
+      <DependentUpon>Opening.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Menus\Menus.resx">
       <DependentUpon>Menus.cs</DependentUpon>
@@ -992,7 +1011,7 @@
       <DependentUpon>TileEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.Main Title\MainTitle.resx">
+    <EmbeddedResource Include="Editor.Intro\MainTitle.resx">
       <DependentUpon>MainTitle.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -51,7 +51,7 @@
             this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonBrowse = new System.Windows.Forms.Button();
-            this.notesFile = new System.Windows.Forms.TextBox();
+            this.projectFile = new System.Windows.Forms.TextBox();
             this.projectOtherInfo = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.projectInformation = new System.Windows.Forms.TabPage();
@@ -404,15 +404,15 @@
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
-            // notesFile
+            // projectFile
             // 
-            this.notesFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.projectFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.notesFile.Location = new System.Drawing.Point(12, 30);
-            this.notesFile.Name = "notesFile";
-            this.notesFile.ReadOnly = true;
-            this.notesFile.Size = new System.Drawing.Size(507, 21);
-            this.notesFile.TabIndex = 1;
+            this.projectFile.Location = new System.Drawing.Point(12, 30);
+            this.projectFile.Name = "projectFile";
+            this.projectFile.ReadOnly = true;
+            this.projectFile.Size = new System.Drawing.Size(507, 21);
+            this.projectFile.TabIndex = 1;
             // 
             // projectOtherInfo
             // 
@@ -914,8 +914,8 @@
             this.fontType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fontType.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.fontType.Items.AddRange(new object[] {
-            "Menu",
             "Dialogue",
+            "Menu",
             "Descriptions"});
             this.fontType.Name = "fontType";
             this.fontType.Size = new System.Drawing.Size(126, 25);
@@ -1075,14 +1075,14 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonBrowse);
-            this.Controls.Add(this.notesFile);
+            this.Controls.Add(this.projectFile);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
             this.Location = new System.Drawing.Point(5, 5);
             this.Name = "Project";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PROJECT - Lazy Shell";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notes_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Project_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.indexNumber)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1138,7 +1138,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonBrowse;
-        private System.Windows.Forms.TextBox notesFile;
+        private System.Windows.Forms.TextBox projectFile;
         private System.Windows.Forms.Panel panelAddressBit;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown addressBit;

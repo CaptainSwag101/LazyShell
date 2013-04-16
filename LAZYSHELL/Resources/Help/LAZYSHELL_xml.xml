@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.15.1" date="January 1, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="3.16.0" date="April 15, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
     <precaution>1. When planning a hack project, the wisest thing to do is to make sure you have the back-up option enabled in the settings. Click the cog icon and check either "Create Back-up ROM on Load" or "Create Back-up ROM on Save" to enable it. I often hear about users throwing in the towel when the application corrupts the ROM, never having bothered to use the back-up feature.</precaution>
     <precaution>2. If you receive an error prompt, please follow the directions in the prompt window and copy ALL of the contents of the error message and post them to the given link in the window. Unless you do this, there is little hope of the bug ever being fixed unless someone else encounters it and posts it to the link. Keep in mind, I do read bug reports and I do attempt to fix the reported bugs, so your post will not be a waste of time.</precaution>
     <precaution>3. If the unfortunate occasion might arise that the application actually does corrupt your ROM, you can try resetting the corrupted elements by importing those specific elements from a fresh SMRPG ROM. Click the button "Import elements from another ROM" (a down-arrow over a small white box), select a fresh ROM, and check the elements you want to import.</precaution>
-    <conclusion>Should you encounter any issues, errors, problems, or irritations using the application, please post them to the following link:
+    <conclusion>Should you encounter any issues, errors, problems, or irritations using the application, please post them to one of the following links:
 
 http://acmlm.kafuka.org/board/thread.php?id=7005
+http://www.smwcentral.net/?p=viewthread&amp;t=45572
 
 Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank you for using the program.</conclusion>
   </Read>
@@ -121,8 +122,9 @@ Base savestates for SNES9X and ZSNES, respectively. These are needed for preview
 
 If the editor crashes, make sure it is the latest version of Lazy Shell by clicking the "(i)" button in the main window and comparing the version there to the version posted on the home page (http://home.comcast.net/~giangurgolo/smrpg/).
 
-If you are using the latest version, make a new post in this thread:
-http://acmlm.kafuka.org/board/thread.php?id=6770
+If you are using the latest version, make a new post in one of these threads:
+http://acmlm.kafuka.org/board/thread.php?id=7005
+http://www.smwcentral.net/?p=viewthread&amp;t=45572
 
 Explain exactly what you did to produce this error or cause this disfunctionality to occur, what editor it was in, what order you did your actions to produce this error or disfunctionality, etc. Also, when the editor bugs out, an exception prompt appears. If you can manage to copy the error message after this:
 
@@ -180,8 +182,9 @@ romhacking community - various feedback</body>
     </entry>
     <entry>
       <question>What do these "B#,b#" things mean?</question>
-      <answer>These are unknown bits. "B0,b0" means "Byte 0, bit 0" and refers to bit 0 in the first byte of the index's property data chunk. If you're confident you have discovered exactly what these bits do, feel free to post it in the bug report thread:
-http://acmlm.kafuka.org/board/thread.php?id=6770</answer>
+      <answer>These are unknown bits. "B0,b0" means "Byte 0, bit 0" and refers to bit 0 in the first byte of the index's property data chunk. If you're confident you have discovered exactly what these bits do, feel free to post it in one of the bug report thread:
+http://acmlm.kafuka.org/board/thread.php?id=7005
+http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
     </entry>
     <entry>
       <question>Is there free space in the ROM where I can insert graphics?</question>
@@ -202,6 +205,10 @@ http://acmlm.kafuka.org/board/thread.php?id=6770</answer>
     <entry>
       <question>My ROM hack's checksum is bad/failed!</question>
       <answer>Only fresh, unsaved, unmodified ROMs will have a good checksum (0x3bb4). The ROM's checksum always fails after a save. It's not a bug because the slightest change in the ROM data will create a bad checksum. However if you are loading a fresh, supposedly unaltered ROM and get a failed checksum, then there may be issues.</answer>
+    </entry>
+    <entry>
+      <question>The editor crashes, regardless of what ROM is loaded.</question>
+      <answer>Try resetting the settings. Click the cog icon in the main window and click "Default..." to reset the settings.</answer>
     </entry>
     <entry>
       <question>Sometimes it asks to save even if I haven't done anything.</question>

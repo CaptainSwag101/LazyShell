@@ -30,7 +30,9 @@ namespace LAZYSHELL
         // local variables
         public bool ShowBG { get { return showBG.Checked; } }
         private List<Mold> molds { get { return animation.Molds; } }
-        private Mold mold { get { return animation.Molds[listBoxMolds.SelectedIndex]; } }
+        private Mold mold { get { return animation.Molds[listBoxMolds.SelectedIndex]; } set { animation.Molds[listBoxMolds.SelectedIndex] = value; } }
+        private Mold moldB = null;
+        private int indexB = -1;
         private int index { get { return listBoxMolds.SelectedIndex; } set { listBoxMolds.SelectedIndex = value; } }
         private int index_tile = 0;
         private int index_subtile = 0;
@@ -59,7 +61,7 @@ namespace LAZYSHELL
         private ZoomPanel zoomPanel;
         private ZoomPanel zoomPanel_TS;
         // buffers
-        private Stack<Mold> commandStack;
+        private CommandStack commandStack;
         private CopyBuffer selectedTiles;
         private CopyBuffer copiedTiles;
         // editors
@@ -70,7 +72,7 @@ namespace LAZYSHELL
         {
             this.spritesEditor = spritesEditor;
             this.overlay = new Overlay();
-            this.commandStack = new Stack<Mold>();
+            this.commandStack = new CommandStack();
             InitializeComponent();
             this.pictureBoxMold.KeyDown += new KeyEventHandler(pictureBoxMold_KeyDown);
             this.zoomPanel = new ZoomPanel(4);
@@ -87,10 +89,12 @@ namespace LAZYSHELL
                     tile.DrawSubtiles(graphics, palette, tile.Gridplane);
             }
             RefreshMold();
+            this.moldB = this.mold.Copy();
+            this.indexB = this.index;
         }
         public void Reload(Sprites spritesEditor)
         {
-            this.commandStack = new Stack<Mold>();
+            this.commandStack = new CommandStack();
             updating = true;
             this.listBoxMolds.Items.Clear();
             for (int i = 0; i < animation.Molds.Count; i++)
@@ -103,6 +107,8 @@ namespace LAZYSHELL
                     tile.DrawSubtiles(graphics, palette, tile.Gridplane);
             }
             RefreshMold();
+            this.moldB = this.mold.Copy();
+            this.indexB = this.index;
         }
         private void ImportImages(string type)
         {
@@ -321,6 +327,16 @@ namespace LAZYSHELL
             SetTilemapImage();
             updating = false;
         }
+        private void RefreshListbox()
+        {
+            updating = true;
+            listBoxMolds.BeginUpdate();
+            listBoxMolds.Items.Clear();
+            for (int i = 0; i < animation.Molds.Count; i++)
+                this.listBoxMolds.Items.Add("Mold " + i.ToString());
+            listBoxMolds.EndUpdate();
+            updating = false;
+        }
         public void SetTilesetImage()
         {
             int[] pixels;
@@ -468,6 +484,7 @@ namespace LAZYSHELL
                 tiles.RemoveAt(mouseOverTile);
             SetTilemapImage();
             animation.Assemble();
+            PushCommand(SpriteAction.Edit);
         }
         private void Cut()
         {
@@ -529,6 +546,7 @@ namespace LAZYSHELL
             overlay.Select = null;
             SetTilemapImage();
             animation.Assemble();
+            PushCommand(SpriteAction.Edit);
         }
         private void Flip(string type)
         {
@@ -573,6 +591,15 @@ namespace LAZYSHELL
                 tile.AddedToBuffer = false;
             SetTilemapImage();
             animation.Assemble();
+            PushCommand(SpriteAction.Edit);
+        }
+        private void PushCommand(SpriteAction action)
+        {
+            commandStack.Push(
+                new SpriteEdit(action, this.molds, this.listBoxMolds,
+                this.mold.Copy(), this.moldB.Copy(), index));
+            this.moldB = this.mold.Copy();
+            this.indexB = this.index;
         }
         private Cursor GetCursor()
         {
@@ -719,9 +746,9 @@ namespace LAZYSHELL
                 mouseDownPosition = new Point(x, y);
                 return;
             }
-            if (mold.Gridplane) 
+            if (mold.Gridplane)
                 return;
-            if (e.Button == MouseButtons.Right) 
+            if (e.Button == MouseButtons.Right)
                 return;
             #region Selecting
             if (select.Checked)
@@ -816,7 +843,11 @@ namespace LAZYSHELL
                 this.Focus();
             }
             else
+            {
+                zoomPanel.Location = new Point(MousePosition.X + 64, MousePosition.Y);
                 zoomPanel.Hide();
+                this.Focus();
+            }
             #endregion
             // coordinator
             if (coordinatorButton.Checked && !select.Checked)
@@ -921,6 +952,8 @@ namespace LAZYSHELL
         }
         private void pictureBoxMold_MouseUp(object sender, MouseEventArgs e)
         {
+            if (mouseDownPosition != new Point(-1, -1) || draw.Checked || erase.Checked)
+                PushCommand(SpriteAction.Edit);
             move = false;
             mouseDownPosition = new Point(-1, -1);
             mouseDownObject = null;
@@ -986,12 +1019,44 @@ namespace LAZYSHELL
                     selectAll.PerformClick();
                     break;
                 case Keys.Control | Keys.Z:
-                    //undoButton.PerformClick(); 
+                    undo.PerformClick();
                     break;
                 case Keys.Control | Keys.Y:
-                    //redoButton.PerformClick(); 
+                    redo.PerformClick();
                     break;
             }
+        }
+        private void undo_Click(object sender, EventArgs e)
+        {
+            selectedTiles = null;
+            overlay.Select = null;
+            //
+            commandStack.UndoCommand();
+            this.moldB = this.mold.Copy();
+            //
+            foreach (Mold.Tile tile in mold.Tiles)
+                tile.DrawSubtiles(graphics, palette, tile.Gridplane);
+            SetTilemapImage();
+            //
+            int index = this.index;
+            RefreshListbox();
+            this.index = Math.Min(listBoxMolds.Items.Count - 1, index);
+        }
+        private void redo_Click(object sender, EventArgs e)
+        {
+            selectedTiles = null;
+            overlay.Select = null;
+            //
+            commandStack.RedoCommand();
+            this.moldB = this.mold.Copy();
+            //
+            foreach (Mold.Tile tile in mold.Tiles)
+                tile.DrawSubtiles(graphics, palette, tile.Gridplane);
+            SetTilemapImage();
+            //
+            int index = this.index;
+            RefreshListbox();
+            this.index = Math.Min(listBoxMolds.Items.Count - 1, index);
         }
         private void pictureBoxTileset_Paint(object sender, PaintEventArgs e)
         {
@@ -1499,13 +1564,14 @@ namespace LAZYSHELL
         private void listBoxMolds_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
+            if (listBoxMolds.SelectedIndex == -1) return;
             selectedTiles = null;
             overlay.Select = null;
             RefreshMold();
         }
         private void moldTileXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) 
+            if (updating)
                 return;
             if (!mold.Gridplane)
                 mold.Tiles[mouseDownTile].X = (byte)moldTileXCoord.Value;
@@ -1524,7 +1590,7 @@ namespace LAZYSHELL
         }
         private void moldTileYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) 
+            if (updating)
                 return;
             if (!mold.Gridplane)
                 mold.Tiles[mouseDownTile].Y = (byte)moldTileYCoord.Value;
@@ -1597,19 +1663,16 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            //
+            PushCommand(SpriteAction.Create);
+            //
             int index = this.index;
             if (MessageBox.Show("Would you like the new mold to be in gridplane format?", "LAZY SHELL",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 molds.Insert(index + 1, this.mold.New(true));
             else
                 molds.Insert(index + 1, this.mold.New(false));
-            updating = true;
-            listBoxMolds.BeginUpdate();
-            listBoxMolds.Items.Clear();
-            for (int i = 0; i < animation.Molds.Count; i++)
-                this.listBoxMolds.Items.Add("Mold " + i.ToString());
-            listBoxMolds.EndUpdate();
-            updating = false;
+            RefreshListbox();
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
@@ -1629,6 +1692,9 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            //
+            PushCommand(SpriteAction.Delete);
+            //
             int index = this.index;
             molds.RemoveAt(index);
             updating = true;
@@ -1654,15 +1720,12 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            //
+            PushCommand(SpriteAction.Create);
+            //
             int index = this.index;
             molds.Insert(index + 1, this.mold.Copy());
-            updating = true;
-            listBoxMolds.BeginUpdate();
-            listBoxMolds.Items.Clear();
-            for (int i = 0; i < animation.Molds.Count; i++)
-                this.listBoxMolds.Items.Add("Mold " + i.ToString());
-            listBoxMolds.EndUpdate();
-            updating = false;
+            RefreshListbox();
             foreach (Mold mold in animation.Molds)
             {
                 foreach (Mold.Tile tile in mold.Tiles)
@@ -1677,6 +1740,9 @@ namespace LAZYSHELL
         private void moveMoldBack_Click(object sender, EventArgs e)
         {
             if (listBoxMolds.SelectedIndex == 0) return;
+            //
+            PushCommand(SpriteAction.MoveUp);
+            //
             int index = listBoxMolds.SelectedIndex - 1;
             animation.Molds.Reverse(index, 2);
             updating = true;
@@ -1686,6 +1752,9 @@ namespace LAZYSHELL
         private void moveMoldFoward_Click(object sender, EventArgs e)
         {
             if (listBoxMolds.SelectedIndex == animation.Molds.Count - 1) return;
+            //
+            PushCommand(SpriteAction.MoveDown);
+            //
             int index = listBoxMolds.SelectedIndex;
             animation.Molds.Reverse(index, 2);
             updating = true;
@@ -1707,6 +1776,5 @@ namespace LAZYSHELL
             ((Form)sender).Hide();
         }
         #endregion
-
     }
 }

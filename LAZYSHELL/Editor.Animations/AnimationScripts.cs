@@ -1236,6 +1236,8 @@ namespace LAZYSHELL
                 animationCategory.SelectedIndex == 1 ||
                 animationCategory.SelectedIndex == 2 ||
                 animationCategory.SelectedIndex == 4;
+            // so it won't try to load the label editor if we haven't loaded the battle events
+            labelWindow.Disable = animationCategory.SelectedIndex != 7;
             if (updating)
                 return;
             animationNum.Value = 0;

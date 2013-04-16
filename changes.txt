@@ -1,5 +1,32 @@
 Major changes/additions are indicated by ***
 
+v3.16.0 (2013-04-15)
+--------------------------------------
+Additions:
+*Audio: score writer can now add notes/rests with user-defined ticks
+*Audio: score viewer & writer now both have key signature support
+*Audio: score writer now has cut/copy/paste/delete/select support
+*Audio: score viewer now has editing support just like writer
+*Intro: editor for opening credits sequence
+*Sprites: undo/redo added for mold editor
+
+Changes
+*Intro: changed "Main Title" text to "Intro"
+
+Fixes:
+*Animations: crash if try to edit non-battle event element's label
+*Audio: importing directory of SPCs crashes if any indexes empty
+*Audio: score writer not configuring octaves in .txt export format
+*Audio: score writer crash if write note after undo/redo before MouseMove
+*Audio: score writer not hiliting notes for staff indexes 2+ when needed
+*Dialogues: fixed pagination issues with preview during text editing
+*Dialogues: font keystrokes table visible if triangles selected
+*Graphics Editor: crash if filling irregular, non-rectangular graphics
+*Levels: new tile mod coords not figuring in zoom factor before setting
+*Project: save dialog still had old .lsnotes format option to save as
+*Sprites: mold image not repainting if zoom box disabled when dragging
+
+
 v3.15.1 (2013-01-01)
 --------------------------------------
 Fixes:

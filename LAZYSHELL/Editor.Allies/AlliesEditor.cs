@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AlliesEditor : NewForm
+    public partial class AlliesEditor : Form
     {
         // variables
 

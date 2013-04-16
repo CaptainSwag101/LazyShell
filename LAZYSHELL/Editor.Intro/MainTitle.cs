@@ -12,9 +12,9 @@ namespace LAZYSHELL
     public partial class MainTitle : Form
     {
         #region Variables
-        private long checksum;
         // main
         private delegate void Function();
+        private long checksum { get { return intro.checksum; } set { intro.checksum = value; } }
         private PaletteSet paletteSet { get { return Model.TitlePalettes; } set { Model.TitlePalettes = value; } }
         private PaletteSet spritePaletteSet { get { return Model.TitleSpritePalettes; } set { Model.TitleSpritePalettes = value; } }
         private Tileset tileset { get { return Model.TitleTileSet; } set { Model.TitleTileSet = value; } }
@@ -22,6 +22,7 @@ namespace LAZYSHELL
         private Bitmap[] tilesetImage = new Bitmap[3];
         private int layer { get { return tilesetEditor.Layer; } set { tilesetEditor.Layer = value; } }
         // editors
+        private Intro intro;
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
         private PaletteEditor spritePaletteEditor;
@@ -29,11 +30,11 @@ namespace LAZYSHELL
         private TilesetEditor tilesetEditor;
         #endregion
         #region Functions
-        public MainTitle()
+        public MainTitle(Intro intro)
         {
+            this.intro = intro;
+            //
             InitializeComponent();
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.S, new EventHandler(save_Click));
-            Do.AddShortcut(toolStrip1, Keys.F1, helpTips);
             pictureBoxTitle.Invalidate();
             LoadTilesetEditor();
             //LoadPaletteEditor();
@@ -48,11 +49,8 @@ namespace LAZYSHELL
             tilesetEditor.Show();
             SetTilesetImages();
             //
-            new ToolTipLabel(this, null, helpTips);
             GC.Collect();
             new History(this);
-            //
-            checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
         }
         // assemblers
         public void Assemble()
@@ -63,7 +61,9 @@ namespace LAZYSHELL
             tileset.Assemble(16);
             // Tilesets
             if (Model.Compress(Model.TitleData, 0x3F216E, 0xDA60, 0x7E92, "Main title"))
-                checksum = Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+                checksum = Do.GenerateChecksum(
+                    Model.OpeningData, Model.OpeningPalette, Model.TitleData, Model.TitlePalettes,
+                    Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
         }
         // drawing
         private void SetTilesetImages()
@@ -164,31 +164,8 @@ namespace LAZYSHELL
             tileset.Assemble(16);
             SetTilesetImages();
         }
-        #endregion
-        #region Event Handlers
-        private void Title_FormClosing(object sender, FormClosingEventArgs e)
+        public void CloseEditors()
         {
-            if (Do.GenerateChecksum(Model.TitleData, Model.TitlePalettes, Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet) == checksum)
-                goto Close;
-            DialogResult result = MessageBox.Show(
-                "Main Title has not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-                Assemble();
-            else if (result == DialogResult.No)
-            {
-                Model.TitleData = null;
-                Model.TitlePalettes = null;
-                Model.TitleSpriteGraphics = null;
-                Model.TitleSpritePalettes = null;
-                Model.TitleTileSet = null;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-        Close:
             if (paletteEditor != null)
             {
                 paletteEditor.Close();
@@ -212,6 +189,8 @@ namespace LAZYSHELL
             tilesetEditor.Close();
             tilesetEditor.Dispose();
         }
+        #endregion
+        #region Event Handlers
         private void pictureBoxTitle_Paint(object sender, PaintEventArgs e)
         {
             if (tilesetImage[0] != null && tilesetImage[1] != null && tilesetImage[2] != null)

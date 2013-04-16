@@ -28,7 +28,7 @@ namespace LAZYSHELL
         private FormationsEditor formations; public FormationsEditor Formations { get { return formations; } }
         private ItemsEditor items; public ItemsEditor Items { get { return items; } }
         private Levels levels; public Levels Levels { get { return levels; } }
-        private MainTitle mainTitle; public MainTitle MainTitle { get { return mainTitle; } }
+        private Intro intro; public Intro Intro { get { return intro; } }
         private MenusEditor menus; public MenusEditor Menus { get { return menus; } }
         private MiniGames miniGames; public MiniGames MiniGames { get { return miniGames; } }
         private Monsters monsters; public Monsters Monsters { get { return monsters; } }
@@ -170,8 +170,8 @@ namespace LAZYSHELL
                 monsters.Assemble();
             if (sprites != null && sprites.Visible)
                 sprites.Assemble();
-            if (mainTitle != null && mainTitle.Visible)
-                mainTitle.Assemble();
+            if (intro != null && intro.Visible)
+                intro.Assemble();
             if (worldMaps != null && worldMaps.Visible)
                 worldMaps.Assemble();
         }
@@ -194,7 +194,7 @@ namespace LAZYSHELL
             if (items == null || !items.Visible) items = new ItemsEditor();
             if (levels == null || !levels.Visible) levels = new Levels();
             if (monsters == null || !monsters.Visible) monsters = new Monsters();
-            if (mainTitle == null || !mainTitle.Visible) mainTitle = new MainTitle();
+            if (intro == null || !intro.Visible) intro = new Intro();
             if (menus == null || !menus.Visible) menus = new MenusEditor();
             if (miniGames == null || !miniGames.Visible) miniGames = new MiniGames();
             if (sprites == null || !sprites.Visible) sprites = new Sprites();
@@ -380,20 +380,20 @@ namespace LAZYSHELL
             monsters.KeyDown += new KeyEventHandler(editor_KeyDown);
             monsters.BringToFront();
         }
-        public void CreateMainTitleWindow()
+        public void CreateIntroWindow()
         {
-            if (mainTitle == null || !mainTitle.Visible)
+            if (intro == null || !intro.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                mainTitle = new MainTitle();
+                intro = new Intro();
                 if (dockEditors)
-                    Do.AddControl(editor.Panel2, mainTitle);
+                    Do.AddControl(editor.Panel2, intro);
                 else
-                    mainTitle.Show();
+                    intro.Show();
                 Cursor.Current = Cursors.Arrow;
             }
-            mainTitle.KeyDown += new KeyEventHandler(editor_KeyDown);
-            mainTitle.BringToFront();
+            intro.KeyDown += new KeyEventHandler(editor_KeyDown);
+            intro.BringToFront();
         }
         public void CreateMenusWindow()
         {
@@ -516,8 +516,8 @@ namespace LAZYSHELL
                 Do.AddControl(editor.Panel2, items);
             if (levels != null && levels.Visible)
                 Do.AddControl(editor.Panel2, levels);
-            if (mainTitle != null && mainTitle.Visible)
-                Do.AddControl(editor.Panel2, mainTitle);
+            if (intro != null && intro.Visible)
+                Do.AddControl(editor.Panel2, intro);
             if (menus != null && menus.Visible)
                 Do.AddControl(editor.Panel2, menus);
             if (miniGames != null && miniGames.Visible)
@@ -553,8 +553,8 @@ namespace LAZYSHELL
                 Do.RemoveControl(items);
             if (levels != null && levels.Visible)
                 Do.RemoveControl(levels);
-            if (mainTitle != null && mainTitle.Visible)
-                Do.RemoveControl(mainTitle);
+            if (intro != null && intro.Visible)
+                Do.RemoveControl(intro);
             if (menus != null && menus.Visible)
                 Do.RemoveControl(menus);
             if (miniGames != null && miniGames.Visible)
@@ -579,7 +579,7 @@ namespace LAZYSHELL
             CreateFormationsWindow();
             CreateItemsWindow();
             CreateLevelsWindow();
-            CreateMainTitleWindow();
+            CreateIntroWindow();
             CreateMenusWindow();
             CreateMiniGamesWindow();
             CreateMonstersWindow();
@@ -610,8 +610,8 @@ namespace LAZYSHELL
                 items.WindowState = FormWindowState.Minimized;
             if (levels != null && levels.Visible)
                 levels.WindowState = FormWindowState.Minimized;
-            if (mainTitle != null && mainTitle.Visible)
-                mainTitle.WindowState = FormWindowState.Minimized;
+            if (intro != null && intro.Visible)
+                intro.WindowState = FormWindowState.Minimized;
             if (menus != null && menus.Visible)
                 menus.WindowState = FormWindowState.Minimized;
             if (miniGames != null && miniGames.Visible)
@@ -647,8 +647,8 @@ namespace LAZYSHELL
                 items.WindowState = FormWindowState.Normal;
             if (levels != null && levels.Visible)
                 levels.WindowState = FormWindowState.Normal;
-            if (mainTitle != null && mainTitle.Visible)
-                mainTitle.WindowState = FormWindowState.Normal;
+            if (intro != null && intro.Visible)
+                intro.WindowState = FormWindowState.Normal;
             if (menus != null && menus.Visible)
                 menus.WindowState = FormWindowState.Normal;
             if (miniGames != null && miniGames.Visible)
@@ -688,8 +688,8 @@ namespace LAZYSHELL
                 monsters.Close();
             if (sprites != null && sprites.Visible)
                 sprites.Close();
-            if (mainTitle != null && mainTitle.Visible)
-                mainTitle.Close();
+            if (intro != null && intro.Visible)
+                intro.Close();
             if (menus != null && menus.Visible)
                 menus.Close();
             if (miniGames != null && miniGames.Visible)
@@ -708,7 +708,7 @@ namespace LAZYSHELL
                 (levels != null && levels.Visible) ||
                 (monsters != null && monsters.Visible) ||
                 (sprites != null && sprites.Visible) ||
-                (mainTitle != null && mainTitle.Visible) ||
+                (intro != null && intro.Visible) ||
                 (menus != null && menus.Visible) ||
                 (miniGames != null && miniGames.Visible) ||
                 (worldMaps != null && worldMaps.Visible))

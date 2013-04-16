@@ -138,7 +138,7 @@ namespace LAZYSHELL
             this.listViewList.ListViewItemSorter = listsColumnSorter;
             if (project == null)
                 return;
-            notesFile.Text = settings.NotePathCustom;
+            projectFile.Text = settings.NotePathCustom;
             InitializeFields();
         }
         #region Functions
@@ -355,7 +355,7 @@ namespace LAZYSHELL
             Model.RefreshListCollections();
             //
             settings.NotePathCustom = openFileDialog.FileName;
-            notesFile.Text = openFileDialog.FileName;
+            projectFile.Text = openFileDialog.FileName;
             InitializeFields();
             return true;
         }
@@ -363,7 +363,7 @@ namespace LAZYSHELL
         {
             if (project != null)
             {
-                DialogResult result = MessageBox.Show("Save changes to currently loaded notes?",
+                DialogResult result = MessageBox.Show("Save changes to currently loaded project?",
                     "LAZY SHELL", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                     SaveLoadedProject();
@@ -391,7 +391,7 @@ namespace LAZYSHELL
             project = (ProjectDB)b.Deserialize(s);
             s.Close();
 
-            notesFile.Text = saveFileDialog.FileName;
+            projectFile.Text = saveFileDialog.FileName;
             InitializeFields();
             return true;
         }
@@ -405,13 +405,13 @@ namespace LAZYSHELL
         }
         private void SaveLoadedProject()
         {
-            if (notesFile.Text == "")
+            if (projectFile.Text == "")
             {
                 SaveAsNewProject();
                 return;
             }
             Model.RefreshListCollections();
-            Stream s = File.Create(notesFile.Text);
+            Stream s = File.Create(projectFile.Text);
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, project);
             s.Close();
@@ -421,15 +421,15 @@ namespace LAZYSHELL
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = settings.NotePathCustom;
-            saveFileDialog.Title = "Save as new notes database...";
-            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + ".lsnotes";
-            saveFileDialog.Filter = "Notes database (*.lsnotes)|*.lsnotes";
+            saveFileDialog.Title = "Save as new project...";
+            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + ".lsproj";
+            saveFileDialog.Filter = "Project DB (*.lsproj)|*.lsproj";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
             settings.NotePathCustom = saveFileDialog.FileName;
-            notesFile.Text = saveFileDialog.FileName;
+            projectFile.Text = saveFileDialog.FileName;
             //
             Model.RefreshListCollections();
             Stream s = File.Create(saveFileDialog.FileName);
@@ -714,33 +714,31 @@ namespace LAZYSHELL
         }
         #endregion
         #region Event Handlers
-        private void Notes_FormClosing(object sender, FormClosingEventArgs e)
+        private void Project_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (project == null) return;
             if (Do.GenerateChecksum(project) == checksum)
             {
                 return;
             }
-            DialogResult result = MessageBox.Show("Save changes to notes?", "LAZY SHELL",
+            DialogResult result = MessageBox.Show("Save changes to project?", "LAZY SHELL",
             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
                 SaveLoadedProject();
             else if (result == DialogResult.Cancel)
                 e.Cancel = true;
-            else if (result == DialogResult.No)
+            else if (result == DialogResult.No && projectFile.Text != "")
             {
                 // reload notes file
                 try
                 {
-                    Stream s = File.OpenRead(notesFile.Text);
+                    Stream s = File.OpenRead(projectFile.Text);
                     BinaryFormatter b = new BinaryFormatter();
                     project = (ProjectDB)b.Deserialize(s);
                     s.Close();
                 }
                 catch
                 {
-                    MessageBox.Show("Could not reload project. The file has been moved, renamed, or no longer exists.",
-                        "LAZY SHELL");
                     return;
                 }
             }

@@ -453,6 +453,7 @@ namespace LAZYSHELL
         public Mold Copy()
         {
             Mold copy = new Mold();
+            copy.Tiles = new List<Tile>();
             foreach (Tile tile in tiles)
                 copy.Tiles.Add(tile.Copy());
             copy.Gridplane = gridplane;

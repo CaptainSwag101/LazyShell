@@ -478,7 +478,13 @@ namespace LAZYSHELL
             if (FontType < FontType.Triangles)
                 newFontTable.Reload();
             else
+            {
                 newFontTable.Hide();
+                toggleKeystrokes.Checked = false;
+                pictureBoxFontTable.Visible = true;
+                fontTable.Visible = false;
+                fontTable.SendToBack();
+            }
         }
         private void numeralGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
         {

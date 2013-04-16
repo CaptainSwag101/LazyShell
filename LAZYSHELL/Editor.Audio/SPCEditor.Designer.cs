@@ -82,7 +82,7 @@
             this.importScript = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.clearChannel = new System.Windows.Forms.ToolStripMenuItem();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBarCT = new System.Windows.Forms.HScrollBar();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.findCommandText = new System.Windows.Forms.ToolStripTextBox();
             this.findCommand = new System.Windows.Forms.ToolStripButton();
@@ -125,14 +125,68 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.scoreViewPicture = new System.Windows.Forms.PictureBox();
-            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
-            this.labelStaffItem = new System.Windows.Forms.Label();
-            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.staffHeightSV = new LAZYSHELL.ToolStripNumericUpDown();
+            this.hScrollBarSV = new System.Windows.Forms.HScrollBar();
+            this.labelRNote = new System.Windows.Forms.Label();
+            this.rToolStripAct = new System.Windows.Forms.ToolStrip();
+            this.rDraw = new System.Windows.Forms.ToolStripButton();
+            this.rErase = new System.Windows.Forms.ToolStripButton();
+            this.rSelect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.rDelete = new System.Windows.Forms.ToolStripButton();
+            this.rCut = new System.Windows.Forms.ToolStripButton();
+            this.rCopy = new System.Windows.Forms.ToolStripButton();
+            this.rPaste = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.rUndo = new System.Windows.Forms.ToolStripButton();
+            this.rRedo = new System.Windows.Forms.ToolStripButton();
+            this.rToolStripNote = new System.Windows.Forms.ToolStrip();
+            this.rSharp = new System.Windows.Forms.ToolStripButton();
+            this.rFlat = new System.Windows.Forms.ToolStripButton();
+            this.rNatural = new System.Windows.Forms.ToolStripButton();
+            this.rTie = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.rNoteWhole = new System.Windows.Forms.ToolStripButton();
+            this.rNoteHalfD = new System.Windows.Forms.ToolStripButton();
+            this.rNoteHalf = new System.Windows.Forms.ToolStripButton();
+            this.rNoteQuarterD = new System.Windows.Forms.ToolStripButton();
+            this.rNoteQuarter = new System.Windows.Forms.ToolStripButton();
+            this.rNoteQuarterT = new System.Windows.Forms.ToolStripButton();
+            this.rNote8thD = new System.Windows.Forms.ToolStripButton();
+            this.rNote8th = new System.Windows.Forms.ToolStripButton();
+            this.rNote8thT = new System.Windows.Forms.ToolStripButton();
+            this.rNote16th = new System.Windows.Forms.ToolStripButton();
+            this.rNote16thT = new System.Windows.Forms.ToolStripButton();
+            this.rNote32nd = new System.Windows.Forms.ToolStripButton();
+            this.rNote64th = new System.Windows.Forms.ToolStripButton();
+            this.rTicksNoteButton = new System.Windows.Forms.ToolStripButton();
+            this.rTicksNoteValue = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.rRestWhole = new System.Windows.Forms.ToolStripButton();
+            this.rRestHalfD = new System.Windows.Forms.ToolStripButton();
+            this.rRestHalf = new System.Windows.Forms.ToolStripButton();
+            this.rRestQuarterD = new System.Windows.Forms.ToolStripButton();
+            this.rRestQuarter = new System.Windows.Forms.ToolStripButton();
+            this.rRestQuarterT = new System.Windows.Forms.ToolStripButton();
+            this.rRest8thD = new System.Windows.Forms.ToolStripButton();
+            this.rRest8th = new System.Windows.Forms.ToolStripButton();
+            this.rRest8thT = new System.Windows.Forms.ToolStripButton();
+            this.rRest16th = new System.Windows.Forms.ToolStripButton();
+            this.rRest16thT = new System.Windows.Forms.ToolStripButton();
+            this.rRest32nd = new System.Windows.Forms.ToolStripButton();
+            this.rRest64th = new System.Windows.Forms.ToolStripButton();
+            this.rTicksRestButton = new System.Windows.Forms.ToolStripButton();
+            this.rTicksRestValue = new LAZYSHELL.ToolStripNumericUpDown();
+            this.rToolStripMain = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
+            this.clefSV = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.keySV = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.timeBeatsSV = new LAZYSHELL.ToolStripNumericUpDown();
             this.timeValueSV = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.staffHeightSV = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.noteSpacingSV = new LAZYSHELL.ToolStripNumericUpDown();
             this.showRests = new LAZYSHELL.ToolStripCheckBox();
@@ -140,14 +194,28 @@
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxRV = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBoxSW = new System.Windows.Forms.GroupBox();
+            this.wToolStripAct = new System.Windows.Forms.ToolStrip();
+            this.wDraw = new System.Windows.Forms.ToolStripButton();
+            this.wErase = new System.Windows.Forms.ToolStripButton();
+            this.wSelect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.wDelete = new System.Windows.Forms.ToolStripButton();
+            this.wCut = new System.Windows.Forms.ToolStripButton();
+            this.wCopy = new System.Windows.Forms.ToolStripButton();
+            this.wPaste = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
+            this.labelWNote = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.scoreWriterPicture = new System.Windows.Forms.PictureBox();
-            this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
-            this.wToolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.wErase = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.hScrollBarSW = new System.Windows.Forms.HScrollBar();
+            this.wToolStripNote = new System.Windows.Forms.ToolStrip();
             this.wSharp = new System.Windows.Forms.ToolStripButton();
+            this.wFlat = new System.Windows.Forms.ToolStripButton();
+            this.wNatural = new System.Windows.Forms.ToolStripButton();
+            this.wTie = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.wNoteWhole = new System.Windows.Forms.ToolStripButton();
             this.wNoteHalfD = new System.Windows.Forms.ToolStripButton();
@@ -162,6 +230,8 @@
             this.wNote16thT = new System.Windows.Forms.ToolStripButton();
             this.wNote32nd = new System.Windows.Forms.ToolStripButton();
             this.wNote64th = new System.Windows.Forms.ToolStripButton();
+            this.ticksNoteButton = new System.Windows.Forms.ToolStripButton();
+            this.ticksNoteValue = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.wRestWhole = new System.Windows.Forms.ToolStripButton();
             this.wRestHalfD = new System.Windows.Forms.ToolStripButton();
@@ -176,9 +246,9 @@
             this.wRest16thT = new System.Windows.Forms.ToolStripButton();
             this.wRest32nd = new System.Windows.Forms.ToolStripButton();
             this.wRest64th = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
-            this.wTie = new System.Windows.Forms.ToolStripButton();
-            this.wToolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.ticksRestButton = new System.Windows.Forms.ToolStripButton();
+            this.ticksRestValue = new LAZYSHELL.ToolStripNumericUpDown();
+            this.wToolStripMain = new System.Windows.Forms.ToolStrip();
             this.saveScoreFile = new System.Windows.Forms.ToolStripButton();
             this.openScoreFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton5 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -189,25 +259,20 @@
             this.wStaffDelete = new System.Windows.Forms.ToolStripButton();
             this.wStaffMoveUp = new System.Windows.Forms.ToolStripButton();
             this.wStaffMoveDown = new System.Windows.Forms.ToolStripButton();
-            this.undo = new System.Windows.Forms.ToolStripButton();
-            this.redo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.staffHeightSW = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.clef = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
+            this.keySW = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.timeBeatsSW = new LAZYSHELL.ToolStripNumericUpDown();
             this.timeValueSW = new LAZYSHELL.ToolStripNumericUpDown();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.staffHeightSW = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.noteSpacingSW = new LAZYSHELL.ToolStripNumericUpDown();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.clef = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.labelNote = new System.Windows.Forms.ToolStripLabel();
-            this.wFlat = new System.Windows.Forms.ToolStripButton();
-            this.wNatural = new System.Windows.Forms.ToolStripButton();
             this.importScoreFiles = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.key = new System.Windows.Forms.ToolStripComboBox();
             this.wTempo = new System.Windows.Forms.ToolStripButton();
             this.wInstrument = new System.Windows.Forms.ToolStripButton();
             this.wVolume = new System.Windows.Forms.ToolStripButton();
@@ -222,8 +287,6 @@
             this.wRepeatEnd = new System.Windows.Forms.ToolStripButton();
             this.wFirstSection = new System.Windows.Forms.ToolStripButton();
             this.panelSPC = new System.Windows.Forms.Panel();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.importSPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importMMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -255,13 +318,16 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).BeginInit();
-            this.toolStrip5.SuspendLayout();
+            this.rToolStripAct.SuspendLayout();
+            this.rToolStripNote.SuspendLayout();
+            this.rToolStripMain.SuspendLayout();
             this.groupBoxRV.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.groupBoxSW.SuspendLayout();
+            this.wToolStripAct.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scoreWriterPicture)).BeginInit();
-            this.wToolStrip2.SuspendLayout();
-            this.wToolStrip1.SuspendLayout();
+            this.wToolStripNote.SuspendLayout();
+            this.wToolStripMain.SuspendLayout();
             this.panelSPC.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -751,17 +817,17 @@
             this.percussivePitchIndex.FormattingEnabled = true;
             this.percussivePitchIndex.Items.AddRange(new object[] {
             "C",
-            "C#",
+            "C# / Db",
             "D",
-            "D#",
-            "E",
+            "D# / Eb",
+            "E / Fb",
             "F",
-            "F#",
+            "F# / Gb",
             "G",
-            "G#",
+            "G# / Ab",
             "A",
-            "A#",
-            "B"});
+            "A# / Bb",
+            "B / Cb"});
             this.percussivePitchIndex.Location = new System.Drawing.Point(202, 45);
             this.percussivePitchIndex.Name = "percussivePitchIndex";
             this.percussivePitchIndex.Size = new System.Drawing.Size(58, 21);
@@ -784,7 +850,7 @@
             // groupBoxCT
             // 
             this.groupBoxCT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxCT.Controls.Add(this.panel1);
             this.groupBoxCT.Controls.Add(this.toolStrip4);
             this.groupBoxCT.Controls.Add(this.toolStrip2);
@@ -803,7 +869,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.channelTracks);
-            this.panel1.Controls.Add(this.hScrollBar1);
+            this.panel1.Controls.Add(this.hScrollBarCT);
             this.panel1.Location = new System.Drawing.Point(25, 42);
             this.panel1.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
             this.panel1.Name = "panel1";
@@ -870,17 +936,17 @@
             this.clearChannel.Text = "Clear Channel";
             this.clearChannel.Click += new System.EventHandler(this.clearChannel_Click);
             // 
-            // hScrollBar1
+            // hScrollBarCT
             // 
-            this.hScrollBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar1.LargeChange = 1;
-            this.hScrollBar1.Location = new System.Drawing.Point(0, 300);
-            this.hScrollBar1.Maximum = 0;
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(339, 16);
-            this.hScrollBar1.TabIndex = 0;
-            this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
-            this.hScrollBar1.ValueChanged += new System.EventHandler(this.hScrollBar1_ValueChanged);
+            this.hScrollBarCT.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.hScrollBarCT.LargeChange = 1;
+            this.hScrollBarCT.Location = new System.Drawing.Point(0, 300);
+            this.hScrollBarCT.Maximum = 0;
+            this.hScrollBarCT.Name = "hScrollBarCT";
+            this.hScrollBarCT.Size = new System.Drawing.Size(339, 16);
+            this.hScrollBarCT.TabIndex = 0;
+            this.hScrollBarCT.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
+            this.hScrollBarCT.ValueChanged += new System.EventHandler(this.hScrollBar1_ValueChanged);
             // 
             // toolStrip4
             // 
@@ -1247,17 +1313,17 @@
             this.noteNames.FormattingEnabled = true;
             this.noteNames.Items.AddRange(new object[] {
             "C",
-            "C#",
+            "C# / Db",
             "D",
-            "D#",
-            "E",
+            "D# / Eb",
+            "E / Fb",
             "F",
-            "F#",
+            "F# / Gb",
             "G",
-            "G#",
+            "G# / Ab",
             "A",
-            "A#",
-            "B",
+            "A# / Bb",
+            "B / Cb",
             "Rest",
             "Tie"});
             this.noteNames.Location = new System.Drawing.Point(46, 6);
@@ -1316,10 +1382,13 @@
             // 
             // groupBoxSV
             // 
-            this.groupBoxSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxSV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxSV.Controls.Add(this.panel2);
-            this.groupBoxSV.Controls.Add(this.toolStrip5);
+            this.groupBoxSV.Controls.Add(this.rToolStripAct);
+            this.groupBoxSV.Controls.Add(this.rToolStripNote);
+            this.groupBoxSV.Controls.Add(this.rToolStripMain);
             this.groupBoxSV.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSV.Name = "groupBoxSV";
             this.groupBoxSV.Size = new System.Drawing.Size(536, 473);
@@ -1333,12 +1402,12 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.hScrollBar2);
-            this.panel2.Controls.Add(this.labelStaffItem);
+            this.panel2.Controls.Add(this.hScrollBarSV);
+            this.panel2.Controls.Add(this.labelRNote);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 42);
+            this.panel2.Location = new System.Drawing.Point(27, 67);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(530, 428);
+            this.panel2.Size = new System.Drawing.Size(506, 403);
             this.panel2.TabIndex = 17;
             // 
             // panel3
@@ -1350,7 +1419,7 @@
             this.panel3.Controls.Add(this.scoreViewPicture);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(526, 387);
+            this.panel3.Size = new System.Drawing.Size(502, 362);
             this.panel3.TabIndex = 0;
             // 
             // scoreViewPicture
@@ -1359,7 +1428,7 @@
             this.scoreViewPicture.Dock = System.Windows.Forms.DockStyle.Top;
             this.scoreViewPicture.Location = new System.Drawing.Point(0, 0);
             this.scoreViewPicture.Name = "scoreViewPicture";
-            this.scoreViewPicture.Size = new System.Drawing.Size(510, 768);
+            this.scoreViewPicture.Size = new System.Drawing.Size(486, 768);
             this.scoreViewPicture.TabIndex = 2;
             this.scoreViewPicture.TabStop = false;
             this.scoreViewPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.scoreViewPicture_Paint);
@@ -1368,86 +1437,730 @@
             this.scoreViewPicture.MouseLeave += new System.EventHandler(this.scoreViewPicture_MouseLeave);
             this.scoreViewPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreViewPicture_MouseMove);
             // 
-            // hScrollBar2
+            // hScrollBarSV
             // 
-            this.hScrollBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.hScrollBarSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBar2.LargeChange = 1;
-            this.hScrollBar2.Location = new System.Drawing.Point(0, 387);
-            this.hScrollBar2.Maximum = 0;
-            this.hScrollBar2.Name = "hScrollBar2";
-            this.hScrollBar2.Size = new System.Drawing.Size(526, 16);
-            this.hScrollBar2.TabIndex = 1;
-            this.hScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
-            this.hScrollBar2.ValueChanged += new System.EventHandler(this.hScrollBar2_ValueChanged);
+            this.hScrollBarSV.LargeChange = 1;
+            this.hScrollBarSV.Location = new System.Drawing.Point(0, 362);
+            this.hScrollBarSV.Maximum = 0;
+            this.hScrollBarSV.Name = "hScrollBarSV";
+            this.hScrollBarSV.Size = new System.Drawing.Size(502, 16);
+            this.hScrollBarSV.TabIndex = 1;
+            this.hScrollBarSV.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
+            this.hScrollBarSV.ValueChanged += new System.EventHandler(this.hScrollBar2_ValueChanged);
             // 
-            // labelStaffItem
+            // labelRNote
             // 
-            this.labelStaffItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.labelRNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelStaffItem.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStaffItem.Location = new System.Drawing.Point(0, 403);
-            this.labelStaffItem.Name = "labelStaffItem";
-            this.labelStaffItem.Size = new System.Drawing.Size(526, 21);
-            this.labelStaffItem.TabIndex = 2;
-            this.labelStaffItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelRNote.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRNote.Location = new System.Drawing.Point(0, 378);
+            this.labelRNote.Name = "labelRNote";
+            this.labelRNote.Size = new System.Drawing.Size(502, 21);
+            this.labelRNote.TabIndex = 2;
+            this.labelRNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStrip5
+            // rToolStripAct
             // 
-            this.toolStrip5.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel6,
-            this.staffHeightSV,
+            this.rToolStripAct.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rToolStripAct.Enabled = false;
+            this.rToolStripAct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rDraw,
+            this.rErase,
+            this.rSelect,
+            this.toolStripSeparator19,
+            this.rDelete,
+            this.rCut,
+            this.rCopy,
+            this.rPaste,
+            this.toolStripSeparator20,
+            this.rUndo,
+            this.rRedo});
+            this.rToolStripAct.Location = new System.Drawing.Point(3, 67);
+            this.rToolStripAct.Name = "rToolStripAct";
+            this.rToolStripAct.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.rToolStripAct.Size = new System.Drawing.Size(24, 403);
+            this.rToolStripAct.TabIndex = 19;
+            this.rToolStripAct.Text = "toolStrip6";
+            // 
+            // rDraw
+            // 
+            this.rDraw.CheckOnClick = true;
+            this.rDraw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rDraw.Image = global::LAZYSHELL.Properties.Resources.draw_small;
+            this.rDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rDraw.Name = "rDraw";
+            this.rDraw.Size = new System.Drawing.Size(21, 17);
+            this.rDraw.Text = "Draw Note";
+            this.rDraw.CheckedChanged += new System.EventHandler(this.rDraw_CheckedChanged);
+            // 
+            // rErase
+            // 
+            this.rErase.CheckOnClick = true;
+            this.rErase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rErase.Image = global::LAZYSHELL.Properties.Resources.erase_small;
+            this.rErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rErase.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rErase.Name = "rErase";
+            this.rErase.Size = new System.Drawing.Size(21, 17);
+            this.rErase.Text = "Erase Note";
+            this.rErase.CheckedChanged += new System.EventHandler(this.rErase_CheckedChanged);
+            // 
+            // rSelect
+            // 
+            this.rSelect.CheckOnClick = true;
+            this.rSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rSelect.Image = global::LAZYSHELL.Properties.Resources.select_small;
+            this.rSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rSelect.Name = "rSelect";
+            this.rSelect.Size = new System.Drawing.Size(21, 17);
+            this.rSelect.Text = "Select Note(s)";
+            this.rSelect.CheckedChanged += new System.EventHandler(this.rSelect_CheckedChanged);
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(21, 6);
+            // 
+            // rDelete
+            // 
+            this.rDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.rDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rDelete.Name = "rDelete";
+            this.rDelete.Size = new System.Drawing.Size(21, 15);
+            this.rDelete.Text = "Delete Note(s)";
+            this.rDelete.Click += new System.EventHandler(this.rDelete_Click);
+            // 
+            // rCut
+            // 
+            this.rCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rCut.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.rCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rCut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rCut.Name = "rCut";
+            this.rCut.Size = new System.Drawing.Size(21, 17);
+            this.rCut.Text = "Cut Note(s)";
+            this.rCut.Click += new System.EventHandler(this.rCut_Click);
+            // 
+            // rCopy
+            // 
+            this.rCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.rCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rCopy.Name = "rCopy";
+            this.rCopy.Size = new System.Drawing.Size(21, 17);
+            this.rCopy.Text = "Copy Note(s)";
+            this.rCopy.Click += new System.EventHandler(this.rCopy_Click);
+            // 
+            // rPaste
+            // 
+            this.rPaste.CheckOnClick = true;
+            this.rPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.rPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rPaste.Name = "rPaste";
+            this.rPaste.Size = new System.Drawing.Size(21, 17);
+            this.rPaste.Text = "Paste Note(s)";
+            this.rPaste.CheckedChanged += new System.EventHandler(this.rPaste_CheckedChanged);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(21, 6);
+            // 
+            // rUndo
+            // 
+            this.rUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rUndo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.rUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rUndo.Name = "rUndo";
+            this.rUndo.Size = new System.Drawing.Size(21, 12);
+            this.rUndo.Text = "Undo";
+            this.rUndo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // rRedo
+            // 
+            this.rRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRedo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.rRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRedo.Name = "rRedo";
+            this.rRedo.Size = new System.Drawing.Size(21, 12);
+            this.rRedo.Text = "Redo";
+            this.rRedo.Click += new System.EventHandler(this.redo_Click);
+            // 
+            // rToolStripNote
+            // 
+            this.rToolStripNote.Enabled = false;
+            this.rToolStripNote.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rToolStripNote.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rSharp,
+            this.rFlat,
+            this.rNatural,
+            this.rTie,
+            this.toolStripSeparator17,
+            this.rNoteWhole,
+            this.rNoteHalfD,
+            this.rNoteHalf,
+            this.rNoteQuarterD,
+            this.rNoteQuarter,
+            this.rNoteQuarterT,
+            this.rNote8thD,
+            this.rNote8th,
+            this.rNote8thT,
+            this.rNote16th,
+            this.rNote16thT,
+            this.rNote32nd,
+            this.rNote64th,
+            this.rTicksNoteButton,
+            this.rTicksNoteValue,
+            this.toolStripSeparator18,
+            this.rRestWhole,
+            this.rRestHalfD,
+            this.rRestHalf,
+            this.rRestQuarterD,
+            this.rRestQuarter,
+            this.rRestQuarterT,
+            this.rRest8thD,
+            this.rRest8th,
+            this.rRest8thT,
+            this.rRest16th,
+            this.rRest16thT,
+            this.rRest32nd,
+            this.rRest64th,
+            this.rTicksRestButton,
+            this.rTicksRestValue});
+            this.rToolStripNote.Location = new System.Drawing.Point(3, 42);
+            this.rToolStripNote.Name = "rToolStripNote";
+            this.rToolStripNote.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.rToolStripNote.Size = new System.Drawing.Size(530, 25);
+            this.rToolStripNote.TabIndex = 18;
+            // 
+            // rSharp
+            // 
+            this.rSharp.AutoSize = false;
+            this.rSharp.CheckOnClick = true;
+            this.rSharp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rSharp.Image = global::LAZYSHELL.Properties.Resources.sharp;
+            this.rSharp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rSharp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rSharp.Name = "rSharp";
+            this.rSharp.Size = new System.Drawing.Size(23, 22);
+            this.rSharp.Text = "Sharp";
+            this.rSharp.Click += new System.EventHandler(this.rAccidental_Click);
+            // 
+            // rFlat
+            // 
+            this.rFlat.CheckOnClick = true;
+            this.rFlat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rFlat.Image = global::LAZYSHELL.Properties.Resources.flat;
+            this.rFlat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rFlat.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rFlat.Name = "rFlat";
+            this.rFlat.Size = new System.Drawing.Size(23, 22);
+            this.rFlat.Text = "Flat";
+            this.rFlat.Click += new System.EventHandler(this.rAccidental_Click);
+            // 
+            // rNatural
+            // 
+            this.rNatural.CheckOnClick = true;
+            this.rNatural.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNatural.Image = global::LAZYSHELL.Properties.Resources.natural;
+            this.rNatural.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rNatural.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNatural.Name = "rNatural";
+            this.rNatural.Size = new System.Drawing.Size(23, 22);
+            this.rNatural.Text = "Natural";
+            this.rNatural.Click += new System.EventHandler(this.rAccidental_Click);
+            // 
+            // rTie
+            // 
+            this.rTie.CheckOnClick = true;
+            this.rTie.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rTie.Image = ((System.Drawing.Image)(resources.GetObject("rTie.Image")));
+            this.rTie.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rTie.Name = "rTie";
+            this.rTie.Size = new System.Drawing.Size(23, 22);
+            this.rTie.Text = "Tie";
+            this.rTie.Click += new System.EventHandler(this.rTie_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
+            // 
+            // rNoteWhole
+            // 
+            this.rNoteWhole.CheckOnClick = true;
+            this.rNoteWhole.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteWhole.Image = global::LAZYSHELL.Properties.Resources.noteWhole;
+            this.rNoteWhole.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteWhole.Name = "rNoteWhole";
+            this.rNoteWhole.Size = new System.Drawing.Size(23, 22);
+            this.rNoteWhole.Text = "Whole Note";
+            this.rNoteWhole.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNoteHalfD
+            // 
+            this.rNoteHalfD.CheckOnClick = true;
+            this.rNoteHalfD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteHalfD.Image = global::LAZYSHELL.Properties.Resources.noteHalfDotted;
+            this.rNoteHalfD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteHalfD.Name = "rNoteHalfD";
+            this.rNoteHalfD.Size = new System.Drawing.Size(23, 22);
+            this.rNoteHalfD.Text = "Dotted Half Note";
+            this.rNoteHalfD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNoteHalf
+            // 
+            this.rNoteHalf.CheckOnClick = true;
+            this.rNoteHalf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteHalf.Image = global::LAZYSHELL.Properties.Resources.noteHalf;
+            this.rNoteHalf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteHalf.Name = "rNoteHalf";
+            this.rNoteHalf.Size = new System.Drawing.Size(23, 22);
+            this.rNoteHalf.Text = "Half Note";
+            this.rNoteHalf.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNoteQuarterD
+            // 
+            this.rNoteQuarterD.CheckOnClick = true;
+            this.rNoteQuarterD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteQuarterD.Image = global::LAZYSHELL.Properties.Resources.noteDotted;
+            this.rNoteQuarterD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteQuarterD.Name = "rNoteQuarterD";
+            this.rNoteQuarterD.Size = new System.Drawing.Size(23, 22);
+            this.rNoteQuarterD.Text = "Dotted Quarter Note";
+            this.rNoteQuarterD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNoteQuarter
+            // 
+            this.rNoteQuarter.CheckOnClick = true;
+            this.rNoteQuarter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteQuarter.Image = global::LAZYSHELL.Properties.Resources.noteQuarter;
+            this.rNoteQuarter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteQuarter.Name = "rNoteQuarter";
+            this.rNoteQuarter.Size = new System.Drawing.Size(23, 22);
+            this.rNoteQuarter.Text = "Quarter Note";
+            this.rNoteQuarter.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNoteQuarterT
+            // 
+            this.rNoteQuarterT.CheckOnClick = true;
+            this.rNoteQuarterT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNoteQuarterT.Image = global::LAZYSHELL.Properties.Resources.noteQuarterTriplet;
+            this.rNoteQuarterT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNoteQuarterT.Name = "rNoteQuarterT";
+            this.rNoteQuarterT.Size = new System.Drawing.Size(23, 22);
+            this.rNoteQuarterT.Text = "Triplet 8th Note (x3 = one half note)";
+            this.rNoteQuarterT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote8thD
+            // 
+            this.rNote8thD.CheckOnClick = true;
+            this.rNote8thD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote8thD.Image = global::LAZYSHELL.Properties.Resources.note8thDotted;
+            this.rNote8thD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote8thD.Name = "rNote8thD";
+            this.rNote8thD.Size = new System.Drawing.Size(23, 22);
+            this.rNote8thD.Text = "Dotted 8th Note";
+            this.rNote8thD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote8th
+            // 
+            this.rNote8th.CheckOnClick = true;
+            this.rNote8th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote8th.Image = global::LAZYSHELL.Properties.Resources.note8th;
+            this.rNote8th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote8th.Name = "rNote8th";
+            this.rNote8th.Size = new System.Drawing.Size(23, 22);
+            this.rNote8th.Text = "8th note";
+            this.rNote8th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote8thT
+            // 
+            this.rNote8thT.CheckOnClick = true;
+            this.rNote8thT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote8thT.Image = global::LAZYSHELL.Properties.Resources.note8thTriplet;
+            this.rNote8thT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote8thT.Name = "rNote8thT";
+            this.rNote8thT.Size = new System.Drawing.Size(23, 22);
+            this.rNote8thT.Text = "Triplet 8th Note (x3 = one quarter note)";
+            this.rNote8thT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote16th
+            // 
+            this.rNote16th.CheckOnClick = true;
+            this.rNote16th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote16th.Image = global::LAZYSHELL.Properties.Resources.note16th;
+            this.rNote16th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote16th.Name = "rNote16th";
+            this.rNote16th.Size = new System.Drawing.Size(23, 22);
+            this.rNote16th.Text = "16th Note";
+            this.rNote16th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote16thT
+            // 
+            this.rNote16thT.CheckOnClick = true;
+            this.rNote16thT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote16thT.Image = global::LAZYSHELL.Properties.Resources.note16thTriplet;
+            this.rNote16thT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote16thT.Name = "rNote16thT";
+            this.rNote16thT.Size = new System.Drawing.Size(23, 22);
+            this.rNote16thT.Text = "Triplet 16th Note (x3 = one 8th note)";
+            this.rNote16thT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote32nd
+            // 
+            this.rNote32nd.CheckOnClick = true;
+            this.rNote32nd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote32nd.Image = global::LAZYSHELL.Properties.Resources.note32nd;
+            this.rNote32nd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote32nd.Name = "rNote32nd";
+            this.rNote32nd.Size = new System.Drawing.Size(23, 22);
+            this.rNote32nd.Text = "32nd Note";
+            this.rNote32nd.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rNote64th
+            // 
+            this.rNote64th.CheckOnClick = true;
+            this.rNote64th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rNote64th.Image = global::LAZYSHELL.Properties.Resources.note64th;
+            this.rNote64th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rNote64th.Name = "rNote64th";
+            this.rNote64th.Size = new System.Drawing.Size(23, 22);
+            this.rNote64th.Text = "64th Note";
+            this.rNote64th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rTicksNoteButton
+            // 
+            this.rTicksNoteButton.CheckOnClick = true;
+            this.rTicksNoteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.rTicksNoteButton.Image = ((System.Drawing.Image)(resources.GetObject("rTicksNoteButton.Image")));
+            this.rTicksNoteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rTicksNoteButton.Name = "rTicksNoteButton";
+            this.rTicksNoteButton.Size = new System.Drawing.Size(35, 22);
+            this.rTicksNoteButton.Text = "Ticks";
+            this.rTicksNoteButton.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rTicksNoteValue
+            // 
+            this.rTicksNoteValue.AutoSize = false;
+            this.rTicksNoteValue.ContextMenuStrip = null;
+            this.rTicksNoteValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rTicksNoteValue.Hexadecimal = false;
+            this.rTicksNoteValue.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.rTicksNoteValue.Location = new System.Drawing.Point(439, 2);
+            this.rTicksNoteValue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.rTicksNoteValue.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.rTicksNoteValue.Name = "noteSpacingSW";
+            this.rTicksNoteValue.Size = new System.Drawing.Size(44, 21);
+            this.rTicksNoteValue.Text = "0";
+            this.rTicksNoteValue.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 25);
+            // 
+            // rRestWhole
+            // 
+            this.rRestWhole.CheckOnClick = true;
+            this.rRestWhole.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestWhole.Image = global::LAZYSHELL.Properties.Resources.restWhole;
+            this.rRestWhole.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestWhole.Name = "rRestWhole";
+            this.rRestWhole.Size = new System.Drawing.Size(23, 22);
+            this.rRestWhole.Text = "Whole Rest";
+            this.rRestWhole.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRestHalfD
+            // 
+            this.rRestHalfD.CheckOnClick = true;
+            this.rRestHalfD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestHalfD.Image = global::LAZYSHELL.Properties.Resources.restHalfDotted;
+            this.rRestHalfD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestHalfD.Name = "rRestHalfD";
+            this.rRestHalfD.Size = new System.Drawing.Size(23, 20);
+            this.rRestHalfD.Text = "Dotted Half Rest";
+            this.rRestHalfD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRestHalf
+            // 
+            this.rRestHalf.CheckOnClick = true;
+            this.rRestHalf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestHalf.Image = global::LAZYSHELL.Properties.Resources.restHalf;
+            this.rRestHalf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestHalf.Name = "rRestHalf";
+            this.rRestHalf.Size = new System.Drawing.Size(23, 20);
+            this.rRestHalf.Text = "Half Rest";
+            this.rRestHalf.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRestQuarterD
+            // 
+            this.rRestQuarterD.CheckOnClick = true;
+            this.rRestQuarterD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestQuarterD.Image = global::LAZYSHELL.Properties.Resources.restDotted;
+            this.rRestQuarterD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestQuarterD.Name = "rRestQuarterD";
+            this.rRestQuarterD.Size = new System.Drawing.Size(23, 20);
+            this.rRestQuarterD.Text = "Dotted Quarter Rest";
+            this.rRestQuarterD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRestQuarter
+            // 
+            this.rRestQuarter.CheckOnClick = true;
+            this.rRestQuarter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestQuarter.Image = global::LAZYSHELL.Properties.Resources.restQuarter;
+            this.rRestQuarter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestQuarter.Name = "rRestQuarter";
+            this.rRestQuarter.Size = new System.Drawing.Size(23, 20);
+            this.rRestQuarter.Text = "Quarter Rest";
+            this.rRestQuarter.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRestQuarterT
+            // 
+            this.rRestQuarterT.CheckOnClick = true;
+            this.rRestQuarterT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRestQuarterT.Image = global::LAZYSHELL.Properties.Resources.restQuarterTriplet;
+            this.rRestQuarterT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRestQuarterT.Name = "rRestQuarterT";
+            this.rRestQuarterT.Size = new System.Drawing.Size(23, 20);
+            this.rRestQuarterT.Text = "Triplet Quarter Rest (x3 = one half rest)";
+            this.rRestQuarterT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest8thD
+            // 
+            this.rRest8thD.CheckOnClick = true;
+            this.rRest8thD.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest8thD.Image = global::LAZYSHELL.Properties.Resources.rest8thDotted;
+            this.rRest8thD.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest8thD.Name = "rRest8thD";
+            this.rRest8thD.Size = new System.Drawing.Size(23, 20);
+            this.rRest8thD.Text = "Dotted 8th Rest";
+            this.rRest8thD.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest8th
+            // 
+            this.rRest8th.CheckOnClick = true;
+            this.rRest8th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest8th.Image = global::LAZYSHELL.Properties.Resources.rest8th;
+            this.rRest8th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest8th.Name = "rRest8th";
+            this.rRest8th.Size = new System.Drawing.Size(23, 20);
+            this.rRest8th.Text = "8th Rest";
+            this.rRest8th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest8thT
+            // 
+            this.rRest8thT.CheckOnClick = true;
+            this.rRest8thT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest8thT.Image = global::LAZYSHELL.Properties.Resources.rest8thTriplet;
+            this.rRest8thT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest8thT.Name = "rRest8thT";
+            this.rRest8thT.Size = new System.Drawing.Size(23, 20);
+            this.rRest8thT.Text = "Triplet 8th Rest (x3 = one quarter rest)";
+            this.rRest8thT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest16th
+            // 
+            this.rRest16th.CheckOnClick = true;
+            this.rRest16th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest16th.Image = global::LAZYSHELL.Properties.Resources.rest16th;
+            this.rRest16th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest16th.Name = "rRest16th";
+            this.rRest16th.Size = new System.Drawing.Size(23, 20);
+            this.rRest16th.Text = "16th Rest";
+            this.rRest16th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest16thT
+            // 
+            this.rRest16thT.CheckOnClick = true;
+            this.rRest16thT.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest16thT.Image = global::LAZYSHELL.Properties.Resources.rest16thTriplet;
+            this.rRest16thT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest16thT.Name = "rRest16thT";
+            this.rRest16thT.Size = new System.Drawing.Size(23, 20);
+            this.rRest16thT.Text = "Triplet 16th Rest (x3 = one 8th rest)";
+            this.rRest16thT.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest32nd
+            // 
+            this.rRest32nd.CheckOnClick = true;
+            this.rRest32nd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest32nd.Image = global::LAZYSHELL.Properties.Resources.rest32nd;
+            this.rRest32nd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest32nd.Name = "rRest32nd";
+            this.rRest32nd.Size = new System.Drawing.Size(23, 20);
+            this.rRest32nd.Text = "32nd Rest";
+            this.rRest32nd.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rRest64th
+            // 
+            this.rRest64th.CheckOnClick = true;
+            this.rRest64th.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rRest64th.Image = global::LAZYSHELL.Properties.Resources.rest64th;
+            this.rRest64th.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rRest64th.Name = "rRest64th";
+            this.rRest64th.Size = new System.Drawing.Size(23, 20);
+            this.rRest64th.Text = "64th Rest";
+            this.rRest64th.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rTicksRestButton
+            // 
+            this.rTicksRestButton.CheckOnClick = true;
+            this.rTicksRestButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.rTicksRestButton.Image = ((System.Drawing.Image)(resources.GetObject("rTicksRestButton.Image")));
+            this.rTicksRestButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rTicksRestButton.Name = "rTicksRestButton";
+            this.rTicksRestButton.Size = new System.Drawing.Size(35, 15);
+            this.rTicksRestButton.Text = "Ticks";
+            this.rTicksRestButton.Click += new System.EventHandler(this.reader_Click);
+            // 
+            // rTicksRestValue
+            // 
+            this.rTicksRestValue.AutoSize = false;
+            this.rTicksRestValue.ContextMenuStrip = null;
+            this.rTicksRestValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rTicksRestValue.Hexadecimal = false;
+            this.rTicksRestValue.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.rTicksRestValue.Location = new System.Drawing.Point(1, 297);
+            this.rTicksRestValue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.rTicksRestValue.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.rTicksRestValue.Name = "noteSpacingSW";
+            this.rTicksRestValue.Size = new System.Drawing.Size(44, 21);
+            this.rTicksRestValue.Text = "0";
+            this.rTicksRestValue.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // rToolStripMain
+            // 
+            this.rToolStripMain.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rToolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel10,
+            this.clefSV,
+            this.toolStripLabel2,
+            this.keySV,
             this.toolStripLabel7,
             this.timeBeatsSV,
             this.timeValueSV,
+            this.toolStripSeparator21,
+            this.toolStripLabel6,
+            this.staffHeightSV,
             this.toolStripLabel8,
             this.noteSpacingSV,
             this.showRests});
-            this.toolStrip5.Location = new System.Drawing.Point(3, 17);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip5.Size = new System.Drawing.Size(530, 25);
-            this.toolStrip5.TabIndex = 0;
-            this.toolStrip5.Text = "toolStrip5";
+            this.rToolStripMain.Location = new System.Drawing.Point(3, 17);
+            this.rToolStripMain.Name = "rToolStripMain";
+            this.rToolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.rToolStripMain.Size = new System.Drawing.Size(530, 25);
+            this.rToolStripMain.TabIndex = 0;
+            this.rToolStripMain.Text = "toolStrip5";
             // 
-            // toolStripLabel6
+            // toolStripLabel10
             // 
-            this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(65, 22);
-            this.toolStripLabel6.Text = "Staff Height";
+            this.toolStripLabel10.Name = "toolStripLabel10";
+            this.toolStripLabel10.Size = new System.Drawing.Size(28, 22);
+            this.toolStripLabel10.Text = " Clef";
             // 
-            // staffHeightSV
+            // clefSV
             // 
-            this.staffHeightSV.AutoSize = false;
-            this.staffHeightSV.ContextMenuStrip = null;
-            this.staffHeightSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffHeightSV.Hexadecimal = false;
-            this.staffHeightSV.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.staffHeightSV.Location = new System.Drawing.Point(72, 2);
-            this.staffHeightSV.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.staffHeightSV.Minimum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.staffHeightSV.Name = "staffHeightSV";
-            this.staffHeightSV.Size = new System.Drawing.Size(45, 21);
-            this.staffHeightSV.Text = "96";
-            this.staffHeightSV.Value = new decimal(new int[] {
-            96,
-            0,
-            0,
-            0});
-            this.staffHeightSV.ValueChanged += new System.EventHandler(this.staffHeightChannel_ValueChanged);
+            this.clefSV.AutoSize = false;
+            this.clefSV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clefSV.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.clefSV.Items.AddRange(new object[] {
+            "Treble",
+            "Bass"});
+            this.clefSV.Name = "clefSV";
+            this.clefSV.Size = new System.Drawing.Size(70, 21);
+            this.clefSV.ToolTipText = "Clef";
+            this.clefSV.SelectedIndexChanged += new System.EventHandler(this.clefSV_SelectedIndexChanged);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(27, 22);
+            this.toolStripLabel2.Text = " Key";
+            // 
+            // keySV
+            // 
+            this.keySV.AutoSize = false;
+            this.keySV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.keySV.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.keySV.Items.AddRange(new object[] {
+            "C major",
+            "G major",
+            "D major",
+            "A major",
+            "E major",
+            "B major",
+            "F# major",
+            "C# major",
+            "F major",
+            "Bb major",
+            "Eb major",
+            "Ab major",
+            "Db major",
+            "Gb major",
+            "Cb major",
+            "A minor",
+            "E minor",
+            "B minor",
+            "F# minor",
+            "C# minor",
+            "G# minor",
+            "D# minor",
+            "A# minor",
+            "D minor",
+            "G minor",
+            "C minor",
+            "F minor",
+            "Bb minor",
+            "Eb minor",
+            "Ab minor"});
+            this.keySV.Name = "keySV";
+            this.keySV.Size = new System.Drawing.Size(70, 21);
+            this.keySV.ToolTipText = "Key";
+            this.keySV.SelectedIndexChanged += new System.EventHandler(this.keySV_SelectedIndexChanged);
             // 
             // toolStripLabel7
             // 
@@ -1466,7 +2179,7 @@
             0,
             0,
             0});
-            this.timeBeatsSV.Location = new System.Drawing.Point(150, 2);
+            this.timeBeatsSV.Location = new System.Drawing.Point(239, 2);
             this.timeBeatsSV.Maximum = new decimal(new int[] {
             64,
             0,
@@ -1498,7 +2211,7 @@
             0,
             0,
             0});
-            this.timeValueSV.Location = new System.Drawing.Point(190, 2);
+            this.timeValueSV.Location = new System.Drawing.Point(279, 2);
             this.timeValueSV.Maximum = new decimal(new int[] {
             64,
             0,
@@ -1519,10 +2232,53 @@
             0});
             this.timeValueSV.ValueChanged += new System.EventHandler(this.time_ValueChanged);
             // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.Size = new System.Drawing.Size(68, 22);
+            this.toolStripLabel6.Text = " Staff Height";
+            // 
+            // staffHeightSV
+            // 
+            this.staffHeightSV.AutoSize = false;
+            this.staffHeightSV.ContextMenuStrip = null;
+            this.staffHeightSV.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffHeightSV.Hexadecimal = false;
+            this.staffHeightSV.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.staffHeightSV.Location = new System.Drawing.Point(393, 2);
+            this.staffHeightSV.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.staffHeightSV.Minimum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.staffHeightSV.Name = "staffHeightSV";
+            this.staffHeightSV.Size = new System.Drawing.Size(50, 21);
+            this.staffHeightSV.Text = "96";
+            this.staffHeightSV.Value = new decimal(new int[] {
+            96,
+            0,
+            0,
+            0});
+            this.staffHeightSV.ValueChanged += new System.EventHandler(this.staffHeightChannel_ValueChanged);
+            // 
             // toolStripLabel8
             // 
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(87, 22);
+            this.toolStripLabel8.Size = new System.Drawing.Size(87, 11);
             this.toolStripLabel8.Text = " Note Spacing %";
             // 
             // noteSpacingSV
@@ -1536,7 +2292,7 @@
             0,
             0,
             0});
-            this.noteSpacingSV.Location = new System.Drawing.Point(317, 2);
+            this.noteSpacingSV.Location = new System.Drawing.Point(1, 17);
             this.noteSpacingSV.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1563,7 +2319,7 @@
             this.showRests.Margin = new System.Windows.Forms.Padding(2, 2, 0, 0);
             this.showRests.Name = "showRests";
             this.showRests.Padding = new System.Windows.Forms.Padding(4, 0, 0, 4);
-            this.showRests.Size = new System.Drawing.Size(84, 23);
+            this.showRests.Size = new System.Drawing.Size(86, 21);
             this.showRests.Text = "Show Rests";
             this.showRests.CheckedChanged += new System.EventHandler(this.showRests_CheckedChanged);
             // 
@@ -1610,32 +2366,187 @@
             this.label11.TabIndex = 4;
             this.label11.Text = ": 128";
             // 
-            // groupBox6
+            // groupBoxSW
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.groupBoxSW.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.panel4);
-            this.groupBox6.Controls.Add(this.hScrollBar3);
-            this.groupBox6.Controls.Add(this.wToolStrip2);
-            this.groupBox6.Controls.Add(this.wToolStrip1);
-            this.groupBox6.Location = new System.Drawing.Point(12, 28);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(913, 473);
-            this.groupBox6.TabIndex = 11;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Score Writer";
-            this.groupBox6.Visible = false;
+            this.groupBoxSW.Controls.Add(this.wToolStripAct);
+            this.groupBoxSW.Controls.Add(this.labelWNote);
+            this.groupBoxSW.Controls.Add(this.panel4);
+            this.groupBoxSW.Controls.Add(this.hScrollBarSW);
+            this.groupBoxSW.Controls.Add(this.wToolStripNote);
+            this.groupBoxSW.Controls.Add(this.wToolStripMain);
+            this.groupBoxSW.Location = new System.Drawing.Point(12, 28);
+            this.groupBoxSW.Name = "groupBoxSW";
+            this.groupBoxSW.Size = new System.Drawing.Size(913, 473);
+            this.groupBoxSW.TabIndex = 11;
+            this.groupBoxSW.TabStop = false;
+            this.groupBoxSW.Text = "Score Writer";
+            this.groupBoxSW.Visible = false;
+            // 
+            // wToolStripAct
+            // 
+            this.wToolStripAct.Dock = System.Windows.Forms.DockStyle.Left;
+            this.wToolStripAct.Enabled = false;
+            this.wToolStripAct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wDraw,
+            this.wErase,
+            this.wSelect,
+            this.toolStripSeparator12,
+            this.wDelete,
+            this.wCut,
+            this.wCopy,
+            this.wPaste,
+            this.toolStripSeparator14,
+            this.undo,
+            this.redo});
+            this.wToolStripAct.Location = new System.Drawing.Point(3, 67);
+            this.wToolStripAct.Name = "wToolStripAct";
+            this.wToolStripAct.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.wToolStripAct.Size = new System.Drawing.Size(24, 403);
+            this.wToolStripAct.TabIndex = 6;
+            this.wToolStripAct.Text = "toolStrip6";
+            // 
+            // wDraw
+            // 
+            this.wDraw.CheckOnClick = true;
+            this.wDraw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wDraw.Image = global::LAZYSHELL.Properties.Resources.draw_small;
+            this.wDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wDraw.Name = "wDraw";
+            this.wDraw.Size = new System.Drawing.Size(21, 17);
+            this.wDraw.Text = "Draw Note";
+            this.wDraw.CheckedChanged += new System.EventHandler(this.wDraw_CheckedChanged);
+            // 
+            // wErase
+            // 
+            this.wErase.CheckOnClick = true;
+            this.wErase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wErase.Image = global::LAZYSHELL.Properties.Resources.erase_small;
+            this.wErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wErase.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wErase.Name = "wErase";
+            this.wErase.Size = new System.Drawing.Size(21, 17);
+            this.wErase.Text = "Erase Note";
+            this.wErase.CheckedChanged += new System.EventHandler(this.wErase_CheckedChanged);
+            // 
+            // wSelect
+            // 
+            this.wSelect.CheckOnClick = true;
+            this.wSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wSelect.Image = global::LAZYSHELL.Properties.Resources.select_small;
+            this.wSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wSelect.Name = "wSelect";
+            this.wSelect.Size = new System.Drawing.Size(21, 17);
+            this.wSelect.Text = "Select Note(s)";
+            this.wSelect.CheckedChanged += new System.EventHandler(this.wSelect_CheckedChanged);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(21, 6);
+            // 
+            // wDelete
+            // 
+            this.wDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.wDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wDelete.Name = "wDelete";
+            this.wDelete.Size = new System.Drawing.Size(21, 15);
+            this.wDelete.Text = "Delete Note(s)";
+            this.wDelete.Click += new System.EventHandler(this.wDelete_Click);
+            // 
+            // wCut
+            // 
+            this.wCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wCut.Image = global::LAZYSHELL.Properties.Resources.cut_small;
+            this.wCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wCut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wCut.Name = "wCut";
+            this.wCut.Size = new System.Drawing.Size(21, 17);
+            this.wCut.Text = "Cut Note(s)";
+            this.wCut.Click += new System.EventHandler(this.wCut_Click);
+            // 
+            // wCopy
+            // 
+            this.wCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.wCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wCopy.Name = "wCopy";
+            this.wCopy.Size = new System.Drawing.Size(21, 17);
+            this.wCopy.Text = "Copy Note(s)";
+            this.wCopy.Click += new System.EventHandler(this.wCopy_Click);
+            // 
+            // wPaste
+            // 
+            this.wPaste.CheckOnClick = true;
+            this.wPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wPaste.Image = global::LAZYSHELL.Properties.Resources.paste_small;
+            this.wPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wPaste.Name = "wPaste";
+            this.wPaste.Size = new System.Drawing.Size(21, 17);
+            this.wPaste.Text = "Paste Note(s)";
+            this.wPaste.CheckedChanged += new System.EventHandler(this.wPaste_CheckedChanged);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(21, 6);
+            // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Enabled = false;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(21, 12);
+            this.undo.Text = "Undo";
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Enabled = false;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(21, 12);
+            this.redo.Text = "Redo";
+            this.redo.Click += new System.EventHandler(this.redo_Click);
+            // 
+            // labelWNote
+            // 
+            this.labelWNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWNote.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelWNote.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWNote.Location = new System.Drawing.Point(29, 446);
+            this.labelWNote.Name = "labelWNote";
+            this.labelWNote.Size = new System.Drawing.Size(881, 24);
+            this.labelWNote.TabIndex = 5;
+            this.labelWNote.Text = "...";
+            this.labelWNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.AutoScroll = true;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.scoreWriterPicture);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 67);
+            this.panel4.Location = new System.Drawing.Point(29, 67);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(907, 387);
+            this.panel4.Size = new System.Drawing.Size(881, 361);
             this.panel4.TabIndex = 2;
             // 
             // scoreWriterPicture
@@ -1644,7 +2555,7 @@
             this.scoreWriterPicture.Dock = System.Windows.Forms.DockStyle.Top;
             this.scoreWriterPicture.Location = new System.Drawing.Point(0, 0);
             this.scoreWriterPicture.Name = "scoreWriterPicture";
-            this.scoreWriterPicture.Size = new System.Drawing.Size(887, 700);
+            this.scoreWriterPicture.Size = new System.Drawing.Size(861, 700);
             this.scoreWriterPicture.TabIndex = 0;
             this.scoreWriterPicture.TabStop = false;
             this.scoreWriterPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.scoreWriterPicture_Paint);
@@ -1653,23 +2564,26 @@
             this.scoreWriterPicture.MouseLeave += new System.EventHandler(this.scoreWriterPicture_MouseLeave);
             this.scoreWriterPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreWriterPicture_MouseMove);
             // 
-            // hScrollBar3
+            // hScrollBarSW
             // 
-            this.hScrollBar3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar3.Location = new System.Drawing.Point(3, 454);
-            this.hScrollBar3.Name = "hScrollBar3";
-            this.hScrollBar3.Size = new System.Drawing.Size(907, 16);
-            this.hScrollBar3.TabIndex = 3;
-            this.hScrollBar3.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
-            this.hScrollBar3.ValueChanged += new System.EventHandler(this.hScrollBar3_ValueChanged);
+            this.hScrollBarSW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBarSW.Location = new System.Drawing.Point(29, 428);
+            this.hScrollBarSW.Name = "hScrollBarSW";
+            this.hScrollBarSW.Size = new System.Drawing.Size(881, 16);
+            this.hScrollBarSW.TabIndex = 3;
+            this.hScrollBarSW.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
+            this.hScrollBarSW.ValueChanged += new System.EventHandler(this.hScrollBar3_ValueChanged);
             // 
-            // wToolStrip2
+            // wToolStripNote
             // 
-            this.wToolStrip2.Enabled = false;
-            this.wToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wErase,
-            this.toolStripSeparator12,
+            this.wToolStripNote.Enabled = false;
+            this.wToolStripNote.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wToolStripNote.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wSharp,
+            this.wFlat,
+            this.wNatural,
+            this.wTie,
             this.toolStripSeparator15,
             this.wNoteWhole,
             this.wNoteHalfD,
@@ -1684,6 +2598,8 @@
             this.wNote16thT,
             this.wNote32nd,
             this.wNote64th,
+            this.ticksNoteButton,
+            this.ticksNoteValue,
             this.toolStripSeparator13,
             this.wRestWhole,
             this.wRestHalfD,
@@ -1698,33 +2614,17 @@
             this.wRest16thT,
             this.wRest32nd,
             this.wRest64th,
-            this.toolStripSeparator22,
-            this.wTie});
-            this.wToolStrip2.Location = new System.Drawing.Point(3, 42);
-            this.wToolStrip2.Name = "wToolStrip2";
-            this.wToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.wToolStrip2.Size = new System.Drawing.Size(907, 25);
-            this.wToolStrip2.TabIndex = 1;
-            // 
-            // wErase
-            // 
-            this.wErase.CheckOnClick = true;
-            this.wErase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.wErase.Image = global::LAZYSHELL.Properties.Resources.erase_small;
-            this.wErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.wErase.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.wErase.Name = "wErase";
-            this.wErase.Size = new System.Drawing.Size(23, 22);
-            this.wErase.Text = "Remove Note/Rest";
-            this.wErase.Click += new System.EventHandler(this.wErase_Click);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
+            this.ticksRestButton,
+            this.ticksRestValue});
+            this.wToolStripNote.Location = new System.Drawing.Point(3, 42);
+            this.wToolStripNote.Name = "wToolStripNote";
+            this.wToolStripNote.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.wToolStripNote.Size = new System.Drawing.Size(907, 25);
+            this.wToolStripNote.TabIndex = 1;
             // 
             // wSharp
             // 
+            this.wSharp.AutoSize = false;
             this.wSharp.CheckOnClick = true;
             this.wSharp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.wSharp.Image = global::LAZYSHELL.Properties.Resources.sharp;
@@ -1734,6 +2634,41 @@
             this.wSharp.Size = new System.Drawing.Size(23, 22);
             this.wSharp.Text = "Sharp";
             this.wSharp.Click += new System.EventHandler(this.wAccidental_Click);
+            // 
+            // wFlat
+            // 
+            this.wFlat.CheckOnClick = true;
+            this.wFlat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wFlat.Image = global::LAZYSHELL.Properties.Resources.flat;
+            this.wFlat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wFlat.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wFlat.Name = "wFlat";
+            this.wFlat.Size = new System.Drawing.Size(23, 22);
+            this.wFlat.Text = "Flat";
+            this.wFlat.Click += new System.EventHandler(this.wAccidental_Click);
+            // 
+            // wNatural
+            // 
+            this.wNatural.CheckOnClick = true;
+            this.wNatural.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wNatural.Image = global::LAZYSHELL.Properties.Resources.natural;
+            this.wNatural.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wNatural.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wNatural.Name = "wNatural";
+            this.wNatural.Size = new System.Drawing.Size(23, 22);
+            this.wNatural.Text = "Natural";
+            this.wNatural.Click += new System.EventHandler(this.wAccidental_Click);
+            // 
+            // wTie
+            // 
+            this.wTie.CheckOnClick = true;
+            this.wTie.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wTie.Image = ((System.Drawing.Image)(resources.GetObject("wTie.Image")));
+            this.wTie.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wTie.Name = "wTie";
+            this.wTie.Size = new System.Drawing.Size(23, 22);
+            this.wTie.Text = "Tie";
+            this.wTie.Click += new System.EventHandler(this.wTie_Click);
             // 
             // toolStripSeparator15
             // 
@@ -1883,6 +2818,48 @@
             this.wNote64th.Text = "64th Note";
             this.wNote64th.Click += new System.EventHandler(this.writer_Click);
             // 
+            // ticksNoteButton
+            // 
+            this.ticksNoteButton.CheckOnClick = true;
+            this.ticksNoteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ticksNoteButton.Image = ((System.Drawing.Image)(resources.GetObject("ticksNoteButton.Image")));
+            this.ticksNoteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ticksNoteButton.Name = "ticksNoteButton";
+            this.ticksNoteButton.Size = new System.Drawing.Size(35, 22);
+            this.ticksNoteButton.Text = "Ticks";
+            this.ticksNoteButton.Click += new System.EventHandler(this.writer_Click);
+            // 
+            // ticksNoteValue
+            // 
+            this.ticksNoteValue.AutoSize = false;
+            this.ticksNoteValue.ContextMenuStrip = null;
+            this.ticksNoteValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ticksNoteValue.Hexadecimal = false;
+            this.ticksNoteValue.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ticksNoteValue.Location = new System.Drawing.Point(439, 2);
+            this.ticksNoteValue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ticksNoteValue.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.ticksNoteValue.Name = "noteSpacingSW";
+            this.ticksNoteValue.Size = new System.Drawing.Size(44, 21);
+            this.ticksNoteValue.Text = "0";
+            this.ticksNoteValue.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
@@ -2031,26 +3008,52 @@
             this.wRest64th.Text = "64th Rest";
             this.wRest64th.Click += new System.EventHandler(this.writer_Click);
             // 
-            // toolStripSeparator22
+            // ticksRestButton
             // 
-            this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 25);
+            this.ticksRestButton.CheckOnClick = true;
+            this.ticksRestButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ticksRestButton.Image = ((System.Drawing.Image)(resources.GetObject("ticksRestButton.Image")));
+            this.ticksRestButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ticksRestButton.Name = "ticksRestButton";
+            this.ticksRestButton.Size = new System.Drawing.Size(35, 22);
+            this.ticksRestButton.Text = "Ticks";
+            this.ticksRestButton.Click += new System.EventHandler(this.writer_Click);
             // 
-            // wTie
+            // ticksRestValue
             // 
-            this.wTie.CheckOnClick = true;
-            this.wTie.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.wTie.Image = ((System.Drawing.Image)(resources.GetObject("wTie.Image")));
-            this.wTie.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.wTie.Name = "wTie";
-            this.wTie.Size = new System.Drawing.Size(23, 22);
-            this.wTie.Text = "Tie";
-            this.wTie.Click += new System.EventHandler(this.wTie_Click);
+            this.ticksRestValue.AutoSize = false;
+            this.ticksRestValue.ContextMenuStrip = null;
+            this.ticksRestValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ticksRestValue.Hexadecimal = false;
+            this.ticksRestValue.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ticksRestValue.Location = new System.Drawing.Point(823, 2);
+            this.ticksRestValue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ticksRestValue.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.ticksRestValue.Name = "noteSpacingSW";
+            this.ticksRestValue.Size = new System.Drawing.Size(44, 21);
+            this.ticksRestValue.Text = "0";
+            this.ticksRestValue.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
-            // wToolStrip1
+            // wToolStripMain
             // 
-            this.wToolStrip1.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wToolStripMain.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wToolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveScoreFile,
             this.openScoreFile,
             this.toolStripDropDownButton5,
@@ -2059,25 +3062,24 @@
             this.wStaffDelete,
             this.wStaffMoveUp,
             this.wStaffMoveDown,
-            this.undo,
-            this.redo,
             this.toolStripSeparator11,
-            this.toolStripLabel3,
-            this.staffHeightSW,
+            this.toolStripLabel1,
+            this.clef,
+            this.toolStripLabel9,
+            this.keySW,
             this.toolStripLabel4,
             this.timeBeatsSW,
             this.timeValueSW,
+            this.toolStripSeparator8,
+            this.toolStripLabel3,
+            this.staffHeightSW,
             this.toolStripLabel5,
-            this.noteSpacingSW,
-            this.toolStripLabel1,
-            this.clef,
-            this.toolStripSeparator14,
-            this.labelNote});
-            this.wToolStrip1.Location = new System.Drawing.Point(3, 17);
-            this.wToolStrip1.Name = "wToolStrip1";
-            this.wToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.wToolStrip1.Size = new System.Drawing.Size(907, 25);
-            this.wToolStrip1.TabIndex = 0;
+            this.noteSpacingSW});
+            this.wToolStripMain.Location = new System.Drawing.Point(3, 17);
+            this.wToolStripMain.Name = "wToolStripMain";
+            this.wToolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.wToolStripMain.Size = new System.Drawing.Size(907, 25);
+            this.wToolStripMain.TabIndex = 0;
             // 
             // saveScoreFile
             // 
@@ -2182,190 +3184,20 @@
             this.wStaffMoveDown.Text = "Move Staff Down";
             this.wStaffMoveDown.Click += new System.EventHandler(this.wStaffMoveDown_Click);
             // 
-            // undo
-            // 
-            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.undo.Enabled = false;
-            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
-            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.undo.Name = "undo";
-            this.undo.Size = new System.Drawing.Size(23, 22);
-            this.undo.Text = "Undo";
-            this.undo.Click += new System.EventHandler(this.undo_Click);
-            // 
-            // redo
-            // 
-            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.redo.Enabled = false;
-            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
-            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.redo.Name = "redo";
-            this.redo.Size = new System.Drawing.Size(23, 22);
-            this.redo.Text = "Redo";
-            this.redo.Click += new System.EventHandler(this.redo_Click);
-            // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(65, 22);
-            this.toolStripLabel3.Text = "Staff Height";
-            // 
-            // staffHeightSW
-            // 
-            this.staffHeightSW.AutoSize = false;
-            this.staffHeightSW.ContextMenuStrip = null;
-            this.staffHeightSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.staffHeightSW.Hexadecimal = false;
-            this.staffHeightSW.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.staffHeightSW.Location = new System.Drawing.Point(297, 2);
-            this.staffHeightSW.Maximum = new decimal(new int[] {
-            512,
-            0,
-            0,
-            0});
-            this.staffHeightSW.Minimum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.staffHeightSW.Name = "staffHeightSW";
-            this.staffHeightSW.Size = new System.Drawing.Size(50, 21);
-            this.staffHeightSW.Text = "96";
-            this.staffHeightSW.Value = new decimal(new int[] {
-            96,
-            0,
-            0,
-            0});
-            this.staffHeightSW.ValueChanged += new System.EventHandler(this.staffHeight_ValueChanged);
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(33, 22);
-            this.toolStripLabel4.Text = " Time";
-            // 
-            // timeBeatsSW
-            // 
-            this.timeBeatsSW.AutoSize = false;
-            this.timeBeatsSW.ContextMenuStrip = null;
-            this.timeBeatsSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeBeatsSW.Hexadecimal = false;
-            this.timeBeatsSW.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.timeBeatsSW.Location = new System.Drawing.Point(380, 2);
-            this.timeBeatsSW.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.timeBeatsSW.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.timeBeatsSW.Name = "timeBeatsSW";
-            this.timeBeatsSW.Size = new System.Drawing.Size(40, 21);
-            this.timeBeatsSW.Text = "4";
-            this.timeBeatsSW.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.timeBeatsSW.ValueChanged += new System.EventHandler(this.time_ValueChanged);
-            // 
-            // timeValueSW
-            // 
-            this.timeValueSW.AutoSize = false;
-            this.timeValueSW.ContextMenuStrip = null;
-            this.timeValueSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeValueSW.Hexadecimal = false;
-            this.timeValueSW.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.timeValueSW.Location = new System.Drawing.Point(420, 2);
-            this.timeValueSW.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.timeValueSW.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.timeValueSW.Name = "timeValueSW";
-            this.timeValueSW.Size = new System.Drawing.Size(40, 21);
-            this.timeValueSW.Text = "4";
-            this.timeValueSW.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.timeValueSW.ValueChanged += new System.EventHandler(this.time_ValueChanged);
-            // 
-            // toolStripLabel5
-            // 
-            this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(87, 22);
-            this.toolStripLabel5.Text = " Note Spacing %";
-            // 
-            // noteSpacingSW
-            // 
-            this.noteSpacingSW.AutoSize = false;
-            this.noteSpacingSW.ContextMenuStrip = null;
-            this.noteSpacingSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noteSpacingSW.Hexadecimal = false;
-            this.noteSpacingSW.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.noteSpacingSW.Location = new System.Drawing.Point(547, 2);
-            this.noteSpacingSW.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.noteSpacingSW.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.noteSpacingSW.Name = "noteSpacingSW";
-            this.noteSpacingSW.Size = new System.Drawing.Size(50, 21);
-            this.noteSpacingSW.Text = "100";
-            this.noteSpacingSW.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.noteSpacingSW.ValueChanged += new System.EventHandler(this.noteSpacingSW_ValueChanged);
-            // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Enabled = false;
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(28, 22);
             this.toolStripLabel1.Text = " Clef";
             // 
             // clef
             // 
+            this.clef.AutoSize = false;
             this.clef.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.clef.Enabled = false;
             this.clef.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -2373,72 +3205,23 @@
             "Treble",
             "Bass"});
             this.clef.Name = "clef";
-            this.clef.Size = new System.Drawing.Size(80, 25);
+            this.clef.Size = new System.Drawing.Size(70, 21);
             this.clef.ToolTipText = "Clef";
             this.clef.SelectedIndexChanged += new System.EventHandler(this.clef_SelectedIndexChanged);
             // 
-            // toolStripSeparator14
+            // toolStripLabel9
             // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(27, 22);
+            this.toolStripLabel9.Text = " Key";
             // 
-            // labelNote
+            // keySW
             // 
-            this.labelNote.Name = "labelNote";
-            this.labelNote.Size = new System.Drawing.Size(14, 22);
-            this.labelNote.Text = "...";
-            // 
-            // wFlat
-            // 
-            this.wFlat.CheckOnClick = true;
-            this.wFlat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.wFlat.Image = global::LAZYSHELL.Properties.Resources.flat;
-            this.wFlat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.wFlat.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.wFlat.Name = "wFlat";
-            this.wFlat.Size = new System.Drawing.Size(23, 22);
-            this.wFlat.Text = "Flat";
-            this.wFlat.Visible = false;
-            this.wFlat.Click += new System.EventHandler(this.wAccidental_Click);
-            // 
-            // wNatural
-            // 
-            this.wNatural.CheckOnClick = true;
-            this.wNatural.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.wNatural.Image = global::LAZYSHELL.Properties.Resources.natural;
-            this.wNatural.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.wNatural.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.wNatural.Name = "wNatural";
-            this.wNatural.Size = new System.Drawing.Size(23, 22);
-            this.wNatural.Text = "Natural";
-            this.wNatural.Visible = false;
-            this.wNatural.Click += new System.EventHandler(this.wAccidental_Click);
-            // 
-            // importScoreFiles
-            // 
-            this.importScoreFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.importScoreFiles.Image = global::LAZYSHELL.Properties.Resources.importText;
-            this.importScoreFiles.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.importScoreFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.importScoreFiles.Name = "importScoreFiles";
-            this.importScoreFiles.Size = new System.Drawing.Size(23, 22);
-            this.importScoreFiles.Text = "Import Staffs";
-            this.importScoreFiles.Click += new System.EventHandler(this.importScoreFiles_Click);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Enabled = false;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(24, 22);
-            this.toolStripLabel2.Text = "Key";
-            this.toolStripLabel2.Visible = false;
-            // 
-            // key
-            // 
-            this.key.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.key.Enabled = false;
-            this.key.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.key.Items.AddRange(new object[] {
+            this.keySW.AutoSize = false;
+            this.keySW.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.keySW.Enabled = false;
+            this.keySW.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.keySW.Items.AddRange(new object[] {
             "C major",
             "G major",
             "D major",
@@ -2469,11 +3252,172 @@
             "Bb minor",
             "Eb minor",
             "Ab minor"});
-            this.key.Name = "key";
-            this.key.Size = new System.Drawing.Size(75, 21);
-            this.key.ToolTipText = "Key";
-            this.key.Visible = false;
-            this.key.SelectedIndexChanged += new System.EventHandler(this.key_SelectedIndexChanged);
+            this.keySW.Name = "keySW";
+            this.keySW.Size = new System.Drawing.Size(70, 21);
+            this.keySW.ToolTipText = "Key";
+            this.keySW.SelectedIndexChanged += new System.EventHandler(this.keySW_SelectedIndexChanged);
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(33, 22);
+            this.toolStripLabel4.Text = " Time";
+            // 
+            // timeBeatsSW
+            // 
+            this.timeBeatsSW.AutoSize = false;
+            this.timeBeatsSW.ContextMenuStrip = null;
+            this.timeBeatsSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeBeatsSW.Hexadecimal = false;
+            this.timeBeatsSW.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeBeatsSW.Location = new System.Drawing.Point(418, 2);
+            this.timeBeatsSW.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.timeBeatsSW.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeBeatsSW.Name = "timeBeatsSW";
+            this.timeBeatsSW.Size = new System.Drawing.Size(40, 21);
+            this.timeBeatsSW.Text = "4";
+            this.timeBeatsSW.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.timeBeatsSW.ValueChanged += new System.EventHandler(this.timeBeatsSW_ValueChanged);
+            // 
+            // timeValueSW
+            // 
+            this.timeValueSW.AutoSize = false;
+            this.timeValueSW.ContextMenuStrip = null;
+            this.timeValueSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeValueSW.Hexadecimal = false;
+            this.timeValueSW.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeValueSW.Location = new System.Drawing.Point(458, 2);
+            this.timeValueSW.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.timeValueSW.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeValueSW.Name = "timeValueSW";
+            this.timeValueSW.Size = new System.Drawing.Size(40, 21);
+            this.timeValueSW.Text = "4";
+            this.timeValueSW.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.timeValueSW.ValueChanged += new System.EventHandler(this.timeValueSW_ValueChanged);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel3.Text = "Staff Height";
+            // 
+            // staffHeightSW
+            // 
+            this.staffHeightSW.AutoSize = false;
+            this.staffHeightSW.ContextMenuStrip = null;
+            this.staffHeightSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffHeightSW.Hexadecimal = false;
+            this.staffHeightSW.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.staffHeightSW.Location = new System.Drawing.Point(569, 2);
+            this.staffHeightSW.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.staffHeightSW.Minimum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.staffHeightSW.Name = "staffHeightSW";
+            this.staffHeightSW.Size = new System.Drawing.Size(50, 21);
+            this.staffHeightSW.Text = "96";
+            this.staffHeightSW.Value = new decimal(new int[] {
+            96,
+            0,
+            0,
+            0});
+            this.staffHeightSW.ValueChanged += new System.EventHandler(this.staffHeight_ValueChanged);
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(87, 22);
+            this.toolStripLabel5.Text = " Note Spacing %";
+            // 
+            // noteSpacingSW
+            // 
+            this.noteSpacingSW.AutoSize = false;
+            this.noteSpacingSW.ContextMenuStrip = null;
+            this.noteSpacingSW.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noteSpacingSW.Hexadecimal = false;
+            this.noteSpacingSW.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.noteSpacingSW.Location = new System.Drawing.Point(706, 2);
+            this.noteSpacingSW.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.noteSpacingSW.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.noteSpacingSW.Name = "noteSpacingSW";
+            this.noteSpacingSW.Size = new System.Drawing.Size(50, 21);
+            this.noteSpacingSW.Text = "100";
+            this.noteSpacingSW.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.noteSpacingSW.ValueChanged += new System.EventHandler(this.noteSpacingSW_ValueChanged);
+            // 
+            // importScoreFiles
+            // 
+            this.importScoreFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importScoreFiles.Image = global::LAZYSHELL.Properties.Resources.importText;
+            this.importScoreFiles.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importScoreFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importScoreFiles.Name = "importScoreFiles";
+            this.importScoreFiles.Size = new System.Drawing.Size(23, 22);
+            this.importScoreFiles.Text = "Import Staffs";
+            this.importScoreFiles.Click += new System.EventHandler(this.importScoreFiles_Click);
             // 
             // wTempo
             // 
@@ -2648,34 +3592,16 @@
             this.panelSPC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSPC.Controls.Add(this.groupBoxI);
+            this.panelSPC.Controls.Add(this.groupBoxSV);
             this.panelSPC.Controls.Add(this.groupBoxRV);
             this.panelSPC.Controls.Add(this.groupBoxPR);
             this.panelSPC.Controls.Add(this.groupBoxCT);
-            this.panelSPC.Controls.Add(this.groupBoxSV);
+            this.panelSPC.Controls.Add(this.groupBoxI);
             this.panelSPC.Location = new System.Drawing.Point(12, 28);
             this.panelSPC.Name = "panelSPC";
             this.panelSPC.Size = new System.Drawing.Size(913, 473);
             this.panelSPC.TabIndex = 2;
             this.panelSPC.SizeChanged += new System.EventHandler(this.panelSPC_SizeChanged);
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
             // 
             // importSPCToolStripMenuItem
             // 
@@ -2713,7 +3639,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panelSPC);
-            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBoxSW);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SPCEditor";
@@ -2754,18 +3680,24 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).EndInit();
-            this.toolStrip5.ResumeLayout(false);
-            this.toolStrip5.PerformLayout();
+            this.rToolStripAct.ResumeLayout(false);
+            this.rToolStripAct.PerformLayout();
+            this.rToolStripNote.ResumeLayout(false);
+            this.rToolStripNote.PerformLayout();
+            this.rToolStripMain.ResumeLayout(false);
+            this.rToolStripMain.PerformLayout();
             this.groupBoxRV.ResumeLayout(false);
             this.groupBoxRV.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.groupBoxSW.ResumeLayout(false);
+            this.groupBoxSW.PerformLayout();
+            this.wToolStripAct.ResumeLayout(false);
+            this.wToolStripAct.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scoreWriterPicture)).EndInit();
-            this.wToolStrip2.ResumeLayout(false);
-            this.wToolStrip2.PerformLayout();
-            this.wToolStrip1.ResumeLayout(false);
-            this.wToolStrip1.PerformLayout();
+            this.wToolStripNote.ResumeLayout(false);
+            this.wToolStripNote.PerformLayout();
+            this.wToolStripMain.ResumeLayout(false);
+            this.wToolStripMain.PerformLayout();
             this.panelSPC.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2805,7 +3737,7 @@
         private System.Windows.Forms.ComboBox parameterName1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox parameterName2;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.HScrollBar hScrollBarCT;
         private System.Windows.Forms.PictureBox channelTracks;
         private System.Windows.Forms.ToolStripComboBox soundType;
         private System.Windows.Forms.Label labelOpcode1;
@@ -2814,8 +3746,8 @@
         private System.Windows.Forms.GroupBox groupBoxSV;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox scoreViewPicture;
-        private System.Windows.Forms.HScrollBar hScrollBar2;
-        private System.Windows.Forms.Label labelStaffItem;
+        private System.Windows.Forms.HScrollBar hScrollBarSV;
+        private System.Windows.Forms.Label labelRNote;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton scoreViewer;
         private System.Windows.Forms.Panel panel3;
@@ -2853,15 +3785,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem clearChannel;
         private System.Windows.Forms.ToolStripButton scoreWriter;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.ToolStrip wToolStrip1;
+        private System.Windows.Forms.GroupBox groupBoxSW;
+        private System.Windows.Forms.ToolStrip wToolStripMain;
         private System.Windows.Forms.ToolStripButton wTempo;
         private System.Windows.Forms.ToolStripButton wInstrument;
         private System.Windows.Forms.ToolStripButton wVolume;
         private System.Windows.Forms.ToolStripButton wBalance;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox scoreWriterPicture;
-        private System.Windows.Forms.ToolStrip wToolStrip2;
+        private System.Windows.Forms.ToolStrip wToolStripNote;
         private System.Windows.Forms.ToolStripButton wSharp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton wNoteWhole;
@@ -2899,7 +3831,7 @@
         private System.Windows.Forms.ToolStripButton wReverbOff;
         private System.Windows.Forms.ToolStripButton wPercussionOn;
         private System.Windows.Forms.ToolStripButton wPercussionOff;
-        private System.Windows.Forms.HScrollBar hScrollBar3;
+        private System.Windows.Forms.HScrollBar hScrollBarSW;
         private System.Windows.Forms.ToolStripButton wFlat;
         private System.Windows.Forms.ToolStripButton wNatural;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
@@ -2910,15 +3842,11 @@
         private System.Windows.Forms.ToolStripButton wFirstSection;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripComboBox clef;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripComboBox key;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripLabel labelNote;
+        private System.Windows.Forms.ToolStripComboBox keySW;
         private System.Windows.Forms.ToolStripButton saveScoreFile;
         private System.Windows.Forms.ToolStripButton openScoreFile;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripButton wErase;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripButton importScoreFiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private ToolStripNumericUpDown staffHeightSW;
@@ -2934,10 +3862,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripTextBox findCommandText;
         private System.Windows.Forms.ToolStripButton findCommand;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem importSPCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importMMLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem exportSPCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportMMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton import;
@@ -2959,7 +3885,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportScoreFiles;
         private System.Windows.Forms.ToolStripMenuItem exportStaffsMML;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ToolStrip toolStrip5;
+        private System.Windows.Forms.ToolStrip rToolStripMain;
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private ToolStripNumericUpDown staffHeightSV;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
@@ -2970,7 +3896,76 @@
         private ToolStripCheckBox showRests;
         private System.Windows.Forms.ToolStripButton undo;
         private System.Windows.Forms.ToolStripButton redo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
         private System.Windows.Forms.ToolStripButton wTie;
+        private System.Windows.Forms.ToolStripButton ticksNoteButton;
+        private ToolStripNumericUpDown ticksNoteValue;
+        private System.Windows.Forms.ToolStripButton ticksRestButton;
+        private ToolStripNumericUpDown ticksRestValue;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox keySV;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton wCut;
+        private System.Windows.Forms.ToolStripButton wCopy;
+        private System.Windows.Forms.ToolStripButton wPaste;
+        private System.Windows.Forms.ToolStripButton wSelect;
+        private System.Windows.Forms.Label labelWNote;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripButton wDelete;
+        private System.Windows.Forms.ToolStrip wToolStripAct;
+        private System.Windows.Forms.ToolStripButton wDraw;
+        private System.Windows.Forms.ToolStrip rToolStripAct;
+        private System.Windows.Forms.ToolStripButton rDraw;
+        private System.Windows.Forms.ToolStripButton rErase;
+        private System.Windows.Forms.ToolStripButton rSelect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
+        private System.Windows.Forms.ToolStripButton rDelete;
+        private System.Windows.Forms.ToolStripButton rCut;
+        private System.Windows.Forms.ToolStripButton rCopy;
+        private System.Windows.Forms.ToolStripButton rPaste;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripButton rUndo;
+        private System.Windows.Forms.ToolStripButton rRedo;
+        private System.Windows.Forms.ToolStrip rToolStripNote;
+        private System.Windows.Forms.ToolStripButton rSharp;
+        private System.Windows.Forms.ToolStripButton rFlat;
+        private System.Windows.Forms.ToolStripButton rNatural;
+        private System.Windows.Forms.ToolStripButton rTie;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.ToolStripButton rNoteWhole;
+        private System.Windows.Forms.ToolStripButton rNoteHalfD;
+        private System.Windows.Forms.ToolStripButton rNoteHalf;
+        private System.Windows.Forms.ToolStripButton rNoteQuarterD;
+        private System.Windows.Forms.ToolStripButton rNoteQuarter;
+        private System.Windows.Forms.ToolStripButton rNoteQuarterT;
+        private System.Windows.Forms.ToolStripButton rNote8thD;
+        private System.Windows.Forms.ToolStripButton rNote8th;
+        private System.Windows.Forms.ToolStripButton rNote8thT;
+        private System.Windows.Forms.ToolStripButton rNote16th;
+        private System.Windows.Forms.ToolStripButton rNote16thT;
+        private System.Windows.Forms.ToolStripButton rNote32nd;
+        private System.Windows.Forms.ToolStripButton rNote64th;
+        private System.Windows.Forms.ToolStripButton rTicksNoteButton;
+        private ToolStripNumericUpDown rTicksNoteValue;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+        private System.Windows.Forms.ToolStripButton rRestWhole;
+        private System.Windows.Forms.ToolStripButton rRestHalfD;
+        private System.Windows.Forms.ToolStripButton rRestHalf;
+        private System.Windows.Forms.ToolStripButton rRestQuarterD;
+        private System.Windows.Forms.ToolStripButton rRestQuarter;
+        private System.Windows.Forms.ToolStripButton rRestQuarterT;
+        private System.Windows.Forms.ToolStripButton rRest8thD;
+        private System.Windows.Forms.ToolStripButton rRest8th;
+        private System.Windows.Forms.ToolStripButton rRest8thT;
+        private System.Windows.Forms.ToolStripButton rRest16th;
+        private System.Windows.Forms.ToolStripButton rRest16thT;
+        private System.Windows.Forms.ToolStripButton rRest32nd;
+        private System.Windows.Forms.ToolStripButton rRest64th;
+        private System.Windows.Forms.ToolStripButton rTicksRestButton;
+        private ToolStripNumericUpDown rTicksRestValue;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel10;
+        private System.Windows.Forms.ToolStripComboBox clefSV;
     }
 }

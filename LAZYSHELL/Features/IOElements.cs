@@ -356,7 +356,7 @@ namespace LAZYSHELL
             if (this.Text == "EXPORT SAMPLE BRRs...")
             {
                 if (radioButtonCurrent.Checked)
-                    Do.Export(Model.AudioSamples[currentIndex].Sample, 
+                    Do.Export(Model.AudioSamples[currentIndex].Sample,
                         "sampleBRR." + currentIndex.ToString("d3") + ".brr", fullPath);
                 else
                 {
@@ -504,6 +504,8 @@ namespace LAZYSHELL
                     }
                     for (int i = 0; i < spcs.Length; i++)
                     {
+                        if (spcs[i].SPCData == null)
+                            continue;
                         Model.SPCs[i] = spcs[i];
                         Model.SPCs[i].CreateCommands();
                     }

@@ -19,10 +19,14 @@ namespace LAZYSHELL
             Bitmap icon = SystemIcons.Error.ToBitmap();
             pictureBox1.Size = icon.Size;
             pictureBox1.Image = icon;
-            string forumthread = "http://acmlm.no-ip.org/board/thread.php?id=7005";
-            label1.Text = "Lazy Shell has encountered an error. Please copy ALL of the contents of the box below and post them as a new reply to this thread:\n\n";
-            label1.Links.Add(label1.Text.Length, forumthread.Length, forumthread);
-            label1.Text += forumthread;
+            string forumthreadA = "http://acmlm.no-ip.org/board/thread.php?id=7005";
+            string forumthreadB = "http://www.smwcentral.net/?p=viewthread&t=45572";
+            label1.Text = "Lazy Shell has encountered an error. Please copy ALL of the contents of the box below and post them as a new reply to one of these threads:\n\n";
+            label1.Links.Add(label1.Text.Length, forumthreadA.Length, forumthreadA);
+            label1.Text += forumthreadA + "\n";
+            label1.Links.Add(label1.Text.Length, forumthreadB.Length, forumthreadB);
+            label1.Text += forumthreadB + "\n\n";
+            label1.Text += "Also please briefly explain what you did to cause the error and which # and name of the element you were editing.";
             //
             Assembly assembly = Assembly.GetExecutingAssembly();
             richTextBox1.Text = assembly.ToString() + "\r\n\r\n";

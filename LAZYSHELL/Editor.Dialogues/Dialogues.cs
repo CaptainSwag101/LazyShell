@@ -13,7 +13,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Dialogues : NewForm
+    public partial class Dialogues : Form
     {
         #region Variables
 
@@ -736,7 +736,7 @@ namespace LAZYSHELL
         }
         private void pageDown_Click(object sender, EventArgs e)
         {
-            dialoguePreview.PageDown(dialogue.Text.Length);
+            dialoguePreview.PageDown();
             SetTextImage();
         }
         private void toolStripButton11_Click(object sender, EventArgs e)

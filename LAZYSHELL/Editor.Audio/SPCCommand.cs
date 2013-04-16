@@ -11,8 +11,7 @@ namespace LAZYSHELL
         // class variables
         private SPC spc;
         private int channel;
-        private byte[] commandData; 
-        private List<SPCCommand> commands = new List<SPCCommand>();
+        private byte[] commandData;
         // public accessors
         public byte Opcode
         {
@@ -71,7 +70,26 @@ namespace LAZYSHELL
         public int Length { get { return commandData.Length; } }
         public int Channel { get { return this.channel; } set { this.channel = value; } }
         public byte[] CommandData { get { return this.commandData; } set { this.commandData = value; } }
-        public List<SPCCommand> Commands { get { return this.commands; } set { this.commands = value; } }
+        public List<SPCCommand> Commands { get { return spc.Channels[channel]; } set { spc.Channels[channel] = value; } }
+        public int Index { get { return this.Commands.IndexOf(this); } }
+        public SPCCommand Prev
+        {
+            get
+            {
+                if (Index > 0)
+                    return Commands[Index - 1];
+                return null;
+            }
+        }
+        public SPCCommand Next
+        {
+            get
+            {
+                if (Index < Commands.Count)
+                    return Commands[Index + 1];
+                return null;
+            }
+        }
         // constructor
         public SPCCommand(byte[] commandData, SPC spc, int channel)
         {

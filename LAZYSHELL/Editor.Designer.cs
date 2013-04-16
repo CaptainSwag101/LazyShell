@@ -47,9 +47,9 @@ namespace LAZYSHELL
             this.openEffects = new System.Windows.Forms.ToolStripButton();
             this.openEventScripts = new System.Windows.Forms.ToolStripButton();
             this.openFormations = new System.Windows.Forms.ToolStripButton();
+            this.openMainTitle = new System.Windows.Forms.ToolStripButton();
             this.openItems = new System.Windows.Forms.ToolStripButton();
             this.openLevels = new System.Windows.Forms.ToolStripButton();
-            this.openMainTitle = new System.Windows.Forms.ToolStripButton();
             this.openMenus = new System.Windows.Forms.ToolStripButton();
             this.openMiniGames = new System.Windows.Forms.ToolStripButton();
             this.openMonsters = new System.Windows.Forms.ToolStripButton();
@@ -86,6 +86,7 @@ namespace LAZYSHELL
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.loadAllData = new System.Windows.Forms.ToolStripButton();
             this.clearModel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -216,9 +217,9 @@ namespace LAZYSHELL
             this.openEffects,
             this.openEventScripts,
             this.openFormations,
+            this.openMainTitle,
             this.openItems,
             this.openLevels,
-            this.openMainTitle,
             this.openMenus,
             this.openMiniGames,
             this.openMonsters,
@@ -352,6 +353,19 @@ namespace LAZYSHELL
             this.openFormations.ToolTipText = "Edit monster battle formations, formations properties, and packs";
             this.openFormations.Click += new System.EventHandler(this.openFormations_Click);
             // 
+            // openMainTitle
+            // 
+            this.openMainTitle.Image = global::LAZYSHELL.Properties.Resources.mainMainTitle;
+            this.openMainTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMainTitle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openMainTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMainTitle.Name = "openMainTitle";
+            this.openMainTitle.Size = new System.Drawing.Size(94, 22);
+            this.openMainTitle.Text = "Intro";
+            this.openMainTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openMainTitle.ToolTipText = "Edit the main title logo and backgrounds";
+            this.openMainTitle.Click += new System.EventHandler(this.openMainTitle_Click);
+            // 
             // openItems
             // 
             this.openItems.Image = global::LAZYSHELL.Properties.Resources.mainItems;
@@ -377,19 +391,6 @@ namespace LAZYSHELL
             this.openLevels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openLevels.ToolTipText = "Edit level / location maps, NPCs, exits and event fields,  etc.";
             this.openLevels.Click += new System.EventHandler(this.openLevels_Click);
-            // 
-            // openMainTitle
-            // 
-            this.openMainTitle.Image = global::LAZYSHELL.Properties.Resources.mainMainTitle;
-            this.openMainTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openMainTitle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openMainTitle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openMainTitle.Name = "openMainTitle";
-            this.openMainTitle.Size = new System.Drawing.Size(94, 22);
-            this.openMainTitle.Text = "Main Title";
-            this.openMainTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openMainTitle.ToolTipText = "Edit the main title logo and backgrounds";
-            this.openMainTitle.Click += new System.EventHandler(this.openMainTitle_Click);
             // 
             // openMenus
             // 
@@ -521,8 +522,9 @@ namespace LAZYSHELL
             this.history,
             this.showROMInfo,
             this.hexViewer,
-            this.info,
-            this.help});
+            this.toolStripSeparator4,
+            this.help,
+            this.info});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -794,6 +796,11 @@ namespace LAZYSHELL
             this.clearModel.Text = "Clear Editor Memory";
             this.clearModel.Click += new System.EventHandler(this.clearModel_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // Editor
             // 
             this.AllowDrop = true;
@@ -890,6 +897,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openNotes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripButton openSettings;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

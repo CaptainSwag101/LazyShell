@@ -12,7 +12,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class WorldMaps : NewForm
+    public partial class WorldMaps : Form
     {
         #region Variables
 
