@@ -51,6 +51,8 @@ namespace LAZYSHELL
             index = 0;
             RefreshShops();
             labelWindow = new EditLabel(shopName, null, "Shops", true);
+            //
+            new History(this, shopName, null);
         }
         // functions
         private void InitializeStrings()

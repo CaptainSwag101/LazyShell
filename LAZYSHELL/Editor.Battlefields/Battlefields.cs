@@ -96,7 +96,7 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, battlefieldName, battlefieldNum);
             if (settings.RememberLastIndex)
                 index = settings.LastBattlefield;
             //

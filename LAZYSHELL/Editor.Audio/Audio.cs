@@ -35,7 +35,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(sampleEditor);
             sampleEditor.Visible = true;
             new ToolTipLabel(this, null, helpTips);
-            new History(this);
+            new History(this, false);
             if (Settings.Default.RememberLastIndex)
             {
                 sampleEditor.Index = Settings.Default.LastAudioSample;

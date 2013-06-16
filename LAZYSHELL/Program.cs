@@ -60,11 +60,11 @@ namespace LAZYSHELL
         [STAThread]
         public static void Main(string[] args)
         {
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             Program App = new Program();
         }
         // custom exception form
-        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Model.History += "***EXCEPTION*** " + e.Exception.Message + ")\n";
             new NewExceptionForm(e.Exception).ShowDialog();

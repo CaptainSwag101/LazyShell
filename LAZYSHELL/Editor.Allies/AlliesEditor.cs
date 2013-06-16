@@ -41,7 +41,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(alliesEditor);
             alliesEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, false);
         }
         // functions
         public void Assemble()

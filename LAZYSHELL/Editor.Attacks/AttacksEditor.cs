@@ -37,7 +37,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(spellsEditor);
             spellsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, false);
             //
             if (settings.RememberLastIndex)
             {

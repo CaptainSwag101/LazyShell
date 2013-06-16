@@ -38,6 +38,8 @@ namespace LAZYSHELL
             this.lvl2TimingStart.Value = characters[0].DefenseStartL2;
             this.lvl2TimingEnd.Value = characters[0].DefenseEndL2;
             this.lvl1TimingEnd.Value = characters[0].DefenseEndL1;
+            //
+            new History(this, characterName, null);
         }
         private void InitializeStrings()
         {

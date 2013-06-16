@@ -67,6 +67,8 @@ namespace LAZYSHELL
             this.formationNameList.SelectedIndex = 0;
             battlefieldName.SelectedIndex = 7;
             RefreshFormations();
+            //
+            new History(this, formationNameList, formationNum);
         }
         // functions
         private void SetControls()

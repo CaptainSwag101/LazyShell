@@ -53,6 +53,8 @@ namespace LAZYSHELL
         {
             get
             {
+                if (listViewList.SelectedItems.Count == 0)
+                    return -1;
                 return Bits.GetInt32(listViewList.SelectedItems[0].SubItems[0].Text);
             }
         }
@@ -550,7 +552,7 @@ namespace LAZYSHELL
             if (exportAll)
                 saveFileDialog.FileName = "listCollections";
             else
-                saveFileDialog.FileName = "list" + ((string)listBoxLists.SelectedItem).Replace(" ", "");
+                saveFileDialog.FileName = "list" + (listBoxLists.SelectedItem.ToString()).Replace(" ", "");
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -584,7 +586,7 @@ namespace LAZYSHELL
             if (importAll)
                 openFileDialog.FileName = "listCollections";
             else
-                openFileDialog.FileName = (string)listBoxLists.SelectedItem;
+                openFileDialog.FileName = listBoxLists.SelectedItem.ToString();
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -833,6 +835,12 @@ namespace LAZYSHELL
         }
         private void addToElements_Click(object sender, EventArgs e)
         {
+            if (listIndex < 0)
+            {
+                MessageBox.Show("Must select an item in the list before adding it to the notes.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             int number = elist.Indexes[listIndex].Index;
             string label = elist.Indexes[listIndex].Label;
             string description = elist.Indexes[listIndex].Description;

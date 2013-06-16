@@ -38,7 +38,7 @@ namespace LAZYSHELL
             itemsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, false);
             checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         // functions

@@ -33,6 +33,8 @@ namespace LAZYSHELL
             searchWindow = new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
             labelWindow = new EditLabel(null, packNum, "Packs", false);
             RefreshFormationPacks();
+            //
+            new History(this, null, packNum);
         }
         // functions
         public void RefreshFormationPacks()

@@ -76,6 +76,8 @@ namespace LAZYSHELL
             }
             searchWindow = new Search(sampleNum, searchText, searchNames, sampleName.Items);
             labelWindow = new EditLabel(sampleName, sampleNum, "Samples", true);
+            //
+            new History(this, sampleName, sampleNum);
         }
         // functions
         private void RefreshSample()

@@ -129,7 +129,7 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, name, number);
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
         }
         private void RefreshSpritesEditor()

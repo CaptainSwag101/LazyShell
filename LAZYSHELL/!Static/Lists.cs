@@ -5337,6 +5337,16 @@ namespace LAZYSHELL
         {
             return Numerize(Convert(list));
         }
+        public static string RemoveTag(string item)
+        {
+            if (item.StartsWith("{"))
+            {
+                while (item.Length > 0 && !item.StartsWith(" "))
+                    item = item.Remove(0, 1);
+                item = item.Trim();
+            }
+            return item;
+        }
         // conversion
         public static string[] Convert(StringCollection list)
         {

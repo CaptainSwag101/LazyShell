@@ -40,6 +40,8 @@ namespace LAZYSHELL
             RefreshItems();
             if (settings.RememberLastIndex)
                 index = settings.LastItem;
+            //
+            new History(this, itemName, itemNum);
         }
         #region Functions
         private void InitializeStrings()

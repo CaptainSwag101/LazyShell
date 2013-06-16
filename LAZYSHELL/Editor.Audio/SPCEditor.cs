@@ -103,16 +103,19 @@ namespace LAZYSHELL
             {
                 spcs = Model.SPCs;
                 trackName.Items.AddRange(Lists.Numerize(Lists.MusicNames));
+                labelWindow.SetElement("Songs");
             }
             else if (Type == 1)
             {
                 spcs = Model.SPCEvent;
                 trackName.Items.AddRange(Lists.Numerize(Lists.SoundNames));
+                labelWindow.SetElement("Sound FX (Event)");
             }
             else
             {
                 spcs = Model.SPCBattle;
                 trackName.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
+                labelWindow.SetElement("Sound FX (Battle)");
             }
             trackNum.Maximum = spcs.Length - 1;
             if (settings.RememberLastIndex)
@@ -135,6 +138,8 @@ namespace LAZYSHELL
             //
             RefreshSPC();
             updating = false;
+            //
+            new History(this, trackName, trackNum);
         }
         #region Functions
         private void RefreshSPC()

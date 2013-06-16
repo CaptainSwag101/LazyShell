@@ -117,7 +117,7 @@ namespace LAZYSHELL
             findNPCNumber = new NPCEditor(this, npcID.Value);
             new ToolTipLabel(findNPCNumber, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, levelName, levelNum);
             lastNavigate = index;
             checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
                 Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);

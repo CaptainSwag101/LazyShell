@@ -29,7 +29,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
-            new History(this);
+            new History(this, false);
             //
         }
         private void LoadMineCartEditor()

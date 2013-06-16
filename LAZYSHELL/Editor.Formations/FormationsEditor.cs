@@ -38,7 +38,7 @@ namespace LAZYSHELL
             formationsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, false);
             if (settings.RememberLastIndex)
             {
                 packsEditor.Index = Settings.Default.LastFormationPack;

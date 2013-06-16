@@ -767,6 +767,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\btn_donate_LG.gif" />
     <None Include="Resources\addFromNotes.gif" />
     <None Include="Resources\addToNotes.gif" />
     <None Include="Resources\keystrokes.gif" />

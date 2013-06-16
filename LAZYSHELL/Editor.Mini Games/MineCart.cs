@@ -161,6 +161,8 @@ namespace LAZYSHELL
             checksum = Do.GenerateChecksum(MinecartData, Model.MinecartM7Graphics, Model.MinecartM7PaletteSet,
                 Model.MinecartM7TilemapA, Model.MinecartM7TilemapB, Model.MinecartM7TilesetPalettes, Model.MinecartM7TilesetSubtiles,
                 Model.MinecartObjectGraphics, Model.MinecartObjectPaletteSet, Model.MinecartSSBGTileset, Model.MinecartSSGraphics, Model.MinecartSSPaletteSet);
+            //
+            new History(this, levelName, null);
         }
         public void Reload(MiniGames miniGames)
         {

@@ -59,7 +59,7 @@ namespace LAZYSHELL
             InitializeStrings();
             RefreshMonsterTab();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, monsterName, monsterNum);
             //
             if (settings.RememberLastIndex)
                 Index = settings.LastMonster;

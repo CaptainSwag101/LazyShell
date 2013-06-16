@@ -89,7 +89,7 @@ namespace LAZYSHELL
             //LoadLogoGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, worldMapName, null);
             checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
                 Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations);
         }

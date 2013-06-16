@@ -110,7 +110,8 @@ namespace LAZYSHELL
             Form form = null;
             string control = "";
             Type type = item.GetType();
-            if (type.BaseType.Name.StartsWith("ToolStrip"))
+            string name = type.BaseType.Name;
+            if (name.StartsWith("ToolStrip") && name != "ToolStrip")
             {
                 form = ((ToolStripItem)item).Owner.FindForm();
                 control = ((ToolStripItem)item).Name;
@@ -129,7 +130,7 @@ namespace LAZYSHELL
             if (form == null) return "";
             //
             XmlDocument LAZYSHELL_help = Model.LAZYSHELL_xml;
-            string name = string.Format("//*[@form='{0}']", form.Name);
+            name = string.Format("//*[@form='{0}']", form.Name);
             // find form in nodes
             XmlNode window = LAZYSHELL_help.SelectSingleNode(name);
             if (window != null)

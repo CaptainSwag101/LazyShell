@@ -34,6 +34,8 @@ namespace LAZYSHELL
             RefreshSpells();
             RefreshTimingSpellsTwo();
             labelWindow = new EditLabel(spellName, spellNum, "Spells", false);
+            //
+            new History(this, spellName, spellNum);
         }
         #region Functions
         public void RefreshSpells()

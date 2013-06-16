@@ -831,11 +831,10 @@ namespace LAZYSHELL.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;LAZYSHELL_xsl.xsl&quot;?&gt;
         ///&lt;LAZYSHELL form=&quot;Editor&quot; icon=&quot;icons/main.gif&quot; title=&quot;LAZY SHELL - Super Mario RPG Editor&quot;&gt;
-        ///  &lt;Properties version=&quot;3.15.0&quot; date=&quot;, 2012&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
+        ///  &lt;Properties version=&quot;3.16.1&quot; date=&quot;??? ??, 2013&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
         ///  &lt;Read&gt;
         ///    &lt;header&gt;Read this first&lt;/header&gt;
-        ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/introduction&gt;
-        ///    &lt; [rest of string was truncated]&quot;;.
+        ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/introduction&gt;        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string LAZYSHELL_xml {
             get {

@@ -133,7 +133,7 @@ namespace LAZYSHELL
             searchWindow = new Search(eventNum, searchLabelsText, searchLabels, Lists.EventLabels);
             labelWindow = new EditLabel(eventLabel, eventNum, "Event Scripts", true);
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            new History(this, null, eventNum);
             disableNavigate = true;
             if (settings.RememberLastIndex)
             {

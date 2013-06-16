@@ -41,7 +41,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
-            new History(this);
+            new History(this, false);
             //
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
                 Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites);

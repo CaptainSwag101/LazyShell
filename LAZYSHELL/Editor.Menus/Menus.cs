@@ -142,6 +142,8 @@ namespace LAZYSHELL
             SetCursorImages();
             SetPreviewImage();
             SetTextObjects();
+            //
+            new History(this, menuName, null);
         }
         public void Reload(MenusEditor menusEditor)
         {

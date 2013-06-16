@@ -93,7 +93,7 @@ namespace LAZYSHELL
                 toolStripCommands.Items.Insert(i + 9, numUpDown);
             }
             InitializeEditor();
-            new History(this);
+            new History(this, animationName, animationNum);
             //
             commands.Items.AddRange(Lists.AnimationCommands);
             checksum = Do.GenerateChecksum(animationBank, battleBank);

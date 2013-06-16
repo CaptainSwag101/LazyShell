@@ -126,7 +126,7 @@ namespace LAZYSHELL
             new ToolTipLabel(this, baseConvertor, helpTips);
             new ToolTipLabel(fonts.NewFontTable, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, null, dialogueNum);
             Checksum = Do.GenerateChecksum(dialogues, dte, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
                 fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
                 Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);

@@ -1,5 +1,17 @@
 Major changes/additions are indicated by ***
 
+v3.16.1 (2013-06-16)
+--------------------------------------
+Additions:
+*History log now includes numbers & names of the current element index
+
+Fixes:
+*Animations: crash if enable help tips and mouseover bottom toolstrip
+*Audio: crash if label editor try to refresh non-music type index > 79
+*Project: crash if try to add element to notes and nothing selected
+*Project: crash if try to import or export current list
+
+
 v3.16.0 (2013-04-15)
 --------------------------------------
 Additions:

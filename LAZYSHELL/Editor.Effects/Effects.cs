@@ -90,7 +90,7 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this);
+            new History(this, name, number);
             if (settings.RememberLastIndex)
                 index = settings.LastEffect;
             checksum = Do.GenerateChecksum(animations, effects);

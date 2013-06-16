@@ -27,6 +27,8 @@ namespace LAZYSHELL
             InitializeStrings();
             RefreshAttacks();
             labelWindow = new EditLabel(attackName, attackNum, "Attacks", false);
+            //
+            new History(this, attackName, attackNum);
         }
         // functions
         private void InitializeStrings()

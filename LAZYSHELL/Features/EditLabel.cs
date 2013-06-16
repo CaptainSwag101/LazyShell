@@ -131,8 +131,12 @@ namespace LAZYSHELL
         private void RefreshLabel()
         {
             updating = true;
-            if (elist != null && index >= 0)
+            if (elist != null && index >= 0 && index < elist.Labels.Length)
                 labelText.Text = elist.Labels[index];
+            else if (elist != null && index >= elist.Labels.Length)
+                MessageBox.Show("Error loading label in \"" + elist.Name +
+                    "\" for index " + index + ". Please report this.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             updating = false;
         }
         private bool CheckLoadedProject()

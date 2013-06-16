@@ -27,6 +27,8 @@ namespace LAZYSHELL
             InitializeStrings();
             index = 0;
             RefreshLevel();
+            //
+            new History(this);
         }
         // functions
         private void InitializeStrings()
