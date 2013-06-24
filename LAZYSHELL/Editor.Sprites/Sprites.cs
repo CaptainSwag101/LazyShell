@@ -461,6 +461,7 @@ namespace LAZYSHELL
             animationVRAM.Value = animation.VramAllocation;
             LoadMoldEditor();
             LoadSequenceEditor();
+            CalculateFreeSpace();
         }
         private void animationVRAM_ValueChanged(object sender, EventArgs e)
         {
@@ -483,7 +484,7 @@ namespace LAZYSHELL
         }
         private void openSequences_Click(object sender, EventArgs e)
         {
-            sequences.Visible = openSequences.Checked;
+            panelSequences.Visible = openSequences.Checked;
         }
         private void openMolds_Click(object sender, EventArgs e)
         {

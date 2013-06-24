@@ -60,6 +60,7 @@ namespace LAZYSHELL
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.recentFiles = new System.Windows.Forms.ToolStripDropDownButton();
             this.refreshROM = new System.Windows.Forms.ToolStripButton();
@@ -74,8 +75,9 @@ namespace LAZYSHELL
             this.history = new System.Windows.Forms.ToolStripButton();
             this.showROMInfo = new System.Windows.Forms.ToolStripButton();
             this.hexViewer = new System.Windows.Forms.ToolStripButton();
-            this.info = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.help = new System.Windows.Forms.ToolStripButton();
+            this.info = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.openAll = new System.Windows.Forms.ToolStripButton();
             this.closeAll = new System.Windows.Forms.ToolStripButton();
@@ -86,11 +88,11 @@ namespace LAZYSHELL
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.loadAllData = new System.Windows.Forms.ToolStripButton();
             this.clearModel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
@@ -110,7 +112,7 @@ namespace LAZYSHELL
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 25);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(583, 75);
+            this.panel4.Size = new System.Drawing.Size(528, 75);
             this.panel4.TabIndex = 1;
             // 
             // panel1
@@ -120,7 +122,7 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(583, 50);
+            this.panel1.Size = new System.Drawing.Size(528, 50);
             this.panel1.TabIndex = 1;
             // 
             // romInfo
@@ -132,7 +134,7 @@ namespace LAZYSHELL
             this.romInfo.ReadOnly = true;
             this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.romInfo.Size = new System.Drawing.Size(489, 50);
+            this.romInfo.Size = new System.Drawing.Size(434, 50);
             this.romInfo.TabIndex = 1;
             this.romInfo.Text = "";
             this.romInfo.WordWrap = false;
@@ -164,7 +166,7 @@ namespace LAZYSHELL
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(528, 25);
             this.toolStrip1.Stretch = true;
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
@@ -187,7 +189,7 @@ namespace LAZYSHELL
             this.loadRomTextBox.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadRomTextBox.Name = "loadRomTextBox";
             this.loadRomTextBox.ReadOnly = true;
-            this.loadRomTextBox.Size = new System.Drawing.Size(488, 18);
+            this.loadRomTextBox.Size = new System.Drawing.Size(433, 25);
             // 
             // removeHeader
             // 
@@ -402,7 +404,7 @@ namespace LAZYSHELL
             this.openMenus.Size = new System.Drawing.Size(94, 22);
             this.openMenus.Text = "Menus";
             this.openMenus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openMenus.ToolTipText = "Edit the overworld menus";
+            this.openMenus.ToolTipText = "Edit the overworld and new game menus";
             this.openMenus.Click += new System.EventHandler(this.openMenus_Click);
             // 
             // openMiniGames
@@ -415,7 +417,7 @@ namespace LAZYSHELL
             this.openMiniGames.Size = new System.Drawing.Size(94, 22);
             this.openMiniGames.Text = "Mini-games";
             this.openMiniGames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openMiniGames.ToolTipText = "Edit the minecart and beetle mania mini-games";
+            this.openMiniGames.ToolTipText = "Edit the mine cart mini-game tracks";
             this.openMiniGames.Click += new System.EventHandler(this.openMiniGames_Click);
             // 
             // openMonsters
@@ -499,11 +501,21 @@ namespace LAZYSHELL
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.webBrowser1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(96, 125);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 460);
+            this.panel2.Size = new System.Drawing.Size(432, 460);
             this.panel2.TabIndex = 4;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(428, 456);
+            this.webBrowser1.TabIndex = 0;
             // 
             // toolStrip4
             // 
@@ -528,7 +540,7 @@ namespace LAZYSHELL
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip4.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(528, 25);
             this.toolStrip4.TabIndex = 0;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -661,15 +673,10 @@ namespace LAZYSHELL
             this.hexViewer.Text = "Open Hex Editor";
             this.hexViewer.Click += new System.EventHandler(this.hexViewer_Click);
             // 
-            // info
+            // toolStripSeparator4
             // 
-            this.info.Image = global::LAZYSHELL.Properties.Resources.about_small;
-            this.info.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.info.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(23, 22);
-            this.info.ToolTipText = "About";
-            this.info.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // help
             // 
@@ -681,6 +688,16 @@ namespace LAZYSHELL
             this.help.Size = new System.Drawing.Size(23, 22);
             this.help.Text = "Open Help Window";
             this.help.Click += new System.EventHandler(this.help_Click);
+            // 
+            // info
+            // 
+            this.info.Image = global::LAZYSHELL.Properties.Resources.about_small;
+            this.info.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.info.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.info.Name = "info";
+            this.info.Size = new System.Drawing.Size(23, 22);
+            this.info.ToolTipText = "About";
+            this.info.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStrip3
             // 
@@ -699,7 +716,7 @@ namespace LAZYSHELL
             this.toolStrip3.Location = new System.Drawing.Point(96, 100);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(487, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(432, 25);
             this.toolStrip3.TabIndex = 3;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -796,17 +813,12 @@ namespace LAZYSHELL
             this.clearModel.Text = "Clear Editor Memory";
             this.clearModel.Click += new System.EventHandler(this.clearModel_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // Editor
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 585);
+            this.ClientSize = new System.Drawing.Size(528, 585);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
@@ -827,6 +839,7 @@ namespace LAZYSHELL
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -898,6 +911,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripButton openSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 

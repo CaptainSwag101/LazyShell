@@ -415,6 +415,12 @@ namespace LAZYSHELL
         public NewPanel()
         {
         }
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            // only scroll with wheel if CTRL key not held
+            if ((Control.ModifierKeys & Keys.Control) == 0)
+                base.OnMouseWheel(e);
+        }
         protected override Point ScrollToControl(Control activeControl)
         {
             return this.DisplayRectangle.Location;
@@ -440,16 +446,106 @@ namespace LAZYSHELL
     }
     public class NewPictureBox : PictureBox
     {
+        [DllImport("user32.dll")]
+        static extern bool SetCursorPos(int X, int Y);
+        //
+        private int zoom = 1;
+        private ZoomBox zoomBox;
+        private int zoomBoxZoom = 4;
+        private bool zoomBoxEnabled = false;
+        private Point zoomBoxPosition = new Point(32, 32);
+        private Point autoScrollPos;
+        private Point mousePosition;
+        //
+        public int Zoom { get { return zoom; } set { zoom = value; } }
+        public ZoomBox ZoomBox { get { return zoomBox; } set { zoomBox = value; } }
+        public int ZoomBoxZoom { get { return zoomBoxZoom; } set { zoomBoxZoom = value; } }
+        public bool ZoomBoxEnabled
+        {
+            get { return zoomBoxEnabled; }
+            set
+            {
+                zoomBoxEnabled = value;
+                if (!zoomBoxEnabled)
+                    zoomBox.Visible = false;
+                Cursor.Position = Cursor.Position;
+            }
+        }
+        public Point ZoomBoxPosition { get { return zoomBoxPosition; } set { zoomBoxPosition = value; } }
+        // constructor
         public NewPictureBox()
         {
+            this.zoomBox = new ZoomBox(zoomBoxZoom);
             this.SetStyle(ControlStyles.Selectable, true);
             this.TabStop = true;
         }
-        protected override void OnMouseDown(MouseEventArgs e)
+        // functions
+        public void ZoomIn(int x, int y)
         {
+            if (this.Parent == null || zoom >= 8)
+                return;
+            if (this.Parent.GetType() != typeof(Panel) &&
+                this.Parent.GetType() != typeof(NewPanel))
+                return;
+            Panel parent = (Panel)this.Parent;
+            //
+            zoom *= 2;
+            autoScrollPos = new Point(Math.Abs(this.Left), Math.Abs(this.Top));
+            autoScrollPos.X += x;
+            autoScrollPos.Y += y;
+            this.Width *= 2;
+            this.Height *= 2;
+            parent.AutoScrollPosition = autoScrollPos;
+            parent.VerticalScroll.SmallChange *= 2;
+            parent.HorizontalScroll.SmallChange *= 2;
+            parent.VerticalScroll.LargeChange *= 2;
+            parent.HorizontalScroll.LargeChange *= 2;
+            this.Invalidate();
             this.Focus();
-            base.OnMouseDown(e);
         }
+        public void ZoomOut(int x, int y)
+        {
+            if (this.Parent == null || zoom <= 1)
+                return;
+            if (this.Parent.GetType() != typeof(Panel) &&
+                this.Parent.GetType() != typeof(NewPanel))
+                return;
+            Panel parent = (Panel)this.Parent;
+            //
+            zoom /= 2;
+            autoScrollPos = new Point(Math.Abs(this.Left), Math.Abs(this.Top));
+            autoScrollPos.X -= x / 2;
+            autoScrollPos.Y -= y / 2;
+            this.Width /= 2;
+            this.Height /= 2;
+            parent.AutoScrollPosition = autoScrollPos;
+            parent.VerticalScroll.SmallChange /= 2;
+            parent.HorizontalScroll.SmallChange /= 2;
+            parent.VerticalScroll.LargeChange /= 2;
+            parent.HorizontalScroll.LargeChange /= 2;
+            this.Invalidate();
+            this.Focus();
+        }
+        public void RefreshZoomBox()
+        {
+            if (zoomBoxEnabled && zoomBox != null)
+            {
+                zoomBox.Location = new Point(
+                    MousePosition.X + zoomBoxPosition.X,
+                    MousePosition.Y + zoomBoxPosition.Y);
+                zoomBox.Visible = true;
+                zoomBox.PictureBox.Invalidate();
+            }
+        }
+        public void CallMouseMove()
+        {
+            base.OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, -1, -1, 0));
+        }
+        public void CallMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+        }
+        //
         protected override bool IsInputKey(Keys keyData)
         {
             if (keyData == Keys.Up || keyData == Keys.Down)
@@ -463,6 +559,11 @@ namespace LAZYSHELL
             this.Invalidate();
             base.OnEnter(e);
         }
+        protected override void OnLostFocus(EventArgs e)
+        {
+            base.OnLostFocus(e);
+            Cursor.Position = Cursor.Position;
+        }
         protected override void OnLeave(EventArgs e)
         {
             this.Invalidate();
@@ -471,6 +572,47 @@ namespace LAZYSHELL
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+        }
+        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Control | Keys.Up:
+                case Keys.Control | Keys.Add:
+                    ZoomIn(mousePosition.X, mousePosition.Y); break;
+                case Keys.Control | Keys.Down:
+                case Keys.Control | Keys.Subtract:
+                    ZoomOut(mousePosition.X, mousePosition.Y); break;
+            }
+            base.OnPreviewKeyDown(e);
+        }
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.Delta > 0 && zoom < 8)
+                    ZoomIn(e.X, e.Y);
+                else if (e.Delta < 0 && zoom > 1)
+                    ZoomOut(e.X, e.Y);
+            }
+            base.OnMouseWheel(e);
+        }
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+        }
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            mousePosition = e.Location;
+            RefreshZoomBox();
+            this.Focus();
+            base.OnMouseMove(e);
+        }
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            if (zoomBox != null)
+                zoomBox.Visible = false;
+            base.OnMouseLeave(e);
         }
     }
     public class NewGroupBox : GroupBox
@@ -514,6 +656,93 @@ namespace LAZYSHELL
             foreColor = new SolidBrush(SystemColors.ControlText);
             Font font = new Font(this.Parent.Font.FontFamily, 7F, FontStyle.Bold);
             e.Graphics.DrawString(this.Text, font, foreColor, pointF);
+        }
+    }
+    public static class MouseSimulator
+    {
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct INPUT
+        {
+            public SendInputEventType type;
+            public MouseKeybdhardwareInputUnion mkhi;
+        }
+        [StructLayout(LayoutKind.Explicit)]
+        struct MouseKeybdhardwareInputUnion
+        {
+            [FieldOffset(0)]
+            public MouseInputData mi;
+
+            [FieldOffset(0)]
+            public KEYBDINPUT ki;
+
+            [FieldOffset(0)]
+            public HARDWAREINPUT hi;
+        }
+        [StructLayout(LayoutKind.Sequential)]
+        struct KEYBDINPUT
+        {
+            public ushort wVk;
+            public ushort wScan;
+            public uint dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+        [StructLayout(LayoutKind.Sequential)]
+        struct HARDWAREINPUT
+        {
+            public int uMsg;
+            public short wParamL;
+            public short wParamH;
+        }
+        struct MouseInputData
+        {
+            public int dx;
+            public int dy;
+            public uint mouseData;
+            public MouseEventFlags dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+        [Flags]
+        enum MouseEventFlags : uint
+        {
+            MOUSEEVENTF_MOVE = 0x0001,
+            MOUSEEVENTF_LEFTDOWN = 0x0002,
+            MOUSEEVENTF_LEFTUP = 0x0004,
+            MOUSEEVENTF_RIGHTDOWN = 0x0008,
+            MOUSEEVENTF_RIGHTUP = 0x0010,
+            MOUSEEVENTF_MIDDLEDOWN = 0x0020,
+            MOUSEEVENTF_MIDDLEUP = 0x0040,
+            MOUSEEVENTF_XDOWN = 0x0080,
+            MOUSEEVENTF_XUP = 0x0100,
+            MOUSEEVENTF_WHEEL = 0x0800,
+            MOUSEEVENTF_VIRTUALDESK = 0x4000,
+            MOUSEEVENTF_ABSOLUTE = 0x8000
+        }
+        enum SendInputEventType : int
+        {
+            InputMouse,
+            InputKeyboard,
+            InputHardware
+        }
+        public static void MouseMove()
+        {
+            INPUT mouseMoveInput = new INPUT();
+            mouseMoveInput.type = SendInputEventType.InputMouse;
+            mouseMoveInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE;
+            SendInput(1, ref mouseMoveInput, Marshal.SizeOf(new INPUT()));
+        }
+        public static void MouseMove(int x, int y)
+        {
+            INPUT mouseMoveInput = new INPUT();
+            mouseMoveInput.type = SendInputEventType.InputMouse;
+            mouseMoveInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE;
+            mouseMoveInput.mkhi.mi.dx = x;
+            mouseMoveInput.mkhi.mi.dy = x;
+            SendInput(1, ref mouseMoveInput, Marshal.SizeOf(new INPUT()));
         }
     }
 }

@@ -303,7 +303,6 @@
             this.MinimizeBox = false;
             this.Name = "TileEditor";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "TILE EDITOR";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TileEditor_FormClosing);

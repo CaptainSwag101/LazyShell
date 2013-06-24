@@ -1,6 +1,6 @@
 ﻿namespace LAZYSHELL
 {
-    partial class ZoomPanel
+    partial class ZoomBox
     {
         /// <summary>
         /// Required designer variable.

@@ -522,8 +522,8 @@ namespace LAZYSHELL
                 }
             }
         }
-        //
-        private void RefreshList()
+        // element lists
+        private void RefreshElementList()
         {
             int index = listBoxLists.SelectedIndex;
             string[] list = elist.Labels;
@@ -541,6 +541,9 @@ namespace LAZYSHELL
             }
             listViewList.Items.AddRange(listViewItems.ToArray());
             listViewList.EndUpdate();
+            //
+            listLabel.Text = "";
+            listDescription.Text = "";
         }
         private void ExportList(bool exportAll)
         {
@@ -831,7 +834,18 @@ namespace LAZYSHELL
         // element lists
         private void listBoxLists_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RefreshList();
+            RefreshElementList();
+        }
+        private void listViewList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewList.SelectedItems.Count == 0)
+                return;
+            listLabel.Text = elist.Indexes[listIndex].Label;
+            listDescription.Text = elist.Indexes[listIndex].Description;
+        }
+        private void listViewList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            Do.SortListView(listViewList, listsColumnSorter, e.Column);
         }
         private void addToElements_Click(object sender, EventArgs e)
         {
@@ -862,18 +876,7 @@ namespace LAZYSHELL
                 return;
             if (elist == null)
                 return;
-            elist.Indexes[listIndex].Label = listLabel.Text;
-            listViewList.SelectedItems[0].SubItems[1].Text = listLabel.Text;
-        }
-        private void listViewList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listViewList.SelectedItems.Count == 0)
-                return;
-            listLabel.Text = listViewList.SelectedItems[0].SubItems[1].Text;
-        }
-        private void listViewList_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            Do.SortListView(listViewList, listsColumnSorter, e.Column);
+            elist.Indexes[listIndex].Description = listDescription.Text;
         }
         private void importCollection_Click(object sender, EventArgs e)
         {
@@ -896,18 +899,17 @@ namespace LAZYSHELL
             if (MessageBox.Show("You are about to reset all lists in the current project to their default labels.\n\n" +
                 "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
-            foreach (EList elist in listBoxLists.Items)
+            foreach (EList elist in project.ELists)
                 elist.Reset();
-            RefreshList();
+            RefreshElementList();
         }
         private void resetCurrentList_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You are about to reset the current list to it's default labels.\n\n" +
                 "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
-            EList elist = (EList)listBoxLists.SelectedItem;
             elist.Reset();
-            RefreshList();
+            RefreshElementList();
         }
         // element notes
         private void transferToLists_Click(object sender, EventArgs e)
@@ -944,7 +946,7 @@ namespace LAZYSHELL
             {
                 elist.Indexes[eindex.Index].Label = eindex.Label;
             }
-            RefreshList();
+            RefreshElementList();
         }
         private void elementType_SelectedIndexChanged(object sender, EventArgs e)
         {

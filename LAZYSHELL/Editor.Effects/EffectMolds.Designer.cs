@@ -32,7 +32,7 @@
             this.e_moldWidth = new LAZYSHELL.ToolStripNumericUpDown();
             this.e_moldHeight = new LAZYSHELL.ToolStripNumericUpDown();
             this.panelMoldImage = new LAZYSHELL.NewPanel();
-            this.pictureBoxE_Mold = new System.Windows.Forms.PictureBox();
+            this.pictureBoxE_Mold = new LAZYSHELL.NewPictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +83,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.showBG = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleZoomBox = new System.Windows.Forms.ToolStripButton();
             this.labelCoords = new System.Windows.Forms.Label();
             this.panelMoldImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxE_Mold)).BeginInit();
@@ -100,6 +101,7 @@
             // e_moldWidth
             // 
             this.e_moldWidth.AutoSize = false;
+            this.e_moldWidth.ContextMenuStrip = null;
             this.e_moldWidth.Hexadecimal = false;
             this.e_moldWidth.Increment = new decimal(new int[] {
             1,
@@ -130,6 +132,7 @@
             // e_moldHeight
             // 
             this.e_moldHeight.AutoSize = false;
+            this.e_moldHeight.ContextMenuStrip = null;
             this.e_moldHeight.Hexadecimal = false;
             this.e_moldHeight.Increment = new decimal(new int[] {
             1,
@@ -180,11 +183,16 @@
             this.pictureBoxE_Mold.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxE_Mold.TabIndex = 399;
             this.pictureBoxE_Mold.TabStop = false;
+            this.pictureBoxE_Mold.Zoom = 1;
+            this.pictureBoxE_Mold.ZoomBoxEnabled = false;
+            this.pictureBoxE_Mold.ZoomBoxPosition = new System.Drawing.Point(32, 32);
+            this.pictureBoxE_Mold.ZoomBoxZoom = 4;
             this.pictureBoxE_Mold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxE_Mold_Paint);
             this.pictureBoxE_Mold.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseClick);
             this.pictureBoxE_Mold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseDown);
             this.pictureBoxE_Mold.MouseEnter += new System.EventHandler(this.pictureBoxE_Mold_MouseEnter);
             this.pictureBoxE_Mold.MouseLeave += new System.EventHandler(this.pictureBoxE_Mold_MouseLeave);
+            this.pictureBoxE_Mold.MouseHover += new System.EventHandler(this.pictureBoxE_Mold_MouseHover);
             this.pictureBoxE_Mold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseMove);
             this.pictureBoxE_Mold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxE_Mold_MouseUp);
             this.pictureBoxE_Mold.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxE_Mold_PreviewKeyDown);
@@ -203,7 +211,7 @@
             this.saveImageAsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 192);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 170);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // cutToolStripMenuItem
@@ -213,7 +221,7 @@
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cutToolStripMenuItem.Text = "Cut";
-            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cut_Click);
             // 
             // copyToolStripMenuItem
             // 
@@ -222,7 +230,7 @@
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copy_Click);
             // 
             // pasteToolStripMenuItem
             // 
@@ -231,7 +239,7 @@
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
-            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.paste_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -240,7 +248,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator6
             // 
@@ -254,7 +262,7 @@
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
             this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
-            this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
+            this.mirrorToolStripMenuItem.Click += new System.EventHandler(this.mirror_Click);
             // 
             // invertToolStripMenuItem
             // 
@@ -263,7 +271,7 @@
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
             this.invertToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.invertToolStripMenuItem.Text = "Invert";
-            this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
+            this.invertToolStripMenuItem.Click += new System.EventHandler(this.invert_Click);
             // 
             // toolStripSeparator5
             // 
@@ -316,7 +324,7 @@
             this.draw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.draw.Name = "draw";
             this.draw.Size = new System.Drawing.Size(22, 17);
-            this.draw.Text = "Draw";
+            this.draw.Text = "Draw (D)";
             this.draw.Click += new System.EventHandler(this.draw_Click);
             // 
             // erase
@@ -328,7 +336,7 @@
             this.erase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.erase.Name = "erase";
             this.erase.Size = new System.Drawing.Size(22, 17);
-            this.erase.Text = "Erase";
+            this.erase.Text = "Erase (E)";
             this.erase.Click += new System.EventHandler(this.erase_Click);
             // 
             // select
@@ -340,7 +348,7 @@
             this.select.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(22, 17);
-            this.select.Text = "Select tile(s)";
+            this.select.Text = "Select (S)";
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
             // selectAll
@@ -351,7 +359,7 @@
             this.selectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(22, 17);
-            this.selectAll.Text = "Select All";
+            this.selectAll.Text = "Select All (Ctrl+A)";
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
             // toolStripSeparator4
@@ -367,7 +375,7 @@
             this.cut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cut.Name = "cut";
             this.cut.Size = new System.Drawing.Size(22, 17);
-            this.cut.Text = "Cut Selection";
+            this.cut.Text = "Cut (Ctrl+X)";
             this.cut.Click += new System.EventHandler(this.cut_Click);
             // 
             // copy
@@ -378,7 +386,7 @@
             this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(22, 17);
-            this.copy.Text = "Copy Selection";
+            this.copy.Text = "Copy (Ctrl+C)";
             this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
             // paste
@@ -389,7 +397,7 @@
             this.paste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(22, 17);
-            this.paste.Text = "Paste";
+            this.paste.Text = "Paste (Ctrl+V)";
             this.paste.Click += new System.EventHandler(this.paste_Click);
             // 
             // delete
@@ -400,7 +408,7 @@
             this.delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(22, 15);
-            this.delete.Text = "Delete Selection";
+            this.delete.Text = "Delete (Del)";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator1
@@ -416,7 +424,7 @@
             this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(22, 12);
-            this.undoButton.Text = "Undo";
+            this.undoButton.Text = "Undo (Ctrl+Z)";
             this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // redoButton
@@ -427,7 +435,7 @@
             this.redoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(22, 12);
-            this.redoButton.Text = "Redo";
+            this.redoButton.Text = "Redo (Ctrl+Y)";
             this.redoButton.Click += new System.EventHandler(this.redoButton_Click);
             // 
             // toolStripSeparator2
@@ -466,7 +474,7 @@
             this.e_moldShowGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.e_moldShowGrid.Name = "e_moldShowGrid";
             this.e_moldShowGrid.Size = new System.Drawing.Size(23, 22);
-            this.e_moldShowGrid.Text = "Pixel Grid";
+            this.e_moldShowGrid.Text = "Tile Grid (G)";
             this.e_moldShowGrid.Click += new System.EventHandler(this.e_moldShowGrid_Click);
             // 
             // e_moldZoomIn
@@ -478,7 +486,7 @@
             this.e_moldZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.e_moldZoomIn.Name = "e_moldZoomIn";
             this.e_moldZoomIn.Size = new System.Drawing.Size(23, 22);
-            this.e_moldZoomIn.Text = "Zoom In";
+            this.e_moldZoomIn.Text = "Zoom In (Ctrl+Up)";
             this.e_moldZoomIn.Click += new System.EventHandler(this.e_moldZoomIn_Click);
             // 
             // e_moldZoomOut
@@ -490,7 +498,7 @@
             this.e_moldZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.e_moldZoomOut.Name = "e_moldZoomOut";
             this.e_moldZoomOut.Size = new System.Drawing.Size(23, 22);
-            this.e_moldZoomOut.Text = "Zoom Out";
+            this.e_moldZoomOut.Text = "Zoom Out (Ctrl+Down)";
             this.e_moldZoomOut.Click += new System.EventHandler(this.e_moldZoomOut_Click);
             // 
             // panel105
@@ -647,7 +655,8 @@
             this.showBG,
             this.toolStripSeparator8,
             this.e_moldZoomIn,
-            this.e_moldZoomOut});
+            this.e_moldZoomOut,
+            this.toggleZoomBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -723,12 +732,24 @@
             this.showBG.Name = "showBG";
             this.showBG.Size = new System.Drawing.Size(23, 22);
             this.showBG.Text = "BG";
+            this.showBG.ToolTipText = "BG Color (B)";
             this.showBG.Click += new System.EventHandler(this.showBG_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toggleZoomBox
+            // 
+            this.toggleZoomBox.CheckOnClick = true;
+            this.toggleZoomBox.Image = global::LAZYSHELL.Properties.Resources.zoomBox;
+            this.toggleZoomBox.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleZoomBox.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleZoomBox.Name = "toggleZoomBox";
+            this.toggleZoomBox.Size = new System.Drawing.Size(23, 22);
+            this.toggleZoomBox.ToolTipText = "Zoom Box (Z)";
+            this.toggleZoomBox.Click += new System.EventHandler(this.toggleZoomBox_Click);
             // 
             // labelCoords
             // 
@@ -780,7 +801,7 @@
         #endregion
 
         private LAZYSHELL.NewPanel panelMoldImage;
-        private System.Windows.Forms.PictureBox pictureBoxE_Mold;
+        private LAZYSHELL.NewPictureBox pictureBoxE_Mold;
         private System.Windows.Forms.ToolStrip toolStrip6;
         private System.Windows.Forms.ToolStripButton e_moldShowGrid;
         private System.Windows.Forms.ToolStripButton draw;
@@ -834,5 +855,6 @@
         private System.Windows.Forms.ToolStripButton importIntoTilemap;
         private System.Windows.Forms.Label labelCoords;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton toggleZoomBox;
     }
 }

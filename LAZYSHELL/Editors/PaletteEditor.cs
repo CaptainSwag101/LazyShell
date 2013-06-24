@@ -14,6 +14,7 @@ namespace LAZYSHELL
     {
         #region Variables
         private bool updating = false;
+        private Overlay overlay = new Overlay();
         private List<CheckBox> rows = new List<CheckBox>();
         private List<CheckBox> cols = new List<CheckBox>();
         private Delegate update;
@@ -24,8 +25,13 @@ namespace LAZYSHELL
         private int[] palettePixels, colorMapPixels;
         private int currentSwatchColor = Color.FromArgb(248, 248, 248).ToArgb();
         private int count;
-        private int startRow;
         private int max;
+        private int startRow;
+        public int StartRow
+        {
+            get { return startRow; }
+            set { startRow = value; }
+        }
         private int currentColor = 0;
         public int CurrentColor
         {
@@ -37,7 +43,6 @@ namespace LAZYSHELL
                 pictureBoxPalette.Invalidate();
             }
         }
-        private Overlay overlay = new Overlay();
         #endregion
         /// <summary>
         /// Loads the palette editor.
@@ -45,22 +50,22 @@ namespace LAZYSHELL
         /// <param name="update">Functiont to execute when updating.</param>
         /// <param name="paletteSet">The palette set to use.</param>
         /// <param name="count">The total number of palettes in the set.</param>
-        /// <param name="start">The palette row (index) to start at.</param>
+        /// <param name="startRow">The palette row (index) to start at.</param>
         /// <param name="max">The maximum number of palettes to show.</param>
-        public PaletteEditor(Delegate update, PaletteSet paletteSet, int count, int start, int max)
+        public PaletteEditor(Delegate update, PaletteSet paletteSet, int count, int startRow, int max)
         {
             this.update = update;
             this.paletteSetBackup2 = paletteSet.Copy();
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
-            this.startRow = start;
+            this.startRow = startRow;
             this.max = max;
-            this.currentColor = start * 16;
+            this.currentColor = startRow * 16;
 
             InitializeComponent();
             // create checkbox rows
-            for (int i = 0; i < count - start && i < max; i++)
+            for (int i = 0; i < count - startRow && i < max; i++)
             {
                 CheckBox checkBox = new CheckBox();
                 checkBox.Appearance = Appearance.Button;
@@ -68,6 +73,7 @@ namespace LAZYSHELL
                 checkBox.Checked = true;
                 checkBox.Location = new Point(12, i * 8 + 43);
                 checkBox.Size = new Size(8, 8);
+                checkBox.CheckedChanged += new EventHandler(checkBox_CheckedChanged);
                 this.rows.Add(checkBox);
                 this.Controls.Add(checkBox);
             }
@@ -80,12 +86,13 @@ namespace LAZYSHELL
                 checkBox.Checked = true;
                 checkBox.Location = new Point(i * 8 + 26, 29);
                 checkBox.Size = new Size(8, 8);
+                checkBox.CheckedChanged += new EventHandler(checkBox_CheckedChanged);
                 this.cols.Add(checkBox);
                 this.Controls.Add(checkBox);
             }
 
-            this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
-            this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
+            this.pictureBoxPalette.Height = Math.Min((count * 8) - (startRow * 8), max * 8);
+            this.panel7.Height = Math.Min((count * 8 + 4) - (startRow * 8), max * 8 + 4);
             this.Height = Math.Max(446, 446 + panel7.Height - 60);
 
             InitializeColor();
@@ -98,22 +105,22 @@ namespace LAZYSHELL
             new ToolTipLabel(this, baseConvertor, helpTips);
             new History(this);
         }
-        public void Reload(Delegate update, PaletteSet paletteSet, int count, int start, int max)
+        public void Reload(Delegate update, PaletteSet paletteSet, int count, int startRow, int max)
         {
             this.update = update;
             this.paletteSetBackup2 = paletteSet.Copy();
             this.paletteSetBackup = paletteSet.Copy();
             this.paletteSet = paletteSet;
             this.count = count;
-            this.startRow = start;
+            this.startRow = startRow;
             this.max = max;
             // create checkbox rows, but only if diff number
-            if (rows.Count != Math.Min(count - start, max))
+            if (rows.Count != Math.Min(count - startRow, max))
             {
                 foreach (CheckBox checkBox in this.rows)
                     this.Controls.Remove(checkBox);
                 List<CheckBox> rows_temp = new List<CheckBox>();
-                for (int i = 0; i < count - start && i < max; i++)
+                for (int i = 0; i < count - startRow && i < max; i++)
                 {
                     CheckBox checkBox = new CheckBox();
                     checkBox.Appearance = Appearance.Button;
@@ -124,6 +131,7 @@ namespace LAZYSHELL
                         checkBox.Checked = true;
                     checkBox.Location = new Point(12, i * 8 + 43);
                     checkBox.Size = new Size(8, 8);
+                    checkBox.CheckedChanged += new EventHandler(checkBox_CheckedChanged);
                     rows_temp.Add(checkBox);
                     this.Controls.Add(checkBox);
                 }
@@ -131,8 +139,8 @@ namespace LAZYSHELL
                 this.rows = rows_temp;
             }
             //
-            this.pictureBoxPalette.Height = Math.Min((count * 8) - (start * 8), max * 8);
-            this.panel7.Height = Math.Min((count * 8 + 4) - (start * 8), max * 8 + 4);
+            this.pictureBoxPalette.Height = Math.Min((count * 8) - (startRow * 8), max * 8);
+            this.panel7.Height = Math.Min((count * 8 + 4) - (startRow * 8), max * 8 + 4);
             this.Height = Math.Max(446, 446 + panel7.Height - 60);
 
             InitializeColor();
@@ -203,7 +211,7 @@ namespace LAZYSHELL
         }
         private void SetPaletteImage()
         {
-            palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, count, startRow, (32 - paletteSet.Length) / 2);
+            palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, count, startRow, 0);
             paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, (count * 8) - (startRow * 8)));
             pictureBoxPalette.Invalidate();
         }
@@ -350,9 +358,9 @@ namespace LAZYSHELL
                 int r = paletteSet.Reds[i];
                 int g = paletteSet.Greens[i];
                 int b = paletteSet.Blues[i];
-                paletteSet.Reds[i] = Math.Max(0, r + (int)brightness.Value) & 0xF8;
-                paletteSet.Greens[i] = Math.Max(0, g + (int)brightness.Value) & 0xF8;
-                paletteSet.Blues[i] = Math.Max(0, b + (int)brightness.Value) & 0xF8;
+                paletteSet.Reds[i] = Math.Min(248, Math.Max(0, r + (int)brightness.Value)) & 0xF8;
+                paletteSet.Greens[i] = Math.Min(248, Math.Max(0, g + (int)brightness.Value)) & 0xF8;
+                paletteSet.Blues[i] = Math.Min(248, Math.Max(0, b + (int)brightness.Value)) & 0xF8;
             }
         }
         private void DoContrast()
@@ -1091,13 +1099,24 @@ namespace LAZYSHELL
         }
         private void invertSelectedRows_CheckedChanged(object sender, EventArgs e)
         {
+            updating = true;
             foreach (CheckBox checkBox in rows)
                 checkBox.Checked = !checkBox.Checked;
+            updating = false;
+            DoAdjustment();
         }
         private void invertSelectedCols_CheckedChanged(object sender, EventArgs e)
         {
+            updating = true;
             foreach (CheckBox checkBox in cols)
                 checkBox.Checked = !checkBox.Checked;
+            updating = false;
+            DoAdjustment();
+        }
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating) return;
+            DoAdjustment();
         }
         #endregion
     }

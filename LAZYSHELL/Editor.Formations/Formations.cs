@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
+using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
@@ -51,6 +52,9 @@ namespace LAZYSHELL
         private ComboBox[] names = new ComboBox[8];
         private NumericUpDown[] coordX = new NumericUpDown[8];
         private NumericUpDown[] coordY = new NumericUpDown[8];
+        private CommandStack commandStack = new CommandStack();
+        private byte[] originalX;
+        private byte[] originalY;
         private int selectedMonster = -1;
         #endregion
         // Constructor
@@ -237,10 +241,15 @@ namespace LAZYSHELL
                 //
                 pixels = new int[128 * 24];
                 int[] palette = Model.BattleMenuPalette.Palette;
+                char[] HP = new char[] { '2', '0', '9' }; // Mario
+                if (i == 1) HP = new char[] { '2', '1', '1' }; // Toadstool
+                if (i == 2) HP = new char[] { '2', '4', '0' }; // Bowser
+                if (i == 3) HP = new char[] { '1', '9', '5' }; // Mallow
+                if (i == 4) HP = new char[] { '2', '0', '3' }; // Geno
                 char[] text = new char[]
                 {
                     '\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x02','\n' ,
-                    '\x00','9','9','9','\x16','9','9','9','\x10','\n',
+                    '\x00',HP[0],HP[1],HP[2],'\x16',HP[0],HP[1],HP[2],'\x10','\n',
                     '\x11','\x11','\x11','\x11','\x11','\x11','\x11','\x11','\x12'
                 };
                 Do.DrawText(pixels, 128, text, 0, 0, 8, Model.FontBattleMenu, palette);
@@ -251,7 +260,7 @@ namespace LAZYSHELL
                 portraits[i] = Do.PixelsToImage(pixels, 256, 256);
             }
         }
-        private void MoveMonster(int a, int b)
+        private void SwitchMonster(int a, int b)
         {
             byte x = formation.X[a];
             byte y = formation.Y[a];
@@ -273,6 +282,7 @@ namespace LAZYSHELL
             //
             this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
         }
+        // drawing
         private void Drag()
         {
             if (overlay.Select == null)
@@ -292,6 +302,38 @@ namespace LAZYSHELL
                             (int)coordY[index].Value - mousePosition.Y));
                 }
             }
+        }
+        private void Undo()
+        {
+            updating = true;
+            commandStack.UndoCommand();
+            for (int i = 0; i < 8; i++)
+            {
+                coordX[i].Value = formation.X[i];
+                coordY[i].Value = formation.Y[i];
+            }
+            updating = false;
+            overlay.Select = null;
+            selectedObjects = null;
+            formation.PixelIndexes = null;
+            pictureBoxFormation.Invalidate();
+            Cursor.Position = Cursor.Position;
+        }
+        private void Redo()
+        {
+            updating = true;
+            commandStack.RedoCommand();
+            for (int i = 0; i < 8; i++)
+            {
+                coordX[i].Value = formation.X[i];
+                coordY[i].Value = formation.Y[i];
+            }
+            updating = false;
+            overlay.Select = null;
+            selectedObjects = null;
+            formation.PixelIndexes = null;
+            pictureBoxFormation.Invalidate();
+            Cursor.Position = Cursor.Position;
         }
         #region Event Handlers
         private void formationNameList_SelectedIndexChanged(object sender, EventArgs e)
@@ -318,7 +360,7 @@ namespace LAZYSHELL
             }
             if (selectedMonster == 0)
                 return;
-            MoveMonster(selectedMonster, selectedMonster - 1);
+            SwitchMonster(selectedMonster, selectedMonster - 1);
             selectedMonster--;
         }
         private void moveDown_Click(object sender, EventArgs e)
@@ -330,7 +372,7 @@ namespace LAZYSHELL
             }
             if (selectedMonster == 7)
                 return;
-            MoveMonster(selectedMonster, selectedMonster + 1);
+            SwitchMonster(selectedMonster, selectedMonster + 1);
             selectedMonster++;
         }
         private void bytes_ValueChanged(object sender, EventArgs e)
@@ -359,9 +401,16 @@ namespace LAZYSHELL
         {
             if (updating)
                 return;
-
+            //
             int index = (int)((NumericUpDown)sender).Tag;
+            if (!move)
+            {
+                byte[] X = Bits.Copy(formation.X);
+                X[index] = (byte)coordX[index].Value;
+                commandStack.Push(new MoveEdit(formation, X, Bits.Copy(formation.Y)));
+            }
             this.formation.X[index] = (byte)coordX[index].Value;
+            //
             if (waitBothCoords)
                 return;
             formation.PixelIndexes = null;
@@ -371,9 +420,16 @@ namespace LAZYSHELL
         {
             if (updating)
                 return;
-
+            //
             int index = (int)((NumericUpDown)sender).Tag;
+            if (!move)
+            {
+                byte[] Y = Bits.Copy(formation.Y);
+                Y[index] = (byte)coordY[index].Value;
+                commandStack.Push(new MoveEdit(formation, Bits.Copy(formation.X), Y));
+            }
             this.formation.Y[index] = (byte)coordY[index].Value;
+            //
             if (waitBothCoords)
                 return;
             formation.PixelIndexes = null;
@@ -441,6 +497,14 @@ namespace LAZYSHELL
             pictureBoxFormation.Cursor = select.Checked ? Cursors.Cross : Cursors.Arrow;
             pictureBoxFormation.Invalidate();
         }
+        private void undo_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+        private void redo_Click(object sender, EventArgs e)
+        {
+            Redo();
+        }
         private void formationBattleEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (updating) return;
@@ -475,6 +539,13 @@ namespace LAZYSHELL
                 {
                     mouseDownObject = "selection";
                     mouseDownPosition = overlay.Select.MousePosition(x, y);
+                    originalX = new byte[8];
+                    originalY = new byte[8];
+                    for (int i = 0; i < 8; i++)
+                    {
+                        originalX[i] = formation.X[i];
+                        originalY[i] = formation.Y[i];
+                    }
                     if (!move)    // only do this if the current selection has not been initially moved
                     {
                         move = true;
@@ -489,9 +560,17 @@ namespace LAZYSHELL
             {
                 if (mouseOverMonster < 0 || mouseOverMonster > 7)
                     return;
+                move = true;
                 mouseDownMonster = mouseOverMonster;
                 diffX = (int)(x - coordX[mouseDownMonster].Value);
                 diffY = (int)(y - coordY[mouseDownMonster].Value);
+                originalX = new byte[8];
+                originalY = new byte[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    originalX[i] = formation.X[i];
+                    originalY[i] = formation.Y[i];
+                }
             }
         }
         private void pictureBoxFormation_MouseMove(object sender, MouseEventArgs e)
@@ -504,6 +583,7 @@ namespace LAZYSHELL
             mousePosition = new Point(x, y);
             mouseOverMonster = -1;
             mouseOverObject = null;
+            pictureBoxFormation.Focus();
             //
             #region Selecting
             if (select.Checked)
@@ -646,6 +726,12 @@ namespace LAZYSHELL
             mouseDownPosition = new Point(-1, -1);
             mouseDownObject = null;
             formation.PixelIndexes = null;
+            //
+            if (originalX != null && originalY != null)
+                commandStack.Push(new MoveEdit(formation, originalX, originalY));
+            originalX = null;
+            originalY = null;
+            //
             pictureBoxFormation.Invalidate();
         }
         private void pictureBoxFormation_Paint(object sender, PaintEventArgs e)
@@ -697,6 +783,16 @@ namespace LAZYSHELL
                     overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1);
             }
         }
+        private void pictureBoxFormation_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.G: isometricGrid.PerformClick(); break;
+                case Keys.S: select.PerformClick(); break;
+                case Keys.Control | Keys.Z: undo.PerformClick(); break;
+                case Keys.Control | Keys.Y: redo.PerformClick(); break;
+            }
+        }
         #endregion
         private class SelectedObject
         {
@@ -717,6 +813,35 @@ namespace LAZYSHELL
                 this.Index = index;
                 this.DiffX = diffX;
                 this.DiffY = diffY;
+            }
+        }
+        public class MoveEdit : Command
+        {
+            // class variables and accessors
+            private Formation formation;
+            private byte[] x = new byte[8];
+            private byte[] y = new byte[8];
+            private bool autoRedo = false;
+            public bool AutoRedo() { return this.autoRedo; }
+            // constructor
+            public MoveEdit(Formation formation, byte[] x, byte[] y)
+            {
+                this.formation = formation;
+                this.x = x;
+                this.y = y;
+            }
+            // execute
+            public void Execute()
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    byte tempX = formation.X[i];
+                    byte tempY = formation.Y[i];
+                    formation.X[i] = x[i];
+                    formation.Y[i] = y[i];
+                    x[i] = tempX;
+                    y[i] = tempY;
+                }
             }
         }
     }

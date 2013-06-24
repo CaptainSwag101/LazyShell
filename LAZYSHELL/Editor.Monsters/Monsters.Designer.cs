@@ -679,6 +679,7 @@
             // monsterName
             // 
             this.monsterName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.monsterName.ContextMenuStrip = null;
             this.monsterName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.monsterName.DropDownHeight = 497;
             this.monsterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -983,9 +984,8 @@
             // 
             // MonsterSoundOther
             // 
-            this.MonsterSoundOther.DropDownHeight = 180;
             this.MonsterSoundOther.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MonsterSoundOther.DropDownWidth = 200;
+            this.MonsterSoundOther.DropDownWidth = 150;
             this.MonsterSoundOther.IntegralHeight = false;
             this.MonsterSoundOther.Items.AddRange(new object[] {
             "none",
@@ -1004,9 +1004,8 @@
             // 
             // MonsterSoundStrike
             // 
-            this.MonsterSoundStrike.DropDownHeight = 184;
+            this.MonsterSoundStrike.DropDownHeight = 200;
             this.MonsterSoundStrike.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MonsterSoundStrike.DropDownWidth = 200;
             this.MonsterSoundStrike.IntegralHeight = false;
             this.MonsterSoundStrike.Items.AddRange(new object[] {
             "bite",
@@ -1078,9 +1077,9 @@
             // 
             // MonsterEntranceStyle
             // 
-            this.MonsterEntranceStyle.DropDownHeight = 150;
+            this.MonsterEntranceStyle.DropDownHeight = 250;
             this.MonsterEntranceStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MonsterEntranceStyle.DropDownWidth = 200;
+            this.MonsterEntranceStyle.DropDownWidth = 150;
             this.MonsterEntranceStyle.IntegralHeight = false;
             this.MonsterEntranceStyle.Items.AddRange(new object[] {
             "none",

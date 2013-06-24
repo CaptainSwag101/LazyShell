@@ -46,6 +46,7 @@ namespace LAZYSHELL
         private Point mouseDownPosition;
         private Point mousePosition;
         private bool moving = false;
+        private bool defloating = false;
         // editors
         private TileEditor tileEditor;
         private PaletteEditor paletteEditor;
@@ -445,12 +446,13 @@ namespace LAZYSHELL
             selection = buffer.Image;
             overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size);
             pictureBoxTileset.Invalidate();
+            defloating = false;
         }
         /// <summary>
         /// "Cements" either a dragged selection or a newly pasted selection.
         /// </summary>
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
-        private void PasteFinal(CopyBuffer buffer)
+        private void Defloat(CopyBuffer buffer)
         {
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
@@ -469,6 +471,19 @@ namespace LAZYSHELL
             }
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetWorldMapImage();
+            defloating = true;
+        }
+        private void Defloat()
+        {
+            if (copiedTiles != null && !defloating)
+                Defloat(copiedTiles);
+            if (draggedTiles != null)
+            {
+                Defloat(draggedTiles);
+                draggedTiles = null;
+            }
+            moving = false;
+            overlay.SelectTS = null;
         }
         private void Delete()
         {
@@ -486,7 +501,7 @@ namespace LAZYSHELL
         private void Flip(string type)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -505,7 +520,7 @@ namespace LAZYSHELL
             else if (type == "invert")
                 Do.FlipVertical(copiedTiles, overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16);
             buffer.Tiles = copiedTiles;
-            PasteFinal(buffer);
+            Defloat(buffer);
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetWorldMapImage();
         }
@@ -577,7 +592,7 @@ namespace LAZYSHELL
             {
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
-                    PasteFinal(draggedTiles);
+                    Defloat(draggedTiles);
                 overlay.SelectTS = null;
                 pictureBoxTileset.Cursor = Cursors.SizeAll;
             }
@@ -592,7 +607,7 @@ namespace LAZYSHELL
             {
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
-                    PasteFinal(draggedTiles);
+                    Defloat(draggedTiles);
                 overlay.SelectTS = null;
                 pictureBoxTileset.Cursor = Cursors.SizeAll;
             }
@@ -730,10 +745,10 @@ namespace LAZYSHELL
                 {
                     // if copied tiles were pasted and not dragging a non-copied selection
                     if (copiedTiles != null && draggedTiles == null)
-                        PasteFinal(copiedTiles);
+                        Defloat(copiedTiles);
                     if (draggedTiles != null)
                     {
-                        PasteFinal(draggedTiles);
+                        Defloat(draggedTiles);
                         draggedTiles = null;
                     }
                     selection = null;
@@ -846,6 +861,7 @@ namespace LAZYSHELL
         private void pictureBoxTileset_MouseEnter(object sender, EventArgs e)
         {
             mouseEnter = true;
+            pictureBoxTileset.Focus();
             pictureBoxTileset.Invalidate();
         }
         private void pictureBoxTileset_MouseLeave(object sender, EventArgs e)
@@ -855,28 +871,28 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == (Keys.Control | Keys.V))
-                buttonEditPaste.PerformClick();
-            if (e.KeyData == (Keys.Control | Keys.C))
-                buttonEditCopy.PerformClick();
-            if (e.KeyData == Keys.Delete)
-                buttonEditDelete.PerformClick();
-            if (e.KeyData == (Keys.Control | Keys.X))
-                buttonEditCut.PerformClick();
-            if (e.KeyData == (Keys.Control | Keys.D))
+            switch (e.KeyData)
             {
-                if (draggedTiles != null)
-                    PasteFinal(draggedTiles);
-                else
-                {
-                    overlay.SelectTS = null;
+                case Keys.B: buttonToggleBG.PerformClick(); break;
+                case Keys.G: buttonToggleCartGrid.PerformClick(); break;
+                case Keys.S: buttonEditSelect.PerformClick(); break;
+                case Keys.Control | Keys.V: buttonEditPaste.PerformClick(); break;
+                case Keys.Control | Keys.C: buttonEditCopy.PerformClick(); break;
+                case Keys.Delete: buttonEditDelete.PerformClick(); break;
+                case Keys.Control | Keys.X: buttonEditCut.PerformClick(); break;
+                case Keys.Control | Keys.D:
+                    if (draggedTiles != null)
+                        Defloat(draggedTiles);
+                    else
+                    {
+                        overlay.SelectTS = null;
+                        pictureBoxTileset.Invalidate();
+                    }
+                    break;
+                case Keys.Control | Keys.A:
+                    overlay.SelectTS = new Overlay.Selection(16, 0, 0, 256, 256);
                     pictureBoxTileset.Invalidate();
-                }
-            }
-            if (e.KeyData == (Keys.Control | Keys.A))
-            {
-                overlay.SelectTS = new Overlay.Selection(16, 0, 0, 256, 256);
-                pictureBoxTileset.Invalidate();
+                    break;
             }
         }
         // drawing buttons
@@ -903,16 +919,16 @@ namespace LAZYSHELL
         private void buttonEditPaste_Click(object sender, EventArgs e)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             Paste(new Point(16, 16), copiedTiles);
         }
         private void buttonEditUndo_Click(object sender, EventArgs e)
         {
-
+            Defloat();
         }
         private void buttonEditRedo_Click(object sender, EventArgs e)
         {
-
+            Defloat();
         }
         private void buttonEditSelect_Click(object sender, EventArgs e)
         {
@@ -920,6 +936,8 @@ namespace LAZYSHELL
                 this.pictureBoxTileset.Cursor = System.Windows.Forms.Cursors.Cross;
             else
                 this.pictureBoxTileset.Cursor = System.Windows.Forms.Cursors.Arrow;
+            Defloat();
+            this.pictureBoxTileset.Invalidate();
         }
         // open editors
         private void openPalettes_Click(object sender, EventArgs e)

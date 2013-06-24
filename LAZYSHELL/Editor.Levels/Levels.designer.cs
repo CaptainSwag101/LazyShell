@@ -2731,7 +2731,7 @@ namespace LAZYSHELL
             // 
             this.mapBattlefieldNum.Location = new System.Drawing.Point(76, 130);
             this.mapBattlefieldNum.Maximum = new decimal(new int[] {
-            54,
+            63,
             0,
             0,
             0});
@@ -2839,7 +2839,7 @@ namespace LAZYSHELL
             // 
             this.mapTilesetL3Num.Location = new System.Drawing.Point(76, 63);
             this.mapTilesetL3Num.Maximum = new decimal(new int[] {
-            31,
+            33,
             0,
             0,
             0});

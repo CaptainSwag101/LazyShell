@@ -1320,8 +1320,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PaletteEditor";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "PALETTE EDITOR";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaletteEditor_FormClosing);

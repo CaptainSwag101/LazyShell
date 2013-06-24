@@ -9,7 +9,6 @@ namespace LAZYSHELL
     class BattlefieldTileset
     {
         // non-serialized variables
-        [NonSerialized()]
         private Battlefield battlefield;
         // class variables
         private byte[] graphics; 

@@ -83,13 +83,13 @@ namespace LAZYSHELL
         public string GetMenuString(bool textView)
         {
             if (!this.Error)
-                return new string(textHelper.Decode(Text, !textView, 1, Keystrokes));
+                return new string(textHelper.Decode(Text, !textView, 0, Keystrokes));
             else
                 return new string(Text);
         }
         public void SetMenuString(string value, bool textView)
         {
-            Text = textHelper.Encode(value.ToCharArray(), !textView, 1, Keystrokes);
+            Text = textHelper.Encode(value.ToCharArray(), !textView, 0, Keystrokes);
         }
         public Rectangle Rectangle(int x, int y)
         {

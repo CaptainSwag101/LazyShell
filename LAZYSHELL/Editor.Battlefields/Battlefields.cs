@@ -301,7 +301,7 @@ namespace LAZYSHELL
         /// "Cements" either a dragged selection or a newly pasted selection.
         /// </summary>
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
-        private void PasteFinal(CopyBuffer buffer)
+        private void Defloat(CopyBuffer buffer)
         {
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
@@ -325,14 +325,14 @@ namespace LAZYSHELL
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
-        private void PasteClear()
+        private void Defloat()
         {
             // if copied tiles were pasted and not dragging a non-copied selection
             if (copiedTiles != null && draggedTiles == null)
-                PasteFinal(copiedTiles);
+                Defloat(copiedTiles);
             if (draggedTiles != null)
             {
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
                 draggedTiles = null;
             }
             overlay.SelectTS = null;
@@ -364,7 +364,7 @@ namespace LAZYSHELL
         private void Flip(string type)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -389,7 +389,7 @@ namespace LAZYSHELL
             else if (type == "invert")
                 Do.FlipVertical(copiedTiles, overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16);
             buffer.Tiles = copiedTiles;
-            PasteFinal(buffer);
+            Defloat(buffer);
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
         }
@@ -651,10 +651,10 @@ namespace LAZYSHELL
                 {
                     // if copied tiles were pasted and not dragging a non-copied selection
                     if (copiedTiles != null && draggedTiles == null)
-                        PasteFinal(copiedTiles);
+                        Defloat(copiedTiles);
                     if (draggedTiles != null)
                     {
-                        PasteFinal(draggedTiles);
+                        Defloat(draggedTiles);
                         draggedTiles = null;
                     }
                     selection = null;
@@ -690,6 +690,7 @@ namespace LAZYSHELL
         private void pictureBoxBattlefield_MouseEnter(object sender, EventArgs e)
         {
             mouseEnter = true;
+            pictureBoxBattlefield.Focus();
             pictureBoxBattlefield.Invalidate();
         }
         private void pictureBoxBattlefield_MouseLeave(object sender, EventArgs e)
@@ -742,18 +743,21 @@ namespace LAZYSHELL
         {
             switch (e.KeyData)
             {
+                case Keys.G: buttonToggleCartGrid.PerformClick(); break;
+                case Keys.B: buttonToggleBG.PerformClick(); break;
+                case Keys.S: buttonEditSelect.PerformClick(); break;
                 case Keys.Control | Keys.C: Copy(); break;
                 case Keys.Control | Keys.X: Cut(); break;
                 case Keys.Control | Keys.V:
                     if (draggedTiles != null)
-                        PasteFinal(draggedTiles);
+                        Defloat(draggedTiles);
                     Paste(new Point(16, 16), copiedTiles);
                     break;
                 case Keys.Delete: Delete(); break;
                 case Keys.Control | Keys.D:
 
                     if (draggedTiles != null)
-                        PasteFinal(draggedTiles);
+                        Defloat(draggedTiles);
                     else
                     {
                         overlay.SelectTS = null;
@@ -790,7 +794,7 @@ namespace LAZYSHELL
         private void buttonEditPaste_Click(object sender, EventArgs e)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             Paste(new Point(16, 16), copiedTiles);
         }
         private void buttonEditUndo_Click(object sender, EventArgs e)
@@ -807,7 +811,7 @@ namespace LAZYSHELL
                 this.pictureBoxBattlefield.Cursor = System.Windows.Forms.Cursors.Cross;
             else
                 this.pictureBoxBattlefield.Cursor = System.Windows.Forms.Cursors.Arrow;
-            PasteClear();
+            Defloat();
         }
         // menu strip
         private void save_Click(object sender, EventArgs e)

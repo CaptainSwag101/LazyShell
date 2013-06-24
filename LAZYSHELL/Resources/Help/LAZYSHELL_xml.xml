@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.16.1" date="June 16, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="3.17.0" date="??????, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -17,7 +17,7 @@ Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank 
   </Read>
   <section>
     <header>Introduction</header>
-    <body>Lazy Shell is a third party .NET application written in the C# programming language which is capable of editing a wide range of elements within the Super Mario RPG (US) ROM image file. </body>
+    <body>Lazy Shell is a third party .NET application written in the C# programming language which is capable of editing a wide range of elements within the Super Mario RPG (US) ROM image file. These elements include allies, battle animations, attacks, spells, sound effects, music, battlefields, dialogues, fonts, effects, events, formations, items, shops, level/location maps, the main title, menus, the mine-cart maps, monsters, sprites, world maps, and more. In addition, it also includes a help database and a project manager to help organize a full hack project.</body>
   </section>
   <section>
     <header>Program Requirements</header>

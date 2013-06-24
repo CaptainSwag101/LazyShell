@@ -1106,6 +1106,7 @@ namespace LAZYSHELL
         private void scoreWriterPicture_MouseEnter(object sender, EventArgs e)
         {
             mouseEnter = true;
+            scoreWriterPicture.Focus();
         }
         private void scoreWriterPicture_MouseLeave(object sender, EventArgs e)
         {
@@ -1203,6 +1204,20 @@ namespace LAZYSHELL
                 labelWNote.Text = "...";
             #endregion
             scoreWriterPicture.Invalidate();
+        }
+        private void scoreWriterPicture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.D: wDraw.PerformClick(); break;
+                case Keys.E: wErase.PerformClick(); break;
+                case Keys.S: wSelect.PerformClick(); break;
+                case Keys.Control | Keys.C: wCopy.PerformClick(); break;
+                case Keys.Control | Keys.X: wCut.PerformClick(); break;
+                case Keys.Delete: wDelete.PerformClick(); break;
+                case Keys.Control | Keys.Z: undo.PerformClick(); break;
+                case Keys.Control | Keys.Y: redo.PerformClick(); break;
+            }
         }
         // Common commands
         private void saveScoreFile_Click(object sender, EventArgs e)

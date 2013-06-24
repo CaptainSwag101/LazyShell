@@ -54,12 +54,14 @@
             this.snapIsometricLeft = new System.Windows.Forms.ToolStripButton();
             this.snapIsometricRight = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toggleAllies = new System.Windows.Forms.ToolStripButton();
             this.labelCoords = new System.Windows.Forms.ToolStripLabel();
             this.select = new System.Windows.Forms.ToolStripButton();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.battlefieldName = new System.Windows.Forms.ToolStripComboBox();
+            this.toggleAllies = new System.Windows.Forms.ToolStripButton();
             this.moveUp = new System.Windows.Forms.Button();
             this.moveDown = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -98,6 +100,7 @@
             this.pictureBoxFormation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseDown);
             this.pictureBoxFormation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseMove);
             this.pictureBoxFormation.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxFormation_MouseUp);
+            this.pictureBoxFormation.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBoxFormation_PreviewKeyDown);
             // 
             // formationCantRun
             // 
@@ -342,9 +345,10 @@
             this.snapIsometricLeft,
             this.snapIsometricRight,
             this.toolStripSeparator1,
-            this.toggleAllies,
             this.labelCoords,
-            this.select});
+            this.select,
+            this.undo,
+            this.redo});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -361,7 +365,7 @@
             this.isometricGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.isometricGrid.Name = "isometricGrid";
             this.isometricGrid.Size = new System.Drawing.Size(23, 22);
-            this.isometricGrid.Text = "Show/hide isometric grid";
+            this.isometricGrid.Text = "Isometric Grid (G)";
             this.isometricGrid.Click += new System.EventHandler(this.isometricGrid_Click);
             // 
             // snapIsometricLeft
@@ -391,18 +395,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toggleAllies
-            // 
-            this.toggleAllies.CheckOnClick = true;
-            this.toggleAllies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toggleAllies.Image = global::LAZYSHELL.Properties.Resources.marioicon;
-            this.toggleAllies.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toggleAllies.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toggleAllies.Name = "toggleAllies";
-            this.toggleAllies.Size = new System.Drawing.Size(23, 22);
-            this.toggleAllies.Text = "Show/hide allies";
-            this.toggleAllies.Click += new System.EventHandler(this.toggleAllies_Click);
-            // 
             // labelCoords
             // 
             this.labelCoords.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -419,8 +411,30 @@
             this.select.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(23, 22);
-            this.select.Text = "Select Monster(s)";
+            this.select.Text = "Select (S)";
             this.select.Click += new System.EventHandler(this.select_Click);
+            // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(23, 22);
+            this.undo.Text = "Undo (Ctrl+Z)";
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(23, 22);
+            this.redo.Text = "Redo (Ctrl+Y)";
+            this.redo.Click += new System.EventHandler(this.redo_Click);
             // 
             // toolStrip2
             // 
@@ -429,7 +443,8 @@
             this.toolStrip2.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.battlefieldName});
+            this.battlefieldName,
+            this.toggleAllies});
             this.toolStrip2.Location = new System.Drawing.Point(0, 249);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -449,8 +464,20 @@
             this.battlefieldName.DropDownWidth = 250;
             this.battlefieldName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.battlefieldName.Name = "battlefieldName";
-            this.battlefieldName.Size = new System.Drawing.Size(226, 25);
+            this.battlefieldName.Size = new System.Drawing.Size(196, 25);
             this.battlefieldName.SelectedIndexChanged += new System.EventHandler(this.battlefieldName_SelectedIndexChanged);
+            // 
+            // toggleAllies
+            // 
+            this.toggleAllies.CheckOnClick = true;
+            this.toggleAllies.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toggleAllies.Image = global::LAZYSHELL.Properties.Resources.marioicon;
+            this.toggleAllies.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleAllies.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleAllies.Name = "toggleAllies";
+            this.toggleAllies.Size = new System.Drawing.Size(23, 22);
+            this.toggleAllies.Text = "Show/hide Allies";
+            this.toggleAllies.Click += new System.EventHandler(this.toggleAllies_Click);
             // 
             // moveUp
             // 
@@ -545,8 +572,6 @@
         private System.Windows.Forms.ComboBox formationBattleEvent;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton isometricGrid;
-        private System.Windows.Forms.ToolStripButton toggleAllies;
-        private System.Windows.Forms.ToolStripLabel labelCoords;
         private System.Windows.Forms.ToolStripButton snapIsometricLeft;
         private System.Windows.Forms.ToolStripButton snapIsometricRight;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -554,5 +579,9 @@
         private System.Windows.Forms.Button moveUp;
         private System.Windows.Forms.Button moveDown;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton undo;
+        private System.Windows.Forms.ToolStripButton redo;
+        private System.Windows.Forms.ToolStripLabel labelCoords;
+        private System.Windows.Forms.ToolStripButton toggleAllies;
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class ZoomPanel : Form
+    public partial class ZoomBox : Form
     {
         private int zoom;
         public int Zoom
@@ -31,7 +31,7 @@ namespace LAZYSHELL
             get { return pictureBox; }
             set { pictureBox = value; }
         }
-        public ZoomPanel(int zoom)
+        public ZoomBox(int zoom)
         {
             InitializeComponent();
             this.Zoom = zoom;

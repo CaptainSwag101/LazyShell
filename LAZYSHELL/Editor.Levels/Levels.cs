@@ -42,7 +42,7 @@ namespace LAZYSHELL
         private Level level { get { return levels[index]; } set { levels[index] = value; } }
         public Level Level { get { return level; } set { level = value; } }
         public System.Windows.Forms.ToolStripComboBox LevelName { get { return levelName; } set { levelName = value; } }
-        public PictureBox picture { get { return levelsTilemap.Picture; } set { levelsTilemap.Picture = value; } }
+        public NewPictureBox picture { get { return levelsTilemap.Picture; } set { levelsTilemap.Picture = value; } }
         private int zoom { get { return levelsTilemap.Zoom; } }
         private Level levelCheck; // Used to verify a level change
         public Overlay overlay = new Overlay(); // Object used to generate all the overlays for levels

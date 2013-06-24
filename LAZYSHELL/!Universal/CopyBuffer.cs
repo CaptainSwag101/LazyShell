@@ -14,6 +14,8 @@ namespace LAZYSHELL
         // class variables and accessors
         private int width; public int Width { get { return width; } }
         private int height; public int Height { get { return height; } }
+        private byte format; public byte Format { get { return format; } }
+        private byte[] buffer; public byte[] Buffer { get { return buffer; } set { buffer = value; } }
         private int[] copy; public int[] Copy { get { return copy; } set { copy = value; } }
         private int[][] copies; public int[][] Copies { get { return copies; } set { copies = value; } }
         private Tile[] tiles; public Tile[] Tiles { get { return tiles; } set { tiles = value; } }
@@ -70,6 +72,13 @@ namespace LAZYSHELL
             this.width = width;
             this.height = height;
             this.copy = copy;
+        }
+        public CopyBuffer(int width, int height, byte[] buffer, byte format)
+        {
+            this.width = width;
+            this.height = height;
+            this.buffer = buffer;
+            this.format = format;
         }
         public CopyBuffer(int width, int height, int[][] copies)
         {

@@ -17,7 +17,7 @@ namespace LAZYSHELL.ScriptsEditor
         private byte[] rom = null;
         // class variables
         private List<ActionCommand> commands;
-        public List<ActionCommand> Commands { get { return this.commands; } }
+        public List<ActionCommand> Commands { get { return this.commands; } set { this.commands = value; } }
         private byte[] script; public byte[] Script { get { return script; } set { script = value; } }
         public int Length
         {
@@ -56,7 +56,6 @@ namespace LAZYSHELL.ScriptsEditor
                 this.baseOffset = 0x210000 + offset;
                 this.script = Bits.GetByteArray(rom, 0x210000 + offset, length);
             }
-            this.commands = new List<ActionCommand>();
             ParseScript();
         }
         public void Assemble()
@@ -81,8 +80,9 @@ namespace LAZYSHELL.ScriptsEditor
             }
         }
         // class functions
-        private void ParseScript()
+        public void ParseScript()
         {
+            this.commands = new List<ActionCommand>();
             int offset = 0, length;
             while (offset < script.Length)
             {
@@ -223,6 +223,11 @@ namespace LAZYSHELL.ScriptsEditor
                     }
                 }
             }
+        }
+        public ActionScript Copy()
+        {
+            ActionScript copy = new ActionScript(this.index);
+            return copy;
         }
         public override void Clear()
         {

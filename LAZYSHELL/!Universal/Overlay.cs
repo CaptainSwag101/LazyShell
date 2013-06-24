@@ -275,18 +275,18 @@ namespace LAZYSHELL
         {
             DrawSelectionBox(g, new Point(x_terminal, y_terminal), new Point(x_initial, y_initial), z);
         }
-        public void DrawHoverBox(Graphics g, Point location, int zoom, bool fill)
+        public void DrawHoverBox(Graphics g, Point location, Size size, int zoom, bool fill)
         {
             int x = location.X;
             int y = location.Y;
-            Rectangle r = new Rectangle(x * zoom, y * zoom, zoom, zoom);
+            Rectangle r = new Rectangle(x * zoom, y * zoom, size.Width * zoom, size.Height * zoom);
             if (fill)
                 g.FillRectangle(new SolidBrush(Color.FromArgb(96, 0, 0, 0)), r);
             else
             {
                 r.Width--;
                 r.Height--;
-                g.DrawRectangle(Pens.Red, r);
+                g.DrawRectangle(Pens.Gray, r);
             }
         }
         // exits

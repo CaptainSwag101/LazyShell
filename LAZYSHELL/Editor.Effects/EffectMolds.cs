@@ -34,7 +34,7 @@ namespace LAZYSHELL
         private Bitmap tilesetImage;
         private bool updating = false;
         private Overlay overlay;
-        private int zoom = 1;
+        private int zoom { get { return pictureBoxE_Mold.Zoom; } set { pictureBoxE_Mold.Zoom = value; } }
         private int width { get { return animation.Width * 16; } }
         private int height { get { return animation.Height * 16; } }
         private bool move = false;
@@ -48,11 +48,12 @@ namespace LAZYSHELL
         private Point mousePosition;
         private bool mouseEnter = false;
         // buffers
-        private bool pasteFinal = false;
+        private bool defloating = false;
         private CopyBuffer draggedTiles;
         private CopyBuffer copiedTiles;
         private CopyBuffer selectedTiles;
         private CommandStack commandStack;
+        private int commandCount = 0;
         private Bitmap selection;
         // editors
         public TileEditor tileEditor;
@@ -63,8 +64,9 @@ namespace LAZYSHELL
         {
             this.effectsEditor = effectsEditor;
             this.overlay = new Overlay();
-            this.commandStack = new CommandStack();
+            this.commandStack = new CommandStack(true);
             InitializeComponent();
+            this.pictureBoxE_Mold.ZoomBoxPosition = new Point(64, 0);
             updating = true;
             for (int i = 0; i < animation.Molds.Count; i++)
                 this.e_molds.Items.Add("Mold " + i.ToString());
@@ -80,7 +82,7 @@ namespace LAZYSHELL
         public void Reload(Effects effectsEditor)
         {
             this.effectsEditor = effectsEditor;
-            this.commandStack = new CommandStack();
+            this.commandStack = new CommandStack(true);
             this.overlay.Select = null;
             this.overlay.SelectTS = null;
             this.selectedTiles = null;
@@ -170,6 +172,7 @@ namespace LAZYSHELL
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, selectedTiles.BYTE_copy, x, y,
                 overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16));
+            commandCount++;
             // draw the tile
             Point p = new Point(x * 16, y * 16);
             int[] pixels = Do.ImageToPixels(overlay.SelectTS.GetSelectionImage(tilesetImage));
@@ -188,6 +191,7 @@ namespace LAZYSHELL
             if (mold.Mold[(y / 16) * (width / 16) + (x / 16)] == 0xFF) return;
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, new byte[] { 0xFF }, x / 16, y / 16, 1, 1));
+            commandCount++;
         }
         private void Undo()
         {
@@ -214,6 +218,11 @@ namespace LAZYSHELL
             if (overlay.Select == null || overlay.Select.Size == new Size(0, 0)) return;
             Copy();
             Delete();
+            if (commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void Copy()
         {
@@ -264,13 +273,13 @@ namespace LAZYSHELL
             draggedTiles = buffer;
             overlay.Select = new Overlay.Selection(16, location, buffer.Size);
             pictureBoxE_Mold.Invalidate();
-            pasteFinal = false;
+            defloating = false;
         }
         /// <summary>
-        /// "Cements" either a dragged selection or a newly pasted selection.
+        /// Defloats either a dragged selection or a newly pasted selection.
         /// </summary>
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
-        private void PasteFinal(CopyBuffer buffer)
+        private void Defloat(CopyBuffer buffer)
         {
             if (buffer == null) return;
             if (overlay.Select == null) return;
@@ -280,26 +289,29 @@ namespace LAZYSHELL
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, buffer.BYTE_copy,
                 location.X, location.Y, buffer.Width / 16, buffer.Height / 16));
+            commandStack.Push(commandCount + 1);
+            commandCount = 0;
             SetTilemapImage();
             if (sequences != null)
             {
                 sequences.SetSequenceFrameImages();
                 sequences.RealignFrames();
             }
-            pasteFinal = true;
+            defloating = true;
             animation.Assemble();
         }
-        private void PasteClear()
+        private void Defloat()
         {
-            if (copiedTiles != null && !pasteFinal)
-                PasteFinal(copiedTiles);
+            if (copiedTiles != null && !defloating)
+                Defloat(copiedTiles);
             if (draggedTiles != null)
             {
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
                 draggedTiles = null;
             }
             move = false;
             overlay.Select = null;
+            Cursor.Position = Cursor.Position;
         }
         private void Delete()
         {
@@ -312,6 +324,7 @@ namespace LAZYSHELL
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, changes,
                 overlay.Select.X / 16, overlay.Select.Y / 16, overlay.Select.Width / 16, overlay.Select.Height / 16));
+            commandCount++;
             SetTilemapImage();
             if (sequences != null)
             {
@@ -503,46 +516,12 @@ namespace LAZYSHELL
             p.Y = Math.Abs(panelMoldImage.AutoScrollPosition.Y);
             if ((e_moldZoomIn.Checked && e.Button == MouseButtons.Left) || (e_moldZoomOut.Checked && e.Button == MouseButtons.Right))
             {
-                if (zoom < 8)
-                {
-                    zoom *= 2;
-                    p = new Point(Math.Abs(pictureBoxE_Mold.Left), Math.Abs(pictureBoxE_Mold.Top));
-                    p.X += e.X;
-                    p.Y += e.Y;
-                    pictureBoxE_Mold.Width = width * zoom;
-                    pictureBoxE_Mold.Height = height * zoom;
-                    panelMoldImage.Focus();
-                    panelMoldImage.AutoScrollPosition = p;
-                    panelMoldImage.VerticalScroll.SmallChange *= 2;
-                    panelMoldImage.HorizontalScroll.SmallChange *= 2;
-                    panelMoldImage.VerticalScroll.LargeChange *= 2;
-                    panelMoldImage.HorizontalScroll.LargeChange *= 2;
-                    pictureBoxE_Mold.Invalidate();
-                    return;
-                }
+                pictureBoxE_Mold.ZoomIn(e.X, e.Y);
                 return;
             }
             else if ((e_moldZoomOut.Checked && e.Button == MouseButtons.Left) || (e_moldZoomIn.Checked && e.Button == MouseButtons.Right))
             {
-                if (zoom > 1)
-                {
-                    zoom /= 2;
-
-                    p = new Point(Math.Abs(pictureBoxE_Mold.Left), Math.Abs(pictureBoxE_Mold.Top));
-                    p.X -= e.X / 2;
-                    p.Y -= e.Y / 2;
-
-                    pictureBoxE_Mold.Width = width * zoom;
-                    pictureBoxE_Mold.Height = height * zoom;
-                    panelMoldImage.Focus();
-                    panelMoldImage.AutoScrollPosition = p;
-                    panelMoldImage.VerticalScroll.SmallChange /= 2;
-                    panelMoldImage.HorizontalScroll.SmallChange /= 2;
-                    panelMoldImage.VerticalScroll.LargeChange /= 2;
-                    panelMoldImage.HorizontalScroll.LargeChange /= 2;
-                    pictureBoxE_Mold.Invalidate();
-                    return;
-                }
+                pictureBoxE_Mold.ZoomOut(e.X, e.Y);
                 return;
             }
             #endregion
@@ -553,10 +532,10 @@ namespace LAZYSHELL
             {
                 // if copied tiles were pasted and not dragging a non-copied selection
                 if (copiedTiles != null && draggedTiles == null)
-                    PasteFinal(copiedTiles);
+                    Defloat(copiedTiles);
                 if (draggedTiles != null)
                 {
-                    PasteFinal(draggedTiles);
+                    Defloat(draggedTiles);
                     draggedTiles = null;
                 }
                 move = false;
@@ -678,6 +657,12 @@ namespace LAZYSHELL
                     sequences.RealignFrames();
                 }
             }
+            if (!move && commandCount > 0)
+            {
+                this.commandStack.Push(commandCount);
+                commandCount = 0;
+            }
+            //
             Point p = new Point(Math.Abs(pictureBoxE_Mold.Left), Math.Abs(pictureBoxE_Mold.Top));
             pictureBoxE_Mold.Focus();
             panelMoldImage.AutoScrollPosition = p;
@@ -688,6 +673,7 @@ namespace LAZYSHELL
         private void pictureBoxE_Mold_MouseEnter(object sender, EventArgs e)
         {
             mouseEnter = true;
+            pictureBoxE_Mold.Focus();
             pictureBoxE_Mold.Invalidate();
         }
         private void pictureBoxE_Mold_MouseLeave(object sender, EventArgs e)
@@ -695,33 +681,28 @@ namespace LAZYSHELL
             mouseEnter = false;
             pictureBoxE_Mold.Invalidate();
         }
+        private void pictureBoxE_Mold_MouseHover(object sender, EventArgs e)
+        {
+            pictureBoxE_Mold.Focus();
+        }
         private void pictureBoxE_Mold_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyData)
             {
-                case Keys.Control | Keys.V:
-                    paste.PerformClick(); break;
-                case Keys.Control | Keys.C:
-                    copy.PerformClick(); break;
-                case Keys.Delete:
-                    delete.PerformClick(); break;
-                case Keys.Control | Keys.X:
-                    cut.PerformClick(); break;
-                case Keys.Control | Keys.D:
-                    if (draggedTiles != null)
-                        PasteFinal(draggedTiles);
-                    else
-                    {
-                        overlay.Select = null;
-                        pictureBoxE_Mold.Invalidate();
-                    }
-                    break;
-                case Keys.Control | Keys.A:
-                    selectAll.PerformClick(); break;
-                case Keys.Control | Keys.Z:
-                    undoButton.PerformClick(); break;
-                case Keys.Control | Keys.Y:
-                    redoButton.PerformClick(); break;
+                case Keys.Z: toggleZoomBox.PerformClick(); break;
+                case Keys.G: e_moldShowGrid.PerformClick(); break;
+                case Keys.B: showBG.PerformClick(); break;
+                case Keys.D: draw.PerformClick(); break;
+                case Keys.E: erase.PerformClick(); break;
+                case Keys.S: select.PerformClick(); break;
+                case Keys.Control | Keys.V: paste.PerformClick(); break;
+                case Keys.Control | Keys.C: copy.PerformClick(); break;
+                case Keys.Delete: delete.PerformClick(); break;
+                case Keys.Control | Keys.X: cut.PerformClick(); break;
+                case Keys.Control | Keys.D: Defloat(); break;
+                case Keys.Control | Keys.A: selectAll.PerformClick(); break;
+                case Keys.Control | Keys.Z: undoButton.PerformClick(); break;
+                case Keys.Control | Keys.Y: redoButton.PerformClick(); break;
             }
         }
         private void e_molds_SelectedIndexChanged(object sender, EventArgs e)
@@ -734,7 +715,7 @@ namespace LAZYSHELL
                 e_molds.BeginUpdate();
                 //
                 e_molds.SelectedIndex = e_molds.LastSelectedIndex;
-                PasteClear();
+                Defloat();
                 e_molds.SelectedIndex = index;
                 //
                 e_molds.EndUpdate();
@@ -760,7 +741,7 @@ namespace LAZYSHELL
         private void e_moldWidth_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            PasteClear();
+            Defloat();
             int width = animation.Width;
             animation.Width = (byte)e_moldWidth.Value;
             for (int i = 0; i < molds.Count; i++)
@@ -791,7 +772,7 @@ namespace LAZYSHELL
         private void e_moldHeight_ValueChanged(object sender, EventArgs e)
         {
             if (updating) return;
-            PasteClear();
+            Defloat();
             animation.Height = (byte)e_moldHeight.Value;
             SetTilemapImage();
             if (sequences != null)
@@ -899,7 +880,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = NewCursors.Draw;
             else if (!draw.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            PasteClear();
+            Defloat();
             pictureBoxE_Mold.Invalidate();
         }
         private void erase_Click(object sender, EventArgs e)
@@ -911,7 +892,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = NewCursors.Erase;
             else if (!erase.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            PasteClear();
+            Defloat();
             pictureBoxE_Mold.Invalidate();
         }
         private void select_Click(object sender, EventArgs e)
@@ -923,15 +904,14 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = Cursors.Cross;
             else if (!select.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            PasteClear();
+            Defloat();
             pictureBoxE_Mold.Invalidate();
         }
         private void selectAll_Click(object sender, EventArgs e)
         {
+            Defloat();
             if (!select.Checked)
                 select.PerformClick();
-            if (draggedTiles != null)
-                PasteFinal(draggedTiles);
             overlay.Select = new Overlay.Selection(16, 0, 0, width, height);
             pictureBoxE_Mold.Invalidate();
         }
@@ -946,12 +926,27 @@ namespace LAZYSHELL
         private void paste_Click(object sender, EventArgs e)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+            {
+                Defloat(draggedTiles);
+                draggedTiles = null;
+            }
             Paste(new Point(0, 0), copiedTiles);
         }
         private void delete_Click(object sender, EventArgs e)
         {
-            Delete();
+            if (!move)
+                Delete();
+            else
+            {
+                move = false;
+                draggedTiles = null;
+                pictureBoxE_Mold.Invalidate();
+            }
+            if (!move && commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void undoButton_Click(object sender, EventArgs e)
         {
@@ -977,7 +972,7 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = NewCursors.ZoomIn;
             else if (!e_moldZoomIn.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            PasteClear();
+            Defloat();
             pictureBoxE_Mold.Invalidate();
         }
         private void e_moldZoomOut_Click(object sender, EventArgs e)
@@ -988,40 +983,18 @@ namespace LAZYSHELL
                 this.pictureBoxE_Mold.Cursor = NewCursors.ZoomOut;
             else if (!e_moldZoomOut.Checked)
                 this.pictureBoxE_Mold.Cursor = Cursors.Arrow;
-            PasteClear();
+            Defloat();
             pictureBoxE_Mold.Invalidate();
+        }
+        private void toggleZoomBox_Click(object sender, EventArgs e)
+        {
+            pictureBoxE_Mold.ZoomBoxEnabled = toggleZoomBox.Checked;
         }
         // contextmenustrip
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if (e_moldZoomIn.Checked || e_moldZoomOut.Checked)
                 e.Cancel = true;
-        }
-        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Cut();
-        }
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Copy();
-        }
-        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (draggedTiles != null)
-                PasteFinal(draggedTiles);
-            Paste(new Point(0, 0), copiedTiles);
-        }
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Delete();
-        }
-        private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Flip("mirror");
-        }
-        private void invertToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Flip("invert");
         }
         private void saveImageAsToolStripMenuItem_Click(object sender, EventArgs e)
         {

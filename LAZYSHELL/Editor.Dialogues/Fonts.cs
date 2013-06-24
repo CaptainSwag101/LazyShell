@@ -590,15 +590,15 @@ namespace LAZYSHELL
                 y >= pictureBoxFontCharacter.Height ||
                 x < 0 || y < 0)
                 return;
-            string action = "";
+            Drawing action = Drawing.None;
             if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditDraw.Checked)
-                action = "draw";
+                action =  Drawing.Draw;
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditErase.Checked)
-                action = "erase";
+                action =  Drawing.Erase;
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditChoose.Checked)
-                action = "select";
+                action =  Drawing.Select;
             else if ((e.Button == MouseButtons.Left || e.Button == MouseButtons.Right) && fontEditFill.Checked)
-                action = "fill";
+                action =  Drawing.Fill;
             int color = currentColor;
             if (e.Button == MouseButtons.Right)
                 color = currentColorBack;
@@ -611,7 +611,7 @@ namespace LAZYSHELL
                 ((x / zoom) & 7) * zoom, ((y / zoom) & 7) * zoom, index, color, color,
                 font[currentFontChar].MaxWidth, font[currentFontChar].Height, 0x10,
                 ((x / zoom) & 8) * zoom, ((y / zoom) & 8) * zoom);
-            if (action == "erase")
+            if (action ==  Drawing.Erase)
                 pictureBoxFontCharacter.Invalidate(new Rectangle(x / zoom * zoom, y / zoom * zoom, 1 * zoom, 1 * zoom));
 
             currentPixel = (x / zoom) + (y / zoom);

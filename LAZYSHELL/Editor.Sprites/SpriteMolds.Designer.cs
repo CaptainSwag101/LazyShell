@@ -96,7 +96,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.moldTileXCoord = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBoxTileset = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTileset = new LAZYSHELL.NewPictureBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.showGrid = new System.Windows.Forms.ToolStripButton();
             this.toggleZoomBox_TS = new System.Windows.Forms.ToolStripButton();
@@ -277,7 +277,7 @@
             this.draw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.draw.Name = "draw";
             this.draw.Size = new System.Drawing.Size(22, 17);
-            this.draw.Text = "Draw";
+            this.draw.Text = "Draw (D)";
             this.draw.Click += new System.EventHandler(this.draw_Click);
             // 
             // erase
@@ -289,7 +289,7 @@
             this.erase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.erase.Name = "erase";
             this.erase.Size = new System.Drawing.Size(22, 17);
-            this.erase.Text = "Erase";
+            this.erase.Text = "Erase (E)";
             this.erase.Click += new System.EventHandler(this.erase_Click);
             // 
             // select
@@ -301,7 +301,7 @@
             this.select.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(22, 17);
-            this.select.Text = "Select Tile(s)";
+            this.select.Text = "Select (S)";
             this.select.Click += new System.EventHandler(this.select_Click);
             // 
             // selectAll
@@ -328,7 +328,7 @@
             this.cut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cut.Name = "cut";
             this.cut.Size = new System.Drawing.Size(22, 17);
-            this.cut.Text = "Cut Selection";
+            this.cut.Text = "Cut (Ctrl+X)";
             this.cut.Click += new System.EventHandler(this.cut_Click);
             // 
             // copy
@@ -339,7 +339,7 @@
             this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(22, 17);
-            this.copy.Text = "Copy Selection";
+            this.copy.Text = "Copy (Ctrl+C)";
             this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
             // paste
@@ -350,7 +350,7 @@
             this.paste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(22, 17);
-            this.paste.Text = "Paste";
+            this.paste.Text = "Paste (Ctrl+V)";
             this.paste.Click += new System.EventHandler(this.paste_Click);
             // 
             // delete
@@ -361,7 +361,7 @@
             this.delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(22, 15);
-            this.delete.Text = "Delete Selection";
+            this.delete.Text = "Delete (Del)";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // toolStripSeparator4
@@ -404,7 +404,7 @@
             this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(22, 12);
-            this.undo.Text = "Undo";
+            this.undo.Text = "Undo (Ctrl+Z)";
             this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
             // redo
@@ -415,7 +415,7 @@
             this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(22, 12);
-            this.redo.Text = "Redo";
+            this.redo.Text = "Redo (Ctrl+Y)";
             this.redo.Click += new System.EventHandler(this.redo_Click);
             // 
             // adjustCoords
@@ -438,7 +438,7 @@
             this.zoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomIn.Name = "zoomIn";
             this.zoomIn.Size = new System.Drawing.Size(23, 22);
-            this.zoomIn.Text = "Zoom In";
+            this.zoomIn.Text = "Zoom In (Ctrl+Up)";
             this.zoomIn.Click += new System.EventHandler(this.zoomIn_Click);
             // 
             // zoomOut
@@ -450,7 +450,7 @@
             this.zoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.zoomOut.Name = "zoomOut";
             this.zoomOut.Size = new System.Drawing.Size(23, 22);
-            this.zoomOut.Text = "Zoom Out";
+            this.zoomOut.Text = "Zoom Out (Ctrl+Down)";
             this.zoomOut.Click += new System.EventHandler(this.zoomOut_Click);
             // 
             // showMoldPixelGrid
@@ -462,7 +462,7 @@
             this.showMoldPixelGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.showMoldPixelGrid.Name = "showMoldPixelGrid";
             this.showMoldPixelGrid.Size = new System.Drawing.Size(23, 22);
-            this.showMoldPixelGrid.Text = "Pixel Grid";
+            this.showMoldPixelGrid.Text = "Pixel Grid (G)";
             this.showMoldPixelGrid.Click += new System.EventHandler(this.showMoldPixelGrid_Click);
             // 
             // listBoxMolds
@@ -620,6 +620,7 @@
             this.showBG.Name = "showBG";
             this.showBG.Size = new System.Drawing.Size(23, 22);
             this.showBG.Text = "BG";
+            this.showBG.ToolTipText = "BG Color (B)";
             this.showBG.Click += new System.EventHandler(this.showBG_Click);
             // 
             // toolStripSeparator3
@@ -637,7 +638,7 @@
             this.toggleZoomBox.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleZoomBox.Name = "toggleZoomBox";
             this.toggleZoomBox.Size = new System.Drawing.Size(23, 22);
-            this.toggleZoomBox.ToolTipText = "Zoom Box";
+            this.toggleZoomBox.ToolTipText = "Zoom Box (Z)";
             this.toggleZoomBox.Click += new System.EventHandler(this.toggleZoomBox_Click);
             // 
             // coordinatorButton
@@ -649,7 +650,7 @@
             this.coordinatorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.coordinatorButton.Name = "coordinatorButton";
             this.coordinatorButton.Size = new System.Drawing.Size(23, 22);
-            this.coordinatorButton.Text = "Coordinator";
+            this.coordinatorButton.Text = "Coordinator (T)";
             this.coordinatorButton.Click += new System.EventHandler(this.coordinatorButton_Click);
             // 
             // toolStripSeparator7
@@ -708,8 +709,13 @@
             this.pictureBoxMold.Size = new System.Drawing.Size(256, 256);
             this.pictureBoxMold.TabIndex = 396;
             this.pictureBoxMold.TabStop = false;
+            this.pictureBoxMold.Zoom = 1;
+            this.pictureBoxMold.ZoomBoxEnabled = true;
+            this.pictureBoxMold.ZoomBoxPosition = new System.Drawing.Point(32, 32);
+            this.pictureBoxMold.ZoomBoxZoom = 4;
             this.pictureBoxMold.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxMold_Paint);
             this.pictureBoxMold.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseDown);
+            this.pictureBoxMold.MouseEnter += new System.EventHandler(this.pictureBoxMold_MouseEnter);
             this.pictureBoxMold.MouseLeave += new System.EventHandler(this.pictureBoxMold_MouseLeave);
             this.pictureBoxMold.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseMove);
             this.pictureBoxMold.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxMold_MouseUp);
@@ -855,6 +861,10 @@
             this.pictureBoxTileset.Size = new System.Drawing.Size(128, 128);
             this.pictureBoxTileset.TabIndex = 42;
             this.pictureBoxTileset.TabStop = false;
+            this.pictureBoxTileset.Zoom = 1;
+            this.pictureBoxTileset.ZoomBoxEnabled = true;
+            this.pictureBoxTileset.ZoomBoxPosition = new System.Drawing.Point(32, 32);
+            this.pictureBoxTileset.ZoomBoxZoom = 4;
             this.pictureBoxTileset.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxTileset_Paint);
             this.pictureBoxTileset.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxTileset_MouseDown);
             this.pictureBoxTileset.MouseLeave += new System.EventHandler(this.pictureBoxTileset_MouseLeave);
@@ -1020,7 +1030,7 @@
         private System.Windows.Forms.ToolStripButton draw;
         private System.Windows.Forms.ToolStripButton erase;
         private System.Windows.Forms.ToolStripButton select;
-        private System.Windows.Forms.PictureBox pictureBoxTileset;
+        private LAZYSHELL.NewPictureBox pictureBoxTileset;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton newMold;
         private System.Windows.Forms.ToolStripButton deleteMold;

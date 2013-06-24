@@ -91,7 +91,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDragSolidity = new System.Windows.Forms.ToolStripButton();
             this.panelLevelPicture = new LAZYSHELL.NewPanel();
-            this.pictureBoxLevel = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLevel = new LAZYSHELL.NewPictureBox();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panelOpacity.SuspendLayout();
@@ -131,7 +131,6 @@
             this.opacityToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(836, 25);
             this.toolStrip1.TabIndex = 0;
@@ -145,7 +144,7 @@
             this.toggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleCartGrid.Name = "toggleCartGrid";
             this.toggleCartGrid.Size = new System.Drawing.Size(23, 22);
-            this.toggleCartGrid.Text = "Grid";
+            this.toggleCartGrid.Text = "Tile Grid (G)";
             this.toggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
             // 
             // toggleIsoGrid
@@ -157,7 +156,7 @@
             this.toggleIsoGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleIsoGrid.Name = "toggleIsoGrid";
             this.toggleIsoGrid.Size = new System.Drawing.Size(23, 22);
-            this.toggleIsoGrid.Text = "Isometric Grid";
+            this.toggleIsoGrid.Text = "Isometric Grid (W)";
             this.toggleIsoGrid.Click += new System.EventHandler(this.buttonToggleOrthGrid_Click);
             // 
             // toolStripSeparator15
@@ -588,7 +587,7 @@
             this.editAllLayers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editAllLayers.Name = "editAllLayers";
             this.editAllLayers.Size = new System.Drawing.Size(23, 17);
-            this.editAllLayers.Text = "Edit All Layers Simultaneously";
+            this.editAllLayers.Text = "Edit All Layers Simultaneously (A)";
             // 
             // toolStripSeparator2
             // 
@@ -604,7 +603,7 @@
             this.buttonEditDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDraw.Name = "buttonEditDraw";
             this.buttonEditDraw.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditDraw.Text = "Draw Tile";
+            this.buttonEditDraw.Text = "Draw (D)";
             this.buttonEditDraw.Click += new System.EventHandler(this.buttonEditDraw_Click);
             // 
             // buttonEditErase
@@ -616,7 +615,7 @@
             this.buttonEditErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditErase.Name = "buttonEditErase";
             this.buttonEditErase.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditErase.Text = "Erase Tile";
+            this.buttonEditErase.Text = "Erase (E)";
             this.buttonEditErase.Click += new System.EventHandler(this.buttonEditErase_Click);
             // 
             // buttonEditSelect
@@ -628,7 +627,7 @@
             this.buttonEditSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditSelect.Name = "buttonEditSelect";
             this.buttonEditSelect.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditSelect.Text = "Select Tile(s)";
+            this.buttonEditSelect.Text = "Select (S)";
             this.buttonEditSelect.Click += new System.EventHandler(this.buttonEditSelect_Click);
             // 
             // selectAll
@@ -639,7 +638,7 @@
             this.selectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(23, 17);
-            this.selectAll.Text = "Select All";
+            this.selectAll.Text = "Select All (Ctrl+A)";
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
             // buttonEditDropper
@@ -651,7 +650,7 @@
             this.buttonEditDropper.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDropper.Name = "buttonEditDropper";
             this.buttonEditDropper.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditDropper.Text = "Select Color";
+            this.buttonEditDropper.Text = "Select Color (P)";
             this.buttonEditDropper.Click += new System.EventHandler(this.buttonEditDropper_Click);
             // 
             // buttonEditFill
@@ -663,7 +662,7 @@
             this.buttonEditFill.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditFill.Name = "buttonEditFill";
             this.buttonEditFill.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditFill.Text = "Fill with tile";
+            this.buttonEditFill.Text = "Fill with tile (F)";
             this.buttonEditFill.Click += new System.EventHandler(this.buttonEditFill_Click);
             // 
             // buttonEditTemplate
@@ -675,7 +674,7 @@
             this.buttonEditTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditTemplate.Name = "buttonEditTemplate";
             this.buttonEditTemplate.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditTemplate.Text = "Draw Template";
+            this.buttonEditTemplate.Text = "Draw Template (T)";
             this.buttonEditTemplate.Click += new System.EventHandler(this.buttonEditTemplate_Click);
             // 
             // buttonEditDelete
@@ -686,7 +685,7 @@
             this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDelete.Name = "buttonEditDelete";
             this.buttonEditDelete.Size = new System.Drawing.Size(23, 15);
-            this.buttonEditDelete.Text = "Delete";
+            this.buttonEditDelete.Text = "Delete (Del)";
             this.buttonEditDelete.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // buttonEditCut
@@ -697,7 +696,7 @@
             this.buttonEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCut.Name = "buttonEditCut";
             this.buttonEditCut.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditCut.Text = "Cut";
+            this.buttonEditCut.Text = "Cut (Ctrl+X)";
             this.buttonEditCut.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
             // buttonEditCopy
@@ -708,7 +707,7 @@
             this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCopy.Name = "buttonEditCopy";
             this.buttonEditCopy.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditCopy.Text = "Copy";
+            this.buttonEditCopy.Text = "Copy (Ctrl+C)";
             this.buttonEditCopy.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // buttonEditPaste
@@ -719,7 +718,7 @@
             this.buttonEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditPaste.Name = "buttonEditPaste";
             this.buttonEditPaste.Size = new System.Drawing.Size(23, 17);
-            this.buttonEditPaste.Text = "Paste";
+            this.buttonEditPaste.Text = "Paste (Ctrl+V)";
             this.buttonEditPaste.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
             // buttonEditUndo
@@ -730,7 +729,7 @@
             this.buttonEditUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditUndo.Name = "buttonEditUndo";
             this.buttonEditUndo.Size = new System.Drawing.Size(23, 12);
-            this.buttonEditUndo.Text = "Undo";
+            this.buttonEditUndo.Text = "Undo (Ctrl+Z)";
             this.buttonEditUndo.Click += new System.EventHandler(this.buttonEditUndo_Click);
             // 
             // buttonEditRedo
@@ -741,7 +740,7 @@
             this.buttonEditRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditRedo.Name = "buttonEditRedo";
             this.buttonEditRedo.Size = new System.Drawing.Size(23, 12);
-            this.buttonEditRedo.Text = "Redo";
+            this.buttonEditRedo.Text = "Redo (Ctrl+Y)";
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
             // 
             // buttonZoomIn
@@ -753,7 +752,7 @@
             this.buttonZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomIn.Name = "buttonZoomIn";
             this.buttonZoomIn.Size = new System.Drawing.Size(23, 17);
-            this.buttonZoomIn.Text = "Zoom In";
+            this.buttonZoomIn.Text = "Zoom In (Ctrl+Up)";
             this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomIn_Click);
             // 
             // buttonZoomOut
@@ -765,7 +764,7 @@
             this.buttonZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomOut.Name = "buttonZoomOut";
             this.buttonZoomOut.Size = new System.Drawing.Size(23, 17);
-            this.buttonZoomOut.Text = "Zoom Out";
+            this.buttonZoomOut.Text = "Zoom Out (Ctrl+Down)";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOut_Click);
             // 
             // toolStripSeparator1
@@ -783,7 +782,7 @@
             this.buttonDragSolidity.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDragSolidity.Name = "buttonDragSolidity";
             this.buttonDragSolidity.Size = new System.Drawing.Size(23, 20);
-            this.buttonDragSolidity.ToolTipText = "Click/drag solidity tiles";
+            this.buttonDragSolidity.ToolTipText = "Click/drag solidity tiles (Q)";
             this.buttonDragSolidity.Click += new System.EventHandler(this.buttonDragSolidity_Click);
             // 
             // panelLevelPicture
@@ -891,7 +890,7 @@
         private System.Windows.Forms.ToolStripButton opacityToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private LAZYSHELL.NewPanel panelLevelPicture;
-        private System.Windows.Forms.PictureBox pictureBoxLevel;
+        private LAZYSHELL.NewPictureBox pictureBoxLevel;
         private System.Windows.Forms.Panel panelOpacity;
         private System.Windows.Forms.TrackBar overlayOpacity;
         private System.Windows.Forms.Label labelOverlayOpacity;

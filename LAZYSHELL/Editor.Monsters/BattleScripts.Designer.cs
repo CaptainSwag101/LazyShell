@@ -102,6 +102,7 @@
             this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandTree = new LAZYSHELL.NewTreeView();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panelRight.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
@@ -979,6 +980,7 @@
             this.BatScrCopyCommand,
             this.BatScrPasteCommand,
             this.BatScrDeleteCommand,
+            this.toolStripSeparator4,
             this.BatScrEditCommand,
             this.BatScrExpandAll,
             this.BatScrCollapseAll,
@@ -1027,6 +1029,11 @@
             this.commandTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
             this.commandTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BattleScriptTree_KeyDown);
             this.commandTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // BattleScripts
             // 
@@ -1164,5 +1171,6 @@
         private System.Windows.Forms.Panel panelAttackA;
         private System.Windows.Forms.Panel panelTargetB;
         private System.Windows.Forms.Panel panelTargetA;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

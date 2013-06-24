@@ -116,14 +116,14 @@
             // 
             // yNegShift
             // 
-            this.yNegShift.Location = new System.Drawing.Point(89, 148);
+            this.yNegShift.Location = new System.Drawing.Point(93, 148);
             this.yNegShift.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.yNegShift.Name = "yNegShift";
-            this.yNegShift.Size = new System.Drawing.Size(39, 21);
+            this.yNegShift.Size = new System.Drawing.Size(43, 21);
             this.yNegShift.TabIndex = 7;
             this.yNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.yNegShift.ValueChanged += new System.EventHandler(this.yNegShift_ValueChanged);
@@ -146,7 +146,7 @@
             0,
             0});
             this.xNegShift.Name = "xNegShift";
-            this.xNegShift.Size = new System.Drawing.Size(39, 21);
+            this.xNegShift.Size = new System.Drawing.Size(43, 21);
             this.xNegShift.TabIndex = 6;
             this.xNegShift.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xNegShift.ValueChanged += new System.EventHandler(this.xNegShift_ValueChanged);

@@ -272,6 +272,20 @@ namespace LAZYSHELL
             }
             return Color.FromArgb(rsrc, gsrc, bsrc).ToArgb();
         }
+        /// <summary>
+        /// Converts an array of color indexes to an array of pixels.
+        /// </summary>
+        /// <param name="src">The source array of color indexes.</param>
+        /// <param name="palette">The palette to use.</param>
+        /// <returns></returns>
+        public static int[] ColorsToPixels(int[] src, int[] palette)
+        {
+            int[] pixels = new int[src.Length];
+            for (int i = 0; i < src.Length; i++)
+                if (src[i] < palette.Length && src[i] != 0)
+                    pixels[i] = palette[src[i]];
+            return pixels;
+        }
         public static Bitmap CombineImages(Bitmap[] images, int maxwidth, int maxheight, int tilesize, bool padedges)
         {
             if (images.Length == 0)
@@ -1325,19 +1339,19 @@ namespace LAZYSHELL
         /// <param name="width">The width,in 8x8 tile units, of the graphic block.</param>
         /// <param name="height">The height,in 8x8 tile units, of the graphic block.</param>
         /// <param name="format">The format for 2bpp or 4bpp, 0x10 or 0x20, respectively.</param>
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int width, int height, byte format)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int width, int height, byte format)
         {
             return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, color, width, height, format, 0, 0);
         }
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int colorBack, int width, int height, byte format)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int colorBack, int width, int height, byte format)
         {
             return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, colorBack, width, height, format, 0, 0);
         }
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, string action, int x, int y, int index, int color, int colorBack, int width, int height, byte format, int x_plus, int y_plus)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int colorBack, int width, int height, byte format, int x_plus, int y_plus)
         {
             if (x < 0 || x >= (width * 8) * zoom || y < 0 || y >= (height * 8) * zoom)
                 return color;
-            if (action == "") return color;
+            if (action == Drawing.None) return color;
             int bit = 0;
             int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
             if (format == 0x20 && offset + 17 >= src.Length)
@@ -1347,33 +1361,35 @@ namespace LAZYSHELL
             Rectangle c;
             switch (action)
             {
-                case "draw":
+                case Drawing.Draw:
                     c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
-                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
+                    if (graphics != null)
+                        graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
                     SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
                     break;
-                case "erase":
+                case Drawing.Erase:
                     SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0, width);
                     break;
-                case "select":
+                case Drawing.Dropper:
                     color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     break;
-                case "replaceColor":
+                case Drawing.ReplaceColor:
                     int selectColor = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     // if pixel not color to replace, return
                     if (selectColor != colorBack)
                         return color;
                     c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
-                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
+                    if (graphics != null)
+                        graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
                     SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
                     break;
-                case "fill":
+                case Drawing.Fill:
                     int fillColor = color;
                     color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     if (color == fillColor) return color;
                     Fill(src, color, fillColor, x, y, width, height, "", srcOffset, index, zoom, format);
                     break;
-                case "replace":
+                case Drawing.FillAll:
                     fillColor = color;
                     color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
                     if (color == fillColor) return color;
@@ -1666,13 +1682,18 @@ namespace LAZYSHELL
             offset += srcOffset;
             return offset;
         }
+        public static int GetBPPOffset(int x, int y, int width, byte format)
+        {
+            int bit = 0;
+            return GetBPPOffset(x, y, 0, 0, 1, format, ref bit, width);
+        }
         /// <summary>
         /// Returns the color index of the BPP pixel at a given coordinate.
         /// </summary>
         /// <param name="offset"></param>
         /// <param name="format"></param>
         /// <param name="bit"></param>
-        private static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int width)
+        public static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int width)
         {
             int color = 0, bit = 0;
             int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
@@ -1704,6 +1725,24 @@ namespace LAZYSHELL
                 Bits.SetBit(src, offset + 16, bit, (color & 4) == 4);
                 Bits.SetBit(src, offset + 17, bit, (color & 8) == 8);
             }
+        }
+        public static byte[] GetBPPRegion(byte[] src, int x, int y, int width, int height, int zoom, byte format)
+        {
+            byte[] buffer;
+            if (format == 0x10)
+                buffer = new byte[(width * height) / 4];
+            else
+                buffer = new byte[(width * height) / 2];
+            for (int Y = y, y_ = 0; y_ < width; Y++, y_++)
+            {
+                for (int X = x, x_ = 0; x_ < height; X++, x_++)
+                {
+                    int offset = GetBPPOffset(X, Y, width, format);
+                    int bufferOffset = GetBPPOffset(x_, y_, width, format);
+                    buffer[bufferOffset] = src[offset];
+                }
+            }
+            return buffer;
         }
         /// <summary>
         /// Flip horizontally an array of pixels.
@@ -1738,6 +1777,30 @@ namespace LAZYSHELL
             }
         }
         /// <summary>
+        /// Flip horizontally a region in a block of SNES graphics.
+        /// </summary>
+        /// <param name="src">The source SNES graphics.</param>
+        /// <param name="srcWidth">The width of the graphics being read.</param>
+        /// <param name="x">The X coord, in pixels, of the region being modified.</param>
+        /// <param name="y">The Y coord, in pixels, of the region being modified.</param>
+        /// <param name="width">The width, in pixels, of the region being modified.</param>
+        /// <param name="height">The height, in pixels, of the region being modified.</param>
+        /// <param name="zoom">The zoom factor.</param>
+        /// <param name="format">The format, 2bpp or 4bpp (0x10 and 0x20), of the source graphics.</param>
+        public static void FlipHorizontal(byte[] src, int srcWidth, int X, int Y, int width, int height, int zoom, byte format)
+        {
+            for (int y = Y; y < Y + height; y++)
+            {
+                for (int a = X, b = (width + X) - 1; a - X < width / 2; a++, b--)
+                {
+                    int tempA = GetBPPColor(src, a, y, 0, 0, zoom, format, srcWidth);
+                    int tempB = GetBPPColor(src, b, y, 0, 0, zoom, format, srcWidth);
+                    SetBPPColor(src, a, y, 0, 0, zoom, format, tempB, srcWidth);
+                    SetBPPColor(src, b, y, 0, 0, zoom, format, tempA, srcWidth);
+                }
+            }
+        }
+        /// <summary>
         /// Flip vertically an array of pixels.
         /// </summary>
         /// <param name="src">The pixels to flip vertically.</param>
@@ -1766,6 +1829,29 @@ namespace LAZYSHELL
                     temp = src[(a * srcWidth) + x];
                     src[(a * srcWidth) + x] = src[(b * srcWidth) + x];
                     src[(b * srcWidth) + x] = temp;
+                }
+            }
+        }
+        /// <summary>
+        /// Flip vertically a region in a block of SNES graphics.
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="zoom"></param>
+        /// <param name="format"></param>
+        public static void FlipVertical(byte[] src, int srcWidth, int X, int Y, int width, int height, int zoom, byte format)
+        {
+            for (int x = X; x < X + width; x++)
+            {
+                for (int a = 0, b = (height + Y) - 1; a - Y < height / 2; a++, b--)
+                {
+                    int tempA = GetBPPColor(src, x, a, 0, 0, zoom, format, srcWidth);
+                    int tempB = GetBPPColor(src, x, b, 0, 0, zoom, format, srcWidth);
+                    SetBPPColor(src, x, a, 0, 0, zoom, format, tempB, srcWidth);
+                    SetBPPColor(src, x, b, 0, 0, zoom, format, tempA, srcWidth);
                 }
             }
         }
@@ -3069,13 +3155,16 @@ namespace LAZYSHELL
             }
             return pixels;
         }
+        /// <summary>
+        /// Determines whether a rectangle is within the bounds of a source rectangle.
+        /// </summary>
+        /// <param name="src">The source rectangle.</param>
+        /// <param name="var">The rectangle to check.</param>
+        /// <returns></returns>
         public static bool WithinBounds(Rectangle regionA, Rectangle regionB)
         {
-            if (regionA.X > regionB.X + regionB.Width ||
-                regionA.Y > regionB.Y + regionB.Height)
-                return false;
-            if (regionA.X + regionA.Width < regionB.X ||
-                regionA.Y + regionA.Height < regionB.Y)
+            if (regionB.Left < regionA.Left || regionB.Right > regionA.Right ||
+                regionB.Top < regionA.Top || regionB.Bottom > regionA.Bottom)
                 return false;
             return true;
         }
@@ -3917,7 +4006,7 @@ namespace LAZYSHELL
                 if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                     return;
                 BinaryFormatter bf = new BinaryFormatter();
-                Stream s = File.Create(saveFileDialog.FileName + ".dat");
+                Stream s = File.Create(saveFileDialog.FileName);
                 bf.Serialize(s, element);
                 s.Close();
             }
@@ -4621,6 +4710,18 @@ namespace LAZYSHELL
             SetWindowPos(frm.Handle.ToInt32(), HWND_TOPMOST,
             frm.Left, frm.Top, frm.Width, frm.Height,
             SWP_NOACTIVATE);
+        }
+        public static Rectangle GetVisibleBounds(Control control)
+        {
+            Control c = control;
+            Rectangle r = c.RectangleToScreen(c.ClientRectangle);
+            while (c != null)
+            {
+                r = Rectangle.Intersect(r, c.RectangleToScreen(c.ClientRectangle));
+                c = c.Parent;
+            }
+            r = control.RectangleToClient(r);
+            return r;
         }
         //
         public static void SortListView(ListView listView, ListViewColumnSorter lvwColumnSorter, int column)

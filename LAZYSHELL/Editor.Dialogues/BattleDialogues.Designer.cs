@@ -358,7 +358,7 @@
             this.toggleText.Name = "toggleText";
             this.toggleText.Size = new System.Drawing.Size(30, 22);
             this.toggleText.Text = "TXT";
-            this.toggleText.ToolTipText = "Show/Hide Dialogue Text";
+            this.toggleText.ToolTipText = "Show/hide Dialogue Text";
             this.toggleText.Click += new System.EventHandler(this.toggleText_Click);
             // 
             // grid
@@ -370,7 +370,7 @@
             this.grid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(23, 22);
-            this.grid.ToolTipText = "Show/Hide Grid";
+            this.grid.ToolTipText = "Tile Grid";
             this.grid.Click += new System.EventHandler(this.grid_Click);
             // 
             // toolStripSeparator3

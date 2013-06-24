@@ -497,7 +497,7 @@
             this.toggleKeystrokes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleKeystrokes.Name = "toggleKeystrokes";
             this.toggleKeystrokes.Size = new System.Drawing.Size(23, 22);
-            this.toggleKeystrokes.ToolTipText = "Show/hide keystrokes table";
+            this.toggleKeystrokes.ToolTipText = "Show/hide keystrokes";
             this.toggleKeystrokes.CheckedChanged += new System.EventHandler(this.toggleKeystrokes_CheckedChanged);
             // 
             // toolStripSeparator1

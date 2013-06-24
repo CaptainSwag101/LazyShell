@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilesetEditor));
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cutToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +39,7 @@
             this.priority1ClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mirrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveImageAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -54,9 +53,12 @@
             this.buttonEditCut = new System.Windows.Forms.ToolStripButton();
             this.buttonEditCopy = new System.Windows.Forms.ToolStripButton();
             this.buttonEditPaste = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonEditMirror = new System.Windows.Forms.ToolStripButton();
+            this.buttonEditInvert = new System.Windows.Forms.ToolStripButton();
             this.buttonEditUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonEditRedo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pictureBoxTilesetL1 = new System.Windows.Forms.PictureBox();
@@ -93,12 +95,12 @@
             this.priority1ClearToolStripMenuItem,
             this.mirrorToolStripMenuItem,
             this.invertToolStripMenuItem,
-            this.toolStripSeparator25,
+            this.toolStripSeparator3,
             this.saveImageAsToolStripMenuItem,
             this.importImageToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 258);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(159, 236);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // cutToolStripMenuItem2
@@ -178,10 +180,10 @@
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
-            // toolStripSeparator25
+            // toolStripSeparator3
             // 
-            this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
             // 
             // saveImageAsToolStripMenuItem
             // 
@@ -216,12 +218,14 @@
             this.buttonEditCut,
             this.buttonEditCopy,
             this.buttonEditPaste,
-            this.toolStripSeparator11,
+            this.toolStripSeparator2,
+            this.buttonEditMirror,
+            this.buttonEditInvert,
             this.buttonEditUndo,
-            this.buttonEditRedo});
+            this.buttonEditRedo,
+            this.toolStripSeparator11});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(8, 0, 1, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(272, 25);
             this.toolStrip1.TabIndex = 0;
@@ -262,7 +266,7 @@
             this.buttonToggleBG.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleBG.Name = "buttonToggleBG";
             this.buttonToggleBG.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleBG.Text = "BG";
+            this.buttonToggleBG.Text = "BG Color";
             this.buttonToggleBG.ToolTipText = "Background";
             this.buttonToggleBG.Click += new System.EventHandler(this.buttonToggleBG_Click);
             // 
@@ -331,12 +335,34 @@
             this.buttonEditPaste.Text = "Paste";
             this.buttonEditPaste.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
-            // toolStripSeparator11
+            // toolStripSeparator2
             // 
-            this.toolStripSeparator11.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
-            this.toolStripSeparator11.Visible = false;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // buttonEditMirror
+            // 
+            this.buttonEditMirror.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditMirror.Enabled = false;
+            this.buttonEditMirror.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.buttonEditMirror.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditMirror.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditMirror.Name = "buttonEditMirror";
+            this.buttonEditMirror.Size = new System.Drawing.Size(23, 22);
+            this.buttonEditMirror.Text = "Mirror";
+            this.buttonEditMirror.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
+            // 
+            // buttonEditInvert
+            // 
+            this.buttonEditInvert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditInvert.Enabled = false;
+            this.buttonEditInvert.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.buttonEditInvert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditInvert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditInvert.Name = "buttonEditInvert";
+            this.buttonEditInvert.Size = new System.Drawing.Size(23, 22);
+            this.buttonEditInvert.Text = "Invert";
+            this.buttonEditInvert.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // buttonEditUndo
             // 
@@ -361,6 +387,13 @@
             this.buttonEditRedo.Text = "Redo";
             this.buttonEditRedo.Visible = false;
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator11.Visible = false;
             // 
             // tabControl1
             // 
@@ -417,7 +450,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(264, 520);
+            this.tabPage2.Size = new System.Drawing.Size(268, 524);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAYER 2";
             // 
@@ -448,7 +481,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(264, 520);
+            this.tabPage3.Size = new System.Drawing.Size(268, 524);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LAYER 3";
             // 
@@ -573,7 +606,6 @@
         private System.Windows.Forms.ToolStripButton buttonToggleCartGrid;
         private System.Windows.Forms.ToolStripButton buttonToggleBG;
         private System.Windows.Forms.ToolStripButton buttonToggleP1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripButton buttonEditDelete;
         private System.Windows.Forms.ToolStripButton buttonEditCut;
         private System.Windows.Forms.ToolStripButton buttonEditCopy;
@@ -590,14 +622,12 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.PictureBox pictureBoxTilesetL3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
         private System.Windows.Forms.ToolStripMenuItem priority1SetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem priority1ClearToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripMenuItem saveImageAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mirrorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
@@ -607,5 +637,11 @@
         private System.Windows.Forms.CheckBox autoUpdate;
         private System.Windows.Forms.Label labelTileIndex;
         private System.Windows.Forms.ToolStripMenuItem importImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton buttonEditMirror;
+        private System.Windows.Forms.ToolStripButton buttonEditInvert;
     }
 }

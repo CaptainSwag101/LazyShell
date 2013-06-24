@@ -125,4 +125,8 @@ namespace LAZYSHELL
     {
         Level, Mod, Template, None
     }
+    public enum Drawing
+    {
+        None, Draw, Erase, Fill, FillAll, ReplaceColor, Dropper, Select
+    }
 }

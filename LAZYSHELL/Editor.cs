@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -44,6 +45,7 @@ namespace LAZYSHELL
             this.AppControl = controls;
             //
             InitializeComponent();
+            LoadWebpage();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(saveToolStripMenuItem_Click));
             loadRomTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             // MRU
@@ -93,6 +95,27 @@ namespace LAZYSHELL
             Application.Run(new Editor(AppControl));
         }
         // Loading
+        private void LoadWebpage()
+        {
+            XmlDocument LAZYSHELL_help = Model.LAZYSHELL_xml;
+            XmlNodeList nodes = LAZYSHELL_help.SelectNodes("//section");
+            string documentText = "<html><head><style>";
+            documentText += Resources.LAZYSHELL_css;
+            documentText += "</style></head>";
+            documentText += "<body>";
+            foreach (XmlNode node in nodes)
+            {
+                XmlNode header = node.SelectSingleNode(".//header");
+                documentText += "<h1 class=\"subwindow\">" + header.InnerText + "</h1>";
+                documentText += "<div class=\"subwindow\">";
+                documentText += "<p class=\"subwindow\">";
+                XmlNode body = node.SelectSingleNode(".//body");
+                documentText += body.InnerText.Replace("\r\n", "<br/>");
+                documentText += "</p></div>";
+            }
+            documentText += "<br/></body></html>";
+            webBrowser1.DocumentText = documentText;
+        }
         private void Open(string filename)
         {
             if (AppControl.AssembleAndCloseWindows())
@@ -587,6 +610,7 @@ namespace LAZYSHELL
         // window editing
         private void docking_Click(object sender, EventArgs e)
         {
+            webBrowser1.Visible = !docking.Checked;
             AppControl.DockEditors = docking.Checked;
             if (docking.Checked)
                 AppControl.Dock();

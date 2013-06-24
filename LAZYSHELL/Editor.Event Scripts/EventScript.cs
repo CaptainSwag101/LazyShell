@@ -92,7 +92,7 @@ namespace LAZYSHELL.ScriptsEditor
             }
         }
         // class functions
-        private void ParseScript()
+        public void ParseScript()
         {
             int offset = 0, length = 0;
             if (script.Length > 0 && this.commands == null)
@@ -325,6 +325,11 @@ namespace LAZYSHELL.ScriptsEditor
                     }
                 }
             }
+        }
+        public EventScript Copy()
+        {
+            EventScript copy = new EventScript(this.index);
+            return copy;
         }
         public override void Clear()
         {

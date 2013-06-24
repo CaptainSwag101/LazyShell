@@ -1,5 +1,43 @@
 Major changes/additions are indicated by ***
 
+v3.17.0 (2013-06-23)
+--------------------------------------
+Additions:
+*Many key shortcuts added for paint features in several editors
+*Zooming with mouse wheel and key shortcut feature supported
+*Zoom box added to effects editor and graphics editor
+*Event Scripts: undo/redo support added
+*Formations: undo/redo for monster coord adjustment
+*Graphics Editor: button to switch fore and back colors in swatch
+*Graphics Editor: adjust size of brush, up to 16 pixels
+*Graphics Editor: undo/redo support added to the paint editing
+*Graphics Editor: select, cut, copy, paste, delete support added
+*Levels: Ctrl+click a tile to select it in the tileset
+
+Changes:
+*Main window loads introductory information from help/readme file
+*Added mirror/invert buttons for sidebars of various tileset editors
+*Effects: undo/redo now groups tiles drawn/erased in same mouse drag
+*Graphics Editor: drawing w/transparent color now behaves like eraser
+*Levels: undo/redo now groups tiles drawn/erased in same mouse drag
+
+Fixes:
+*Mirror/invert tileset tiles was clearing the selection box
+*Effects: image controls not updating when changing image #
+*Graphics Editor: replace color not updating graphics image correctly
+*Levels: maximum wrong for some NumericUpDown controls in MAPS tab
+*Levels: erasing when editing all layers not checking if tiles empty
+*Levels: exporting to battlefield tileset not serializing battlefield
+*Levels: crash if undo/redo solid mod if no edits done at all
+*Menus: menu texts were encoding/decoding as description type
+*Palette Editor: palette effects not updating if checked colors changed
+*Palette Editor: brightness adjustment not setting ceiling to 248
+*Project: reset not working properly for element lists
+*Project: element list index description not loading/saving at all
+*Sprites: issues with undo/redo when changing mold indexes
+*Sprites: free space label not updating when changing animation #
+
+
 v3.16.1 (2013-06-16)
 --------------------------------------
 Additions:

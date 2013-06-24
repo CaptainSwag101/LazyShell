@@ -106,8 +106,8 @@ namespace LAZYSHELL
                     labelEvtA2.Text = "Object";
                     if (esc.Opcode == 0xF8)
                         labelEvtC1.Text = "Jump to";
-                    evtNameA1.Items.AddRange(Lists.LevelNames); evtNameA1.Enabled = true;
-                    evtNameA1.DropDownWidth = 450;
+                    evtNameA1.Items.AddRange(Lists.Numerize(Lists.LevelNames)); evtNameA1.Enabled = true;
+                    evtNameA1.DropDownWidth = 500;
                     evtNameA2.Items.AddRange(Lists.ObjectNames); evtNameA2.Enabled = true;
                     evtNumA1.Enabled = true; evtNumA1.Maximum = 511;
                     if (esc.Opcode == 0xF3)
@@ -224,8 +224,8 @@ namespace LAZYSHELL
                     labelEvtA2.Text = "F / Z";
                     labelEvtA3.Text = "X";
                     labelEvtA4.Text = "Y";
-                    evtNameA1.Items.AddRange(Lists.LevelNames); evtNameA1.Enabled = true;
-                    evtNameA1.DropDownWidth = 450;
+                    evtNameA1.Items.AddRange(Lists.Numerize(Lists.LevelNames)); evtNameA1.Enabled = true;
+                    evtNameA1.DropDownWidth = 500;
                     evtNameA2.Items.AddRange(Lists.Directions); evtNameA2.Enabled = true;
                     evtNumA1.Enabled = true; evtNumA1.Maximum = 511;
                     evtNumA2.Enabled = true; evtNumA2.Maximum = 31;
@@ -249,8 +249,8 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA1.Text = "Level";
                     labelEvtA3.Text = "Mod #";
-                    evtNameA1.Items.AddRange(Lists.LevelNames); evtNameA1.Enabled = true;
-                    evtNameA1.DropDownWidth = 450;
+                    evtNameA1.Items.AddRange(Lists.Numerize(Lists.LevelNames)); evtNameA1.Enabled = true;
+                    evtNameA1.DropDownWidth = 500;
                     evtNumA1.Enabled = true; evtNumA1.Maximum = 511;
                     evtNumA3.Enabled = true; evtNumA3.Maximum = 63;
                     //
@@ -1223,8 +1223,8 @@ namespace LAZYSHELL
                                 labelEvtA1.Text = "Level";
                                 labelEvtA2.Text = "Object";
                                 labelEvtC1.Text = "Jump to";
-                                evtNameA1.Items.AddRange(Lists.LevelNames); evtNameA1.Enabled = true;
-                                evtNameA1.DropDownWidth = 450;
+                                evtNameA1.Items.AddRange(Lists.Numerize(Lists.LevelNames)); evtNameA1.Enabled = true;
+                                evtNameA1.DropDownWidth = 500;
                                 evtNameA2.Items.AddRange(Lists.ObjectNames); evtNameA2.Enabled = true;
                                 evtNumA1.Enabled = true; evtNumA1.Maximum = 511;
                                 evtEffects.Items.AddRange(new object[] { "is enabled" });
@@ -2400,7 +2400,9 @@ namespace LAZYSHELL
                     labelEvtA2.Text = "Object";
                     if (esc.Opcode == 0xF8)
                         labelEvtC1.Text = "Jump to";
-                    evtNameA1.Items.AddRange(Lists.LevelNames); evtNameA1.Enabled = true;
+                    evtNameA1.Items.AddRange(Lists.Numerize(Lists.LevelNames));
+                    evtNameA1.DropDownWidth = 500;
+                    evtNameA1.Enabled = true;
                     evtNameA2.Items.AddRange(Lists.ObjectNames); evtNameA2.Enabled = true;
                     evtNumA1.Enabled = true; evtNumA1.Maximum = 511;
                     if (asc.Opcode == 0xF3)

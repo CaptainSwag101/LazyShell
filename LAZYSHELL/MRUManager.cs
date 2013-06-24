@@ -253,6 +253,7 @@ namespace LAZYSHELL
 
             if (menuItemParent == null)
             {
+                return;
                 throw new Exception(
                     "MRUManager: Cannot find parent of MRU menu item");
             }

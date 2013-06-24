@@ -20,7 +20,7 @@ namespace LAZYSHELL.Undo
         private bool transparent;
         private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
         // constructor
-        public TilemapEdit(Levels updater, Tilemap tilemap, int layer, Point start, Point stop, 
+        public TilemapEdit(Levels updater, Tilemap tilemap, int layer, Point start, Point stop,
             int[][] changes, bool pasting, bool transparent, bool allLayers)
         {
             if (updater != null)
@@ -75,7 +75,7 @@ namespace LAZYSHELL.Undo
                         {
                             if (l == 2 && updater.LevelMap.GraphicSetL3 == 0xFF)
                                 break;
-                            if (changes[l] == null) 
+                            if (changes[l] == null)
                                 continue;
                             temp = tilemap.GetTileNum(l, tileX, tileY); // Save the current tileNum for later undo
                             empty = changes[l][x + y * deltaX] == 0;
@@ -90,7 +90,7 @@ namespace LAZYSHELL.Undo
                     }
                     else
                     {
-                        if (changes[layer] == null) 
+                        if (changes[layer] == null)
                             continue;
                         temp = tilemap.GetTileNum(layer, tileX, tileY); // Save the current tileNum for later undo
                         empty = changes[layer][x + y * deltaX] == 0;

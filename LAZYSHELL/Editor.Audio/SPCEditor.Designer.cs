@@ -132,10 +132,10 @@
             this.rErase = new System.Windows.Forms.ToolStripButton();
             this.rSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.rDelete = new System.Windows.Forms.ToolStripButton();
             this.rCut = new System.Windows.Forms.ToolStripButton();
             this.rCopy = new System.Windows.Forms.ToolStripButton();
             this.rPaste = new System.Windows.Forms.ToolStripButton();
+            this.rDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.rUndo = new System.Windows.Forms.ToolStripButton();
             this.rRedo = new System.Windows.Forms.ToolStripButton();
@@ -200,10 +200,10 @@
             this.wErase = new System.Windows.Forms.ToolStripButton();
             this.wSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.wDelete = new System.Windows.Forms.ToolStripButton();
             this.wCut = new System.Windows.Forms.ToolStripButton();
             this.wCopy = new System.Windows.Forms.ToolStripButton();
             this.wPaste = new System.Windows.Forms.ToolStripButton();
+            this.wDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.undo = new System.Windows.Forms.ToolStripButton();
             this.redo = new System.Windows.Forms.ToolStripButton();
@@ -538,7 +538,9 @@
             // 
             // scoreViewer
             // 
+            this.scoreViewer.Checked = true;
             this.scoreViewer.CheckOnClick = true;
+            this.scoreViewer.CheckState = System.Windows.Forms.CheckState.Checked;
             this.scoreViewer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.scoreViewer.Image = global::LAZYSHELL.Properties.Resources.scoreView;
             this.scoreViewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -939,11 +941,11 @@
             // hScrollBarCT
             // 
             this.hScrollBarCT.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBarCT.LargeChange = 1;
+            this.hScrollBarCT.LargeChange = 100;
             this.hScrollBarCT.Location = new System.Drawing.Point(0, 300);
-            this.hScrollBarCT.Maximum = 0;
             this.hScrollBarCT.Name = "hScrollBarCT";
             this.hScrollBarCT.Size = new System.Drawing.Size(339, 16);
+            this.hScrollBarCT.SmallChange = 10;
             this.hScrollBarCT.TabIndex = 0;
             this.hScrollBarCT.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             this.hScrollBarCT.ValueChanged += new System.EventHandler(this.hScrollBar1_ValueChanged);
@@ -1395,7 +1397,6 @@
             this.groupBoxSV.TabIndex = 10;
             this.groupBoxSV.TabStop = false;
             this.groupBoxSV.Text = "Staff Viewer";
-            this.groupBoxSV.Visible = false;
             this.groupBoxSV.Resize += new System.EventHandler(this.groupBoxSV_Resize);
             // 
             // panel2
@@ -1436,19 +1437,20 @@
             this.scoreViewPicture.MouseEnter += new System.EventHandler(this.scoreViewPicture_MouseEnter);
             this.scoreViewPicture.MouseLeave += new System.EventHandler(this.scoreViewPicture_MouseLeave);
             this.scoreViewPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreViewPicture_MouseMove);
+            this.scoreViewPicture.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.scoreViewPicture_PreviewKeyDown);
             // 
             // hScrollBarSV
             // 
             this.hScrollBarSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBarSV.LargeChange = 1;
+            this.hScrollBarSV.LargeChange = 100;
             this.hScrollBarSV.Location = new System.Drawing.Point(0, 362);
-            this.hScrollBarSV.Maximum = 0;
             this.hScrollBarSV.Name = "hScrollBarSV";
-            this.hScrollBarSV.Size = new System.Drawing.Size(502, 16);
+            this.hScrollBarSV.Size = new System.Drawing.Size(486, 16);
+            this.hScrollBarSV.SmallChange = 10;
             this.hScrollBarSV.TabIndex = 1;
-            this.hScrollBarSV.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
-            this.hScrollBarSV.ValueChanged += new System.EventHandler(this.hScrollBar2_ValueChanged);
+            this.hScrollBarSV.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBarSV_Scroll);
+            this.hScrollBarSV.ValueChanged += new System.EventHandler(this.hScrollBarSV_ValueChanged);
             // 
             // labelRNote
             // 
@@ -1470,10 +1472,10 @@
             this.rErase,
             this.rSelect,
             this.toolStripSeparator19,
-            this.rDelete,
             this.rCut,
             this.rCopy,
             this.rPaste,
+            this.rDelete,
             this.toolStripSeparator20,
             this.rUndo,
             this.rRedo});
@@ -1493,7 +1495,7 @@
             this.rDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rDraw.Name = "rDraw";
             this.rDraw.Size = new System.Drawing.Size(21, 17);
-            this.rDraw.Text = "Draw Note";
+            this.rDraw.Text = "Draw (D)";
             this.rDraw.CheckedChanged += new System.EventHandler(this.rDraw_CheckedChanged);
             // 
             // rErase
@@ -1505,7 +1507,7 @@
             this.rErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rErase.Name = "rErase";
             this.rErase.Size = new System.Drawing.Size(21, 17);
-            this.rErase.Text = "Erase Note";
+            this.rErase.Text = "Erase (E)";
             this.rErase.CheckedChanged += new System.EventHandler(this.rErase_CheckedChanged);
             // 
             // rSelect
@@ -1517,24 +1519,13 @@
             this.rSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rSelect.Name = "rSelect";
             this.rSelect.Size = new System.Drawing.Size(21, 17);
-            this.rSelect.Text = "Select Note(s)";
+            this.rSelect.Text = "Select (S)";
             this.rSelect.CheckedChanged += new System.EventHandler(this.rSelect_CheckedChanged);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
             this.toolStripSeparator19.Size = new System.Drawing.Size(21, 6);
-            // 
-            // rDelete
-            // 
-            this.rDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.rDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.rDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.rDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.rDelete.Name = "rDelete";
-            this.rDelete.Size = new System.Drawing.Size(21, 15);
-            this.rDelete.Text = "Delete Note(s)";
-            this.rDelete.Click += new System.EventHandler(this.rDelete_Click);
             // 
             // rCut
             // 
@@ -1544,7 +1535,7 @@
             this.rCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rCut.Name = "rCut";
             this.rCut.Size = new System.Drawing.Size(21, 17);
-            this.rCut.Text = "Cut Note(s)";
+            this.rCut.Text = "Cut (Ctrl+X)";
             this.rCut.Click += new System.EventHandler(this.rCut_Click);
             // 
             // rCopy
@@ -1555,7 +1546,7 @@
             this.rCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rCopy.Name = "rCopy";
             this.rCopy.Size = new System.Drawing.Size(21, 17);
-            this.rCopy.Text = "Copy Note(s)";
+            this.rCopy.Text = "Copy (Ctrl+C)";
             this.rCopy.Click += new System.EventHandler(this.rCopy_Click);
             // 
             // rPaste
@@ -1567,8 +1558,19 @@
             this.rPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rPaste.Name = "rPaste";
             this.rPaste.Size = new System.Drawing.Size(21, 17);
-            this.rPaste.Text = "Paste Note(s)";
+            this.rPaste.Text = "Paste (Ctrl+V)";
             this.rPaste.CheckedChanged += new System.EventHandler(this.rPaste_CheckedChanged);
+            // 
+            // rDelete
+            // 
+            this.rDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.rDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.rDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rDelete.Name = "rDelete";
+            this.rDelete.Size = new System.Drawing.Size(21, 15);
+            this.rDelete.Text = "Delete (Del)";
+            this.rDelete.Click += new System.EventHandler(this.rDelete_Click);
             // 
             // toolStripSeparator20
             // 
@@ -1583,7 +1585,7 @@
             this.rUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rUndo.Name = "rUndo";
             this.rUndo.Size = new System.Drawing.Size(21, 12);
-            this.rUndo.Text = "Undo";
+            this.rUndo.Text = "Undo (Ctrl+Z)";
             this.rUndo.Click += new System.EventHandler(this.undo_Click);
             // 
             // rRedo
@@ -1594,7 +1596,7 @@
             this.rRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.rRedo.Name = "rRedo";
             this.rRedo.Size = new System.Drawing.Size(21, 12);
-            this.rRedo.Text = "Redo";
+            this.rRedo.Text = "Redo (Ctrl+Y)";
             this.rRedo.Click += new System.EventHandler(this.redo_Click);
             // 
             // rToolStripNote
@@ -2394,17 +2396,17 @@
             this.wErase,
             this.wSelect,
             this.toolStripSeparator12,
-            this.wDelete,
             this.wCut,
             this.wCopy,
             this.wPaste,
+            this.wDelete,
             this.toolStripSeparator14,
             this.undo,
             this.redo});
             this.wToolStripAct.Location = new System.Drawing.Point(3, 67);
             this.wToolStripAct.Name = "wToolStripAct";
             this.wToolStripAct.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.wToolStripAct.Size = new System.Drawing.Size(24, 403);
+            this.wToolStripAct.Size = new System.Drawing.Size(32, 403);
             this.wToolStripAct.TabIndex = 6;
             this.wToolStripAct.Text = "toolStrip6";
             // 
@@ -2417,7 +2419,7 @@
             this.wDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wDraw.Name = "wDraw";
             this.wDraw.Size = new System.Drawing.Size(21, 17);
-            this.wDraw.Text = "Draw Note";
+            this.wDraw.Text = "Draw Note (D)";
             this.wDraw.CheckedChanged += new System.EventHandler(this.wDraw_CheckedChanged);
             // 
             // wErase
@@ -2428,8 +2430,8 @@
             this.wErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wErase.Name = "wErase";
-            this.wErase.Size = new System.Drawing.Size(21, 17);
-            this.wErase.Text = "Erase Note";
+            this.wErase.Size = new System.Drawing.Size(29, 17);
+            this.wErase.Text = "Erase (E)";
             this.wErase.CheckedChanged += new System.EventHandler(this.wErase_CheckedChanged);
             // 
             // wSelect
@@ -2440,25 +2442,14 @@
             this.wSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wSelect.Name = "wSelect";
-            this.wSelect.Size = new System.Drawing.Size(21, 17);
-            this.wSelect.Text = "Select Note(s)";
+            this.wSelect.Size = new System.Drawing.Size(29, 17);
+            this.wSelect.Text = "Select (S)";
             this.wSelect.CheckedChanged += new System.EventHandler(this.wSelect_CheckedChanged);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(21, 6);
-            // 
-            // wDelete
-            // 
-            this.wDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.wDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.wDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.wDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.wDelete.Name = "wDelete";
-            this.wDelete.Size = new System.Drawing.Size(21, 15);
-            this.wDelete.Text = "Delete Note(s)";
-            this.wDelete.Click += new System.EventHandler(this.wDelete_Click);
             // 
             // wCut
             // 
@@ -2467,8 +2458,8 @@
             this.wCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wCut.Name = "wCut";
-            this.wCut.Size = new System.Drawing.Size(21, 17);
-            this.wCut.Text = "Cut Note(s)";
+            this.wCut.Size = new System.Drawing.Size(29, 17);
+            this.wCut.Text = "Cut (Ctrl+X)";
             this.wCut.Click += new System.EventHandler(this.wCut_Click);
             // 
             // wCopy
@@ -2478,8 +2469,8 @@
             this.wCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wCopy.Name = "wCopy";
-            this.wCopy.Size = new System.Drawing.Size(21, 17);
-            this.wCopy.Text = "Copy Note(s)";
+            this.wCopy.Size = new System.Drawing.Size(29, 17);
+            this.wCopy.Text = "Copy (Ctrl+C)";
             this.wCopy.Click += new System.EventHandler(this.wCopy_Click);
             // 
             // wPaste
@@ -2490,9 +2481,20 @@
             this.wPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wPaste.Name = "wPaste";
-            this.wPaste.Size = new System.Drawing.Size(21, 17);
-            this.wPaste.Text = "Paste Note(s)";
+            this.wPaste.Size = new System.Drawing.Size(29, 17);
+            this.wPaste.Text = "Paste (Ctrl+V)";
             this.wPaste.CheckedChanged += new System.EventHandler(this.wPaste_CheckedChanged);
+            // 
+            // wDelete
+            // 
+            this.wDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.wDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.wDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.wDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.wDelete.Name = "wDelete";
+            this.wDelete.Size = new System.Drawing.Size(29, 15);
+            this.wDelete.Text = "Delete (Del)";
+            this.wDelete.Click += new System.EventHandler(this.wDelete_Click);
             // 
             // toolStripSeparator14
             // 
@@ -2508,7 +2510,7 @@
             this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(21, 12);
-            this.undo.Text = "Undo";
+            this.undo.Text = "Undo (Ctrl+Z)";
             this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
             // redo
@@ -2520,7 +2522,7 @@
             this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(21, 12);
-            this.redo.Text = "Redo";
+            this.redo.Text = "Redo (Ctrl+Y)";
             this.redo.Click += new System.EventHandler(this.redo_Click);
             // 
             // labelWNote
@@ -2563,14 +2565,17 @@
             this.scoreWriterPicture.MouseEnter += new System.EventHandler(this.scoreWriterPicture_MouseEnter);
             this.scoreWriterPicture.MouseLeave += new System.EventHandler(this.scoreWriterPicture_MouseLeave);
             this.scoreWriterPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreWriterPicture_MouseMove);
+            this.scoreWriterPicture.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.scoreWriterPicture_PreviewKeyDown);
             // 
             // hScrollBarSW
             // 
             this.hScrollBarSW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBarSW.LargeChange = 100;
             this.hScrollBarSW.Location = new System.Drawing.Point(29, 428);
             this.hScrollBarSW.Name = "hScrollBarSW";
-            this.hScrollBarSW.Size = new System.Drawing.Size(881, 16);
+            this.hScrollBarSW.Size = new System.Drawing.Size(863, 16);
+            this.hScrollBarSW.SmallChange = 10;
             this.hScrollBarSW.TabIndex = 3;
             this.hScrollBarSW.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar3_Scroll);
             this.hScrollBarSW.ValueChanged += new System.EventHandler(this.hScrollBar3_ValueChanged);
@@ -3638,8 +3643,8 @@
             this.ClientSize = new System.Drawing.Size(937, 513);
             this.ControlBox = false;
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panelSPC);
             this.Controls.Add(this.groupBoxSW);
+            this.Controls.Add(this.panelSPC);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SPCEditor";

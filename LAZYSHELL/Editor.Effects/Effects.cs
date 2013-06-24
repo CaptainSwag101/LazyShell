@@ -317,7 +317,12 @@ namespace LAZYSHELL
         {
             if (updating) return;
             effect.AnimationPacket = (byte)imageNum.Value;
+            // image properties
+            e_paletteSetSize.Value = animation.PaletteSetLength;
+            e_graphicSetSize.Minimum = animation.Codec == 1 ? 16 : 32;
+            e_graphicSetSize.Value = animation.GraphicSetLength;
             e_codec.SelectedIndex = animation.Codec;
+            //
             animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             CalculateFreeSpace();
             LoadMoldEditor();
@@ -371,7 +376,7 @@ namespace LAZYSHELL
         }
         private void openSequences_Click(object sender, EventArgs e)
         {
-            sequences.Visible = openSequences.Checked;
+            panelSequences.Visible = openSequences.Checked;
         }
         private void editor_FormClosing(object sender, FormClosingEventArgs e)
         {

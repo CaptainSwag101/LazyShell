@@ -13,10 +13,11 @@ namespace LAZYSHELL.Undo
         private Mold moldA;
         private Mold moldB;
         private int index;
+        private int indexB;
         private SpriteAction action;
         private bool autoRedo = false;
         public bool AutoRedo() { return this.autoRedo; }
-        public SpriteEdit(SpriteAction action, List<Mold> molds, ListBox listbox, Mold moldA, Mold moldB, int index)
+        public SpriteEdit(SpriteAction action, List<Mold> molds, ListBox listbox, Mold moldA, Mold moldB, int index, int indexB)
         {
             this.action = action;
             this.molds = molds;
@@ -24,6 +25,7 @@ namespace LAZYSHELL.Undo
             this.moldA = moldA.Copy();
             this.moldB = moldB.Copy();
             this.index = index;
+            this.indexB = indexB;
         }
         public void Execute()
         {
@@ -61,11 +63,18 @@ namespace LAZYSHELL.Undo
                 this.listbox.SelectedIndex = index + 1;
                 this.action = SpriteAction.MoveDown;
             }
+            else if (action == SpriteAction.IndexChange)
+            {
+                this.listbox.SelectedIndex = this.indexB;
+                int index = this.index;
+                this.index = this.indexB;
+                this.indexB = index;
+            }
             //
         }
     }
     enum SpriteAction
     {
-        Edit, MoveUp, MoveDown, Delete, Create
+        Edit, MoveUp, MoveDown, Delete, Create, IndexChange
     }
 }

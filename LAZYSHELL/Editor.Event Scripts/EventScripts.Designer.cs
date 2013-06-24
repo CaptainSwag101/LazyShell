@@ -100,6 +100,7 @@
             this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.hexEditor = new System.Windows.Forms.ToolStripButton();
             this.autoPointerUpdate = new System.Windows.Forms.ToolStripButton();
+            this.EventPreview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addThisToNotesDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,10 +112,13 @@
             this.EvtScrCopyCommand = new System.Windows.Forms.ToolStripButton();
             this.EvtScrPasteCommand = new System.Windows.Forms.ToolStripButton();
             this.EvtScrDeleteCommand = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.EvtScrEditCommand = new System.Windows.Forms.ToolStripButton();
             this.EvtScrExpandAll = new System.Windows.Forms.ToolStripButton();
             this.EvtScrCollapseAll = new System.Windows.Forms.ToolStripButton();
-            this.EventPreview = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.evtNumA4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.evtNumA3)).BeginInit();
@@ -753,7 +757,7 @@
             this.eventHexText.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.eventHexText.Name = "eventHexText";
             this.eventHexText.ReadOnly = true;
-            this.eventHexText.Size = new System.Drawing.Size(150, 25);
+            this.eventHexText.Size = new System.Drawing.Size(100, 25);
             // 
             // toolStripSeparator6
             // 
@@ -780,7 +784,9 @@
             this.helpTips,
             this.baseConvertor,
             this.hexEditor,
-            this.autoPointerUpdate});
+            this.autoPointerUpdate,
+            this.toolStripSeparator6,
+            this.EventPreview});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -975,6 +981,17 @@
             this.autoPointerUpdate.Size = new System.Drawing.Size(23, 22);
             this.autoPointerUpdate.ToolTipText = "Auto Pointer Update";
             // 
+            // EventPreview
+            // 
+            this.EventPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.EventPreview.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.EventPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.EventPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EventPreview.Name = "EventPreview";
+            this.EventPreview.Size = new System.Drawing.Size(23, 22);
+            this.EventPreview.Text = "Open Previewer";
+            this.EventPreview.Click += new System.EventHandler(this.EventPreview_Click);
+            // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
@@ -1021,11 +1038,13 @@
             this.EvtScrCopyCommand,
             this.EvtScrPasteCommand,
             this.EvtScrDeleteCommand,
+            this.toolStripSeparator8,
+            this.undo,
+            this.redo,
+            this.toolStripSeparator9,
             this.EvtScrEditCommand,
             this.EvtScrExpandAll,
             this.EvtScrCollapseAll,
-            this.toolStripSeparator6,
-            this.EventPreview,
             this.toolStripSeparator12,
             this.labelBytesLeft,
             this.toolStripSeparator3,
@@ -1093,6 +1112,36 @@
             this.EvtScrDeleteCommand.Text = "Delete Command";
             this.EvtScrDeleteCommand.Click += new System.EventHandler(this.EvtScrDeleteCommand_Click);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(23, 22);
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(23, 22);
+            this.redo.Click += new System.EventHandler(this.redo_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            // 
             // EvtScrEditCommand
             // 
             this.EvtScrEditCommand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1125,17 +1174,6 @@
             this.EvtScrCollapseAll.Size = new System.Drawing.Size(23, 22);
             this.EvtScrCollapseAll.Text = "Collapse Command Tree";
             this.EvtScrCollapseAll.Click += new System.EventHandler(this.EvtScrCollapseAll_Click);
-            // 
-            // EventPreview
-            // 
-            this.EventPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.EventPreview.Image = global::LAZYSHELL.Properties.Resources.preview;
-            this.EventPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.EventPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.EventPreview.Name = "EventPreview";
-            this.EventPreview.Size = new System.Drawing.Size(23, 22);
-            this.EventPreview.Text = "Open Previewer";
-            this.EventPreview.Click += new System.EventHandler(this.EventPreview_Click);
             // 
             // toolTip1
             // 
@@ -1279,5 +1317,9 @@
         private System.Windows.Forms.Panel panelEvtA2;
         private System.Windows.Forms.Panel panelEvtA1;
         private System.Windows.Forms.ToolStripTextBox eventLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton undo;
+        private System.Windows.Forms.ToolStripButton redo;
     }
 }

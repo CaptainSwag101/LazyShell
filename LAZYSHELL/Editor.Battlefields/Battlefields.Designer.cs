@@ -69,11 +69,14 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.buttonEditSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonEditDelete = new System.Windows.Forms.ToolStripButton();
-            this.buttonEditCopy = new System.Windows.Forms.ToolStripButton();
             this.buttonEditCut = new System.Windows.Forms.ToolStripButton();
+            this.buttonEditCopy = new System.Windows.Forms.ToolStripButton();
             this.buttonEditPaste = new System.Windows.Forms.ToolStripButton();
+            this.buttonEditDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonEditMirror = new System.Windows.Forms.ToolStripButton();
+            this.buttonEditInvert = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonEditUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonEditRedo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -123,9 +126,9 @@
             panel444.Controls.Add(this.pictureBoxBattlefield);
             panel444.Dock = System.Windows.Forms.DockStyle.Fill;
             panel444.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            panel444.Location = new System.Drawing.Point(24, 0);
+            panel444.Location = new System.Drawing.Point(32, 0);
             panel444.Name = "panel444";
-            panel444.Size = new System.Drawing.Size(516, 516);
+            panel444.Size = new System.Drawing.Size(508, 516);
             panel444.TabIndex = 1;
             // 
             // pictureBoxBattlefield
@@ -162,7 +165,7 @@
             this.importTilesetToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 214);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 192);
             // 
             // cutToolStripMenuItem
             // 
@@ -672,17 +675,20 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonEditSelect,
             this.toolStripSeparator3,
-            this.buttonEditDelete,
-            this.buttonEditCopy,
             this.buttonEditCut,
+            this.buttonEditCopy,
             this.buttonEditPaste,
+            this.buttonEditDelete,
             this.toolStripSeparator11,
+            this.buttonEditMirror,
+            this.buttonEditInvert,
+            this.toolStripSeparator7,
             this.buttonEditUndo,
             this.buttonEditRedo});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(24, 516);
+            this.toolStrip2.Size = new System.Drawing.Size(32, 516);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -694,36 +700,14 @@
             this.buttonEditSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditSelect.Name = "buttonEditSelect";
-            this.buttonEditSelect.Size = new System.Drawing.Size(21, 17);
-            this.buttonEditSelect.Text = "Select Tile(s)";
+            this.buttonEditSelect.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditSelect.Text = "Select (S)";
             this.buttonEditSelect.Click += new System.EventHandler(this.buttonEditSelect_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(21, 6);
-            // 
-            // buttonEditDelete
-            // 
-            this.buttonEditDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonEditDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
-            this.buttonEditDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonEditDelete.Name = "buttonEditDelete";
-            this.buttonEditDelete.Size = new System.Drawing.Size(21, 15);
-            this.buttonEditDelete.Text = "Delete";
-            this.buttonEditDelete.Click += new System.EventHandler(this.buttonEditDelete_Click);
-            // 
-            // buttonEditCopy
-            // 
-            this.buttonEditCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonEditCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
-            this.buttonEditCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonEditCopy.Name = "buttonEditCopy";
-            this.buttonEditCopy.Size = new System.Drawing.Size(21, 17);
-            this.buttonEditCopy.Text = "Copy";
-            this.buttonEditCopy.Click += new System.EventHandler(this.buttonEditCopy_Click);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(29, 6);
             // 
             // buttonEditCut
             // 
@@ -732,9 +716,20 @@
             this.buttonEditCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCut.Name = "buttonEditCut";
-            this.buttonEditCut.Size = new System.Drawing.Size(21, 17);
-            this.buttonEditCut.Text = "Cut";
+            this.buttonEditCut.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditCut.Text = "Cut (Ctrl+X)";
             this.buttonEditCut.Click += new System.EventHandler(this.buttonEditCut_Click);
+            // 
+            // buttonEditCopy
+            // 
+            this.buttonEditCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditCopy.Image = global::LAZYSHELL.Properties.Resources.copy_small;
+            this.buttonEditCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditCopy.Name = "buttonEditCopy";
+            this.buttonEditCopy.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditCopy.Text = "Copy (Ctrl+C)";
+            this.buttonEditCopy.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
             // buttonEditPaste
             // 
@@ -743,16 +738,54 @@
             this.buttonEditPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditPaste.Name = "buttonEditPaste";
-            this.buttonEditPaste.Size = new System.Drawing.Size(21, 17);
-            this.buttonEditPaste.Text = "Paste";
+            this.buttonEditPaste.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditPaste.Text = "Paste (Ctrl+V)";
             this.buttonEditPaste.Click += new System.EventHandler(this.buttonEditPaste_Click);
+            // 
+            // buttonEditDelete
+            // 
+            this.buttonEditDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditDelete.Image = global::LAZYSHELL.Properties.Resources.delete_small;
+            this.buttonEditDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditDelete.Name = "buttonEditDelete";
+            this.buttonEditDelete.Size = new System.Drawing.Size(29, 15);
+            this.buttonEditDelete.Text = "Delete (Del)";
+            this.buttonEditDelete.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(21, 6);
-            this.toolStripSeparator11.Visible = false;
+            this.toolStripSeparator11.Size = new System.Drawing.Size(27, 6);
+            // 
+            // buttonEditMirror
+            // 
+            this.buttonEditMirror.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditMirror.Image = global::LAZYSHELL.Properties.Resources.mirror_small;
+            this.buttonEditMirror.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditMirror.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditMirror.Name = "buttonEditMirror";
+            this.buttonEditMirror.Size = new System.Drawing.Size(29, 15);
+            this.buttonEditMirror.Text = "Mirror";
+            this.buttonEditMirror.Click += new System.EventHandler(this.mirrorToolStripMenuItem_Click);
+            // 
+            // buttonEditInvert
+            // 
+            this.buttonEditInvert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEditInvert.Image = global::LAZYSHELL.Properties.Resources.flip_small;
+            this.buttonEditInvert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEditInvert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEditInvert.Name = "buttonEditInvert";
+            this.buttonEditInvert.Size = new System.Drawing.Size(29, 17);
+            this.buttonEditInvert.Text = "Invert";
+            this.buttonEditInvert.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(29, 6);
+            this.toolStripSeparator7.Visible = false;
             // 
             // buttonEditUndo
             // 
@@ -761,8 +794,8 @@
             this.buttonEditUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditUndo.Name = "buttonEditUndo";
-            this.buttonEditUndo.Size = new System.Drawing.Size(21, 12);
-            this.buttonEditUndo.Text = "Undo";
+            this.buttonEditUndo.Size = new System.Drawing.Size(29, 12);
+            this.buttonEditUndo.Text = "Undo (Ctrl+Z)";
             this.buttonEditUndo.Visible = false;
             this.buttonEditUndo.Click += new System.EventHandler(this.buttonEditUndo_Click);
             // 
@@ -773,8 +806,8 @@
             this.buttonEditRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditRedo.Name = "buttonEditRedo";
-            this.buttonEditRedo.Size = new System.Drawing.Size(21, 12);
-            this.buttonEditRedo.Text = "Redo";
+            this.buttonEditRedo.Size = new System.Drawing.Size(29, 12);
+            this.buttonEditRedo.Text = "Redo (Ctrl+Y)";
             this.buttonEditRedo.Visible = false;
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
             // 
@@ -845,7 +878,7 @@
             this.buttonToggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleCartGrid.Name = "buttonToggleCartGrid";
             this.buttonToggleCartGrid.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleCartGrid.ToolTipText = "Show / Hide Grid";
+            this.buttonToggleCartGrid.ToolTipText = "Tile Grid (G)";
             this.buttonToggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
             // 
             // buttonToggleBG
@@ -857,7 +890,7 @@
             this.buttonToggleBG.Name = "buttonToggleBG";
             this.buttonToggleBG.Size = new System.Drawing.Size(23, 22);
             this.buttonToggleBG.Text = "BG";
-            this.buttonToggleBG.ToolTipText = "Show / Hide Background Color";
+            this.buttonToggleBG.ToolTipText = "BG Color (B)";
             this.buttonToggleBG.Click += new System.EventHandler(this.buttonToggleBG_Click);
             // 
             // toolStrip3
@@ -1106,5 +1139,8 @@
         private System.Windows.Forms.ToolStripMenuItem importTilesetToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripButton buttonEditMirror;
+        private System.Windows.Forms.ToolStripButton buttonEditInvert;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

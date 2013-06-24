@@ -201,7 +201,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Memory ${0} += 1",			// 0xB2
             "Memory ${0} -= 1",			// 0xB3
             "Memory $700C = memory ${0}",			// 0xB4
-            "Memory ${0} = memory ${1}",			// 0xB5
+            "Memory ${0} = memory $700C",			// 0xB5
             "Memory $700C = random # between 0 and {0}",			// 0xB6
             "Memory ${0} = random # between 0 and {1}",			// 0xB7
             "Memory $700C += memory ${0}",			// 0xB8

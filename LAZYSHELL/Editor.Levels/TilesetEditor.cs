@@ -59,8 +59,8 @@ namespace LAZYSHELL
             {
                 mouseDownTile = value;
                 MouseEventArgs mouseEventArgs = new MouseEventArgs(
-                    MouseButtons.Left, 1, 
-                    value % 16 * 16, 
+                    MouseButtons.Left, 1,
+                    value % 16 * 16,
                     value / 16 * 16, 0);
                 pictureBoxTileset_MouseDown(null, mouseEventArgs);
                 pictureBoxTileset_MouseUp(null, mouseEventArgs);
@@ -254,7 +254,7 @@ namespace LAZYSHELL
         /// "Cements" either a dragged selection or a newly pasted selection.
         /// </summary>
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
-        public void PasteFinal(CopyBuffer buffer)
+        public void Defloat(CopyBuffer buffer)
         {
             if (buffer == null) return;
             if (overlay.SelectTS == null) return;
@@ -274,7 +274,6 @@ namespace LAZYSHELL
                     tileset.Tilesets_tiles[Layer][index].TileIndex = index;
                 }
             }
-            overlay.SelectTS = null;
             tileset.DrawTileset(tileset.Tilesets_tiles[Layer], tileset.Tilesets_bytes[Layer]);
             tileset.Assemble(16, Layer);
             SetTileSetImage();
@@ -300,7 +299,7 @@ namespace LAZYSHELL
         private void Flip(string type)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -319,12 +318,12 @@ namespace LAZYSHELL
             else if (type == "invert")
                 Do.FlipVertical(copiedTiles, overlay.SelectTS.Width / 16, overlay.SelectTS.Height / 16);
             buffer.Tiles = copiedTiles;
-            PasteFinal(buffer);
+            Defloat(buffer);
         }
         private void Priority1(bool priority1)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             if (overlay.SelectTS == null) return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -457,7 +456,7 @@ namespace LAZYSHELL
         private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
         {
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             else
                 overlay.SelectTS = null;
         }
@@ -537,10 +536,10 @@ namespace LAZYSHELL
             {
                 // if copied tiles were pasted and not dragging a non-copied selection
                 if (copiedTiles != null && draggedTiles == null)
-                    PasteFinal(copiedTiles);
+                    Defloat(copiedTiles);
                 if (draggedTiles != null)
                 {
-                    PasteFinal(draggedTiles);
+                    Defloat(draggedTiles);
                     draggedTiles = null;
                 }
                 selection = null;
@@ -641,7 +640,7 @@ namespace LAZYSHELL
             if (e.KeyData == (Keys.Control | Keys.D))
             {
                 if (draggedTiles != null)
-                    PasteFinal(draggedTiles);
+                    Defloat(draggedTiles);
                 else
                 {
                     overlay.SelectTS = null;
@@ -661,6 +660,8 @@ namespace LAZYSHELL
             buttonEditCut.Enabled = !lockEditing.Checked;
             buttonEditCopy.Enabled = !lockEditing.Checked;
             buttonEditPaste.Enabled = !lockEditing.Checked;
+            buttonEditMirror.Enabled = !lockEditing.Checked;
+            buttonEditInvert.Enabled = !lockEditing.Checked;
         }
         // toolstrip
         private void buttonToggleTileEditor_Click(object sender, EventArgs e)
@@ -698,7 +699,7 @@ namespace LAZYSHELL
         {
             if (lockEditing.Checked) return;
             if (draggedTiles != null)
-                PasteFinal(draggedTiles);
+                Defloat(draggedTiles);
             Paste(new Point(16, 16), copiedTiles);
         }
         private void buttonEditUndo_Click(object sender, EventArgs e)

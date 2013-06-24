@@ -49,11 +49,6 @@ namespace LAZYSHELL
             //
             this.commandStackW = new CommandStack();
             this.commandStackR = new CommandStack();
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.C, new EventHandler(wCopy_Click));
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.X, new EventHandler(wCut_Click));
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.Delete, new EventHandler(wDelete_Click));
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.Z, new EventHandler(undo_Click));
-            Do.AddShortcut(toolStrip1, Keys.Control | Keys.Y, new EventHandler(redo_Click));
             labelWindow = new EditLabel(trackName, trackNum, "Songs", true);
             newCommands.Items.AddRange(Lists.SPCCommands);
             percussivePitch.Items.AddRange(Lists.Pitches);
@@ -3320,12 +3315,27 @@ namespace LAZYSHELL
         private void scoreViewPicture_MouseEnter(object sender, EventArgs e)
         {
             mouseEnter = true;
+            scoreViewPicture.Focus();
         }
         private void scoreViewPicture_MouseLeave(object sender, EventArgs e)
         {
             mouseEnter = false;
             labelRNote.Text = "...";
             scoreViewPicture.Invalidate();
+        }
+        private void scoreViewPicture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.D: rDraw.PerformClick(); break;
+                case Keys.E: rErase.PerformClick(); break;
+                case Keys.S: rSelect.PerformClick(); break;
+                case Keys.Control | Keys.C: rCopy.PerformClick(); break;
+                case Keys.Control | Keys.X: rCut.PerformClick(); break;
+                case Keys.Delete: rDelete.PerformClick(); break;
+                case Keys.Control | Keys.Z: rUndo.PerformClick(); break;
+                case Keys.Control | Keys.Y: rRedo.PerformClick(); break;
+            }
         }
         private void staffHeightChannel_ValueChanged(object sender, EventArgs e)
         {
@@ -3405,11 +3415,11 @@ namespace LAZYSHELL
         {
             //ResizePanels();
         }
-        private void hScrollBar2_ValueChanged(object sender, EventArgs e)
+        private void hScrollBarSV_ValueChanged(object sender, EventArgs e)
         {
             scoreViewPicture.Invalidate();
         }
-        private void hScrollBar2_Scroll(object sender, ScrollEventArgs e)
+        private void hScrollBarSV_Scroll(object sender, ScrollEventArgs e)
         {
             scoreViewPicture.Invalidate();
         }

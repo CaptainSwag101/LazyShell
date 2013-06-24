@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Feature.Project\ProjectDB.cs" />
     <Compile Include="Feature.Undo\AnimationEdit.cs" />
+    <Compile Include="Feature.Undo\GraphicEdit.cs" />
     <Compile Include="Feature.Undo\ScoreEdit.cs" />
     <Compile Include="Feature.Undo\SpriteEdit.cs" />
     <Compile Include="Features\AnimatedGifEncoder.cs" />
@@ -261,11 +262,11 @@
     <Compile Include="Features\StatusCalculator.Designer.cs">
       <DependentUpon>StatusCalculator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\ZoomPanel.cs">
+    <Compile Include="Features\ZoomBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\ZoomPanel.Designer.cs">
-      <DependentUpon>ZoomPanel.cs</DependentUpon>
+    <Compile Include="Features\ZoomBox.Designer.cs">
+      <DependentUpon>ZoomBox.cs</DependentUpon>
     </Compile>
     <Compile Include="About.cs">
       <SubType>Form</SubType>
@@ -767,6 +768,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\switch.gif" />
     <None Include="Resources\btn_donate_LG.gif" />
     <None Include="Resources\addFromNotes.gif" />
     <None Include="Resources\addToNotes.gif" />
@@ -866,8 +868,8 @@
       <DependentUpon>StatusCalculator.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\ZoomPanel.resx">
-      <DependentUpon>ZoomPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Features\ZoomBox.resx">
+      <DependentUpon>ZoomBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.Allies\Allies.resx">
