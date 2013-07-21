@@ -61,11 +61,9 @@ namespace LAZYSHELL
         }
         private void saveAndClose_Click(object sender, EventArgs e)
         {
-
         }
         private void saveAsAndClose_Click(object sender, EventArgs e)
         {
-
         }
         private void close_Click(object sender, EventArgs e)
         {

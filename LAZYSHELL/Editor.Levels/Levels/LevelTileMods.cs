@@ -17,7 +17,7 @@ namespace LAZYSHELL
         public List<Mod> Mods { get { return mods; } set { mods = value; } }
         public int Count { get { return mods.Count; } }
         // external selectors
-        private Mod mod; 
+        private Mod mod;
         public Mod MOD { get { return mod; } }
         private int currentMod = 0;
         public int CurrentMod
@@ -88,16 +88,12 @@ namespace LAZYSHELL
             ushort offsetStart = 0;
             ushort offsetEnd = 0;
             Mod tMod;
-
             int pointerOffset = (index * 2) + 0x1D5EBD;
-
             offsetStart = Bits.GetShort(rom, pointerOffset); pointerOffset += 2;
             offsetEnd = Bits.GetShort(rom, pointerOffset);
-
             if (index == 0x1FF) offsetEnd = 0;
-
-            if (offsetStart >= offsetEnd) return; // no exit fields for level
-
+            if (offsetStart >= offsetEnd)
+                return; // no exit fields for level
             offset = offsetStart + 0x1D0000;
             while (offset < offsetEnd + 0x1D0000)
             {
@@ -357,7 +353,6 @@ namespace LAZYSHELL
             // constructor
             public Mod()
             {
-
             }
             // assemblers
             public void Disassemble(ref int offset)
@@ -422,7 +417,8 @@ namespace LAZYSHELL
                         }
                     }
                 }
-                if (!set) return;
+                if (!set)
+                    return;
                 tilemapsB[0] = new byte[(width * height) * 2];
                 if (layer1)
                 {
@@ -518,7 +514,8 @@ namespace LAZYSHELL
                         }
                     }
                 }
-                if (!set) return;
+                if (!set)
+                    return;
                 if (layer1)
                 {
                     for (int i = 0, c = 0; c < (width * height) * 2; i++)

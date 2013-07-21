@@ -20,7 +20,7 @@ namespace LAZYSHELL
         private string emulatorPath = "INVALID";
         private bool rom = false, emulator = false, savestate = false, eventchoice = false, initializing = false;
         private int selectNum;
-        private ArrayList eventTriggers;
+        private List<Entrance> eventTriggers;
         private bool snes9x;
         private EType behavior;
         private bool updating = false;
@@ -46,20 +46,17 @@ namespace LAZYSHELL
         private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
         #endregion
         // Constructor
-        public Previewer(int num, EType behaviour)
+        public Previewer(int num, EType behavior)
         {
             this.selectNum = num;
-            this.eventTriggers = new ArrayList();
-            this.behavior = behaviour;
-
+            this.eventTriggers = new List<Entrance>();
+            this.behavior = behavior;
             InitializeComponent();
             InitializePreviewer();
-
             this.emulator = GetEmulator();
             if (num == 0)
                 this.selectNumericUpDown_ValueChanged(null, null);
             UpdateGUI();
-
             if (settings.PreviewFirstTime)
             {
                 DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews. Doing so will yield unpredictable results.\n\nDo you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -77,9 +74,8 @@ namespace LAZYSHELL
         {
             this.category = category;
             this.index = index;
-
             this.selectNum = index;
-            this.eventTriggers = new ArrayList();
+            this.eventTriggers = new List<Entrance>();
             this.behavior = EType.AnimationScript;
             InitializeComponent();
             InitializePreviewer();
@@ -103,9 +99,8 @@ namespace LAZYSHELL
         public Previewer(int index, bool automatic, EType behavior) // SPC Previewer
         {
             this.index = index;
-
             this.selectNum = index;
-            this.eventTriggers = new ArrayList();
+            this.eventTriggers = new List<Entrance>();
             this.behavior = behavior;
             this.automatic = automatic;
             InitializeComponent();
@@ -129,21 +124,18 @@ namespace LAZYSHELL
             if (automatic)
                 launchButton_Click(null, null);
         }
-        public void Reload(int num, EType behaviour)
+        public void Reload(int num, EType behavior)
         {
-            if (this.selectNum == num && this.behavior == behaviour)
+            if (this.selectNum == num && this.behavior == behavior)
                 return;
             this.selectNum = num;
-            this.eventTriggers = new ArrayList();
-            this.behavior = behaviour;
-
+            this.eventTriggers = new List<Entrance>();
+            this.behavior = behavior;
             InitializePreviewer();
-
             this.emulator = GetEmulator();
             if (this.selectIndex.Value == selectNum)
                 this.selectNumericUpDown_ValueChanged(null, null);
             UpdateGUI();
-
             if (settings.PreviewFirstTime)
             {
                 DialogResult result = MessageBox.Show("The generated Preview ROM should not be used for anything other than Previews.\nDoing so will yield unpredictable results. Do you understand?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -158,9 +150,8 @@ namespace LAZYSHELL
         {
             this.category = category;
             this.index = index;
-
             this.selectNum = index;
-            this.eventTriggers = new ArrayList();
+            this.eventTriggers = new List<Entrance>();
             this.behavior = EType.AnimationScript;
             InitializePreviewer();
             this.emulator = GetEmulator();
@@ -180,9 +171,8 @@ namespace LAZYSHELL
         public void Reload(int index, bool automatic, EType behavior)
         {
             this.index = index;
-
             this.selectNum = index;
-            this.eventTriggers = new ArrayList();
+            this.eventTriggers = new List<Entrance>();
             this.behavior = behavior;
             this.automatic = automatic;
             InitializePreviewer();
@@ -242,10 +232,8 @@ namespace LAZYSHELL
                 this.Text = "PREVIEW BATTLE - Lazy Shell";
                 this.label1.Text = "Monster #";
                 this.selectIndex.Maximum = 255;
-
                 this.groupBox1.Enabled = false;
                 this.groupBox2.Enabled = true;
-
                 this.battleBG.Items.AddRange(Lists.Numerize(Lists.BattlefieldNames));
                 this.battleBG.Enabled = true;
                 this.battleBG.Enabled = true;
@@ -325,23 +313,19 @@ namespace LAZYSHELL
             this.allyAccessory.Items.AddRange(Model.ItemNames.Names);
             //
             updating = true;
-            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
-            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
-            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
             //
             this.maxOutStats.Checked = settings.PreviewMaxStats;
             for (int i = 0; i < 4; i++)
                 alliesInParty.SetItemChecked(i, Bits.GetBit(settings.PreviewAllies, i));
+            this.enableDebug.Checked = settings.EnableDebug;
+            //
             updating = false;
             //
             romPath = GetRomPath();
             this.initializing = false;
-        }
-        private byte StringToByte(string value, int index)
-        {
-            string substring = value.Substring(index * 2, 2);
-            byte equipment = Convert.ToByte(substring, 16);
-            return equipment;
         }
         private bool GetEmulator()
         {
@@ -350,7 +334,6 @@ namespace LAZYSHELL
             try
             {
                 fi = new FileInfo(this.emulatorPath);
-
                 if (fi.Exists) // Checks if its a valid path
                     return true;
                 else
@@ -359,12 +342,9 @@ namespace LAZYSHELL
             catch
             {
                 this.emulatorPath = SelectFile("exe files (*.exe)|*.exe|All files (*.*)|*.*", "C:\\", "Select Emulator");
-
                 if (this.emulatorPath == null || !this.emulatorPath.EndsWith(".exe"))
                     return false;
-
                 fi = new FileInfo(this.emulatorPath);
-
                 if (fi.Exists)
                 {
                     settings.ZSNESPath = this.emulatorPath;
@@ -390,58 +370,56 @@ namespace LAZYSHELL
             this.selectIndex.Value = this.selectNum;
             this.eventListBox.Items.Clear();
             Entrance ent;
-
             for (int i = 0; i < eventTriggers.Count; i++)
             {
-                ent = (Entrance)eventTriggers[i];
+                ent = eventTriggers[i];
                 if (this.behavior == EType.EventScript)
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
-                            "Enter event (x:" + ent.CoordX.ToString() +
-                            " y:" + ent.CoordY.ToString() +
-                            " z:" + ent.CoordZ.ToString() +
+                            "Enter event (x:" + ent.X.ToString() +
+                            " y:" + ent.Y.ToString() +
+                            " z:" + ent.Z.ToString() +
                             ") " + Lists.Numerize(Lists.LevelNames, ent.Destination));
                     else if (ent.MSG != "NPC") // A run event
                         this.eventListBox.Items.Add(
-                            "Event field (x:" + ent.CoordX.ToString() +
-                            " y:" + ent.CoordY.ToString() +
-                            " z:" + ent.CoordZ.ToString() +
+                            "Event field (x:" + ent.X.ToString() +
+                            " y:" + ent.Y.ToString() +
+                            " z:" + ent.Z.ToString() +
                             ") " + Lists.Numerize(Lists.LevelNames, ent.Destination));
                     else if (ent.MSG == "NPC")
                         this.eventListBox.Items.Add(
-                            "NPC #" + ent.Source + " event (x:" + ent.CoordX.ToString() +
-                            " y:" + ent.CoordY.ToString() +
-                            " z:" + ent.CoordZ.ToString() +
+                            "NPC #" + ent.Source + " event (x:" + ent.X.ToString() +
+                            " y:" + ent.Y.ToString() +
+                            " z:" + ent.Z.ToString() +
                             ") " + Lists.Numerize(Lists.LevelNames, ent.Destination));
                 }
                 else if (this.behavior == EType.Level)
                 {
                     this.eventListBox.Items.Add(
-                        "(x:" + ent.CoordX.ToString() +
-                        " y:" + ent.CoordY.ToString() +
-                        " z:" + ent.CoordZ.ToString() +
+                        "(x:" + ent.X.ToString() +
+                        " y:" + ent.Y.ToString() +
+                        " z:" + ent.Z.ToString() +
                         ") " + Lists.Numerize(Lists.LevelNames, ent.Source));
                 }
                 else if (this.behavior == EType.MineCart)
                 {
-
                 }
                 else if (this.behavior == EType.ActionScript)
                 {
                     if (ent.Flag)
                         this.eventListBox.Items.Add(
                             "NPC #" + ent.Source.ToString() +
-                            " (x:" + ent.CoordX.ToString() +
-                            " y:" + ent.CoordY.ToString() +
-                            " z:" + ent.CoordZ.ToString() +
+                            " (x:" + ent.X.ToString() +
+                            " y:" + ent.Y.ToString() +
+                            " z:" + ent.Z.ToString() +
                             ") " + Lists.Numerize(Lists.LevelNames, ent.Destination));
                     else
                         this.eventListBox.Items.Add(
                             "NPC #" + ent.Source.ToString() +
-                            " (x:" + ent.CoordX.ToString() +
-                            " y:" + ent.CoordY.ToString() +
-                            " z:" + ent.CoordZ.ToString() +
+                            " (x:" + ent.X.ToString() +
+                            " y:" + ent.Y.ToString() +
+                            " z:" + ent.Z.ToString() +
                             ") " + Lists.Numerize(Lists.LevelNames, ent.Destination));
                 }
                 else if (this.behavior == EType.BattleScript)
@@ -486,16 +464,12 @@ namespace LAZYSHELL
         {
             bool ret = false;
             // Make backup of current data                
-            byte[] backup = new byte[Model.ROM.Length];
-            bool[] editGraphicSets = new bool[272];
-            bool[] editTileSets = new bool[125];
-            bool[] editTileMaps = new bool[309];
-            bool[] editSolidityMaps = new bool[120];
-            Model.ROM.CopyTo(backup, 0);
-            Model.EditGraphicSets.CopyTo(editGraphicSets, 0);
-            Model.EditTileSets.CopyTo(editTileSets, 0);
-            Model.EditTileMaps.CopyTo(editTileMaps, 0);
-            Model.EditSolidityMaps.CopyTo(editSolidityMaps, 0);
+            byte[] backup = Bits.Copy(Model.ROM);
+            bool[] editGraphicSets = Bits.Copy(Model.EditGraphicSets);
+            bool[] editTilesets = Bits.Copy(Model.EditTilesets);
+            bool[] editTilemaps = Bits.Copy(Model.EditTilemaps);
+            bool[] editSolidityMaps = Bits.Copy(Model.EditSolidityMaps);
+            //
             if (!((this.behavior == EType.EventScript || this.behavior == EType.ActionScript) &&
                 this.eventListBox.SelectedIndex < 0 || this.eventListBox.SelectedIndex >= this.eventTriggers.Count))
             {
@@ -532,8 +506,8 @@ namespace LAZYSHELL
             //Restore Rom Image
             backup.CopyTo(Model.ROM, 0);
             editGraphicSets.CopyTo(Model.EditGraphicSets, 0);
-            editTileSets.CopyTo(Model.EditTileSets, 0);
-            editTileMaps.CopyTo(Model.EditTileMaps, 0);
+            editTilesets.CopyTo(Model.EditTilesets, 0);
+            editTilemaps.CopyTo(Model.EditTilemaps, 0);
             editSolidityMaps.CopyTo(Model.EditSolidityMaps, 0);
             return ret;
         }
@@ -558,7 +532,6 @@ namespace LAZYSHELL
                 byte[] state = br.ReadBytes((int)fs.Length);
                 br.Close();
                 fs.Close();
-
                 int offset = 0;
                 // modify zst if needed
                 if (maxOutStats.Checked)
@@ -613,9 +586,9 @@ namespace LAZYSHELL
                         state[offset++] = (byte)mgAttack;
                         state[offset++] = (byte)mgDefense;
                         Bits.SetShort(state, offset, experience); offset += 2;
-                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3);
-                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3 + 1);
-                        state[offset++] = StringToByte(settings.AllyEquipment, character.Index * 3 + 2);
+                        state[offset++] = Bits.StringToByte(settings.AllyEquipment, character.Index * 3);
+                        state[offset++] = Bits.StringToByte(settings.AllyEquipment, character.Index * 3 + 1);
+                        state[offset++] = Bits.StringToByte(settings.AllyEquipment, character.Index * 3 + 2);
                         offset++;   // unused byte
                         double p = 0;
                         for (int i = 0; i < 32; i++, p += 0.125)
@@ -661,7 +634,6 @@ namespace LAZYSHELL
         {
             Entrance ent = new Entrance();
             int index = this.eventListBox.SelectedIndex;
-
             if ((this.behavior == EType.EventScript ||
                 this.behavior == EType.ActionScript ||
                 this.behavior == EType.BattleScript) &&
@@ -676,7 +648,7 @@ namespace LAZYSHELL
             storage.CurrentExit = 0;
             if (this.eventTriggers.Count > 0)
             {
-                ent = (Entrance)eventTriggers[index];
+                ent = eventTriggers[index];
                 storage.DstF = ent.F;
                 storage.ShowMessage = ent.ShowMessage;
             }
@@ -769,8 +741,12 @@ namespace LAZYSHELL
             Model.Levels[storage.Destination].LevelEvents.EntranceEvent = save;
             Model.Levels[storage.Destination].LevelEvents.Music = saveMusic;
             //
-            storage.Exit_.Assemble(0x1DF000);
+            storage.Exit.Assemble(0x1DF000);
             this.eventchoice = true;
+            //
+            if (enableDebug.Checked)
+                Model.ROM[0x0106AF] = 0x80;
+            //
             return true;
         }
         private void PrepareBattlePack(int formationNum)
@@ -778,7 +754,6 @@ namespace LAZYSHELL
             if (formationNum == 0xFFFF)
             {
                 int formationIndex = 4;
-
                 byte monster1 = Model.Formations[formationIndex].Monsters[0];
                 byte xcoord = Model.Formations[formationIndex].X[0];
                 byte ycoord = Model.Formations[formationIndex].Y[0];
@@ -802,9 +777,7 @@ namespace LAZYSHELL
                 Model.Formations[formationIndex].Use[5] = false;
                 Model.Formations[formationIndex].Use[6] = false;
                 Model.Formations[formationIndex].Use[7] = false;
-
                 Model.Formations[formationIndex].Assemble();
-
                 Model.Formations[formationIndex].Monsters[0] = monster1;
                 Model.Formations[formationIndex].X[0] = xcoord;
                 Model.Formations[formationIndex].Y[0] = ycoord;
@@ -818,7 +791,6 @@ namespace LAZYSHELL
                 Model.Formations[formationIndex].Use[7] = uses[7];
                 formationNum = formationIndex;
             }
-
             FormationPack sfp = Model.FormationPacks[0];
             ushort formation1 = sfp.Formations[0];
             ushort formation2 = sfp.Formations[0];
@@ -894,9 +866,9 @@ namespace LAZYSHELL
                     {
                         ent = new Entrance();
                         ent.Destination = (ushort)lvl.Index;
-                        ent.CoordX = event_.X;
-                        ent.CoordY = event_.Y;
-                        ent.CoordZ = event_.Z;
+                        ent.X = event_.X;
+                        ent.Y = event_.Y;
+                        ent.Z = event_.Z;
                         ent.F = event_.F;
                         ent.ShowMessage = false;
                         ent.Flag = false;
@@ -917,9 +889,9 @@ namespace LAZYSHELL
                         ent = new Entrance();
                         ent.Source = (ushort)lvl.Index;
                         ent.Destination = (ushort)exit.Destination;
-                        ent.CoordX = exit.DstX;
-                        ent.CoordY = exit.DstY;
-                        ent.CoordZ = exit.DstZ;
+                        ent.X = exit.DstX;
+                        ent.Y = exit.DstY;
+                        ent.Z = exit.DstZ;
                         ent.F = exit.DstFace;
                         ent.ShowMessage = exit.ShowMessage;
                         ent.Flag = true; // Indicates an enter event
@@ -943,9 +915,9 @@ namespace LAZYSHELL
                     {
                         ent = new Entrance();
                         ent.Destination = (ushort)lvl.Index;
-                        ent.CoordX = npc.X;
-                        ent.CoordY = npc.Y;
-                        ent.CoordZ = npc.Z;
+                        ent.X = npc.X;
+                        ent.Y = npc.Y;
+                        ent.Z = npc.Z;
                         ent.MSG = "NPC";
                         ent.ShowMessage = false;
                         ent.Source = index;
@@ -959,9 +931,9 @@ namespace LAZYSHELL
                         {
                             ent = new Entrance();
                             ent.Destination = (ushort)lvl.Index;
-                            ent.CoordX = clone.X;
-                            ent.CoordY = clone.Y;
-                            ent.CoordZ = clone.Z;
+                            ent.X = clone.X;
+                            ent.Y = clone.Y;
+                            ent.Z = clone.Z;
                             ent.MSG = "NPC";
                             ent.ShowMessage = false;
                             ent.Source = index + 1;
@@ -985,9 +957,9 @@ namespace LAZYSHELL
                         ent = new Entrance();
                         ent.Source = counter++;
                         ent.Destination = (ushort)lvl.Index;
-                        ent.CoordX = (byte)((npc.X + 2) & 0x3F);
-                        ent.CoordY = (byte)((npc.Y + 2) & 0x7F);
-                        ent.CoordZ = npc.Z;
+                        ent.X = (byte)((npc.X + 2) & 0x3F);
+                        ent.Y = (byte)((npc.Y + 2) & 0x7F);
+                        ent.Z = npc.Z;
                         ent.F = 7;
                         ent.ShowMessage = false;
                         ent.Flag = true; // Indicates an NPC and not an Instance
@@ -1000,9 +972,9 @@ namespace LAZYSHELL
                             ent = new Entrance();
                             ent.Source = counter++;
                             ent.Destination = (ushort)lvl.Index;
-                            ent.CoordX = (byte)((instance.X + 2) & 0x3F);
-                            ent.CoordY = (byte)((instance.Y + 2) & 0x7F);
-                            ent.CoordZ = instance.Z;
+                            ent.X = (byte)((instance.X + 2) & 0x3F);
+                            ent.Y = (byte)((instance.Y + 2) & 0x7F);
+                            ent.Z = instance.Z;
                             ent.F = 7;
                             ent.ShowMessage = false;
                             ent.Flag = false; // Indicates an Instance
@@ -1039,22 +1011,18 @@ namespace LAZYSHELL
             ent.Source = 0xFFFF;
             ent.MSG = "Default: " + Model.MonsterNames.GetUnsortedName(monsterNum);
             eventTriggers.Add(ent);
-
             for (int i = 0; i < formations.Length; i++)
             {
                 if (ScanFormation(monsterNum, formations[i]))
                 {
                     ent = new Entrance();
-
                     ent.Source = (ushort)i;
-
                     ent.MSG = "Formation: " + i.ToString() + " - " + formations[i].ToString();
                     ent.Destination = 0;
-                    ent.CoordX = 0;
-                    ent.CoordY = 0;
-                    ent.CoordZ = 0;
+                    ent.X = 0;
+                    ent.Y = 0;
+                    ent.Z = 0;
                     ent.F = 0;
-
                     eventTriggers.Add(ent);
                 }
             }
@@ -1108,14 +1076,12 @@ namespace LAZYSHELL
         private void eventListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = this.eventListBox.SelectedIndex;
-
             if (index < 0 || index >= this.eventTriggers.Count)
                 return;
-
             // Set the XYZ values
-            this.adjustX.Value = ((Entrance)eventTriggers[index]).CoordX;
-            this.adjustY.Value = ((Entrance)eventTriggers[index]).CoordY;
-            this.adjustZ.Value = ((Entrance)eventTriggers[index]).CoordZ;
+            this.adjustX.Value = eventTriggers[index].X;
+            this.adjustY.Value = eventTriggers[index].Y;
+            this.adjustZ.Value = eventTriggers[index].Z;
         }
         private void selectNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
@@ -1172,7 +1138,8 @@ namespace LAZYSHELL
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
@@ -1182,9 +1149,9 @@ namespace LAZYSHELL
             if (updating || initializing)
                 return;
             updating = true;
-            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
-            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
-            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
             updating = false;
         }
         private void allyWeapon_SelectedIndexChanged(object sender, EventArgs e)
@@ -1234,9 +1201,16 @@ namespace LAZYSHELL
                 return;
             settings.AllyEquipment = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
             settings.Save();
-            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
-            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
-            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+            this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
+            this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
+            this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
+        }
+        private void enableDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            if (updating || initializing)
+                return;
+            settings.EnableDebug = enableDebug.Checked;
+            settings.Save();
         }
         //
         private void launchButton_Click(object sender, EventArgs e)
@@ -1253,9 +1227,9 @@ namespace LAZYSHELL
         {
             public int Source;
             public bool ShowMessage;
-            public byte CoordX;
-            public byte CoordY;
-            public byte CoordZ;
+            public byte X;
+            public byte Y;
+            public byte Z;
             public byte F;
             public ushort Destination;
             public bool Flag;

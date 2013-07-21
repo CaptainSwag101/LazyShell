@@ -19,18 +19,15 @@ namespace LAZYSHELL
         // so when painting the template it starts at the correct isometric coord
         public bool Even { get { return (size.Width / 16) % 2 == 0; } }
         // constructor
-
         // functions
         public void Transfer(byte[][] tilemaps, LevelMap levelMap, LevelSolidMap solidityMap, Point start, Point stop)
         {
             this.start = start;
             int offset = 0, o = 0, p = 0;
             size = new Size(stop.X - start.X, stop.Y - start.Y);
-
             this.tilemaps[0] = new byte[(size.Width * size.Height) / 128];
             this.tilemaps[1] = new byte[(size.Width * size.Height) / 128];
             this.tilemaps[2] = new byte[(size.Width * size.Height) / 256];
-
             for (int y = start.Y / 16, b = 0; y < stop.Y / 16; y++, b++)
             {
                 for (int x = start.X / 16, a = 0; x < stop.X / 16; x++, a++, o++)

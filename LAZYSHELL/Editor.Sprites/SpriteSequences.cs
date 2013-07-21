@@ -18,7 +18,6 @@ namespace LAZYSHELL
     {
         #region Variables
         // main editor accessed variables
-
         private Sprites spritesEditor;
         private Sprite sprite { get { return spritesEditor.Sprite; } set { spritesEditor.Sprite = value; } }
         private SpriteMolds molds { get { return spritesEditor.Molds; } set { spritesEditor.Molds = value; } }
@@ -314,7 +313,8 @@ namespace LAZYSHELL
         }
         private void frame_Paint(object sender, PaintEventArgs e)
         {
-            if (sequence.Frames.Count == 0) return;
+            if (sequence.Frames.Count == 0)
+                return;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
             PictureBox frame = (PictureBox)sender;
             int index = (int)frame.Tag;
@@ -349,7 +349,8 @@ namespace LAZYSHELL
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
         {
-            if (PlaybackSequence.IsBusy) return;
+            if (PlaybackSequence.IsBusy)
+                return;
             PictureBox frame = (PictureBox)sender;
             frame.Focus();
             index = (int)frame.Tag;
@@ -366,7 +367,8 @@ namespace LAZYSHELL
         }
         private void frame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (PlaybackSequence.IsBusy) return;
+            if (PlaybackSequence.IsBusy)
+                return;
             if (e.KeyData == Keys.Right || e.KeyData == Keys.Down)
             {
                 index++;
@@ -399,25 +401,29 @@ namespace LAZYSHELL
         {
             if (PlaybackSequence.IsBusy)
                 PlaybackSequence.CancelAsync();
-            if (updating) return;
+            if (updating)
+                return;
             index = listBoxFrames.SelectedIndex;
             if (panelFrames.HorizontalScroll.Visible)
                 panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
         }
         private void sequences_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshSequence();
             sequences.Focus();
         }
         private void duration_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             frame.Duration = (byte)duration.Value;
         }
         private void frameMold_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             if ((int)frameMold.Value >= animation.Molds.Count)
                 frameMold.Value = animation.Molds.Count - 1;
             frame.Mold = (byte)frameMold.Value;
@@ -426,7 +432,8 @@ namespace LAZYSHELL
         private void play_Click(object sender, EventArgs e)
         {
             sequence_temp = sequence;
-            if (sequence_temp == null) return;
+            if (sequence_temp == null)
+                return;
             PlaybackSequence.CancelAsync();
             spritesEditor.EnableOnPlayback(false);
             panelSequence.BringToFront();
@@ -501,7 +508,8 @@ namespace LAZYSHELL
         // adding,deleting
         private void sequenceActive_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sequence.Active = sequenceActive.Checked;
         }
         private void exportAnimatedGIF_Click(object sender, EventArgs e)
@@ -591,7 +599,8 @@ namespace LAZYSHELL
         }
         private void moveSequenceBack_Click(object sender, EventArgs e)
         {
-            if (sequences.SelectedIndex == 0) return;
+            if (sequences.SelectedIndex == 0)
+                return;
             int index = sequences.SelectedIndex - 1;
             animation.Sequences.Reverse(index, 2);
             updating = true;
@@ -600,7 +609,8 @@ namespace LAZYSHELL
         }
         private void moveSeqeuenceFoward_Click(object sender, EventArgs e)
         {
-            if (sequences.SelectedIndex == animation.Sequences.Count - 1) return;
+            if (sequences.SelectedIndex == animation.Sequences.Count - 1)
+                return;
             int index = sequences.SelectedIndex;
             animation.Sequences.Reverse(index, 2);
             updating = true;

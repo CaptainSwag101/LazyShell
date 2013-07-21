@@ -92,7 +92,7 @@ namespace LAZYSHELL
                         offset += 2;
                         continue;
                     }
-                    Bits.SetShort(array, offset, tile.TileIndex); offset++;
+                    Bits.SetShort(array, offset, tile.Index); offset++;
                     Bits.SetBit(array, offset, 6, tile.Mirror);
                     Bits.SetBit(array, offset, 7, tile.Invert); offset++;
                 }
@@ -222,15 +222,15 @@ namespace LAZYSHELL
                     if (contains == null)
                     {
                         tileset.Tilesets_tiles[layer][extratiles] = copy;
-                        tileset.Tilesets_tiles[layer][extratiles].TileIndex = extratiles;
+                        tileset.Tilesets_tiles[layer][extratiles].Index = extratiles;
                         tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][extratiles];
                         Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, extratiles);
                         extratiles++;
                     }
                     else
                     {
-                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][contains.TileIndex];
-                        Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, contains.TileIndex);
+                        tilemap.Tilemaps_Tiles[layer][i] = tileset.Tilesets_tiles[layer][contains.Index];
+                        Bits.SetShort(tilemap.Tilemaps_Bytes[layer], counter - 2, contains.Index);
                     }
                 }
             }
@@ -255,12 +255,12 @@ namespace LAZYSHELL
                 prioritySet.ColorMathHalfIntensity = array[offset++];
                 prioritySet.ColorMathMinusSubscreen = array[offset++];
             }
-            Model.EditTileMaps[levelMap.TilemapL1 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TilemapL2 + 0x40] = true;
-            Model.EditTileMaps[levelMap.TilemapL3] = true;
-            Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
-            Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
-            Model.EditTileSets[levelMap.TilesetL3] = true;
+            Model.EditTilemaps[levelMap.TilemapL1 + 0x40] = true;
+            Model.EditTilemaps[levelMap.TilemapL2 + 0x40] = true;
+            Model.EditTilemaps[levelMap.TilemapL3] = true;
+            Model.EditTilesets[levelMap.TilesetL1 + 0x20] = true;
+            Model.EditTilesets[levelMap.TilesetL2 + 0x20] = true;
+            Model.EditTilesets[levelMap.TilesetL3] = true;
             Model.EditGraphicSets[levelMap.GraphicSetA + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetB + 0x48] = true;
             Model.EditGraphicSets[levelMap.GraphicSetC + 0x48] = true;
@@ -282,8 +282,8 @@ namespace LAZYSHELL
                 saveFileDialog.FileName = "architecture.SMRPG.level." + index.ToString("d4");
                 saveFileDialog.FilterIndex = 0;
                 saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
                 textBoxCurrent.Text = saveFileDialog.FileName;
             }
             else
@@ -294,8 +294,8 @@ namespace LAZYSHELL
                 openFileDialog.Filter = filter;
                 openFileDialog.FilterIndex = 0;
                 openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
                 textBoxCurrent.Text = openFileDialog.FileName;
             }
             fullPath = textBoxCurrent.Text;

@@ -12,7 +12,6 @@ namespace LAZYSHELL
     public partial class Items : Form
     {
         #region Variables
-
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
@@ -57,7 +56,8 @@ namespace LAZYSHELL
         public void RefreshItems()
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             this.itemName.SelectedIndex = Model.ItemNames.GetSortedIndex(index);
             this.itemName.Invalidate();
@@ -197,17 +197,14 @@ namespace LAZYSHELL
         private void InsertIntoDescriptionText(string toInsert)
         {
             char[] newText = new char[this.textBoxItemDescription.Text.Length + toInsert.Length];
-
             textBoxItemDescription.Text.CopyTo(0, newText, 0, textBoxItemDescription.SelectionStart);
             toInsert.CopyTo(0, newText, textBoxItemDescription.SelectionStart, toInsert.Length);
             textBoxItemDescription.Text.CopyTo(textBoxItemDescription.SelectionStart, newText, textBoxItemDescription.SelectionStart + toInsert.Length, this.textBoxItemDescription.Text.Length - this.textBoxItemDescription.SelectionStart);
-
             if (byteView)
                 item.CaretPositionByteView = this.textBoxItemDescription.SelectionStart + toInsert.Length;
             else
                 item.CaretPositionTextView = this.textBoxItemDescription.SelectionStart + toInsert.Length;
             item.SetDescription(new string(newText), byteView);
-
             textBoxItemDescription.Text = item.GetDescription(byteView);
         }
         #endregion
@@ -223,7 +220,8 @@ namespace LAZYSHELL
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
@@ -331,7 +329,6 @@ namespace LAZYSHELL
             item.EffectMushroom = itemStatusEffect.GetItemChecked(4);
             item.EffectScarecrow = itemStatusEffect.GetItemChecked(5);
             item.EffectInvincible = itemStatusEffect.GetItemChecked(6);
-
         }
         private void itemElemNull_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -404,7 +401,6 @@ namespace LAZYSHELL
                     textBoxItemDescription.SelectionStart = tempSel + 2;
                 }
             }
-
             bool flag = textHelper.VerifySymbols(this.textBoxItemDescription.Text.ToCharArray(), byteView);
             if (flag)
             {

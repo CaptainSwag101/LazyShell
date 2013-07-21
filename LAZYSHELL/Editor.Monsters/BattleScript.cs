@@ -38,7 +38,7 @@ namespace LAZYSHELL.ScriptsEditor
             offset += script.Length;
         }
         // class functions and accessors
-        private void ParseScript()
+        public void ParseScript()
         {
             int offset = 0, length = 0;
             if (script.Length > 0 && this.commands == null)
@@ -94,7 +94,7 @@ namespace LAZYSHELL.ScriptsEditor
         public override void Clear()
         {
             this.commands.Clear();
-            BattleCommand bsc = new BattleCommand(new byte[] { 0xFF, 0xFF });
+            BattleCommand bsc = new BattleCommand(new byte[] { 0xFF });
             this.commands.Add(bsc);
             this.commands.Add(bsc);
             script = new byte[2] { 0xFF, 0xFF };

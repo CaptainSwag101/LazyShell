@@ -266,7 +266,6 @@ namespace LAZYSHELL
                         "mirror",
                         "invert"});
                     aniBits.Enabled = true;
-
                     aniNumA1.Value = aniNameA1.SelectedIndex = Bits.GetShort(asc.CommandData, 3) & 0x3FF;
                     aniNumA2.Value = asc.Param5;
                     aniNumB1.Value = (asc.Param6 & 0x30) >> 4;
@@ -295,7 +294,6 @@ namespace LAZYSHELL
                     aniNumC1.Enabled = true; aniNumC1.Minimum = -0x8000; aniNumC1.Maximum = 0x7FFF;
                     aniBits.Enabled = true;
                     aniBits.Items.AddRange(new object[] { "set X coord", "set Y coord", "set Z coord" });
-
                     aniNameA1.SelectedIndex = (int)(asc.Param1 >> 4);
                     aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
                     aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
@@ -316,7 +314,6 @@ namespace LAZYSHELL
                         "looping on",
                         "store palette"});
                     aniBits.Enabled = true;
-
                     aniNumA1.Value = aniNameA1.SelectedIndex = Bits.GetShort(asc.CommandData, 3) & 0x3FF;
                     aniNumB1.Value = asc.Param5 & 15;
                     aniBits.SetItemChecked(0, (asc.Param1 & 0x01) == 0x01);
@@ -340,7 +337,6 @@ namespace LAZYSHELL
                     aniLabelA2.Text = "Speed";
                     aniLabelB1.Text = "Start position";
                     aniLabelB2.Text = "End position";
-
                     aniNumA2.Enabled = true; aniNumA2.Maximum = 0x7FFF; aniNumA2.Minimum = -0x8000;
                     aniNumB1.Enabled = true; aniNumB1.Maximum = 0x7FFF; aniNumB1.Minimum = -0x8000;
                     aniNumB2.Enabled = true; aniNumB2.Maximum = 0x7FFF; aniNumB2.Minimum = -0x8000;
@@ -348,7 +344,6 @@ namespace LAZYSHELL
                         "apply to Z axis","apply to Y axis","apply to X axis",
                         "set start position","set end position","set speed"});
                     aniBits.Enabled = true;
-
                     aniNumA2.Value = (short)Bits.GetShort(asc.CommandData, 6);
                     aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
                     aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
@@ -366,19 +361,16 @@ namespace LAZYSHELL
                 case 0x64:
                     aniLabelB1.Text = "Address";
                     aniNumB1.Maximum = 0xFFFF; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
-
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0x0C:
                     aniLabelA1.Text = "Type";
                     aniLabelB1.Text = "Speed";
                     aniLabelB2.Text = "Arch height";
-
                     aniNameA1.Enabled = true;
                     aniNameA1.Items.AddRange(new object[] { "{00}", "shift", "transfer", "{04}", "{08}" });
                     aniNumB1.Enabled = true; aniNumB1.Maximum = 0x7FFF; aniNumB1.Minimum = -0x8000;
                     aniNumB2.Enabled = true; aniNumB2.Maximum = 0x7FFF; aniNumB2.Minimum = -0x8000;
-
                     aniNameA1.SelectedIndex = asc.Param1 / 2;
                     aniNumB1.Value = (short)Bits.GetShort(asc.CommandData, 2);
                     aniNumB2.Value = (short)Bits.GetShort(asc.CommandData, 4);
@@ -394,7 +386,6 @@ namespace LAZYSHELL
                     aniLabelA1.Text = "Variable type";
                     aniLabelB1.Text = "AMEM";
                     aniLabelB2.Text = "Variable";
-
                     aniNameA1.Items.AddRange(Interpreter.VariableNames);
                     aniNameA1.Enabled = true;
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
@@ -430,7 +421,6 @@ namespace LAZYSHELL
                             break;
                     }
                     aniNameA1.SelectedIndex = asc.Param1 >> 4;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     break;
                 case 0x24:
@@ -445,7 +435,6 @@ namespace LAZYSHELL
                     aniLabelA2.Text = "AMEM";
                     aniLabelB1.Text = "Variable";
                     aniLabelB2.Text = "Jump to";
-
                     aniNameA1.Items.AddRange(Interpreter.VariableNames);
                     aniNameA1.Enabled = true;
                     aniNumA2.Minimum = 0x60; aniNumA2.Maximum = 0x6F;
@@ -480,7 +469,6 @@ namespace LAZYSHELL
                             break;
                     }
                     aniNumB2.Maximum = 0xFFFF; aniNumB2.Enabled = true; aniNumB2.Hexadecimal = true;
-
                     aniNameA1.SelectedIndex = asc.Param1 >> 4;
                     aniNumA2.Value = (asc.Param1 & 0x0F) + 0x60;
                     aniNumB2.Value = Bits.GetShort(asc.CommandData, 4);
@@ -494,19 +482,16 @@ namespace LAZYSHELL
                     aniLabelB1.Text = "AMEM";
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
                     aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     break;
                 case 0x36:
                 case 0x37:
                     aniLabelB1.Text = "AMEM";
                     aniTitleD.Text = "Bits";
-
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
                     aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
                     aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
                     aniBits.Enabled = true;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
@@ -516,13 +501,11 @@ namespace LAZYSHELL
                     aniLabelB1.Text = "AMEM";
                     aniTitleD.Text = "Bits";
                     aniLabelC1.Text = "Jump to";
-
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
                     aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
                     aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
                     aniBits.Enabled = true;
                     aniNumC1.Maximum = 0xFFFF; aniNumC1.Enabled = true; aniNumC1.Hexadecimal = true;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
@@ -532,12 +515,10 @@ namespace LAZYSHELL
                 case 0x41:
                     aniLabelB1.Text = "AMEM";
                     aniTitleD.Text = "Bits";
-
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
                     aniNumB1.Enabled = true; aniNumB1.Hexadecimal = true;
                     aniBits.Items.AddRange(new object[] { "b0", "b1", "b2", "b3", "b4", "b5", "b6", "b7" });
                     aniBits.Enabled = true;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param2 & i) == i);
@@ -547,7 +528,6 @@ namespace LAZYSHELL
                     aniNumB1.Maximum = 0x0F; aniNumB1.Enabled = true;
                     aniBits.Items.AddRange(new object[] { "looping on", "looping off", "b6", "mirror" });
                     aniBits.Enabled = true;
-
                     aniNumB1.Value = asc.Param1 & 0x0F;
                     for (int i = 0x10, j = 0; j < 4; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
@@ -555,14 +535,12 @@ namespace LAZYSHELL
                 case 0x5D:
                     aniLabelB1.Text = "Object #";
                     aniLabelB2.Text = "Address";
-
                     aniNumB1.Maximum = 0x0F; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
                     aniNumB2.Maximum = 0xFFFF; aniNumB2.Hexadecimal = true; aniNumB2.Enabled = true;
                     aniBits.Items.AddRange(new object[] { 
                         "b0", "b1", "b2", "character slot", 
                         "b4", "b5", "current target", "b7" });
                     aniBits.Enabled = true;
-
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
                     aniNumB1.Value = asc.Param2;
@@ -572,7 +550,6 @@ namespace LAZYSHELL
                     aniLabelA1.Text = "Type";
                     aniNameA1.Items.AddRange(new object[] { "attack name", "spell name", "item name" });
                     aniNameA1.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0x68:
@@ -580,7 +557,6 @@ namespace LAZYSHELL
                     aniLabelB2.Text = "Index";
                     aniNumB1.Hexadecimal = true; aniNumB1.Maximum = 0xFFFF; aniNumB1.Enabled = true;
                     aniNumB2.Maximum = 255; aniNumB2.Enabled = true;
-
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     aniNumB2.Value = asc.CommandData[3];
                     break;
@@ -591,7 +567,6 @@ namespace LAZYSHELL
                     aniNumB1.Minimum = 0x60; aniNumB1.Maximum = 0x6F;
                     aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
                     aniNumB2.Maximum = asc.Opcode == 0x6A ? 0xFF : 0xFFFF; aniNumB2.Enabled = true;
-
                     aniNumB1.Value = (asc.Param1 & 0x0F) + 0x60;
                     aniNumB2.Value = asc.Opcode == 0x6A ? asc.Param2 : Bits.GetShort(asc.CommandData, 2);
                     break;
@@ -602,7 +577,6 @@ namespace LAZYSHELL
                     aniBits.Items.AddRange(new object[]{
                         "looping on","playback off","looping off","b3"});
                     aniBits.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param2;
                     for (int i = 1, j = 0; j < 4; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
@@ -635,7 +609,6 @@ namespace LAZYSHELL
                 case 0x75:
                     aniLabelB1.Text = "Bits";
                     aniNumB1.Maximum = 0xFFFF; aniNumB1.Hexadecimal = true; aniNumB1.Enabled = true;
-
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0x77:
@@ -647,7 +620,6 @@ namespace LAZYSHELL
                     aniBits.Items.AddRange(new object[]{
                         "b0","4bpp","2bpp","invisible"});
                     aniBits.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param1 >> 4;
                     for (int i = 1, j = 0; j < 4; i *= 2, j++)
                         aniBits.SetItemChecked(j, (asc.Param1 & i) == i);
@@ -658,7 +630,6 @@ namespace LAZYSHELL
                     aniNameA1.Items.AddRange(new object[] { "battle dialogue", "psychopath message", "battle message" });
                     aniNameA1.Enabled = true;
                     aniNumA2.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param1 & 3;
                     aniNumA2.Value = asc.Param2;
                     break;
@@ -680,7 +651,6 @@ namespace LAZYSHELL
                 case 0x7E:
                     aniLabelB1.Text = "Duration";
                     aniNumB1.Enabled = true;
-
                     aniNumB1.Value = asc.Param1;
                     break;
                 case 0x80:
@@ -707,7 +677,6 @@ namespace LAZYSHELL
                     aniNameA1.Items.AddRange(new object[] { "fade out", "fade in" }); aniNameA1.Enabled = true;
                     aniNameA2.Items.AddRange(new object[] { "effect", "sprite", "screen" }); aniNameA2.Enabled = true;
                     aniNumB1.Enabled = true;
-
                     aniNameA1.SelectedIndex = (asc.Param1 & 0x0F) >> 1;
                     aniNameA2.SelectedIndex = asc.Param1 >> 4;
                     aniNumB1.Value = asc.Param2;
@@ -733,7 +702,6 @@ namespace LAZYSHELL
                         "{none}", "red", "green", "yellow", "blue", "pink", "aqua", "white" });
                     aniNameA1.Enabled = true;
                     aniNameA1.SelectedIndex = asc.Param1 & 0x07;
-
                     if (asc.Opcode == 0x8E)
                     {
                         aniNumB1.Enabled = true;
@@ -752,14 +720,12 @@ namespace LAZYSHELL
                     aniLabelA1.Text = "Sound";
                     aniNameA1.Items.AddRange(Lists.Numerize(Lists.BattleSoundNames));
                     aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 250;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xB0:
                     aniLabelA1.Text = "Music";
                     aniNameA1.Items.AddRange(Lists.Numerize(Lists.MusicNames));
                     aniNameA1.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xB1:
@@ -767,7 +733,6 @@ namespace LAZYSHELL
                     aniNameA1.Items.AddRange(Lists.Numerize(Lists.MusicNames));
                     aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 250;
                     aniNumB1.Enabled = true; aniNumB1.Maximum = 0xFFFF;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 2);
                     break;
@@ -776,7 +741,6 @@ namespace LAZYSHELL
                     aniLabelB2.Text = "Volume";
                     aniNumB1.Enabled = true;
                     aniNumB2.Enabled = true;
-
                     aniNumB1.Value = asc.Param1;
                     aniNumB2.Value = asc.Param2;
                     break;
@@ -784,7 +748,6 @@ namespace LAZYSHELL
                     aniLabelA1.Text = "Target";
                     aniNameA1.Items.AddRange(Lists.TargetNames);
                     aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 200;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xBC:
@@ -797,7 +760,6 @@ namespace LAZYSHELL
                     aniNameA1.ItemHeight = 15;
                     aniNumA1.Maximum = 0xB0; aniNumA1.Enabled = true;
                     aniBits.Items.Add("remove"); aniBits.Enabled = true;
-
                     aniNameA1.SelectedIndex = Model.ItemNames.GetSortedIndex(
                         Math.Abs((short)Bits.GetShort(asc.CommandData, 1)));
                     aniNumA1.Value = Math.Abs((short)Bits.GetShort(asc.CommandData, 1));
@@ -806,14 +768,12 @@ namespace LAZYSHELL
                 case 0xBE:
                     aniLabelB1.Text = "Value";
                     aniNumB1.Maximum = 0xFFFF; aniNumB1.Enabled = true;
-
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0xBF:
                     aniLabelA1.Text = "Target";
                     aniNameA1.Items.AddRange(Lists.TargetNames);
                     aniNameA1.Enabled = true; aniNameA1.DropDownWidth = 200;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xC3:
@@ -822,13 +782,11 @@ namespace LAZYSHELL
                         "...", "incline", "incline", "circle", "dome", 
                         "polygon", "wavy circle", "cylinder" });
                     aniNameA1.Enabled = true;
-
                     aniNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0xCB:
                     aniLabelB1.Text = "Speed";
                     aniNumB1.Maximum = 15; aniNumB1.Enabled = true;
-
                     aniNumB1.Value = asc.Param1;
                     break;
                 case 0xE1:
@@ -837,7 +795,6 @@ namespace LAZYSHELL
                     aniNumB1.Maximum = 0xFFFF;
                     aniNumB1.Enabled = true;
                     aniNumB2.Enabled = true;
-
                     aniNumB1.Value = Bits.GetShort(asc.CommandData, 1);
                     aniNumB2.Value = asc.Param2;
                     break;
@@ -1130,7 +1087,6 @@ namespace LAZYSHELL
         private void ResetControls()
         {
             updatingControls = true;
-
             aniNameA1.DrawMode = DrawMode.Normal; aniNameA1.ItemHeight = 13; aniNameA1.BackColor = SystemColors.Window;
             aniNameA1.Items.Clear(); aniNameA1.ResetText(); aniNameA1.Enabled = false; aniNameA1.DropDownWidth = aniNameA1.Width;
             aniNameA2.Items.Clear(); aniNameA2.ResetText(); aniNameA2.Enabled = false; aniNameA2.DropDownWidth = aniNameA2.Width;
@@ -1141,7 +1097,6 @@ namespace LAZYSHELL
             aniNumC1.Maximum = 255; aniNumC1.Hexadecimal = false; aniNumC1.Value = 0; aniNumC1.Enabled = false;
             aniNumC2.Maximum = 255; aniNumC2.Value = 0; aniNumC2.Enabled = false;
             aniBits.ColumnWidth = 134; aniBits.Items.Clear(); aniBits.Enabled = false;
-
             aniTitleA.Text = "";
             aniTitleB.Text = "";
             aniTitleC.Text = "";
@@ -1152,7 +1107,6 @@ namespace LAZYSHELL
             aniLabelB2.Text = "";
             aniLabelC1.Text = "";
             aniLabelC2.Text = "";
-
             updatingControls = false;
         }
         private void OrganizeControls()
@@ -1549,7 +1503,6 @@ namespace LAZYSHELL
             ascCopy = null;
             //
             ControlAssemble();
-
             byte[] changes = new byte[available];
             for (int i = 0; i < available; i++)
                 changes[i] = (byte)(i < asc.Length ? asc.CommandData[i] : 0x0A);
@@ -1571,8 +1524,8 @@ namespace LAZYSHELL
         }
         private void aniNameA1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingControls) return;
-
+            if (updatingControls)
+                return;
             switch (asc.Opcode)
             {
                 case 0x00:
@@ -1657,15 +1610,16 @@ namespace LAZYSHELL
         }
         private void aniNameA1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void aniNumA1_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingControls) return;
-
+            if (updatingControls)
+                return;
             AnimationCommand asc = ascCopy != null ? ascCopy : this.asc;
             switch (asc.Opcode)
             {
@@ -1722,9 +1676,8 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = "animationScripts.txt";
             saveFileDialog.RestoreDirectory = true;
-
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
             int i = 0;
             StreamWriter evtscr = File.CreateText(saveFileDialog.FileName);
             evtscr.WriteLine("**************");
@@ -1738,7 +1691,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1755,7 +1707,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1772,7 +1723,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1789,7 +1739,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1806,7 +1755,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1823,7 +1771,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1840,7 +1787,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1857,7 +1803,6 @@ namespace LAZYSHELL
                 {
                     evtscr.Write((asc.Offset).ToString("X6") + ": ");
                     evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                     dumpAnimationLoop(asc, evtscr, 1);
                 }
                 i++;
@@ -1869,10 +1814,8 @@ namespace LAZYSHELL
             {
                 for (int i = 0; i < level; i++)
                     evtscr.Write("\t");
-
                 evtscr.Write((asc.Offset).ToString("X6") + ": ");
                 evtscr.Write("{" + BitConverter.ToString(asc.CommandData) + "}\n");
-
                 dumpAnimationLoop(asc, evtscr, level + 1);
             }
         }

@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class PaletteEditor
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -1288,6 +1286,7 @@
             this.helpTips.CheckOnClick = true;
             this.helpTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help_small;
+            this.helpTips.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.helpTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 20);
@@ -1387,9 +1386,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.PictureBox pictureBoxPalette;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -1483,6 +1480,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripButton helpTips;
-
     }
 }

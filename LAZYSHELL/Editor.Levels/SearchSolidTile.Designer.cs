@@ -14,7 +14,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -27,9 +26,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -904,11 +901,8 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.heightOverhead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zCoordWater)).EndInit();
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private CheckBox checkConveyor;
         private CheckBox checkConveyorBeltFast;
         private CheckBox checkConveyorBeltNormal;

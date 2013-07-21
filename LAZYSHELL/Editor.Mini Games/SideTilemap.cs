@@ -68,7 +68,7 @@ namespace LAZYSHELL
                     for (int x = 0; x < 16; x++)
                     {
                         int offset = (y * 16 + x) + (a * 256);
-                        tilemaps_Bytes[0][offset] = (byte)tilemaps_Tiles[0][y * Width + x + (a * 16)].TileIndex;
+                        tilemaps_Bytes[0][offset] = (byte)tilemaps_Tiles[0][y * Width + x + (a * 16)].Index;
                     }
                 }
             }
@@ -77,9 +77,7 @@ namespace LAZYSHELL
         private void ChangeSingleTile(int placement, int tile, int x, int y)
         {
             this.tilemaps_Tiles[0][placement] = tileset.Tileset_tiles[tile]; // Change the tile in the layer map
-
             Tile source = this.tilemaps_Tiles[0][placement]; // Grab the new tile
-
             // Draw all 4 subtiles to the appropriate array based on priority
             Do.PixelsToPixels(source.Subtiles[0].Pixels, this.pixels, Width_p, new Rectangle(x, y, 8, 8));
             Do.PixelsToPixels(source.Subtiles[1].Pixels, this.pixels, Width_p, new Rectangle((x + 8), y, 8, 8));
@@ -97,7 +95,6 @@ namespace LAZYSHELL
             for (int i = 0; i < 256; i++)
             {
                 arr[y * Width_p + x + counter] = 0;
-
                 counter++;
                 if (counter % 16 == 0)
                 {
@@ -113,7 +110,6 @@ namespace LAZYSHELL
             {
                 if (source[i] != 0)
                     dest[y * width + x + counter] = source[i];
-
                 counter++;
                 if (counter % 16 == 0)
                 {
@@ -121,7 +117,6 @@ namespace LAZYSHELL
                     counter = 0;
                 }
             }
-
         }
         private void CopyToPixelArray(int[] dest, int[] source)
         {
@@ -138,9 +133,10 @@ namespace LAZYSHELL
         }
         private void CreateLayer(int layer)
         {
-            if (tilemaps_Bytes[layer] == null) return;
-            if (tileset.Tileset_tiles == null) return;
-
+            if (tilemaps_Bytes[layer] == null)
+                return;
+            if (tileset.Tileset_tiles == null)
+                return;
             tilemaps_Tiles[layer] = new Tile[Width * Height]; // Create our layer here
             for (int a = 0; a < Width / 16; a++)
             {
@@ -252,9 +248,9 @@ namespace LAZYSHELL
             if (tilemaps_Tiles[0] != null)
             {
                 if (!ignoretransparent)
-                    return tilemaps_Tiles[0][placement].TileIndex;
+                    return tilemaps_Tiles[0][placement].Index;
                 else if (tilemaps_Tiles[0][placement].Pixels[p.Y * 16 + p.X] != 0)
-                    return tilemaps_Tiles[0][placement].TileIndex;
+                    return tilemaps_Tiles[0][placement].Index;
                 else
                     return 0;
             }

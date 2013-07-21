@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class PickNativeSPC
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -82,11 +80,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SELECT MML NATIVE FORMAT";
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBox1;

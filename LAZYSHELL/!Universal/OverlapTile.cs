@@ -17,12 +17,10 @@ namespace LAZYSHELL
             get
             {
                 int[] pixels = new int[32 * 32];
-
                 Do.PixelsToPixels(GetSubtile(0).Pixels, pixels, 32, new Rectangle(0, 0, 16, 16));
                 Do.PixelsToPixels(GetSubtile(1).Pixels, pixels, 32, new Rectangle(16, 0, 16, 16));
                 Do.PixelsToPixels(GetSubtile(2).Pixels, pixels, 32, new Rectangle(0, 16, 16, 16));
                 Do.PixelsToPixels(GetSubtile(3).Pixels, pixels, 32, new Rectangle(16, 16, 16, 16));
-
                 return pixels;
             }
             set

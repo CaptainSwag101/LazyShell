@@ -34,7 +34,20 @@ namespace LAZYSHELL
         {
             try
             {
-                if ((data & (byte)(Math.Pow(2, bit))) == (byte)(Math.Pow(2, bit)))
+                if ((data & (byte)Math.Pow(2, bit)) == (byte)Math.Pow(2, bit))
+                    return true;
+                return false;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+        public static bool GetBit(int data, int bit)
+        {
+            try
+            {
+                if ((data & (int)Math.Pow(2, bit)) == (int)Math.Pow(2, bit))
                     return true;
                 return false;
             }
@@ -62,7 +75,6 @@ namespace LAZYSHELL
                 ret += (ushort)(data[offset + 1] << 8);
                 ret += (ushort)(data[offset]);
             }
-
             catch
             {
                 ShowError(offset, data.Length);
@@ -78,7 +90,6 @@ namespace LAZYSHELL
                 ret += (ushort)(data[offset] << 8);
                 ret += (ushort)(data[offset + 1]);
             }
-
             catch
             {
                 ShowError(offset, data.Length);
@@ -130,7 +141,6 @@ namespace LAZYSHELL
         public static byte[] GetByteArray(byte[] data, int offset)
         {
             byte[] toGet = new byte[data.Length - offset];
-
             try
             {
                 for (int i = 0; i < data.Length && i < toGet.Length; i++)
@@ -139,7 +149,6 @@ namespace LAZYSHELL
                 }
                 return toGet;
             }
-
             catch
             {
                 ShowError(offset, data.Length);
@@ -149,7 +158,6 @@ namespace LAZYSHELL
         public static byte[] GetByteArray(byte[] data, int offset, int size)
         {
             byte[] toGet = new byte[size];
-
             try
             {
                 for (int i = 0; i < size; i++)
@@ -158,7 +166,6 @@ namespace LAZYSHELL
                 }
                 return toGet;
             }
-
             catch
             {
                 ShowError(offset, data.Length);
@@ -168,7 +175,6 @@ namespace LAZYSHELL
         public static ushort[] GetShortArray(byte[] data, int offset, int size)
         {
             ushort[] toGet = new ushort[size];
-
             try
             {
                 for (int i = 0; i < size; i++)
@@ -187,7 +193,6 @@ namespace LAZYSHELL
         public static int[] GetIntArray(int[] data, int offset, int size)
         {
             int[] toGet = new int[size];
-
             try
             {
                 for (int i = 0; i < size; i++)
@@ -196,7 +201,6 @@ namespace LAZYSHELL
                 }
                 return toGet;
             }
-
             catch
             {
                 ShowError(offset, data.Length);
@@ -322,13 +326,11 @@ namespace LAZYSHELL
             {
                 data[offset] = set;
             }
-
             catch
             {
                 ShowError(offset, data.Length);
                 throw new Exception();
             }
-
         }
         public static void SetByteBits(byte[] data, int offset, byte set, byte bits)
         {
@@ -337,13 +339,11 @@ namespace LAZYSHELL
             {
                 // clear the bits to set
                 data[offset] &= (byte)(bits ^ 0xFF);
-
                 // set the byte bits
                 data[offset] |= (byte)set;
             }
             catch
             {
-
             }
         }
         public static void SetShort(byte[] data, int offset, int set)
@@ -353,13 +353,11 @@ namespace LAZYSHELL
                 data[offset] = (byte)(set & 0xff);
                 data[offset + 1] = (byte)(set >> 8);
             }
-
             catch
             {
                 ShowError(offset, data.Length);
                 throw new Exception();
             }
-
         }
         public static void SetInt24(byte[] data, int offset, int value)
         {
@@ -384,13 +382,11 @@ namespace LAZYSHELL
                     data[offset + i] = src[i];
                 }
             }
-
             catch
             {
                 ShowError(offset, data.Length);
                 throw new Exception();
             }
-
         }
         public static void SetByteArray(byte[] data, int offset, byte[] toSet, int copyStart, int copyEnd)
         {
@@ -401,13 +397,11 @@ namespace LAZYSHELL
                     data[offset + i] = toSet[i];
                 }
             }
-
             catch
             {
                 ShowError(offset, data.Length);
                 throw new Exception();
             }
-
         }
         public static void SetByteArray(byte[] src, byte value)
         {
@@ -438,13 +432,11 @@ namespace LAZYSHELL
                     dst[offset + i] = src[i];
                 }
             }
-
             catch
             {
                 ShowError(offset, dst.Length);
                 throw new Exception();
             }
-
         }
         #endregion
         // operations
@@ -457,13 +449,11 @@ namespace LAZYSHELL
         {
             if (a.Length != b.Length)
                 return false;
-
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
                     return false;
             }
-
             return true;
         }
         public static bool Compare(char[] a, char[] b)
@@ -479,33 +469,28 @@ namespace LAZYSHELL
                 if (a[c] != b[d])
                     return false;
             }
-
             return true;
         }
         public static bool Compare(int[] a, int[] b)
         {
             if (a.Length != b.Length)
                 return false;
-
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
                     return false;
             }
-
             return true;
         }
         public static bool Compare(ushort[] a, ushort[] b)
         {
             if (a.Length != b.Length)
                 return false;
-
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
                     return false;
             }
-
             return true;
         }
         public static byte[] Copy(byte[] source)
@@ -529,6 +514,14 @@ namespace LAZYSHELL
             if (source == null)
                 return null;
             int[] temp = new int[source.Length];
+            source.CopyTo(temp, 0);
+            return temp;
+        }
+        public static bool[] Copy(bool[] source)
+        {
+            if (source == null)
+                return null;
+            bool[] temp = new bool[source.Length];
             source.CopyTo(temp, 0);
             return temp;
         }
@@ -603,6 +596,12 @@ namespace LAZYSHELL
             byte c = (byte)(value >> 8);
             byte d = (byte)value;
             return (d << 24) + (c << 16) + (b << 8) + a;
+        }
+        public static byte StringToByte(string value, int index)
+        {
+            string substring = value.Substring(index * 2, 2);
+            byte equipment = Convert.ToByte(substring, 16);
+            return equipment;
         }
         public static void Switch(ref int valueA, ref int valueB)
         {

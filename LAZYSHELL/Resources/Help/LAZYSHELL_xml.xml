@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.17.0" date="??????, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="3.18.0" date="July 21, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -9,10 +9,8 @@
     <precaution>2. If you receive an error prompt, please follow the directions in the prompt window and copy ALL of the contents of the error message and post them to the given link in the window. Unless you do this, there is little hope of the bug ever being fixed unless someone else encounters it and posts it to the link. Keep in mind, I do read bug reports and I do attempt to fix the reported bugs, so your post will not be a waste of time.</precaution>
     <precaution>3. If the unfortunate occasion might arise that the application actually does corrupt your ROM, you can try resetting the corrupted elements by importing those specific elements from a fresh SMRPG ROM. Click the button "Import elements from another ROM" (a down-arrow over a small white box), select a fresh ROM, and check the elements you want to import.</precaution>
     <conclusion>Should you encounter any issues, errors, problems, or irritations using the application, please post them to one of the following links:
-
 http://acmlm.kafuka.org/board/thread.php?id=7005
 http://www.smwcentral.net/?p=viewthread&amp;t=45572
-
 Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank you for using the program.</conclusion>
   </Read>
   <section>
@@ -22,7 +20,6 @@ Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank 
   <section>
     <header>Program Requirements</header>
     <body>Microsoft .NET Framework 2.0 or higher must be installed on the system for the application to run at all.
-
 Minimal system requirements:
 512MB of RAM (1GB recommended)
 10MB HD space (more if ROM back-ups used)</body>
@@ -30,37 +27,23 @@ Minimal system requirements:
   <section>
     <header>Main Features</header>
     <body>The editor is comprised of 17 individual editors. 
-
 Various status editors include modification capabilities for the statuses of monsters, formations, formation packs, items, spells, attacks, shops, new game properties, level-ups, and timing properties. The monsters editor contains a battle script editor for each monster. 
-
 The Levels portion allows the user to modify the maps of areas (aka locations) using a paint-like interface, the NPCs (ie the sprites in the maps), the exit fields (aka entrances), event fields, overlaps, and the basic layering properties. A template creator/editor lets the user to store a separate portion of the map composed of all 3 layers and the physical layer into a single file. 
-
 The two scripts editors in Lazy Shell enable the user to modify the event scripts, action scripts, and animations scripts. Commands within event scripts and action scripts may be added, modified, deleted, moved, or copied and pasted. Commands within animation scripts may be modified, moved, or replaced with new commands of the same or smaller length, but adding/deleting entirely new commands within animations is not supported and never will be due to the fickle and erratic nature of the animation script engine. 
-
 The Sprites editor is able to modify a sprite's graphics, palette, and animations. The effects editor allows the user to edit spell effects and their respective graphics, palettes, and animations. 
-
 In the Dialogue editor, the user may view and edit the dialogues (aka the game script) as well as the dialogues which appear in battles and the graphics of the dialogue background tiles. Fonts, font colors, and a new font generator will let the user create an entirely new font table based upon manual editing or a supportive font installed on the OS.
-
 In the World Maps editor World maps, world map palettes, and the locations that appear on world maps can be modified. The logo banner graphics and palettes can be modified as well.
-
 The Audio editor can export, import, clear, and playback the audio samples used by the SPC engine. The .wav files can be edited in a third party program such as Audacity. SPC data can be edited in a variety of ways, allowing the user to create entirely new pieces of music. Instruments can be changed as well as well as the raw SPC track data, which can even import custom scripts from a text document.
-
 The mini-games editor so far can modify the minecart mini game maps for all four stages and the objects in the same manner as levels. The menus editor allows the user to modify the menu palettes and import an external image into the menu backgrounds, as well as import an image into the frame image.</body>
   </section>
   <section>
     <header>Extra Features</header>
     <body>The portions of the editor have tooltips for almost every single control. Just press F1 (or click the ? buttons found in most editors) and move the mouse over a control to see what that property is for. There is also a conversion tooltip for showing the hexadecimal or decimal value for the value in the control when moving the mouse cursor over it. Press F2 to enable this feature, or click the base conversion button found in most editors. 
-
 Users are also able to import and export many elements from previously exported .dat, .bin, or .pal files in all portions of the editor as a means of backing up or inter-changing elements. Clearing/erasing data is managed as well so as to free up space for new scripts or dialogues. 
-
 The notes database manager was written for the editor to aid the user aiming to create a full or partial hack. Indexes for elements such as monsters, levels, etc. can be added and a user-defined description provided as well. Adding new indexes is simplified with an option for adding a specific index within a portion of the editor by right- clicking the name list or index number. The user can also load a selected index in the notes database manager into its respective portion of the editor where it can be modified there.
-
 The patch feature reads a list of patches from the currently defined patch server http:// or ftp:// location and can apply those patches to the currently loaded ROM image.
-
 A previewer for levels, event scripts and battle scripts lets the user load a temporary ROM created from the current modifications in the currently loaded ROM image into an emulator of choice (the only options so far are ZSNES and SNES9X). Lazy Shell will create a save state which, when loaded, will immediately enter the current level or initiate the current event or battle script.
-
 There are many more smaller features which are too numerous to list here, and are scattered throughout the editor with the purpose of easing the use of Lazy Shell and reducing the amount of work required to complete a task.
-
 That's what all of these extra features are here for. Not as bells and whistles, but for making the hacking process less headache-inducing.</body>
   </section>
   <section>
@@ -70,18 +53,14 @@ That's what all of these extra features are here for. Not as bells and whistles,
   <section>
     <header>Using the Previewer</header>
     <body>Before using the previewer, do the following: 
-
 1. Make sure all editor files are in the same folder. 
 2. Configure the emulator's save-state folder to read/write to the same folder as any loaded ROM. ZSNES by default already does this, and so does Snes9x v1.43. However, later versions of Snes9x will by default read/write to a "Save" folder created within the emulator's main folder, and if not changed it will fail to load the preview save state. 
-
 Choose either the SNES9X or ZSNES emulator file to use when opening the previewer. ZSNES will automatically load the generated save state when the emulator is loaded from the previewer, but for SNES9X the F1 key must be pressed manually to load the generated save state. If the emulator has problems loading the save state, make sure the 2 steps above have been completed. 
-
 The latest version of ZSNES (v1.51 as of this release) is supported. Snes9x v1.43 and/or its derivatives (rerecord, Geiger's debugger, etc.) are preferred and should work. </body>
   </section>
   <section>
     <header>Importing Custom WAVs</header>
     <body>TIPS: follow these steps to successfully import a .WAV file of your choosing. Say you have a .WAV file, "MyWavFile.wav", that you wish to replace one of the samples in this audio editor with. Here are the steps you need to take: 
-
 1. Download and install Audacity, a good free audio editing program.
      http://audacity.sourceforge.net/download/
 2. In the Lazy Shell audio editor, export any sample to a file named "OldSample.wav".
@@ -92,7 +71,6 @@ The latest version of ZSNES (v1.51 as of this release) is supported. Snes9x v1.4
 7. Export to a .WAV file named "NewSample.wav".
 8. In the Lazy Shell audio editor, import "NewSample.wav".
 MAKE SURE THE SELECTED Hz SAMPLE RATE IS THE SAME AS THE IMPORTED .WAV FILE.
-
 The reason this is the only way to do it is because by using the same exported file ("OldSample.wav") with the modified WAV data from "MyWavFile.wav", it retains some obscure data from "OldSample.wav" in "NewSample.wav" which is necessary to have in order to successfully import a .WAV file.</body>
   </section>
   <Files>
@@ -119,19 +97,13 @@ Base savestates for SNES9X and ZSNES, respectively. These are needed for preview
   <section>
     <header>Bugs, errors, exceptions and complications in functionality.</header>
     <body>The editor may occasionally crash or not function properly due to certain errors in the code (although with each new bugfix I am aiming to completely remove the possibility of this ever happening). Please remember that this is almost certainly the programmer's fault and NOT yours, the user's. As often is the case, when an error surfaces or the program behaves in a buggy fashion, the user tends to immediately feel that they are to blame or the programmer is blaming them for the error. This is not correct: almost all of the time, it's the programmer's fault. Incidences when it might be the fault of the user may be due to a corrupt ROM being loaded (a corrupt ROM basically means any SMRPG rom which has been modified in any way, shape or form). This includes a ROM edited by Lazy Shell, but errors may occur if a ROM has been modified outside of Lazy Shell (ie. a hex editor), or often times in much older versions of Lazy Shell (v2.5 seems to be popular among users who find problems with v3.x).
-
 If the editor crashes, make sure it is the latest version of Lazy Shell by clicking the "(i)" button in the main window and comparing the version there to the version posted on the home page (http://home.comcast.net/~giangurgolo/smrpg/).
-
 If you are using the latest version, make a new post in one of these threads:
 http://acmlm.kafuka.org/board/thread.php?id=7005
 http://www.smwcentral.net/?p=viewthread&amp;t=45572
-
 Explain exactly what you did to produce this error or cause this disfunctionality to occur, what editor it was in, what order you did your actions to produce this error or disfunctionality, etc. Also, when the editor bugs out, an exception prompt appears. If you can manage to copy the error message after this:
-
 ************** Exception Text **************
-
 and include it in your post, it will definitely help. But most importantly, you must explain in your post what you did. Only posting the exception text alone will not be adequate enough.
-
 The suggestions above are only suggestions. Sometimes only five words might be enough for me to quickly locate the bug and fix it. Remember, an error or bug is most likely NOT YOUR FAULT. Don't be afraid to report an error should it occur. I do notice and try to fix every bug that is reported, so your post won't be in vain (unless you're making a request for an addition to the editor, which I am now ignoring due to how time-consuming it can be).</body>
   </section>
   <section>
@@ -325,7 +297,6 @@ http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
       <description>The allies editor contains two subwindows: new game stats and level-ups.</description>
       <Allies form="Allies" icon="icons/mainAllies.gif" title="New Game Stats" type="subwindow">
         <description>In the new game stats subwindow the starting stats for all 5 characters can be modified, along with the starting items, special items, and equipment. Starting coins, flower points, and frog coins can be changed, too. In addition to this, the universal defense timing lets the user change the timing properties of a defense against a monster attack.
-
 The current character selected is the base index for all of the properties in this subwindow except for those in the "Inventory Slot Items", "New Game Status" and "Defense Timing" boxes.</description>
         <Characters title="Characters" type="section">
           <tooltip control="characterName">
@@ -409,7 +380,6 @@ The current character selected is the base index for all of the properties in th
           <tooltip control="slotNum">
             <title>Inventory Slot #</title>
             <description>The slot is the "open slot" in an inventory to store an item.
-
 For example, the equipment and items have 30 slots, therefore they can store 30 items in slots 0 to 29. By default, there are actually 29 open slots in the game, due to the default trash can occupying slot #29).</description>
           </tooltip>
           <tooltip control="startingItem">
@@ -453,7 +423,6 @@ For example, the equipment and items have 30 slots, therefore they can store 30 
         <tooltip control="levelNum">
           <title>Level #</title>
           <description>The character's level to edit by number. All 5 characters have a total of 29 levels (levels 2 through 30) each.
-
 The level selected is the base index for all of the properties in the "Level-up Status Increments", "Level-up Bonus Increments" and "Level-up learned spell" panels.</description>
         </tooltip>
         <tooltip control="expNeeded">
@@ -551,7 +520,6 @@ The level selected is the base index for all of the properties in the "Level-up 
       <tooltip control="commandTree">
         <title>Command Tree</title>
         <description>The collection of commands that comprise the animation script. Nodes are drawn in a hierarchical format for subroutines and animation packets used by the script. Check the nodes to move commands up or down--they cannot be delete, copied or pasted, however.
-
 Click a node to edit its properties in the panel on the right. Note that not all commands have been documented nor have their parameters been disassembled to a user-friendly GUI.</description>
       </tooltip>
       <tooltip control="applyAnimation">
@@ -614,7 +582,6 @@ The docs_ani-code.txt file contains all opcodes decoded thus far.</answer>
       <description>The attacks editor contains two subwindows: spells and attacks.</description>
       <Spells form="Spells" icon="icons/openSpells.gif" title="Spells" type="subwindow">
         <description>The spells editor can modify all spell properties. These properties are applied to either in-battle usage, overworld usage or both.
-
 Spell #0-63 are ally spells, while all other spells are monster spells. Both are exclusively limited to usage by either allies or monsters. Any attempts to assign monster spells to allies or vice versa will most likely cause a glitch, and is not recommended.</description>
         <tooltip control="spellNum" control2="spellName">
           <title>Spell Index</title>
@@ -659,15 +626,10 @@ Spell #0-63 are ally spells, while all other spells are monster spells. Both are
         <tooltip control="spellAttackProp">
           <title>Other Properties</title>
           <description>"Check Caster/Target Atk/Def" will add to or subtract from the base damage or heal amount of the spell based on the target's attack and defense power instead of its magic attack and magic defense power. By default, no spells have this property enabled.
-
 "Ignore Target's Defense" will not subtract the target's magic defense power from the spell's base damage or heal amount (ie. the spell's magic power).
-
 "Check Mortality Protection" is redundant because the game engine always checks anyways. Only the dummied Knock Out spell has this enabled by default.
-
 "Usable in overworld menu" allows the spell to be used out of battle, ie. the overworld menu. This is normally reserved for healing spells.
-
 "9999 Damage/Heal" will kill the target in one strike, if the spell does not miss. Only the dummied Knock Out spell has this enabled by default.
-
 "Hide Battle Numerals" will hide the damage or heal amount total (ie. the numbers shown after an attack). This is generally used by spells that cause 0 damage and are only effect-based spells such as Sleepy Time, to avoid a redundant "0" appearing.</description>
         </tooltip>
         <tooltip control="textBoxSpellDescription">
@@ -677,15 +639,10 @@ Spell #0-63 are ally spells, while all other spells are monster spells. Both are
         <tooltip control="spellTargetting">
           <title>Targetting</title>
           <description>"Other Targets" will limit the target to a single ally or enemy. This must NOT be checked with "Entire Party".
-
 "Enemy Party" will allow the spell to target the opposing party.
-
 "Entire Party" will cause the spell to target all members of either the ally party or enemy party. This must NOT be checked with "Other Targets".
-
 "Wounded Only" will limit the target to wounded members, ie. members with currently 0 HP.
-
 "One Party Only" will limit the target to only one party. By default, all usable spells have this property enabled. Uncheck at your own risk!
-
 "Not Self" will limit the target to other allies only, and the caster is untargettable. By default no spells have this checked, although the Mushroom item that turns the user into a mushroom has this property enabled.</description>
         </tooltip>
         <tooltip control="spellStatusEffect">
@@ -695,7 +652,6 @@ Spell #0-63 are ally spells, while all other spells are monster spells. Both are
         <tooltip control="spellStatusChange">
           <title>Effect &lt;. . . .&gt;</title>
           <description>The status of a target is either lowered or raised by 50%, depending on the value for "Effect Type". If the value for "Effect Type" is set to "Inflict" then the target's stats will be raised 50%. If "Effect type is set to "Nullify" then the target's stats will be lowered 50%.
-
 Example: Geno Boost by default raises the target's Attack and Defense power by 50% (eg. if the attack and/or defense power of the target is 100, then it becomes 150). Shredder by default lowers the target's Attack, Defense, Magic Attack, and Magic Defense power by 50% (ie. it halves them).</description>
         </tooltip>
         <Timing title="Timing" type="section">
@@ -782,7 +738,6 @@ Example: Geno Boost by default raises the target's Attack and Defense power by 5
         <tooltip control="attackAtkLevel">
           <title>Attack Level</title>
           <description>The attack level multiplies the base damage of the attack (ie. the monster's attack power) by a number.
-
 An attack level of 0 will yield base damage. 
 An attack level of 1 will multiply the base damage by 1.5. 
 An attack level of 2 will multiply the base damage by 2. 
@@ -791,7 +746,6 @@ An attack level of 4 will multiply the base damage by 8.
 An attack level of 5 will multiply the base damage by 16. 
 An attack level of 6 will multiply the base damage by 32. 
 An attack level of 7 will multiply the base damage by 64.
-
 Example: if the monster's attack power is 6, and the attack level of the attack is 7, then the damage will be increased to 384 (ie. 6 x 64).</description>
         </tooltip>
         <tooltip control="attackStatusEffect">
@@ -801,15 +755,12 @@ Example: if the monster's attack power is 6, and the attack level of the attack 
         <tooltip control="attackStatusUp">
           <title>Status Up</title>
           <description>The status of a target is raised by 50%.
-
 Example: Valor Up by default raises the target's Defense and Magic Defense power by 50% (eg. if the magic defense and/or defense power of the target is 100, then it becomes 150). Vigor up! by default raises the Magic Attack and Attack power by 50%.</description>
         </tooltip>
         <tooltip control="attackAtkType">
           <title>Attack Type</title>
           <description>"9999 Damage" will kill the target in one strike, if the attack does not miss.
-
 "No damage" will yield 0 damage to the target (both "No damage" properties are exactly the same, but different bits).
-
 "Hide Battle Numerals" will hide the total damage (ie. the numbers shown after an attack). This is generally used by attacks that cause 0 damage and are only effect-based attacks such as S'crow Bell or "9999 damage" enabled attacks such as Scythe, to avoid a redundant "0" or "9999" appearing.</description>
         </tooltip>
       </Attacks>
@@ -832,10 +783,8 @@ Example: Valor Up by default raises the target's Defense and Magic Defense power
         <tooltip control="relFreq">
           <title>Relative Frequency</title>
           <description>This is used to tune a sample sound to the pitch of A. Relative frequency is the frequency of the sample in distance by hertz from a base 32000hz. The difference, however, is not a simple matter of addition/subtraction. The formula for calculating final frequency is as follows:
-
 If the relative frequency is positive: 32000 x 2^(RelFreq / 256 / 12).
 If the relative frequency is negative: 32000 / 2^(RelFreq / 256 / 12).
-
 So multiply or divide 32000 by 2 to the power of the final quotient of what's between () to get the final frequency of the sample.</description>
         </tooltip>
         <tooltip control="relGain">
@@ -845,7 +794,6 @@ So multiply or divide 32000 by 2 to the power of the final quotient of what's be
         <tooltip control="loopStart">
           <title>Loop Start</title>
           <description>If the sample loops this is the location in bytes it loops back to. If set to 0 or a value higher than the BRR sample's total size in bytes, it loops back to the beginning. This value must point to the start of a chunk, in other words it must be divisible by 9--the size of each chunk in a BRR sample's data.
-
 The loop start point is indicated in the wavelength image by a vertical gray line.</description>
         </tooltip>
       </Samples>
@@ -882,9 +830,7 @@ The loop start point is indicated in the wavelength image by a vertical gray lin
         <tooltip control="percussivePitchIndex">
           <title>Pitch Index</title>
           <description>This is not the actual pitch of the percussive (which is below) but the pitch index assigned to it. If a channel is in percussive mode, then the notes will play an instrument in the percussive list based on the note's pitch corresponding to the percussive's pitch index.
-
 Example: if a percussive has a pitch index of B, then for any B notes played while in percussive mode it will play that percussive's sample.
-
 All percussives in the collection must have different pitch indexes.</description>
         </tooltip>
         <tooltip control="percussivePitch">
@@ -937,7 +883,6 @@ All percussives in the collection must have different pitch indexes.</descriptio
         </ScoreViewer>
         <ScoreWriter icon="icons/scoreWriter.gif" title="Score Writer" type="section">
           <description>Write your own basic scores using the notes and rests provided in the toolstrip. This is completely separate from the ROM, and does not interact with the ROM in any way other than to export the custom made score to separate .txt files for each channel and import those into an SPC's channel track.
-
 Notes/rests can be drawn, erased, and the orientation can be changed in the same nature as the score viewer (staff height, time signature, etc). This is a fairly basic feature, which can only insert the beats used by SMRPG and no notes with a fixed durations/tick length. Most useful is its ability to undo/redo any action and save/export in three formats.</description>
         </ScoreWriter>
       </SPCs>
@@ -1006,9 +951,7 @@ Notes/rests can be drawn, erased, and the orientation can be changed in the same
     </Battlefields>
     <Dialogues form="Dialogues" icon="icons/mainDialogues.gif" title="Dialogues" type="editor">
       <description>Dialogues are the game's script. Dialogues must be triggered by an event script command to show. Generally, most dialogues are "assigned" to an NPC, ie. the NPC has an event # assigned to it, wherein there is a command to display a specific dialogue # in that event script. The first few dialogues are by default used as the message / caption that is shown at the top of some levels.
-
 To find a dialogue, use the text field "Find...". Dialogues have a number of commands and characters which can be inserted either using the toolstrip on the right or through font table's right-click menu item "Insert into dialogue".
-
 The dialogues editor contains two subwindows: battle dialogues and fonts.</description>
       <tooltip control="dialogueNum">
         <title>Dialogue Index</title>
@@ -1021,7 +964,6 @@ The dialogues editor contains two subwindows: battle dialogues and fonts.</descr
       <tooltip control="dialogueTextBox">
         <title>Dialogue</title>
         <description>Edit the current dialogue.
-
 To insert symbols, simply right-click the symbol in the dialogue font table and click "Insert into dialogue".</description>
       </tooltip>
       <tooltip control="toolStrip7">
@@ -1041,14 +983,11 @@ To insert symbols, simply right-click the symbol in the dialogue font table and 
       </BattleDialogues>
       <Fonts form="Fonts" icon="icons/openFonts.gif" title="Fonts" type="subwindow">
         <description>4 font tables can be selected:
-
 "Menu" font is used in the overworld menu.
 "Dialogue" font is used in overworld and battle dialogue.
 "Description" font is used in item and spell descriptions in the overworld menu.
 "Triangles" are the option triangles used in overworld dialogue.
-
 It must be noted that each font table has its OWN keystroke table. If you are translating the game's text, remember that if writing special characters like á, é, etc. into an element's name, description, etc. you must assign a keystroke value to the font letter you want to associate it with--for ALL three font tables.
-
 Only the "dialogue" font allows the user to insert symbols into the overworld or battle dialogue through the right-click menu.</description>
         <tooltip control="fontType">
           <title>Font Table</title>
@@ -1131,7 +1070,6 @@ Only the "dialogue" font allows the user to insert symbols into the overworld or
     </Dialogues>
     <Effects form="Effects" icon="icons/mainEffects.gif" title="Effects" type="editor">
       <description>The spell effect editor has two subwindows: molds and sequences.
-
 A spell effect is not the entire spell animation itself, but an animation sequence used in spell animations. Spell animation scripts can use more than one different spell effect, for example, the "Boulder" spell uses spell effect 26 (boulder) and 53 (black flash).</description>
       <tooltip control="number" control2="name">
         <title>Effect Index</title>
@@ -1140,7 +1078,6 @@ A spell effect is not the entire spell animation itself, but an animation sequen
       <tooltip control="imageNum">
         <title>Image</title>
         <description>The image # of the currently selected spell effect refers to the set of properties that designate the raw graphics and palette set to use.
-
 Anything in the "Image Properties" box is part of the spell effect's image.</description>
       </tooltip>
       <tooltip control="e_paletteIndex">
@@ -1205,7 +1142,6 @@ Anything in the "Image Properties" box is part of the spell effect's image.</des
     </Effects>
     <EventScripts form="EventScripts" icon="icons/mainEventScripts.gif" title="Event Scripts" type="editor">
       <description>The game basically progresses by event scripts, outside of battle. Everything you see happening in a level that isn't controlled by the player (ie. Mario) is executed by the commands in an event script. Scripts are usually initialized by a trigger in the level, when Mario comes into contact with either an event field or an NPC. An event script is also automatically initialized every time when entering a new level.
-
 An event script is comprised of 0 or more commands, of which fall into two categories: event or action queue commands. Event commands generally alter or read things like memory, tell the script to jump to an address in the event data, etc. All of the options appear in each event command category in the category list on the top-right. Action queue commands only appear in an action queue for a specific NPC or object, such as Mario or the screen. These commands are usually coord-shifting and sequence playback commands for NPCs and other objects.</description>
       <tooltip control="eventName">
         <title>Script Type</title>
@@ -1238,29 +1174,19 @@ An event script is comprised of 0 or more commands, of which fall into two categ
       <tooltip control="categories_es">
         <title>Select category</title>
         <description>Select a category of event scripts, then choose from the commands in that category to create a new one. Some categories may need further explanation for the novice user.
-
 "Objects" ie. action queues, will provide a list of objects to choose from for creating an action queue. These are mostly NPC #'s corresponding to the numbers in the NPC collection seen in the levels editor, but include other commonly used objects such as Mario or the screen layers.
-
 "Jump to" commands will jump to an address within the current bank. So if the event script command offsets start with $1E, a jump to command with an address of $78FE will jump to $1E78FE. You cannot jump to an address outside of the bank, but you can jump to any one of the 4096 events using the commands in the "Events" category.
-
 "Memory" and "Memory $7000" commands change and read values/bits stored in memory addresses. "Memory" commands generally read or modify bits in memory addresses $7045 and over. "Memory $7000" commands generally have fewer limits in that they are commonly used to check anything not associated with event bits, and are read/written on a byte basis instead of the bit basis $7045+ addresses are used for.
-
 "Return" simply ends the script or the entire hierarchy of scripts.</description>
       </tooltip>
       <tooltip control="categories_aq">
         <title>Action Queue Categories</title>
         <description>Select a category of action queue commands, then choose from the commands in that category to create a new one. Some categories may need further explanation for the novice user.
-
 "Properties" commands can modify the object's sprite attributes (several are associated with the NPC attributes box in the levels editor).
-
 "Sprite sequence" commands can play back a sprite sequence or set to a single mold corresponding to the molds and sequences in the sprites editor.
-
 "Shift" commands move the object on either a pixel or isometric basis, either by a given unit or by single unit.
-
 "Jump to" commands will jump to an address within the current bank. So if the event script command offsets start with $1E, a jump to command with an address of $78FE will jump to $1E78FE. You cannot jump to an address outside of the bank, and jump to command inside an action queue should not jump outside of the queue.
-
 "Memory" and "Memory $700C" commands change and read values/bits stored in memory addresses. "Memory" commands generally read or modify bits in memory addresses $7045 and over. "Memory $700C" commands generally have fewer limits in that they are commonly used to check anything not associated with event bits, and are read/written on a byte basis instead of a bit basis like $7045+ addresses.
-
 "Return" simply ends the action queue or the entire script.</description>
       </tooltip>
       <tooltip control="commands">
@@ -1277,7 +1203,6 @@ An event script is comprised of 0 or more commands, of which fall into two categ
       </tooltip>
       <ActionScripts title="Action Scripts" type="section">
         <description>Action scripts are the behaviors of NPCs and other objects in a level. The random movements of townspeople are infinitely looping action scripts. The behaviors of monsters in a level are all action scripts.
-
 Action scripts are basically the same as action queues found in event scripts, except they can only contain action commands and aren't "triggered" like event scripts are. They're set and usually assigned to NPCs in the levels editor, but an NPC's action script can be changed within an event script.</description>
       </ActionScripts>
       <FAQ title="EVENT SCRIPTS EDITOR">
@@ -1335,7 +1260,6 @@ Action scripts are basically the same as action queues found in event scripts, e
         <tooltip control="formationMusic">
           <title>Type</title>
           <description>The music assigned to the formation that plays in battle.
-
 The music can be selected from 8 indexes or set to {CURRENT}, which continues to play the current music track in the overworld when the battle begins. To edit the actual track that is assigned to the index, change the "Track" property below.</description>
         </tooltip>
         <tooltip control="musicTrack">
@@ -1365,7 +1289,6 @@ The music can be selected from 8 indexes or set to {CURRENT}, which continues to
         <tooltip control="use">
           <title>Use</title>
           <description>The monsters enabled in the formation. This must be checked for a monster that is to have any presence in the battle at all.
-
 It is not recommended to have more than 6 monsters enabled in one formation, due to VRAM capacity.</description>
         </tooltip>
         <tooltip control="hide">
@@ -1375,7 +1298,6 @@ It is not recommended to have more than 6 monsters enabled in one formation, due
         <tooltip control="pictureBoxFormation">
           <title>Formation Image</title>
           <description>Click and drag the monsters in the formation.
-
 The actual boundaries of the image are beyond the visible boundaries as seen here and in-game, thus a monster coordinate of 0,0 or 255,255 may hide it completely.</description>
         </tooltip>
         <tooltip control="battlefieldName">
@@ -1457,7 +1379,6 @@ The actual boundaries of the image are beyond the visible boundaries as seen her
         <tooltip control="itemCoinValue">
           <title>Coin Value</title>
           <description>The amount the item costs in a shop. Final costs varies depending on the "Purchase Discounts" properties of the shop selling the item. The resale value of the item is exactly half the "Coin Value" (ie. how many coins you receive from selling it in a shop).
-
 NOTE: to make item a "Special Item", set coin value to 0.</description>
         </tooltip>
         <tooltip control="itemSpeed">
@@ -1495,19 +1416,14 @@ NOTE: to make item a "Special Item", set coin value to 0.</description>
         <tooltip control="itemAttackType">
           <title>Effect Type</title>
           <description>The effect type, ie. whether or not the item will inflict, nullify or protect against (an) effect(s).
-
 "Protection" should only be used for equipment, such as the Super Suit which protects against all adverse effects.
-
 "Infliction" will inflict anything under "EFFECT" on the target, or raise any stats under "STATS". Set only for items that are used in battle.
-
 "Nullification" will remove the effects under "EFFECT" on the target, or lower the stats under "STATS". Set only for items that are used in battle.
-
 If set to {NONE} then anything checked under "EFFECT" and "STATUS" is ignored. Likewise, this property is ignored if nothing under "EFFECT" and "STATUS" is checked.</description>
         </tooltip>
         <tooltip control="itemFunction">
           <title>Inflict Function</title>
           <description>The inflict function is only used for non-equipment items, such as the Mushroom which is set to "Restore HP" and Maple Syrup which is set to "Restore FP", or the Flower items that raise the maximum FP are set to "Raise Max FP".
-
 Some functions read the "Infliction Amount" value to determine how much HP, FP, etc. will be restored/raised.</description>
         </tooltip>
         <tooltip control="itemElemAttack">
@@ -1517,11 +1433,8 @@ Some functions read the "Infliction Amount" value to determine how much HP, FP, 
         <tooltip control="itemUsage">
           <title>Item Properties</title>
           <description>"Mortality Protection" is only used with equipment and causes all instant death attacks to always miss.
-
 "Hide Battle Numerals" is only used with items in battle, typically those that cause 0 or 9999 damage to avoid the redundant "0" or "9999" appearing.
-
 "Usable in Battle Menu" and "Usable in Overworld Menu" indicate whether the item can be used in and/or out of battle in the menu.
-
 "Reusable" gives the item infinite usage, eg. the "Star Egg" can be used repeatedly and never run out. NOTE: the Lucky Jewel can has this set, but the CPU reads a RAM address to limit the usage to 10 times. That cannot be changed here.</description>
         </tooltip>
         <tooltip control="textBoxItemDescription">
@@ -1531,9 +1444,7 @@ Some functions read the "Infliction Amount" value to determine how much HP, FP, 
         <tooltip control="itemStatusEffect">
           <title>Effect &lt;. . . .&gt;</title>
           <description>The effect inflicted, protected against or nullified on a target. 
-
 Example: Red Essence inflicts Invincible on the target. Super Suit protects against all effects (except Invincible). Able Juice nullifies all effects (except Invincible).
-
 These properties are used based on the value for "Effect Type".</description>
         </tooltip>
         <tooltip control="itemElemNull">
@@ -1547,7 +1458,6 @@ These properties are used based on the value for "Effect Type".</description>
         <tooltip control="itemStatusChange">
           <title>Status &lt;. . . .&gt;</title>
           <description>The status of a target is either lowered or raised by 50%, depending on the value for "Effect Type". If the value for "Effect Type" is set to "Infliction" then the target's stats will be raised 50%. If "Effect type" is set to "Nullification" then the target's stats will be lowered 50%.
-
 Example: Power Blast by default raises the target's Attack and Magic Attack power by 50% (eg. if the attack and/or defense power of the target is 100, then it becomes 150). If the item is equipment, then the wearer's stats (in-battle) will be raised/lowered 50%. If the item is a usable item in- battle, then the target's stats will be raised/lowered 50%.</description>
         </tooltip>
         <tooltip control="itemWhoEquip">
@@ -1557,17 +1467,11 @@ Example: Power Blast by default raises the target's Attack and Magic Attack powe
         <tooltip control="itemTargetting">
           <title>Targetting</title>
           <description>"Other Targets" will limit the target to a single ally or enemy. This must NOT be checked with "Entire Party".
-
 "Enemy Party" will allow the spell to target the opposing party.
-
 "Entire Party" will cause the spell to target all members of either the ally party or enemy party. This must NOT be checked with "Other Targets".
-
 "Wounded Only" will limit the target to wounded members, ie. members with currently 0 HP.
-
 "One Party Only" will limit the target to only one party. By default, all usable spells have this property enabled. Uncheck at your own risk!
-
 "Not Self" will limit the target to other allies only, and the caster is untargettable. By default no spells have this checked, although the Mushroom item that turns the user into a mushroom has this property enabled.
-
 NOTE: these properties are ignored by items that cannot be used in battle.</description>
         </tooltip>
         <tooltip control="itemCursor">
@@ -1610,9 +1514,7 @@ NOTE: these properties are ignored by items that cannot be used in battle.</desc
         <tooltip control="shopBuyOptions">
           <title>Shop Options</title>
           <description>"Buy with Frog Coins, one product each" is used, for example, by the "Frog Disciple" in Seaside Town. Only one of each product can be bought with Frog Coins only.
-
 "Buy with Frog Coins" is the same as above, only the product(s) can be bought as many times as afforded. The "Frog Coin Emporium" uses this property.
-
 "Buy only, no selling" is obvious: only buying is allowed in the shop, and items cannot be sold. Both of these properties are exactly the same, there is no difference (they are merely two separate bits that each have the same property).</description>
         </tooltip>
         <tooltip control="shopDiscounts">
@@ -1638,7 +1540,6 @@ NOTE: these properties are ignored by items that cannot be used in battle.</desc
     </Items>
     <Levels form="Levels" icon="icons/mainLevels.gif" title="Levels" type="editor">
       <description>The places and areas you can enter in-game. Many ROM editors also refer to these as "locations" or "rooms".
-
 A single level is often a smaller part of a larger map, and is defined by a set of boundaries known as a "mask". Hence the appearance of multiple levels in the level image when a single level is selected. These are all explained in the individual tab descriptions below.</description>
       <tooltip control="levelName">
         <title>Level Index</title>
@@ -1666,13 +1567,9 @@ A single level is often a smaller part of a larger map, and is defined by a set 
       </tooltip>
       <Maps title="Maps" type="section">
         <description>The "MAPS" tab contains all the properties of a level's map. The map is the collection of properties that set the tilemaps, palette, and tilesets for the level. Each level is assigned a "Map #" with all of the properties in the "MAPS" tab.
-
 A graphic set is a loosely organized collection of 4bpp or 2bpp 8x8 tiles that are read from and organized into 16x16 tiles by a tileset. They are essentially the raw graphics used by a level.
-
 A tileset is a set of 16x16 tiles (drawn using the graphic sets) which comprise what is essentially the set of tiles of which the final level image is drawn. Note that tilesets do not contain any raw graphics, and are merely each a series of indexes in which 8x8 tiles are chosen from the graphic sets in the map.
-
 A tilemap is a map of 16x16 tiles (drawn using the tilesets) which comprise what is essentially the final level image (for that layer only).
-
 Many levels use the same map as other levels, such as the Booster Tower levels, because the area which generally constitutes the viewable boundaries of the level in-game is merely a portion of the entire map, where the boundaries are often set by the Layer Mask edges. If the boundaries are not set, then often when Mario walks to the far edge of a level, another part of the level's map which constitutes a different level can be seen.</description>
         <tooltip control="mapNum">
           <title>Map #</title>
@@ -1733,7 +1630,6 @@ Many levels use the same map as other levels, such as the Booster Tower levels, 
         <tooltip control="mapPhysicalMapNum">
           <title>Solidity Map</title>
           <description>The solidity map, also referred to as a physical map or collision tiles, is a map of solid tiles in the orientation of an isometric map. An isometric map is a 2D map that projects a 3D-like image.
-
 The solidity map can be shown/hidden using the block-like button in the toolstrip above the level image.</description>
         </tooltip>
         <tooltip control="mapBattlefieldNum">
@@ -1754,25 +1650,19 @@ The solidity map can be shown/hidden using the block-like button in the toolstri
         <tooltip control="layerPrioritySet">
           <title>Priority Set</title>
           <description>A set of properties that handles how the layers of the level are drawn. Note that editing the properties in the "Layer Priority" box for the currently set Priority Set will affect all other levels that use the same Priority Set.
-
 "Mainscreen" refers to the layers that are drawn opaquely (ie. normally without 'see-through' effects).
-
 "Subscreen" refers to the layers that are drawn translucently (ie. 'see through' effects). Example: many levels with water (which is translucent) have the water on L3 (which is commonly used for water, clouds, fog, etc.) which is enabled in the subscreen.Generally, at least one (usually all) layer is enabled in the "Color Math" that is also enabled in "Mainscreen" in order for the "Subscreen" layers that are enabled to appear at all.
-
 "Color Math" refers to the layers that the subscreen will appear over. If nothing is enabled in "Color Math" then the subscreen will not show at all.This is called "Color Math" because the colors of the subscreen are being added to or subtracted from the colors on the mainscreen, which creates a translucent effect for the subscreen.</description>
         </tooltip>
         <tooltip control="layerColorMathIntensity">
           <title>Intensity</title>
           <description>"Half" intensity will halve the color values being added to or subtracted from. Example: if the mainscreen color has 128 for red and the subscreen color has 64 for red, then the final color will be (128/2) + (64/2) or 64 + 32 (or subtracts depending on the "Mode").This generally creates a darker effect of the subscreen.
-
 "Full intensity will add or subtract the full values of the colors. Example: if the mainscreen color has 128 for red and the subscreen color has 64 for red, then it adds 128 + 64 (or subtracts depending on the "Mode").This creates a much brighter effect than "Half" intensity.</description>
         </tooltip>
         <tooltip control="layerColorMathMode">
           <title>Mode</title>
           <description>"Plus" mode will add the colors of the subscreen together.
-
 "Minus" mode will subtract the subscreen colors from the mainscreen colors. This creates a much darker effect.
-
 In reference to the other "Layer Priority" properties, anything referring to an either/or case of subtracting or adding is referring to the "Mode" property.</description>
         </tooltip>
         <tooltip control="layerMainscreenL1">
@@ -1830,7 +1720,6 @@ In reference to the other "Layer Priority" properties, anything referring to an 
         <tooltip control="layerLockMask">
           <title>Lock Scrolling</title>
           <description>If checked, the screen will be unable to scroll past the edge of the layer mask.
-
 The layer mask sets the viewable boundaries of the level. Anything beyond these boundaries will not appear in-game. Click the orange box in the toolstrip to show the layer mask.</description>
         </tooltip>
         <tooltip control="layerMaskHighX">
@@ -1868,21 +1757,17 @@ The layer mask sets the viewable boundaries of the level. Anything beyond these 
         <tooltip control="layerScrollWrapping">
           <title>Layer Scrolling Wrap</title>
           <description>Scrolling layers will wrap around infinitely.
-
 For practical purposes, "horizontal" and "vertical" are generally checked together for a layer if either one is checked at all.
-
 NOTE: This is ignored if "Speed" in the "Layer Auto-scrolling" box for the layer is set to (none).</description>
         </tooltip>
         <tooltip control="layerL2VSync">
           <title>L2 Vertical Synchronization</title>
           <description>The amount of layer 2's desynchronization when Mario walks up/down. This refers to the speed in which the screen scrolls up/down in the opposite direction when Mario walks up/down.
-
 This rarely used. Example: in Bowser's Castle in the throne room, where the Chandeliers (layer 2) have a "Low" horizontal and vertical desync value. This means the chandeliers will move left more slowly when Mario walks to the right, and move right slowly when Mario walks left. The same applies vertically.</description>
         </tooltip>
         <tooltip control="layerL2HSync">
           <title>L2 Horizontal Synchronization</title>
           <description>The amount of layer 2's desynchronization when Mario walks left/right. This refers to the speed in which the screen scrolls left/right in the opposite direction when Mario walks left/right.
-
 This rarely used. Example: in Bowser's Castle in the throne room, where the Chandeliers (layer 2) have a "Low" horizontal and vertical desync value. This means the chandeliers will move left more slowly when Mario walks to the right, and move right slowly when Mario walks left. The same applies vertically.</description>
         </tooltip>
         <tooltip control="layerL3VSync">
@@ -1896,7 +1781,6 @@ This rarely used. Example: in Bowser's Castle in the throne room, where the Chan
         <tooltip control="layerInfiniteAutoscroll">
           <title>Infinite</title>
           <description>For layers that have autoscrolling enabled (ie. the "Speed" for the layer is not set to (none)) the layer will scroll indefinitely.
-
 This property is ignored for layers that don't have "SCROLL WRAPPING" enabled.</description>
         </tooltip>
         <tooltip control="layerL2ScrollShift">
@@ -1938,9 +1822,7 @@ This property is ignored for layers that don't have "SCROLL WRAPPING" enabled.</
       </Layer>
       <NPCs title="NPCs" type="section">
         <description>An "NPC" is a "non- playable character", or generally referred to as sprites although the use of the word "sprites" for this may be misleading since most NPCs do not correspond to the sprite index. Add, remove, duplicate, cut, copy, paste NPCs or NPC clones using the toolstrip above the NPC collection.
-
 You will notice in the NPC collection treeview some NPCs have child nodes, which here are referred to as "Clones" of an NPC. An NPC clone is an NPC that shares all of the same properties of its parent NPC (ie. the NPC it is an instance of) save for those fields not disabled when a clone is selected. Each clone has its own coords.
-
 Only up to 3 NPCs may contain clones. Clones *must* come first in the collection and *must* use gridplane format sprites for the partition to store them to the video memory's clone buffer properly.</description>
         <tooltip control="npcObjectTree">
           <title>NPC Collection</title>
@@ -1957,11 +1839,8 @@ Only up to 3 NPCs may contain clones. Clones *must* come first in the collection
         <tooltip control="npcEngageType">
           <title>Type</title>
           <description>Some properties of the NPC change based on it's type.
-
 "Object" is generally used for normal NPC's such as the characters in a town that trigger dialogue.
-
 "Treasure" is typically used for treasure chests.
-
 "Battle" is typically used for monsters that trigger a battle.</description>
         </tooltip>
         <tooltip control="npcEngageTrigger">
@@ -1987,15 +1866,12 @@ Only up to 3 NPCs may contain clones. Clones *must* come first in the collection
         <tooltip control="npcEventORPack">
           <title>Event / Pack #</title>
           <description>If "Type" is set to "Object" or "Treasure", this will execute an event script when the NPC has been triggered.
-
 If "Type" is set to "Battle", this assigns a pack to the NPC to be accessed when the NPC has been triggered.
-
 Edit the event or pack by clicking the button to the left.</description>
         </tooltip>
         <tooltip control="npcMovement">
           <title>Action #</title>
           <description>The action # that is initially assigned to the NPC when the level is first entered. The action is the general movement and behavior of the sprite, e.g. walking back / forth randomly.
-
 Click the button to the left to edit the action #.</description>
         </tooltip>
         <tooltip control="npcSpeedPlus">
@@ -2009,22 +1885,18 @@ Click the button to the left to edit the action #.</description>
         <tooltip control="npcPropertyA">
           <title>NPC #+ / $70A7 = / Action #+</title>
           <description>If "Type" is set to "Object", this value is added to the NPC #. The purpose of this is to allow clones to use a different NPC # than their parent, but only within an index range of 7. Example: if "NPC #+" is 3 and "NPC #" is 15, then the clone will be assigned NPC # 18. 
-
 If "Type" is set to "Treasure", this value is stored to memory address $70A7. $70A7 can be accessed in event scripts to determine what the item # or what type of item (ie. mushroom, super star, flower, etc.) will be given or shown for the treasure chest.
-
 If "Type" is set to "Battle", this value is added to the "Action #". The purpose of this is to allow clones to use a different action # than their parent, but only within an index range of 15. Example: if "Action #+" is 3 and the "Action #" is 15, then the clone will be assigned Action # 18.</description>
         </tooltip>
         <tooltip control="npcPropertyB">
           <title>Event / Pack #+</title>
           <description>If "Type" is set to "Object", this value is added to the Event #. The purpose of this is to allow clones to use a different Event # than their parent, but only within an index range of 7. Example: if "Event #+" is 3 and the "Event #" is 15, then the clone will be assigned Event # 18. 
-
 If "Type" is set to "Treasure", this value refers to "Treasure" or the type of treasure the NPC will give you if it is triggered. Here is the default list of treasure types: 
 0 = mushroom 
 1 = invincible star 
 2 = flower 
 3 = frog coin. 
 Other values might refer to an item # that the treasure rewards, but this is usually declared by an event script.
-
 If "Type" is set to "Battle", this value is added to the "Pack #". The purpose of this is to allow clones to use a different action # than their parent, but only within an index range of 15. Example: if "Pack #+" is 3 and the "Pack #" is 15, then the clone will be assigned Pack # 18.</description>
         </tooltip>
         <tooltip control="npcPropertyC">
@@ -2058,28 +1930,18 @@ If "Type" is set to "Battle", this value is added to the "Pack #". The purpose o
         <tooltip control="npcAttributes">
           <title>Other Properties</title>
           <description>"Face on trigger" will cause the NPC to face Mario when it has been triggered.
-
 "Sequence playback" must be enabled for any sprite sequences (ie. animations) of the NPC to play.
-
 "Can't float" will cause the NPC to fall to the ground if its Z coord is higher than the top of the floor.
-
 "Can't walk under" will not let Mario or any NPC's to walk under the NPC.
-
 "Can't pass walls" will not let the NPC pass through walls.
-
 "Can't jump through" will not let Mario or any NPC's beneath it to jump through the NPC.
-
 "Can't pass NPCs" will not let the NPC pass through NPCs
-
 "Can't walk through" will not let Mario or any NPC's to walk through the NPC.
-
 "Slidable along walls" prevents the NPC from "sticking" to a wall if moving alongside it.</description>
         </tooltip>
         <Partitions form="SpritePartitions" icon="icons/openPartitions.gif" title="Partitions Editor" type="subeditor">
           <description>Browse the partitions used by the levels. A partition is the organization of sprite graphics in the video memory, which is very limited in capacity for a game like SMRPG. Hence the need for partitions, which store and organize the sprites present in a level based on the partition's properties.
-
 Some sprites need more video memory, some need less. Clones, or several NPCs which use the same sprite, must be stored in the clone buffer.
-
 NOTE: if you have problems with NPC sprites displaying properly in a custom level try changing this value to something else. Use other existing levels for comparison and find which one works the best through trial and error. Notice that even though the sprites might appear fine, when they playback an animation sequence there might be problems.</description>
           <tooltip control="partitionNum">
             <title>Partition #</title>
@@ -2100,9 +1962,7 @@ NOTE: if you have problems with NPC sprites displaying properly in a custom leve
           <tooltip control="byte2a">
             <title>Buffer type</title>
             <description>What to store in the clone buffer. 3 or 4 sprites per row will store a cloneable NPC to it, (empty) treasure chest will store an (empty) treasure chest sprite. Coins will store the coin sprites. Empty buffer will not store anything to the buffer. This last option is most often used when the main buffer's data overflows into the clone buffer space.
-
 If your level is to have treasure chests or coins, buffer A or C must have these options set to display the sprites correctly in game.
-
 NOTE: the two treasure chest options are ALWAYS stored to clone buffer A, and the coins are ALWAYS stored to clone buffer C. This is regardless of whether they are selected for any other buffers.</description>
           </tooltip>
           <tooltip control="byte2b">
@@ -2204,7 +2064,6 @@ NOTE: the two treasure chest options are ALWAYS stored to clone buffer A, and th
       </NPCs>
       <Exits title="Exits" type="section">
         <description>An "Exit" is an isometric field that, when walked into, will open the level or world map location defined in the "Destination Properties" box.
-
 Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit field collection.</description>
         <tooltip control="exitsFieldTree">
           <title>Exit Field Collection</title>
@@ -2277,7 +2136,6 @@ Add, remove, copy, paste, and duplicate exits using the toolstrip above the exit
       </Exits>
       <Events title="Events" type="section">
         <description>An event field is an isometric field that, when walked into, will trigger an event #.
-
 Add, remove, copy, paste, and duplicate event fields using the toolstrip above the event field collection.</description>
         <tooltip control="eventsList">
           <title>Event Field Collection</title>
@@ -2326,7 +2184,6 @@ Add, remove, copy, paste, and duplicate event fields using the toolstrip above t
       </Events>
       <Overlaps title="Overlaps" type="section">
         <description>An "overlap" is an object that hides NPCs under all layers.
-
 Add, remove, copy, paste, and duplicate overlaps using the toolstrip above the overlap collection.</description>
         <tooltip control="overlapFieldTree">
           <title>Overlap Collection</title>
@@ -2359,7 +2216,6 @@ Add, remove, copy, paste, and duplicate overlaps using the toolstrip above the o
       </Overlaps>
       <TileMods title="Tile Mods" type="section">
         <description>Tile mods are modifications to a level tilemap's tiles, usually done through an event script. Common examples include manually opening and closing doors through event commands, which require a tile mod to change the tiles to an open/closed door.
-
 A tile mod can also have an "alternate" tile mod, which can be selected in preference to the parent tile mod through an event script command's properties.</description>
         <tooltip control="tileModsFieldTree">
           <title>Tile Mod Collection</title>
@@ -2411,19 +2267,13 @@ A tile mod can also have an "alternate" tile mod, which can be selected in prefe
       </SolidMods>
       <SolidTiles form="LevelsSolidTiles" icon="icons/buttonPhysicalTiles.gif" title="Solid Tiles" type="subwindow">
         <description>Here a solidity tile is selected to draw to the level map.
-
 Solidity tiles, like the solidity map they're drawn in, are isometric in make-up. All of these properties are in isometric units.
-
 Solidity tiles are color-coded. Places where there are no tiles at all can be walked on. Grey tiles are tiles that can also (generally) be walked on. Slanted grey tiles are stairs that can be walked on. Pink tiles are those tiles or portions of tiles that cannot be walked on at all. White tiles are "floating" tiles, or tiles that hover above a base tile of the same tile. Dark grey tiles are simply base tiles which have a "floating" tile above them. Light blue tiles are water tiles that can be waded through. Dark blue tiles are water tiles that can be swum through. Green tiles are vine tiles that can be climbed.
-
 A solidity tile is arranged in four quadrants (north, south, east, west) each quadrant having its own set of properties. It also has four edges (NW, SW, NE, SE) which also have a set of attributes.
-
 The following is a list of the most common solidity tiles:</description>
         <attribute>
           <description>Tile #0 is the empty tile--erasing a tile is the same as drawing tile #0 in its place. Therefore it is strongly recommended to leave this tile alone.
-
 Tile #255 is commonly used to set the physical boundaries of a level, just as the layer mask sets the visible boundaries.
-
 Tile #256 is exactly the same as tile #0, only that it has priority 3 for objects that walk on it.</description>
         </attribute>
         <tooltip control="physicalTileNum">
@@ -2525,7 +2375,6 @@ Tile #256 is exactly the same as tile #0, only that it has priority 3 for object
         <tooltip control="doorFormat">
           <title>Door format</title>
           <description>Walking on this tile will do an automatic tile mod door effect on the map layers its placed at. Notice that the door tiles in the layer tileset must be in layer 1 and must be in the same position in the tileset image they are found in all levels with doors. Otherwise the solid tile's automatic tile mod function will set the tiles to whatever is at the default index of the door tiles.
-
 Some of these properties are unknown, but seem to call automatic tile mods.</description>
         </tooltip>
         <tooltip control="unknownBits">
@@ -2535,9 +2384,7 @@ Some of these properties are unknown, but seem to call automatic tile mods.</des
       </SolidTiles>
       <SpaceAnalyzer form="SpaceAnalyzer" icon="icons/spaceAnalyzer.gif" title="Space Analyzer" type="section">
         <description>The Space Analyzer window is for monitoring the space available in the banks that store the compressed level map data for tile maps and solidity maps. The size of the uncompressed map data that the user interacts with in the editor is compressed to analyze the actual space which will be used in each bank.
-
 Each tab contains the entire list of tilemaps and solidity maps used by all levels, and the data for accessing each. Collections of rows are color-coded to separate the banks from one another. The most import column is probably the "Bytes left" column, which shows how many available bytes there are for that bank, starting at that map.
-
 If one or more rows (ie. maps) at the end of the bank are red, then there is not enough space to store all of the compressed maps and the editor will fail to save those map rows marked red.</description>
         <tooltip control="tilemapListView">
           <title>Tile Maps</title>
@@ -2632,9 +2479,7 @@ If one or more rows (ie. maps) at the end of the bank are red, then there is not
     </MainTitle>
     <Menus form="MenusEditor" icon="icons/mainMenus.gif" title="Menus" type="editor">
       <description>Menus that can be edited here include the game select menu, all menus in the overworld menu accessible with the X button, and all shop menus. All exclusively menu-oriented text can be changed, as well as the music and Mario sprites used by the new game select menu.
-
 Overworld and shop menus use a different background palette, but the same graphics and frame. Overworld and shop menus use a frame in the foreground, while the new game menu has a more elaborate foreground. So selecting a menu might change the data in the graphic &amp; palette editors.
-
 Right-click the images below for more options, or simply use the buttons in the toolstrip to import/export data.</description>
       <tooltip control="menuTextName" control2="menuTextNum">
         <title>Menu Text Index</title>
@@ -2672,7 +2517,6 @@ Right-click the images below for more options, or simply use the buttons in the 
       <description>SMRPG's mini-games with a unique interface include the mine-cart levels and the beetle mania game.</description>
       <MineCart form="MineCart" icon="icons/mainMiniGames.gif" title="Mine Cart Track-builder" type="subwindow">
         <description>Here the four mine-cart levels in Moleville Mountain can be fully modified from their maps to the mushroom and coin objects that appear in them.
-
 Two types of mine cart levels: mode 7 and side-scrolling. Mode 7 are the 1st and 3rd levels, while the side-scrolling levels are the 2nd and 4th. Mode 7 levels are one layer only and can be edited like a level's tilemap. The mushroom count of both is fixed at 8 mushrooms, removal/insertion is not supported. Side-scrolling levels can have a custom number of mushrooms and coins.</description>
         <tooltip control="levelName">
           <title>Mine Cart Index</title>
@@ -2854,11 +2698,8 @@ Two types of mine cart levels: mode 7 and side-scrolling. Mode 7 are the 1st and
       <tooltip control="MonsterProperties">
         <title>Special Status</title>
         <description>"Invincible" will nullify all damage done to the monster, ie. all attacks, spells and items used on the monster will yield 0 damage.
-
 "Mortality Protection" will nullify all instant-death attacks such as Yoshi Cookie, Lamb's Lure, Geno Whirl, etc.
-
 "Disable Auto-Death" is for battle-script purposes. If checked, the monster will not be removed or set as defeated until manually removed through a battle-script command.
-
 "Share palette" is only used by the four crystals and its actual purpose is unknown.</description>
       </tooltip>
       <tooltip control="MonsterFlowerBonus">
@@ -2886,15 +2727,10 @@ Two types of mine cart levels: mode 7 and side-scrolling. Mode 7 are the 1st and
         <tooltip control="listBoxCommands">
           <title>Command List</title>
           <description>Select from a list of commands to add to the monster's battle script.
-
 "Do" commands can either cast a spell or execute an attack on the current target. Either 1 specific spell/attack or 1 selected randomly from 3 are the options. Remember that if no target is set with the "Target set" command, the monster will by default choose a random ally to attack.
-
 "If" commands set a condition for all the following commands up to the closing "Wait 1 turn, return all" command. If the condition is met, the commands will execute; if not, the monster's turn is over and the script will start over from the beginning on the next turn.
-
 "Memory" commands change the values and bits of the battle memory addresses 7EE000 to 7EE00F. These addresses are read by "If" commands for checking conditions.
-
 "Run" commands will run a dialogue, event, or object sequence. An object sequence is selected from a list of animation scripts (roughly corresponding to the "Monster behaviors" in the animations editor) to playback for the monster.
-
 "Target" commands set a number of attributes for a given target. Disabling/enabling a target will prevent/allow the player to target and thus attack the target.</description>
         </tooltip>
         <tooltip control="buttonInsert">
@@ -2940,9 +2776,7 @@ Two types of mine cart levels: mode 7 and side-scrolling. Mode 7 are the 1st and
     </Monsters>
     <Sprites form="Sprites" icon="icons/mainSprites.gif" title="Sprites" type="editor">
       <description>Sprites are images representing all of the characters, monsters, items, objects, and some spell and attack effects.
-
 Sprite indexes can be viewed as 3 groups: 0 to 255 are primarily the allies, ally weapons, townspeople, and other common objects. 256 to 511 are monsters, this order corresponding exactly to 0-255 in the monsters editor. 512 to 767 are battle related sprites, like items or explosions. 768 to 927 are spell and attack effects, and the rest are the end credit sprites.
-
 This editor has 2 subwindows: molds and sequences. Each sprite has its own mold and sequence collections, both of these subwindows interacting with one another.</description>
       <tooltip control="name">
         <title>Sprite Index</title>
@@ -2955,7 +2789,6 @@ This editor has 2 subwindows: molds and sequences. Each sprite has its own mold 
       <tooltip control="imageNum">
         <title>Image</title>
         <description>The image # of the currently selected sprite refers to the set of properties that designate the raw graphics and palette set to use.
-
 Anything in the "IMAGE PALETTE..." and "IMAGE GRAPHICS..." panels are part of the sprite's image.</description>
       </tooltip>
       <tooltip control="paletteIndex">
@@ -2973,7 +2806,6 @@ Anything in the "IMAGE PALETTE..." and "IMAGE GRAPHICS..." panels are part of th
       <tooltip control="animationPacket">
         <title>Animation</title>
         <description>The animation # of the currently selected sprite refers to the set of properties that designate the sequences and molds to assign to the sprite.
-
 Anything in the "ANIMATION SEQUENCES..." and "ANIMATION MOLDS..." are part of the sprite's animation.</description>
       </tooltip>
       <tooltip control="animationVRAM">
@@ -2982,9 +2814,7 @@ Anything in the "ANIMATION SEQUENCES..." and "ANIMATION MOLDS..." are part of th
       </tooltip>
       <SpriteMolds form="SpriteMolds" icon="icons/mainSprites.gif" title="Molds" type="subwindow">
         <description>A sprite mold is basically a single sprite image. Multiple molds can be accessed by the sequence data to create an animation sequence. Sprite molds, unlike effect molds, are drawn in two formats: gridplane and tilemap.
-
 Gridplane arranges the 8x8 tiles used by the mold in a fixed table. Gridplane format molds are generally much smaller, with a limited dimension of 32x32, and a fixed position centered in the mold image box.
-
 Tilemap format is composed of 16x16 tiles, each assigned a fixed coordinate and a set of 4 subtiles. This is relatively more common than the gridplane format, and far more versatile. The mold can be drawn using a collection of 16x16 tiles from the tileset provided on the right. Even external images can be imported as a tile or whole tileset.</description>
         <tooltip control="listBoxMolds">
           <title>Mold Collection</title>
@@ -3004,7 +2834,6 @@ Tilemap format is composed of 16x16 tiles, each assigned a fixed coordinate and 
         <tooltip control="sequences">
           <title>Sequence Collection</title>
           <description>The collection of sequences used by the sprite's animation.
-
 A sequence is a collection of frames, where each frame is assigned a mold from the mold collection above and a duration, creating an animation that can be played back in the image to the right.</description>
         </tooltip>
         <tooltip control="listBoxFrames">
@@ -3069,12 +2898,10 @@ A sequence is a collection of frames, where each frame is assigned a mold from t
     </Sprites>
     <WorldMaps form="WorldMaps" icon="icons/mainWorldMaps.gif" title="World Maps" type="editor">
       <description>The 7 different areas of the world map in SMRPG can be edited. Each world map image is a tileset, like battlefields, and are modified in the same manner. Unique features of the world maps include a location set, a banner, and a mode 7 transformation as seen in-game.
-
 A separate layer for the banner displaying the location's name. This and the locations can be shown or hidden with a button.</description>
       <tooltip control="worldMapName">
         <title>World Map Index</title>
         <description>Select the world map to load. There are 8 maps total.
-
 The map may appear disoriented in correlation with the locations, because the game engine stretches the map.</description>
       </tooltip>
       <tooltip control="showLocations">
@@ -3084,13 +2911,11 @@ The map may appear disoriented in correlation with the locations, because the ga
       <tooltip control="pointCount">
         <title>Locations</title>
         <description>The total # of locations that the current map uses. The collection of locations used by the map is based on the locations used by the earlier maps.
-
 Map #0, for example, by default uses 7 locations total, and since it is the first map that means it will use locations #0 - 6 (as seen in the "LOCATIONS" editor panel). Map #1 uses 6 locations, and because the last location in Map #0 is location #6, then Map #1's locations will be locations #7 - 12 (ie. 6 total, starting at #7).</description>
       </tooltip>
       <tooltip control="worldMapTileset">
         <title>Tileset</title>
         <description>The tileset, or the actual image used by the map.
-
 To edit a tile in the tileset, click on the tile in the image above to edit it in the "WORLD MAP TILE EDITOR" panel to the right.</description>
       </tooltip>
       <tooltip control="worldMapXCoord">
@@ -3122,17 +2947,13 @@ To edit a tile in the tileset, click on the tile in the image above to edit it i
         <tooltip control="showCheckAddress">
           <title>Memory Address</title>
           <description>If the bit (under "BIT SET") of this memory address is set, then the location is enabled / visible in-game.
-
 Example: by default location #9 (Mushroom Way) is not enabled or visible until bit 2 of memory address $7065 is set. This bit is set at the end of event script #1396.
-
 These bits are always set in an event script.</description>
         </tooltip>
         <tooltip control="showCheckBit">
           <title>Bit</title>
           <description>If this bit of a memory address (under "IF MEMORY") is set, then the location is enabled / visible in-game.
-
 Example: by default location #9 (Mushroom Way) is not enabled or visible until bit 2 of memory address $7065 is set. This bit is set at the end of event script #1396.
-
 These bits are always set in an event script.</description>
         </tooltip>
         <tooltip control="leadToLocation">
@@ -3235,11 +3056,8 @@ These bits are always set in an event script.</description>
     <header>Sub-editors</header>
     <Previewer form="Previewer" icon="icons/preview.gif" title="Previewer" type="editor">
       <description>Launch an emulator from the previewer window and load a save state for easy ROM testing. 
-
 Choose either the SNES9X or ZSNES emulator file to use when opening the previewer. ZSNES will automatically load the generated save state when the emulator is loaded from the previewer, but for SNES9X the F1 key must be pressed manually to load the generated save state. If the emulator has problems loading the save state, make sure the 2 steps above have been completed. 
-
 The latest version of ZSNES (v1.51 as of this release) is supported. Snes9x v1.43 and/or its derivatives (rerecord, Geiger's debugger, etc.) are preferred and should work.
-
 Before using the previewer, do the following: </description>
       <attribute>
         <description>1. Make sure all editor files are in the same folder.</description>
@@ -3270,15 +3088,10 @@ Before using the previewer, do the following: </description>
       <tooltip control="eventListBox">
         <title>Source of Entrance</title>
         <description>Choose from a list of sources to set the previewer's save state to.
-
 For levels this list is generated from the entrances of other levels leading to the desired level to preview.
-
 Event scripts will produce a list of levels and coordinates where there are event fields assigned that script. 
-
 Animation scripts will open a battle and depending on the category will either load a formation with a monster who executes the attack / spell animation or set the item inventory to contain the item to preview, etc.
-
 SPCs will have no list and simply load a black screen then playback the song or sound effect.
-
 Mine cart levels will simply load the level at the same coordinates. The level may take a bit longer to load than other previewable elements.</description>
       </tooltip>
       <tooltip control="selectIndex">
@@ -3341,9 +3154,7 @@ Mine cart levels will simply load the level at the same coordinates. The level m
     </Previewer>
     <Palettes form="PaletteEditor" icon="icons/openPalettes.gif" title="Palettes" type="editor">
       <description>Here a palette or palette set can be modified and a number of effects can be applied to it. The RGB can be typically modified in the "Color levels" box, while many common color transformations are available in the "Adjust RGB" and "Effects" tabs.
-
 The "Switch" and "Equalize" boxes make it easy to create a custom palette swap of a sprite, level, etc. Under the "Effects" tab other common color transformations are found, as well as a "Threshold" and "Colorize" feature.
-
 The swatch box on the bottom-right is available for setting the selected color in the palette to any generic color in the swatch.</description>
       <tooltip control="pictureBoxPalette">
         <title>Palette</title>
@@ -3467,7 +3278,6 @@ The swatch box on the bottom-right is available for setting the selected color i
         <tooltip control="thresholdApply">
           <title>Threshold</title>
           <description>Apply a threshold effect on the palette set.
-
 A threshold effect will reduce the palette to two colors: black and white. The level of the threshold is the ratio of white to black: the higher the threshold, the darker colors will be converted to 0, or solid black. Lower thresholds will convert more colors to white.</description>
         </tooltip>
         <tooltip control="threshold" control2="trackBarThreshold">
@@ -3491,12 +3301,10 @@ A threshold effect will reduce the palette to two colors: black and white. The l
     </Palettes>
     <Graphics form="GraphicEditor" icon="icons/openGraphics.gif" title="Graphics" type="editor">
       <description>Paint edit a set of 4bpp or 2bpp graphics used by an element in the ROM. The user can edit the graphics directly or save the graphics as an image to edit in an external paint program (this is preferred for more in-depth editing). The graphics image can be re-imported after the external editing has been done.
-
 Here a color in the palette set can be selected to draw to the graphics image. Both a front and back color can be selected to be drawn using the left or right click buttons.</description>
       <tooltip control="pictureBoxPalette">
         <title>Palette Set</title>
         <description>Choose a color to draw with in the graphics below. Right-click a color to draw with using the right mouse button.
-
 The graphics image below can only use a single palette row (16 colors) therefore clicking a color will show the graphics image using that color's palette row. Changing the palette row this way will NOT modify the ROM data, only how the graphics image is shown. Different objects in the image will use different palettes, so select the proper row to view a set of objects with their appropriate palette.</description>
       </tooltip>
       <tooltip control="pictureBoxColor">
@@ -3514,7 +3322,6 @@ The graphics image below can only use a single palette row (16 colors) therefore
       <tooltip control="pictureBoxGraphicSet">
         <title>Graphics</title>
         <description>Draw, erase, fill, pixels, select/replace a color, or zoom in/out using the toolstrip above. Only single pixels can be erased or drawn. Import an image with the right-click context menu.
-
 NOTE: when importing an image, the top-right corner of the new image will be pasted to the place where you right-clicked.</description>
       </tooltip>
       <tooltip control="buttonUpdate">
@@ -3569,18 +3376,13 @@ NOTE: when importing an image, the top-right corner of the new image will be pas
     </TileEditor>
     <TilesetEditor form="TilesetEditor" icon="icons/openTilesets.gif" title="Tilesets" type="editor">
       <description>For levels, these are the level's tilesets for each of the 3 layers. If layer 3 is not enabled for the level the layer 3 tab is inaccessible.
-
 Tilesets for the main title can be modified exactly in the same nature as level tilesets, with a couple of differences. The first being the format of layer 3, and the second being the ability to import an external image file as a single layer in just a few steps. This feature is accessible by right-clicking the tileset image.
-
 Mine cart levels, both mode 7 and side-scrolling, have only one tileset to draw from.</description>
       <tooltip control="tabControl1">
         <title>Layers</title>
         <description>Select the layer and tileset to edit or draw from. To erase, draw to, etc. a specific layer in a level's (tile)map/image select the layer among the tabs available. Note that selecting a tab in the level editor will set the layer being edited for both the tilemap and the tileset.
-
 You can only draw layer 1, 2, and 3 tiles to their respective layers. Cross-layer drawing is not possible. However, layer tilesets will most often have identical tiles to draw the same tiles to different layers.
-
 You will notice that there are often repeats of tile groupings in a tileset, ie. two identical crates, grass patches, etc. This is because one grouping has priority 1 set, the other does not. Mario and NPCs may overlap one crate, but not the other crate.
-
 To help with this, you can view what tiles have priority 1 set with the P1 button in the toolstrip. The blue tint covers all priority 1 subtiles.</description>
       </tooltip>
       <tooltip control="pictureBoxTilesetL1">
@@ -3598,7 +3400,6 @@ To help with this, you can view what tiles have priority 1 set with the P1 butto
       <tooltip control="lockEditing">
         <title>Lock tileset editing</title>
         <description>This should be checked when selecting tiles to draw to the map/image, to prevent accidental clicking/dragging a selection of tiles and unintentionally corrupting the tileset.
-
 Uncheck this only to manually edit one or more tiles in the tileset.</description>
       </tooltip>
       <tooltip control="buttonUpdate">
@@ -3644,9 +3445,7 @@ Uncheck this only to manually edit one or more tiles in the tileset.</descriptio
       <tooltip control="currentROMData" control2="originalROMData">
         <title>ROM Data</title>
         <description>The raw ROM data as seen in a hex editor.
-
 Change data here just as you would in a typical hex editor. Make selections by clicking and dragging the cursor over a series of bytes. Note that only selections smaller than the height of the window can be made--such are the limitations of an amateur hex editor.
-
 Copying, pasting, and deleting values is supported with the typical keyboard shortcuts or the respective buttons for such functions in the toolstrip at the top. You may undo or redo any changes made to the data as well.</description>
       </tooltip>
       <tooltip control="ROMOffsets">

@@ -11,25 +11,21 @@ namespace LAZYSHELL
 {
     public partial class ProgressBar : Form
     {
-        private byte[] data { get { return Model.ROM; } set { Model.ROM = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private BackgroundWorker backgroundWorker;
         // constructor
-        public ProgressBar(byte[] data, string title, int max)
+        public ProgressBar(byte[] rom, string title, int max)
         {
             InitializeComponent();
-
             loadingWhat.Width += buttonCancel.Width + 2;
             buttonCancel.Visible = false;
-
-            this.data = data;
             this.Text = title;
             this.progressBar1.Maximum = max;
         }
-        public ProgressBar(byte[] data, string title, int max, BackgroundWorker backgroundWorker)
+        public ProgressBar(byte[] rom, string title, int max, BackgroundWorker backgroundWorker)
         {
             InitializeComponent();
-
-            this.data = data;
+            this.rom = rom;
             this.Text = title;
             this.backgroundWorker = backgroundWorker;
             this.progressBar1.Maximum = max;
@@ -37,7 +33,6 @@ namespace LAZYSHELL
         public ProgressBar(string title, int max, BackgroundWorker backgroundWorker)
         {
             InitializeComponent();
-
             this.Text = title;
             this.backgroundWorker = backgroundWorker;
             this.progressBar1.Maximum = max;
@@ -45,10 +40,8 @@ namespace LAZYSHELL
         public ProgressBar(string title, int max)
         {
             InitializeComponent();
-
             loadingWhat.Width += buttonCancel.Width + 2;
             buttonCancel.Visible = false;
-
             this.Text = title;
             this.progressBar1.Maximum = max;
         }

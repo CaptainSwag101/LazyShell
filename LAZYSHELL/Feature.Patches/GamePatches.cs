@@ -55,23 +55,18 @@ namespace LAZYSHELL.Patches
         private void AddNewDownload(byte[] data)
         {
             Patch patch = new Patch(patches.Count + 1, data);
-
             patches.Add(patch);
             PatchListBox.Items.Add((patch.PatchName));
-
             if (PatchListBox.SelectedIndex == -1)
                 PatchListBox.SelectedIndex = 0;
-
             if (patches.Count == 1)
                 DisplayPatchInfo();
-
         }
         private void DisplayPatchInfo()
         {
             try
             {
                 Patch patch = (Patch)patches[PatchListBox.SelectedIndex];
-
                 DescriptionTextBox.Text = "Name: " + patch.PatchName + "\r\n";
                 DescriptionTextBox.Text += "Author: " + patch.Author + "\r\n";
                 DescriptionTextBox.Text += "Date: " + patch.CreationDate + "\r\n";
@@ -149,13 +144,10 @@ namespace LAZYSHELL.Patches
                 clock.CancelAsync();
                 this.downloadingLabel.Visible = false;
                 this.applyButton.Text = "APPLY PATCH";
-
                 if (!downloadingIPS)
                     return;
                 downloadingIPS = false;
-
                 IPSPatch ips = new IPSPatch(e.Result);
-
                 if (ips.Verified)
                 {
                     DialogResult result = MessageBox.Show(
@@ -233,7 +225,6 @@ namespace LAZYSHELL.Patches
         }
         private void clock_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
         }
         private void GamePatches_FormClosing(object sender, FormClosingEventArgs e)
         {

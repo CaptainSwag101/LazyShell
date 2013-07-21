@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class IOArchitecture
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -66,7 +64,7 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(10, 24);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(78, 17);
+            this.checkBox1.Size = new System.Drawing.Size(76, 17);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Palette set";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -78,7 +76,7 @@
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Location = new System.Drawing.Point(94, 24);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(67, 17);
+            this.checkBox2.Size = new System.Drawing.Size(68, 17);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Graphics";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -102,7 +100,7 @@
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Location = new System.Drawing.Point(235, 24);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(67, 17);
+            this.checkBox4.Size = new System.Drawing.Size(68, 17);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "Tilemaps";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -114,7 +112,7 @@
             this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Location = new System.Drawing.Point(308, 24);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(78, 17);
+            this.checkBox5.Size = new System.Drawing.Size(74, 17);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "Priority set";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -134,6 +132,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(381, 97);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -155,8 +154,10 @@
             // 
             // IOArchitecture
             // 
+            this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(467, 132);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
@@ -175,9 +176,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.Button browseCurrent;
         private System.Windows.Forms.TextBox textBoxCurrent;
         private System.Windows.Forms.CheckBox checkBox1;

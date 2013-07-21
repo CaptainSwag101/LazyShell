@@ -17,15 +17,12 @@ namespace LAZYSHELL
         public MenuTileset(PaletteSet paletteSet, byte[] tileSet, byte[] graphicSet)
         {
             this.paletteSet = paletteSet; // grab the current Palette Set
-
             // Create our layers for the tilesets (256x512)
             tileset = new Tile[16 * 16];
-
             for (int i = 0; i < tileset.Length; i++)
                 tileset[i] = new Tile(i);
             this.tileSet = tileSet;
             this.graphicSet = graphicSet;
-
             DrawTileset(tileSet, tileset);
         }
         // drawing functions
@@ -34,7 +31,6 @@ namespace LAZYSHELL
             byte temp, tile;
             Subtile source;
             int offset = 0;
-
             for (int i = 0; i < tileSet.Length; i++)
             {
                 for (int z = 0; z < 2; z++)
@@ -64,7 +60,7 @@ namespace LAZYSHELL
         // accessor functions
         public int GetTileNumber(int x, int y)
         {
-            return tileset[x + y * 16].TileIndex;
+            return tileset[x + y * 16].Index;
         }
         // universal functions
         public void Clear(int count)

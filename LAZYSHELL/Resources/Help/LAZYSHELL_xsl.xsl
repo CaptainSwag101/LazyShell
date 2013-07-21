@@ -72,7 +72,6 @@
       </body>
     </html>
   </xsl:template>
-
   <xsl:template name="lefttabs">
     <div class="lefttab">
       <p class="lefttab">
@@ -85,7 +84,6 @@
       </p>
     </div>
   </xsl:template>
-
   <xsl:template name="main">
     <div class="editor" id="{@form}">
       <h1 class="faq">
@@ -163,7 +161,6 @@
       </div>
     </div>
   </xsl:template>
-
   <xsl:template name="editor">
     <div class="editor" id="{@form}">
       <h1 class="editor">
@@ -198,7 +195,6 @@
       </div>
     </div>
   </xsl:template>
-
   <xsl:template name="attribute">
     <p class="attribute">
       <xsl:call-template name="formattext">
@@ -206,7 +202,6 @@
       </xsl:call-template>
     </p>
   </xsl:template>
-
   <xsl:template name="subwindow">
     <h1 class="subwindow">
       <xsl:if test="@icon != ''">
@@ -239,7 +234,6 @@
       </xsl:for-each>
     </div>
   </xsl:template>
-
   <xsl:template name="subeditor">
     <h1 class="subeditor">
       <xsl:if test="@icon != ''">
@@ -272,7 +266,6 @@
       </xsl:for-each>
     </div>
   </xsl:template>
-
   <xsl:template name="section">
     <div class="section">
       <h1 class="section">
@@ -301,7 +294,6 @@
       </p>
     </div>
   </xsl:template>
-
   <xsl:template name="tooltips">
     <xsl:if test="count(tooltip) > 0">
       <div class="tooltips">
@@ -327,7 +319,6 @@
       </div>
     </xsl:if>
   </xsl:template>
-
   <!--FAQ-->
   <xsl:template name="faq">
     <div class="faq" id="{concat('faq_', @form)}">
@@ -354,7 +345,6 @@
       </div>
     </div>
   </xsl:template>
-
   <!--definition-->
   <xsl:template name="definition">
     <a name="{@term}"></a>
@@ -369,7 +359,6 @@
       </p>
     </div>
   </xsl:template>
-
   <!--FORMAT TEXT-->
   <xsl:template name="formattext">
     <xsl:param name="text"/>
@@ -378,7 +367,6 @@
       <xsl:with-param name="entries" select="//LAZYSHELL/Glossary/entry"/>
     </xsl:call-template>
   </xsl:template>
-
   <!--HYPERLINK GLOSSARY REFERENCES-->
   <xsl:template name="glossarize">
     <xsl:param name="text" />
@@ -424,7 +412,6 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
   <!--BREAK LINES-->
   <xsl:template name="breaklines">
     <xsl:param name="text"/>
@@ -443,7 +430,6 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
   <xsl:template name="replace">
     <xsl:param name="text" />
     <xsl:param name="replace" />
@@ -463,5 +449,4 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
 </xsl:stylesheet>

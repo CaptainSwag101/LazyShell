@@ -78,7 +78,6 @@ namespace LAZYSHELL.Patches
                 record.size = Bits.GetShortReversed(patch, index); index += 2;
                 record.recordData = new Byte[record.size];
                 byte value = patch[index]; index++;
-
                 for (int i = 0; i < record.recordData.Length; i++)
                     record.recordData[i] = value;
                 this.records.Add(record); // Save the record

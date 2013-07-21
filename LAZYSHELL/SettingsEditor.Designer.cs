@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class SettingsEditor
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -250,11 +248,8 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.TextBox customDirectoryTextBox;
         private System.Windows.Forms.Button buttonDefault;
@@ -270,6 +265,5 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.GroupBox groupBox5;
-
     }
 }

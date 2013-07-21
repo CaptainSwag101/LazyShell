@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class BattleScripts
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -90,8 +88,6 @@
             this.BatScrExpandAll = new System.Windows.Forms.ToolStripButton();
             this.BatScrCollapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.battlePreview = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.labelBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.label1 = new System.Windows.Forms.ToolStripLabel();
@@ -99,10 +95,13 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.undo = new System.Windows.Forms.ToolStripButton();
+            this.redo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandTree = new LAZYSHELL.NewTreeView();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panelRight.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMonster)).BeginInit();
@@ -819,7 +818,7 @@
             this.BatScrMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrMoveUp.Name = "BatScrMoveUp";
             this.BatScrMoveUp.Size = new System.Drawing.Size(22, 22);
-            this.BatScrMoveUp.Text = "Move Command Up";
+            this.BatScrMoveUp.Text = "Move Command Up (Shift+Up)";
             this.BatScrMoveUp.Click += new System.EventHandler(this.BatScrMoveUp_Click);
             // 
             // BatScrMoveDown
@@ -831,7 +830,7 @@
             this.BatScrMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrMoveDown.Name = "BatScrMoveDown";
             this.BatScrMoveDown.Size = new System.Drawing.Size(22, 22);
-            this.BatScrMoveDown.Text = "Move Command Down";
+            this.BatScrMoveDown.Text = "Move Command Down (Shift+Down)";
             this.BatScrMoveDown.Click += new System.EventHandler(this.BatScrMoveDown_Click);
             // 
             // toolStripSeparator5
@@ -848,7 +847,7 @@
             this.BatScrCopyCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrCopyCommand.Name = "BatScrCopyCommand";
             this.BatScrCopyCommand.Size = new System.Drawing.Size(22, 22);
-            this.BatScrCopyCommand.Text = "Copy Command";
+            this.BatScrCopyCommand.Text = "Copy Command (Ctrl+C)";
             this.BatScrCopyCommand.Click += new System.EventHandler(this.BatScrCopyCommand_Click);
             // 
             // BatScrPasteCommand
@@ -860,7 +859,7 @@
             this.BatScrPasteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrPasteCommand.Name = "BatScrPasteCommand";
             this.BatScrPasteCommand.Size = new System.Drawing.Size(22, 22);
-            this.BatScrPasteCommand.Text = "Paste Command";
+            this.BatScrPasteCommand.Text = "Paste Command (Ctrl+V)";
             this.BatScrPasteCommand.Click += new System.EventHandler(this.BatScrPasteCommand_Click);
             // 
             // BatScrDeleteCommand
@@ -872,7 +871,7 @@
             this.BatScrDeleteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BatScrDeleteCommand.Name = "BatScrDeleteCommand";
             this.BatScrDeleteCommand.Size = new System.Drawing.Size(22, 22);
-            this.BatScrDeleteCommand.Text = "Delete Command";
+            this.BatScrDeleteCommand.Text = "Delete Command (Del)";
             this.BatScrDeleteCommand.Click += new System.EventHandler(this.BatScrDeleteCommand_Click);
             // 
             // BatScrEditCommand
@@ -915,23 +914,6 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // battlePreview
-            // 
-            this.battlePreview.AutoSize = false;
-            this.battlePreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.battlePreview.Image = global::LAZYSHELL.Properties.Resources.preview;
-            this.battlePreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.battlePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.battlePreview.Name = "battlePreview";
-            this.battlePreview.Size = new System.Drawing.Size(22, 22);
-            this.battlePreview.Text = "Open Previewer";
-            this.battlePreview.Click += new System.EventHandler(this.battlePreview_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // labelBytesLeft
             // 
@@ -981,12 +963,13 @@
             this.BatScrPasteCommand,
             this.BatScrDeleteCommand,
             this.toolStripSeparator4,
+            this.undo,
+            this.redo,
+            this.toolStripSeparator8,
             this.BatScrEditCommand,
             this.BatScrExpandAll,
             this.BatScrCollapseAll,
             this.toolStripSeparator6,
-            this.battlePreview,
-            this.toolStripSeparator1,
             this.labelBytesLeft,
             this.toolStripSeparator7,
             this.label1,
@@ -996,6 +979,38 @@
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(466, 25);
             this.toolStrip2.TabIndex = 2;
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // undo
+            // 
+            this.undo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo_small;
+            this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(23, 22);
+            this.undo.Text = "Undo (Ctrl+Z)";
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
+            // redo
+            // 
+            this.redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo_small;
+            this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redo.Name = "redo";
+            this.redo.Size = new System.Drawing.Size(23, 22);
+            this.redo.Text = "Redo (Ctrl+Y)";
+            this.redo.Click += new System.EventHandler(this.redo_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
             // contextMenuStripGoto
             // 
@@ -1029,11 +1044,6 @@
             this.commandTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.BattleScriptTree_NodeMouseClick);
             this.commandTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BattleScriptTree_KeyDown);
             this.commandTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BattleScriptTree_MouseDoubleClick);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // BattleScripts
             // 
@@ -1093,11 +1103,8 @@
             this.contextMenuStripGoto.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private NewPanel panelRight;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonInsert;
@@ -1138,7 +1145,6 @@
         private System.Windows.Forms.ToolStripButton BatScrEditCommand;
         private System.Windows.Forms.ToolStripButton BatScrExpandAll;
         private System.Windows.Forms.ToolStripButton BatScrCollapseAll;
-        private System.Windows.Forms.ToolStripButton battlePreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel labelBytesLeft;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -1146,7 +1152,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripTextBox hexText;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.NumericUpDown monsterTargetArrowY;
@@ -1172,5 +1177,8 @@
         private System.Windows.Forms.Panel panelTargetB;
         private System.Windows.Forms.Panel panelTargetA;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton undo;
+        private System.Windows.Forms.ToolStripButton redo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }

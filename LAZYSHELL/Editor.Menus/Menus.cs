@@ -1114,7 +1114,8 @@ namespace LAZYSHELL
         }
         private void menuName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshMenu();
         }
         private void openPalettesBG_Click(object sender, EventArgs e)

@@ -149,6 +149,10 @@ namespace LAZYSHELL
         {
             tileset.Assemble(16);
             tileset = new Tileset(paletteSet, "title");
+            if (layer != 2)
+                tileset.Graphics = graphicEditor.Graphics;
+            else
+                tileset.GraphicsL3 = graphicEditor.Graphics;
             SetTilesetImages();
             LoadTilesetEditor();
         }
@@ -199,7 +203,6 @@ namespace LAZYSHELL
                 e.Graphics.FillRectangle(new SolidBrush(bgcolor), new Rectangle(new Point(0, 0), pictureBoxTitle.Size));
                 e.Graphics.DrawImage(tilesetImage[1], 0, 0);
                 e.Graphics.DrawImage(tilesetImage[0], 0, 0);
-
                 Rectangle upperPart = new Rectangle(0, 0, 256, 72);
                 Rectangle lowerPart = new Rectangle(0, 72, 256, 24);
                 e.Graphics.DrawImage(tilesetImage[2].Clone(upperPart, PixelFormat.DontCare), 0, 208);

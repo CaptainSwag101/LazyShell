@@ -25,7 +25,6 @@ namespace LAZYSHELL
         private void Disassemble()
         {
             int offset = (index * 4) + 0x251000;
-
             paletteIndex = (byte)(rom[offset] & 7); offset++;
             animationPacket = rom[offset++];
             x = (byte)(rom[offset] - 1 ^ 255); offset++;
@@ -34,7 +33,6 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int offset = (index * 4) + 0x251000;
-
             rom[offset] = paletteIndex; offset++;
             rom[offset] = animationPacket; offset++;
             rom[offset] = (byte)(x - 1 ^ 255); offset++;

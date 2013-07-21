@@ -34,23 +34,17 @@ namespace LAZYSHELL
         private void Disassemble()
         {
             int layerPriorityOffset = (index * 3) + 0x1D0000;
-
             int temp = rom[layerPriorityOffset]; layerPriorityOffset++;
-
             mainscreenL1 = (temp & 0x01) == 0x01;
             mainscreenL2 = (temp & 0x02) == 0x02;
             mainscreenL3 = (temp & 0x04) == 0x04;
             mainscreenOBJ = (temp & 0x10) == 0x10;
-
             temp = rom[layerPriorityOffset]; layerPriorityOffset++;
-
             subscreenL1 = (temp & 0x01) == 0x01;
             subscreenL2 = (temp & 0x02) == 0x02;
             subscreenL3 = (temp & 0x04) == 0x04;
             subscreenOBJ = (temp & 0x10) == 0x10;
-
             temp = rom[layerPriorityOffset]; layerPriorityOffset++;
-
             colorMathL1 = (temp & 0x01) == 0x01;
             colorMathL2 = (temp & 0x02) == 0x02;
             colorMathL3 = (temp & 0x04) == 0x04;
@@ -62,21 +56,16 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int offset = (index * 3) + 0x1D0000;
-
             Bits.SetBit(rom, offset, 0, mainscreenL1);
             Bits.SetBit(rom, offset, 1, mainscreenL2);
             Bits.SetBit(rom, offset, 2, mainscreenL3);
             Bits.SetBit(rom, offset, 4, mainscreenOBJ);
-
             offset++;
-
             Bits.SetBit(rom, offset, 0, subscreenL1);
             Bits.SetBit(rom, offset, 1, subscreenL2);
             Bits.SetBit(rom, offset, 2, subscreenL3);
             Bits.SetBit(rom, offset, 4, subscreenOBJ);
-
             offset++;
-
             Bits.SetBit(rom, offset, 0, colorMathL1);
             Bits.SetBit(rom, offset, 1, colorMathL2);
             Bits.SetBit(rom, offset, 2, colorMathL3);

@@ -1,5 +1,27 @@
 Major changes/additions are indicated by ***
 
+v3.18.0 (2013-07-21)
+--------------------------------------
+Additions:
+*Undo/redo support added for world maps, battlefields, battlescripts
+*Event Scripts: added commands 0x3E and 0x3F to action commands
+*Previewer: enable battle debug menu access when previewing
+*Sprites: NPC packet editor added, access w/button at top of window
+
+Changes:
+*Selection box now drawn in "marching ants" style, one pixel wide
+*Dialogues: replaced font character editor w/docked graphics editor
+
+Fixes:
+*Restore elements restoring ROM from source even if OK not clicked
+*Dialogues: several issues paint editing the horizontal triangles
+*Hex Editor: enlarging window when at end of ROM threw exception
+*Intro: modifying graphics not updating main title for undo/redo
+*Levels: erasing tiles when BG is off using BG color & not checkers
+*Monsters: clearing battlescripts doubling size of counter commands
+*Sprites: shouldn't be pushing command if nothing actually changed
+
+
 v3.17.0 (2013-06-23)
 --------------------------------------
 Additions:

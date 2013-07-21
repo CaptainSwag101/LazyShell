@@ -172,7 +172,8 @@ namespace LAZYSHELL
         // event handlers
         public void ControlMouseMove(object sender, MouseEventArgs e)
         {
-            if (sender == form) return;
+            if (sender == form)
+                return;
             Point location = new Point(Cursor.Position.X + 20, Cursor.Position.Y + 10);
             if (location.X == this.location.X && location.Y == this.location.Y)
                 return;
@@ -245,7 +246,6 @@ namespace LAZYSHELL
                     }
                     else
                         numericUpDown = (NumericUpDown)control;
-
                     if (((NumericUpDown)numericUpDown).Hexadecimal)
                         labelConvertor.Text = "DEC:  " + ((int)((NumericUpDown)numericUpDown).Value).ToString();
                     else

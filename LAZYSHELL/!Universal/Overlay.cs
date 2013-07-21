@@ -34,13 +34,23 @@ namespace LAZYSHELL
         // selecting
         public Selection Select;
         public Selection SelectTS;
+        //
         public class Selection
         {
             /// <summary>
             /// The picture box control associated with the selection.
             /// </summary>
-            private PictureBox pictureBox;
-            public PictureBox PictureBox { get { return pictureBox; } set { pictureBox = value; } }
+            private PictureBox picture;
+            public PictureBox Picture { get { return picture; } set { picture = value; } }
+            // marching ants
+            private Timer antTimer;
+            private int antOffset = 63;
+            private Timer glowTimer;
+            private int glowOpacity = 0;
+            private Timer zoomTimer;
+            private Bitmap zoomRegion;
+            private int zoomFactor = 1;
+            // dimensions, coordinates
             public int X { get { return Math.Min(initial.X, final.X); } }
             public int Y { get { return Math.Min(initial.Y, final.Y); } }
             public int Height { get { return size.Height; } }
@@ -126,28 +136,27 @@ namespace LAZYSHELL
             /// Returns a rectangle containing the location and size of the selection.
             /// </summary>
             public Rectangle Region { get { return new Rectangle(Location, Size); } }
-            public Selection(int unit, Point initial, Size size)
+            public Selection(int unit, Point initial, Size size, PictureBox picture)
             {
                 this.unit = unit;
                 this.initial = new Point(initial.X / unit * unit, initial.Y / unit * unit);
                 this.size = new Size(size.Width / unit * unit, size.Height / unit * unit);
                 this.final = new Point(initial.X + size.Width, initial.Y + size.Height);
+                this.picture = picture;
+                this.antTimer = new Timer();
+                this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                this.antTimer.Start();
             }
-            public Selection(int unit, Point initial, Point final)
-            {
-                this.unit = unit;
-                this.initial = new Point(initial.X / unit * unit, initial.Y / unit * unit);
-                this.final = new Point(final.X + size.Width, final.Y + size.Height);
-                this.size = new Size(
-                    Math.Abs(initial.X - final.X),
-                    Math.Abs(initial.Y - final.Y));
-            }
-            public Selection(int unit, int x, int y, int width, int height)
+            public Selection(int unit, int x, int y, int width, int height, PictureBox picture)
             {
                 this.unit = unit;
                 this.initial = new Point(x / unit * unit, y / unit * unit);
                 this.size = new Size(width / unit * unit, height / unit * unit);
                 this.final = new Point(x + size.Width, y + size.Height);
+                this.picture = picture;
+                this.antTimer = new Timer();
+                this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                this.antTimer.Start();
             }
             /// <summary>
             /// Returns the mouse's relative position within the selection.
@@ -186,21 +195,96 @@ namespace LAZYSHELL
             {
                 return image.Clone(Region, System.Drawing.Imaging.PixelFormat.DontCare);
             }
+            // drawing the selection box
+            public void DrawSelectionBox(Graphics g, int z, Color color)
+            {
+                Point start = Location;
+                Point stop = Terminal;
+                if (stop.X == start.X)
+                    return;
+                if (stop.Y == start.Y)
+                    return;
+                Point p = new Point(start.X * z, start.Y * z);
+                Size s = new Size((stop.X * z) - (start.X * z) - 1, (stop.Y * z) - (start.Y * z) - 1);
+                Pen penw = new Pen(color);
+                Pen penb = new Pen(Color.FromArgb(color.R / 4, color.G / 4, color.B / 4));
+                penb.DashOffset = antOffset;
+                penb.DashPattern = new float[] { 4, 4 };
+                Rectangle src = new Rectangle(p, s);
+                if (glowOpacity > 0)
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(glowOpacity, color)), src);
+                g.DrawRectangle(penw, src);
+                g.DrawRectangle(penb, src);
+                //
+                if (zoomFactor > 1 && zoomRegion != null)
+                {
+                    int x = src.X - ((Width * zoomFactor - Width) / 2);
+                    int y = src.Y - ((Height * zoomFactor - Height) / 2);
+                    Rectangle dst = new Rectangle(x, y, Width * zoomFactor, Height * zoomFactor);
+                    src = new Rectangle(0, 0, Width + 1, Height + 1);
+                    g.DrawImage(zoomRegion, dst, src, GraphicsUnit.Pixel);
+                }
+            }
+            public void DrawSelectionBox(Graphics g, int z)
+            {
+                DrawSelectionBox(g, z, Color.White);
+            }
+            public void GlowSelection()
+            {
+                glowOpacity = 255;
+                glowTimer = new Timer();
+                glowTimer.Tick += new EventHandler(glowTimer_Tick);
+                glowTimer.Start();
+            }
+            public void ZoomRegion(Bitmap image)
+            {
+                zoomRegion = image.Clone(Region, PixelFormat.DontCare);
+                zoomFactor = 8;
+                zoomTimer = new Timer();
+                zoomTimer.Interval = 20;
+                zoomTimer.Tick += new EventHandler(zoomTimer_Tick);
+                zoomTimer.Start();
+            }
+            //
+            private void glowTimer_Tick(object sender, EventArgs e)
+            {
+                glowOpacity -= 32;
+                if (glowOpacity <= 0)
+                    glowTimer.Stop();
+                this.picture.Refresh();
+            }
+            private void antTimer_Tick(object sender, EventArgs e)
+            {
+                antOffset--;
+                if (antOffset < 0)
+                    antOffset = 63;
+                this.picture.Refresh();
+            }
+            private void zoomTimer_Tick(object sender, EventArgs e)
+            {
+                zoomFactor--;
+                if (zoomFactor <= 1)
+                {
+                    zoomRegion = null;
+                    zoomTimer.Stop();
+                }
+                this.picture.Refresh();
+            }
         }
         #endregion
         #region Functions
         public Overlay()
         {
         }
-        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, bool dashed, int offset)
+        public void DrawTileGrid(Graphics g, Color c, Size s, Size u, bool dashed, int offset)
         {
-            DrawCartesianGrid(g, c, s, u, 1, dashed, offset);
+            DrawTileGrid(g, c, s, u, 1, dashed, offset);
         }
-        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed)
+        public void DrawTileGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed)
         {
-            DrawCartesianGrid(g, c, s, u, z, dashed, 0);
+            DrawTileGrid(g, c, s, u, z, dashed, 0);
         }
-        public void DrawCartesianGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed, int offset)
+        public void DrawTileGrid(Graphics g, Color c, Size s, Size u, int z, bool dashed, int offset)
         {
             c = Color.FromArgb(alpha, c);
             Pen p = new Pen(new SolidBrush(c));
@@ -247,34 +331,6 @@ namespace LAZYSHELL
             g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), location.X * z, location.Y * z, 256 * z, 224 * z);
             g.DrawRectangle(pen, location.X * z, location.Y * z, 256 * z, 224 * z);
         }
-        public void DrawSelectionBox(Graphics g, Point stop, Point start, int z, Color color)
-        {
-            if (stop.X == start.X) return;
-            if (stop.Y == start.Y) return;
-
-            Point p = new Point(start.X * z, start.Y * z);
-            Size s = new Size((stop.X * z) - (start.X * z) - 1, (stop.Y * z) - (start.Y * z) - 1);
-
-            Pen penw = new Pen(color);
-            Pen penb = new Pen(Color.FromArgb(color.R / 4, color.G / 4, color.B / 4));
-            penb.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            Rectangle ro = new Rectangle(p, s);
-            p.X++; p.Y++; s.Width -= 2; s.Height -= 2;
-            Rectangle ri = new Rectangle(p, s);
-
-            g.DrawRectangle(penw, ro);
-            g.DrawRectangle(penw, ri);
-            g.DrawRectangle(penb, ro);
-            g.DrawRectangle(penb, ri);
-        }
-        public void DrawSelectionBox(Graphics g, Point stop, Point start, int z)
-        {
-            DrawSelectionBox(g, stop, start, z, Color.White);
-        }
-        public void DrawSelectionBox(Graphics g, int x_initial, int y_initial, int x_terminal, int y_terminal, int z)
-        {
-            DrawSelectionBox(g, new Point(x_terminal, y_terminal), new Point(x_initial, y_initial), z);
-        }
         public void DrawHoverBox(Graphics g, Point location, Size size, int zoom, bool fill)
         {
             int x = location.X;
@@ -296,12 +352,10 @@ namespace LAZYSHELL
             Bitmap exitFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
             int[] exitFieldBasePixels = Do.ImageToPixels(exitFieldBase);
             int[] exitFieldBlockPixels = Do.ImageToPixels(exitFieldBlock);
-
             Do.Colorize(exitFieldBasePixels, 60.0, 1.0);
             Do.Colorize(exitFieldBlockPixels, 60.0, 1.0);
             Do.Gradient(exitFieldBasePixels, 32, 16, 128.0, -128.0, true);
             Do.Gradient(exitFieldBlockPixels, 32, 16, 128.0, 0, true);
-
             exitFieldBaseImage = Do.PixelsToImage(exitFieldBasePixels, 32, 16);
             exitFieldBlockImage = Do.PixelsToImage(exitFieldBlockPixels, 32, 32);
             exitFieldBaseImageH = Do.Hilite(exitFieldBaseImage, 32, 16);
@@ -408,10 +462,10 @@ namespace LAZYSHELL
         }
         public void DrawLevelExitTags(LevelExits exits, Graphics g, int z)
         {
-            if (exits.Count == 0) return;
+            if (exits.Count == 0)
+                return;
             // draw exit strings
             Rectangle r = new Rectangle();
-            Pen pen = new Pen(Color.Yellow, 2);
             SolidBrush brush = new SolidBrush(Color.FromArgb(128, Color.Yellow));
             SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, Color.Yellow));
             Font font = new Font("Tahoma", 8.25F);
@@ -427,7 +481,7 @@ namespace LAZYSHELL
                     name = Lists.Numerize(Lists.MapNames, exit.Destination);
                 RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                     g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
-                if (exit == exits.Exit_)
+                if (exit == exits.Exit)
                 {
                     g.FillRectangle(brush, r);
                     g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
@@ -438,7 +492,6 @@ namespace LAZYSHELL
                     g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
                     g.DrawString(name, font, brush, r.X, r.Y + 24);
                 }
-                g.DrawRectangle(pen, r);
             }
         }
         // events
@@ -448,12 +501,10 @@ namespace LAZYSHELL
             Bitmap eventFieldBlock = global::LAZYSHELL.Properties.Resources.fieldBlock;
             int[] eventFieldBasePixels = Do.ImageToPixels(eventFieldBase);
             int[] eventFieldBlockPixels = Do.ImageToPixels(eventFieldBlock);
-
             Do.Colorize(eventFieldBasePixels, 120.0, 1.0);
             Do.Colorize(eventFieldBlockPixels, 120.0, 1.0);
             Do.Gradient(eventFieldBasePixels, 32, 16, 128.0, -128.0, true);
             Do.Gradient(eventFieldBlockPixels, 32, 16, 128.0, 0, true);
-
             eventFieldBaseImage = Do.PixelsToImage(eventFieldBasePixels, 32, 16);
             eventFieldBlockImage = Do.PixelsToImage(eventFieldBlockPixels, 32, 32);
             eventFieldBaseImageH = Do.Hilite(eventFieldBaseImage, 32, 16);
@@ -560,35 +611,32 @@ namespace LAZYSHELL
         }
         public void DrawLevelEventTags(LevelEvents events, Graphics g, int z)
         {
-            if (events.Count == 0) return;
+            if (events.Count == 0)
+                return;
             // draw event strings
             foreach (Event event_ in events.Events)
             {
-                if (event_ != events.EVENT)
+                if (event_ != events.Event)
                     DrawLevelEventTag(g, events, event_, z);
             }
-            if (events.EVENT != null)
-                DrawLevelEventTag(g, events, events.EVENT, z);
+            if (events.Event != null)
+                DrawLevelEventTag(g, events, events.Event, z);
         }
         private void DrawLevelEventTag(Graphics g, LevelEvents events, Event temp, int z)
         {
             Rectangle r = new Rectangle();
-            Pen pen = new Pen(Color.Yellow, 2);
             SolidBrush brush = new SolidBrush(Color.FromArgb(128, 0, 255, 0));
             SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, 0, 255, 0));
             Font font = new Font("Tahoma", 8.25F);
             Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold | FontStyle.Underline);
             Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
             Font lucida = new Font("Lucida Console", 8.25F);
-
             r.X = ((temp.X & 127) * 32) + (16 * (temp.Y & 1)) - 16; r.X *= z;
             r.Y = ((temp.Y & 127) * 8) - 8; r.Y *= z;
-
             string name = "Event #" + temp.RunEvent.ToString();
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                 g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
-
-            if (temp != events.EVENT)
+            if (temp != events.Event)
             {
                 g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
                 g.DrawString(name, font, brush, r.X, r.Y + 24);
@@ -599,12 +647,11 @@ namespace LAZYSHELL
                 g.FillRectangle(new SolidBrush(Color.FromArgb(192, Color.Black)), label);
                 g.DrawString(name, font_, brush_, r.X, r.Y + 24);
                 // draw commands
-                string script = Do.EventScriptToText(Model.EventScripts[events.EVENT.RunEvent], 8, 40);
+                string script = Do.EventScriptToText(Model.EventScripts[events.Event.RunEvent], 8, 40);
                 RectangleF commandbox = new RectangleF(r.X + 2, r.Y + 40, 256, (label.Height - 2) * script.Split('\n').Length);
                 g.FillRectangle(brush_, commandbox);
                 g.DrawString(script, font_b, new SolidBrush(Color.Black), r.X + 6, r.Y + 44);
             }
-            g.DrawRectangle(pen, r);
         }
         // npcs
         private void GenerateNPCFields()
@@ -700,7 +747,8 @@ namespace LAZYSHELL
         }
         public void DrawLevelNPCTags(LevelNPCs npcs, Graphics g, int z)
         {
-            if (npcs.Count == 0) return;
+            if (npcs.Count == 0)
+                return;
             // draw npc strings
             int index = 0;
             int current = 0;
@@ -729,21 +777,17 @@ namespace LAZYSHELL
         private void DrawLevelNPCTag(LevelNPCs npcs, Graphics g, NPC npc, int index, NPC parent, int z)
         {
             Rectangle r = new Rectangle();
-            Pen pen = new Pen(Color.Yellow, 2);
             SolidBrush brush = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
             SolidBrush brush_ = new SolidBrush(Color.FromArgb(192, 255, 0, 0));
             Font font = new Font("Tahoma", 8.25F);
             Font font_ = new Font("Tahoma", 8.25F, FontStyle.Bold | FontStyle.Underline);
             Font font_b = new Font("Tahoma", 8.25F, FontStyle.Bold);
             Font lucida = new Font("Lucida Console", 8.25F);
-
             r.X = ((npc.X & 127) * 32) + (16 * (npc.Y & 1)) - 16; r.X *= z;
             r.Y = ((npc.Y & 127) * 8) - 8; r.Y *= z;
-
             string name = "NPC #" + index;
             RectangleF label = new RectangleF(new PointF(r.X, r.Y + 24),
                 g.MeasureString(name, font_, new PointF(0, 0), StringFormat.GenericDefault));
-
             if (!npc.Hilite)
             {
                 g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Black)), label);
@@ -791,7 +835,6 @@ namespace LAZYSHELL
                 g.FillRectangle(brush_, commandbox);
                 g.DrawString(text, font_b, new SolidBrush(Color.Black), r.X + 6, r.Y + 44);
             }
-            g.DrawRectangle(pen, r);
         }
         // overlaps
         private void GenerateOverlapFields()
@@ -844,7 +887,8 @@ namespace LAZYSHELL
         // mods
         public void DrawLevelTileMods(LevelTileMods tileMods, Graphics g, ImageAttributes ia, int z)
         {
-            if (tileMods.Count == 0) return;
+            if (tileMods.Count == 0)
+                return;
             Rectangle rsrc;
             Rectangle rdst;
             Pen pen;
@@ -865,7 +909,8 @@ namespace LAZYSHELL
                 rdst.Height += 2 * z;
                 g.DrawRectangle(pen, rdst);
             }
-            if (tileMods.Mods.Count == 0) return;
+            if (tileMods.Mods.Count == 0)
+                return;
             LevelTileMods.Mod current = tileMods.MOD;
             rsrc = new Rectangle(current.X * 16, current.Y * 16, current.Width * 16, current.Height * 16);
             rdst = new Rectangle(current.X * 16 * z, current.Y * 16 * z, current.Width * 16 * z, current.Height * 16 * z);
@@ -892,12 +937,14 @@ namespace LAZYSHELL
                     continue;
                 g.DrawImage(mod.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
             }
-            if (solidMods.Mods.Count == 0) return;
+            if (solidMods.Mods.Count == 0)
+                return;
             g.DrawImage(solidMods.Mod_.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
         }
         public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g, int z)
         {
-            if (solidMods.Count == 0) return;
+            if (solidMods.Count == 0)
+                return;
             foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
             {
                 int x = ((mod.X & 127) * 32) + (16 * (mod.Y & 1)) - 16;

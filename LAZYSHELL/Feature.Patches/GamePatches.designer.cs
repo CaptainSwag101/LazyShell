@@ -1,3 +1,4 @@
+
 namespace LAZYSHELL.Patches
 {
     partial class GamePatches
@@ -6,7 +7,6 @@ namespace LAZYSHELL.Patches
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@ namespace LAZYSHELL.Patches
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -213,11 +211,8 @@ namespace LAZYSHELL.Patches
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.PictureBox ImagePictureBox;
         private System.Windows.Forms.ListBox PatchListBox;
         private System.Windows.Forms.Label AuthorLabel;

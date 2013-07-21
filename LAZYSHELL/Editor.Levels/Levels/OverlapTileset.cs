@@ -14,10 +14,8 @@ namespace LAZYSHELL
         public OverlapTileset()
         {
             overlapTiles = new OverlapTile[104];
-
             for (int i = 0; i < overlapTiles.Length; i++)
                 overlapTiles[i] = new OverlapTile(i);
-
             DrawOverlapsGraphicSet();
             DrawOverlapsTileSet(overlapTiles);
         }
@@ -25,16 +23,13 @@ namespace LAZYSHELL
         public void DrawOverlapsGraphicSet()
         {
             graphicSet = new byte[128 * 96];
-
             int offset = 0x1DE000;
             int loc = 0;
-
             for (int o = 0; o < 96; o++)   // for all 104 overlap tiles
             {
                 offset = (o * 0x20) + 0x1DE000;
                 loc = (o / 8) * 0x400;
                 loc += (o % 8) * 0x40;
-
                 int a = 0, b = 0;
                 for (int i = 0; i < 8; i++, a++, b += 2)
                 {
@@ -75,28 +70,23 @@ namespace LAZYSHELL
                 palette[i] = Color.Black.ToArgb();
             Subtile source;
             Tile[] subtiles;
-
             for (int i = 0; i < tileset.Length; i++)   // for all 104 overlap tiles
             {
                 subtiles = new Tile[4];
                 for (int o = 0; o < subtiles.Length; o++)
                     subtiles[o] = new Tile(o);
-
                 for (int a = 0; a < 4; a++) // the four 16x16 tiles in an overlap tile
                 {
                     index = Model.ROM[i * 5 + a + offset];
                     place = (i / 8) * 32;
                     place += ((i % 8) * 2) + (a % 2) + ((a / 2) * 16);
-
                     subtiles[a].Mirror = Bits.GetBit(Model.ROM, i * 5 + 4 + offset, ((a * 2) + 1) ^ 7);
                     subtiles[a].Invert = Bits.GetBit(Model.ROM, i * 5 + 4 + offset, (a * 2) ^ 7);
-
                     if (index != 0)
                     {
                         index--;
                         loc = index % 8 * 0x40;
                         loc += index / 8 * 0x400;
-
                         source = new Subtile(index, graphicSet, loc, palette, false, false, false, false);
                         subtiles[a].Subtiles[0] = source;
                         source = new Subtile(index, graphicSet, loc + 0x20, palette, false, false, false, false);

@@ -14,7 +14,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -27,9 +26,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -77,6 +74,8 @@ namespace LAZYSHELL
             this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.hexEditor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.npcPacketButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -437,7 +436,9 @@ namespace LAZYSHELL
             this.toolStripSeparator12,
             this.helpTips,
             this.baseConvertor,
-            this.hexEditor});
+            this.hexEditor,
+            this.toolStripSeparator2,
+            this.npcPacketButton});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -555,6 +556,22 @@ namespace LAZYSHELL
             this.hexEditor.Size = new System.Drawing.Size(23, 22);
             this.hexEditor.Text = "Hex Editor";
             this.hexEditor.Click += new System.EventHandler(this.hexViewer_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // npcPacketButton
+            // 
+            this.npcPacketButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.npcPacketButton.Image = global::LAZYSHELL.Properties.Resources.openPackets;
+            this.npcPacketButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.npcPacketButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.npcPacketButton.Name = "npcPacketButton";
+            this.npcPacketButton.Size = new System.Drawing.Size(23, 22);
+            this.npcPacketButton.Text = "NPC Packets";
+            this.npcPacketButton.Click += new System.EventHandler(this.npcPacketButton_Click);
             // 
             // toolStrip3
             // 
@@ -719,11 +736,8 @@ namespace LAZYSHELL
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private BackgroundWorker PlaybackSequence;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator5;
@@ -777,6 +791,8 @@ namespace LAZYSHELL
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private Panel panelSequences;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton npcPacketButton;
     }
 }
 

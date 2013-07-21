@@ -41,7 +41,6 @@ namespace LAZYSHELL
             this.targetArmor.Items.AddRange(itemNames.Names);
             this.targetAccessory.Items.Clear();
             this.targetAccessory.Items.AddRange(itemNames.Names);
-
             this.attackerWeapon.SelectedIndex = itemNames.GetSortedIndex(255);
             this.attackerArmor.SelectedIndex = itemNames.GetSortedIndex(255);
             this.attackerAccessory.SelectedIndex = itemNames.GetSortedIndex(255);
@@ -57,10 +56,8 @@ namespace LAZYSHELL
             this.attackerBonus.SelectedIndex = 0;
             this.targetBonus.SelectedIndex = 0;
             updating = false;
-
             CalculatePhysical();
             CalculateSpells();
-
             this.attackerBonus.SelectedIndex = 0;
             this.targetBonus.SelectedIndex = 0;
         }
@@ -384,16 +381,18 @@ namespace LAZYSHELL
         }
         private void loadProperties(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             CalculateLevel(
-                sender == attackerTypeAlly || 
-                sender == attackerLevel || 
-                sender == attackerName || 
+                sender == attackerTypeAlly ||
+                sender == attackerLevel ||
+                sender == attackerName ||
                 sender == attackerBonus);
         }
         private void calculateTotal(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             if (sender == timedAttackL1 && timedAttackL1.Checked)
                 timedAttackL2.Checked = false;
             if (sender == timedAttackL2 && timedAttackL2.Checked)

@@ -16,7 +16,6 @@ namespace LAZYSHELL
     public partial class Dialogues : Form
     {
         #region Variables
-
         public long Checksum;
         private Settings settings = Settings.Default;
         // main
@@ -77,7 +76,6 @@ namespace LAZYSHELL
             dteStrText = Model.DTEStr(false);
             FindDuplicateDialoguePointers();
             FindWithinDialogues();
-
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
@@ -134,18 +132,15 @@ namespace LAZYSHELL
         private void RefreshDialogueEditor()
         {
             updatingDialogue = true;
-
             if (dialogue.Reference != index)
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
                 dialogueTextBox.BackColor = SystemColors.Window;
             this.dialogueTextBox.Text = dialogue.GetText(byteView, dteStr);
             this.dialogueTextBox.SelectionStart = dialogue.GetCaretPosition(byteView);
-
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
-
             updatingDialogue = false;
         }
         private void SetTilesetImage()
@@ -160,7 +155,6 @@ namespace LAZYSHELL
             bool preview = true, valid = true, fail = false;
             char[] swap;
             int temp;
-
             for (int i = 0; i < text.Length; i++)
             {
                 // Open bracket when we have already had an open bracket
@@ -256,7 +250,6 @@ namespace LAZYSHELL
             int index = 0;
             int end = 0;
             double left = 0;
-
             if (current >= 0x0C00)
             {
                 size = (0xFFFF - 0xEDE0) + 0x9000;
@@ -275,18 +268,15 @@ namespace LAZYSHELL
                 index = 0x0000;
                 end = 0x0800;
             }
-
             for (int i = index; i < end; i++)
             {
                 if (i == dialogues[i].Reference && dialogues[i].Position == 0)
                 {
                     used += dialogues[i].Length;
-
                     if (i < end - 1 && used + dialogues[i + 1].Length > size && i + 1 == dialogues[i + 1].Reference && dialogues[i + 1].Position == 0)
                     {
                         bool test = false;
                         test = (size >= used + dialogues[i + 1].Length);
-
                         if (!test)
                         {
                             i++;
@@ -295,19 +285,15 @@ namespace LAZYSHELL
                     }
                 }
             }
-
             left = (double)(size - used);
-
             return true;
         }
         public void InsertIntoDialogueText(string toInsert)
         {
             char[] newText = new char[dialogueTextBox.Text.Length + toInsert.Length];
-
             dialogueTextBox.Text.CopyTo(0, newText, 0, dialogueTextBox.SelectionStart);
             toInsert.CopyTo(0, newText, dialogueTextBox.SelectionStart, toInsert.Length);
             dialogueTextBox.Text.CopyTo(dialogueTextBox.SelectionStart, newText, dialogueTextBox.SelectionStart + toInsert.Length, this.dialogueTextBox.Text.Length - this.dialogueTextBox.SelectionStart);
-
             dialogue.SetCaretPosition(this.dialogueTextBox.SelectionStart + toInsert.Length, byteView);
             dialogue.SetText(new string(newText), byteView, dteStr);
             RefreshDialogueEditor();
@@ -323,13 +309,11 @@ namespace LAZYSHELL
             {
                 if (text[i] == '[' && preview == false) // Open bracket when we have already had an open bracket
                     fail = true;
-
                 if (text[i] == '[') // Open Bracket
                 {
                     preview = false;
                     i++;
                     temp = i;
-
                     while (temp < text.Length && text[temp] != ']')
                     {
                         if (byteView)
@@ -344,7 +328,6 @@ namespace LAZYSHELL
                     preview = true;
                 else if (preview == true && valid == true)
                     valid = textHelper.IsValidSymbol(text[i]);
-
                 if (i < text.Length && text[i] == '\n')
                 {
                     int tempSel = textBox.SelectionStart;
@@ -456,7 +439,6 @@ namespace LAZYSHELL
         {
             string dialogueSearch = "";
             int j = 0;
-
             for (int i = 0; i < dialogues.Length; i++)
             {
                 string dialogue = dialogues[i].GetText(byteView, dteStr);
@@ -511,6 +493,7 @@ namespace LAZYSHELL
         {
             SetTextImage();
             battleDialogues.SetTextImage();
+            option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16));
         }
         // assembler
         public void Assemble()
@@ -568,7 +551,6 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 1 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             if (FreeSpace(0x800))
             {
                 length = 0x0004;
@@ -589,7 +571,6 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 2 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             if (FreeSpace(0xC00))
             {
                 length = 0x0004;
@@ -606,7 +587,6 @@ namespace LAZYSHELL
                     else
                         dialogues[i].Assemble(dialogues[dialogues[i].Reference].Pointer + 4);
                 }
-
                 length = 0xEDE0;
                 for (; i < 0x1000 && length + dialogues[i].Length < 0xFFFF; i++)
                 {
@@ -685,10 +665,9 @@ namespace LAZYSHELL
         }
         private void dialogueNum_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingDialogue) return;
-
+            if (updatingDialogue)
+                return;
             dialoguePreview.Reset();
-
             RefreshDialogueEditor();
             SetTextImage();
             settings.LastDialogue = index;
@@ -720,7 +699,6 @@ namespace LAZYSHELL
         }
         private void showDialogueBG_Click(object sender, EventArgs e)
         {
-
         }
         private void pictureBoxDialogue_Paint(object sender, PaintEventArgs e)
         {
@@ -741,14 +719,12 @@ namespace LAZYSHELL
         }
         private void toolStripButton11_Click(object sender, EventArgs e)
         {
-
         }
         private void dialogueTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updatingDialogue) return;
-
+            if (updatingDialogue)
+                return;
             SetTextImage();
-
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
@@ -932,7 +908,6 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = "dialogues";
             saveFileDialog.RestoreDirectory = true;
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter dialogues = File.CreateText(saveFileDialog.FileName);
@@ -952,10 +927,8 @@ namespace LAZYSHELL
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
-
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-
             string path = openFileDialog.FileName;
             TextReader tr;
             BinaryFormatter b = new BinaryFormatter();
@@ -994,7 +967,8 @@ namespace LAZYSHELL
         }
         private void dct_TextChanged(object sender, EventArgs e)
         {
-            if (updatingDialogue) return;
+            if (updatingDialogue)
+                return;
             SetDialogueTable((TextBox)sender);
             modifyDTE = CalculateFreeTableSpace() >= 0;
         }
@@ -1003,7 +977,8 @@ namespace LAZYSHELL
         }
         private void panel1_Leave(object sender, EventArgs e)
         {
-            if (updatingDialogue) return;
+            if (updatingDialogue)
+                return;
             if (modifyDTE)
                 EncodeDialogues();
         }
@@ -1100,10 +1075,8 @@ namespace LAZYSHELL
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
-
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-
             string path = openFileDialog.FileName;
             TextReader tr;
             BinaryFormatter b = new BinaryFormatter();
@@ -1143,7 +1116,6 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = "dialogues";
             saveFileDialog.RestoreDirectory = true;
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter dialogues = File.CreateText(saveFileDialog.FileName);
@@ -1164,7 +1136,6 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = "battleDialogues";
             saveFileDialog.RestoreDirectory = true;
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter dialogues = File.CreateText(saveFileDialog.FileName);

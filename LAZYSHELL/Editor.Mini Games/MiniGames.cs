@@ -93,7 +93,7 @@ namespace LAZYSHELL
             state.Select = false;
             state.Dropper = false;
             state.Fill = false;
-            state.CartesianGrid = false;
+            state.TileGrid = false;
             DialogResult result;
             result = MessageBox.Show("Mini-games have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)

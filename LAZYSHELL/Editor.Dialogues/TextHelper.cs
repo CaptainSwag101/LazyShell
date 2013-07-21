@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
+
 namespace LAZYSHELL
 {
     [Serializable()]
@@ -61,7 +62,6 @@ namespace LAZYSHELL
         // constructor
         TextHelper()
         {
-
         }
         // public functions
         public char[] Decode(char[] text, bool byteView, string[] tables)

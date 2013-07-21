@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class EventScripts
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -413,7 +411,7 @@
             this.panel1.Controls.Add(this.buttonInsertEvent);
             this.panel1.Controls.Add(this.buttonApplyEvent);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 526);
+            this.panel1.Location = new System.Drawing.Point(0, 511);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 29);
             this.panel1.TabIndex = 7;
@@ -425,7 +423,7 @@
             this.groupBoxC.Controls.Add(this.evtNumC1);
             this.groupBoxC.Controls.Add(this.labelEvtC1);
             this.groupBoxC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxC.Location = new System.Drawing.Point(0, 482);
+            this.groupBoxC.Location = new System.Drawing.Point(0, 467);
             this.groupBoxC.Name = "groupBoxC";
             this.groupBoxC.Size = new System.Drawing.Size(282, 44);
             this.groupBoxC.TabIndex = 6;
@@ -438,7 +436,7 @@
             this.groupBoxB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxB.Controls.Add(this.evtEffects);
             this.groupBoxB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxB.Location = new System.Drawing.Point(0, 457);
+            this.groupBoxB.Location = new System.Drawing.Point(0, 442);
             this.groupBoxB.Name = "groupBoxB";
             this.groupBoxB.Size = new System.Drawing.Size(282, 25);
             this.groupBoxB.TabIndex = 5;
@@ -456,7 +454,7 @@
             this.groupBoxA.Location = new System.Drawing.Point(0, 371);
             this.groupBoxA.Name = "groupBoxA";
             this.groupBoxA.Padding = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.groupBoxA.Size = new System.Drawing.Size(282, 86);
+            this.groupBoxA.Size = new System.Drawing.Size(282, 71);
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
             this.groupBoxA.Visible = false;
@@ -468,7 +466,7 @@
             this.panelEvtA3_4.Controls.Add(this.evtNumA3);
             this.panelEvtA3_4.Controls.Add(this.labelEvtA3);
             this.panelEvtA3_4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA3_4.Location = new System.Drawing.Point(3, 59);
+            this.panelEvtA3_4.Location = new System.Drawing.Point(3, 58);
             this.panelEvtA3_4.Name = "panelEvtA3_4";
             this.panelEvtA3_4.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA3_4.TabIndex = 5;
@@ -480,7 +478,7 @@
             this.panelEvtA2.Controls.Add(this.evtNameA2);
             this.panelEvtA2.Controls.Add(this.labelEvtA2);
             this.panelEvtA2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA2.Location = new System.Drawing.Point(3, 38);
+            this.panelEvtA2.Location = new System.Drawing.Point(3, 37);
             this.panelEvtA2.Name = "panelEvtA2";
             this.panelEvtA2.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA2.TabIndex = 5;
@@ -492,7 +490,7 @@
             this.panelEvtA1.Controls.Add(this.evtNameA1);
             this.panelEvtA1.Controls.Add(this.labelEvtA1);
             this.panelEvtA1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA1.Location = new System.Drawing.Point(3, 17);
+            this.panelEvtA1.Location = new System.Drawing.Point(3, 16);
             this.panelEvtA1.Name = "panelEvtA1";
             this.panelEvtA1.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA1.TabIndex = 5;
@@ -1065,7 +1063,7 @@
             this.EvtScrMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EvtScrMoveUp.Name = "EvtScrMoveUp";
             this.EvtScrMoveUp.Size = new System.Drawing.Size(23, 22);
-            this.EvtScrMoveUp.Text = "Move Command Up";
+            this.EvtScrMoveUp.Text = "Move Command Up (Shift+Up)";
             this.EvtScrMoveUp.Click += new System.EventHandler(this.EvtScrMoveUp_Click);
             // 
             // EvtScrMoveDown
@@ -1076,7 +1074,7 @@
             this.EvtScrMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EvtScrMoveDown.Name = "EvtScrMoveDown";
             this.EvtScrMoveDown.Size = new System.Drawing.Size(23, 22);
-            this.EvtScrMoveDown.Text = "Move Command Down";
+            this.EvtScrMoveDown.Text = "Move Command Down (Shift+Down)";
             this.EvtScrMoveDown.Click += new System.EventHandler(this.EvtScrMoveDown_Click);
             // 
             // EvtScrCopyCommand
@@ -1087,7 +1085,7 @@
             this.EvtScrCopyCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EvtScrCopyCommand.Name = "EvtScrCopyCommand";
             this.EvtScrCopyCommand.Size = new System.Drawing.Size(23, 22);
-            this.EvtScrCopyCommand.Text = "Copy Command";
+            this.EvtScrCopyCommand.Text = "Copy Command (Ctrl+C)";
             this.EvtScrCopyCommand.Click += new System.EventHandler(this.EvtScrCopyCommand_Click);
             // 
             // EvtScrPasteCommand
@@ -1098,7 +1096,7 @@
             this.EvtScrPasteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EvtScrPasteCommand.Name = "EvtScrPasteCommand";
             this.EvtScrPasteCommand.Size = new System.Drawing.Size(23, 22);
-            this.EvtScrPasteCommand.Text = "Paste Command";
+            this.EvtScrPasteCommand.Text = "Paste Command (Ctrl+V)";
             this.EvtScrPasteCommand.Click += new System.EventHandler(this.EvtScrPasteCommand_Click);
             // 
             // EvtScrDeleteCommand
@@ -1109,7 +1107,7 @@
             this.EvtScrDeleteCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EvtScrDeleteCommand.Name = "EvtScrDeleteCommand";
             this.EvtScrDeleteCommand.Size = new System.Drawing.Size(23, 22);
-            this.EvtScrDeleteCommand.Text = "Delete Command";
+            this.EvtScrDeleteCommand.Text = "Delete Command (Del)";
             this.EvtScrDeleteCommand.Click += new System.EventHandler(this.EvtScrDeleteCommand_Click);
             // 
             // toolStripSeparator8
@@ -1125,6 +1123,7 @@
             this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(23, 22);
+            this.undo.Text = "Undo (Ctrl+Z)";
             this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
             // redo
@@ -1135,6 +1134,7 @@
             this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(23, 22);
+            this.redo.Text = "Redo (Ctrl+Y)";
             this.redo.Click += new System.EventHandler(this.redo_Click);
             // 
             // toolStripSeparator9
@@ -1227,9 +1227,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.CheckedListBox evtEffects;
         private System.Windows.Forms.NumericUpDown evtNumC2;
         private System.Windows.Forms.Label labelEvtC2;

@@ -104,12 +104,10 @@ namespace LAZYSHELL
             this.searchButton = searchButton;
             InitializeProperties();
             this.function = function;
-
             this.toolStripSeparator1.Visible = type == "richTextBox";
             this.toolStripLabel1.Visible = type == "richTextBox";
             this.replaceAllButton.Visible = type == "richTextBox";
             this.replaceWithText.Visible = type == "richTextBox";
-
             if (type == "treeView")
             {
                 this.treeView.Enabled = true;
@@ -213,7 +211,8 @@ namespace LAZYSHELL
         }
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox.SelectedItem == null) return;
+            if (listBox.SelectedItem == null)
+                return;
             int index = ((SearchItem)listBox.SelectedItem).Index;
             if (searchIndexNum != null && index < searchIndexNum.Maximum)
                 searchIndexNum.Value = index;

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
@@ -190,6 +192,21 @@ namespace LAZYSHELL
         [DllImport("user32.dll")]
         public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
         //
+        public TreeNode LastNode
+        {
+            get
+            {
+                if (this.Nodes.Count > 0)
+                    return this.Nodes[this.Nodes.Count - 1];
+                return new TreeNode();
+            }
+            set
+            {
+                if (this.Nodes.Count > 0)
+                    this.Nodes[this.Nodes.Count - 1] = value;
+            }
+        }
+        // constructor
         public NewTreeView()
         {
         }
@@ -407,6 +424,15 @@ namespace LAZYSHELL
             }
         }
     }
+    public class NewListBox : ListBox
+    {
+        private int lastSelectedIndex = -1;
+        public int LastSelectedIndex { get { return lastSelectedIndex; } set { lastSelectedIndex = value; } }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+        }
+    }
     public class NewPanel : Panel
     {
         [DllImport("user32.dll")]
@@ -435,17 +461,12 @@ namespace LAZYSHELL
             Refresh();
         }
     }
-    public class NewListBox : ListBox
-    {
-        private int lastSelectedIndex = -1;
-        public int LastSelectedIndex { get { return lastSelectedIndex; } set { lastSelectedIndex = value; } }
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-        }
-    }
     public class NewPictureBox : PictureBox
     {
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
         [DllImport("user32.dll")]
         static extern bool SetCursorPos(int X, int Y);
         //
@@ -456,6 +477,9 @@ namespace LAZYSHELL
         private Point zoomBoxPosition = new Point(32, 32);
         private Point autoScrollPos;
         private Point mousePosition;
+        private bool mouseDown = false;
+        private MouseButtons mouseButton;
+        private const int WM_SETREDRAW = 0x0B;
         //
         public int Zoom { get { return zoom; } set { zoom = value; } }
         public ZoomBox ZoomBox { get { return zoomBox; } set { zoomBox = value; } }
@@ -482,12 +506,13 @@ namespace LAZYSHELL
         // functions
         public void ZoomIn(int x, int y)
         {
-            if (this.Parent == null || zoom >= 8)
+            if (this.Parent == null || zoom >= 8 ||
+                Width >= 8192 || Height >= 8192)
                 return;
-            if (this.Parent.GetType() != typeof(Panel) &&
-                this.Parent.GetType() != typeof(NewPanel))
+            if (this.Parent.GetType() != typeof(NewPanel))
                 return;
-            Panel parent = (Panel)this.Parent;
+            NewPanel parent = (NewPanel)this.Parent;
+            parent.SuspendDrawing();
             //
             zoom *= 2;
             autoScrollPos = new Point(Math.Abs(this.Left), Math.Abs(this.Top));
@@ -502,15 +527,18 @@ namespace LAZYSHELL
             parent.HorizontalScroll.LargeChange *= 2;
             this.Invalidate();
             this.Focus();
+            //
+            parent.ResumeDrawing();
+            parent.Invalidate();
         }
         public void ZoomOut(int x, int y)
         {
             if (this.Parent == null || zoom <= 1)
                 return;
-            if (this.Parent.GetType() != typeof(Panel) &&
-                this.Parent.GetType() != typeof(NewPanel))
+            if (this.Parent.GetType() != typeof(NewPanel))
                 return;
-            Panel parent = (Panel)this.Parent;
+            NewPanel parent = (NewPanel)this.Parent;
+            parent.SuspendDrawing();
             //
             zoom /= 2;
             autoScrollPos = new Point(Math.Abs(this.Left), Math.Abs(this.Top));
@@ -525,6 +553,19 @@ namespace LAZYSHELL
             parent.HorizontalScroll.LargeChange /= 2;
             this.Invalidate();
             this.Focus();
+            //
+            parent.ResumeDrawing();
+            parent.Invalidate();
+        }
+        public void ZoomIn()
+        {
+            while (zoom < 8)
+                ZoomIn(0, 0);
+        }
+        public void ZoomOut()
+        {
+            while (zoom > 1)
+                ZoomOut(0, 0);
         }
         public void RefreshZoomBox()
         {
@@ -545,7 +586,42 @@ namespace LAZYSHELL
         {
             base.OnMouseMove(e);
         }
+        /// <summary>
+        /// Erases a rectangular portion of the image. Zoom must be pre-factored into parameter values.
+        /// </summary>
+        /// <param name="x">The X coord of the rectangle.</param>
+        /// <param name="y">The Y coord of the rectangle.</param>
+        /// <param name="width">The width of the rectangle.</param>
+        /// <param name="height">The height of the rectangle.</param>
+        public void Erase(int x, int y, int width, int height)
+        {
+            Rectangle temp = new Rectangle(x % 128, y % 128, width, height);
+            if (temp.X < 0) temp.X += 128;
+            if (temp.Y < 0) temp.Y += 128;
+            Bitmap emptyblock = new Bitmap(Icons.Emptyblock.Clone(temp, PixelFormat.DontCare));
+            Graphics g = this.CreateGraphics();
+            g.DrawImage(emptyblock, x, y, width, height);
+        }
+        public void Erase(Rectangle rectangle)
+        {
+            Erase(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+        }
+        public void Draw(int x, int y, int width, int height, Color fill)
+        {
+            Graphics g = this.CreateGraphics();
+            SolidBrush brush = new SolidBrush(fill);
+            g.FillRectangle(brush, x, y, width, height);
+        }
+        public void Draw(Rectangle rectangle, Color fill)
+        {
+            Draw(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height, fill);
+        }
         //
+        public void Focus(Form form)
+        {
+            if (GetForegroundWindow() == form.Handle)
+                Focus();
+        }
         protected override bool IsInputKey(Keys keyData)
         {
             if (keyData == Keys.Up || keyData == Keys.Down)
@@ -559,15 +635,56 @@ namespace LAZYSHELL
             this.Invalidate();
             base.OnEnter(e);
         }
+        protected override void OnLeave(EventArgs e)
+        {
+            this.Invalidate();
+            base.OnLeave(e);
+        }
         protected override void OnLostFocus(EventArgs e)
         {
             base.OnLostFocus(e);
             Cursor.Position = Cursor.Position;
         }
-        protected override void OnLeave(EventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            this.Invalidate();
-            base.OnLeave(e);
+            // if another mouse button pressed while this one pressed, cancel the operation
+            if (mouseDown && mouseButton != e.Button)
+                return;
+            mouseDown = true;
+            mouseButton = e.Button;
+            base.OnMouseDown(e);
+        }
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            if (zoomBox != null)
+                zoomBox.Visible = false;
+            base.OnMouseLeave(e);
+        }
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            mousePosition = e.Location;
+            RefreshZoomBox();
+            //this.Focus();
+            base.OnMouseMove(e);
+        }
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            // if mouse button being released is NOT the first one still being held, cancel
+            if (mouseButton != e.Button)
+                return;
+            mouseDown = false;
+            base.OnMouseUp(e);
+        }
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.Delta > 0 && zoom < 8)
+                    ZoomIn(e.X, e.Y);
+                else if (e.Delta < 0 && zoom > 1)
+                    ZoomOut(e.X, e.Y);
+            }
+            base.OnMouseWheel(e);
         }
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -586,33 +703,11 @@ namespace LAZYSHELL
             }
             base.OnPreviewKeyDown(e);
         }
-        protected override void OnMouseWheel(MouseEventArgs e)
+        protected override void OnInvalidated(InvalidateEventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                if (e.Delta > 0 && zoom < 8)
-                    ZoomIn(e.X, e.Y);
-                else if (e.Delta < 0 && zoom > 1)
-                    ZoomOut(e.X, e.Y);
-            }
-            base.OnMouseWheel(e);
-        }
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            base.OnMouseDown(e);
-        }
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            mousePosition = e.Location;
-            RefreshZoomBox();
-            this.Focus();
-            base.OnMouseMove(e);
-        }
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (zoomBox != null)
-                zoomBox.Visible = false;
-            base.OnMouseLeave(e);
+            if (mouseDown)
+                return;
+            base.OnInvalidated(e);
         }
     }
     public class NewGroupBox : GroupBox
@@ -662,7 +757,6 @@ namespace LAZYSHELL
     {
         [DllImport("user32.dll", SetLastError = true)]
         static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
-
         [StructLayout(LayoutKind.Sequential)]
         struct INPUT
         {
@@ -674,10 +768,8 @@ namespace LAZYSHELL
         {
             [FieldOffset(0)]
             public MouseInputData mi;
-
             [FieldOffset(0)]
             public KEYBDINPUT ki;
-
             [FieldOffset(0)]
             public HARDWAREINPUT hi;
         }

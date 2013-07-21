@@ -225,25 +225,19 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int offset = 0;
-
             offset = (index * 18) + 0x1D0040; offset++;
-
             rom[offset] = messageBox != 0 ? (byte)((messageBox - 1) << 1) : (byte)0xFE;
-
             offset++;
-
             rom[offset] = maskLowX;
             Bits.SetBit(rom, offset, 7, maskLock); offset++;
             rom[offset] = maskLowY; offset++;
             rom[offset] = maskHighX; offset++;
             rom[offset] = maskHighY; offset++;
-
             rom[offset] = xNegL2; offset++;
             rom[offset] = yNegL2; offset++;
             rom[offset] = xNegL3; offset++;
             rom[offset] = yNegL3;
             Bits.SetBit(rom, offset, 7, infiniteScrolling); offset++;
-
             Bits.SetBit(rom, offset, 0, scrollWrapL1_HZ);
             Bits.SetBit(rom, offset, 1, scrollWrapL1_VT);
             Bits.SetBit(rom, offset, 2, culexA);
@@ -252,9 +246,7 @@ namespace LAZYSHELL
             Bits.SetBit(rom, offset, 5, culexB);
             Bits.SetBit(rom, offset, 6, scrollWrapL3_HZ);
             Bits.SetBit(rom, offset, 7, scrollWrapL3_VT);
-
             offset++;
-
             rom[offset] = 0;
             switch (syncL2_HZ)
             {
@@ -284,9 +276,7 @@ namespace LAZYSHELL
                 case 2: Bits.SetBitsByByte(rom, offset, 0xC0, true); break;
                 case 3: Bits.SetBitsByByte(rom, offset, 0x40, true); break;
             }
-
             offset++;
-
             switch (scrollDirectionL2)
             {
                 case 0: rom[offset] = 0x00; break;
@@ -298,7 +288,6 @@ namespace LAZYSHELL
                 case 6: rom[offset] = 0x30; break;
                 case 7: rom[offset] = 0x38; break;
             }
-
             switch (scrollSpeedL2)
             {
                 case 0: Bits.SetBitsByByte(rom, offset, 0x00, true); break;
@@ -309,10 +298,8 @@ namespace LAZYSHELL
                 case 5: Bits.SetBitsByByte(rom, offset, 0x05, true); break;
                 case 6: Bits.SetBitsByByte(rom, offset, 0x07, true); break;
             }
-
             Bits.SetBit(rom, offset, 7, scrollL2Bit7);
             offset++;
-
             switch (scrollDirectionL3)
             {
                 case 0: rom[offset] = 0x00; break;
@@ -324,7 +311,6 @@ namespace LAZYSHELL
                 case 6: rom[offset] = 0x30; break;
                 case 7: rom[offset] = 0x38; break;
             }
-
             switch (scrollSpeedL3)
             {
                 case 0: Bits.SetBitsByByte(rom, offset, 0x00, true); break;
@@ -335,16 +321,12 @@ namespace LAZYSHELL
                 case 5: Bits.SetBitsByByte(rom, offset, 0x05, true); break;
                 case 6: Bits.SetBitsByByte(rom, offset, 0x07, true); break;
             }
-
             Bits.SetBit(rom, offset, 7, scrollL3Bit7);
             offset++;
-
             rom[offset] = 0;
             Bits.SetBit(rom, offset, 4, ripplingWater);
             Bits.SetBitsByByte(rom, offset, prioritySet, true);
-
             offset++;
-
             switch (effectsL3)
             {
                 case 0: rom[offset] = 0x00; break;
@@ -371,9 +353,7 @@ namespace LAZYSHELL
                 case 21: rom[offset] = 0x17; break;
                 case 22: rom[offset] = 0x18; break;
             }
-
             offset++;
-
             switch (effectsNPC)
             {
                 case 0: rom[offset] = 0x00; break;
@@ -407,23 +387,18 @@ namespace LAZYSHELL
         public void Clear()
         {
             int offset = 0;
-
             offset = (index * 18) + 0x1D0040; offset++;
-
             this.messageBox = 0;
             this.maskLock = false;
-
             this.maskLowX = 0;
             this.maskLowY = 0;
             this.maskHighX = 63;
             this.maskHighY = 63;
-
             this.xNegL2 = 0;
             this.yNegL2 = 0;
             this.xNegL3 = 0;
             this.infiniteScrolling = false;
             this.yNegL3 = 0;
-
             this.scrollWrapL1_HZ = false;
             this.scrollWrapL1_VT = false;
             this.culexA = false;
@@ -432,12 +407,10 @@ namespace LAZYSHELL
             this.scrollWrapL2_VT = false;
             this.scrollWrapL3_HZ = false;
             this.scrollWrapL3_VT = false;
-
             this.syncL2_HZ = 0;
             this.syncL2_VT = 0;
             this.syncL3_HZ = 0;
             this.syncL3_VT = 0;
-
             this.scrollDirectionL2 = 0;
             this.scrollSpeedL2 = 0;
             this.scrollDirectionL3 = 0;

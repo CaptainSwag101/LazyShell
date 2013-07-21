@@ -23,7 +23,6 @@ namespace LAZYSHELL
         private void AddBorder(int[] pixels)
         {
             int[] borderCalc = { -1, 1, -256, 256, -257, 257, -255, 255 };
-
             for (int i = 0; i < pixels.Length; i++) // for each pixel in image
             {
                 if (pixels[i] != 0 && pixels[i] != palette[3]) // draw border if it is a set pixel, and not border color

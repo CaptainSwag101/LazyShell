@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class Attacks : Form
     {
         // variables
-        
+        //
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Attack[] attacks { get { return Model.Attacks; } set { Model.Attacks = value; } }
@@ -38,7 +38,8 @@ namespace LAZYSHELL
         }
         public void RefreshAttacks()
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             this.attackName.SelectedIndex = Model.AttackNames.GetSortedIndex(index);
             this.attackHitRate.Value = attacks[index].HitRate;
@@ -73,7 +74,8 @@ namespace LAZYSHELL
         }
         private void attackName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.AttackNames, Model.FontDialogue,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, true, Model.MenuBG_);

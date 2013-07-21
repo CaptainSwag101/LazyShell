@@ -14,7 +14,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -27,9 +26,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -362,7 +359,7 @@ namespace LAZYSHELL
             this.openGraphicEditor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.openTemplates = new System.Windows.Forms.ToolStripButton();
-            this.levelPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.openPreviewer = new System.Windows.Forms.ToolStripButton();
             this.spaceAnalyzer = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -4914,15 +4911,15 @@ namespace LAZYSHELL
             this.openTemplates.ToolTipText = "Templates";
             this.openTemplates.Click += new System.EventHandler(this.openTemplates_Click);
             // 
-            // levelPreviewToolStripButton
+            // openPreviewer
             // 
-            this.levelPreviewToolStripButton.Image = global::LAZYSHELL.Properties.Resources.preview;
-            this.levelPreviewToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.levelPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.levelPreviewToolStripButton.Name = "levelPreviewToolStripButton";
-            this.levelPreviewToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.levelPreviewToolStripButton.ToolTipText = "Previewer";
-            this.levelPreviewToolStripButton.Click += new System.EventHandler(this.levelPreviewToolStripButton_Click);
+            this.openPreviewer.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.openPreviewer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openPreviewer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPreviewer.Name = "openPreviewer";
+            this.openPreviewer.Size = new System.Drawing.Size(23, 22);
+            this.openPreviewer.ToolTipText = "Previewer";
+            this.openPreviewer.Click += new System.EventHandler(this.openPreviewer_Click);
             // 
             // spaceAnalyzer
             // 
@@ -4980,7 +4977,7 @@ namespace LAZYSHELL
             this.openGraphicEditor,
             this.toolStripSeparator2,
             this.openTemplates,
-            this.levelPreviewToolStripButton,
+            this.openPreviewer,
             this.spaceAnalyzer});
             this.toolStripToggle.Location = new System.Drawing.Point(0, 0);
             this.toolStripToggle.Name = "toolStripToggle";
@@ -5650,9 +5647,7 @@ namespace LAZYSHELL
             this.PerformLayout();
 
         }
-
         #endregion
-
         private Button npcGotoA;
         private Button npcGotoB;
         private Button eventGotoA;
@@ -5839,7 +5834,7 @@ namespace LAZYSHELL
         private TabPage tabPage3;
         private TabPage tabPage4;
         private ToolStrip toolStripLevel;
-        private ToolStripButton levelPreviewToolStripButton;
+        private ToolStripButton openPreviewer;
         private ToolStripButton openGraphicEditor;
         private ToolStripButton openPaletteEditor;
         private ToolStripButton openTilemap;

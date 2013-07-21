@@ -9,9 +9,10 @@ namespace LAZYSHELL
     [Serializable()]
     public class LevelEvents
     {
-        // Local Variables
+        // universal Variables
         private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
-        private int index;
+        private int index; public int Index { get { return index; } set { index = value; } }
+        // local variables
         private List<Event> events = new List<Event>();
         private int currentEvent = 0;
         private int selectedEvent;
@@ -44,8 +45,7 @@ namespace LAZYSHELL
         }
         public List<Event> Events { get { return events; } }
         public int SelectedEvent { get { return this.selectedEvent; } set { selectedEvent = value; } }
-        public Event EVENT { get { return thisEvent; } set { thisEvent = value; } }
-        public int Index { get { return index; } set { index = value; } }
+        public Event Event { get { return thisEvent; } set { thisEvent = value; } }        
         public int Count { get { return events.Count; } }
         // level properties
         private byte music; public byte Music { get { return music; } set { music = value; } }
@@ -173,7 +173,6 @@ namespace LAZYSHELL
         // constructor
         public Event()
         {
-
         }
         // assemblers
         public void Disassemble(int offset)
@@ -205,14 +204,12 @@ namespace LAZYSHELL
         {
             Bits.SetShort(data, offset, runEvent); offset++;
             Bits.SetBit(data, offset, 7, width > 0); offset++;
-
             data[offset] = x;
             Bits.SetBit(data, offset, 7, x_half); offset++;
             data[offset] = y;
             Bits.SetBit(data, offset, 7, y_half); offset++;
             data[offset] = z;
             Bits.SetBitsByByte(data, offset, (byte)(height << 5), true); offset++;
-
             if (width > 0)
             {
                 data[offset] = width;

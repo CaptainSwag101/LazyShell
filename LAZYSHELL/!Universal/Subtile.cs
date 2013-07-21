@@ -48,14 +48,12 @@ namespace LAZYSHELL
             this.priority1 = priority1;
             this.index = index;
             this.twobpp = twobpp;
-
             if (twobpp == false)
             {
                 for (int r = 0; r < 8; r++) // Number of Rows in an 8x8 Tile
                 {
                     // Get all the pixels in a row
                     byte[] row = new byte[8];
-
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
                         if ((graphics[offset + r * 2 + 0x11] & b) == b)
                             row[i] += 8;
@@ -68,7 +66,6 @@ namespace LAZYSHELL
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
                         if ((graphics[offset + r * 2] & b) == b)
                             row[i]++;
-
                     for (int c = 0; c < 8; c++) // Number of Columns in an 8x8 Tile
                     {
                         colors[r * 8 + c] = row[c];
@@ -122,13 +119,11 @@ namespace LAZYSHELL
         }
         private Subtile()
         {
-
         }
         // spawning
         public Subtile Copy()
         {
             Subtile copy = new Subtile();
-
             copy.Pixels = new int[this.pixels.Length]; this.Pixels.CopyTo(copy.Pixels, 0);
             copy.Colors = new int[this.colors.Length]; this.Colors.CopyTo(copy.Colors, 0);
             copy.Priority1 = this.priority1;
@@ -136,7 +131,6 @@ namespace LAZYSHELL
             copy.Invert = this.invert;
             copy.Index = this.index;
             copy.Palette = this.palette;
-
             return copy;
         }
         public void CopyTo(Subtile dest)

@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class Allies
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -879,11 +877,8 @@
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Label label188;
         private System.Windows.Forms.Label label132;
         private System.Windows.Forms.NumericUpDown startingMgAttack;
@@ -940,6 +935,5 @@
         private System.Windows.Forms.Label label160;
         private System.Windows.Forms.Label label159;
         private System.Windows.Forms.Label label157;
-
     }
 }

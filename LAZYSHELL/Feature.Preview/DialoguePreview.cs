@@ -328,7 +328,6 @@ namespace LAZYSHELL
                         if (text[offset] >= 0x0E && text[offset] <= 0x19) break;
                         if (text[offset] == 0x1B) break;
                         if (text[offset] == 0x20) break;
-
                         // ...otherwise add next character
                         letters.Add(text[offset]);
                     }

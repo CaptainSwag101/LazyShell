@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class TilesetEditor
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -256,7 +254,7 @@
             this.buttonToggleCartGrid.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleCartGrid.Name = "buttonToggleCartGrid";
             this.buttonToggleCartGrid.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleCartGrid.Text = "Cartesian Grid";
+            this.buttonToggleCartGrid.Text = "Tile Grid";
             this.buttonToggleCartGrid.Click += new System.EventHandler(this.buttonToggleCartGrid_Click);
             // 
             // buttonToggleBG
@@ -266,19 +264,20 @@
             this.buttonToggleBG.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleBG.Name = "buttonToggleBG";
             this.buttonToggleBG.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleBG.Text = "BG Color";
-            this.buttonToggleBG.ToolTipText = "Background";
+            this.buttonToggleBG.Text = "BG";
+            this.buttonToggleBG.ToolTipText = "BG Color";
             this.buttonToggleBG.Click += new System.EventHandler(this.buttonToggleBG_Click);
             // 
             // buttonToggleP1
             // 
             this.buttonToggleP1.CheckOnClick = true;
+            this.buttonToggleP1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonToggleP1.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
             this.buttonToggleP1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonToggleP1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonToggleP1.Name = "buttonToggleP1";
             this.buttonToggleP1.Size = new System.Drawing.Size(23, 22);
-            this.buttonToggleP1.ToolTipText = "Highlight Priority 1";
+            this.buttonToggleP1.Text = "Priority 1";
             this.buttonToggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
             // 
             // toolStripSeparator13
@@ -450,7 +449,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(268, 524);
+            this.tabPage2.Size = new System.Drawing.Size(260, 516);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LAYER 2";
             // 
@@ -481,7 +480,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(268, 524);
+            this.tabPage3.Size = new System.Drawing.Size(260, 516);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "LAYER 3";
             // 
@@ -598,9 +597,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.PictureBox pictureBoxTilesetL1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton buttonToggleCartGrid;

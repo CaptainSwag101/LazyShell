@@ -684,7 +684,6 @@ namespace LAZYSHELL
         private int[] GetQuadPixels(bool isBase, bool isWater, int type, int[][] src)
         {
             int format = 0;
-
             if (!isBase && !isWater) // it is an overhead tile
             {
                 if (tile.SpecialTileFormat == 1)    // vines (green)
@@ -720,7 +719,6 @@ namespace LAZYSHELL
                 format = 1;
             else if (tile.SolidTile && isBase && tile.OverheadTileZ == 0)
                 format = 1;
-
             return src[format];
         }
         private void SetIsometric()
@@ -730,7 +728,6 @@ namespace LAZYSHELL
             int counter = 0;
             int xPixel = 0;
             int yPixel = 0;
-
             // Do the odd rows
             for (int y = 0; y < 65; y++)
             {
@@ -740,13 +737,11 @@ namespace LAZYSHELL
                     yPixel = (y * 16) - 8;
                     tileCoords[tileOffset].X = xPixel;
                     tileCoords[tileOffset].Y = yPixel;
-
                     tileOffset++;
                 }
                 counter += 65;
                 tileOffset = counter;
             }
-
             // Do the even rows
             tileOffset = 33;
             counter = 0;
@@ -758,17 +753,14 @@ namespace LAZYSHELL
                     yPixel = (y * 16);
                     tileCoords[tileOffset].X = xPixel;
                     tileCoords[tileOffset].Y = yPixel;
-
                     tileOffset++;
                 }
                 counter += 65;
                 tileOffset = counter + 33;
             }
-
             int currTilePosX = 0;
             int currTilePosY = 0;
             int offset = 0;
-
             /*********ASSIGN EACH PIXEL (1024 * 1024) A TILE NUMBER*********/
             while (offset < 0x20C2)
             {
@@ -777,12 +769,10 @@ namespace LAZYSHELL
                 SetTileNum(offset, currTilePosX, currTilePosY);
                 offset += 2;
             }
-
             /*********ASSIGN EACH PIXEL (1024 * 1024) X,Y ORTHOGRAPHIC COORDS*********/
             int[] orthCoord = new int[32 * 128];
             int[] orthCoordX = new int[32];
             int[] orthCoordY = new int[128];
-
             for (int y = 0; y < 128; y++)
             {
                 for (int x = 0; x < 32; x++)
@@ -798,7 +788,6 @@ namespace LAZYSHELL
             int leftEdge = 14;
             int rightEdge = 18;
             int temp = 0;
-
             for (int y = 0; y < 8; y++)
             {
                 for (int x = leftEdge; x < rightEdge; x++)
@@ -810,14 +799,11 @@ namespace LAZYSHELL
                         pixelTiles[temp] == 0)
                         pixelTiles[temp] = offset / 2;
                 }
-
                 leftEdge -= 2;
                 rightEdge += 2;
             }
-
             leftEdge = 0;
             rightEdge = 32;
-
             for (int y = 8; y < 16; y++)
             {
                 for (int x = leftEdge; x < rightEdge; x++)
@@ -829,7 +815,6 @@ namespace LAZYSHELL
                         pixelTiles[temp] == 0)
                         pixelTiles[temp] = offset / 2;
                 }
-
                 leftEdge += 2;
                 rightEdge -= 2;
             }
@@ -880,7 +865,6 @@ namespace LAZYSHELL
             int currTilePosY = 0;
             int xPixel = 0;
             int yPixel = 0;
-
             bool twoTiles = false;
             // initialize offset based on column of tile to change
             offset /= 2;
@@ -901,18 +885,15 @@ namespace LAZYSHELL
                     tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
-
                     if (tileNum != 0)
                     {
                         tilePixels = GetTilePixels(tiles[tileNum]);
-
                         for (int a = 752 - tiles[tileNum].TotalHeight; a < 784; a++)
                         {
                             for (int b = 16; b < 32; b++)    // b = 16, ie. start at eastern half
                             {
                                 xPixel = currTilePosX + b;
                                 yPixel = currTilePosY + a - 768;
-
                                 if (xPixel >= 0 && xPixel < 1024 && yPixel >= 0 && yPixel < 1024)
                                 {
                                     if (tilePixels[b + (a * 32)] != 0)
@@ -934,27 +915,21 @@ namespace LAZYSHELL
                             }
                         }
                     }
-
                     offset += 2;
-
                     if (offset >= map.Tilemap_Bytes.Length) break;
-
                     // ...draw western half of right tile
                     tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
-
                     if (tileNum != 0)
                     {
                         tilePixels = GetTilePixels(tiles[tileNum]);
-
                         for (int a = 752 - tiles[tileNum].TotalHeight; a < 784; a++)
                         {
                             for (int b = 0; b < 16; b++)    // b < 16, ie. stop when western half done drawing
                             {
                                 xPixel = currTilePosX + b;
                                 yPixel = currTilePosY + a - 768;
-
                                 if (xPixel >= 0 && xPixel < 1024 && yPixel >= 0 && yPixel < 1024)
                                 {
                                     if (tilePixels[b + (a * 32)] != 0)
@@ -976,9 +951,7 @@ namespace LAZYSHELL
                             }
                         }
                     }
-
                     offset += 64;
-
                     if (offset >= map.Tilemap_Bytes.Length) break;
                 }
                 else
@@ -987,18 +960,15 @@ namespace LAZYSHELL
                     tileNum = Bits.GetShort(map.Tilemap_Bytes, offset);
                     currTilePosX = tileCoords[offset / 2].X;
                     currTilePosY = tileCoords[offset / 2].Y;
-
                     if (tileNum != 0)
                     {
                         tilePixels = GetTilePixels(tiles[tileNum]);
-
                         for (int a = 752 - tiles[tileNum].TotalHeight; a < 784; a++)
                         {
                             for (int b = 0; b < 32; b++)
                             {
                                 xPixel = currTilePosX + b;
                                 yPixel = currTilePosY + a - 768;
-
                                 if (xPixel >= 0 && xPixel < 1024 && yPixel >= 0 && yPixel < 1024)
                                 {
                                     if (tilePixels[b + (a * 32)] != 0)
@@ -1020,9 +990,7 @@ namespace LAZYSHELL
                             }
                         }
                     }
-
                     offset += 64;
-
                     if (offset >= map.Tilemap_Bytes.Length) break;
                 }
                 twoTiles = !twoTiles;

@@ -44,17 +44,16 @@ namespace LAZYSHELL
         // assemblers
         public override void Assemble()
         {
-            if (tilemap_Tiles == null) return;
+            if (tilemap_Tiles == null)
+                return;
             for (int i = 0; i < tilemap_Tiles.Length; i++)
-                tilemap_Bytes[i] = (byte)tilemap_Tiles[i].TileIndex;
+                tilemap_Bytes[i] = (byte)tilemap_Tiles[i].Index;
         }
         // drawing
         private void ChangeSingleTile(int placement, int tile, int x, int y)
         {
             this.tilemap_Tiles[placement] = tileset.Tileset_tiles[tile]; // Change the tile in the layer map
-
             Tile source = this.tilemap_Tiles[placement]; // Grab the new tile
-
             // Draw all 4 subtiles to the appropriate array based on priority
             Do.PixelsToPixels(source.Subtiles[0].Pixels, this.pixels, Width_p, new Rectangle(x, y, 8, 8));
             Do.PixelsToPixels(source.Subtiles[1].Pixels, this.pixels, Width_p, new Rectangle((x + 8), y, 8, 8));
@@ -62,19 +61,18 @@ namespace LAZYSHELL
             Do.PixelsToPixels(source.Subtiles[3].Pixels, this.pixels, Width_p, new Rectangle((x + 8), (y + 8), 8, 8));
             DrawSingleMainscreenTile(x, y);
         }
-        public void Clear(int count)
+        public void Clear()
         {
             Model.MinecartM7TilemapA = new byte[0x2000];
             Model.MinecartM7TilemapB = new byte[0x2000];
             RedrawTilemaps();
         }
-        private void ClearSingleTile(int[] arr, int x, int y)
+        private void ClearSingleTile(int[] pixels, int x, int y)
         {
             int counter = 0;
             for (int i = 0; i < 256; i++)
             {
-                arr[y * Width_p + x + counter] = 0;
-
+                pixels[y * Width_p + x + counter] = 0;
                 counter++;
                 if (counter % 16 == 0)
                 {
@@ -83,14 +81,13 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void CopySingleTileToArray(int[] dest, int[] source, int width, int x, int y)
+        private void CopySingleTileToArray(int[] dst, int[] src, int width, int x, int y)
         {
             int counter = 0;
             for (int i = 0; i < 256; i++)
             {
-                if (source[i] != 0)
-                    dest[y * width + x + counter] = source[i];
-
+                if (src[i] != 0)
+                    dst[y * width + x + counter] = src[i];
                 counter++;
                 if (counter % 16 == 0)
                 {
@@ -98,15 +95,14 @@ namespace LAZYSHELL
                     counter = 0;
                 }
             }
-
         }
-        private void CopyToPixelArray(int[] dest, int[] source)
+        private void CopyToPixelArray(int[] dst, int[] src)
         {
             try
             {
-                for (int i = 0; i < source.Length; i++)
-                    if (source[i] != 0)
-                        dest[i] = source[i];
+                for (int i = 0; i < src.Length; i++)
+                    if (src[i] != 0)
+                        dst[i] = src[i];
             }
             catch
             {
@@ -115,9 +111,10 @@ namespace LAZYSHELL
         }
         private void CreateLayer()
         {
-            if (tilemap_Bytes == null) return;
-            if (tileset.Tileset_tiles == null) return;
-
+            if (tilemap_Bytes == null)
+                return;
+            if (tileset.Tileset_tiles == null)
+                return;
             tilemap_Tiles = new Tile[Width * Height]; // Create our layer here
             int offset = 0;
             for (int i = 0; i < Width * Height && i < tilemap_Bytes.Length; i++)
@@ -198,9 +195,9 @@ namespace LAZYSHELL
             if (tilemap_Tiles != null)
             {
                 if (!ignoretransparent)
-                    return tilemap_Tiles[placement].TileIndex;
+                    return tilemap_Tiles[placement].Index;
                 else if (tilemap_Tiles[placement].Pixels[p.Y * 16 + p.X] != 0)
-                    return tilemap_Tiles[placement].TileIndex;
+                    return tilemap_Tiles[placement].Index;
                 else
                     return 0;
             }

@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class AttacksEditor : Form
     {
         // variables
-        
+            //
         private long checksum;
         private Settings settings = Settings.Default;
         public Spells spellsEditor;

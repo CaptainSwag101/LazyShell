@@ -8,8 +8,8 @@ namespace LAZYSHELL
     [Serializable()]
     public abstract class Tilemap
     {
-        public abstract int Height_p { get; set; }
         public abstract int Width_p { get; set; }
+        public abstract int Height_p { get; set; }
         public abstract int[] Pixels { get; set; }
         public abstract Tile[] Tilemap_Tiles { get; set; }
         public abstract Tile[][] Tilemaps_Tiles { get; set; }

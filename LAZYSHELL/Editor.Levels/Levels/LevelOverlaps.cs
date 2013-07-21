@@ -59,24 +59,18 @@ namespace LAZYSHELL
             ushort offsetStart = 0;
             ushort offsetEnd = 0;
             Overlap tOverlap;
-
             int pointerOffset = (index * 2) + 0x1D4905;
-
             offsetStart = Bits.GetShort(rom, pointerOffset); pointerOffset += 2;
             offsetEnd = Bits.GetShort(rom, pointerOffset);
-
             if (index == 0x1FF) offsetEnd = 0;
-
-            if (offsetStart >= offsetEnd) return; // no overlaps for level
-
+            if (offsetStart >= offsetEnd)
+                return; // no overlaps for level
             offset = offsetStart + 0x1D0000;
-
             while (offset < offsetEnd + 0x1D0000)
             {
                 tOverlap = new Overlap();
                 tOverlap.Disassemble(offset);
                 overlaps.Add(tOverlap);
-
                 offset += 4;
             }
         }
@@ -87,7 +81,8 @@ namespace LAZYSHELL
             int offset = offsetStart + 0x1D0000;
             offsetStart = (ushort)(offset - 0x1D0000);
             // no exit fields for level
-            if (overlaps.Count == 0) return;
+            if (overlaps.Count == 0)
+                return;
             //
             foreach (Overlap overlap in overlaps)
             {
@@ -149,7 +144,6 @@ namespace LAZYSHELL
         // constructor
         public Overlap()
         {
-
         }
         // assemblers
         public void Disassemble(int offset)

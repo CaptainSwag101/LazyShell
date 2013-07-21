@@ -86,7 +86,6 @@ namespace LAZYSHELL
             //    counter++;
             //}
             //// draw shadows
-
             //// draw dynamic VRAM
             //x = y = 0;
             //DrawNPCToVRAM(pixels, ref x, ref y, 0, 0, true);    // Mario
@@ -229,78 +228,91 @@ namespace LAZYSHELL
         //
         private void extraSpriteBuffer_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.ExtraSpriteBuffer = (byte)extraSpriteBuffer.Value;
         }
         private void allyCount_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.AllySpriteBuffer = (byte)allyCount.Value;
             SetPreviewImage();
         }
         private void extraSprites_CheckedChanged(object sender, EventArgs e)
         {
             extraSpriteBuffer.Enabled = extraSprites.Checked;
-            if (updating) return;
+            if (updating)
+                return;
             partition.ExtraSprites = extraSprites.Checked;
             SetPreviewImage();
         }
         private void noWaterPalettes_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.FullPaletteBuffer = noWaterPalettes.Checked;
         }
         private void byte2a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneASprite = (byte)byte2a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte2b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneAMain = (byte)byte2b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte2_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneAIndexing = byte2.Checked;
             SetPreviewImage();
         }
         private void byte3a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneBSprite = (byte)byte3a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte3b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneBMain = (byte)byte3b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte3_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneBIndexing = byte3.Checked;
             SetPreviewImage();
         }
         private void byte4a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneCSprite = (byte)byte4a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte4b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneCMain = (byte)byte4b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte4_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             partition.CloneCIndexing = byte4.Checked;
             SetPreviewImage();
         }

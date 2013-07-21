@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class FormationPacks : Form
     {
         #region Variables
-        
+        //
         private delegate void Function(TreeView treeView, StringComparison stringComparison, bool matchWholeWord);
         private int index { get { return (int)packNum.Value; } set { packNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
@@ -39,7 +39,8 @@ namespace LAZYSHELL
         // functions
         public void RefreshFormationPacks()
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             this.packFormation1.Value = pack.Formations[0];
             this.packFormation2.Value = pack.Formations[1];
@@ -78,7 +79,6 @@ namespace LAZYSHELL
                 {
                     tn = treeView.Nodes.Add("PACK #" + fp.Index);
                     tn.Tag = (int)fp.Index;
-
                     if (Do.Contains(
                         formations[fp.Formations[0]].ToString(),
                         packNameTextBox.Text, stringComparison, matchWholeWord))
@@ -113,26 +113,23 @@ namespace LAZYSHELL
         }
         private void packFormation1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             pack.Formations[0] = (ushort)packFormation1.Value;
-
             RefreshFormationPackStrings();
         }
         private void packFormation2_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             pack.Formations[1] = (ushort)packFormation2.Value;
-
             RefreshFormationPackStrings();
         }
         private void packFormation3_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             pack.Formations[2] = (ushort)packFormation3.Value;
-
             RefreshFormationPackStrings();
         }
         private void packFormationButton1_Click(object sender, EventArgs e)

@@ -1,3 +1,4 @@
+
 namespace LAZYSHELL
 {
     partial class Editor
@@ -6,7 +7,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -55,7 +53,7 @@ namespace LAZYSHELL
             this.openMonsters = new System.Windows.Forms.ToolStripButton();
             this.openSprites = new System.Windows.Forms.ToolStripButton();
             this.openWorldMaps = new System.Windows.Forms.ToolStripButton();
-            this.openNotes = new System.Windows.Forms.ToolStripButton();
+            this.openProject = new System.Windows.Forms.ToolStripButton();
             this.openPatches = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -228,7 +226,7 @@ namespace LAZYSHELL
             this.openSprites,
             this.openWorldMaps,
             this.toolStripSeparator1,
-            this.openNotes,
+            this.openProject,
             this.openPatches});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip2.Location = new System.Drawing.Point(0, 100);
@@ -461,16 +459,16 @@ namespace LAZYSHELL
             // 
             // openNotes
             // 
-            this.openNotes.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
-            this.openNotes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openNotes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.openNotes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openNotes.Name = "openNotes";
-            this.openNotes.Size = new System.Drawing.Size(94, 22);
-            this.openNotes.Text = "Project";
-            this.openNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openNotes.ToolTipText = "Open the project manager";
-            this.openNotes.Click += new System.EventHandler(this.openNotes_Click);
+            this.openProject.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
+            this.openProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openProject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.openProject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openProject.Name = "openNotes";
+            this.openProject.Size = new System.Drawing.Size(94, 22);
+            this.openProject.Text = "Project";
+            this.openProject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openProject.ToolTipText = "Open the project manager";
+            this.openProject.Click += new System.EventHandler(this.openProject_Click);
             // 
             // openPatches
             // 
@@ -846,12 +844,9 @@ namespace LAZYSHELL
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-
         #endregion
-
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RichTextBox romInfo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -907,7 +902,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openMenus;
         private System.Windows.Forms.ToolStripButton openMiniGames;
         private System.Windows.Forms.ToolStripButton help;
-        private System.Windows.Forms.ToolStripButton openNotes;
+        private System.Windows.Forms.ToolStripButton openProject;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripButton openSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;

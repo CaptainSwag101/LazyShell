@@ -591,7 +591,7 @@ namespace LAZYSHELL
                 Bits.SetBitsByByte(rom, offset, (byte)(f << 5), true); offset++;
             }
             // universal functions
-            public void Clear()
+            public new void Clear()
             {
                 x = 0;
                 y = 0;

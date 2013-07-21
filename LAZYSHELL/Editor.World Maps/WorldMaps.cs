@@ -15,7 +15,6 @@ namespace LAZYSHELL
     public partial class WorldMaps : Form
     {
         #region Variables
-
         private long checksum;
         // main
         private delegate void Function();
@@ -58,7 +57,8 @@ namespace LAZYSHELL
         private Bitmap selection;
         private CopyBuffer draggedTiles;
         private CopyBuffer copiedTiles;
-        private CommandStack commandStack = new CommandStack();
+        private CommandStack commandStack = new CommandStack(true);
+        private int commandCount = 0;
         // old
         private ArrayList[] worldMapLocations;
         private int[] pointActivePixels;
@@ -98,12 +98,10 @@ namespace LAZYSHELL
         {
             Cursor.Current = Cursors.WaitCursor;
             updating = true;
-
             this.worldMapTileset.Value = worldMap.Tileset;
             this.pointCount.Value = worldMap.Locations;
             this.worldMapXCoord.Value = worldMap.X;
             this.worldMapYCoord.Value = worldMap.Y;
-
             AddLocations();
             Location temp;
             if (worldMapLocations[index] != null &&
@@ -114,16 +112,12 @@ namespace LAZYSHELL
             }
             else
                 MessageBox.Show("There are not enough locations left to add to the current world map.\nTry reducing the location count used by earlier world maps.", "LAZY SHELL");
-
             tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
-
             SetWorldMapImage();
             SetLocationsImage();
             SetBannerImage();
-
             updating = false;
-
             GC.Collect();
             Cursor.Current = Cursors.Arrow;
         }
@@ -173,7 +167,6 @@ namespace LAZYSHELL
             // Palettes
             palettes.Assemble(Model.WorldMapPalettes, 0);
             Model.Compress(Model.WorldMapPalettes, 0x3E988C, 0x100, 0xD4, "Palette set");
-
             foreach (Location mp in locations)
                 mp.Assemble();
             AssembleLocationTexts();
@@ -262,11 +255,9 @@ namespace LAZYSHELL
             double multiplier = 8; // 8;
             ushort color = 0;
             int[] red = new int[16], green = new int[16], blue = new int[16];
-
             for (int i = 0; i < 16; i++) // 16 colors in palette
             {
                 color = Bits.GetShort(Model.ROM, i * 2 + 0x3DFF00);
-
                 red[i] = (byte)((color % 0x20) * multiplier);
                 green[i] = (byte)(((color >> 5) % 0x20) * multiplier);
                 blue[i] = (byte)(((color >> 10) % 0x20) * multiplier);
@@ -388,7 +379,8 @@ namespace LAZYSHELL
         }
         private void Copy()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             if (draggedTiles != null)
             {
                 this.copiedTiles = draggedTiles;
@@ -414,7 +406,8 @@ namespace LAZYSHELL
         /// </summary>
         private void Drag()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             // make the copy
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -434,17 +427,25 @@ namespace LAZYSHELL
         }
         private void Cut()
         {
+            if (overlay.SelectTS == null || overlay.SelectTS.Size == new Size(0, 0))
+                return;
             Copy();
             Delete();
+            if (commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void Paste(Point location, CopyBuffer buffer)
         {
-            if (buffer == null) return;
+            if (buffer == null)
+                return;
             moving = true;
             // now dragging a new selection
             draggedTiles = buffer;
             selection = buffer.Image;
-            overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size);
+            overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size, pictureBoxTileset);
             pictureBoxTileset.Invalidate();
             defloating = false;
         }
@@ -454,6 +455,8 @@ namespace LAZYSHELL
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
         private void Defloat(CopyBuffer buffer)
         {
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
             int y_ = overlay.SelectTS.Y / 16;
@@ -466,12 +469,16 @@ namespace LAZYSHELL
                         continue;
                     Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileset.Tileset_tiles[(y + y_) * 16 + x + x_] = tile.Copy();
-                    tileset.Tileset_tiles[(y + y_) * 16 + x + x_].TileIndex = (y + y_) * 16 + x + x_;
+                    tileset.Tileset_tiles[(y + y_) * 16 + x + x_].Index = (y + y_) * 16 + x + x_;
                 }
             }
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
+            commandStack.Push(commandCount + 1);
+            commandCount = 0;
             SetWorldMapImage();
             defloating = true;
+            //
+            commandStack.Push(new TilesetCommand(tileset, oldTileset, Model.WorldMapGraphics, 0x20, worldMapName));
         }
         private void Defloat()
         {
@@ -484,10 +491,14 @@ namespace LAZYSHELL
             }
             moving = false;
             overlay.SelectTS = null;
+            Cursor.Position = Cursor.Position;
         }
         private void Delete()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             for (int y = 0; y < overlay.SelectTS.Height / 16 && y + y_ < 0x100; y++)
@@ -497,12 +508,16 @@ namespace LAZYSHELL
             }
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetWorldMapImage();
+            //
+            commandStack.Push(new TilesetCommand(tileset, oldTileset, Model.WorldMapGraphics, 0x20, worldMapName));
+            commandCount++;
         }
         private void Flip(string type)
         {
             if (draggedTiles != null)
                 Defloat(draggedTiles);
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             CopyBuffer buffer = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
@@ -583,6 +598,7 @@ namespace LAZYSHELL
         }
         private void worldMapName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Defloat();
             RefreshWorldMap();
         }
         private void showLocations_Click(object sender, EventArgs e)
@@ -617,37 +633,39 @@ namespace LAZYSHELL
         }
         private void pointCount_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             worldMap.Locations = (byte)pointCount.Value;
             AddLocations();
             SetLocationsImage();
         }
         private void worldMapTileset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             worldMap.Tileset = (byte)worldMapTileset.Value;
             tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
-
             SetWorldMapImage();
         }
         private void worldMapXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             worldMap.X = (sbyte)worldMapXCoord.Value;
             pictureBoxTileset.Invalidate();
         }
         private void worldMapYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             worldMap.Y = (sbyte)worldMapYCoord.Value;
             pictureBoxTileset.Invalidate();
         }
         // image
         private void pictureBoxTileset_Paint(object sender, PaintEventArgs e)
         {
-            if (tilesetImage == null) return;
+            if (tilesetImage == null)
+                return;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             Rectangle rdst = new Rectangle(0, 0, 256, 256);
             if (showLocations.Checked || showBanner.Checked)
@@ -664,10 +682,8 @@ namespace LAZYSHELL
                 y -= Do.PercentDecrease(third, 256) / 4.0;
                 rdst.Offset((int)x, (int)y);
             }
-
             if (buttonToggleBG.Checked)
                 e.Graphics.Clear(Color.FromArgb(palettes.Palette[0]));
-
             if (tilesetImage != null)
                 e.Graphics.DrawImage(tilesetImage, rdst, 0, 0, 256, 256, GraphicsUnit.Pixel);
             if (showLocations.Checked)
@@ -705,7 +721,6 @@ namespace LAZYSHELL
                 Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
                     "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
-
             float[][] matrixItems ={ 
                new float[] {1, 0, 0, 0, 0},
                new float[] {0, 1, 0, 0, 0},
@@ -715,24 +730,22 @@ namespace LAZYSHELL
             ColorMatrix cm = new ColorMatrix(matrixItems);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
             if (mouseEnter && !showLocations.Checked && !showBanner.Checked)
                 DrawHoverBox(e.Graphics);
-
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1, true);
-
+                overlay.DrawTileGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1, true);
             if (overlay.SelectTS != null)
             {
                 if (buttonToggleCartGrid.Checked)
-                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1, Color.Yellow);
+                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
                 else
-                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1);
             }
         }
         private void pictureBoxTileset_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right) return;
+            if (e.Button == MouseButtons.Right)
+                return;
             mouseDownObject = null;
             // set a floor and ceiling for the coordinates
             int x = Math.Max(0, Math.Min(e.X, pictureBoxTileset.Width));
@@ -756,7 +769,7 @@ namespace LAZYSHELL
                 }
                 // if making a new selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == null)
-                    overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16);
+                    overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16, pictureBoxTileset);
                 // if moving a current selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == "selection")
                 {
@@ -852,11 +865,9 @@ namespace LAZYSHELL
         }
         private void pictureBoxTileset_MouseClick(object sender, MouseEventArgs e)
         {
-
         }
         private void pictureBoxTileset_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
         }
         private void pictureBoxTileset_MouseEnter(object sender, EventArgs e)
         {
@@ -890,9 +901,11 @@ namespace LAZYSHELL
                     }
                     break;
                 case Keys.Control | Keys.A:
-                    overlay.SelectTS = new Overlay.Selection(16, 0, 0, 256, 256);
+                    overlay.SelectTS = new Overlay.Selection(16, 0, 0, 256, 256, pictureBoxTileset);
                     pictureBoxTileset.Invalidate();
                     break;
+                case Keys.Control | Keys.Z: buttonEditUndo.PerformClick(); break;
+                case Keys.Control | Keys.Y: buttonEditRedo.PerformClick(); break;
             }
         }
         // drawing buttons
@@ -906,7 +919,19 @@ namespace LAZYSHELL
         }
         private void buttonEditDelete_Click(object sender, EventArgs e)
         {
-            Delete();
+            if (!moving)
+                Delete();
+            else
+            {
+                moving = false;
+                draggedTiles = null;
+                pictureBoxTileset.Invalidate();
+            }
+            if (!moving && commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void buttonEditCopy_Click(object sender, EventArgs e)
         {
@@ -924,11 +949,13 @@ namespace LAZYSHELL
         }
         private void buttonEditUndo_Click(object sender, EventArgs e)
         {
-            Defloat();
+            commandStack.UndoCommand();
+            SetWorldMapImage();
         }
         private void buttonEditRedo_Click(object sender, EventArgs e)
         {
-            Defloat();
+            commandStack.RedoCommand();
+            SetWorldMapImage();
         }
         private void buttonEditSelect_Click(object sender, EventArgs e)
         {
@@ -966,7 +993,6 @@ namespace LAZYSHELL
         }
         private void spriteGraphicsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
         private void openTileEditor_Click(object sender, EventArgs e)
         {

@@ -17,7 +17,6 @@ namespace LAZYSHELL
     public partial class Effects : Form
     {
         #region Variables
-
         private long checksum;
         public long Checksum { get { return checksum; } set { checksum = value; } }
         private Settings settings = Settings.Default;
@@ -141,7 +140,6 @@ namespace LAZYSHELL
         {
             effect.Assemble();
             animation.Assemble();
-
             int i = 0;
             int pointer = 0x252C00;
             int offset = 0x330000;
@@ -193,11 +191,11 @@ namespace LAZYSHELL
         {
             if (paletteEditor == null)
             {
-                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), animation.PaletteSet, 8, 0,8);
+                paletteEditor = new PaletteEditor(new Function(PaletteUpdate), animation.PaletteSet, 8, 0, 8);
                 paletteEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditor.Reload(new Function(PaletteUpdate), animation.PaletteSet, 8, 0,8);
+                paletteEditor.Reload(new Function(PaletteUpdate), animation.PaletteSet, 8, 0, 8);
         }
         public void LoadGraphicEditor()
         {
@@ -281,7 +279,8 @@ namespace LAZYSHELL
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             name.SelectedIndex = (int)number.Value;
             if (animation.Tileset_tiles != null)
                 animations[(int)imageNum.Value].Assemble();
@@ -290,13 +289,15 @@ namespace LAZYSHELL
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             number.Value = name.SelectedIndex;
         }
         // basic
         private void e_paletteIndex_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             effect.PaletteIndex = (byte)e_paletteIndex.Value;
             animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             molds.SetTilesetImage();
@@ -305,17 +306,20 @@ namespace LAZYSHELL
         }
         private void xNegShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             effect.X = (byte)xNegShift.Value;
         }
         private void yNegShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             effect.Y = (byte)yNegShift.Value;
         }
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             effect.AnimationPacket = (byte)imageNum.Value;
             // image properties
             e_paletteSetSize.Value = animation.PaletteSetLength;
@@ -330,7 +334,8 @@ namespace LAZYSHELL
         }
         private void e_paletteSetSize_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             animation.PaletteSetLength = (ushort)e_paletteSetSize.Value;
             // update free space
             animation.Assemble();
@@ -339,7 +344,8 @@ namespace LAZYSHELL
         private void e_graphicSetSize_ValueChanged(object sender, EventArgs e)
         {
             e_graphicSetSize.Value = (int)e_graphicSetSize.Value & (animation.Codec == 1 ? 0xFFFFF0 : 0xFFFFE0);
-            if (updating) return;
+            if (updating)
+                return;
             animation.GraphicSetLength = (int)e_graphicSetSize.Value;
             // update free space
             animation.Assemble();
@@ -349,7 +355,8 @@ namespace LAZYSHELL
         private void e_codec_SelectedIndexChanged(object sender, EventArgs e)
         {
             e_graphicSetSize.Minimum = e_codec.SelectedIndex == 1 ? 16 : 32;
-            if (updating) return;
+            if (updating)
+                return;
             animation.Codec = (ushort)e_codec.SelectedIndex;
             animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
             molds.SetTilesetImage();

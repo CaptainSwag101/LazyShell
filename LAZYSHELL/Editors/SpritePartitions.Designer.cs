@@ -1,3 +1,4 @@
+
 namespace LAZYSHELL
 {
     partial class SpritePartitions
@@ -6,7 +7,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -510,12 +508,9 @@ namespace LAZYSHELL
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-
         #endregion
-
         private System.Windows.Forms.CheckBox byte3;
         private System.Windows.Forms.ComboBox byte2a;
         private System.Windows.Forms.ComboBox byte3a;

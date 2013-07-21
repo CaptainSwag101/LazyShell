@@ -25,9 +25,7 @@ namespace LAZYSHELL
             if (element != null)
                 this.type = element.GetType();
             InitializeComponent();
-
             this.Text = title;
-
             if (type != null)
                 toIndex.Value = toIndex.Maximum = ((object[])element).Length - 1;
             else if (type == null && this.Text == "CLEAR LEVEL DATA...")
@@ -72,11 +70,10 @@ namespace LAZYSHELL
             fromIndex.Maximum = toIndex.Value;
             end = (int)toIndex.Value;
         }
-        public void buttonOK_Click(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             for (int i = start; type != null && i <= end; i++)
                 ((Element[])element)[i].Clear();
-
             if (type == null && this.Text == "CLEAR LEVEL DATA...")
             {
                 for (int i = start; i <= end; i++)
@@ -98,7 +95,7 @@ namespace LAZYSHELL
                         Model.Tilesets[i] = new byte[0x1000];
                     else
                         Model.Tilesets[i] = new byte[0x2000];
-                    Model.EditTileSets[i] = true;
+                    Model.EditTilesets[i] = true;
                 }
             }
             if (type == null && this.Text == "CLEAR TILEMAPS...")
@@ -109,7 +106,7 @@ namespace LAZYSHELL
                         Model.Tilemaps[i] = new byte[0x1000];
                     else
                         Model.Tilemaps[i] = new byte[0x2000];
-                    Model.EditTileMaps[i] = true;
+                    Model.EditTilemaps[i] = true;
                 }
             }
             if (type == null && this.Text == "CLEAR SOLIDITY MAPS...")
@@ -128,7 +125,6 @@ namespace LAZYSHELL
                     Model.EditTilesetsBF[i] = true;
                 }
             }
-
             this.Tag = new Point(start, end);
             this.DialogResult = DialogResult.OK;
             this.Close();

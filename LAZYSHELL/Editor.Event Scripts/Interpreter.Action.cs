@@ -74,8 +74,8 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "",			// 0x3B
             "",			// 0x3C
             "If in air, jump to ${0}",			// 0x3D
-            "",			// 0x3E
-            "",			// 0x3F
+            "Create new NPC ({0}) @ coords of {1} (if null, jump to ${2})",			// 0x3E
+            "Create new NPC ({0}) @ coords of $7010-15 (if null, jump to ${1})",			// 0x3F
             			
             "Walk 1 step east",			// 0x40
             "Walk 1 step southeast",			// 0x41
@@ -178,7 +178,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Play sound (ch.6,7): {0} (speaker balance = {1})",			// 0x9D
             "Fade out current sound to volume {1} (time stretch = {0})",			// 0x9E
             "",			// 0x9F
-
             "Set memory ${0} bit {1}",			// 0xA0
             "Set memory ${0} bit {1}",			// 0xA1
             "Set memory ${0} bit {1}",			// 0xA2
@@ -605,6 +604,15 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0x27:
                 case 0x28:
                     vars[0] = BitConverter.ToString(asc.CommandData, 1);
+                    break;
+                case 0x3E:
+                    vars[0] = Lists.NPCPackets[asc.Param1];
+                    vars[1] = ObjectNames[asc.Param2];
+                    vars[2] = Bits.GetShort(asc.CommandData, 3).ToString("X4");
+                    break;
+                case 0x3F:
+                    vars[0] = Lists.NPCPackets[asc.Param1];
+                    vars[1] = Bits.GetShort(asc.CommandData, 2).ToString("X4");
                     break;
                 case 0x50:
                 case 0x51:

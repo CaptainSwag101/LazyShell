@@ -1709,7 +1709,6 @@ namespace LAZYSHELL
                     sampleIndexes[i].Enabled = true;
                     volumes[i].Enabled = true;
                     volumes[i].Value = globalVol;
-
                 }
                 else
                 {
@@ -2296,7 +2295,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void soundType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             trackName.Items.Clear();
             if (Type == 0)
             {
@@ -2449,17 +2449,20 @@ namespace LAZYSHELL
         }
         private void percussives_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshPercussive();
         }
         private void percussivePitchIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             spc.Percussives[percussives.SelectedIndex].PitchIndex = (Pitch)percussivePitchIndex.SelectedIndex;
         }
         private void percussiveName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             int index = percussiveName.SelectedIndex;
             percussives.Items[percussives.SelectedIndex] = Lists.Numerize(Lists.SampleNames[index], index, 3);
@@ -2468,17 +2471,20 @@ namespace LAZYSHELL
         }
         private void percussivePitch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             spc.Percussives[percussives.SelectedIndex].Pitch = (byte)percussivePitch.SelectedIndex;
         }
         private void percussiveVolume_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             spc.Percussives[percussives.SelectedIndex].Volume = (byte)percussiveVolume.Value;
         }
         private void percussiveBalance_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             spc.Percussives[percussives.SelectedIndex].Balance = (byte)percussiveBalance.Value;
         }
         // Toolstrip
@@ -2504,10 +2510,9 @@ namespace LAZYSHELL
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x042826) - 0x3400 + 0x042C26;
             else
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x043E26) - 0x3400 + 0x044226;
-            Model.HexViewer.Offset = offset & 0x3FFFF0;
-            Model.HexViewer.SelectionStart = (offset & 15) * 3;
-            Model.HexViewer.Compare();
-            Model.HexViewer.Show();
+            Model.HexEditor.SetOffset(offset);
+            Model.HexEditor.Compare();
+            Model.HexEditor.Show();
         }
         private void openPreviewer_Click(object sender, EventArgs e)
         {
@@ -2690,7 +2695,8 @@ namespace LAZYSHELL
         // Track editor, toolstrip
         private void moveLeft_Click(object sender, EventArgs e)
         {
-            if (mouseDownSSC == null) return;
+            if (mouseDownSSC == null)
+                return;
             List<SPCCommand> channel = spc.Channels[mouseDownSSC.Channel];
             int index = mouseDownSSC.Index;
             if (index > 0)
@@ -2702,7 +2708,8 @@ namespace LAZYSHELL
         }
         private void moveRight_Click(object sender, EventArgs e)
         {
-            if (mouseDownSSC == null) return;
+            if (mouseDownSSC == null)
+                return;
             List<SPCCommand> channel = spc.Channels[mouseDownSSC.Channel];
             int index = mouseDownSSC.Index;
             if (index < channel.Count - 1)
@@ -2861,7 +2868,8 @@ namespace LAZYSHELL
         // Track editor, commands
         private void opcodeByte1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2876,7 +2884,8 @@ namespace LAZYSHELL
         }
         private void parameterByte1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2890,7 +2899,8 @@ namespace LAZYSHELL
         }
         private void parameterByte2_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2904,7 +2914,8 @@ namespace LAZYSHELL
         }
         private void parameterByte3_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2918,7 +2929,8 @@ namespace LAZYSHELL
         }
         private void parameterName1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2932,7 +2944,8 @@ namespace LAZYSHELL
         }
         private void noteNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2946,7 +2959,8 @@ namespace LAZYSHELL
         }
         private void noteLengthName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -2960,7 +2974,8 @@ namespace LAZYSHELL
         }
         private void noteLengthByte_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             try
             {
                 ControlAssemble();
@@ -3055,7 +3070,7 @@ namespace LAZYSHELL
             if (rSelect.Checked && overlay.Select != null)
             {
                 e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
-                overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1);
+                overlay.Select.DrawSelectionBox(e.Graphics, 1);
             }
         }
         private void scoreViewPicture_MouseMove(object sender, MouseEventArgs e)
@@ -3188,7 +3203,7 @@ namespace LAZYSHELL
             }
             if (rSelect.Checked)
             {
-                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1);
+                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1, scoreViewPicture);
                 scoreViewPicture.Invalidate();
                 return;
             }
@@ -3657,7 +3672,6 @@ namespace LAZYSHELL
         }
         private void rTie_Click(object sender, EventArgs e)
         {
-
         }
         private void undo_Click(object sender, EventArgs e)
         {

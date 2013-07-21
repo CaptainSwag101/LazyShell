@@ -13,7 +13,6 @@ namespace LAZYSHELL
     public partial class Allies : Form
     {
         #region Variables
-
         private Settings settings = Settings.Default;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
@@ -48,11 +47,9 @@ namespace LAZYSHELL
             for (int i = 0; i < characters.Length; i++)
                 this.characterName.Items.Add(new string(characters[i].Name));
             this.characterName.SelectedIndex = index;
-
             this.startingMagic.Items.Clear();
             for (int i = 0; i < 32; i++)
                 this.startingMagic.Items.Add(new string(Model.Spells[i].Name));
-
             this.startingWeapon.Items.Clear();
             this.startingWeapon.Items.AddRange(Model.ItemNames.Names);
             this.startingAccessory.Items.Clear();
@@ -69,23 +66,20 @@ namespace LAZYSHELL
         }
         public void RefreshCharacter()
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
-
             this.characterName.SelectedIndex = index;
             this.textBoxCharacterName.Text = Do.RawToASCII(character.Name, Lists.KeystrokesMenu);
-
             this.startingLevel.Value = character.StartingLevel;
             this.startingAttack.Value = character.StartingAttack;
             this.startingDefense.Value = character.StartingDefense;
             this.startingMgAttack.Value = character.StartingMgAttack;
             this.startingMgDefense.Value = character.StartingMgDefense;
             this.startingSpeed.Value = character.StartingSpeed;
-
             this.startingWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingWeapon);
             this.startingArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingArmor);
             this.startingAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(character.StartingAccessory);
-
             this.startingExperience.Value = character.StartingExperience;
             this.startingCurrentHP.Value = character.StartingCurrentHP;
             this.startingMaximumHP.Value = character.StartingMaxHP;
@@ -93,7 +87,6 @@ namespace LAZYSHELL
             for (int i = 0; i < character.StartingMagic.Length; i++)
                 this.startingMagic.SetItemChecked(i, character.StartingMagic[i]);
             this.characterName.Invalidate();
-
             updating = false;
         }
         private void RefreshSlots()
@@ -115,7 +108,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void characterName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             index = characterName.SelectedIndex;
             RefreshCharacter();
         }
@@ -127,14 +121,16 @@ namespace LAZYSHELL
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void textBoxCharacterName_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             character.Name = Do.ASCIIToRaw(textBoxCharacterName.Text, Lists.KeystrokesMenu, 10);
             updating = true;
             this.characterName.Items.Clear();
@@ -267,6 +263,5 @@ namespace LAZYSHELL
             characterName_SelectedIndexChanged(null, null);
         }
         #endregion
-
     }
 }

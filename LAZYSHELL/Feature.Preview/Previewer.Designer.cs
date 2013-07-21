@@ -1,3 +1,4 @@
+
 namespace LAZYSHELL
 {
     public partial class Previewer
@@ -6,7 +7,6 @@ namespace LAZYSHELL
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@ namespace LAZYSHELL
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -60,6 +58,7 @@ namespace LAZYSHELL
             this.reset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.enableDebug = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -105,7 +104,7 @@ namespace LAZYSHELL
             this.eventListBox.IntegralHeight = false;
             this.eventListBox.Location = new System.Drawing.Point(3, 17);
             this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(412, 346);
+            this.eventListBox.Size = new System.Drawing.Size(412, 374);
             this.eventListBox.TabIndex = 0;
             this.eventListBox.SelectedIndexChanged += new System.EventHandler(this.eventListBox_SelectedIndexChanged);
             // 
@@ -113,7 +112,7 @@ namespace LAZYSHELL
             // 
             this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.launchButton.FlatAppearance.BorderSize = 0;
-            this.launchButton.Location = new System.Drawing.Point(6, 341);
+            this.launchButton.Location = new System.Drawing.Point(6, 369);
             this.launchButton.Name = "launchButton";
             this.launchButton.Size = new System.Drawing.Size(81, 23);
             this.launchButton.TabIndex = 8;
@@ -156,7 +155,7 @@ namespace LAZYSHELL
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Location = new System.Drawing.Point(89, 341);
+            this.cancelButton.Location = new System.Drawing.Point(89, 369);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(78, 23);
             this.cancelButton.TabIndex = 9;
@@ -485,6 +484,17 @@ namespace LAZYSHELL
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Battlefield";
             // 
+            // enableDebug
+            // 
+            this.enableDebug.AutoSize = true;
+            this.enableDebug.Location = new System.Drawing.Point(6, 344);
+            this.enableDebug.Name = "enableDebug";
+            this.enableDebug.Size = new System.Drawing.Size(151, 17);
+            this.enableDebug.TabIndex = 10;
+            this.enableDebug.Text = "Enable battle debug menu";
+            this.enableDebug.UseVisualStyleBackColor = true;
+            this.enableDebug.CheckedChanged += new System.EventHandler(this.enableDebug_CheckedChanged);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.alliesInParty);
@@ -600,7 +610,7 @@ namespace LAZYSHELL
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(0, 133);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(418, 366);
+            this.groupBox6.Size = new System.Drawing.Size(418, 394);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Source of Entrance";
@@ -618,6 +628,7 @@ namespace LAZYSHELL
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.enableDebug);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
@@ -628,7 +639,7 @@ namespace LAZYSHELL
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(418, 133);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(174, 366);
+            this.panel1.Size = new System.Drawing.Size(174, 394);
             this.panel1.TabIndex = 1;
             // 
             // toolStrip1
@@ -667,7 +678,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 499);
+            this.ClientSize = new System.Drawing.Size(592, 527);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox5);
@@ -693,15 +704,14 @@ namespace LAZYSHELL
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.Label emuPathLabel;
         private System.Windows.Forms.ListBox eventListBox;
         private System.Windows.Forms.Button launchButton;
@@ -747,5 +757,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton baseConvertor;
         private System.Windows.Forms.ToolStripButton helpTips;
+        private System.Windows.Forms.CheckBox enableDebug;
     }
 }

@@ -229,7 +229,6 @@ namespace LAZYSHELL
                         else
                             region = Do.Crop(m.MoldPixels(), out molds[index], 256, 256);
                         m.MoldTilesPerPixel = null;
-
                         if (x + region.Width < maxwidth && biggestWidth < x + region.Width)
                             biggestWidth = x + region.Width;
                         // if reached far right boundary of a row, add current row's height

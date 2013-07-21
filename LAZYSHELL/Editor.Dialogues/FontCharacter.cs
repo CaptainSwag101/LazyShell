@@ -144,7 +144,6 @@ namespace LAZYSHELL
         {
             int[] pixels = GetPixels(palette);
             int right = 0;
-
             for (int x = 0; x < maxWidth; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -162,7 +161,6 @@ namespace LAZYSHELL
         {
             int[] pixels = GetPixels(palette);
             int left = maxWidth;
-
             for (int x = maxWidth - 1; x >= 0; x--)
             {
                 for (int y = 0; y < height; y++)
@@ -180,7 +178,6 @@ namespace LAZYSHELL
         {
             int[] pixels = GetPixels(palette);
             int bottom = 0;
-
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < maxWidth; x++)
@@ -198,7 +195,6 @@ namespace LAZYSHELL
         {
             int[] pixels = GetPixels(palette);
             int top = height;
-
             for (int y = height - 1; y >= 0; y--)
             {
                 for (int x = 0; x < maxWidth; x++)

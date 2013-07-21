@@ -11,7 +11,6 @@ namespace LAZYSHELL
 {
     public partial class Shops : Form
     {
-
         private Settings settings = Settings.Default;
         private Shop[] shops { get { return Model.Shops; } set { Model.Shops = value; } }
         private Shop shop { get { return shops[index]; } set { shops[index] = value; } }
@@ -73,7 +72,8 @@ namespace LAZYSHELL
         }
         public void RefreshShops()
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             for (int i = 0; i < shopItems.Length; i++)
                 shopItems[i].SelectedIndex = Model.ItemNames.GetSortedIndex(shop.Items[i]);
@@ -100,7 +100,8 @@ namespace LAZYSHELL
         }
         private void itemName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, false, false, Model.MenuBG_);
@@ -136,7 +137,7 @@ namespace LAZYSHELL
                 return;
             }
             int index = Convert.ToInt32(selectedItem.Name.Substring(8));
-            if (index == 0) 
+            if (index == 0)
                 return;
             int temp = shop.Items[index - 1];
             shop.Items[index - 1] = shop.Items[index];

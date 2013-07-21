@@ -13,7 +13,7 @@ namespace LAZYSHELL
     public partial class Monsters : Form
     {
         #region Variables
-        
+            //
         private delegate void Function();
         private long checksum;
         private bool updatingMonsters = false;
@@ -24,6 +24,7 @@ namespace LAZYSHELL
         public int Index { get { return (int)monsterNum.Value; } set { monsterNum.Value = value; } }
         private Settings settings = Settings.Default;
         private MenuTextPreview menuTextPreview = new MenuTextPreview();
+        private Previewer previewer;
         //
         private BattleScripts battleScriptsEditor;
         private HackingTools hackingToolsWindow;
@@ -54,7 +55,6 @@ namespace LAZYSHELL
             panel1.Controls.Add(battleScriptsEditor);
             battleScriptsEditor.BringToFront();
             battleScriptsEditor.Visible = true;
-
             toolTip1.InitialDelay = 0;
             InitializeStrings();
             RefreshMonsterTab();
@@ -142,7 +142,6 @@ namespace LAZYSHELL
         private void InsertIntoText(string toInsert)
         {
             char[] newText = new char[MonsterPsychopath.Text.Length + toInsert.Length];
-
             MonsterPsychopath.Text.CopyTo(0, newText, 0, MonsterPsychopath.SelectionStart);
             toInsert.CopyTo(0, newText, MonsterPsychopath.SelectionStart, toInsert.Length);
             MonsterPsychopath.Text.CopyTo(MonsterPsychopath.SelectionStart, newText, MonsterPsychopath.SelectionStart + toInsert.Length, this.MonsterPsychopath.Text.Length - this.MonsterPsychopath.SelectionStart);
@@ -214,7 +213,10 @@ namespace LAZYSHELL
                 Assemble();
                 battleScriptsEditor.Assemble();
                 battleScriptsEditor.Close();
-                if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
+                if (hackingToolsWindow.Visible) 
+                    hackingToolsWindow.Close();
+                if (previewer != null)
+                    previewer.Close();
             }
             else if (result == DialogResult.No)
             {
@@ -222,7 +224,10 @@ namespace LAZYSHELL
                 Model.MonsterNames = null;
                 Model.BattleScripts = null;
                 battleScriptsEditor.Close();
-                if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
+                if (hackingToolsWindow.Visible)
+                    hackingToolsWindow.Close();
+                if (previewer != null)
+                    previewer.Close();
                 return;
             }
             else if (result == DialogResult.Cancel)
@@ -251,16 +256,23 @@ namespace LAZYSHELL
             if (Model.MonsterNames.GetUnsortedName(monster.Index).CompareTo(this.monsterNameText.Text) != 0)
             {
                 monster.Name = Do.ASCIIToRaw(this.monsterNameText.Text, Lists.KeystrokesMenu, 13);
-
                 Model.MonsterNames.SetName(
                     monster.Index,
                     new string(monster.Name));
                 Model.MonsterNames.SortAlphabetically();
-
                 this.monsterName.Items.Clear();
                 this.monsterName.Items.AddRange(Model.MonsterNames.Names);
                 this.monsterName.SelectedIndex = Model.MonsterNames.GetSortedIndex(monster.Index);
             }
+        }
+        private void battlePreview_Click(object sender, EventArgs e)
+        {
+            if (previewer == null || !previewer.Visible)
+                previewer = new Previewer(Index, EType.BattleScript);
+            else
+                previewer.Reload(Index, EType.BattleScript);
+            previewer.Show();
+            previewer.BringToFront();
         }
         // vital stats
         private void MonsterValHP_ValueChanged(object sender, EventArgs e)
@@ -487,18 +499,15 @@ namespace LAZYSHELL
                     MonsterPsychopath.SelectionStart = tempSel + 2;
                 }
             }
-
             bool flag = textHelper.VerifySymbols(this.MonsterPsychopath.Text.ToCharArray(), byteView);
             if (flag)
             {
                 this.MonsterPsychopath.BackColor = SystemColors.Window;
                 monster.SetPsychopath(this.MonsterPsychopath.Text, byteView);
-
                 if (!monster.PsychopathError)
                 {
                     monster.SetPsychopath(MonsterPsychopath.Text, byteView);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychopath, false);
-
                     psychopathTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
                     pictureBoxPsychopath.Invalidate();
                 }

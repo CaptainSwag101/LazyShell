@@ -76,10 +76,8 @@ namespace LAZYSHELL.ScriptsEditor
                 if (index == 70) offset = baseOffset + 6;
                 if (index == 85) offset = baseOffset + 6;
             }
-
             if (this.commands == null)
                 this.commands = new List<AnimationCommand>();
-
             while (offset < rom.Length)
             {
                 if (offset == 0x3A6BA1)   // another annoying rare case

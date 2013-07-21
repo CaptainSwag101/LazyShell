@@ -14,7 +14,6 @@ namespace LAZYSHELL
     {
         #region Variables
         // main editor accessed variables
-
         private Effects effectsEditor;
         private Effect effect { get { return effectsEditor.Effect; } set { effectsEditor.Effect = value; } }
         private EffectMolds molds { get { return effectsEditor.Molds; } set { effectsEditor.Molds = value; } }
@@ -232,7 +231,8 @@ namespace LAZYSHELL
         }
         private void frame_MouseDown(object sender, MouseEventArgs e)
         {
-            if (PlaybackSequence.IsBusy) return;
+            if (PlaybackSequence.IsBusy)
+                return;
             PictureBox frame = (PictureBox)sender;
             frame.Focus();
             index = (int)frame.Tag;
@@ -245,7 +245,8 @@ namespace LAZYSHELL
         }
         private void frame_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (PlaybackSequence.IsBusy) return;
+            if (PlaybackSequence.IsBusy)
+                return;
             if (e.KeyData == Keys.Right || e.KeyData == Keys.Down)
                 index++;
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
@@ -260,18 +261,21 @@ namespace LAZYSHELL
         }
         private void listBoxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             index = listBoxFrames.SelectedIndex;
         }
         private void duration_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             frame.Duration = (byte)duration.Value;
             SetSequenceFrameImages();
         }
         private void frameMold_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             if ((int)frameMold.Value >= animation.Molds.Count)
                 frameMold.Value = animation.Molds.Count - 1;
             frame.Mold = (byte)frameMold.Value;
@@ -384,7 +388,8 @@ namespace LAZYSHELL
         }
         private void moveFrameBack_Click(object sender, EventArgs e)
         {
-            if (this.index == 0) return;
+            if (this.index == 0)
+                return;
             int index = this.index - 1;
             sequence.Frames.Reverse(index, 2);
             sequenceImages.Reverse(index, 2);
@@ -393,7 +398,8 @@ namespace LAZYSHELL
         }
         private void moveFrameFoward_Click(object sender, EventArgs e)
         {
-            if (this.index == sequence.Frames.Count - 1) return;
+            if (this.index == sequence.Frames.Count - 1)
+                return;
             int index = this.index;
             sequence.Frames.Reverse(index, 2);
             sequenceImages.Reverse(index, 2);

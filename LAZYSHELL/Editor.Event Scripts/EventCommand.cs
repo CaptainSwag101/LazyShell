@@ -87,7 +87,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             // Assembles this command back to binary data
             // Stores it in byte[]eventData
             int start;
-
             if (Locked)   // for events 0xD01 and 0xE91 only
             {
                 start = 0;
@@ -105,19 +104,16 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 b = commandData[1];
                 if (Param1 >= 0xF0)
                     c = commandData[2];
-
                 foreach (ActionCommand aqc in queue.Commands)
                 {
                     aqc.Assemble();
                     offset += aqc.Length;
                 }
-
                 commandData = new byte[offset];
                 commandData[0] = a;
                 commandData[1] = b;
                 if (Param1 >= 0xF0)
                     commandData[2] = c;
-
                 foreach (ActionCommand aqc in queue.Commands)
                 {
                     aqc.CommandData.CopyTo(commandData, start);
@@ -129,9 +125,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         public void RefreshOffsets(int offset)
         {
             this.offset = offset;
-
             Assemble(); // added 2008-12-20
-
             if (Locked)
             {
                 foreach (ActionCommand aqc in queue.Commands)
@@ -150,21 +144,22 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 }
             }
         }
-        public void ModifyOffset(int delta, int conditionOffset)
+        /// <summary>
+        /// Adds/subtracts a value from the command's offset and any pointers in the command that point to or after a given offset.
+        /// </summary>
+        /// <param name="delta">The value to add/subtract from any pointers.</param>
+        /// <param name="conditionOffset">The offset to compare to.</param>
+        public void UpdatePointer(int delta, int conditionOffset)
         {
             ushort pointer;
-
             if (this.offset >= conditionOffset || conditionOffset == 0x7FFFFFFF)
             {
                 this.offset += delta;
                 this.internalOffset += delta;   // 2009-01-07
             }
-
             if ((this.Locked || this.QueueTrigger) && this.queue != null)
                 queue.UpdateOffsets(delta, conditionOffset);
-
             conditionOffset &= 0xFFFF; // convert to pointer
-
             if (commandData[0] == 0x42 || commandData[0] == 0x67 || commandData[0] == 0xE9)
             {
                 pointer = ReadPointerSpecial(0);
@@ -180,26 +175,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 if (pointer >= conditionOffset)
                     WritePointer((ushort)(pointer + delta));
             }
-        }
-        public override void WritePointerSpecial(int index, ushort write)
-        {
-            if (commandData[0] != 0xE9 && commandData[0] != 0x42 && commandData[0] != 0x67)
-                throw new Exception("Not Command 0xE9, 0x42 or 0x67");
-
-            if (index == 0)
-                Bits.SetShort(commandData, 1, write);
-            else if (index == 1)
-                Bits.SetShort(commandData, 3, write);
-        }
-        public override ushort ReadPointerSpecial(int index)
-        {
-            if (commandData[0] != 0xE9 && commandData[0] != 0x42 && commandData[0] != 0x67)
-                throw new Exception("Not Command 0xE9, 0x42 or 0x67");
-            if (index == 0)
-                return Bits.GetShort(commandData, 1);
-            else if (index == 1)
-                return Bits.GetShort(commandData, 3);
-            return 0;
         }
         public override ushort ReadPointer()
         {
@@ -269,11 +244,16 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                             return Bits.GetShort(commandData, 5);
                         default:
                             return 0;
-
                     }
                 default:
                     return 0;
             }
+        }
+        public override ushort ReadPointerSpecial(int index)
+        {
+            if (commandData[0] != 0xE9 && commandData[0] != 0x42 && commandData[0] != 0x67)
+                throw new Exception("Not Command 0xE9, 0x42 or 0x67");
+            return Bits.GetShort(commandData, index * 2 + 1);
         }
         public override void WritePointer(ushort pointer)
         {
@@ -347,12 +327,16 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 default:
                     break;
             }
-
+        }
+        public override void WritePointerSpecial(int index, ushort pointer)
+        {
+            if (commandData[0] != 0xE9 && commandData[0] != 0x42 && commandData[0] != 0x67)
+                throw new Exception("Not Command 0xE9, 0x42 or 0x67");
+            Bits.SetShort(commandData, index * 2 + 1, pointer);
         }
         public void ResetOriginalOffset()
         {
             this.originalOffset = this.offset;
-
             if (this.QueueTrigger && this.queue != null && this.queue.Commands != null)
             {
                 foreach (ActionCommand aqc in queue.Commands)

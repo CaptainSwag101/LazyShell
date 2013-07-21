@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class SpaceAnalyzer : Form
     {
         // variables
-        
+            //
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         // constructor
         public SpaceAnalyzer()
@@ -27,18 +27,15 @@ namespace LAZYSHELL
         {
             ProgressBar pBar = new ProgressBar(Model.ROM, "CALCULATING...", 428);
             pBar.Show();
-
             int bank, index, size, bankIndex;
             int offset;
             Color bg;
             ListViewItem item;
-
             bank = 0x160000; // Set bank pointer
             index = 0; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x00DA; // Set initial offset for this bank
             bg = Color.White;
-
             for (; index < 109; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.Tilemaps[index], null);
@@ -46,7 +43,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -59,17 +55,14 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 tilemapListView.Items.Add(item);
                 pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             bank = 0x170000; // Set bank pointer
             index = 109; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x006C; // Set initial offset for this bank
             bg = Color.FromArgb(240, 240, 240);
-
             for (; index < 163; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.Tilemaps[index], null);
@@ -77,7 +70,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -90,17 +82,14 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 tilemapListView.Items.Add(item);
                 pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             bank = 0x180000; // Set bank pointer
             index = 163; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0070; // Set initial offset for this bank
             bg = Color.FromArgb(224, 224, 224);
-
             for (; index < 219; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.Tilemaps[index], null);
@@ -108,7 +97,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -121,17 +109,14 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 tilemapListView.Items.Add(item);
                 pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             bank = 0x190000; // Set bank pointer
             index = 219; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0070; // Set initial offset for this bank
             bg = Color.FromArgb(240, 240, 240);
-
             for (; index < 275; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.Tilemaps[index], null);
@@ -139,7 +124,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -152,17 +136,14 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 tilemapListView.Items.Add(item);
                 pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             bank = 0x1A0000; // Set bank pointer
             index = 275; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0044; // Set initial offset for this bank
             bg = Color.FromArgb(255, 255, 255);
-
             for (; index < 309; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.Tilemaps[index], null);
@@ -170,7 +151,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -183,11 +163,9 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 tilemapListView.Items.Add(item);
                 pBar.PerformStep("TILE MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
 
             /****PHYSICAL MAPS****/
             bank = 0x1B0000; // Set bank pointer
@@ -195,7 +173,6 @@ namespace LAZYSHELL
             bankIndex = 0;
             offset = 0x00A0; // Set initial offset for this bank
             bg = Color.White;
-
             for (; index < 80; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.SolidityMaps[index], null);
@@ -203,7 +180,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -216,17 +192,14 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 soliditymapListView.Items.Add(item);
                 pBar.PerformStep("SOLIDITY MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             bank = 0x1C0000; // Set bank pointer
             index = 80; // Set initial index for this bank
             bankIndex = 0;
             offset = 0x0050; // Set initial offset for this bank
             bg = Color.FromArgb(240, 240, 240);
-
             for (; index < 120; index++, bankIndex++)
             {
                 size = Comp.Compress(Model.SolidityMaps[index], null);
@@ -234,7 +207,6 @@ namespace LAZYSHELL
                 {
                     bg = Color.Red;
                 }
-
                 item = new ListViewItem(new string[]
                 {
                     index.ToString(),
@@ -247,11 +219,9 @@ namespace LAZYSHELL
                 item.BackColor = bg;
                 soliditymapListView.Items.Add(item);
                 pBar.PerformStep("SOLIDITY MAP #" + index.ToString("d3"));
-
                 offset++;
                 offset += size;
             }
-
             pBar.Close();
         }
         // event handlers

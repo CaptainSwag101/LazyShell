@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class TilemapEditor
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -29,7 +27,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilemapEditor));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toggleCartGrid = new System.Windows.Forms.ToolStripButton();
             this.toggleIsoGrid = new System.Windows.Forms.ToolStripButton();
@@ -38,10 +35,10 @@
             this.toggleL2 = new System.Windows.Forms.ToolStripButton();
             this.toggleL3 = new System.Windows.Forms.ToolStripButton();
             this.toggleBG = new System.Windows.Forms.ToolStripButton();
+            this.toggleP1 = new System.Windows.Forms.ToolStripButton();
             this.toggleTileMods = new System.Windows.Forms.ToolStripButton();
             this.toggleSolid = new System.Windows.Forms.ToolStripButton();
             this.toggleSolidMods = new System.Windows.Forms.ToolStripButton();
-            this.toggleP1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.toggleMushrooms = new System.Windows.Forms.ToolStripButton();
             this.toggleRails = new System.Windows.Forms.ToolStripButton();
@@ -132,7 +129,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(836, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(832, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toggleCartGrid
@@ -217,6 +214,17 @@
             this.toggleBG.ToolTipText = "Background";
             this.toggleBG.Click += new System.EventHandler(this.buttonToggleBG_Click);
             // 
+            // toggleP1
+            // 
+            this.toggleP1.CheckOnClick = true;
+            this.toggleP1.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
+            this.toggleP1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toggleP1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleP1.Name = "toggleP1";
+            this.toggleP1.Size = new System.Drawing.Size(23, 22);
+            this.toggleP1.ToolTipText = "Priority 1";
+            this.toggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
+            // 
             // toggleTileMods
             // 
             this.toggleTileMods.CheckOnClick = true;
@@ -252,17 +260,6 @@
             this.toggleSolidMods.Size = new System.Drawing.Size(23, 22);
             this.toggleSolidMods.Text = "Solidity Mods";
             this.toggleSolidMods.Click += new System.EventHandler(this.buttonToggleSolidMods_Click);
-            // 
-            // toggleP1
-            // 
-            this.toggleP1.CheckOnClick = true;
-            this.toggleP1.Image = global::LAZYSHELL.Properties.Resources.priority1ON;
-            this.toggleP1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toggleP1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toggleP1.Name = "toggleP1";
-            this.toggleP1.Size = new System.Drawing.Size(23, 22);
-            this.toggleP1.ToolTipText = "Priority 1";
-            this.toggleP1.Click += new System.EventHandler(this.buttonToggleP1_Click);
             // 
             // toolStripSeparator14
             // 
@@ -407,24 +404,24 @@
             // 
             this.toolStripSeparator13.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(21, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(27, 6);
             // 
             // toolStripSeparator46
             // 
             this.toolStripSeparator46.Name = "toolStripSeparator46";
-            this.toolStripSeparator46.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator46.Size = new System.Drawing.Size(29, 6);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(21, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(27, 6);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(21, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(27, 6);
             // 
             // contextMenuStrip1
             // 
@@ -496,7 +493,7 @@
             this.panelOpacity.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelOpacity.Controls.Add(this.overlayOpacity);
             this.panelOpacity.Controls.Add(this.labelOverlayOpacity);
-            this.panelOpacity.Location = new System.Drawing.Point(210, 25);
+            this.panelOpacity.Location = new System.Drawing.Point(200, 25);
             this.panelOpacity.Name = "panelOpacity";
             this.panelOpacity.Size = new System.Drawing.Size(248, 21);
             this.panelOpacity.TabIndex = 1;
@@ -535,10 +532,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTileCoords.BackColor = System.Drawing.SystemColors.Control;
             this.labelTileCoords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTileCoords.Location = new System.Drawing.Point(29, 629);
+            this.labelTileCoords.Location = new System.Drawing.Point(29, 625);
             this.labelTileCoords.Name = "labelTileCoords";
             this.labelTileCoords.Padding = new System.Windows.Forms.Padding(0, 0, 2, 2);
-            this.labelTileCoords.Size = new System.Drawing.Size(807, 24);
+            this.labelTileCoords.Size = new System.Drawing.Size(803, 24);
             this.labelTileCoords.TabIndex = 4;
             this.labelTileCoords.Text = "(x: 0, y: 0)  Tile  |  (x: 0, y: 0) Isometric  |  (x: 0, y: 0) Pixel";
             this.labelTileCoords.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -574,7 +571,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 25);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(26, 628);
+            this.toolStrip2.Size = new System.Drawing.Size(32, 624);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -586,13 +583,13 @@
             this.editAllLayers.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editAllLayers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.editAllLayers.Name = "editAllLayers";
-            this.editAllLayers.Size = new System.Drawing.Size(23, 17);
+            this.editAllLayers.Size = new System.Drawing.Size(29, 17);
             this.editAllLayers.Text = "Edit All Layers Simultaneously (A)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(29, 6);
             // 
             // buttonEditDraw
             // 
@@ -602,7 +599,7 @@
             this.buttonEditDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDraw.Name = "buttonEditDraw";
-            this.buttonEditDraw.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditDraw.Size = new System.Drawing.Size(29, 17);
             this.buttonEditDraw.Text = "Draw (D)";
             this.buttonEditDraw.Click += new System.EventHandler(this.buttonEditDraw_Click);
             // 
@@ -614,7 +611,7 @@
             this.buttonEditErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditErase.Name = "buttonEditErase";
-            this.buttonEditErase.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditErase.Size = new System.Drawing.Size(29, 17);
             this.buttonEditErase.Text = "Erase (E)";
             this.buttonEditErase.Click += new System.EventHandler(this.buttonEditErase_Click);
             // 
@@ -626,7 +623,7 @@
             this.buttonEditSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditSelect.Name = "buttonEditSelect";
-            this.buttonEditSelect.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditSelect.Size = new System.Drawing.Size(29, 17);
             this.buttonEditSelect.Text = "Select (S)";
             this.buttonEditSelect.Click += new System.EventHandler(this.buttonEditSelect_Click);
             // 
@@ -637,7 +634,7 @@
             this.selectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.selectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.selectAll.Name = "selectAll";
-            this.selectAll.Size = new System.Drawing.Size(23, 17);
+            this.selectAll.Size = new System.Drawing.Size(29, 17);
             this.selectAll.Text = "Select All (Ctrl+A)";
             this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
             // 
@@ -649,7 +646,7 @@
             this.buttonEditDropper.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDropper.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDropper.Name = "buttonEditDropper";
-            this.buttonEditDropper.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditDropper.Size = new System.Drawing.Size(29, 17);
             this.buttonEditDropper.Text = "Select Color (P)";
             this.buttonEditDropper.Click += new System.EventHandler(this.buttonEditDropper_Click);
             // 
@@ -661,7 +658,7 @@
             this.buttonEditFill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditFill.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditFill.Name = "buttonEditFill";
-            this.buttonEditFill.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditFill.Size = new System.Drawing.Size(29, 17);
             this.buttonEditFill.Text = "Fill with tile (F)";
             this.buttonEditFill.Click += new System.EventHandler(this.buttonEditFill_Click);
             // 
@@ -673,7 +670,7 @@
             this.buttonEditTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditTemplate.Name = "buttonEditTemplate";
-            this.buttonEditTemplate.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditTemplate.Size = new System.Drawing.Size(29, 17);
             this.buttonEditTemplate.Text = "Draw Template (T)";
             this.buttonEditTemplate.Click += new System.EventHandler(this.buttonEditTemplate_Click);
             // 
@@ -684,7 +681,7 @@
             this.buttonEditDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditDelete.Name = "buttonEditDelete";
-            this.buttonEditDelete.Size = new System.Drawing.Size(23, 15);
+            this.buttonEditDelete.Size = new System.Drawing.Size(29, 15);
             this.buttonEditDelete.Text = "Delete (Del)";
             this.buttonEditDelete.Click += new System.EventHandler(this.buttonEditDelete_Click);
             // 
@@ -695,7 +692,7 @@
             this.buttonEditCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCut.Name = "buttonEditCut";
-            this.buttonEditCut.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditCut.Size = new System.Drawing.Size(29, 17);
             this.buttonEditCut.Text = "Cut (Ctrl+X)";
             this.buttonEditCut.Click += new System.EventHandler(this.buttonEditCut_Click);
             // 
@@ -706,7 +703,7 @@
             this.buttonEditCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditCopy.Name = "buttonEditCopy";
-            this.buttonEditCopy.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditCopy.Size = new System.Drawing.Size(29, 17);
             this.buttonEditCopy.Text = "Copy (Ctrl+C)";
             this.buttonEditCopy.Click += new System.EventHandler(this.buttonEditCopy_Click);
             // 
@@ -717,7 +714,7 @@
             this.buttonEditPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditPaste.Name = "buttonEditPaste";
-            this.buttonEditPaste.Size = new System.Drawing.Size(23, 17);
+            this.buttonEditPaste.Size = new System.Drawing.Size(29, 17);
             this.buttonEditPaste.Text = "Paste (Ctrl+V)";
             this.buttonEditPaste.Click += new System.EventHandler(this.buttonEditPaste_Click);
             // 
@@ -728,7 +725,7 @@
             this.buttonEditUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditUndo.Name = "buttonEditUndo";
-            this.buttonEditUndo.Size = new System.Drawing.Size(23, 12);
+            this.buttonEditUndo.Size = new System.Drawing.Size(29, 12);
             this.buttonEditUndo.Text = "Undo (Ctrl+Z)";
             this.buttonEditUndo.Click += new System.EventHandler(this.buttonEditUndo_Click);
             // 
@@ -739,7 +736,7 @@
             this.buttonEditRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonEditRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonEditRedo.Name = "buttonEditRedo";
-            this.buttonEditRedo.Size = new System.Drawing.Size(23, 12);
+            this.buttonEditRedo.Size = new System.Drawing.Size(29, 12);
             this.buttonEditRedo.Text = "Redo (Ctrl+Y)";
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
             // 
@@ -751,7 +748,7 @@
             this.buttonZoomIn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomIn.Name = "buttonZoomIn";
-            this.buttonZoomIn.Size = new System.Drawing.Size(23, 17);
+            this.buttonZoomIn.Size = new System.Drawing.Size(29, 17);
             this.buttonZoomIn.Text = "Zoom In (Ctrl+Up)";
             this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomIn_Click);
             // 
@@ -763,14 +760,14 @@
             this.buttonZoomOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonZoomOut.Name = "buttonZoomOut";
-            this.buttonZoomOut.Size = new System.Drawing.Size(23, 17);
+            this.buttonZoomOut.Size = new System.Drawing.Size(29, 17);
             this.buttonZoomOut.Text = "Zoom Out (Ctrl+Down)";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOut_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(29, 6);
             // 
             // buttonDragSolidity
             // 
@@ -781,7 +778,7 @@
             this.buttonDragSolidity.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonDragSolidity.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDragSolidity.Name = "buttonDragSolidity";
-            this.buttonDragSolidity.Size = new System.Drawing.Size(23, 20);
+            this.buttonDragSolidity.Size = new System.Drawing.Size(29, 20);
             this.buttonDragSolidity.ToolTipText = "Click/drag solidity tiles (Q)";
             this.buttonDragSolidity.Click += new System.EventHandler(this.buttonDragSolidity_Click);
             // 
@@ -795,7 +792,7 @@
             this.panelLevelPicture.Controls.Add(this.pictureBoxLevel);
             this.panelLevelPicture.Location = new System.Drawing.Point(29, 31);
             this.panelLevelPicture.Name = "panelLevelPicture";
-            this.panelLevelPicture.Size = new System.Drawing.Size(803, 597);
+            this.panelLevelPicture.Size = new System.Drawing.Size(799, 593);
             this.panelLevelPicture.TabIndex = 3;
             this.panelLevelPicture.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panelLevelPicture_Scroll);
             // 
@@ -808,6 +805,10 @@
             this.pictureBoxLevel.Size = new System.Drawing.Size(1024, 1024);
             this.pictureBoxLevel.TabIndex = 0;
             this.pictureBoxLevel.TabStop = false;
+            this.pictureBoxLevel.Zoom = 1;
+            this.pictureBoxLevel.ZoomBoxEnabled = false;
+            this.pictureBoxLevel.ZoomBoxPosition = new System.Drawing.Point(32, 32);
+            this.pictureBoxLevel.ZoomBoxZoom = 4;
             this.pictureBoxLevel.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxLevel_Paint);
             this.pictureBoxLevel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDoubleClick);
             this.pictureBoxLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxLevel_MouseDown);
@@ -822,7 +823,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 653);
+            this.ClientSize = new System.Drawing.Size(832, 649);
             this.ControlBox = false;
             this.Controls.Add(this.labelTileCoords);
             this.Controls.Add(this.panelOpacity);
@@ -852,7 +853,6 @@
 
         }
         #endregion
-
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toggleCartGrid;
         private System.Windows.Forms.ToolStripButton toggleIsoGrid;

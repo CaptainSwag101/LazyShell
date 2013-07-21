@@ -251,13 +251,11 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         length = GetOpcodeLength(rom, offset);
                         temp = new AnimationCommand(Bits.GetByteArray(rom, offset, length), offset, script, this);
                         commands.Add(temp);
-
                         if (rom[offset] == 0x07 || // end animation packet
                             rom[offset] == 0x09 || // jump directly to address (thus ending this)
                             rom[offset] == 0x11 || // end subroutine
                             rom[offset] == 0x5E)   // end sprite subroutine
                             break;
-
                         offset += length;
                     }
                     break;
@@ -301,15 +299,12 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         {
             byte opcode, option;
             int len;
-
             opcode = data[offset];
             if (data.Length - offset > 1)
                 option = data[offset + 1];
             else
                 option = 0;
-
             len = A_ScriptEnums.GetCommandLength(opcode, option);
-
             return len;
         }
         public bool ContainsOffset(AnimationCommand parent, int offset)

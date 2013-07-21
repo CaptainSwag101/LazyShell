@@ -51,7 +51,6 @@ namespace LAZYSHELL
             ushort tile;
             Subtile source;
             int offset = 0;
-
             for (int i = 0; i < dst.Length; i++)
             {
                 for (int z = 0; z < 2; z++)

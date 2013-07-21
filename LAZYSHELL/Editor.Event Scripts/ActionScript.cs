@@ -18,7 +18,36 @@ namespace LAZYSHELL.ScriptsEditor
         // class variables
         private List<ActionCommand> commands;
         public List<ActionCommand> Commands { get { return this.commands; } set { this.commands = value; } }
+        public ActionCommand LastCommand
+        {
+            get
+            {
+                if (commands.Count > 0)
+                    return commands[commands.Count - 1];
+                else
+                    return null;
+            }
+        }
         private byte[] script; public byte[] Script { get { return script; } set { script = value; } }
+        private int baseOffset; public int BaseOffset { get { return this.baseOffset; } set { this.baseOffset = value; } }
+        private int endInternalOffset
+        {
+            get
+            {
+                if (LastCommand != null)
+                    return LastCommand.InternalOffset + LastCommand.Length;
+                return 0;
+            }
+        }
+        private int endOffset
+        {
+            get
+            {
+                if (LastCommand != null)
+                    return LastCommand.Offset + LastCommand.Length;
+                return 0;
+            }
+        }
         public int Length
         {
             get
@@ -26,7 +55,7 @@ namespace LAZYSHELL.ScriptsEditor
                 return script.Length;
             }
         }
-        private int baseOffset; public int BaseOffset { get { return this.baseOffset; } set { this.baseOffset = value; } }
+        public bool Undoing;
         private bool embedded = false;
         public bool Embedded { get { return this.embedded; } set { this.embedded = value; } }
         // constructors
@@ -153,6 +182,7 @@ namespace LAZYSHELL.ScriptsEditor
         {
             if (commands == null)
                 return;
+            Assemble();
             // refresh offsets
             int offset = baseOffset;
             foreach (ActionCommand asc in commands)
@@ -166,60 +196,115 @@ namespace LAZYSHELL.ScriptsEditor
             while (!it.IsDone)
             {
                 eac = it.Next();
-                eac.PointerChangedA = false;
-                eac.PointerChangedB = false;
+                eac.PointerChanged = new bool[256];
             }
             it = new ScriptIterator(this);
             while (!it.IsDone)
             {
                 eac = it.Next();
-                if (State.Instance.AutoPointerUpdate)
+                if (!Undoing && State.Instance.AutoPointerUpdate)
                     UpdatePointersToCommand(eac);
                 eac.InternalOffset = eac.Offset;
             }
+            if (!Undoing && State.Instance.AutoPointerUpdate)
+                UpdatePointersAfterScript();
         }
+        /// <summary>
+        /// Updates all of the pointers in the script pointing directly to a given command's offset.
+        /// </summary>
+        /// <param name="reference">The reference command in the script.</param>
         private void UpdatePointersToCommand(EventActionCommand reference)
         {
-            ushort pointer;
-            EventActionCommand eac;
             ScriptIterator it = new ScriptIterator(this);
             while (!it.IsDone)
             {
-                eac = it.Next();
+                EventActionCommand eac = it.Next();
+                int pointer;
                 if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
                 {
                     if (eac.GetType() == typeof(EventCommand) || eac.Opcode == 0xE9)
                     {
                         pointer = eac.ReadPointerSpecial(0);
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChanged[0])
                         {
                             eac.WritePointerSpecial(0, (ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedA = true;
+                            eac.PointerChanged[0] = true;
                         }
                         pointer = eac.ReadPointerSpecial(1);
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedB)
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChanged[1])
                         {
                             eac.WritePointerSpecial(1, (ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedB = true;
+                            eac.PointerChanged[1] = true;
                         }
                     }
                     else
                     {
                         pointer = eac.ReadPointer();
-                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                        if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChanged[0])
                         {
                             eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
-                            eac.PointerChangedA = true;
+                            eac.PointerChanged[0] = true;
                         }
                     }
                 }
                 else
                 {
                     pointer = eac.ReadPointer();
-                    if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChangedA)
+                    if (pointer == (reference.InternalOffset & 0xFFFF) && !eac.PointerChanged[0])
                     {
                         eac.WritePointer((ushort)(reference.Offset & 0xFFFF));
-                        eac.PointerChangedA = true;
+                        eac.PointerChanged[0] = true;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Adds/subtracts a value from all of the pointers in the script that point to an offset after the script.
+        /// </summary>
+        /// <param name="delta">The value to add/subtract.</param>
+        private void UpdatePointersAfterScript()
+        {
+            int delta = this.endOffset - this.endInternalOffset;
+            //
+            ScriptIterator it = new ScriptIterator(this);
+            while (!it.IsDone)
+            {
+                EventActionCommand eac = it.Next();
+                int pointer;
+                if (eac.Opcode == 0x42 || eac.Opcode == 0x67 || eac.Opcode == 0xE9)
+                {
+                    if (eac.GetType() == typeof(EventCommand) || eac.Opcode == 0xE9)
+                    {
+                        pointer = eac.ReadPointerSpecial(0);
+                        if (pointer >= (this.endInternalOffset & 0xFFFF) && !eac.PointerChanged[0])
+                        {
+                            eac.WritePointerSpecial(0, (ushort)(pointer + delta));
+                            eac.PointerChanged[0] = true;
+                        }
+                        pointer = eac.ReadPointerSpecial(1);
+                        if (pointer >= (this.endInternalOffset & 0xFFFF) && !eac.PointerChanged[1])
+                        {
+                            eac.WritePointerSpecial(1, (ushort)(pointer + delta));
+                            eac.PointerChanged[1] = true;
+                        }
+                    }
+                    else
+                    {
+                        pointer = eac.ReadPointer();
+                        if (pointer >= (this.endInternalOffset & 0xFFFF) && !eac.PointerChanged[0])
+                        {
+                            eac.WritePointer((ushort)(pointer + delta));
+                            eac.PointerChanged[0] = true;
+                        }
+                    }
+                }
+                else
+                {
+                    pointer = eac.ReadPointer();
+                    if (pointer >= (this.endInternalOffset & 0xFFFF) && !eac.PointerChanged[0])
+                    {
+                        eac.WritePointer((ushort)(pointer + delta));
+                        eac.PointerChanged[0] = true;
                     }
                 }
             }
@@ -243,7 +328,7 @@ namespace LAZYSHELL.ScriptsEditor
             if (commands == null)
                 return;
             foreach (ActionCommand asc in commands)
-                asc.ModifyOffset(delta, conditionOffset);
+                asc.UpdatePointer(delta, conditionOffset);
         }
     }
 }

@@ -470,7 +470,7 @@ namespace LAZYSHELL
             }
             else
                 tilesetEditor.Reload(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
-            tilesetEditor.DisableLayers(false, true, true);
+            tilesetEditor.EnableLayers(true, false, false);
         }
         private void LoadPreviewer()
         {
@@ -548,7 +548,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void levelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshLevel();
             settings.LastMineCart = levelName.SelectedIndex;
         }
@@ -585,7 +586,8 @@ namespace LAZYSHELL
         //
         private void pictureBoxScreens_Paint(object sender, PaintEventArgs e)
         {
-            if (L1Indexes.Count == 0) return;
+            if (L1Indexes.Count == 0)
+                return;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
             Rectangle dst;
             Rectangle src;
@@ -721,7 +723,8 @@ namespace LAZYSHELL
         // screen data
         private void screenWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             if (Index == 2)
                 MinecartData.WidthA = (int)screenWidth.Value;
             else
@@ -729,13 +732,15 @@ namespace LAZYSHELL
         }
         private void screenL1Number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             L1Indexes[screenIndex] = (int)screenL1Number.Value;
             SetScreenImage();
         }
         private void screenL2Number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             L2Indexes[screenIndex] = (int)screenL2Number.Value;
             SetScreenImage();
         }

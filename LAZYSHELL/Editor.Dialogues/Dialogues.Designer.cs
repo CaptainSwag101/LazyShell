@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class Dialogues
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -161,7 +159,7 @@
             this.panelDialogues.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDialogues.Location = new System.Drawing.Point(244, 25);
             this.panelDialogues.Name = "panelDialogues";
-            this.panelDialogues.Size = new System.Drawing.Size(458, 615);
+            this.panelDialogues.Size = new System.Drawing.Size(458, 664);
             this.panelDialogues.TabIndex = 2;
             // 
             // panel60
@@ -177,7 +175,7 @@
             this.panel60.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel60.Location = new System.Drawing.Point(0, 25);
             this.panel60.Name = "panel60";
-            this.panel60.Size = new System.Drawing.Size(244, 615);
+            this.panel60.Size = new System.Drawing.Size(244, 664);
             this.panel60.TabIndex = 1;
             this.panel60.Paint += new System.Windows.Forms.PaintEventHandler(this.panel60_Paint);
             // 
@@ -186,7 +184,7 @@
             this.dialogueTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dialogueTextBox.Location = new System.Drawing.Point(0, 106);
             this.dialogueTextBox.Name = "dialogueTextBox";
-            this.dialogueTextBox.Size = new System.Drawing.Size(220, 281);
+            this.dialogueTextBox.Size = new System.Drawing.Size(220, 330);
             this.dialogueTextBox.TabIndex = 3;
             this.dialogueTextBox.Text = "";
             this.dialogueTextBox.TextChanged += new System.EventHandler(this.dialogueTextBox_TextChanged);
@@ -216,7 +214,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(220, 106);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(24, 281);
+            this.toolStrip2.Size = new System.Drawing.Size(24, 330);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -477,7 +475,7 @@
             this.toolStripLabel2,
             this.pauseFrameNum,
             this.pauseFramesInsert});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 387);
+            this.toolStrip4.Location = new System.Drawing.Point(0, 436);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip4.Size = new System.Drawing.Size(244, 25);
@@ -544,7 +542,7 @@
             this.toolStripLabel1,
             this.variables,
             this.variablesInsert});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 412);
+            this.toolStrip6.Location = new System.Drawing.Point(0, 461);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip6.Size = new System.Drawing.Size(244, 25);
@@ -602,7 +600,7 @@
             this.panel1.Controls.Add(this.dct14);
             this.panel1.Controls.Add(this.dct13);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 437);
+            this.panel1.Location = new System.Drawing.Point(0, 486);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(244, 178);
             this.panel1.TabIndex = 7;
@@ -984,7 +982,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 640);
+            this.ClientSize = new System.Drawing.Size(702, 689);
             this.Controls.Add(this.panelDialogues);
             this.Controls.Add(this.panel60);
             this.Controls.Add(this.toolStrip3);
@@ -1019,11 +1017,8 @@
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelDialogues;
         private System.Windows.Forms.Panel panel60;
         private System.Windows.Forms.Panel panel69;

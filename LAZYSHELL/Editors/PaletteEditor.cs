@@ -62,7 +62,6 @@ namespace LAZYSHELL
             this.startRow = startRow;
             this.max = max;
             this.currentColor = startRow * 16;
-
             InitializeComponent();
             // create checkbox rows
             for (int i = 0; i < count - startRow && i < max; i++)
@@ -90,16 +89,13 @@ namespace LAZYSHELL
                 this.cols.Add(checkBox);
                 this.Controls.Add(checkBox);
             }
-
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (startRow * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (startRow * 8), max * 8 + 4);
             this.Height = Math.Max(446, 446 + panel7.Height - 60);
-
             InitializeColor();
             SetColorMapImage();
             SetPaletteImage();
             this.BringToFront();
-
             Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip2, Keys.F2, baseConvertor);
             new ToolTipLabel(this, baseConvertor, helpTips);
@@ -142,7 +138,6 @@ namespace LAZYSHELL
             this.pictureBoxPalette.Height = Math.Min((count * 8) - (startRow * 8), max * 8);
             this.panel7.Height = Math.Min((count * 8 + 4) - (startRow * 8), max * 8 + 4);
             this.Height = Math.Max(446, 446 + panel7.Height - 60);
-
             InitializeColor();
             SetColorMapImage();
             SetPaletteImage();
@@ -157,11 +152,9 @@ namespace LAZYSHELL
         {
             updating = true;
             pictureBoxCurrentColor.Invalidate();
-
             currentRed.Value = paletteSet.Reds[currentColor];
             currentGreen.Value = paletteSet.Greens[currentColor];
             currentBlue.Value = paletteSet.Blues[currentColor];
-
             currentHTML.Text = paletteSet.Reds[currentColor].ToString("X2");
             currentHTML.Text += paletteSet.Greens[currentColor].ToString("X2");
             currentHTML.Text += paletteSet.Blues[currentColor].ToString("X2");
@@ -218,7 +211,8 @@ namespace LAZYSHELL
         //
         private void DoAdjustment()
         {
-            if (updating) return;
+            if (updating)
+                return;
             for (int i = startRow * 16; i < paletteSetBackup.Palette.Length; i++)
             {
                 paletteSet.Reds[i] = paletteSetBackup.Reds[i];
@@ -234,7 +228,6 @@ namespace LAZYSHELL
             DoContrast();
             DoThreshold();
             DoColorize();
-
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
             InitializeColor();
@@ -264,21 +257,18 @@ namespace LAZYSHELL
         private void DoColorSwitch()
         {
             int[] rgbA, rgbB;
-
             if (switchRedsA.Checked)
                 rgbA = paletteSet.Reds;
             else if (switchGreensA.Checked)
                 rgbA = paletteSet.Greens;
             else
                 rgbA = paletteSet.Blues;
-
             if (switchRedsB.Checked)
                 rgbB = paletteSet.Reds;
             else if (switchGreensB.Checked)
                 rgbB = paletteSet.Greens;
             else
                 rgbB = paletteSet.Blues;
-
             for (int i = startRow * 16, o = 0; i < rgbA.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
@@ -292,21 +282,18 @@ namespace LAZYSHELL
         private void DoColorEquate()
         {
             int[] rgbA, rgbB;
-
             if (equateRedsA.Checked)
                 rgbA = paletteSet.Reds;
             else if (equateGreensA.Checked)
                 rgbA = paletteSet.Greens;
             else
                 rgbA = paletteSet.Blues;
-
             if (equateRedsB.Checked)
                 rgbB = paletteSet.Reds;
             else if (equateGreensB.Checked)
                 rgbB = paletteSet.Greens;
             else
                 rgbB = paletteSet.Blues;
-
             for (int i = startRow * 16, o = 0; i < rgbA.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
@@ -350,7 +337,8 @@ namespace LAZYSHELL
         }
         private void DoBrightness()
         {
-            if (brightness.Value == 0) return;
+            if (brightness.Value == 0)
+                return;
             for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
@@ -365,7 +353,8 @@ namespace LAZYSHELL
         }
         private void DoContrast()
         {
-            if (this.contrast.Value == 0) return;
+            if (this.contrast.Value == 0)
+                return;
             double contrast = ((double)this.contrast.Value + 100) / 100.0;
             for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
@@ -374,11 +363,9 @@ namespace LAZYSHELL
                 double r = paletteSet.Reds[i];
                 double g = paletteSet.Greens[i];
                 double b = paletteSet.Blues[i];
-
                 r = Math.Max(0, Math.Min(248, (r - 128) * contrast + 128));
                 g = Math.Max(0, Math.Min(248, (g - 128) * contrast + 128));
                 b = Math.Max(0, Math.Min(248, (b - 128) * contrast + 128));
-
                 paletteSet.Reds[i] = (int)r & 0xF8;
                 paletteSet.Greens[i] = (int)g & 0xF8;
                 paletteSet.Blues[i] = (int)b & 0xF8;
@@ -386,7 +373,8 @@ namespace LAZYSHELL
         }
         private void DoThreshold()
         {
-            if (!thresholdApply.Checked) return;
+            if (!thresholdApply.Checked)
+                return;
             for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
             {
                 if (!rows[o / 16].Checked || !cols[o % 16].Checked)
@@ -405,8 +393,8 @@ namespace LAZYSHELL
         }
         private void DoColorize()
         {
-            if (!colorizeApply.Checked) return;
-
+            if (!colorizeApply.Checked)
+                return;
             double h = (double)colorizeHue.Value / 255.0;
             double s = (double)colorizeSaturation.Value / 255.0;
             for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++)
@@ -461,16 +449,12 @@ namespace LAZYSHELL
         //private void importPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
         //{
         //    string path = SelectFile("Select the file to import", "Binary files (*.bin)|*.bin|MS Palette file (*.pal)|*.pal|All files (*.*)|*.*");
-
         //    FileStream fs;
         //    BinaryReader br;
-
         //    byte[] buffer = new byte[1024];
-
         //    try
         //    {
         //        fs = File.OpenRead(path);
-
         //        if (Path.GetExtension(path) == ".pal")
         //        {
         //            br = new BinaryReader(fs);
@@ -478,7 +462,6 @@ namespace LAZYSHELL
         //                buffer = br.ReadBytes(buffer.Length);
         //            else
         //                br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
-
         //            for (int i = 0; i < 7; i++) // 7 palettes in set
         //            {
         //                for (int j = 0; j < 16; j++) // 16 colors in palette
@@ -505,16 +488,13 @@ namespace LAZYSHELL
         //                buffer = br.ReadBytes(buffer.Length);
         //            else
         //                br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
-
         //            double multiplier = 8; // 8;
         //            ushort color = 0;
-
         //            for (int i = 0; i < 7; i++) // 7 palettes in set
         //            {
         //                for (int j = 0; j < 16; j++) // 16 colors in palette
         //                {
         //                    color = Bits.GetShort(buffer, (i * 30) + (j * 2));
-
         //                    if (contextMenuStrip3.SourceControl == palettePictureBox)
         //                    {
         //                        paletteSet.Reds[(i * 16) + j] = (byte)((color % 0x20) * multiplier);
@@ -534,7 +514,6 @@ namespace LAZYSHELL
         //            mapNum_ValueChanged(null, null);
         //        else
         //            battlefieldNum_ValueChanged(null, null);
-
         //        fs.Close();
         //        br.Close();
         //    }
@@ -554,13 +533,11 @@ namespace LAZYSHELL
         //    else
         //        saveFileDialog.FileName = "paletteSetBat." + ((int)(battlefieldPaletteSetNum.Value)).ToString("d3");
         //    saveFileDialog.RestoreDirectory = true;
-
         //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
         //    {
         //        FileStream fs;
         //        BinaryWriter bw;
         //        byte[] buffer = new byte[1024];
-
         //        if (saveFileDialog.FilterIndex == 2)
         //        {
         //            byte[] temp = new byte[]
@@ -569,9 +546,7 @@ namespace LAZYSHELL
         //                0x50, 0x41, 0x4C, 0x20, 0x64, 0x61, 0x74, 0x61
         //            };
         //            temp.CopyTo(buffer, 0);
-
         //            Bits.SetShort(buffer, 0x10, 448 + 3);
-
         //            for (int i = 0; i < 7; i++) // 7 palettes in set
         //            {
         //                for (int j = 0; j < 16; j++) // 16 colors in palette
@@ -590,7 +565,6 @@ namespace LAZYSHELL
         //                    }
         //                }
         //            }
-
         //            fs = new FileStream(saveFileDialog.FileName + ".pal", FileMode.Create, FileAccess.ReadWrite);
         //            bw = new BinaryWriter(fs);
         //            bw.Write(buffer, 0, 448 + 0x17);
@@ -601,7 +575,6 @@ namespace LAZYSHELL
         //        {
         //            ushort color = 0;
         //            int r, g, b;
-
         //            for (int i = 0; i < 7; i++) // 7 palettes in set
         //            {
         //                for (int j = 0; j < 16; j++) // 16 colors in palette
@@ -622,7 +595,6 @@ namespace LAZYSHELL
         //                    Bits.SetShort(buffer, (i * 30) + (j * 2), color);
         //                }
         //            }
-
         //            fs = new FileStream(saveFileDialog.FileName + ".bin", FileMode.Create, FileAccess.ReadWrite);
         //            bw = new BinaryWriter(fs);
         //            bw.Write(buffer, 0, 0xE0);
@@ -641,7 +613,6 @@ namespace LAZYSHELL
         {
             if (paletteImage != null)
                 e.Graphics.DrawImage(paletteImage, 0, 0, 128, (count * 8) - (startRow * 8));
-
             Point p = new Point(currentColor % 16 * 8, currentColor / 16 * 8 - (startRow * 8));
             e.Graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(p.X, p.Y, 7, 7));
         }
@@ -699,7 +670,8 @@ namespace LAZYSHELL
                 trackBar1.Value = (int)currentRed.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar1")
                 currentRed.Value = trackBar1.Value & 0xF8;
-            if (updating) return;
+            if (updating)
+                return;
             paletteSet.Reds[currentColor] = (int)currentRed.Value & 0xF8;
             paletteSetBackup.Reds[currentColor] = paletteSet.Reds[currentColor];
             if (autoUpdate.Checked)
@@ -714,7 +686,8 @@ namespace LAZYSHELL
                 trackBar2.Value = (int)currentGreen.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar2")
                 currentGreen.Value = trackBar2.Value & 0xF8;
-            if (updating) return;
+            if (updating)
+                return;
             paletteSet.Greens[currentColor] = (int)currentGreen.Value & 0xF8;
             paletteSetBackup.Greens[currentColor] = paletteSet.Greens[currentColor];
             if (autoUpdate.Checked)
@@ -729,7 +702,8 @@ namespace LAZYSHELL
                 trackBar3.Value = (int)currentBlue.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar3")
                 currentBlue.Value = trackBar3.Value & 0xF8;
-            if (updating) return;
+            if (updating)
+                return;
             paletteSet.Blues[currentColor] = (int)currentBlue.Value & 0xF8;
             paletteSetBackup.Blues[currentColor] = paletteSet.Blues[currentColor];
             if (autoUpdate.Checked)
@@ -740,8 +714,10 @@ namespace LAZYSHELL
         }
         private void currentHTML_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-            if (currentHTML.Text.Length != 6) return;
+            if (updating)
+                return;
+            if (currentHTML.Text.Length != 6)
+                return;
             paletteSet.Reds[currentColor] = Int32.Parse(currentHTML.Text.Substring(0, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Greens[currentColor] = Int32.Parse(currentHTML.Text.Substring(2, 2), NumberStyles.AllowHexSpecifier);
             paletteSet.Blues[currentColor] = Int32.Parse(currentHTML.Text.Substring(4, 2), NumberStyles.AllowHexSpecifier);
@@ -912,13 +888,15 @@ namespace LAZYSHELL
         }
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!colorizeApply.Checked) return;
+            if (!colorizeApply.Checked)
+                return;
             int x = Math.Min(pictureBox1.Width, Math.Max(0, e.X));
             colorizeHue.Value = (int)((double)x * (255.0 / (double)pictureBox1.Width));
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!colorizeApply.Checked) return;
+            if (!colorizeApply.Checked)
+                return;
             if (e.Button != MouseButtons.Left)
                 return;
             int x = Math.Min(pictureBox1.Width, Math.Max(0, e.X));
@@ -982,8 +960,8 @@ namespace LAZYSHELL
             openFileDialog.Filter = "Binary files (*.bin)|*.bin|Microsoft palette files (*.pal)|*.pal|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
             FileStream fs = File.OpenRead(openFileDialog.FileName);
             BinaryReader br = new BinaryReader(fs);
             byte[] buffer = new byte[1024];
@@ -995,7 +973,6 @@ namespace LAZYSHELL
                         buffer = br.ReadBytes(buffer.Length);
                     else
                         br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
-
                     for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
                         paletteSet.Reds[i] = buffer[(o * 4) + 1 + 0x17];
@@ -1009,12 +986,10 @@ namespace LAZYSHELL
                         buffer = br.ReadBytes(buffer.Length);
                     else
                         br.ReadBytes((int)fs.Length).CopyTo(buffer, 0);
-
                     ushort color = 0;
                     for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
                         color = Bits.GetShort(buffer, (o * 2));
-
                         paletteSet.Reds[i] = (byte)((color % 0x20) * 8);
                         paletteSet.Greens[i] = (byte)(((color >> 5) % 0x20) * 8);
                         paletteSet.Blues[i] = (byte)(((color >> 10) % 0x20) * 8);
@@ -1040,13 +1015,11 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = "paletteSet.bin";
             saveFileDialog.RestoreDirectory = true;
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs;
                 BinaryWriter bw;
                 byte[] buffer = new byte[1024];
-
                 if (saveFileDialog.FilterIndex == 2)
                 {
                     byte[] temp = new byte[]
@@ -1055,16 +1028,13 @@ namespace LAZYSHELL
                         0x50, 0x41, 0x4C, 0x20, 0x64, 0x61, 0x74, 0x61
                     };
                     temp.CopyTo(buffer, 0);
-
                     Bits.SetShort(buffer, 0x10, 448 + 3);
-
                     for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
                         buffer[(o * 4) + 1 + 0x17] = (byte)paletteSet.Reds[i];
                         buffer[(o * 4) + 2 + 0x17] = (byte)paletteSet.Greens[i];
                         buffer[(o * 4) + 3 + 0x17] = (byte)paletteSet.Blues[i];
                     }
-
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
                     bw.Write(buffer, 0, 0x200 + 0x17);
@@ -1075,7 +1045,6 @@ namespace LAZYSHELL
                 {
                     ushort color = 0;
                     int r, g, b;
-
                     for (int i = startRow * 16, o = 0; i < paletteSet.Palette.Length && o / 16 < max; i++, o++) // 16 colors in palette
                     {
                         r = (int)(paletteSet.Reds[i] / 8);
@@ -1084,7 +1053,6 @@ namespace LAZYSHELL
                         color = (ushort)((b << 10) | (g << 5) | r);
                         Bits.SetShort(buffer, (o * 2), color);
                     }
-
                     fs = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                     bw = new BinaryWriter(fs);
                     bw.Write(buffer, 0, 0x100);
@@ -1115,7 +1083,8 @@ namespace LAZYSHELL
         }
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             DoAdjustment();
         }
         #endregion

@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class HexEditor : Form
     {
         #region Variables
-        private byte[] data
+        private byte[] rom
         {
             get
             {
@@ -27,10 +27,14 @@ namespace LAZYSHELL
         private bool atLowerNibble { get { return ROMData.SelectionStart % 3 == 1; } }
         private bool atUpperNibble = false;
         private int end { get { return ((line_count - 1) * 16 + 15) * 3; } }
-        private int offset; public int Offset { get { return offset; } set { offset = value; } }
+        private int offset;
         private List<Change> oldProperties = new List<Change>();
         private List<Change> newProperties = new List<Change>();
         private byte[] clipboard;
+        private int last_line
+        {
+            get { return line_count * 16 + (offset & 0xFFFFF0); }
+        }
         private int line_count
         {
             get
@@ -67,7 +71,6 @@ namespace LAZYSHELL
             }
         }
         private int selectionStart;
-        public int SelectionStart { get { return selectionStart; } set { selectionStart = value; } }
         private int selectionLength;
         private bool isMovingUpDown;
         #endregion
@@ -106,6 +109,12 @@ namespace LAZYSHELL
             current_unmodified.CopyTo(current, 0);
             RefreshHexEditor();
         }
+        public void SetOffset(int offset)
+        {
+            this.offset = offset & 0xFFFFF0;
+            this.selectionStart = (offset & 15) * 3;
+            this.ROMData.SelectionStart = (offset & 15) * 3;
+        }
         public void RefreshHexEditor()
         {
             updating = true;
@@ -113,6 +122,10 @@ namespace LAZYSHELL
             string bytes2 = "";
             string bytes3 = "";
             string offsets = "";
+            // in case enlarging when at end of ROM
+            while (last_line > current.Length)
+                offset -= 16;
+            //
             int offset_line = offset & 0xFFFFF0;
             for (int i = 0; i < line_count; i++)
             {
@@ -178,13 +191,15 @@ namespace LAZYSHELL
         }
         private void UpdateInformationLabels()
         {
+            if (selection + 2 >= rom.Length)
+                return;
             info_offset.Text = "Offset: " + selection.ToString("X6");
             if (ROMData.SelectionLength / 3 == 3)
-                info_value.Text = "Value: " + Bits.GetInt24(data, selection).ToString();
+                info_value.Text = "Value: " + Bits.GetInt24(rom, selection).ToString();
             else if (ROMData.SelectionLength / 3 == 2)
-                info_value.Text = "Value: " + Bits.GetShort(data, selection).ToString();
+                info_value.Text = "Value: " + Bits.GetShort(rom, selection).ToString();
             else if (ROMData.SelectionLength / 3 <= 1)
-                info_value.Text = "Value: " + data[selection].ToString();
+                info_value.Text = "Value: " + rom[selection].ToString();
             else
                 info_value.Text = "Value: ";
             int sel = ROMData.SelectionLength / 3;
@@ -199,13 +214,14 @@ namespace LAZYSHELL
         }
         private void richTextBox_SelectionChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             ROMData.BeginUpdate();
-            if (ROMData.SelectionStart / 3 + offset >= data.Length)
+            if (ROMData.SelectionStart / 3 + offset >= rom.Length)
                 ROMData.SelectionStart = end;
             else if (ROMData.SelectionStart % 3 == 2 && !atUpperNibble &&
-                ROMData.SelectionStart / 3 + offset + 1 < data.Length)
+                ROMData.SelectionStart / 3 + offset + 1 < rom.Length)
                 ROMData.SelectionStart++;
             else if (ROMData.SelectionStart % 3 == 2 && atUpperNibble)
                 ROMData.SelectionStart--;
@@ -257,8 +273,8 @@ namespace LAZYSHELL
                     if (line != line_count - 1)
                         break;
                     offset += 0x10;
-                    if (offset + (line_count * 16) >= data.Length)
-                        offset = data.Length - (line_count * 16);
+                    if (offset + (line_count * 16) >= rom.Length)
+                        offset = rom.Length - (line_count * 16);
                     RefreshHexEditor();
                     isMovingUpDown = true;
                     break;
@@ -273,8 +289,8 @@ namespace LAZYSHELL
                     break;
                 case Keys.PageDown:
                     offset += line_count * 16;
-                    if (offset >= data.Length)
-                        offset = data.Length - (line_count * 16);
+                    if (offset >= rom.Length)
+                        offset = rom.Length - (line_count * 16);
                     RefreshHexEditor();
                     isMovingUpDown = true;
                     break;
@@ -292,7 +308,7 @@ namespace LAZYSHELL
                     break;
                 case Keys.End:
                     selectionStart = line_count * 16 * 3 - 3;
-                    offset = data.Length - (line_count * 16);
+                    offset = rom.Length - (line_count * 16);
                     RefreshHexEditor();
                     break;
                 default:
@@ -342,13 +358,18 @@ namespace LAZYSHELL
         }
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             offset = Math.Min(vScrollBar1.Value * 16, 0x400000 - (line_count * 16));
             RefreshHexEditor();
         }
         // toolstrip2
         private void save_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Saving the ROM in the hex editor resets all elements in all other editors. " +
+                "You will lose any changes made there since the last save.\n\n" +
+                "Continue with process?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
             current.CopyTo(current_unmodified, 0);
             Model.ClearModel();
             ClearMemory();
@@ -356,16 +377,16 @@ namespace LAZYSHELL
         }
         private void copy_Click(object sender, EventArgs e)
         {
-            if (ROMData.SelectionLength < 3) return;
+            if (ROMData.SelectionLength < 3)
+                return;
             int column = ROMData.SelectionStart / 3;
-            clipboard = Bits.GetByteArray(data, offset + column, ROMData.SelectionLength / 3);
+            clipboard = Bits.GetByteArray(rom, offset + column, ROMData.SelectionLength / 3);
         }
         private void paste_Click(object sender, EventArgs e)
         {
             int column = ROMData.SelectionStart / 3;
             if (offset + column + clipboard.Length >= 0x400000)
                 return;
-
             oldProperties.Add(new Change(offset + column,
                 Bits.GetByteArray(current, offset + column, clipboard.Length), Color.Red));
             Bits.SetByteArray(current, offset + column, clipboard);
@@ -373,40 +394,34 @@ namespace LAZYSHELL
         }
         private void undo_Click(object sender, EventArgs e)
         {
-            if (oldProperties.Count == 0) return;
-
+            if (oldProperties.Count == 0)
+                return;
             int offset = oldProperties[oldProperties.Count - 1].Offset;
-
             byte[] oldValues = oldProperties[oldProperties.Count - 1].Values;
             oldProperties.RemoveAt(oldProperties.Count - 1);
-
             byte[] newValues = Bits.GetByteArray(current, offset, oldValues.Length);
             newProperties.Add(new Change(offset, newValues, Color.Red));
-
             Bits.SetByteArray(current, offset, oldValues);
-
             RefreshHexEditor();
         }
         private void redo_Click(object sender, EventArgs e)
         {
-            if (newProperties.Count == 0) return;
-
+            if (newProperties.Count == 0)
+                return;
             int offset = newProperties[newProperties.Count - 1].Offset;
-
             byte[] newValues = newProperties[newProperties.Count - 1].Values;
             newProperties.RemoveAt(newProperties.Count - 1);
-
             byte[] oldValues = Bits.GetByteArray(current, offset, newValues.Length);
             oldProperties.Add(new Change(offset, oldValues, Color.Red));
-
             Bits.SetByteArray(current, offset, newValues);
-
             RefreshHexEditor();
         }
         private void fillWith_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData != Keys.Enter) return;
-            if (currentROMData.SelectionLength < 3) return;
+            if (e.KeyData != Keys.Enter)
+                return;
+            if (currentROMData.SelectionLength < 3)
+                return;
             int column = ROMData.SelectionStart / 3;
             byte value;
             try
@@ -426,7 +441,8 @@ namespace LAZYSHELL
         }
         private void baseConvDec_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             try
             {
@@ -442,7 +458,8 @@ namespace LAZYSHELL
         }
         private void baseConvHex_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             try
             {
@@ -494,12 +511,12 @@ namespace LAZYSHELL
                 }
                 else if (input < 0x000000)
                 {
-                    MessageBox.Show("Offset too low. Must be between $000000 and $2FFFFF.");
+                    MessageBox.Show("Offset too low. Must be between $000000 and $3FFFFF.");
                     return;
                 }
                 else if (input >= 0x400000)
                 {
-                    MessageBox.Show("Offset too high. Must be between $000000 and $2FFFFF.");
+                    MessageBox.Show("Offset too high. Must be between $000000 and $3FFFFF.");
                     return;
                 }
             }
@@ -528,9 +545,8 @@ namespace LAZYSHELL
                     values[i] = value;
                 }
                 int offset, foundAt;
-
                 offset = this.offset;
-                foundAt = Bits.Find(data, values, ROMData.SelectionStart / 3 + ROMData.SelectionLength + offset);
+                foundAt = Bits.Find(rom, values, ROMData.SelectionStart / 3 + ROMData.SelectionLength + offset);
                 if (foundAt != -1)
                 {
                     this.offset = foundAt & 0xFFFFF0;
@@ -539,11 +555,11 @@ namespace LAZYSHELL
                     RefreshHexEditor();
                     searchValues.Focus();
                 }
-                else if (MessageBox.Show("Search string was not found.\n\n" + "Restart from beginning?", "ZONE DOCTOR",
+                else if (MessageBox.Show("Search string was not found.\n\n" + "Restart from beginning?", "LAZY SHELL",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     offset = this.offset;
-                    foundAt = Bits.Find(data, values, 0);
+                    foundAt = Bits.Find(rom, values, 0);
                     if (foundAt != -1)
                     {
                         this.offset = foundAt & 0xFFFFF0;

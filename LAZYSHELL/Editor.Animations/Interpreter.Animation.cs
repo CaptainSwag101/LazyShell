@@ -673,7 +673,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             string bits = "";
             string[] bit = new string[length];
             bool pre = false;
-
             for (int b = 1, i = 0; i < length; b *= 2, i++)
             {
                 if ((src & b) == b)
@@ -690,7 +689,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             }
             for (int k = 0; k < bit.Length; k++)
                 bits += bit[k];
-
             return bits;
         }
     }

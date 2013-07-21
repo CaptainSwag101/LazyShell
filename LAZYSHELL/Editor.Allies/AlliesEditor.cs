@@ -14,7 +14,6 @@ namespace LAZYSHELL
     public partial class AlliesEditor : Form
     {
         // variables
-
         private long checksum;
         private Settings settings = Settings.Default;
         private Allies alliesEditor;

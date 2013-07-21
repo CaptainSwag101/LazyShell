@@ -75,9 +75,7 @@ namespace LAZYSHELL
         {	//Decode a string of BRR bytes
             int Filter = (Data[0] & 0x0c) >> 2;
             int ShiftAmount = (Data[0] >> 4) & 0x0F;						//Read filter & shift amount
-
             short[] output = new short[(Data.Length - 1) << 1];					//Output string of 16-bit samples
-
             for (int i = 0; i < Data.Length - 1; i++)
             {						//Loop for each byte
                 DecodeSample((byte)(Data[i + 1] & 0xF0), ShiftAmount, Filter);		//Decode high nybble
@@ -160,7 +158,6 @@ namespace LAZYSHELL
             FIRen = new bool[] { true, true, true, true };
             FIRstats = new int[] { 0, 0, 0, 0 };
             List<byte> outBrr = new List<byte>();
-
             BRRBuffer = new byte[9];			//9 bytes long buffer
             int offset = 0;
             if (Bits.GetString(inWav, offset, 4) != "RIFF")
@@ -236,9 +233,7 @@ namespace LAZYSHELL
                     MessageBox.Show("Error : unsupported amount of bits per sample (8 or 16 are supported");
                     return null;
             }
-
             samples = resample(samples, resample_type);
-
             if ((samples.Length & 0xF) != 0)
             {
                 MessageBox.Show("Warning ! The Amount of PCM samples isn't a multiple of 16 !");
@@ -330,7 +325,6 @@ namespace LAZYSHELL
                 }
                 d = (PCMData[i] >> 1) - vlin;		//Difference between linear prediction and current sample
                 da = Math.Abs(d);
-
                 if (da > 16384 && da < 32768)
                 {								// Take advantage of wrapping
                     d = d - 32768 * (d >> 24);
@@ -356,7 +350,6 @@ namespace LAZYSHELL
                 l1 = (short)(clamp_16(vlin + dp) * 2);
                 d = PCMData[i] - l1;
                 d2 += ((double)d) * d;		/* update square-error */
-
                 if (write)
                 {							/* if we want output, put it in proper place */
                     BRRBuffer[(i >> 1) + 1] |= (byte)(c << (4 - ((i & 0x01) << 2)));
@@ -412,7 +405,6 @@ namespace LAZYSHELL
                     for (int i = 0; i < output.Length; i++)
                     {
                         int a = (int)(i * resample_var);
-
                         double b = i * resample_var - a;
                         double b2 = b * b;
                         double b3 = b2 * b;

@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class NewFontTable : Form
     {
         #region Variables
-        
+            //
         private Fonts fontsEditor;
         private FontCharacter[] font { get { return fontsEditor.FontCharacters; } }
         private FontType fontType { get { return fontsEditor.FontType; } }
@@ -53,7 +53,6 @@ namespace LAZYSHELL
                 ' ',' ',' ',' ',' ',' ',':',';',
                 '<','>',' ','#','+','×','%',' ',
                 ' ',' ','*','\'','&',' ',' ',' ',
-
             };
         #endregion
         // constructor
@@ -189,7 +188,6 @@ namespace LAZYSHELL
                     bold = italics = underline = FontStyle.Underline;
                 }
             }
-
             try
             {
                 fontTable.Font = new Font(ff[fontFamily.SelectedIndex].Name, (float)fontSize.Value, (FontStyle)(bold | italics | underline));
@@ -252,7 +250,6 @@ namespace LAZYSHELL
             graphic.ReleaseHdc(dc1);
             memGraphic.ReleaseHdc(dc2);
             import.MakeTransparent(fontTable.BackColor);
-
             int[] palette = new int[4];
             for (int i = 0; i < 4; i++)
                 palette[i] = this.palette[i];
@@ -278,7 +275,6 @@ namespace LAZYSHELL
         private void autoSetWidths_Click(object sender, EventArgs e)
         {
             autoSetWidths.ForeColor = autoSetWidths.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-
             padding.Enabled = autoSetWidths.Checked;
         }
         private void rtb_Enter(object sender, EventArgs e)

@@ -46,11 +46,21 @@ namespace LAZYSHELL.ScriptsEditor
                 return asc.CommandData;
             }
         }
+        public int SelectedIndex
+        {
+            get
+            {
+                return treeView.GetFullIndex();
+            }
+            set
+            {
+                treeView.SelectNode(value);
+            }
+        }
         private EventScript script; public EventScript Script { get { return this.script; } set { this.script = value; } }
         private ActionScript action; public ActionScript Action { get { return this.action; } set { this.action = value; } }
         private bool actionScript; public bool ActionScript { get { return this.actionScript; } set { this.actionScript = value; } }
         private int scriptDelta = 0; public int ScriptDelta { get { return this.scriptDelta; } set { this.scriptDelta = value; } }
-        public int conditionOffset = 0;
         private ArrayList commandCopies;
         #endregion
         // constructor
@@ -149,7 +159,6 @@ namespace LAZYSHELL.ScriptsEditor
             finally
             {
                 RefreshScript(); // Update offsets and descriptions
-                this.conditionOffset = esc.Offset;
                 this.treeView.EndUpdate();
             }
         }
@@ -258,7 +267,6 @@ namespace LAZYSHELL.ScriptsEditor
             {
                 // Update offsets and descriptions
                 RefreshScript();
-                this.conditionOffset = asc.Offset;
                 this.treeView.EndUpdate();
             }
         }
@@ -297,7 +305,6 @@ namespace LAZYSHELL.ScriptsEditor
             try
             {
                 this.treeView.BeginUpdate();
-
                 TreeNode node = editedNode;
                 if (node == null)
                     return;
@@ -386,6 +393,7 @@ namespace LAZYSHELL.ScriptsEditor
                     if (node == null)
                         return;
                     index = parent.Index;
+                    // Remove event command
                     parent.Remove();
                     if (!actionScript)
                         this.script.RemoveAt(parent.Index);
@@ -586,9 +594,11 @@ namespace LAZYSHELL.ScriptsEditor
         {
             foreach (TreeNode parent in treeView.Nodes)
             {
-                parent.Checked = false;
+                if (parent.Checked)
+                    parent.Checked = false;
                 foreach (TreeNode child in parent.Nodes)
-                    child.Checked = false;
+                    if (child.Checked)
+                        child.Checked = false;
             }
             TreeNode temp = treeView.SelectedNode;
             // pasting event command in event script
@@ -681,9 +691,7 @@ namespace LAZYSHELL.ScriptsEditor
         public void ClearAll()
         {
             this.script.Assemble();
-
             this.treeView.BeginUpdate();
-
             if (actionScript)
             {
                 this.scriptDelta -= action.Length;
@@ -694,7 +702,6 @@ namespace LAZYSHELL.ScriptsEditor
                 this.scriptDelta -= script.Length;
                 this.script.Clear();
             }
-
             RefreshScript();
             this.treeView.EndUpdate();
         }
@@ -715,6 +722,20 @@ namespace LAZYSHELL.ScriptsEditor
                     selectedNode = treeView.Nodes[selectedNode.Index];
                 treeView.SelectedNode = selectedNode;
             }
+        }
+        /// <summary>
+        /// Refreshes the script and sets the selected node to the specified (full) index.
+        /// </summary>
+        /// <param name="fullIndex">The full index of the node to select.</param>
+        public void RefreshScript(int fullIndex)
+        {
+            if (!actionScript)
+                script.Refresh();
+            else
+                action.Refresh();
+            Populate();
+            //
+            treeView.SelectNode(fullIndex);
         }
         #endregion
     }

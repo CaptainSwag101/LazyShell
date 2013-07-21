@@ -9,33 +9,25 @@ namespace LAZYSHELL
     public partial class Levels
     {
         #region Variables
-
         private LevelEvents events { get { return level.LevelEvents; } set { level.LevelEvents = value; } } // Events for the current level
         private Object copyEvent;
         public TreeView EventsFieldTree { get { return eventsList; } set { eventsList = value; } }
         public NumericUpDown EventX { get { return eventX; } set { eventX = value; } }
         public NumericUpDown EventY { get { return eventY; } set { eventY = value; } }
-
         #endregion
         #region Methods
-
         private void InitializeEventFieldProperties()
         {
             updatingProperties = true;
-
             this.eventMusic.SelectedIndex = events.Music;
             this.eventExit.Value = events.EntranceEvent;
-
             this.eventsList.Nodes.Clear();
-
             for (int i = 0; i < events.Count; i++)
             {
                 this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
             }
-
             if (eventsList.Nodes.Count > 0)
                 this.eventsList.SelectedNode = this.eventsList.Nodes[0];
-
             if (events.Count != 0 && this.eventsList.SelectedNode != null)
             {
                 events.CurrentEvent = this.eventsList.SelectedNode.Index;
@@ -48,7 +40,6 @@ namespace LAZYSHELL
                 this.eventHeight.Value = events.Height;
                 this.eventsWidthXPlusHalf.Checked = events.X_Half;
                 this.eventsWidthYPlusHalf.Checked = events.Y_Half;
-
                 foreach (ToolStripItem item in toolStrip6.Items)
                     item.Enabled = true;
                 this.eventEvent.Enabled = true;
@@ -60,7 +51,6 @@ namespace LAZYSHELL
                 this.eventHeight.Enabled = true;
                 this.eventsWidthXPlusHalf.Enabled = true;
                 this.eventsWidthYPlusHalf.Enabled = true;
-
                 this.eventGotoA.Enabled = true;
             }
             else
@@ -77,7 +67,6 @@ namespace LAZYSHELL
                 this.eventHeight.Enabled = false;
                 this.eventsWidthXPlusHalf.Enabled = false;
                 this.eventsWidthYPlusHalf.Enabled = false;
-
                 this.eventEvent.Value = 0;
                 this.eventX.Value = 0;
                 this.eventY.Value = 0;
@@ -87,19 +76,15 @@ namespace LAZYSHELL
                 this.eventHeight.Value = 0;
                 this.eventsWidthXPlusHalf.Checked = false;
                 this.eventsWidthYPlusHalf.Checked = false;
-
                 this.eventGotoA.Enabled = false;
             }
-
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;
             updatingProperties = false;
-
         }
         private void RefreshEventFieldProperties()
         {
             updatingProperties = true;
-
             if (events.Count != 0 && this.eventsList.SelectedNode != null)
             {
                 events.CurrentEvent = this.eventsList.SelectedNode.Index;
@@ -112,7 +97,6 @@ namespace LAZYSHELL
                 this.eventHeight.Value = events.Height;
                 this.eventsWidthXPlusHalf.Checked = events.X_Half;
                 this.eventsWidthYPlusHalf.Checked = events.Y_Half;
-
                 foreach (ToolStripItem item in toolStrip6.Items)
                     item.Enabled = true;
                 this.eventEvent.Enabled = true;
@@ -124,7 +108,6 @@ namespace LAZYSHELL
                 this.eventHeight.Enabled = true;
                 this.eventsWidthXPlusHalf.Enabled = true;
                 this.eventsWidthYPlusHalf.Enabled = true;
-
                 this.eventGotoA.Enabled = true;
             }
             else
@@ -141,7 +124,6 @@ namespace LAZYSHELL
                 this.eventHeight.Enabled = false;
                 this.eventsWidthXPlusHalf.Enabled = false;
                 this.eventsWidthYPlusHalf.Enabled = false;
-
                 this.eventEvent.Value = 0;
                 this.eventX.Value = 0;
                 this.eventY.Value = 0;
@@ -151,18 +133,15 @@ namespace LAZYSHELL
                 this.eventHeight.Value = 0;
                 this.eventsWidthXPlusHalf.Checked = false;
                 this.eventsWidthYPlusHalf.Checked = false;
-
                 this.eventGotoA.Enabled = false;
             }
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
         }
         public int CalculateFreeEventSpace()
         {
             int used = 0;
-
             foreach (Level level in levels)
             {
                 used += 3; // for the music and initial event
@@ -182,20 +161,15 @@ namespace LAZYSHELL
                         events.New(eventsList.SelectedNode.Index + 1, newEvent);
                     else
                         events.New(0, newEvent);
-
                     int reselect;
-
                     if (eventsList.Nodes.Count > 0)
                         reselect = eventsList.SelectedNode.Index;
                     else
                         reselect = -1;
-
                     eventsList.BeginUpdate();
                     this.eventsList.Nodes.Clear();
-
                     for (int i = 0; i < events.Count; i++)
                         this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
-
                     this.eventsList.SelectedNode = this.eventsList.Nodes[reselect + 1];
                     eventsList.EndUpdate();
                 }
@@ -207,105 +181,91 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         #endregion
         #region Event Handlers
-
         private void eventsFieldTree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
         {
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.SelectedEvent = this.eventsList.SelectedNode.Index;
-
-            
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshEventFieldProperties();
             picture.Invalidate();
         }
         private void eventsExitEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.EntranceEvent = (ushort)this.eventExit.Value;
         }
         private void eventsAreaMusic_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.Music = (byte)this.eventMusic.SelectedIndex;
         }
         private void eventsRunEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.RunEvent = (ushort)this.eventEvent.Value;
             picture.Invalidate();
         }
         private void eventsFieldHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Height = (byte)this.eventHeight.Value;
-
-            
-
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
         private void eventsFieldLength_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Width = (byte)(this.eventLength.Value - 1);
-
-            
-
+            //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
         private void eventsFieldZCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Z = (byte)this.eventZ.Value;
-
-            
-
+            //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
         private void eventsFieldYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Y = (byte)this.eventY.Value;
-
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
         private void eventsFieldXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.X = (byte)this.eventX.Value;
-
 
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
         private void eventsFieldRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.F = (byte)this.eventFace.SelectedIndex;
-
-            
+            //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             picture.Invalidate();
         }
@@ -322,20 +282,15 @@ namespace LAZYSHELL
                         events.New(eventsList.SelectedNode.Index + 1, p);
                     else
                         events.New(0, p);
-
                     int reselect;
-
                     if (eventsList.Nodes.Count > 0)
                         reselect = eventsList.SelectedNode.Index;
                     else
                         reselect = -1;
-
                     eventsList.BeginUpdate();
                     this.eventsList.Nodes.Clear();
-
                     for (int i = 0; i < events.Count; i++)
                         this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
-
                     this.eventsList.SelectedNode = this.eventsList.Nodes[reselect + 1];
                     eventsList.EndUpdate();
                 }
@@ -353,25 +308,19 @@ namespace LAZYSHELL
             if (this.eventsList.SelectedNode != null && events.CurrentEvent == this.eventsList.SelectedNode.Index)
             {
                 events.Remove();
-
                 int reselect = eventsList.SelectedNode.Index;
                 if (reselect == eventsList.Nodes.Count - 1)
                     reselect--;
-
                 eventsList.BeginUpdate();
                 this.eventsList.Nodes.Clear();
-
                 for (int i = 0; i < events.Count; i++)
                     this.eventsList.Nodes.Add(new TreeNode("EVENT #" + i.ToString()));
-
                 if (eventsList.Nodes.Count > 0)
                     this.eventsList.SelectedNode = this.eventsList.Nodes[reselect];
                 else
                 {
                     this.eventsList.SelectedNode = null;
-
-                    
-
+                    //
                     RefreshEventFieldProperties();
                     picture.Invalidate();
                 }
@@ -382,13 +331,11 @@ namespace LAZYSHELL
         {
             if (eventsWidthXPlusHalf.Checked) eventsWidthXPlusHalf.ForeColor = Color.Black;
             else eventsWidthXPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.X_Half = this.eventsWidthXPlusHalf.Checked;
-
-            
-
+            //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshEventFieldProperties();
         }
@@ -396,13 +343,11 @@ namespace LAZYSHELL
         {
             if (eventsWidthYPlusHalf.Checked) eventsWidthYPlusHalf.ForeColor = Color.Black;
             else eventsWidthYPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Y_Half = this.eventsWidthYPlusHalf.Checked;
-
-            
-
+            //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             RefreshExitFieldProperties();
         }
@@ -411,7 +356,6 @@ namespace LAZYSHELL
         {
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                 Model.Program.CreateEventScriptsWindow();
-
             Model.Program.EventScripts.EventName.SelectedIndex = 0;
             Model.Program.EventScripts.EventNum.Value = eventExit.Value;
             Model.Program.EventScripts.BringToFront();
@@ -420,7 +364,6 @@ namespace LAZYSHELL
         {
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                 Model.Program.CreateEventScriptsWindow();
-
             Model.Program.EventScripts.EventName.SelectedIndex = 0;
             Model.Program.EventScripts.EventNum.Value = eventEvent.Value;
             Model.Program.EventScripts.BringToFront();
@@ -429,7 +372,7 @@ namespace LAZYSHELL
         private void eventsCopyField_Click(object sender, EventArgs e)
         {
             if (eventsList.SelectedNode != null)
-                copyEvent = events.EVENT.Copy();
+                copyEvent = events.Event.Copy();
         }
         private void eventsPasteField_Click(object sender, EventArgs e)
         {
@@ -437,7 +380,7 @@ namespace LAZYSHELL
         }
         private void eventsDuplicateField_Click(object sender, EventArgs e)
         {
-            AddNewEvent(events.EVENT.Copy());
+            AddNewEvent(events.Event.Copy());
         }
         #endregion
     }

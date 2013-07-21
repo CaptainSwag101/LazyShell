@@ -163,7 +163,8 @@ namespace LAZYSHELL
         }
         private void menuTextNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             menuTextName.SelectedIndex = (int)menuTextNum.Value;
             updating = false;
@@ -171,7 +172,8 @@ namespace LAZYSHELL
         }
         private void menuTextName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             menuTextNum.Value = menuTextName.SelectedIndex;
             updating = false;
@@ -179,7 +181,8 @@ namespace LAZYSHELL
         }
         private void menuTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             //
             char[] text = menuTextBox.Text.ToCharArray();
             char[] swap;
@@ -220,11 +223,11 @@ namespace LAZYSHELL
         }
         private void textView_CheckedChanged(object sender, EventArgs e)
         {
-
         }
         private void xCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             menuText.X = (int)xCoord.Value;
             menus.SetTextObjects();
             menus.Picture.Invalidate();

@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class ItemsEditor : Form
     {
-        
+            //
         private long checksum;
         public long Checksum { get { return checksum; } set { checksum = value; } }
         private Settings settings = Settings.Default;

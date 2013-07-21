@@ -62,10 +62,8 @@ namespace LAZYSHELL
         private byte spriteBehavior;
         private byte strikeSound;
         private byte otherSound;
-
         private byte cursorX;
         private byte cursorY;
-
         #endregion
         #region Accessors
         public char[] Name { get { return this.name; } set { this.name = value; } }

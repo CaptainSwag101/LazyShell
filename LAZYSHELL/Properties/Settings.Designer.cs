@@ -9,20 +9,19 @@
 //------------------------------------------------------------------------------
 
 namespace LAZYSHELL.Properties {
-    
-    
+            //
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+            //
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-        
+            //
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")]
@@ -34,7 +33,7 @@ namespace LAZYSHELL.Properties {
                 this["AllyEquipment"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -46,7 +45,7 @@ namespace LAZYSHELL.Properties {
                 this["BackupROMDirectory"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -58,7 +57,7 @@ namespace LAZYSHELL.Properties {
                 this["CreateBackupROM"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -70,7 +69,19 @@ namespace LAZYSHELL.Properties {
                 this["CreateBackupROMSave"] = value;
             }
         }
-        
+            //
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableDebug {
+            get {
+                return ((bool)(this["EnableDebug"]));
+            }
+            set {
+                this["EnableDebug"] = value;
+            }
+        }
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -82,7 +93,7 @@ namespace LAZYSHELL.Properties {
                 this["FirstLoad"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -94,7 +105,7 @@ namespace LAZYSHELL.Properties {
                 this["History"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -106,7 +117,7 @@ namespace LAZYSHELL.Properties {
                 this["LastAnimation"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -118,7 +129,7 @@ namespace LAZYSHELL.Properties {
                 this["LastAnimationCat"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -130,7 +141,7 @@ namespace LAZYSHELL.Properties {
                 this["LastAttack"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -142,7 +153,7 @@ namespace LAZYSHELL.Properties {
                 this["LastAudioSample"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -154,7 +165,7 @@ namespace LAZYSHELL.Properties {
                 this["LastBattleDialogue"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -166,7 +177,7 @@ namespace LAZYSHELL.Properties {
                 this["LastBattlefield"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -178,7 +189,7 @@ namespace LAZYSHELL.Properties {
                 this["LastDialogue"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
@@ -190,7 +201,7 @@ namespace LAZYSHELL.Properties {
                 this["LastDirectory"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -202,7 +213,7 @@ namespace LAZYSHELL.Properties {
                 this["LastEffect"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -214,7 +225,7 @@ namespace LAZYSHELL.Properties {
                 this["LastEventScript"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -226,7 +237,7 @@ namespace LAZYSHELL.Properties {
                 this["LastEventScriptCat"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -238,7 +249,7 @@ namespace LAZYSHELL.Properties {
                 this["LastFormation"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -250,7 +261,7 @@ namespace LAZYSHELL.Properties {
                 this["LastFormationPack"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -262,7 +273,7 @@ namespace LAZYSHELL.Properties {
                 this["LastItem"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -274,7 +285,7 @@ namespace LAZYSHELL.Properties {
                 this["LastLevel"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -286,7 +297,7 @@ namespace LAZYSHELL.Properties {
                 this["LastMineCart"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -298,7 +309,7 @@ namespace LAZYSHELL.Properties {
                 this["LastMonster"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
@@ -310,7 +321,7 @@ namespace LAZYSHELL.Properties {
                 this["LastRomPath"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -322,7 +333,7 @@ namespace LAZYSHELL.Properties {
                 this["LastSoundType"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -334,7 +345,7 @@ namespace LAZYSHELL.Properties {
                 this["LastSPC"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -346,7 +357,7 @@ namespace LAZYSHELL.Properties {
                 this["LastSpell"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -358,7 +369,7 @@ namespace LAZYSHELL.Properties {
                 this["LastSprite"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -370,7 +381,7 @@ namespace LAZYSHELL.Properties {
                 this["LoadAllData"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -382,7 +393,7 @@ namespace LAZYSHELL.Properties {
                 this["LoadLastUsedROM"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -394,7 +405,7 @@ namespace LAZYSHELL.Properties {
                 this["LoadNotes"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -406,7 +417,7 @@ namespace LAZYSHELL.Properties {
                 this["NotePathCustom"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://home.comcast.net/~giangurgolo/patches/")]
@@ -418,7 +429,7 @@ namespace LAZYSHELL.Properties {
                 this["PatchServerURL"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -430,7 +441,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewAllies"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
@@ -439,7 +450,7 @@ namespace LAZYSHELL.Properties {
                 return ((string)(this["PreviewArgsDefault"]));
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
@@ -451,7 +462,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewArguments"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -463,7 +474,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewBattlefield"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -475,7 +486,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewDynamicRomName"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -487,7 +498,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewFirstTime"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
@@ -499,7 +510,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewLevel"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -511,7 +522,7 @@ namespace LAZYSHELL.Properties {
                 this["PreviewMaxStats"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -523,7 +534,7 @@ namespace LAZYSHELL.Properties {
                 this["RememberLastIndex"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -535,7 +546,7 @@ namespace LAZYSHELL.Properties {
                 this["ShowEncryptionWarnings"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("65535")]
@@ -547,7 +558,7 @@ namespace LAZYSHELL.Properties {
                 this["UndoStackSize"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -559,7 +570,7 @@ namespace LAZYSHELL.Properties {
                 this["UnverifiedRomWarning"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -571,7 +582,7 @@ namespace LAZYSHELL.Properties {
                 this["VisualThemeSystem"] = value;
             }
         }
-        
+            //
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]

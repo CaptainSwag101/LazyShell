@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
+
 namespace LAZYSHELL
 {
     [Serializable()]
@@ -51,7 +52,6 @@ namespace LAZYSHELL
         // constructor
         TextHelperReduced()
         {
-
         }
         // public functions
         public char[] Decode(char[] text, bool byteView, int textType, string[] keystrokes)
@@ -152,11 +152,9 @@ namespace LAZYSHELL
                                     if (text[i + 1] != ']') // would make 1
                                     {
                                         char digitOne = (char)(text[i + 1] - 0x30);
-
                                         if (text.Length > i + 2 && text[i + 2] != ']') // would make 2 digits
                                         {
                                             char digitTwo = (char)(text[i + 2] - 0x30);
-
                                             if (text.Length > i + 3 && text[i + 3] != ']') // would make 3 digits
                                             {
                                                 char digitThree = (char)(text[i + 3] - 0x30);
@@ -349,7 +347,6 @@ namespace LAZYSHELL
                 if (text[i] != '[' && text[i] != ']' && IsValidSymbol(text[i]) == false)
                     if (i == 0 || (text[i - 1] != '\x0B' && text[i - 1] != '\x0D'))
                         return false;
-
                 if (text[i] == '[')
                 {
                     if (openBracket == true)

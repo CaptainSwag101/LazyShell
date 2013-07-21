@@ -31,18 +31,14 @@ namespace LAZYSHELL
         public NotesDB()
         {
             generalNotes = "";
-
             levels = new ArrayList();
-
             eventScripts = new ArrayList();
             actionScripts = new ArrayList();
             battleScripts = new ArrayList();
             memoryBits = new ArrayList();
-
             sprites = new ArrayList();
             effects = new ArrayList();
             dialogues = new ArrayList();
-
             monsters = new ArrayList();
             formations = new ArrayList();
             packs = new ArrayList();

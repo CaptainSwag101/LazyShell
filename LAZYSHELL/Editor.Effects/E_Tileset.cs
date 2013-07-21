@@ -22,11 +22,9 @@ namespace LAZYSHELL
             this.animation = animation;
             this.graphics = animation.GraphicSet;
             this.palette = animation.PaletteSet.Palettes[index];
-
             tileset = new Tile[16 * 16];
             for (int i = 0; i < tileset.Length; i++)
                 tileset[i] = new Tile(i);
-
             DrawTileset(tileset, animation.Tileset_bytes);
         }
         // class functions
@@ -42,7 +40,6 @@ namespace LAZYSHELL
                         source = Do.DrawSubtile((byte)tileset[i].Subtiles[z].Index, 0, graphics, palette, 0x10);
                     else
                         source = Do.DrawSubtile((byte)tileset[i].Subtiles[z].Index, 0, graphics, palette, 0x20);
-
                     tileset[i].Subtiles[z] = source;
                 }
             }
@@ -62,7 +59,8 @@ namespace LAZYSHELL
                 {
                     for (int z = 0; z < 2; z++)
                     {
-                        if (offset >= src.Length - 1) return;
+                        if (offset >= src.Length - 1)
+                            return;
                         tile = (ushort)(Bits.GetShort(src, offset++) & 0x03FF);
                         temp = src[offset++];
                         if (animation.Codec == 1)
@@ -74,7 +72,8 @@ namespace LAZYSHELL
                     offset += 28; // jump forward in buffer to grab correct 8x8 tiles
                     for (int a = 2; a < 4; a++)
                     {
-                        if (offset >= src.Length - 1) return;
+                        if (offset >= src.Length - 1)
+                            return;
                         tile = (ushort)(Bits.GetShort(src, offset++) & 0x03FF);
                         temp = src[offset++];
                         if (animation.Codec == 1)

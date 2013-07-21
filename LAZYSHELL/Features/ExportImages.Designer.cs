@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class ExportImages
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -56,7 +54,7 @@
             this.oneImageDefault.Checked = true;
             this.oneImageDefault.Location = new System.Drawing.Point(11, 20);
             this.oneImageDefault.Name = "oneImageDefault";
-            this.oneImageDefault.Size = new System.Drawing.Size(351, 17);
+            this.oneImageDefault.Size = new System.Drawing.Size(342, 17);
             this.oneImageDefault.TabIndex = 0;
             this.oneImageDefault.TabStop = true;
             this.oneImageDefault.Text = "One image per mold, default size (all tilemap molds will be 256x256!)";
@@ -67,7 +65,7 @@
             this.oneSpriteSheet.AutoSize = true;
             this.oneSpriteSheet.Location = new System.Drawing.Point(11, 54);
             this.oneSpriteSheet.Name = "oneSpriteSheet";
-            this.oneSpriteSheet.Size = new System.Drawing.Size(331, 17);
+            this.oneSpriteSheet.Size = new System.Drawing.Size(322, 17);
             this.oneSpriteSheet.TabIndex = 2;
             this.oneSpriteSheet.Text = "One sprite sheet image per sprite, molds cropped to pixel edges";
             this.oneSpriteSheet.UseVisualStyleBackColor = true;
@@ -78,7 +76,7 @@
             this.oneImageCropped.AutoSize = true;
             this.oneImageCropped.Location = new System.Drawing.Point(11, 37);
             this.oneImageCropped.Name = "oneImageCropped";
-            this.oneImageCropped.Size = new System.Drawing.Size(236, 17);
+            this.oneImageCropped.Size = new System.Drawing.Size(232, 17);
             this.oneImageCropped.TabIndex = 1;
             this.oneImageCropped.Text = "One image per mold, cropped to pixel edges";
             this.oneImageCropped.UseVisualStyleBackColor = true;
@@ -95,6 +93,7 @@
             // 
             // cancel_button
             // 
+            this.cancel_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancel_button.Location = new System.Drawing.Point(309, 219);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(75, 23);
@@ -161,7 +160,7 @@
             this.oneAnimatedGIF.AutoSize = true;
             this.oneAnimatedGIF.Location = new System.Drawing.Point(11, 104);
             this.oneAnimatedGIF.Name = "oneAnimatedGIF";
-            this.oneAnimatedGIF.Size = new System.Drawing.Size(296, 17);
+            this.oneAnimatedGIF.Size = new System.Drawing.Size(292, 17);
             this.oneAnimatedGIF.TabIndex = 0;
             this.oneAnimatedGIF.Text = "One animated GIF per sequence, cropped to pixel edges";
             this.oneAnimatedGIF.UseVisualStyleBackColor = true;
@@ -241,8 +240,10 @@
             // 
             // ExportImages
             // 
+            this.AcceptButton = this.ok_button;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancel_button;
             this.ClientSize = new System.Drawing.Size(396, 254);
             this.Controls.Add(this.range);
             this.Controls.Add(this.current);
@@ -269,9 +270,7 @@
             this.PerformLayout();
 
         }
-
         #endregion
-
         private System.Windows.Forms.RadioButton oneImageDefault;
         private System.Windows.Forms.RadioButton oneSpriteSheet;
         private System.Windows.Forms.RadioButton oneImageCropped;

@@ -6,11 +6,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
 {
     public partial class Interpreter
     {
-                static Interpreter instance = null; // Our instance
+        static Interpreter instance = null; // Our instance
         static readonly object padlock = new object(); // Ensures only one instance of this object
         Interpreter()
         {
-            
         }
         public static Interpreter Instance
         {
@@ -24,7 +23,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     }
                     return instance;
                 }
-
             }
         }
     }

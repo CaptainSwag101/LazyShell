@@ -14,8 +14,8 @@ namespace LAZYSHELL
         // tile properties
         private Subtile[] subtiles = new Subtile[4];
         public Subtile[] Subtiles { get { return subtiles; } set { subtiles = value; } }
-        private int tileIndex;
-        public int TileIndex { get { return tileIndex; } set { tileIndex = value; } }
+        private int index;
+        public int Index { get { return index; } set { index = value; } }
         private bool mirror, invert;
         public bool Mirror { get { return mirror; } set { mirror = value; } }
         public bool Invert { get { return invert; } set { invert = value; } }
@@ -75,9 +75,9 @@ namespace LAZYSHELL
             }
         }
         // constructors
-        public Tile(int tileIndex)
+        public Tile(int index)
         {
-            this.tileIndex = tileIndex; // set tile Number
+            this.index = index; // set tile Number
             this.pixels = new int[16 * 16];
             for (int p = 0; p < 4; p++)
                 subtiles[p] = new Subtile(0, new byte[0x20], 0, new int[16], false, false, false, false);
@@ -85,7 +85,7 @@ namespace LAZYSHELL
         // spawning
         public Tile Copy()
         {
-            Tile copy = new Tile(this.tileIndex);
+            Tile copy = new Tile(this.index);
             for (int i = 0; i < 4; i++)
             {
                 Subtile source = subtiles[i].Copy();

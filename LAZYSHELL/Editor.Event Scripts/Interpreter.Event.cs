@@ -281,7 +281,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Return",			// 0xFE
             "Return all"			// 0xFF
 			        };
-
         public static string[] EventCommandsFD = new string[]
         {
             "","","","","","","","",
@@ -290,7 +289,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "","","","","","","","",
             "","","","","","","","",
             "","","","","","","","",
-
             "Unfreeze screen",			// 0x30
             "Freeze screen",			// 0x31
             "Remember last object",			// 0x32
@@ -512,14 +510,12 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Return",			// 0xFE
             "Return all"			// 0xFF
         };
-
         private static string[] CharacterNames = new string[]
         {
             "Mario","Toadstool","Bowser","Geno","Mallow",
             "INVALID","INVALID","INVALID","INVALID","INVALID",
             "INVALID","INVALID","INVALID","INVALID","INVALID",
         };
-
         private static string[] ObjectNames = new string[]
             {
             "Mario",
@@ -538,7 +534,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "Layer 1",
             "Layer 2",
             "Layer 3",
-
             "Memory $70A8",
             "Memory $70A9",
             "Memory $70AA",
@@ -555,7 +550,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "NPC #9",
             "NPC #10",
             "NPC #11",
-
             "NPC #12",
             "NPC #13",
             "NPC #14",
@@ -573,7 +567,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
             "NPC #26",
             "NPC #27",
             };
-
         private static string[] Menus = new string[] { 
             "choose game", "overworld menu", "return to world map", "shop 0", "save game", "items maxed out" };
         private static string[] DirectionNames = new string[] { 
@@ -585,7 +578,6 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         private static string[] LayerNames = new string[] { "L1", "L2", "L3", "L4", "Sprites", "BG", "½ intensity", "Minus sub" };
         private static string[] TutorialNames = new string[] { "How to equip", "How to use items", "How to switch allies", "How to play beetle mania" };
         private static string[] EventNames = new string[] { "Mario falls to pipehouse", "Mario returns to MK", "Mario takes Nimbus bus" };
-
         #endregion
         public string InterpretCommand(EventCommand esc)
         {

@@ -16,7 +16,7 @@ namespace LAZYSHELL
     public partial class LevelsTemplate : Form
     {
         // variables
-        
+        //
         private Levels levels;
         private Overlay overlay;
         private LevelTemplate template; public LevelTemplate Template { get { return this.template; } }
@@ -40,7 +40,8 @@ namespace LAZYSHELL
         }
         private void SetTemplateImage()
         {
-            if (template == null) return;
+            if (template == null)
+                return;
             pictureBoxTemplate.Size = template.Size;
             templateImage = new Bitmap(Do.PixelsToImage(template.GetPixels(levels.Level, levels.Tileset),
                 template.Size.Width, template.Size.Height));
@@ -125,7 +126,8 @@ namespace LAZYSHELL
         }
         private void templatesLoaded_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (templatesLoaded.SelectedIndex == -1) return;
+            if (templatesLoaded.SelectedIndex == -1)
+                return;
             template = (LevelTemplate)templates[templatesLoaded.SelectedIndex];
             templateRenameText.Text = template.Name;
             SetTemplateImage();
@@ -139,7 +141,8 @@ namespace LAZYSHELL
         }
         private void templateRenameText_TextChanged(object sender, EventArgs e)
         {
-            if (templates.Count == 0) return;
+            if (templates.Count == 0)
+                return;
             if (templateRenameText.Text == "")
             {
                 MessageBox.Show("A template name cannot be empty.", "LAZY SHELL");
@@ -163,10 +166,8 @@ namespace LAZYSHELL
         {
             if (template == null || templates.Count == 0)
                 return;
-
             templates.Remove(template);
             int temp = templatesLoaded.SelectedIndex;
-
             templatesLoaded.BeginUpdate();
             templatesLoaded.Items.Clear();
             foreach (LevelTemplate lt in templates)
@@ -191,23 +192,19 @@ namespace LAZYSHELL
         {
             if (template == null || templates.Count == 0)
                 return;
-
             templateC = template;
         }
         private void templatePaste_Click(object sender, EventArgs e)
         {
             if (templateC == null || templates.Count == 0)
                 return;
-
             template = templateC;
             templates.Add(template);
-
             templatesLoaded.Items.Add(template.Name);
             templatesLoaded.SelectedIndex = templatesLoaded.Items.Count - 1;
             templatesLoaded.Enabled = true;
             templateRenameText.Enabled = true;
             templateRename.Enabled = true;
-
             templateRenameText.Text = template.Name;
         }
         private void pictureBoxTemplate_Paint(object sender, PaintEventArgs e)

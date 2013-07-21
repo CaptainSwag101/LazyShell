@@ -14,7 +14,6 @@ namespace LAZYSHELL
     public partial class Battlefields : Form
     {
         #region Variables
-
         private long checksum;
         private Settings settings = Settings.Default;
         // main
@@ -70,7 +69,8 @@ namespace LAZYSHELL
         private Bitmap selection;
         private CopyBuffer draggedTiles;
         private CopyBuffer copiedTiles;
-        private CommandStack commandStack = new CommandStack();
+        private CommandStack commandStack = new CommandStack(true);
+        private int commandCount = 0;
         // special controls
         private EditLabel labelWindow;
         #endregion
@@ -226,7 +226,8 @@ namespace LAZYSHELL
         }
         private void Copy()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             if (draggedTiles != null)
             {
                 this.copiedTiles = draggedTiles;
@@ -258,7 +259,8 @@ namespace LAZYSHELL
         /// </summary>
         private void Drag()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             // make the copy
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -284,17 +286,25 @@ namespace LAZYSHELL
         }
         private void Cut()
         {
+            if (overlay.SelectTS == null || overlay.SelectTS.Size == new Size(0, 0))
+                return;
             Copy();
             Delete();
+            if (commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void Paste(Point location, CopyBuffer buffer)
         {
-            if (buffer == null) return;
+            if (buffer == null)
+                return;
             moving = true;
             // now dragging a new selection
             draggedTiles = buffer;
             selection = buffer.Image;
-            overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size);
+            overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size, pictureBoxBattlefield);
             pictureBoxBattlefield.Invalidate();
         }
         /// <summary>
@@ -303,6 +313,8 @@ namespace LAZYSHELL
         /// <param name="buffer">The dragged selection or the newly pasted selection.</param>
         private void Defloat(CopyBuffer buffer)
         {
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             selection = null;
             int x_ = overlay.SelectTS.X / 16;
             int y_ = overlay.SelectTS.Y / 16;
@@ -319,11 +331,15 @@ namespace LAZYSHELL
                     if (y < 0 || x < 0) continue;
                     Tile tile = buffer.Tiles[y * (buffer.Width / 16) + x];
                     tileset.Tileset_tiles[index] = tile.Copy();
-                    tileset.Tileset_tiles[index].TileIndex = index;
+                    tileset.Tileset_tiles[index].Index = index;
                 }
             }
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
+            commandStack.Push(commandCount + 1);
+            commandCount = 0;
             SetBattlefieldImage();
+            //
+            commandStack.Push(new TilesetCommand(tileset, oldTileset, this));
         }
         private void Defloat()
         {
@@ -335,13 +351,17 @@ namespace LAZYSHELL
                 Defloat(draggedTiles);
                 draggedTiles = null;
             }
-            overlay.SelectTS = null;
-            selection = null;
             moving = false;
+            selection = null;
+            overlay.SelectTS = null;
+            Cursor.Position = Cursor.Position;
         }
         private void Delete()
         {
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             for (int y = 0; y < overlay.SelectTS.Height / 16; y++)
@@ -360,12 +380,16 @@ namespace LAZYSHELL
             }
             tileset.DrawTileset(tileset.Tileset_tiles, tileset.Tileset_bytes);
             SetBattlefieldImage();
+            //
+            commandStack.Push(new TilesetCommand(tileset, oldTileset, this));
+            commandCount++;
         }
         private void Flip(string type)
         {
             if (draggedTiles != null)
                 Defloat(draggedTiles);
-            if (overlay.SelectTS == null) return;
+            if (overlay.SelectTS == null)
+                return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
             CopyBuffer buffer = new CopyBuffer(overlay.SelectTS.Width, overlay.SelectTS.Height);
@@ -431,12 +455,9 @@ namespace LAZYSHELL
         }
         private void battlefieldNum_ValueChanged(object sender, EventArgs e)
         {
+            Defloat();
             battlefieldName.SelectedIndex = (int)battlefieldNum.Value;
             tileset.Assemble(16, 16);
-            draggedTiles = null;
-            overlay.SelectTS = null;
-            selection = null;
-            moving = false;
             RefreshBattlefield();
             settings.LastBattlefield = index;
         }
@@ -446,7 +467,8 @@ namespace LAZYSHELL
         }
         private void battlefieldPaletteSetNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.PaletteSet = (byte)battlefieldPaletteSetNum.Value;
             battlefieldPaletteSetName.SelectedIndex = (int)battlefieldPaletteSetNum.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -458,12 +480,14 @@ namespace LAZYSHELL
         }
         private void battlefieldPaletteSetName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldPaletteSetNum.Value = battlefieldPaletteSetName.SelectedIndex;
         }
         private void battlefieldGFXSet1Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.GraphicSetA = (byte)battlefieldGFXSet1Num.Value;
             battlefieldGFXSet1Name.SelectedIndex = (int)battlefieldGFXSet1Num.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -475,12 +499,14 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet1Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldGFXSet1Num.Value = battlefieldGFXSet1Name.SelectedIndex;
         }
         private void battlefieldGFXSet2Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.GraphicSetB = (byte)battlefieldGFXSet2Num.Value;
             battlefieldGFXSet2Name.SelectedIndex = (int)battlefieldGFXSet2Num.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -492,12 +518,14 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet2Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldGFXSet2Num.Value = battlefieldGFXSet2Name.SelectedIndex;
         }
         private void battlefieldGFXSet3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.GraphicSetC = (byte)battlefieldGFXSet3Num.Value;
             battlefieldGFXSet3Name.SelectedIndex = (int)battlefieldGFXSet3Num.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -509,12 +537,14 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldGFXSet3Num.Value = battlefieldGFXSet3Name.SelectedIndex;
         }
         private void battlefieldGFXSet4Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.GraphicSetD = (byte)battlefieldGFXSet4Num.Value;
             battlefieldGFXSet4Name.SelectedIndex = (int)battlefieldGFXSet4Num.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -526,12 +556,14 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet4Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldGFXSet4Num.Value = battlefieldGFXSet4Name.SelectedIndex;
         }
         private void battlefieldGFXSet5Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.GraphicSetE = (byte)battlefieldGFXSet5Num.Value;
             battlefieldGFXSet5Name.SelectedIndex = (int)battlefieldGFXSet5Num.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -543,12 +575,14 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet5Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldGFXSet5Num.Value = battlefieldGFXSet5Name.SelectedIndex;
         }
         private void battlefieldTilesetNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefield.TileSet = (byte)battlefieldTilesetNum.Value;
             battlefieldTilesetName.SelectedIndex = (int)battlefieldTilesetNum.Value;
             tileset = new BattlefieldTileset(battlefield, paletteSets[palette]);
@@ -560,7 +594,8 @@ namespace LAZYSHELL
         }
         private void battlefieldTilesetName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             battlefieldTilesetNum.Value = battlefieldTilesetName.SelectedIndex;
         }
         // open editors
@@ -584,13 +619,11 @@ namespace LAZYSHELL
         // image
         private void pictureBoxBattlefield_Paint(object sender, PaintEventArgs e)
         {
-            if (battlefieldImage == null) return;
-
+            if (battlefieldImage == null)
+                return;
             Rectangle rdst = new Rectangle(0, 0, 512, 512);
-
             if (buttonToggleBG.Checked)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(paletteSets[palette].Palette[0])), rdst);
-
             e.Graphics.DrawImage(battlefieldImage, rdst, 0, 0, 512, 512, GraphicsUnit.Pixel);
             if (moving && selection != null)
             {
@@ -602,7 +635,6 @@ namespace LAZYSHELL
                 Do.DrawString(e.Graphics, new Point(rdst.X, rdst.Y + rdst.Height),
                     "click/drag", Color.White, Color.Black, new Font("Tahoma", 6.75F, FontStyle.Bold));
             }
-
             float[][] matrixItems ={ 
                new float[] {1, 0, 0, 0, 0},
                new float[] {0, 1, 0, 0, 0},
@@ -612,32 +644,22 @@ namespace LAZYSHELL
             ColorMatrix cm = new ColorMatrix(matrixItems);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
             if (mouseEnter)
                 DrawHoverBox(e.Graphics);
-
             if (buttonToggleCartGrid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1, true);
-
+                overlay.DrawTileGrid(e.Graphics, Color.Gray, pictureBoxBattlefield.Size, new Size(16, 16), 1, true);
             if (overlay.SelectTS != null)
             {
                 if (buttonToggleCartGrid.Checked)
-                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1, Color.Yellow);
+                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
                 else
-                    overlay.DrawSelectionBox(e.Graphics, overlay.SelectTS.Terminal, overlay.SelectTS.Location, 1);
+                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1);
             }
-        }
-        private void pictureBoxBattlefield_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-        private void pictureBoxBattlefield_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
         }
         private void pictureBoxBattlefield_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right) return;
+            if (e.Button == MouseButtons.Right)
+                return;
             mouseDownObject = null;
             PictureBox pictureBox = (PictureBox)sender;
             pictureBox.Focus();
@@ -662,7 +684,7 @@ namespace LAZYSHELL
                 }
                 // if making a new selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == null)
-                    overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16);
+                    overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16, pictureBoxBattlefield);
                 // if moving a current selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == "selection")
                 {
@@ -737,7 +759,6 @@ namespace LAZYSHELL
         }
         private void pictureBoxBattlefield_MouseUp(object sender, MouseEventArgs e)
         {
-
         }
         private void pictureBoxBattlefield_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -746,8 +767,8 @@ namespace LAZYSHELL
                 case Keys.G: buttonToggleCartGrid.PerformClick(); break;
                 case Keys.B: buttonToggleBG.PerformClick(); break;
                 case Keys.S: buttonEditSelect.PerformClick(); break;
-                case Keys.Control | Keys.C: Copy(); break;
-                case Keys.Control | Keys.X: Cut(); break;
+                case Keys.Control | Keys.C: buttonEditCopy.PerformClick(); break;
+                case Keys.Control | Keys.X: buttonEditCut.PerformClick(); break;
                 case Keys.Control | Keys.V:
                     if (draggedTiles != null)
                         Defloat(draggedTiles);
@@ -755,7 +776,6 @@ namespace LAZYSHELL
                     break;
                 case Keys.Delete: Delete(); break;
                 case Keys.Control | Keys.D:
-
                     if (draggedTiles != null)
                         Defloat(draggedTiles);
                     else
@@ -765,9 +785,11 @@ namespace LAZYSHELL
                     }
                     break;
                 case Keys.Control | Keys.A:
-                    overlay.Select = new Overlay.Selection(16, 0, 0, 512, 512);
+                    overlay.Select = new Overlay.Selection(16, 0, 0, 512, 512, pictureBoxBattlefield);
                     pictureBoxBattlefield.Invalidate();
                     break;
+                case Keys.Control | Keys.Z: buttonEditUndo.PerformClick(); break;
+                case Keys.Control | Keys.Y: buttonEditRedo.PerformClick(); break;
             }
         }
         // drawing buttons
@@ -781,7 +803,19 @@ namespace LAZYSHELL
         }
         private void buttonEditDelete_Click(object sender, EventArgs e)
         {
-            Delete();
+            if (!moving)
+                Delete();
+            else
+            {
+                moving = false;
+                draggedTiles = null;
+                pictureBoxBattlefield.Invalidate();
+            }
+            if (!moving && commandCount > 0)
+            {
+                commandStack.Push(commandCount);
+                commandCount = 0;
+            }
         }
         private void buttonEditCopy_Click(object sender, EventArgs e)
         {
@@ -794,16 +828,21 @@ namespace LAZYSHELL
         private void buttonEditPaste_Click(object sender, EventArgs e)
         {
             if (draggedTiles != null)
+            {
                 Defloat(draggedTiles);
-            Paste(new Point(16, 16), copiedTiles);
+                draggedTiles = null;
+            }
+            Paste(new Point(0, 0), copiedTiles);
         }
         private void buttonEditUndo_Click(object sender, EventArgs e)
         {
-
+            commandStack.UndoCommand();
+            SetBattlefieldImage();
         }
         private void buttonEditRedo_Click(object sender, EventArgs e)
         {
-
+            commandStack.RedoCommand();
+            SetBattlefieldImage();
         }
         private void buttonEditSelect_Click(object sender, EventArgs e)
         {
@@ -824,6 +863,8 @@ namespace LAZYSHELL
             foreach (PaletteSet paletteSet in Model.PaletteSetsBF)
                 paletteSet.BUFFER = Model.ROM;
             RefreshBattlefield();
+            commandStack.Clear();
+            commandCount = 0;
         }
         private void export_Click(object sender, EventArgs e)
         {
@@ -831,11 +872,19 @@ namespace LAZYSHELL
         }
         private void clear_Click(object sender, EventArgs e)
         {
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             ClearElements clearElements = new ClearElements(null, index, "CLEAR BATTLEFIELD TILESETS...");
             clearElements.ShowDialog();
             if (clearElements.DialogResult == DialogResult.Cancel)
                 return;
             RefreshBattlefield();
+            //
+            if (!Bits.Compare(oldTileset, tileset.Tileset_bytes))
+            {
+                commandStack.Push(new TilesetCommand(tileset, oldTileset, this));
+                commandStack.Push(1);
+            }
         }
         // context menu strip
         private void mirrorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -865,6 +914,8 @@ namespace LAZYSHELL
             if (tileset == null)
                 return;
             //
+            byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
+            //
             tileset.Palettes.BUFFER = Model.ROM;
             this.battlefield.GraphicSetA = tileset.Battlefield.GraphicSetA;
             this.battlefield.GraphicSetB = tileset.Battlefield.GraphicSetB;
@@ -876,10 +927,15 @@ namespace LAZYSHELL
             this.tileset.Graphics = tileset.Graphics;
             this.tileset.Tileset_tiles = tileset.Tileset_tiles;
             this.tileset.DrawTileset(this.tileset.Tileset_tiles, this.tileset.Tileset_bytes);
-
             this.tileset.Assemble(16, 16);
-
+            //
             RefreshBattlefield();
+            //
+            if (!Bits.Compare(oldTileset, tileset.Tileset_bytes))
+            {
+                commandStack.Push(new TilesetCommand(tileset, oldTileset, this));
+                commandStack.Push(1);
+            }
         }
         private void reset_Click(object sender, EventArgs e)
         {

@@ -4449,7 +4449,7 @@ namespace LAZYSHELL
                 },
                 new int[]   // 2
                 {
-                    0x08,0x10,0xD0
+                    0x08,0x10,0x3E,0x3F,0xD0
                 },
                 new int[]   // 3
                 {
@@ -4532,7 +4532,7 @@ namespace LAZYSHELL
                 },
                 new int[]   // 2
                 {
-                    0x00,0x00,0x00
+                    0x00,0x00,0x00,0x00,0x00
                 },
                 new int[]   // 3
                 {
@@ -4626,9 +4626,7 @@ namespace LAZYSHELL
                     "Enable event trigger for object @ 70A8",			// 0xF6
                     "Disable event trigger for object @ 70A8",			// 0xF7
                     "If object {xx} is present in level {xx}...",			// 0xF8
-
                     /********FD OPTIONS********/
-
                     "Remember last object",			// 0x32
                     "If object {xx}'s action script running...",			// 0x33
                     "If object {xx} is underwater...",			// 0x34
@@ -4637,28 +4635,23 @@ namespace LAZYSHELL
                     "If object {xx}'s event trigger in level {xx} is...",  // 0xF0
                     "Mario glows"			// 0xF9
                                         };
-
                 case 1:
                     return new string[] 
                     {
                     "Enable buttons {xx} only...",			// 0x34
                     "Enable buttons {xx} only, reset @ return...",			// 0x35
                                         };
-
                 case 2:
                     return new string[] 
                     { 
                     "Add or remove character {xx} in party...",			// 0x36
                     "Equip item {xx} to character {xx}...",			// 0x54
                     "Character {xx}'s HP -= memory $7000",			// 0x56
-
                     /********FD OPTIONS********/
-
                     "Experience += experience packet",			// 0x4B
                     "Restore all HP",			// 0x5B
                     "Experience packet = memory $7000"			// 0x64
                     };
-
                 case 3:
                     return new string[] 
                     { 
@@ -4667,9 +4660,7 @@ namespace LAZYSHELL
                     "Coins += ...",			// 0x52
                     "Frog coins += ...",			// 0x53
                     "FP -= memory $7000",			// 0x57
-
                     /********FD OPTIONS********/
-
                     "Store memory $70A7 to item inventory",			// 0x50
                     "Store memory $70A7 to equipment inventory",			// 0x51
                     "Coins += memory $7000",			// 0x52
@@ -4680,14 +4671,12 @@ namespace LAZYSHELL
                     "Maximum FP += memory $7000",			// 0x57
                     "Restore all FP"			// 0x5C
                     };
-
                 case 4:
                     return new string[] 
                     { 
                     "Engage in battle with pack @ $700E",			// 0x49
                     "Engage in battle with pack {xx}..."			// 0x4A
                     };
-
                 case 5:
                     return new string[] 
                     { 
@@ -4696,7 +4685,6 @@ namespace LAZYSHELL
                     "Apply tile mod to level...",			// 0x6A
                     "Apply solid mod to level..."			// 0x6B
                     };
-
                 case 6:
                     return new string[] 
                     { 
@@ -4704,14 +4692,11 @@ namespace LAZYSHELL
                     "Open menu/run event sequence...",			// 0x4F
                     "Reset game, choose game",			// 0xFB
                     "Reset game",			// 0xFC
-
                     /********FD OPTIONS********/
-
                     "Open save game menu",			// 0x4A
                     "Run menu tutorial...",			// 0x4C
                     "Run level-up bonus sequence"			// 0x65
                     };
-
                 case 7:
                     return new string[] 
                     { 
@@ -4724,7 +4709,6 @@ namespace LAZYSHELL
                     "If dialogue option B selected...",			// 0x66
                     "If dialogue option B / C selected..."			// 0x67
                     };
-
                 case 8:
                     return new string[] 
                     { 
@@ -4736,9 +4720,7 @@ namespace LAZYSHELL
                     "Run event sequence...",			// 0x4E
                     "Run event...",			// 0xD0
                     "Run event as subroutine...",			// 0xD1
-
                     /********FD OPTIONS********/
-
                     "Stop all background events", // 0x43
                     "Run event at return...",  // 0x46
                     "Run star piece sequence...",			// 0x4D
@@ -4748,7 +4730,6 @@ namespace LAZYSHELL
                     "Run ending credit sequence",			// 0x67
                     "Exor crashes into keep"			// 0xF8
                     };
-
                 case 9:
                     return new string[] 
                     { 
@@ -4760,7 +4741,6 @@ namespace LAZYSHELL
                     "Jump to start of script",			// 0xF9
                     "Jump to start of script"			// 0xFA
                     };
-
                 case 10:
                     return new string[] 
                     {
@@ -4788,13 +4768,10 @@ namespace LAZYSHELL
                     "Palette set = ...",			// 0x8A
                     "Circle mask, shrink to object {xx} (non-static)...", // 0x87
                     "Circle mask, shrink to object {xx} (static)...",	    // 0x8F
-
                     /********FD OPTIONS********/
-
                     "Unfreeze screen",			// 0x30
                     "Freeze screen"			// 0x31
                     };
-
                 case 11:
                     return new string[] 
                     {
@@ -4810,9 +4787,7 @@ namespace LAZYSHELL
                     "Play {xx} sound (ch.6,7)...",			// 0x9C
                     "Play {xx} sound (ch.6,7) with {xx} speaker balance...",			// 0x9D
                     "Fade out current sound to {xx} volume...",			// 0x9E
-
                     /********FD OPTIONS********/
-
                     "Deactivate {xx} sound channels...",        // 0x94
                     "If audio memory $69 >= ...",        // 0x96
                     "If audio memory $69 = ...",        // 0x97
@@ -4820,7 +4795,6 @@ namespace LAZYSHELL
                     "Lower current music tempo",			// 0xA4
                     "Slide current music tempo to default"			// 0xA5
                     };
-
                 case 12:
                     return new string[] 
                     { 
@@ -4849,13 +4823,10 @@ namespace LAZYSHELL
                     "If memory $7xxx != ...",			// 0xE5
                     "If random # between 0 and 255 > 128...",			// 0xE8
                     "If random # between 0 and 255 > 66...",			// 0xE9
-
                     /********FD OPTIONS********/
-
                     "Memory $7xxx shift left {xx} times...",			// 0xB6
                     "Generate random # between 0 and memory $7xxx..."			// 0xB7
                     };
-
                 case 13:
                     return new string[] 
                     {
@@ -4897,9 +4868,7 @@ namespace LAZYSHELL
                     "If comparison result is: <...",			// 0xED
                     "If loaded memory < 0...",			// 0xEE
                     "If loaded memory >= 0...",			// 0xEF
-
                     /********FD OPTIONS********/
-
                     "Memory $7000 = quantity of item {xx} in inventory...",			// 0x58
                     "Memory $7000 = coins",			// 0x59
                     "Memory $7000 = frog coins",			// 0x5A
@@ -4914,7 +4883,6 @@ namespace LAZYSHELL
                     "Memory $7000 ^= memory $7xxx...",			// 0xB5
                     "Memory $7000 = Moleville Mountain timer"			// 0xB8
                     };
-
                 case 14:
                     return new string[] 
                     { 
@@ -4922,20 +4890,16 @@ namespace LAZYSHELL
                     "Pause script until screen effect done", // 0x7F
                     "Pause script for {xx} frames...",			// 0xF0
                     "Pause script for {xxxx} frames...",			// 0xF1
-
                     /********FD OPTIONS********/
-
                     "Pause script, resume on next dialogue page A",			// 0x60
                     "Pause script, resume on next dialogue page B",			// 0x61
                     };
-
                 case 15:
                     return new string[] 
                     {
                     "Return",			// 0xFE
                     "Return all"			// 0xFF
                     };
-
                 default:
                     return new string[] { };
             }
@@ -4962,16 +4926,13 @@ namespace LAZYSHELL
                     "Movement set {xx} bits...",			// 0x15
                     "If in air...",			// 0x3D
                     "Reset properties",			// 0x09
-
                     /********FD OPTIONS********/
-
                     "Shadow on",			// 0x00
                     "Shadow off",			// 0x01
                     "Floating on",			// 0x02
                     "Floating off",			// 0x03
                     "Priority = ...",			// 0x0F
                     };
-
                 case 1:
                     return new string[] 
                     { 
@@ -4979,15 +4940,15 @@ namespace LAZYSHELL
                     "Palette row += ...",			// 0x0E
                     "Palette row += 1",			// 0x0F
                     };
-
                 case 2:
                     return new string[] 
                     { 
                     "Animation/sequence = ...",			// 0x08
                     "Walking/sequence speed = ...",			// 0x10
+                    "Create NPC @ object {xx}'s (x,y,z)...",			// 0x3E
+                    "Create NPC @ (x,y,z) of $7010-15...",			// 0x3F
                     "Action script = ...",			// 0xD0
                     };
-
                 case 3:
                     return new string[] 
                     { 
@@ -4995,7 +4956,6 @@ namespace LAZYSHELL
                     "Embedded animation routine ($27)...",			// 0x27
                     "Embedded animation routine ($28)...",			// 0x28
                     };
-
                 case 4:
                     return new string[] 
                     { 
@@ -5011,7 +4971,6 @@ namespace LAZYSHELL
                     "Z coord += 1 step",			// 0x4A
                     "Z coord -= 1 step",			// 0x4B
                     };
-
                 case 5:
                     return new string[] 
                     { 
@@ -5032,7 +4991,6 @@ namespace LAZYSHELL
                     "Jump at {xx} velocity...",			// 0x7E
                     "Jump (+SFX) at {xx} velocity...",			// 0x7F
                     };
-
                 case 6:
                     return new string[] 
                     { 
@@ -5049,7 +5007,6 @@ namespace LAZYSHELL
                     "Z coord += {xx} pixels...",			// 0x6A
                     "Z coord -= {xx} pixels...",			// 0x6B
                     };
-
                 case 7:
                     return new string[] 
                     { 
@@ -5068,7 +5025,6 @@ namespace LAZYSHELL
                     "Face east",			// 0x7C
                     "Face southwest",			// 0x7D
                     };
-
                 case 8:
                     return new string[] 
                     { 
@@ -5085,7 +5041,6 @@ namespace LAZYSHELL
                     "Transfer (x,y,z) pixels...",			// 0x94
                     "Transfer to (x,y,z) of object...",			// 0x95
                     };
-
                 case 9:
                     return new string[] 
                     { 
@@ -5094,7 +5049,6 @@ namespace LAZYSHELL
                     "Play sound: {xx} (ch.6,7), speaker balance {xx}...",			// 0x9D
                     "Fade out current sound to volume {xx}...",			// 0x9E
                     };
-
                 case 10:
                     return new string[] 
                     { 
@@ -5123,12 +5077,9 @@ namespace LAZYSHELL
                     "If memory $7xxx != ...",			// 0xE5
                     "If random # between 0 and 255 > 128...",			// 0xE8
                     "If random # between 0 and 255 > 66...",			// 0xE9
-
                     /********FD OPTIONS********/
-
                     "Memory $7xxx shift left {xx} times...",			// 0xB6
                     };
-
                 case 11:
                     return new string[] 
                     { 
@@ -5163,9 +5114,7 @@ namespace LAZYSHELL
                     "If comparison result is: <...",			// 0xED
                     "If loaded memory < 0...",			// 0xEE
                     "If loaded memory >= 0...",			// 0xEF
-
                     /********FD OPTIONS********/
-
                     "Memory $700C &= {xx}...",			// 0xB0
                     "Memory $700C |= {xx}...",			// 0xB1
                     "Memory $700C ^= {xx}...",			// 0xB2
@@ -5173,7 +5122,6 @@ namespace LAZYSHELL
                     "Memory $700C |= memory $7xxx...",			// 0xB4
                     "Memory $700C ^= memory $7xxx...",			// 0xB5
                     };
-
                 case 12:
                     return new string[] 
                     { 
@@ -5182,7 +5130,6 @@ namespace LAZYSHELL
                     "Loop start, count = ...",			// 0xD4
                     "Loop end",			// 0xD7
                     };
-
                 case 13:
                     return new string[] 
                     { 
@@ -5193,9 +5140,7 @@ namespace LAZYSHELL
                     "Enable event trigger for object @ 70A8",			// 0xF6
                     "Disable event trigger for object @ 70A8",			// 0xF7
                     "If object {xx} is present in level {xx}...",			// 0xF8
-
                     /********FD OPTIONS********/
-
                     "Object memory $0E set bit 4",			// 0x04
                     "Object memory $0E clear bit 4",			// 0x05
                     "Object memory $0E set bit 5",			// 0x06
@@ -5208,21 +5153,18 @@ namespace LAZYSHELL
                     "Object memory $30 set bit 4",			// 0x0D
                     "Object memory $09 clear bit 4,6, set bit 5",			// 0x0E
                     };
-
                 case 14:
                     return new string[] 
                     { 
                     "Pause script for {xx} frames...",			// 0xF0
                     "Pause script for {xxxx} frames...",			// 0xF1
                     };
-
                 case 15:
                     return new string[] 
                     { 
                     "Return queue",			// 0xFE
                     "Return all"			// 0xFF
                     };
-
                 default:
                     return new string[] { };
             }
@@ -5323,6 +5265,14 @@ namespace LAZYSHELL
             string[] temp = new string[list.Length];
             for (int i = 0; i < list.Length; i++)
                 temp[i] = "{" + i.ToString("d" + length) + "}  " + list[i];
+            return temp;
+        }
+        public static string[] Numerize(int start, int end, string[] list)
+        {
+            int length = (list.Length - 1).ToString().Length;
+            string[] temp = new string[end - start];
+            for (int i = start; i < list.Length && i < end; i++)
+                temp[i - start] = "{" + i.ToString("d" + length) + "}  " + list[i];
             return temp;
         }
         public static string[] Numerize(StringCollection list)

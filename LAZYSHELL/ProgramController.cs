@@ -39,7 +39,6 @@ namespace LAZYSHELL
             else
                 return false;
 
-
         }
         public bool OpenRomFile(string filename)
         {
@@ -73,10 +72,6 @@ namespace LAZYSHELL
         public bool VerifyRom()
         {
             return Model.VerifyRom();
-        }
-        public string GetFileName()
-        {
-            return Model.FileName;
         }
         public bool HeaderPresent()
         {
@@ -212,7 +207,7 @@ namespace LAZYSHELL
         {
             App.CreatePatchesWindow();
         }
-        public void Notes()
+        public void Project()
         {
             App.CreateProjectWindow();
         }

@@ -40,23 +40,19 @@ namespace LAZYSHELL
         {
             int offset = index * 4 + 0x1DDE00;
             byte temp = 0;
-
             temp = rom[offset++];
             extraSprites = (temp & 0x10) == 0x10;
             fullPaletteBuffer = (temp & 0x80) == 0x80;
             allySpriteBuffer = (byte)((temp & 0x60) >> 5);
             extraSpriteBuffer = (byte)(temp & 0x0F);
-
             temp = rom[offset++];
             cloneAsprite = (byte)(temp & 0x07);
             cloneAmain = (byte)((temp & 0x70) >> 4);
             cloneAindexing = (temp & 0x80) == 0x80;
-
             temp = rom[offset++];
             cloneBsprite = (byte)(temp & 0x07);
             cloneBmain = (byte)((temp & 0x70) >> 4);
             cloneBindexing = (temp & 0x80) == 0x80;
-
             temp = rom[offset++];
             cloneCsprite = (byte)(temp & 0x07);
             cloneCmain = (byte)((temp & 0x70) >> 4);

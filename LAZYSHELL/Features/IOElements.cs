@@ -31,11 +31,8 @@ namespace LAZYSHELL
             this.currentIndex = currentIndex;
             this.args = args;
             this.type = element.GetType();
-
             this.TopLevel = true;
-
             InitializeComponent();
-
             this.Text = title;
         }
         // event handlers
@@ -45,7 +42,6 @@ namespace LAZYSHELL
             textBoxAll.Enabled = false;
             browseCurrent.Enabled = true;
             textBoxCurrent.Enabled = true;
-
             if (radioButtonCurrent.Checked)
             {
                 buttonOK.Enabled = textBoxCurrent.Text != "";
@@ -59,7 +55,6 @@ namespace LAZYSHELL
             browseAll.Enabled = true;
             textBoxAll.Enabled = true;
             buttonOK.Enabled = true;
-
             if (radioButtonAll.Checked)
             {
                 buttonOK.Enabled = textBoxAll.Text != "";
@@ -98,8 +93,8 @@ namespace LAZYSHELL
                 }
                 saveFileDialog.FilterIndex = 0;
                 saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
                 textBoxCurrent.Text = saveFileDialog.FileName;
             }
             else
@@ -110,8 +105,8 @@ namespace LAZYSHELL
                 openFileDialog.Filter = filter;
                 openFileDialog.FilterIndex = 0;
                 openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
                 textBoxCurrent.Text = openFileDialog.FileName;
             }
             fullPath = textBoxCurrent.Text;
@@ -120,18 +115,15 @@ namespace LAZYSHELL
         private void browseAll_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
             folderBrowserDialog.SelectedPath = settings.LastDirectory;
             if (this.Text.Substring(0, 6) == "EXPORT")
                 folderBrowserDialog.Description = "Select directory to export to";
             else
                 folderBrowserDialog.Description = "Select directory to import from";
-
             // Display the openFile dialog.
             DialogResult result = folderBrowserDialog.ShowDialog();
-
-            if (result != DialogResult.OK) return;
-
+            if (result != DialogResult.OK)
+                return;
             settings.LastDirectory = folderBrowserDialog.SelectedPath;
             textBoxAll.Text = folderBrowserDialog.SelectedPath;
             fullPath = textBoxAll.Text;
@@ -140,28 +132,28 @@ namespace LAZYSHELL
         private void buttonOK_Click(object sender, EventArgs e)
         {
             #region Levels
-            if (this.Text == "EXPORT LEVELS...")
+            if (this.Text == "EXPORT LEVEL DATA...")
             {
                 this.Enabled = false;
                 if (radioButtonCurrent.Checked)
                 {
                     // create the serialized level
                     SerializedLevel sLevel = new SerializedLevel();
-                    sLevel.levelLayer = Model.Levels[currentIndex].Layer;
-                    sLevel.levelMapNum = Model.Levels[currentIndex].LevelMap;
+                    sLevel.LevelLayer = Model.Levels[currentIndex].Layer;
+                    sLevel.LevelMapNum = Model.Levels[currentIndex].LevelMap;
                     LevelMap lMap = Model.LevelMaps[Model.Levels[currentIndex].LevelMap];
-                    sLevel.levelMap = lMap;// Add it to serialized level data object
-                    sLevel.tileSetL1 = Model.Tilesets[lMap.TilesetL1 + 0x20];
-                    sLevel.tileSetL2 = Model.Tilesets[lMap.TilesetL2 + 0x20];
-                    sLevel.tileSetL3 = Model.Tilesets[lMap.TilesetL3];
-                    sLevel.tileMapL1 = Model.Tilemaps[lMap.TilemapL1 + 0x40];
-                    sLevel.tileMapL2 = Model.Tilemaps[lMap.TilemapL2 + 0x40];
-                    sLevel.tileMapL3 = Model.Tilemaps[lMap.TilemapL3];
-                    sLevel.solidityMap = Model.SolidityMaps[lMap.SolidityMap];
-                    sLevel.levelNPCs = Model.Levels[currentIndex].LevelNPCs;
-                    sLevel.levelExits = Model.Levels[currentIndex].LevelExits;
-                    sLevel.levelEvents = Model.Levels[currentIndex].LevelEvents;
-                    sLevel.levelOverlaps = Model.Levels[currentIndex].LevelOverlaps;
+                    sLevel.LevelMap = lMap;// Add it to serialized level data object
+                    sLevel.TilesetL1 = Model.Tilesets[lMap.TilesetL1 + 0x20];
+                    sLevel.TilesetL2 = Model.Tilesets[lMap.TilesetL2 + 0x20];
+                    sLevel.TilesetL3 = Model.Tilesets[lMap.TilesetL3];
+                    sLevel.TilemapL1 = Model.Tilemaps[lMap.TilemapL1 + 0x40];
+                    sLevel.TilemapL2 = Model.Tilemaps[lMap.TilemapL2 + 0x40];
+                    sLevel.TilemapL3 = Model.Tilemaps[lMap.TilemapL3];
+                    sLevel.SolidityMap = Model.SolidityMaps[lMap.SolidityMap];
+                    sLevel.LevelNPCs = Model.Levels[currentIndex].LevelNPCs;
+                    sLevel.LevelExits = Model.Levels[currentIndex].LevelExits;
+                    sLevel.LevelEvents = Model.Levels[currentIndex].LevelEvents;
+                    sLevel.LevelOverlaps = Model.Levels[currentIndex].LevelOverlaps;
                     // finally export the serialized levels
                     Do.Export(sLevel, null, fullPath);
                 }
@@ -172,21 +164,21 @@ namespace LAZYSHELL
                     for (int i = 0; i < sLevels.Length; i++)
                     {
                         sLevels[i] = new SerializedLevel();
-                        sLevels[i].levelLayer = Model.Levels[i].Layer;
-                        sLevels[i].levelMapNum = Model.Levels[i].LevelMap;
+                        sLevels[i].LevelLayer = Model.Levels[i].Layer;
+                        sLevels[i].LevelMapNum = Model.Levels[i].LevelMap;
                         LevelMap lMap = Model.LevelMaps[Model.Levels[i].LevelMap];
-                        sLevels[i].levelMap = lMap;// Add it to serialized level data object
-                        sLevels[i].tileSetL1 = Model.Tilesets[lMap.TilesetL1 + 0x20];
-                        sLevels[i].tileSetL2 = Model.Tilesets[lMap.TilesetL2 + 0x20];
-                        sLevels[i].tileSetL3 = Model.Tilesets[lMap.TilesetL3];
-                        sLevels[i].tileMapL1 = Model.Tilemaps[lMap.TilemapL1 + 0x40];
-                        sLevels[i].tileMapL2 = Model.Tilemaps[lMap.TilemapL2 + 0x40];
-                        sLevels[i].tileMapL3 = Model.Tilemaps[lMap.TilemapL3];
-                        sLevels[i].solidityMap = Model.SolidityMaps[lMap.SolidityMap];
-                        sLevels[i].levelNPCs = Model.Levels[i].LevelNPCs;
-                        sLevels[i].levelExits = Model.Levels[i].LevelExits;
-                        sLevels[i].levelEvents = Model.Levels[i].LevelEvents;
-                        sLevels[i].levelOverlaps = Model.Levels[i].LevelOverlaps;
+                        sLevels[i].LevelMap = lMap;// Add it to serialized level data object
+                        sLevels[i].TilesetL1 = Model.Tilesets[lMap.TilesetL1 + 0x20];
+                        sLevels[i].TilesetL2 = Model.Tilesets[lMap.TilesetL2 + 0x20];
+                        sLevels[i].TilesetL3 = Model.Tilesets[lMap.TilesetL3];
+                        sLevels[i].TilemapL1 = Model.Tilemaps[lMap.TilemapL1 + 0x40];
+                        sLevels[i].TilemapL2 = Model.Tilemaps[lMap.TilemapL2 + 0x40];
+                        sLevels[i].TilemapL3 = Model.Tilemaps[lMap.TilemapL3];
+                        sLevels[i].SolidityMap = Model.SolidityMaps[lMap.SolidityMap];
+                        sLevels[i].LevelNPCs = Model.Levels[i].LevelNPCs;
+                        sLevels[i].LevelExits = Model.Levels[i].LevelExits;
+                        sLevels[i].LevelEvents = Model.Levels[i].LevelEvents;
+                        sLevels[i].LevelOverlaps = Model.Levels[i].LevelOverlaps;
                     }
                     // finally export the serialized levels
                     Do.Export(sLevels,
@@ -208,29 +200,29 @@ namespace LAZYSHELL
                         MessageBox.Show("File not a level data file.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    Model.Levels[currentIndex].Layer = sLevel.levelLayer;
+                    Model.Levels[currentIndex].Layer = sLevel.LevelLayer;
                     Model.Levels[currentIndex].Layer.Index = currentIndex;
-                    Model.Levels[currentIndex].LevelMap = sLevel.levelMapNum;
-                    LevelMap lMap = sLevel.levelMap;
+                    Model.Levels[currentIndex].LevelMap = sLevel.LevelMapNum;
+                    LevelMap lMap = sLevel.LevelMap;
                     Model.LevelMaps[Model.Levels[currentIndex].LevelMap] = lMap;
-                    Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevel.tileSetL1;
-                    Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevel.tileSetL2;
-                    Model.Tilesets[lMap.TilesetL3] = sLevel.tileSetL3;
-                    Model.EditTileSets[lMap.TilesetL1 + 0x20] = true;
-                    Model.EditTileSets[lMap.TilesetL2 + 0x20] = true;
-                    Model.EditTileSets[lMap.TilesetL3] = true;
-                    Model.Tilemaps[lMap.TilemapL1 + 0x40] = sLevel.tileMapL1;
-                    Model.Tilemaps[lMap.TilemapL2 + 0x40] = sLevel.tileMapL2;
-                    Model.Tilemaps[lMap.TilemapL3] = sLevel.tileMapL3;
-                    Model.EditTileMaps[lMap.TilemapL1 + 0x40] = true;
-                    Model.EditTileMaps[lMap.TilemapL2 + 0x40] = true;
-                    Model.EditTileMaps[lMap.TilemapL3] = true;
-                    Model.SolidityMaps[lMap.SolidityMap] = sLevel.solidityMap;
+                    Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevel.TilesetL1;
+                    Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevel.TilesetL2;
+                    Model.Tilesets[lMap.TilesetL3] = sLevel.TilesetL3;
+                    Model.EditTilesets[lMap.TilesetL1 + 0x20] = true;
+                    Model.EditTilesets[lMap.TilesetL2 + 0x20] = true;
+                    Model.EditTilesets[lMap.TilesetL3] = true;
+                    Model.Tilemaps[lMap.TilemapL1 + 0x40] = sLevel.TilemapL1;
+                    Model.Tilemaps[lMap.TilemapL2 + 0x40] = sLevel.TilemapL2;
+                    Model.Tilemaps[lMap.TilemapL3] = sLevel.TilemapL3;
+                    Model.EditTilemaps[lMap.TilemapL1 + 0x40] = true;
+                    Model.EditTilemaps[lMap.TilemapL2 + 0x40] = true;
+                    Model.EditTilemaps[lMap.TilemapL3] = true;
+                    Model.SolidityMaps[lMap.SolidityMap] = sLevel.SolidityMap;
                     Model.EditSolidityMaps[lMap.SolidityMap] = true;
-                    Model.Levels[currentIndex].LevelNPCs = sLevel.levelNPCs;
-                    Model.Levels[currentIndex].LevelExits = sLevel.levelExits;
-                    Model.Levels[currentIndex].LevelEvents = sLevel.levelEvents;
-                    Model.Levels[currentIndex].LevelOverlaps = sLevel.levelOverlaps;
+                    Model.Levels[currentIndex].LevelNPCs = sLevel.LevelNPCs;
+                    Model.Levels[currentIndex].LevelExits = sLevel.LevelExits;
+                    Model.Levels[currentIndex].LevelEvents = sLevel.LevelEvents;
+                    Model.Levels[currentIndex].LevelOverlaps = sLevel.LevelOverlaps;
                     Model.Levels[currentIndex].LevelNPCs.Index = currentIndex;
                     Model.Levels[currentIndex].LevelExits.Index = currentIndex;
                     Model.Levels[currentIndex].LevelEvents.Index = currentIndex;
@@ -252,29 +244,29 @@ namespace LAZYSHELL
                     }
                     for (int i = 0; i < sLevels.Length; i++)
                     {
-                        Model.Levels[i].Layer = sLevels[i].levelLayer;
+                        Model.Levels[i].Layer = sLevels[i].LevelLayer;
                         Model.Levels[i].Layer.Index = currentIndex;
-                        Model.Levels[i].LevelMap = sLevels[i].levelMapNum;
-                        LevelMap lMap = sLevels[i].levelMap;
+                        Model.Levels[i].LevelMap = sLevels[i].LevelMapNum;
+                        LevelMap lMap = sLevels[i].LevelMap;
                         Model.LevelMaps[Model.Levels[i].LevelMap] = lMap;
-                        Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevels[i].tileSetL1;
-                        Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevels[i].tileSetL2;
-                        Model.Tilesets[lMap.TilesetL3] = sLevels[i].tileSetL3;
-                        Model.EditTileSets[lMap.TilesetL1 + 0x20] = true;
-                        Model.EditTileSets[lMap.TilesetL2 + 0x20] = true;
-                        Model.EditTileSets[lMap.TilesetL3] = true;
-                        Model.Tilemaps[lMap.TilemapL1 + 0x40] = sLevels[i].tileMapL1;
-                        Model.Tilemaps[lMap.TilemapL2 + 0x40] = sLevels[i].tileMapL2;
-                        Model.Tilemaps[lMap.TilemapL3] = sLevels[i].tileMapL3;
-                        Model.EditTileMaps[lMap.TilemapL1 + 0x40] = true;
-                        Model.EditTileMaps[lMap.TilemapL2 + 0x40] = true;
-                        Model.EditTileMaps[lMap.TilemapL3] = true;
-                        Model.SolidityMaps[lMap.SolidityMap] = sLevels[i].solidityMap;
+                        Model.Tilesets[lMap.TilesetL1 + 0x20] = sLevels[i].TilesetL1;
+                        Model.Tilesets[lMap.TilesetL2 + 0x20] = sLevels[i].TilesetL2;
+                        Model.Tilesets[lMap.TilesetL3] = sLevels[i].TilesetL3;
+                        Model.EditTilesets[lMap.TilesetL1 + 0x20] = true;
+                        Model.EditTilesets[lMap.TilesetL2 + 0x20] = true;
+                        Model.EditTilesets[lMap.TilesetL3] = true;
+                        Model.Tilemaps[lMap.TilemapL1 + 0x40] = sLevels[i].TilemapL1;
+                        Model.Tilemaps[lMap.TilemapL2 + 0x40] = sLevels[i].TilemapL2;
+                        Model.Tilemaps[lMap.TilemapL3] = sLevels[i].TilemapL3;
+                        Model.EditTilemaps[lMap.TilemapL1 + 0x40] = true;
+                        Model.EditTilemaps[lMap.TilemapL2 + 0x40] = true;
+                        Model.EditTilemaps[lMap.TilemapL3] = true;
+                        Model.SolidityMaps[lMap.SolidityMap] = sLevels[i].SolidityMap;
                         Model.EditSolidityMaps[lMap.SolidityMap] = true;
-                        Model.Levels[i].LevelNPCs = sLevels[i].levelNPCs;
-                        Model.Levels[i].LevelExits = sLevels[i].levelExits;
-                        Model.Levels[i].LevelEvents = sLevels[i].levelEvents;
-                        Model.Levels[i].LevelOverlaps = sLevels[i].levelOverlaps;
+                        Model.Levels[i].LevelNPCs = sLevels[i].LevelNPCs;
+                        Model.Levels[i].LevelExits = sLevels[i].LevelExits;
+                        Model.Levels[i].LevelEvents = sLevels[i].LevelEvents;
+                        Model.Levels[i].LevelOverlaps = sLevels[i].LevelOverlaps;
                         Model.Levels[i].LevelNPCs.Index = currentIndex;
                         Model.Levels[i].LevelExits.Index = currentIndex;
                         Model.Levels[i].LevelEvents.Index = currentIndex;

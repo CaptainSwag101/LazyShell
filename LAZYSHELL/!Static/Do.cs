@@ -41,18 +41,14 @@ namespace LAZYSHELL
         {
             Color[] colors = new Color[palette.Length];
             Color[] newColors = new Color[palette.Length];
-
             double distance = 500.0;
             double temp;
-
             double r, g, b;
             double dbl_test_red;
             double dbl_test_green;
             double dbl_test_blue;
-
             for (int i = 0; i < palette.Length; i++)
                 colors[i] = Color.FromArgb(palette[i]);
-
             for (int i = 0; i < array.Length; i++)
             {
                 distance = 500;
@@ -61,17 +57,13 @@ namespace LAZYSHELL
                 b = Convert.ToDouble(Color.FromArgb(array[i]).B);
                 int nearest_color = 0;
                 Color o;
-
                 for (int v = 1; v < colors.Length; v++)
                 {
                     o = colors[v];
-
                     dbl_test_red = Math.Pow(Convert.ToDouble(((Color)o).R) - r, 2.0);
                     dbl_test_green = Math.Pow(Convert.ToDouble(((Color)o).G) - g, 2.0);
                     dbl_test_blue = Math.Pow(Convert.ToDouble(((Color)o).B) - b, 2.0);
-
                     temp = Math.Sqrt(dbl_test_blue + dbl_test_green + dbl_test_red);
-
                     // explore the result and store the nearest color
                     if (temp == 0.0)
                     {
@@ -99,18 +91,14 @@ namespace LAZYSHELL
         {
             Color[] colors = new Color[palette.Length];
             Color[] newColors = new Color[palette.Length];
-
             double distance = 500.0;
             double temp;
-
             double r, g, b;
             double dbl_test_red;
             double dbl_test_green;
             double dbl_test_blue;
-
             for (int i = 0; i < palette.Length; i++)
                 colors[i] = Color.FromArgb(palette[i]);
-
             for (int y = dst.Y; y < dst.Y + dst.Height; y++)
             {
                 for (int x = dst.X; x < dst.X + dst.Width; x++)
@@ -121,17 +109,13 @@ namespace LAZYSHELL
                     b = Convert.ToDouble(Color.FromArgb(array[y * src.Width + x]).B);
                     int nearest_color = 0;
                     Color o;
-
                     for (int v = 1; v < colors.Length; v++)
                     {
                         o = colors[v];
-
                         dbl_test_red = Math.Pow(Convert.ToDouble(((Color)o).R) - r, 2.0);
                         dbl_test_green = Math.Pow(Convert.ToDouble(((Color)o).G) - g, 2.0);
                         dbl_test_blue = Math.Pow(Convert.ToDouble(((Color)o).B) - b, 2.0);
-
                         temp = Math.Sqrt(dbl_test_blue + dbl_test_green + dbl_test_red);
-
                         // explore the result and store the nearest color
                         if (temp == 0.0)
                         {
@@ -159,7 +143,6 @@ namespace LAZYSHELL
                 {
                     // Get all the pixels in a row
                     byte[] row = new byte[8];
-
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
                         if ((subtile[offset + r * 2 + 0x11] & b) == b)
                             row[i] += 8;
@@ -172,7 +155,6 @@ namespace LAZYSHELL
                     for (int i = 7, b = 1; i >= 0; i--, b *= 2)
                         if ((subtile[offset + r * 2] & b) == b)
                             row[i]++;
-
                     for (int c = 0; c < 8; c++) // Number of Columns in an 8x8 Tile
                     {
                         if (row[c] != 0)
@@ -272,18 +254,23 @@ namespace LAZYSHELL
             }
             return Color.FromArgb(rsrc, gsrc, bsrc).ToArgb();
         }
+        public static int[] ColorsToPixels(int[] src, int[] palette)
+        {
+            return ColorsToPixels(src, palette, 0);
+        }
         /// <summary>
         /// Converts an array of color indexes to an array of pixels.
         /// </summary>
         /// <param name="src">The source array of color indexes.</param>
         /// <param name="palette">The palette to use.</param>
+        /// <param name="index">The color index offset.</param>
         /// <returns></returns>
-        public static int[] ColorsToPixels(int[] src, int[] palette)
+        public static int[] ColorsToPixels(int[] src, int[] palette, int index)
         {
             int[] pixels = new int[src.Length];
             for (int i = 0; i < src.Length; i++)
                 if (src[i] < palette.Length && src[i] != 0)
-                    pixels[i] = palette[src[i]];
+                    pixels[i] = palette[src[i] + index];
             return pixels;
         }
         public static Bitmap CombineImages(Bitmap[] images, int maxwidth, int maxheight, int tilesize, bool padedges)
@@ -417,7 +404,6 @@ namespace LAZYSHELL
                     src.CopyTo(temp, 0);
                     break;
             }
-
             byte[] character;
             for (int i = 0; i * fontCharacters[0].Graphics.Length < temp.Length && i < temp.Length; i++)
             {
@@ -445,7 +431,8 @@ namespace LAZYSHELL
         /// <param name="tileLength">Length, in bytes, of an 8x8 tile in a tileset. Either one or two.</param>
         /// <param name="tilesetSize">Size, in pixels, of the tileset being drawn to.</param>
         /// <param name="tileIndexStart">The index to start writing tilenums to the tileset. Normally 0, 1, or 2</param>
-        public static void CopyToTileset(byte[] src, byte[] tileset, int[][] palettes, int[] paletteIndexes, bool checkIfFlipped, bool priority1, byte tileSize, byte tileLength, Size tilesetSize, int tileIndexStart)
+        public static void CopyToTileset(byte[] src, byte[] tileset, int[][] palettes, int[] paletteIndexes,
+            bool checkIfFlipped, bool priority1, byte tileSize, byte tileLength, Size tilesetSize, int tileIndexStart)
         {
             ArrayList tiles_a = new ArrayList();    // the tileset, essentially, in array form
             ArrayList tiles_b = new ArrayList();    // used for redrawing a culled 4bpp graphic block
@@ -508,7 +495,6 @@ namespace LAZYSHELL
             }
             // now rewrite tileset data using tiles_a
             c = 0; byte[] culledTileset = new byte[tileset.Length];
-
             foreach (Subtile tile in tiles_a)
             {
                 culledTileset[c * tileLength] = (byte)(tile.Index + tileIndexStart);
@@ -539,7 +525,8 @@ namespace LAZYSHELL
         /// <param name="tilesetSize">Size, in pixels, of the tileset being drawn to.</param>
         /// <param name="tileIndexStart">The index to start writing tilenums to the tileset. Normally 0, 1, or 2</param>
         /// <returns></returns>
-        public static int CopyToTileset(byte[] src, byte[] tileset, int[] palette, int paletteIndex, bool checkIfFlipped, bool priority1, byte format, byte tileLength, Size tilesetSize, int tileIndexStart)
+        public static int CopyToTileset(byte[] src, byte[] tileset, int[] palette, int paletteIndex,
+            bool checkIfFlipped, bool priority1, byte format, byte tileLength, Size tilesetSize, int tileIndexStart)
         {
             List<Subtile> tiles_a = new List<Subtile>();    // the tileset, essentially, in array form
             List<Subtile> tiles_b = new List<Subtile>();    // used for redrawing a culled 4bpp graphic block
@@ -598,10 +585,8 @@ namespace LAZYSHELL
                 }
                 c++;
             }
-
             // now rewrite tileset data using tiles_a
             c = 0; byte[] culledTileset = new byte[tileset.Length];
-
             foreach (Subtile tile in tiles_a)
             {
                 if (c * tileLength >= culledTileset.Length)
@@ -995,15 +980,15 @@ namespace LAZYSHELL
             foreach (Tile tile in tileset)
             {
                 int contains = Contains(tile, tileset);
-                if (tile.TileIndex == contains)
+                if (tile.Index == contains)
                     tilesetTiles.Add(tile);
                 else
-                    tile.TileIndex = contains;
+                    tile.Index = contains;
             }
             // renumber tile indexes
             int c = 0;
             foreach (Tile tile in tilesetTiles)
-                tile.TileIndex = c++;
+                tile.Index = c++;
             // finally cull the original tileset
             c = 0;
             foreach (Tile tile in tilesetTiles)
@@ -1025,16 +1010,16 @@ namespace LAZYSHELL
             {
                 int contains = Contains(tile, tileset);
                 if (Bits.Compare(tile.Pixels, new int[16 * 16]))
-                    tile.TileIndex = 0xFF;
-                else if (tile.TileIndex == contains)
+                    tile.Index = 0xFF;
+                else if (tile.Index == contains)
                     tilesetTiles.Add(tile);
                 else
-                    tile.TileIndex = contains;
+                    tile.Index = contains;
             }
             // renumber tile indexes
             int c = 0;
             foreach (Tile tile in tilesetTiles)
-                tile.TileIndex = c++;
+                tile.Index = c++;
             // draw to tilemap with culled indexes
             for (int y = 0; y < height; y++)
             {
@@ -1043,7 +1028,7 @@ namespace LAZYSHELL
                     if (y * width + x >= tileset.Length ||
                         y * width + x >= tilemap.Length)
                         continue;
-                    tilemap[y * width + x] = (byte)tileset[y * width + x].TileIndex;
+                    tilemap[y * width + x] = (byte)tileset[y * width + x].Index;
                 }
             }
             // finally cull the original tileset
@@ -1167,17 +1152,13 @@ namespace LAZYSHELL
         public static Subtile DrawSubtile(ushort num, byte status, byte[] graphics, int[][] palettes, byte tileSize)
         {
             byte paletteIndex = (byte)((status >> 2) & 0x07);
-
             if (paletteIndex >= palettes.Length) paletteIndex = 0;
-
             bool priorityOne = (status & 0x20) == 0x20;
             bool mirrored = (status & 0x40) == 0x40;
             bool inverted = (status & 0x80) == 0x80;
             bool twobpp = tileSize == 0x10;
-
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
-
             int[] palette;
             if (tileSize == 0x10)
             {
@@ -1208,10 +1189,8 @@ namespace LAZYSHELL
             bool mirrored = (status & 0x40) == 0x40;
             bool inverted = (status & 0x80) == 0x80;
             bool twobpp = tileSize == 0x10;
-
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
-
             Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
             tile.Palette = paletteIndex;
             return tile;
@@ -1229,12 +1208,9 @@ namespace LAZYSHELL
         public static Subtile DrawSubtile(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[][] palettes, byte tileSize)
         {
             if (paletteIndex >= palettes.Length) paletteIndex = 0;
-
             bool twobpp = tileSize == 0x10;
-
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
-
             int[] palette;
             if (tileSize == 0x10)
             {
@@ -1261,10 +1237,8 @@ namespace LAZYSHELL
         public static Subtile DrawSubtile(ushort num, byte paletteIndex, bool priorityOne, bool mirrored, bool inverted, byte[] graphics, int[] palette, byte tileSize)
         {
             bool twobpp = tileSize == 0x10;
-
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
-
             Subtile tile = new Subtile(num, graphics, offset, palette, mirrored, inverted, priorityOne, twobpp);
             tile.Palette = paletteIndex;
             return tile;
@@ -1272,10 +1246,8 @@ namespace LAZYSHELL
         public static Subtile DrawSubtileM7(ushort num, byte paletteIndex, byte[] graphics, int[][] palettes, byte tileSize)
         {
             if (paletteIndex >= palettes.Length) paletteIndex = 0;
-
             int offset = num * tileSize;
             if (offset >= graphics.Length) offset = 0;
-
             int[] palette;
             if (tileSize == 0x10)
             {
@@ -1339,21 +1311,30 @@ namespace LAZYSHELL
         /// <param name="width">The width,in 8x8 tile units, of the graphic block.</param>
         /// <param name="height">The height,in 8x8 tile units, of the graphic block.</param>
         /// <param name="format">The format for 2bpp or 4bpp, 0x10 or 0x20, respectively.</param>
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int width, int height, byte format)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action,
+            int x, int y, int index, int color, int width, int height, byte format)
         {
-            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, color, width, height, format, 0, 0);
+            return EditPixelBPP(src, srcOffset, palette, graphics, zoom,
+                action, x, y, index, color, color, width, height, format);
         }
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int colorBack, int width, int height, byte format)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action,
+            int x, int y, int index, int color, int colorBack, int width, int height, byte format)
         {
-            return EditPixelBPP(src, srcOffset, palette, graphics, zoom, action, x, y, index, color, colorBack, width, height, format, 0, 0);
+            return EditPixelBPP(src, srcOffset, palette, graphics, zoom,
+                action, x, y, index, color, colorBack, width, height, format, null);
         }
-        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action, int x, int y, int index, int color, int colorBack, int width, int height, byte format, int x_plus, int y_plus)
+        public static int EditPixelBPP(byte[] src, int srcOffset, int[] palette, Graphics graphics, int zoom, Drawing action,
+            int x, int y, int index, int color, int colorBack, int width, int height, byte format, FontCharacter font)
         {
-            if (x < 0 || x >= (width * 8) * zoom || y < 0 || y >= (height * 8) * zoom)
+            if (x < 0 || x >= (width * 8) * zoom ||
+                y < 0 || y >= (height * 8) * zoom ||
+                action == Drawing.None)
                 return color;
-            if (action == Drawing.None) return color;
+            if (srcOffset < 0 || index < 0)
+                return color;
+            //
             int bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width, font);
             if (format == 0x20 && offset + 17 >= src.Length)
                 return color;
             if (format == 0x10 && offset + 1 >= src.Length)
@@ -1362,52 +1343,49 @@ namespace LAZYSHELL
             switch (action)
             {
                 case Drawing.Draw:
-                    c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
-                    if (graphics != null)
-                        graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
-                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width, font);
                     break;
                 case Drawing.Erase:
-                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0, width);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, 0, width, font);
                     break;
                 case Drawing.Dropper:
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width, font);
                     break;
                 case Drawing.ReplaceColor:
-                    int selectColor = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    int selectColor = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width, font);
                     // if pixel not color to replace, return
                     if (selectColor != colorBack)
                         return color;
-                    c = new Rectangle((x / zoom * zoom) + x_plus, (y / zoom * zoom) + y_plus, zoom, zoom);
+                    c = new Rectangle(x / zoom * zoom, y / zoom * zoom, zoom, zoom);
                     if (graphics != null)
                         graphics.FillRectangle(new SolidBrush(Color.FromArgb(palette[color])), c);
-                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width);
+                    SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width, font);
                     break;
                 case Drawing.Fill:
                     int fillColor = color;
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width, font);
                     if (color == fillColor) return color;
-                    Fill(src, color, fillColor, x, y, width, height, "", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y, width, height, "", srcOffset, index, zoom, format, font);
                     break;
                 case Drawing.FillAll:
                     fillColor = color;
-                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width);
+                    color = GetBPPColor(src, x, y, srcOffset, index, zoom, format, width, font);
                     if (color == fillColor) return color;
+                    int thisWidth = font != null ? font.Width : width;
                     for (int b = 0; b < height * 8; b++)
                     {
-                        for (int a = 0; a < width * 8; a++)
+                        for (int a = 0; a < thisWidth * 8; a++)
                         {
-                            int seeColor = GetBPPColor(src, a, b, srcOffset, index, 1, format, width);
+                            int seeColor = GetBPPColor(src, a, b, srcOffset, index, 1, format, width, font);
                             // if fillable, fill pixel and create spawn travelling west
                             if (seeColor == color)
-                                SetBPPColor(src, a, b, srcOffset, index, 1, format, fillColor, width);
+                                SetBPPColor(src, a, b, srcOffset, index, 1, format, fillColor, width, font);
                         }
                     }
                     break;
             }
             return color;
         }
-        private static int stacksize = -1;
         public static void Fill(byte[] src, ushort value, ushort fillValue, int x, int y, int width, int height, string dir)
         {
             // first, fill this/these tile(s)
@@ -1451,7 +1429,6 @@ namespace LAZYSHELL
                     Fill(src, value, fillValue, x, y + 16, width, height, "south");
             }
 
-
             // look NORTHWEST, if not travelling southeast or at boundary
             if (dir != "southeast" && x >= 16 && y >= 8)
             {
@@ -1491,7 +1468,6 @@ namespace LAZYSHELL
         }
         public static void Fill(int[][] src, int layer, bool chkall, int value, int[] fillValues, int x, int y, int width, int height, int vwidth, int vheight, string dir)
         {
-            stacksize++;
             // first, fill this/these tile(s)
             int[] otherlayers;
             if (layer == 0)
@@ -1521,7 +1497,6 @@ namespace LAZYSHELL
                     src[layer][(y + b) * width + x + a] = fillValues[b * vwidth + a];
                 }
             }
-
             // look WEST, if not travelling east or at boundary
             if (dir != "east" && x - vwidth + 1 > 0)
             {
@@ -1620,52 +1595,64 @@ namespace LAZYSHELL
         /// <param name="x">X coord to start travelling from</param>
         /// <param name="y">Y coord to start travelling from</param>
         /// <param name="dir">Direction travelling from</param>
-        private static void Fill(byte[] src, int color, int fillColor, int x, int y, int width, int height, string dir, int srcOffset, int index, int zoom, byte format)
+        private static void Fill(byte[] src, int color, int fillColor, int x, int y, int width, int height,
+            string dir, int srcOffset, int index, int zoom, byte format, FontCharacter font)
         {
             // the color seen when looking in a direction
             int seeColor = 0;
             // first, fill this pixel
-            SetBPPColor(src, x, y, srcOffset, index, zoom, format, fillColor, width);
-
+            SetBPPColor(src, x, y, srcOffset, index, zoom, format, fillColor, width, font);
             // look WEST, if not travelling east or at boundary
             if (dir != "east" && x / zoom > 0)
             {
                 // see what color is to the west
-                seeColor = GetBPPColor(src, x - (1 * zoom), y, srcOffset, index, zoom, format, width);
+                seeColor = GetBPPColor(src, x - (1 * zoom), y, srcOffset, index, zoom, format, width, font);
                 // if fillable, fill pixel and create spawn travelling west
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x - (1 * zoom), y, width, height, "west", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x - (1 * zoom), y, width, height, "west", srcOffset, index, zoom, format, font);
             }
             //  look EAST, if not travelling west or at boundary
             if (dir != "west" && x < (width * 8 * zoom) - (1 * zoom))
             {
                 // see what color is to the east
-                seeColor = GetBPPColor(src, x + (1 * zoom), y, srcOffset, index, zoom, format, width);
+                seeColor = GetBPPColor(src, x + (1 * zoom), y, srcOffset, index, zoom, format, width, font);
                 // if fillable, fill pixel and create spawn travelling east
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x + (1 * zoom), y, width, height, "east", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x + (1 * zoom), y, width, height, "east", srcOffset, index, zoom, format, font);
             }
             //  look NORTH, if not travelling south or at boundary
             if (dir != "south" && y / zoom > 0)
             {
                 // see what color is to the north
-                seeColor = GetBPPColor(src, x, y - (1 * zoom), srcOffset, index, zoom, format, width);
+                seeColor = GetBPPColor(src, x, y - (1 * zoom), srcOffset, index, zoom, format, width, font);
                 // if fillable, fill pixel and create spawn travelling north
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x, y - (1 * zoom), width, height, "north", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y - (1 * zoom), width, height, "north", srcOffset, index, zoom, format, font);
             }
             //  look SOUTH, if not travelling north or at boundary
             if (dir != "north" && y < (height * 8 * zoom) - (1 * zoom))
             {
                 // see what color is to the south
-                seeColor = GetBPPColor(src, x, y + (1 * zoom), srcOffset, index, zoom, format, width);
+                seeColor = GetBPPColor(src, x, y + (1 * zoom), srcOffset, index, zoom, format, width, font);
                 // if fillable, fill pixel and create spawn travelling south
                 if (seeColor == color)
-                    Fill(src, color, fillColor, x, y + (1 * zoom), width, height, "south", srcOffset, index, zoom, format);
+                    Fill(src, color, fillColor, x, y + (1 * zoom), width, height, "south", srcOffset, index, zoom, format, font);
             }
         }
         private static int GetBPPOffset(int x, int y, int srcOffset, int index, int zoom, byte format, ref int bit, int width)
         {
+            return GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width, null);
+        }
+        private static int GetBPPOffset(int x, int y, int srcOffset, int index, int zoom, byte format, ref int bit, int width, FontCharacter font)
+        {
+            if (font != null)
+            {
+                index = (y / zoom) / 8;
+                srcOffset = ((x / zoom) / 8) * 24;
+                x = ((x / zoom) & 7) * zoom;
+                y = ((y / zoom) & 7) * zoom;
+            }
+            //
             int offset = (y / (8 * zoom)) * width + (x / (8 * zoom));
             byte row = (byte)(y / zoom % 8);
             byte col = (byte)(x / zoom % 8);
@@ -1695,8 +1682,12 @@ namespace LAZYSHELL
         /// <param name="bit"></param>
         public static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int width)
         {
+            return GetBPPColor(src, x, y, srcOffset, index, zoom, format, width, null);
+        }
+        public static int GetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int width, FontCharacter font)
+        {
             int color = 0, bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width, font);
             if (format == 0x20 && offset + 17 >= src.Length)
                 return -1;
             if (format == 0x10 && offset + 1 >= src.Length)
@@ -1712,8 +1703,12 @@ namespace LAZYSHELL
         }
         private static void SetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int color, int width)
         {
+            SetBPPColor(src, x, y, srcOffset, index, zoom, format, color, width, null);
+        }
+        private static void SetBPPColor(byte[] src, int x, int y, int srcOffset, int index, int zoom, byte format, int color, int width, FontCharacter font)
+        {
             int bit = 0;
-            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width);
+            int offset = GetBPPOffset(x, y, srcOffset, index, zoom, format, ref bit, width, font);
             if (format == 0x20 && offset + 17 >= src.Length)
                 return;
             if (format == 0x10 && offset + 1 >= src.Length)
@@ -1992,9 +1987,9 @@ namespace LAZYSHELL
                     // first, flip the tiles
                     temp = tiles[(y * width) + a].Copy();
                     tiles[(y * width) + a] = tiles[(y * width) + b].Copy();
-                    tiles[(y * width) + a].TileIndex = (y * width) + a;
+                    tiles[(y * width) + a].Index = (y * width) + a;
                     tiles[(y * width) + b] = temp.Copy();
-                    tiles[(y * width) + b].TileIndex = (y * width) + b;
+                    tiles[(y * width) + b].Index = (y * width) + b;
                     // now flip subtiles in both tiles
                     Tile tile = tiles[(y * width) + a];
                     for (int c = 0; c < 2; c++)
@@ -2082,22 +2077,17 @@ namespace LAZYSHELL
             Color[] colors;
             int[] dst = new int[array.Length];
             int[] avgs = new int[palettes.Length];
-
             for (int index = 0; index < palettes.Length; index++)
             {
                 colors = new Color[palettes[index].Length];
-
                 double distance = 500.0;
                 double temp;
-
                 double r, g, b;
                 double dbl_test_red;
                 double dbl_test_green;
                 double dbl_test_blue;
-
                 for (int i = 0; i < palettes[index].Length; i++)
                     colors[i] = Color.FromArgb(palettes[index][i]);
-
                 int[] diffs = new int[array.Length];
                 for (int i = 0; i < array.Length; i++)
                 {
@@ -2107,17 +2097,13 @@ namespace LAZYSHELL
                     b = Convert.ToDouble(Color.FromArgb(array[i]).B);
                     int nearest_color = 0;
                     Color o;
-
                     for (int v = 1; v < colors.Length; v++)
                     {
                         o = colors[v];
-
                         dbl_test_red = Math.Pow(Convert.ToDouble(((Color)o).R) - r, 2.0);
                         dbl_test_green = Math.Pow(Convert.ToDouble(((Color)o).G) - g, 2.0);
                         dbl_test_blue = Math.Pow(Convert.ToDouble(((Color)o).B) - b, 2.0);
-
                         temp = Math.Sqrt(dbl_test_blue + dbl_test_green + dbl_test_red);
-
                         // explore the result and store the nearest color
                         if (temp == 0.0)
                         {
@@ -2157,22 +2143,17 @@ namespace LAZYSHELL
             int closestAvg = 248;
             int closestIndex = 0;
             Color[] colors;
-
             for (int index = 0; index < palettes.Length; index++)
             {
                 colors = new Color[palettes[index].Length];
-
                 double distance = 500.0;
                 double temp = 500.0;
-
                 double r, g, b;
                 double dbl_test_red;
                 double dbl_test_green;
                 double dbl_test_blue;
-
                 for (int i = 0; i < palettes[index].Length; i++)
                     colors[i] = Color.FromArgb(palettes[index][i]);
-
                 int[] diffs = new int[destination.Width * destination.Height];
                 for (int y = destination.Y, y_ = 0; y < destination.Y + destination.Height && y_ < destination.Height; y++, y_++)
                 {
@@ -2184,17 +2165,13 @@ namespace LAZYSHELL
                         b = Convert.ToDouble(Color.FromArgb(src[y * source.Width + x]).B);
                         int nearest_color = 0;
                         Color o;
-
                         for (int v = 1; v < colors.Length; v++)
                         {
                             o = colors[v];
-
                             dbl_test_red = Math.Pow(Convert.ToDouble(((Color)o).R) - r, 2.0);
                             dbl_test_green = Math.Pow(Convert.ToDouble(((Color)o).G) - g, 2.0);
                             dbl_test_blue = Math.Pow(Convert.ToDouble(((Color)o).B) - b, 2.0);
-
                             temp = Math.Sqrt(dbl_test_blue + dbl_test_green + dbl_test_red);
-
                             // explore the result and store the nearest color
                             if (temp == 0.0)
                             {
@@ -2235,7 +2212,6 @@ namespace LAZYSHELL
         public static byte GetFlippedStatus(int[] tile_a, int[] tile_b)
         {
             if (tile_a.Length != tile_b.Length) return 0;
-
             byte status = 0;
             // first create a mirror of tile_a which will be checked later
             int[] tile_a_both = new int[tile_a.Length]; tile_a.CopyTo(tile_a_both, 0);
@@ -2277,7 +2253,6 @@ namespace LAZYSHELL
                 status |= 0x80;
             if (Bits.Compare(tile_b, tile_a_both))
                 status |= 0xC0;
-
             return status;
         }
         /// <summary>
@@ -2348,10 +2323,10 @@ namespace LAZYSHELL
             {
                 for (int x = regX, x_ = 0; x < regX + regWidth; x++, x_++)
                 {
-                    int tileIndex = y * srcWidth + x;
-                    if ((tileIndex * format) + offset >= snes.Length)
+                    int index = y * srcWidth + x;
+                    if ((index * format) + offset >= snes.Length)
                         continue;
-                    temp = new Subtile(tileIndex, snes, tileIndex * format + offset, palette, false, false, false, format == 0x10);
+                    temp = new Subtile(index, snes, index * format + offset, palette, false, false, false, format == 0x10);
                     Do.PixelsToPixels(temp.Pixels, pixels, regWidth * 8, new Rectangle(x_ * 8, y_ * 8, 8, 8));
                 }
             }
@@ -2820,7 +2795,6 @@ namespace LAZYSHELL
         public static int[] PixelsToBPP(int[] src, byte[] dst, Size size, int[][] palettes, byte format)
         {
             int[] indexes = new int[size.Width * size.Height];
-
             Do.PixelsToBPP_Worker = new BackgroundWorker();
             Do.PixelsToBPP_Worker.WorkerReportsProgress = true;
             Do.PixelsToBPP_Worker.WorkerSupportsCancellation = true;
@@ -2828,10 +2802,8 @@ namespace LAZYSHELL
                 PixelsToBPP_Worker_DoWork(s, e, src, dst, size, palettes, format, indexes);
             Do.PixelsToBPP_Worker.ProgressChanged += new ProgressChangedEventHandler(PixelsToBPP_Worker_ProgressChanged);
             Do.PixelsToBPP_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(PixelsToBPP_Worker_RunWorkerCompleted);
-
             Do.ProgressBar = new ProgressBar("CONVERTING IMPORTED IMAGE TO BPP FORMAT...", size.Width * size.Height, PixelsToBPP_Worker);
             ProgressBar.Show();
-
             PixelsToBPP_Worker.RunWorkerAsync();
             while (PixelsToBPP_Worker.IsBusy)
             {
@@ -2851,11 +2823,9 @@ namespace LAZYSHELL
                 for (int x_ = 0; x_ < size.Width; x_++)
                 {
                     int i = y_ * size.Width + x_;
-
                     if (PixelsToBPP_Worker.CancellationPending)
                         return;
                     PixelsToBPP_Worker.ReportProgress(i);
-
                     Rectangle regionDest = new Rectangle(x_ * 8, y_ * 8, 8, 8);
                     Rectangle regionSrc = new Rectangle(0, 0, size.Width * 8, size.Height * 8);
                     indexes[i] = GetClosestPaletteIndex(palettes, src, regionSrc, regionDest);
@@ -2907,7 +2877,6 @@ namespace LAZYSHELL
             Point p;
             int offset;
             byte bit;
-
             for (int y_ = 0; y_ < size.Height; y_++)
             {
                 for (int x_ = 0; x_ < size.Width; x_++)
@@ -3144,7 +3113,6 @@ namespace LAZYSHELL
         public static int[] TilesetToPixels(OverlapTile[] tileset, int width, int height, int startAtTile)
         {
             int[] pixels = new int[(width * 32) * (height * 32)];
-
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -3209,7 +3177,8 @@ namespace LAZYSHELL
             double max = Math.Max(r, Math.Max(g, b));
             double min = Math.Min(r, Math.Min(g, b));
             l = (min + max) / 2.0;
-            if (l <= 0.0) return;
+            if (l <= 0.0)
+                return;
             double dif = max - min; s = dif;
             if (s > 0.0)
                 s /= (l <= 0.5) ? (max + min) : (2.0 - max - min);
@@ -3340,7 +3309,8 @@ namespace LAZYSHELL
                 double max = Math.Max(r_, Math.Max(g_, b_));
                 double min = Math.Min(r_, Math.Min(g_, b_));
                 l[i] = (min + max) / 2.0;
-                if (l[i] <= 0.0) return;
+                if (l[i] <= 0.0)
+                    return;
                 double dif = max - min; s[i] = dif;
                 if (s[i] > 0.0)
                     s[i] /= (l[i] <= 0.5) ? (max + min) : (2.0 - max - min);
@@ -3725,10 +3695,10 @@ namespace LAZYSHELL
         {
             foreach (Tile item in collection)
                 if (item == value)
-                    return value.TileIndex;
+                    return value.Index;
                 else if (Bits.Compare(item.Pixels, value.Pixels))
-                    return item.TileIndex;
-            return value.TileIndex;
+                    return item.Index;
+            return value.Index;
         }
         /// <summary>
         /// Converts an ASCII format string into a raw char array using a keystroke table.
@@ -4686,7 +4656,6 @@ namespace LAZYSHELL
         public static int GetStringHeight(string text, int containerWidth, Font font)
         {
             int height = 0;
-
             return height;
         }
         //
@@ -4770,7 +4739,8 @@ namespace LAZYSHELL
         }
         public static void Play(SoundPlayer soundPlayer, byte[] wav, bool looping)
         {
-            if (wav == null) return;
+            if (wav == null)
+                return;
             soundPlayer.Stream = new MemoryStream(wav);
             if (looping)
                 soundPlayer.PlayLooping();
@@ -4903,7 +4873,8 @@ namespace LAZYSHELL
         public static void StopWatchStop(bool showMessage)
         {
             StopWatch.Stop();
-            if (!showMessage) return;
+            if (!showMessage)
+                return;
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = StopWatch.Elapsed;
             // Format and display the TimeSpan value.
@@ -4920,7 +4891,8 @@ namespace LAZYSHELL
         {
             try
             {
-                if (node == null) return;
+                if (node == null)
+                    return;
                 string text;
                 if (!noreadoffset)
                     text = action + " | index " + index + ", offset 0x" + node.Text.Substring(1, 6) + " | ";

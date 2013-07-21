@@ -9,17 +9,14 @@ namespace LAZYSHELL
     public partial class Levels
     {
         #region Variables
-
         private LevelLayer layer { get { return level.Layer; } set { level.Layer = value; } }
         public LevelLayer Layer { get { return layer; } }// Layer for the current level
         public NumericUpDown LayerMaskHighX { get { return layerMaskHighX; } set { layerMaskHighX = value; } }
         public NumericUpDown LayerMaskHighY { get { return layerMaskHighY; } set { layerMaskHighY = value; } }
         public NumericUpDown LayerMaskLowX { get { return layerMaskLowX; } set { layerMaskLowX = value; } }
         public NumericUpDown LayerMaskLowY { get { return layerMaskLowY; } set { layerMaskLowY = value; } }
-
         #endregion
         #region Methods
-
         private void InitializeLayerProperties()
         {
             this.layerMessageBox.SelectedIndex = layer.MessageBox;
@@ -37,10 +34,8 @@ namespace LAZYSHELL
             this.layerColorMathL3.Checked = prioritySets[layer.PrioritySet].ColorMathL3;
             this.layerColorMathNPC.Checked = prioritySets[layer.PrioritySet].ColorMathOBJ;
             this.layerColorMathBG.Checked = prioritySets[layer.PrioritySet].ColorMathBG;
-
             this.layerColorMathIntensity.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathHalfIntensity;
             this.layerColorMathMode.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathMinusSubscreen;
-
             this.layerMaskHighX.Value = layer.MaskHighX;
             this.layerMaskHighY.Value = layer.MaskHighY;
             this.layerMaskLowX.Value = layer.MaskLowX;
@@ -49,10 +44,8 @@ namespace LAZYSHELL
             this.layerL2LeftShift.Value = layer.XNegL2;
             this.layerL3UpShift.Value = layer.YNegL3;
             this.layerL3LeftShift.Value = layer.XNegL3;
-
             this.layerInfiniteAutoscroll.Checked = layer.InfiniteScrolling;
             this.layerLockMask.Checked = layer.MaskLock;
-
             this.layerScrollWrapping.SetItemChecked(0, layer.ScrollWrapL1_HZ);
             this.layerScrollWrapping.SetItemChecked(1, layer.ScrollWrapL1_VT);
             this.layerScrollWrapping.SetItemChecked(2, layer.ScrollWrapL2_HZ);
@@ -61,28 +54,22 @@ namespace LAZYSHELL
             this.layerScrollWrapping.SetItemChecked(5, layer.ScrollWrapL3_VT);
             this.layerScrollWrapping.SetItemChecked(6, layer.CulexA);
             this.layerScrollWrapping.SetItemChecked(7, layer.CulexB);
-
             this.layerL2HSync.SelectedIndex = layer.SyncL2_HZ;
             this.layerL3HSync.SelectedIndex = layer.SyncL3_HZ;
             this.layerL2VSync.SelectedIndex = layer.SyncL2_VT;
             this.layerL3VSync.SelectedIndex = layer.SyncL3_VT;
-
             this.layerL2ScrollDirection.SelectedIndex = layer.ScrollDirectionL2;
             this.layerL3ScrollDirection.SelectedIndex = layer.ScrollDirectionL3;
             this.layerL2ScrollSpeed.SelectedIndex = layer.ScrollSpeedL2;
             this.layerL3ScrollSpeed.SelectedIndex = layer.ScrollSpeedL3;
             this.layerL2ScrollShift.Checked = layer.ScrollL2Bit7;
             this.layerL3ScrollShift.Checked = layer.ScrollL3Bit7;
-
             this.layerL3Effects.SelectedIndex = layer.EffectsL3;
             this.layerOBJEffects.SelectedIndex = layer.EffectsNPC;
-
             this.layerWaveEffect.Checked = layer.RipplingWater;
         }
-
         #endregion
         #region Event Handlers
-
         private void layerMessageBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             layer.MessageBox = (byte)layerMessageBox.SelectedIndex;
@@ -91,7 +78,6 @@ namespace LAZYSHELL
         {
             if (!updatingProperties)
                 layer.PrioritySet = (byte)layerPrioritySet.Value;
-
             updatingProperties = true;
             this.layerMainscreenL1.Checked = prioritySets[layer.PrioritySet].MainscreenL1;
             this.layerMainscreenL2.Checked = prioritySets[layer.PrioritySet].MainscreenL2;
@@ -109,7 +95,6 @@ namespace LAZYSHELL
             this.layerColorMathIntensity.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathHalfIntensity;
             this.layerColorMathMode.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathMinusSubscreen;
             updatingProperties = false;
-
             if (!updatingLevel)
             {
                 RefreshLevel();
@@ -266,11 +251,9 @@ namespace LAZYSHELL
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 0;//false;
                 else if (layerColorMathIntensity.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 1;//true;
-
                 if (!updatingLevel)
                     RefreshLevel();
             }
-
         }
         private void layerColorMathMode_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -280,11 +263,9 @@ namespace LAZYSHELL
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 0;//false;
                 else if (layerColorMathMode.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 1;// true;
-
                 if (!updatingLevel)
                     RefreshLevel();
             }
-
         }
         private void layerMaskHighX_ValueChanged(object sender, EventArgs e)
         {
@@ -338,7 +319,6 @@ namespace LAZYSHELL
             layer.ScrollWrapL3_VT = layerScrollWrapping.GetItemChecked(5);
             layer.CulexA = layerScrollWrapping.GetItemChecked(6);
             layer.CulexB = layerScrollWrapping.GetItemChecked(7);
-
         }
         private void layerL2VSync_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -404,7 +384,6 @@ namespace LAZYSHELL
             if (layerWaveEffect.Checked) layerWaveEffect.ForeColor = Color.Black;
             else layerWaveEffect.ForeColor = Color.Gray;
         }
-
         #endregion
     }
 }

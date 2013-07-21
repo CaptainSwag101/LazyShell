@@ -46,7 +46,6 @@ namespace LAZYSHELL
         private void InitializeNPCs()
         {
             updating = true;
-
             this.spriteName.SelectedIndex = npcProperty.Sprite;
             this.layerPriority.SetItemChecked(0, npcProperty.Priority0);
             this.layerPriority.SetItemChecked(1, npcProperty.Priority1);
@@ -55,14 +54,11 @@ namespace LAZYSHELL
             this.axisAcute.Value = npcProperty.AcuteAxis;
             this.axisObtuse.Value = npcProperty.ObtuseAxis;
             this.height.Value = npcProperty.Height;
-
             this.showShadow.Checked = npcProperty.ShowShadow;
             this.shadow.SelectedIndex = npcProperty.Shadow;
             this.cannotClone.Checked = npcProperty.ActiveVRAM;
-
             this.vramStore.SelectedIndex = npcProperty.Byte1a;
             this.vramSize.Value = npcProperty.Byte1b;
-
             this.unknownBits.SetItemChecked(0, npcProperty.B2b0);
             this.unknownBits.SetItemChecked(1, npcProperty.B2b1);
             this.unknownBits.SetItemChecked(2, npcProperty.B2b2);
@@ -71,18 +67,14 @@ namespace LAZYSHELL
             this.unknownBits.SetItemChecked(5, npcProperty.B5b6);
             this.unknownBits.SetItemChecked(6, npcProperty.B5b7);
             this.unknownBits.SetItemChecked(7, npcProperty.B6b2);
-
             SetSpriteImage();
-
             updating = false;
-
             //if (level.npcs.NumberOfNPCs != 0)
             //    level.NPCID.Value = npcNum.Value;
         }
         private void LoadSearch()
         {
             searchResults.Items.Clear();
-
             bool notFound;
             int val = (int)searchSpriteName.SelectedIndex;
             for (int i = 0; i < npcProperties.Length; i++)
@@ -99,8 +91,8 @@ namespace LAZYSHELL
             spritePixels = sprite.GetPixels(false, true, 0, 3, false, true, ref size);
             if (spritePixels.Length == 0)
             {
-                spritePixels = new int[2]; 
-                size.Width = 1; 
+                spritePixels = new int[2];
+                size.Width = 1;
                 size.Height = 1;
             }
             spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, size.Width, size.Height));
@@ -124,20 +116,21 @@ namespace LAZYSHELL
         private void spriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
             spriteNum.Value = spriteName.SelectedIndex;
-            if (updating) return;
+            if (updating)
+                return;
             SetSpriteImage();
         }
         private void editSprite_Click(object sender, EventArgs e)
         {
             if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
                 Model.Program.CreateSpritesWindow();
-
             Model.Program.Sprites.Index = (int)spriteNum.Value;
             Model.Program.Sprites.BringToFront();
         }
         private void layerPriority_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void showShadow_CheckedChanged(object sender, EventArgs e)
         {
@@ -145,23 +138,28 @@ namespace LAZYSHELL
         }
         private void yPixelShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void axisAcute_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void axisObtuse_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void height_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void shadow_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         private void cannotClone_CheckedChanged(object sender, EventArgs e)
         {
@@ -169,7 +167,8 @@ namespace LAZYSHELL
         }
         private void unknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
         }
         //
         private void searchSpriteName_SelectedIndexChanged(object sender, EventArgs e)

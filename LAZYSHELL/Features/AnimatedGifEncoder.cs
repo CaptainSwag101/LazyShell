@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.IO;
-
 #region .NET Disclaimer/Info
 //===============================================================================
 //
@@ -16,7 +15,6 @@ using System.IO;
 //  
 //===============================================================================
 #endregion
-
 #region Java
 /**
  * Class AnimatedGifEncoder - Encodes a GIF file consisting of one or
@@ -40,12 +38,11 @@ using System.IO;
  *
  */
 #endregion
-
 #region Modified By Phil Garcia
 /* 
  * Modified by Phil Garcia (phil@thinkedge.com) 
 	1. Add support to output the Gif to a MemoryStream (9/2/2005)
- 
+            //
 */
 #endregion
 
@@ -63,7 +60,6 @@ namespace LAZYSHELL
         //	protected BinaryWriter bw;
         protected MemoryStream ms;
         //		protected FileStream fs;
-
         protected Image image; // current frame
         protected byte[] pixels; // BGR byte array from frame
         protected byte[] indexedPixels; // converted frame indexed to palette
@@ -76,7 +72,6 @@ namespace LAZYSHELL
         protected bool firstFrame = true;
         protected bool sizeSet = false; // if false, get size from first frame
         protected int sample = 10; // default sample interval for quantizer
-
         /**
          * Sets the delay time between each frame, or changes it
          * for subsequent frames (applies to last frame added).
@@ -87,7 +82,6 @@ namespace LAZYSHELL
         {
             delay = (int)Math.Round(ms / 10.0f);
         }
-
         /**
          * Sets the GIF frame disposal code for the last added frame
          * and any subsequent frames.  Default is 0 if no transparent
@@ -101,7 +95,6 @@ namespace LAZYSHELL
                 dispose = code;
             }
         }
-
         /**
          * Sets the number of times the set of GIF frames
          * should be played.  Default is 1; 0 means play
@@ -118,7 +111,6 @@ namespace LAZYSHELL
                 repeat = iter;
             }
         }
-
         /**
          * Sets the transparent color for the last added frame
          * and any subsequent frames.
@@ -134,7 +126,6 @@ namespace LAZYSHELL
         {
             transparent = c;
         }
-
         /**
          * Adds next GIF frame.  The frame is not written immediately, but is
          * actually deferred until the next frame is received so that timing
@@ -181,14 +172,12 @@ namespace LAZYSHELL
                 WritePixels(); // encode and write pixel data
                 firstFrame = false;
             }
-            catch (IOException e)
+            catch
             {
                 ok = false;
             }
-
             return ok;
         }
-
         /**
          * Flushes any pending data and closes output file.
          * If writing to an OutputStream, the stream is not
@@ -208,11 +197,10 @@ namespace LAZYSHELL
                     //					ms.Close();
                 }
             }
-            catch (IOException e)
+            catch
             {
                 ok = false;
             }
-
             // reset for subsequent use
             transIndex = 0;
             //			fs = null;
@@ -222,10 +210,8 @@ namespace LAZYSHELL
             colorTab = null;
             closeStream = false;
             firstFrame = true;
-
             return ok;
         }
-
         /**
          * Sets frame rate in frames per second.  Equivalent to
          * <code>setDelay(1000/fps)</code>.
@@ -239,7 +225,6 @@ namespace LAZYSHELL
                 delay = (int)Math.Round(100f / fps);
             }
         }
-
         /**
          * Sets quality of color quantization (conversion of images
          * to the maximum 256 colors allowed by the GIF specification).
@@ -256,7 +241,6 @@ namespace LAZYSHELL
             if (quality < 1) quality = 1;
             sample = quality;
         }
-
         /**
          * Sets the GIF frame size.  The default size is the
          * size of the first frame added if this method is
@@ -267,14 +251,14 @@ namespace LAZYSHELL
          */
         public void SetSize(int w, int h)
         {
-            if (started && !firstFrame) return;
+            if (started && !firstFrame)
+                return;
             width = w;
             height = h;
             if (width < 1) width = 320;
             if (height < 1) height = 240;
             sizeSet = true;
         }
-
         /**
          * Initiates GIF file creation on the given stream.  The stream
          * is not closed automatically.
@@ -282,7 +266,6 @@ namespace LAZYSHELL
          * @param os OutputStream on which GIF images are written.
          * @return false if initial write failed.
          */
-
         public bool Start(MemoryStream os)
         {
             if (os == null) return false;
@@ -293,13 +276,12 @@ namespace LAZYSHELL
             {
                 WriteString("GIF89a"); // header
             }
-            catch (IOException e)
+            catch
             {
                 ok = false;
             }
             return started = ok;
         }
-
         /**
          * Initiates writing of a GIF file to a memory stream.
          *
@@ -313,13 +295,12 @@ namespace LAZYSHELL
                 ok = Start(new MemoryStream(10 * 1024));
                 closeStream = true;
             }
-            catch (IOException e)
+            catch
             {
                 ok = false;
             }
             return started = ok;
         }
-
         /**
          * Initiates writing of a GIF file with the specified name.
          *
@@ -333,18 +314,16 @@ namespace LAZYSHELL
                 fs.Write(ms.ToArray(), 0, (int)ms.Length);
                 fs.Close();
             }
-            catch (IOException e)
+            catch
             {
                 return false;
             }
             return true;
         }
-
         public MemoryStream Output()
         {
             return ms;
         }
-
         /**
          * Analyzes image colors and creates color map.
          */
@@ -385,7 +364,6 @@ namespace LAZYSHELL
                 transIndex = nq.Map(transparent.B, transparent.G, transparent.R);
             }
         }
-
         /**
          * Returns index of palette color closest to c
          *
@@ -415,7 +393,6 @@ namespace LAZYSHELL
             }
             return minpos;
         }
-
         /**
          * Extracts image pixels into byte array "pixels"
          */
@@ -456,10 +433,8 @@ namespace LAZYSHELL
                     count++;
                 }
             }
-
             //		pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         }
-
         /**
          * Writes Graphic Control Extension
          */
@@ -484,18 +459,15 @@ namespace LAZYSHELL
                 disp = dispose & 7; // user override
             }
             disp <<= 2;
-
             // packed fields
             ms.WriteByte(Convert.ToByte(0 | // 1:3 reserved
                 disp | // 4:6 disposal
                 0 | // 7   user input - 0 = none
                 transp)); // 8   transparency flag
-
             WriteShort(delay); // delay x 1/100 sec
             ms.WriteByte(Convert.ToByte(transIndex)); // transparent color index
             ms.WriteByte(0); // block terminator
         }
-
         /**
          * Writes Image Descriptor
          */
@@ -522,7 +494,6 @@ namespace LAZYSHELL
                     palSize)); // 6-8 size of color table
             }
         }
-
         /**
          * Writes Logical Screen Descriptor
          */
@@ -536,11 +507,9 @@ namespace LAZYSHELL
                 0x70 | // 2-4 : color resolution = 7
                 0x00 | // 5   : gct sort flag = 0
                 palSize)); // 6-8 : gct size
-
             ms.WriteByte(0); // background color index
             ms.WriteByte(0); // pixel aspect ratio - assume 1:1
         }
-
         /**
          * Writes Netscape application extension to define
          * repeat count.
@@ -556,7 +525,6 @@ namespace LAZYSHELL
             WriteShort(repeat); // loop count (extra iterations, 0=repeat forever)
             ms.WriteByte(0); // block terminator
         }
-
         /**
          * Writes color table
          */
@@ -569,7 +537,6 @@ namespace LAZYSHELL
                 ms.WriteByte(0);
             }
         }
-
         /**
          * Encodes and writes pixel data
          */
@@ -579,7 +546,6 @@ namespace LAZYSHELL
                 new LZWEncoder(width, height, indexedPixels, colorDepth);
             encoder.Encode(ms);
         }
-
         /**
          *    Write 16-bit value to output stream, LSB first
          */
@@ -588,7 +554,6 @@ namespace LAZYSHELL
             ms.WriteByte(Convert.ToByte(value & 0xff));
             ms.WriteByte(Convert.ToByte((value >> 8) & 0xff));
         }
-
         /**
          * Writes string to output stream
          */
@@ -601,5 +566,4 @@ namespace LAZYSHELL
             }
         }
     }
-
 }

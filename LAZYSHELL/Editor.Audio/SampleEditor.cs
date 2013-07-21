@@ -131,7 +131,6 @@ namespace LAZYSHELL
             // check if room for next in bank 1D
             for (; i < samples.Length && offset1D + samples[i].Length < 0x1DDE00; i++)
                 samples[i].Assemble(ref offset1D);
-
             if (i < samples.Length)
                 MessageBox.Show("Not enough space to save all samples. Stopped saving at index " + i.ToString("d3") + ".");
         }
@@ -167,7 +166,8 @@ namespace LAZYSHELL
         }
         private void loopStart_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sample.LoopStart = (int)loopStart.Value;
             wav = BRR.BRRToWAV(sample.Sample, sampleRate);
             loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
@@ -175,7 +175,8 @@ namespace LAZYSHELL
         }
         private void relGain_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sample.RelGain = (short)relGain.Value;
             wav = BRR.BRRToWAV(sample.Sample, sampleRate);
             loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
@@ -183,7 +184,8 @@ namespace LAZYSHELL
         }
         private void relFreq_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sample.RelFreq = (short)relFreq.Value;
             wav = BRR.BRRToWAV(sample.Sample, sampleRate);
             loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
@@ -225,15 +227,12 @@ namespace LAZYSHELL
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-
         }
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
         }
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
         }
         //
         private void import_Click(object sender, EventArgs e)

@@ -12,7 +12,7 @@ namespace LAZYSHELL
     {
         private void ControlDisassembleEvent()
         {
-            updatingControls = false;
+            updatingControls = true;
             panelCommands.SuspendDrawing();
             int[] tree = categoryCommand;
             if (tree != null)
@@ -125,7 +125,6 @@ namespace LAZYSHELL
                     if (esc.Opcode == 0xF8)
                         evtNumC1.Value = Bits.GetShort(esc.CommandData, 3);
                     break;
-
                 // Joypad
                 case 0x34:
                 case 0x35:
@@ -135,7 +134,6 @@ namespace LAZYSHELL
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         evtEffects.SetItemChecked(j, (esc.Param1 & i) == i);
                     break;
-
                 // Party Members
                 case 0x36:
                     groupBoxA.Text = commandText;
@@ -167,7 +165,6 @@ namespace LAZYSHELL
                     //
                     evtNameA1.SelectedIndex = esc.Param1 & 7;
                     break;
-
                 // Inventory
                 case 0x50:
                 case 0x51:
@@ -188,7 +185,6 @@ namespace LAZYSHELL
                     //
                     evtNumA1.Value = esc.Param1;
                     break;
-
                 // Battle
                 case 0x4A:
                     groupBoxA.Text = commandText;
@@ -203,7 +199,6 @@ namespace LAZYSHELL
                     evtNameA2.SelectedIndex = esc.Param3;
                     evtNumA3.Value = esc.Param1;
                     break;
-
                 // Levels
                 case 0x4B:      // Open, world location...
                     groupBoxA.Text = commandText;
@@ -265,14 +260,12 @@ namespace LAZYSHELL
                     evtEffects.Enabled = true;
                     evtEffects.SetItemChecked(0, (esc.Param2 & 0x80) == 0x80);
                     break;
-
                 // Open window
                 case 0x4C:      // Open, shop menu...
                     groupBoxA.Text = commandText;
                     labelEvtA1.Text = "Shop";
                     evtNameA1.Items.AddRange(Lists.ShopNames);
                     evtNameA1.DropDownWidth = 200; evtNameA1.Enabled = true;
-
                     evtNameA1.SelectedIndex = esc.Param1;
                     break;
                 case 0x4F:      // Open, window...
@@ -281,10 +274,8 @@ namespace LAZYSHELL
                     evtNameA1.Items.AddRange(Lists.MenuNames);
                     evtNameA1.DropDownWidth = 200;
                     evtNameA1.Enabled = true;
-
                     evtNameA1.SelectedIndex = esc.Param1;
                     break;
-
                 // Dialogue
                 case 0x60:
                     groupBoxA.Text = commandText;
@@ -355,7 +346,6 @@ namespace LAZYSHELL
                         evtNumA4.Value = Bits.GetShort(esc.CommandData, 3);
                     }
                     break;
-
                 // Events
                 case 0x40:
                     groupBoxA.Text = commandText;
@@ -413,13 +403,11 @@ namespace LAZYSHELL
                         case 2: // open world location
                             labelEvtA2.Text = "Location";
                             evtNameA2.Items.AddRange(Lists.Numerize(Lists.MapNames)); evtNameA2.Enabled = true;
-
                             evtNameA2.SelectedIndex = esc.Param2;
                             break;
                         case 3: // open shop menu
                             labelEvtA3.Text = "Shop menu";
                             evtNumA3.Maximum = 32; evtNumA3.Enabled = true;
-
                             evtNumA3.Value = esc.Param2;
                             break;
                         case 5: // items maxed out
@@ -427,7 +415,6 @@ namespace LAZYSHELL
                             evtNameA2.Items.AddRange(Model.ItemNames.Names); evtNameA2.Enabled = true;
                             evtNameA2.DrawMode = DrawMode.OwnerDrawFixed;
                             evtNumA2.Maximum = 255; evtNumA2.Enabled = true;
-
                             evtNumA2.Value = esc.Param2;
                             evtNameA2.SelectedIndex = Model.ItemNames.GetSortedIndex((int)evtNumA2.Value);
                             break;
@@ -435,33 +422,28 @@ namespace LAZYSHELL
                             labelEvtA2.Text = "Tutorial";
                             evtNameA2.Items.AddRange(new string[] { "How to equip", "How to use items", "How to switch allies", "How to play beetle mania" });
                             evtNameA2.Enabled = true;
-
                             evtNameA2.SelectedIndex = esc.Param2;
                             break;
                         case 16:    // world map event
                             labelEvtA2.Text = "Map event";
                             evtNameA2.Items.AddRange(new string[] { "Mario falls to pipehouse", "Mario returns to MK", "Mario takes Nimbus bus" });
                             evtNameA2.Enabled = true;
-
                             evtNameA2.SelectedIndex = esc.Param2;
                             break;
                     }
                     break;
-
                 // Jump to
                 case 0xD2:
                 case 0xD3:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Address";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     break;
                 case 0xD4:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Count";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = esc.Param1;
                     break;
                 case 0xD5:
@@ -471,7 +453,6 @@ namespace LAZYSHELL
                     evtNumA3.Enabled = true;
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     break;
-
                 // Screen effects
                 case 0x72:
                 case 0x73:
@@ -489,7 +470,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA1.Text = "Color";
                     evtNameA1.Items.AddRange(Lists.ColorNames); evtNameA1.Enabled = true;
-
                     if (esc.Opcode != 0x83)
                     {
                         labelEvtA3.Text = "Duration";
@@ -512,13 +492,11 @@ namespace LAZYSHELL
                     evtNumA3.Enabled = true;
                     evtNumA4.Enabled = true;
                     evtEffects.Items.AddRange(Lists.LayerNames); evtEffects.Enabled = true;
-
                     double multiplier = 8; // 8;
                     ushort color = Bits.GetShort(esc.CommandData, 1);
                     evtNumA1.Value = (byte)((color % 0x20) * multiplier);
                     evtNumA2.Value = (byte)(((color >> 5) % 0x20) * multiplier);
                     evtNumA3.Value = (byte)(((color >> 10) % 0x20) * multiplier);
-
                     evtNumA4.Value = esc.Param4;
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         evtEffects.SetItemChecked(j, (esc.Param3 & i) == i);
@@ -533,7 +511,6 @@ namespace LAZYSHELL
                         "L1","L2","L3","NPC", "BG", "½ intensity", "Minus subscreen"
                     });
                     evtEffects.Enabled = true;
-
                     evtEffects.SetItemChecked(0, (esc.Param1 & 0x01) == 0x01);
                     evtEffects.SetItemChecked(1, (esc.Param1 & 0x02) == 0x02);
                     evtEffects.SetItemChecked(2, (esc.Param1 & 0x04) == 0x04);
@@ -612,7 +589,6 @@ namespace LAZYSHELL
                     evtNumA3.Value = esc.Param2;
                     evtNumA4.Value = esc.Param3;
                     break;
-
                 // Playback audio
                 case 0x90:
                 case 0x91:
@@ -675,7 +651,6 @@ namespace LAZYSHELL
                     evtNameA1.Items.AddRange(Lists.Numerize(Lists.SoundNames)); evtNameA1.Enabled = true;
                     evtNameA1.DropDownWidth = 250;
                     evtNumA3.Enabled = true;
-
                     evtNameA1.SelectedIndex = esc.Param1;
                     evtNumA3.Value = esc.Param2;
                     break;
@@ -685,11 +660,9 @@ namespace LAZYSHELL
                     labelEvtA4.Text = "To volume";
                     evtNumA3.Enabled = true;
                     evtNumA4.Enabled = true;
-
                     evtNumA3.Value = esc.Param1;
                     evtNumA4.Value = esc.Param2;
                     break;
-
                 // Memory
                 case 0xA0:
                 case 0xA1:
@@ -766,7 +739,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true;
                     evtNumA3.Maximum = 0x719F; evtNumA3.Minimum = 0x70A0;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = esc.Param1 + 0x70A0;
                     break;
                 case 0xB7:
@@ -868,7 +840,6 @@ namespace LAZYSHELL
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     evtNumA4.Value = Bits.GetShort(esc.CommandData, 3);
                     break;
-
                 // Memory $7000
                 case 0x38:
                     groupBoxA.Text = commandText;
@@ -885,7 +856,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Value";
                     evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     break;
                 case 0xB4:
@@ -894,7 +864,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true;
                     evtNumA3.Maximum = 0x719F; evtNumA3.Minimum = 0x70A0;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = esc.Param1 + 0x70A0;
                     break;
                 case 0xB8:
@@ -906,7 +875,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                     evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = (esc.Param1 * 2) + 0x7000;
                     break;
                 case 0xC4:
@@ -917,7 +885,6 @@ namespace LAZYSHELL
                     labelEvtA2.Text = "Units";
                     evtNameA1.Items.AddRange(Lists.ObjectNames); evtNameA1.Enabled = true;
                     evtNameA2.Items.AddRange(new string[] { "pixel", "isometric" }); evtNameA2.Enabled = true;
-
                     evtNameA1.SelectedIndex = esc.Param1 & 0x3F;
                     evtNameA2.SelectedIndex = (esc.Param1 & 0x40) >> 6;
                     break;
@@ -935,7 +902,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Memory";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     break;
                 case 0xE2:
@@ -973,27 +939,22 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1);
                     break;
-
                 // Pause script
                 case 0xF0:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Frames";
                     evtNumA3.Enabled = true;
                     evtNumA3.Minimum = 1; evtNumA3.Maximum = 256;
-
                     evtNumA3.Value = esc.Param1 + 1;
                     break;
                 case 0xF1:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Frames";
                     evtNumA3.Minimum = 1; evtNumA3.Maximum = 65536; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(esc.CommandData, 1) + 1;
                     break;
-
                 default:
                     // Action Queue (same for all sub-indexes, so no need to do a switch for sub)
                     if (esc.Opcode <= 0x2F)
@@ -1032,7 +993,6 @@ namespace LAZYSHELL
                             evtNameA2.SelectedIndex = esc.Param1 - 0xEF;
                         }
                         else evtNameA2.SelectedIndex = 0;
-
                         if (esc.Param1 >= 0xF2 && esc.Param1 <= 0xF5)
                         {
                             labelEvtA3.Text = "Action #";
@@ -1077,16 +1037,13 @@ namespace LAZYSHELL
                                 evtNumA2.Value = Bits.GetShort(esc.CommandData, 3) & 0xFFF;
                                 evtNumC1.Value = Bits.GetShort(esc.CommandData, 5);
                                 break;
-
                             // Menus
                             case 0x4C:
                                 groupBoxA.Text = commandText;
                                 labelEvtA1.Text = "Menu";
                                 evtNameA1.Items.AddRange(Lists.Tutorials); evtNameA1.Enabled = true;
-
                                 evtNameA1.SelectedIndex = esc.Param2;
                                 break;
-
                             // Run event
                             case 0x46:
                                 groupBoxA.Text = commandText;
@@ -1099,7 +1056,6 @@ namespace LAZYSHELL
                                 groupBoxA.Text = commandText;
                                 labelEvtA3.Text = "Star #";
                                 evtNumA3.Maximum = 7; evtNumA3.Minimum = 1; evtNumA3.Enabled = true;
-
                                 if (esc.Param2 < 1)
                                     esc.Param2 = 1;
                                 evtNumA3.Value = esc.Param2;
@@ -1111,11 +1067,9 @@ namespace LAZYSHELL
                                 evtNameA1.Items.AddRange(new string[] { "Super Mario", "Princess Toadstool", "King Bowser", "Mallow", "Geno", "In..." });
                                 evtNameA1.Enabled = true;
                                 evtNumA3.Enabled = true;
-
                                 evtNameA1.SelectedIndex = esc.Param3;
                                 evtNumA3.Value = esc.Param2;
                                 break;
-
                             // Playback audio
                             case 0x94:
                                 groupBoxB.Text = commandText;
@@ -1140,10 +1094,8 @@ namespace LAZYSHELL
                                 groupBoxA.Text = commandText;
                                 labelEvtA1.Text = "Sound";
                                 evtNameA1.Items.AddRange(Lists.Numerize(Lists.SoundNames)); evtNameA1.Enabled = true;
-
                                 evtNameA1.SelectedIndex = esc.Param2;
                                 break;
-
                             // Memory
                             case 0xB6:
                                 groupBoxA.Text = commandText;
@@ -1153,7 +1105,6 @@ namespace LAZYSHELL
                                 evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                                 evtNumA3.Enabled = true;
                                 evtNumA4.Maximum = 256; evtNumA4.Minimum = 1; evtNumA4.Enabled = true;
-
                                 evtNumA3.Value = (esc.Param2 * 2) + 0x7000;
                                 evtNumA4.Value = (esc.Param3 ^ 0xFF) + 1;
                                 break;
@@ -1163,10 +1114,8 @@ namespace LAZYSHELL
                                 evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                                 evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                                 evtNumA3.Enabled = true;
-
                                 evtNumA3.Value = (esc.Param2 * 2) + 0x7000;
                                 break;
-
                             // Memory $7000
                             case 0x58:
                                 groupBoxA.Text = commandText;
@@ -1174,7 +1123,6 @@ namespace LAZYSHELL
                                 evtNameA1.Items.AddRange(Model.ItemNames.Names); evtNameA1.Enabled = true;
                                 evtNameA1.DrawMode = DrawMode.OwnerDrawFixed;
                                 evtNumA1.Maximum = 255; evtNumA1.Enabled = true;
-
                                 evtNumA1.Value = esc.Param2;
                                 evtNameA1.SelectedIndex = Model.ItemNames.GetSortedIndex((int)evtNumA1.Value);
                                 break;
@@ -1185,7 +1133,6 @@ namespace LAZYSHELL
                                 evtNameA1.Items.AddRange(Lists.CharacterNames); evtNameA1.Enabled = true;
                                 evtNameA2.Items.AddRange(new string[] { "weapon", "armor", "accessory" });
                                 evtNameA2.Enabled = true;
-
                                 evtNameA1.SelectedIndex = esc.Param2;
                                 evtNameA2.SelectedIndex = esc.Param3;
                                 break;
@@ -1195,7 +1142,6 @@ namespace LAZYSHELL
                                 evtNumA3.Hexadecimal = true;
                                 evtNumA3.Maximum = 0x7FFFFF; evtNumA3.Minimum = 0x7FF800;
                                 evtNumA3.Enabled = true;
-
                                 evtNumA3.Value = Bits.GetShort(esc.CommandData, 2) + 0x7FF800;
                                 break;
                             case 0xB0:
@@ -1204,7 +1150,6 @@ namespace LAZYSHELL
                                 groupBoxA.Text = commandText;
                                 labelEvtA3.Text = "Value";
                                 evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
-
                                 evtNumA3.Value = Bits.GetShort(esc.CommandData, 2);
                                 break;
                             case 0xB3:
@@ -1215,7 +1160,6 @@ namespace LAZYSHELL
                                 evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                                 evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                                 evtNumA3.Enabled = true;
-
                                 evtNumA3.Value = (esc.Param2 * 2) + 0x7000;
                                 break;
                             case 0xF0:
@@ -1245,7 +1189,7 @@ namespace LAZYSHELL
             OrganizeControls();
             //
             panelCommands.ResumeDrawing();
-            updatingControls = true;
+            updatingControls = false;
         }
         private void ControlAssembleEvent()
         {
@@ -1290,14 +1234,12 @@ namespace LAZYSHELL
                     if (esc.Opcode == 0xF8)
                         Bits.SetShort(esc.CommandData, 3, (ushort)evtNumC1.Value);
                     break;
-
                 // Joypad
                 case 0x34:
                 case 0x35:
                     for (int i = 0; i < 8; i++)
                         Bits.SetBit(esc.CommandData, 1, i, evtEffects.GetItemChecked(i)); // set bit if true
                     break;
-
                 // Party Members
                 case 0x36:
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
@@ -1310,7 +1252,6 @@ namespace LAZYSHELL
                 case 0x56:
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
                     break;
-
                 // Inventory
                 case 0x50:
                 case 0x51:
@@ -1320,17 +1261,14 @@ namespace LAZYSHELL
                 case 0x53:
                     esc.Param1 = (byte)evtNumA1.Value;
                     break;
-
                 // Battle
                 case 0x4A:
                     esc.Param1 = (byte)evtNumA3.Value;
                     esc.Param3 = (byte)evtNumA2.Value;
                     break;
-
                 // Levels
                 case 0x4B:      // Open, world location...
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
-
                     Bits.SetBit(esc.CommandData, 2, 5, evtEffects.GetItemChecked(0));
                     Bits.SetBit(esc.CommandData, 2, 6, evtEffects.GetItemChecked(1));
                     Bits.SetBit(esc.CommandData, 2, 7, evtEffects.GetItemChecked(2));
@@ -1352,7 +1290,6 @@ namespace LAZYSHELL
                     esc.Param2 &= 0x81;
                     esc.Param2 |= (byte)((byte)evtNumA3.Value << 1);
                     break;
-
                 // Open window
                 case 0x4C:      // Open, shop menu...
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
@@ -1360,7 +1297,6 @@ namespace LAZYSHELL
                 case 0x4F:      // Open, window...
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
                     break;
-
                 // Dialogue
                 case 0x60:
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA1.Value);
@@ -1393,7 +1329,6 @@ namespace LAZYSHELL
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA3.Value);
                     Bits.SetShort(esc.CommandData, 3, (ushort)evtNumA4.Value);
                     break;
-
                 // Events
                 case 0x40:
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA3.Value);
@@ -1418,7 +1353,6 @@ namespace LAZYSHELL
                     break;
                 case 0x4E:
                     esc.Param1 = (byte)evtNameA1.SelectedIndex;
-
                     switch (evtNameA1.SelectedIndex)
                     {
                         case 2: // open world location
@@ -1442,7 +1376,6 @@ namespace LAZYSHELL
                             break;
                     }
                     break;
-
                 // Jump to
                 case 0xD2:
                 case 0xD3:
@@ -1454,7 +1387,6 @@ namespace LAZYSHELL
                 case 0xD5:
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Screen effects
                 case 0x72:
                 case 0x73:
@@ -1481,7 +1413,6 @@ namespace LAZYSHELL
                     b = (int)(evtNumA3.Value / 8);
                     color = (ushort)((b << 10) | (g << 5) | r);
                     Bits.SetShort(esc.CommandData, 1, color);
-
                     esc.Param4 = (byte)evtNumA4.Value;
                     for (int i = 0; i < 8; i++)
                         Bits.SetBit(esc.CommandData, 3, i, evtEffects.GetItemChecked(i));
@@ -1530,7 +1461,6 @@ namespace LAZYSHELL
                     esc.Param2 = (byte)evtNumA3.Value;
                     esc.Param3 = (byte)evtNumA4.Value;
                     break;
-
                 // Playback audio
                 case 0x90:
                 case 0x91:
@@ -1566,7 +1496,6 @@ namespace LAZYSHELL
                     esc.Param1 = (byte)evtNumA3.Value;
                     esc.Param2 = (byte)evtNumA4.Value;
                     break;
-
                 // Memory
                 case 0xA0:
                 case 0xA1:
@@ -1650,7 +1579,6 @@ namespace LAZYSHELL
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA3.Value);
                     Bits.SetShort(esc.CommandData, 3, (ushort)evtNumA4.Value);
                     break;
-
                 // Memory $7000
                 case 0x38:
                     if (esc.Param1 < 8) esc.Param1 = 8;
@@ -1705,7 +1633,6 @@ namespace LAZYSHELL
                 case 0xEF:
                     Bits.SetShort(esc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Pause script
                 case 0xF0:
                     esc.Param1 = (byte)(evtNumA3.Value - 1);
@@ -1713,7 +1640,6 @@ namespace LAZYSHELL
                 case 0xF1:
                     Bits.SetShort(esc.CommandData, 1, (ushort)(evtNumA3.Value - 1));
                     break;
-
                 default:
                     // Action Queue (same for all sub-indexes, so no need to do a switch for sub)
                     if (esc.Opcode <= 0x2F)
@@ -1746,7 +1672,6 @@ namespace LAZYSHELL
                                 esc.Param1 = (byte)(evtNameA2.SelectedIndex + 0xEF);
                                 break;
                         }
-
                         /*
                          * TODO
                          * set evtNumC value and labelEvtC text according to evtNameB.SelectedIndex
@@ -1774,12 +1699,10 @@ namespace LAZYSHELL
                                 Bits.SetBit(esc.CommandData, 3, 7, evtEffects.GetItemChecked(0));    // set bit 7 if true
                                 Bits.SetShort(esc.CommandData, 4, (ushort)evtNumC1.Value);
                                 break;
-
                             // Menus
                             case 0x4C:
                                 esc.Param2 = (byte)evtNameA1.SelectedIndex;
                                 break;
-
                             // Run event
                             case 0x46:
                                 Bits.SetShort(esc.CommandData, 2, (ushort)evtNumA3.Value);
@@ -1791,7 +1714,6 @@ namespace LAZYSHELL
                                 esc.Param3 = (byte)evtNameA1.SelectedIndex;
                                 esc.Param2 = (byte)evtNumA3.Value;
                                 break;
-
                             // Playback audio
                             case 0x94:
                                 for (int i = 0; i < 8; i++)
@@ -1805,7 +1727,6 @@ namespace LAZYSHELL
                             case 0x9C:
                                 esc.Param2 = (byte)evtNameA1.SelectedIndex;
                                 break;
-
                             // Memory
                             case 0xB6:
                                 esc.Param2 = (byte)((evtNumA3.Value - 0x7000) / 2);
@@ -1814,7 +1735,6 @@ namespace LAZYSHELL
                             case 0xB7:
                                 esc.Param2 = (byte)((evtNumA3.Value - 0x7000) / 2);
                                 break;
-
                             // Memory $7000
                             case 0x58:
                                 esc.Param2 = (byte)evtNumA1.Value;
@@ -1845,7 +1765,7 @@ namespace LAZYSHELL
         //
         private void ControlDisassembleAction()
         {
-            updatingControls = false;
+            updatingControls = true;
             panelCommands.SuspendDrawing();
             int[] tree = categoryCommand;
             if (tree != null)
@@ -1867,7 +1787,6 @@ namespace LAZYSHELL
                             "bit 4", "can't pass NPCs", "can't walk through", "bit 7", 
                         });
                     evtEffects.Enabled = true;
-
                     for (int i = 1, j = 0; j < 8; i *= 2, j++)
                         evtEffects.SetItemChecked(j, (asc.Param1 & i) == i);
                     break;
@@ -1875,27 +1794,22 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "VRAM priority";
                     evtNumA3.Maximum = 3; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     break;
                 case 0x3D:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
-
                 // Palette
                 case 0x0D: evtNumA3.Maximum = 15; goto case 0x0E;
                 case 0x0E:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Row";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 & 0x0F;
                     break;
-
                 // Sprite Sequence
                 case 0x08:
                     groupBoxA.Text = commandText;
@@ -1910,14 +1824,12 @@ namespace LAZYSHELL
                         "mirror sprite"
                     });
                     evtEffects.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 & 0x07;
                     evtNumA4.Value = asc.Param2 & 0x7F;
                     evtEffects.SetItemChecked(0, (asc.Param1 & 0x08) == 0x08);
                     evtEffects.SetItemChecked(1, (asc.Param1 & 0x10) == 0x10);
                     evtEffects.SetItemChecked(2, (asc.Param1 & 0x40) == 0x40);
                     evtEffects.SetItemChecked(3, (asc.Param2 & 0x80) == 0x80);
-
                     if (evtEffects.GetItemChecked(0))
                         labelEvtA4.Text = "Mold";
                     else
@@ -1941,16 +1853,40 @@ namespace LAZYSHELL
                     evtEffects.SetItemChecked(0, (asc.Param1 & 0x40) == 0x40);
                     evtEffects.SetItemChecked(1, (asc.Param1 & 0x80) == 0x80);
                     break;
+                case 0x3E:         // Create NPC packet @ obj coords...
+                    groupBoxA.Text = commandText;
+                    labelEvtA1.Text = "Object";
+                    labelEvtA2.Text = "Packet";
+                    groupBoxC.Text = "If null...";
+                    labelEvtC1.Text = "Jump to";
+                    evtNameA1.Items.AddRange(Lists.ObjectNames); evtNameA1.Enabled = true;
+                    evtNameA2.Items.AddRange(Lists.Numerize(Lists.NPCPackets)); evtNameA2.Enabled = true;
+                    evtNameA2.DropDownWidth = 200;
+                    evtNumC1.Enabled = true; evtNumC1.Hexadecimal = true; evtNumC1.Maximum = 0xFFFF;
+                    //
+                    evtNameA1.SelectedIndex = asc.Param2;
+                    evtNameA2.SelectedIndex = asc.Param1;
+                    evtNumC1.Value = Bits.GetShort(asc.CommandData, 3);
+                    break;
+                case 0x3F:         // Create NPC packet...
+                    groupBoxA.Text = commandText;
+                    labelEvtA2.Text = "Packet";
+                    groupBoxC.Text = "If null...";
+                    labelEvtC1.Text = "Jump to";
+                    evtNameA2.Items.AddRange(Lists.Numerize(Lists.NPCPackets)); evtNameA2.Enabled = true;
+                    evtNameA2.DropDownWidth = 200;
+                    evtNumC1.Enabled = true; evtNumC1.Hexadecimal = true; evtNumC1.Maximum = 0xFFFF;
+                    //
+                    evtNameA2.SelectedIndex = asc.Param1;
+                    evtNumC1.Value = Bits.GetShort(asc.CommandData, 2);
+                    break;
                 case 0xD0:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Action #";
                     evtNumA3.Maximum = 0x3FF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1) & 0x3FF;
                     break;
-
                 // Sprite Animation
-
 
                 // Shift isometric units
                 case 0x50:
@@ -1967,7 +1903,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Steps";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     break;
                 case 0x7E: groupBoxA.Text = commandText; goto case 0x7F;
@@ -1975,10 +1910,8 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Steps";
                     evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
-
                 // Shift 1px units
                 case 0x60:
                 case 0x61:
@@ -1994,19 +1927,15 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Pixels";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     break;
-
                 // Face direction
                 case 0x7B:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Turn amount";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     break;
-
                 // Shift to coords
                 case 0x80:
                 case 0x81:
@@ -2031,7 +1960,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA1.Text = "Object";
                     evtNameA1.Items.AddRange(Lists.ObjectNames); evtNameA1.Enabled = true;
-
                     evtNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0x90:
@@ -2075,13 +2003,11 @@ namespace LAZYSHELL
                     evtNumA3.Value = asc.Param1;
                     evtNumA4.Value = asc.Param2;
                     break;
-
                 // Audio playback
                 case 0x9C:
                     groupBoxA.Text = commandText;
                     labelEvtA1.Text = "Sound";
                     evtNameA1.Items.AddRange(Lists.Numerize(Lists.SoundNames)); evtNameA1.Enabled = true;
-
                     evtNameA1.SelectedIndex = asc.Param1;
                     break;
                 case 0x9D:
@@ -2090,7 +2016,6 @@ namespace LAZYSHELL
                     labelEvtA3.Text = "Balance";
                     evtNameA1.Items.AddRange(Lists.Numerize(Lists.SoundNames)); evtNameA1.Enabled = true;
                     evtNumA3.Enabled = true;
-
                     evtNameA1.SelectedIndex = asc.Param1;
                     evtNumA3.Value = asc.Param2;
                     break;
@@ -2100,11 +2025,9 @@ namespace LAZYSHELL
                     labelEvtA4.Text = "To volume";
                     evtNumA3.Enabled = true;
                     evtNumA4.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     evtNumA4.Value = asc.Param2;
                     break;
-
                 // Memory
                 case 0xA0:
                 case 0xA1:
@@ -2146,7 +2069,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true;
                     evtNumA3.Maximum = 0x719F; evtNumA3.Minimum = 0x70A0;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 + 0x70A0;
                     break;
                 case 0xB0:
@@ -2172,7 +2094,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                     evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = (asc.Param1 * 2) + 0x7000;
                     break;
                 case 0xB5:
@@ -2181,7 +2102,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true;
                     evtNumA3.Maximum = 0x719F; evtNumA3.Minimum = 0x70A0;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 + 0x70A0;
                     break;
                 case 0xB7:
@@ -2226,7 +2146,6 @@ namespace LAZYSHELL
                     evtNumA3.Enabled = true;
                     evtNumA4.Maximum = 7; evtNumA4.Enabled = true;
                     evtNumC1.Hexadecimal = true; evtNumC1.Maximum = 0xFFFF; evtNumC1.Enabled = true;
-
                     if (asc.Opcode < 0xDC) evtNumA3.Value = ((((asc.Opcode - 0xD8) * 0x100) + asc.Param1) >> 3) + 0x7040;
                     else evtNumA3.Value = ((((asc.Opcode - 0xDC) * 0x100) + asc.Param1) >> 3) + 0x7040;
                     evtNumA4.Value = asc.Param1 & 7;
@@ -2259,7 +2178,6 @@ namespace LAZYSHELL
                     evtNumA3.Enabled = true;
                     evtNumA4.Maximum = 65535; evtNumA4.Enabled = true;
                     evtNumC1.Hexadecimal = true; evtNumC1.Maximum = 0xFFFF; evtNumC1.Enabled = true;
-
                     evtNumA3.Value = (asc.Param1 * 2) + 0x7000;
                     evtNumA4.Value = Bits.GetShort(asc.CommandData, 2);
                     evtNumC1.Value = Bits.GetShort(asc.CommandData, 4);
@@ -2268,7 +2186,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0xE9:
@@ -2277,11 +2194,9 @@ namespace LAZYSHELL
                     labelEvtA4.Text = "Else jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
                     evtNumA4.Hexadecimal = true; evtNumA4.Maximum = 0xFFFF; evtNumA4.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     evtNumA4.Value = Bits.GetShort(asc.CommandData, 3);
                     break;
-
                 // Memory $700C
                 case 0xAC:
                 case 0xAD:
@@ -2290,7 +2205,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Value";
                     evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0xB4:
@@ -2299,7 +2213,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true;
                     evtNumA3.Maximum = 0x719F; evtNumA3.Minimum = 0x70A0;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 + 0x70A0;
                     break;
                 case 0xB8:
@@ -2311,7 +2224,6 @@ namespace LAZYSHELL
                     evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                     evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = (asc.Param1 * 2) + 0x7000;
                     break;
                 case 0xC4:
@@ -2322,7 +2234,6 @@ namespace LAZYSHELL
                     labelEvtA2.Text = "Units";
                     evtNameA1.Items.AddRange(Lists.ObjectNames); evtNameA1.Enabled = true;
                     evtNameA2.Items.AddRange(new string[] { "pixel", "isometric" }); evtNameA2.Enabled = true;
-
                     evtNameA1.SelectedIndex = asc.Param1 & 0x3F;
                     evtNameA2.SelectedIndex = (asc.Param1 & 0x40) >> 6;
                     break;
@@ -2331,7 +2242,6 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0xE2:
@@ -2341,7 +2251,6 @@ namespace LAZYSHELL
                     labelEvtA4.Text = "Jump to";
                     evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
                     evtNumA4.Hexadecimal = true; evtNumA4.Maximum = 0xFFFF; evtNumA4.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     evtNumA4.Value = Bits.GetShort(asc.CommandData, 3);
                     break;
@@ -2369,28 +2278,22 @@ namespace LAZYSHELL
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
-
                 // Jump to
                 case 0xD2:
                 case 0xD3:
                     groupBoxA.Text = commandText;
-
                     labelEvtA3.Text = "Jump to";
                     evtNumA3.Hexadecimal = true; evtNumA3.Maximum = 0xFFFF; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1);
                     break;
                 case 0xD4:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Count";
                     evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1;
                     break;
-
                 // Object memory
                 case 0xF2:         // Set obj presence...  
                 case 0xF3:         // Set obj engage type...
@@ -2420,23 +2323,19 @@ namespace LAZYSHELL
                     if (asc.Opcode == 0xF8)
                         evtNumC1.Value = Bits.GetShort(asc.CommandData, 3);
                     break;
-
                 // Pause script
                 case 0xF0:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Frames";
                     evtNumA3.Minimum = 1; evtNumA3.Maximum = 256; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = asc.Param1 + 1;
                     break;
                 case 0xF1:
                     groupBoxA.Text = commandText;
                     labelEvtA3.Text = "Frames";
                     evtNumA3.Minimum = 1; evtNumA3.Maximum = 65536; evtNumA3.Enabled = true;
-
                     evtNumA3.Value = Bits.GetShort(asc.CommandData, 1) + 1;
                     break;
-
                 case 0xFD:
                     switch (asc.Param1)
                     {
@@ -2444,10 +2343,8 @@ namespace LAZYSHELL
                             groupBoxA.Text = commandText;
                             labelEvtA3.Text = "Priority";
                             evtNumA3.Maximum = 3; evtNumA3.Enabled = true;
-
                             evtNumA3.Value = asc.Param2;
                             break;
-
                         // Memory
                         case 0xB6:
                             groupBoxA.Text = commandText;
@@ -2457,11 +2354,9 @@ namespace LAZYSHELL
                             evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                             evtNumA3.Enabled = true;
                             evtNumA4.Maximum = 256; evtNumA4.Minimum = 1; evtNumA4.Enabled = true;
-
                             evtNumA3.Value = (asc.Param2 * 2) + 0x7000;
                             evtNumA4.Value = (asc.Param3 ^ 0xFF) + 1;
                             break;
-
                         // Memory $700C
                         case 0xB0:
                         case 0xB1:
@@ -2469,7 +2364,6 @@ namespace LAZYSHELL
                             groupBoxA.Text = commandText;
                             labelEvtA3.Text = "Value";
                             evtNumA3.Maximum = 65535; evtNumA3.Enabled = true;
-
                             evtNumA3.Value = Bits.GetShort(asc.CommandData, 2);
                             break;
                         case 0xB3:
@@ -2480,7 +2374,6 @@ namespace LAZYSHELL
                             evtNumA3.Hexadecimal = true; evtNumA3.Increment = 2;
                             evtNumA3.Maximum = 0x71FE; evtNumA3.Minimum = 0x7000;
                             evtNumA3.Enabled = true;
-
                             evtNumA3.Value = (asc.Param2 * 2) + 0x7000;
                             break;
                     }
@@ -2488,7 +2381,7 @@ namespace LAZYSHELL
             }
             OrganizeControls();
             panelCommands.ResumeDrawing();
-            updatingControls = true;
+            updatingControls = false;
         }
         private void ControlAssembleAction()
         {
@@ -2508,14 +2401,12 @@ namespace LAZYSHELL
                 case 0x3D:
                     Bits.SetShort(asc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Palette
                 case 0x0D:
                 case 0x0E:
                     asc.Param1 &= 0xF0;
                     asc.Param1 |= (byte)evtNumA3.Value;
                     break;
-
                 // Sprite Sequence
                 case 0x08:
                     asc.Param1 = (byte)evtNumA3.Value;
@@ -2530,12 +2421,19 @@ namespace LAZYSHELL
                     Bits.SetBit(asc.CommandData, 1, 6, evtEffects.GetItemChecked(0));
                     Bits.SetBit(asc.CommandData, 1, 7, evtEffects.GetItemChecked(1));
                     break;
+                case 0x3E:         // Create NPC packet @ obj coords...
+                    asc.Param2 = (byte)evtNameA1.SelectedIndex;
+                    asc.Param1 = (byte)evtNameA2.SelectedIndex;
+                    Bits.SetShort(asc.CommandData, 3, (ushort)evtNumC1.Value);
+                    break;
+                case 0x3F:         // Create NPC packet...
+                    asc.Param1 = (byte)evtNameA2.SelectedIndex;
+                    Bits.SetShort(asc.CommandData, 2, (ushort)evtNumC1.Value);
+                    break;
                 case 0xD0:
                     Bits.SetShort(asc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Sprite Animation
-
 
                 // Shift isometric units
                 case 0x50:
@@ -2555,7 +2453,6 @@ namespace LAZYSHELL
                 case 0x7F:
                     Bits.SetShort(asc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Shift 1px units
                 case 0x60:
                 case 0x61:
@@ -2570,12 +2467,10 @@ namespace LAZYSHELL
                 case 0x6B:
                     asc.Param1 = (byte)evtNumA3.Value;
                     break;
-
                 // Face direction
                 case 0x7B:
                     asc.Param1 = (byte)evtNumA3.Value;
                     break;
-
                 // Shift to coords
                 case 0x80:
                 case 0x81:
@@ -2627,7 +2522,6 @@ namespace LAZYSHELL
                         asc.Param2 = (byte)evtNumA4.Value;
                     }
                     break;
-
                 // Audio playback
                 case 0x9C:
                     asc.Param1 = (byte)evtNameA1.SelectedIndex;
@@ -2640,7 +2534,6 @@ namespace LAZYSHELL
                     asc.Param1 = (byte)evtNumA3.Value;
                     asc.Param2 = (byte)evtNumA4.Value;
                     break;
-
                 // Memory
                 case 0xA0:
                 case 0xA1:
@@ -2724,7 +2617,6 @@ namespace LAZYSHELL
                     Bits.SetShort(asc.CommandData, 1, (ushort)evtNumA3.Value);
                     Bits.SetShort(asc.CommandData, 3, (ushort)evtNumA4.Value);
                     break;
-
                 // Memory $700C
                 case 0xAC:
                 case 0xAD:
@@ -2770,7 +2662,6 @@ namespace LAZYSHELL
                 case 0xEF:
                     Bits.SetShort(asc.CommandData, 1, (ushort)evtNumA3.Value);
                     break;
-
                 // Jump to
                 case 0xD2:
                 case 0xD3:
@@ -2779,7 +2670,6 @@ namespace LAZYSHELL
                 case 0xD4:
                     asc.Param1 = (byte)evtNumA3.Value;
                     break;
-
                 // Object memory
                 case 0xF2:         // Set obj presence...  
                 case 0xF3:         // Set obj engage type...
@@ -2794,7 +2684,6 @@ namespace LAZYSHELL
                      * synchronize evtNameA with evtNumA
                      */
                     break;
-
                 // Pause script
                 case 0xF0:
                     asc.Param1 = (byte)(evtNumA3.Value - 1);
@@ -2802,20 +2691,17 @@ namespace LAZYSHELL
                 case 0xF1:
                     Bits.SetShort(asc.CommandData, 1, (ushort)(evtNumA3.Value - 1));
                     break;
-
                 case 0xFD:
                     switch (asc.Param1)
                     {
                         case 0x0F:
                             asc.Param2 = (byte)evtNumA3.Value;
                             break;
-
                         // Memory
                         case 0xB6:
                             asc.Param2 = (byte)((evtNumA3.Value - 0x7000) / 2);
                             asc.Param3 = (byte)((byte)(evtNumA4.Value - 1) ^ 0xFF);
                             break;
-
                         // Memory $700C
                         case 0xB0:
                         case 0xB1:
@@ -2834,8 +2720,7 @@ namespace LAZYSHELL
         //
         private void ResetControls()
         {
-            updatingControls = false;
-
+            updatingControls = true;
             evtNameA1.DropDownWidth = evtNameA1.Width; evtNameA1.Items.Clear(); evtNameA1.ResetText(); evtNameA1.Enabled = false;
             evtNameA1.DrawMode = DrawMode.Normal; evtNameA1.ItemHeight = 13; evtNameA1.BackColor = SystemColors.Window;
             evtNameA2.DropDownWidth = evtNameA2.Width; evtNameA2.Items.Clear(); evtNameA2.ResetText(); evtNameA2.Enabled = false;
@@ -2856,8 +2741,7 @@ namespace LAZYSHELL
             labelEvtA4.Text = "";
             labelEvtC1.Text = "";
             labelEvtC2.Text = "";
-
-            updatingControls = true;
+            updatingControls = false;
         }
         private void OrganizeControls()
         {

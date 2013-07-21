@@ -44,8 +44,8 @@ namespace LAZYSHELL
                 project = value;
             }
         }
-        private static HexEditor hexViewer;
-        public static HexEditor HexViewer { get { return hexViewer; } set { hexViewer = value; } }
+        private static HexEditor hexEditor;
+        public static HexEditor HexEditor { get { return hexEditor; } set { hexEditor = value; } }
         private static XmlDocument lazyshell_xml;
         public static XmlDocument LAZYSHELL_xml
         {
@@ -83,14 +83,13 @@ namespace LAZYSHELL
         public static bool Locked { get { return locked; } set { locked = value; } }
         private static bool published = false;
         public static bool Published { get { return published; } set { published = value; } }
-        private static byte[] dataHash;
-        public static byte[] DataHash { get { return dataHash; } set { dataHash = value; } }
-        #region Lists
+        private static byte[] romHash;
+        public static byte[] ROMHash { get { return romHash; } set { romHash = value; } }
+        // lists
         public static List<EList> ELists;
         public static string[] Keystrokes;
         public static string[] KeystrokesMenu;
         public static string[] KeystrokesDesc;
-        #endregion
         #region Variables and Accessors
         #region Audio
         private static BRRSample[] audioSamples;
@@ -704,8 +703,8 @@ namespace LAZYSHELL
             set { solidityMaps = value; }
         }
         public static bool[] EditGraphicSets = new bool[272];
-        public static bool[] EditTileSets = new bool[125];
-        public static bool[] EditTileMaps = new bool[309];
+        public static bool[] EditTilesets = new bool[125];
+        public static bool[] EditTilemaps = new bool[309];
         public static bool[] EditSolidityMaps = new bool[120];
         // properties
         private static Level[] levels;
@@ -1520,6 +1519,22 @@ namespace LAZYSHELL
             }
             set { spriteGraphics = value; }
         }
+        //
+        private static NPCPacket[] npcPackets;
+        public static NPCPacket[] NPCPackets
+        {
+            get
+            {
+                if (npcPackets == null)
+                {
+                    npcPackets = new NPCPacket[80];
+                    for (int i = 0; i < npcPackets.Length; i++)
+                        npcPackets[i] = new NPCPacket(i);
+                }
+                return npcPackets;
+            }
+            set { npcPackets = value; }
+        }
         #endregion
         #region Stats
         private static Attack[] attacks;
@@ -1891,11 +1906,9 @@ namespace LAZYSHELL
         {
             if (!LAZYSHELL.Properties.Settings.Default.UnverifiedRomWarning) // If the warning is disabled, dont bother checking
                 return true;
-
             // 32 bytes of SMRPG Rom Data at 0xF800
             byte[] original = new byte[]{0x0F,0x1A,0x4A,0x85,0x26,0x64,0x27,0x90,0x06,0xA5,0x28,0x9D,0x00,0x00,0xE8,0xC2,
                                          0x20,0xA5,0x28,0x9D,0x00,0x00,0xE8,0xE8,0xC6,0x26,0x10,0xF7,0xE2,0x20,0xC8,0x80};
-
             if (rom.Length >= 0x400000)
             {
                 if (Bits.Compare(original, Bits.GetByteArray(rom, 0xF800, 32)))
@@ -1906,19 +1919,16 @@ namespace LAZYSHELL
         public static void CalculateAndSetNewRomChecksum()
         {
             int check = 0;
-
             for (int i = 0; i < rom.Length; i++)
                 check += rom[i];
             check &= 0xFFFF;
-
             Bits.SetShort(rom, 0x007FDE, (ushort)check);
         }
         public static void CreateNewMD5Checksum()
         {
             MD5 md5Hasher = MD5.Create();
-
             if (rom != null)
-                dataHash = md5Hasher.ComputeHash(rom);
+                romHash = md5Hasher.ComputeHash(rom);
         }
         public static string GameCode()
         {
@@ -1988,7 +1998,6 @@ namespace LAZYSHELL
                 rom = br.ReadBytes((int)romLength);
                 br.Close();
                 fStream.Close();
-
                 if (settings.CreateBackupROM)
                 {
                     DateTime currentTime = DateTime.Now;
@@ -2016,7 +2025,7 @@ namespace LAZYSHELL
                             MessageBox.Show("Could not create backup ROM.\n\nThe backup ROM directory has been moved, renamed, or no longer exists.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                hexViewer = new HexEditor(rom, Bits.Copy(rom));
+                hexEditor = new HexEditor(rom, Bits.Copy(rom));
                 return true;
             }
             catch (Exception e)
@@ -2024,26 +2033,21 @@ namespace LAZYSHELL
                 if (MessageBox.Show("Lazy Shell was unable to load the rom.\n\n" + e.Message,
                     "LAZY SHELL", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) != DialogResult.Cancel)
                     goto Retry;
-
                 fileName = "Invalid File";
                 return false;
             }
-
         }
         public static bool RemoveHeader()
         {
             try
             {
                 byte[] noHeader = new byte[romLength - 0x200];
-
                 for (int i = 0; i < romLength - 0x200; i++)
                 {
                     noHeader[i] = rom[i + 0x200];
-
                 }
                 romLength -= 0x200;
                 rom = noHeader;
-
                 return true;
             }
             catch
@@ -2058,7 +2062,6 @@ namespace LAZYSHELL
             for (int i = 0; i < rom.Length; i++)
                 checkSum += rom[i];
             checkSum &= 0xFFFF;
-
             if ((ushort)checkSum == Bits.GetShort(rom, 0x007FDE))
                 return "0x" + checkSum.ToString("X") + " (OK)";
             else
@@ -2077,16 +2080,13 @@ namespace LAZYSHELL
         {
             MD5 md5Hasher = MD5.Create();
             byte[] hash;
-
-            if (dataHash != null)
+            if (romHash != null)
                 hash = md5Hasher.ComputeHash(rom);
             else
                 return true;
-
-            for (int i = 0; i < dataHash.Length && i < hash.Length; i++)
-                if (dataHash[i] != hash[i])
+            for (int i = 0; i < romHash.Length && i < hash.Length; i++)
+                if (romHash[i] != hash[i])
                     return false;
-
             return true;
         }
         public static bool WriteRom()
@@ -2096,7 +2096,6 @@ namespace LAZYSHELL
                 BinaryWriter binWriter = new BinaryWriter(File.Open(fileName, FileMode.Create));
                 binWriter.Write(rom);
                 binWriter.Close();
-
                 if (Settings.Default.CreateBackupROMSave)
                 {
                     DateTime currentTime = DateTime.Now;
@@ -2124,7 +2123,6 @@ namespace LAZYSHELL
                             MessageBox.Show("Could not create backup ROM.\n\nThe backup ROM directory has been moved, renamed, or no longer exists.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
                 return true;
             }
             catch (Exception ex)
@@ -2132,7 +2130,6 @@ namespace LAZYSHELL
                 MessageBox.Show("Lazy Shell was unable to write to the file.\n\n" + ex.Message, "LAZY SHELL");
                 return false;
             }
-
         }
         #endregion
         #region Compression
@@ -2700,6 +2697,8 @@ namespace LAZYSHELL
                     "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Project temp = program.Project;
+                    if (temp == null)
+                        temp = new Project();
                     if (project == null)
                         temp.LoadProject();
                 }

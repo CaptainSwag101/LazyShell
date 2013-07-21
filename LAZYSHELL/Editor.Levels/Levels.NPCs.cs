@@ -9,7 +9,6 @@ namespace LAZYSHELL
     public partial class Levels
     {
         #region Variables
-
         public LevelNPCs npcs { get { return level.LevelNPCs; } set { level.LevelNPCs = value; } }
         private Object copyNPC;
         public NumericUpDown NpcXCoord { get { return npcX; } set { npcX = value; } }
@@ -39,7 +38,6 @@ namespace LAZYSHELL
             this.npcObjectTree.ExpandAll();
             if (npcObjectTree.Nodes.Count > 0)
                 npcObjectTree.SelectedNode = npcObjectTree.Nodes[0];
-
             if (npcs.Count != 0 && this.npcObjectTree.SelectedNode != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
@@ -54,9 +52,7 @@ namespace LAZYSHELL
                     this.npcDuplicate.Enabled = true;
                     this.npcMoveDown.Enabled = true;
                     this.npcMoveUp.Enabled = true;
-
                     this.npcEngageType.Enabled = false;
-
                     this.npcX.Enabled = true;
                     this.npcY.Enabled = true;
                     this.npcZ.Enabled = true;
@@ -65,7 +61,6 @@ namespace LAZYSHELL
                     this.npcPropertyB.Enabled = true;
                     this.npcVisible.Enabled = true;
                     this.npcZ_half.Enabled = true;
-
                     this.npcAttributes.Enabled = false;
                     this.npcAfterBattle.Enabled = false;
                     this.npcEngageTrigger.Enabled = false;
@@ -73,14 +68,12 @@ namespace LAZYSHELL
                     this.npcID.Enabled = false;
                     this.npcEventORPack.Enabled = false;
                     this.npcSpeedPlus.Enabled = false;
-
                     this.npcX.Value = npcs.CloneX;
                     this.npcY.Value = npcs.CloneY;
                     this.npcZ.Value = npcs.CloneZ;
                     this.npcFace.SelectedIndex = npcs.CloneF;
                     this.npcVisible.Checked = npcs.CloneXb7;
                     this.npcZ_half.Checked = npcs.CloneYb7;
-
                     if (this.npcEngageType.SelectedIndex == 0)
                     {
                         this.label104.Text = "NPC #+";
@@ -117,7 +110,6 @@ namespace LAZYSHELL
                     this.npcPropertyA.Value = npcs.ClonePropertyA;
                     this.npcPropertyB.Value = npcs.ClonePropertyB;
                     this.npcPropertyC.Value = npcs.ClonePropertyC;
-
                     this.npcGotoA.Enabled = false;
                     this.npcGotoB.Enabled = false;
                 }
@@ -131,9 +123,7 @@ namespace LAZYSHELL
                     this.npcDuplicate.Enabled = true;
                     this.npcMoveDown.Enabled = true;
                     this.npcMoveUp.Enabled = true;
-
                     this.npcEngageType.Enabled = true;
-
                     this.npcX.Enabled = true;
                     this.npcY.Enabled = true;
                     this.npcZ.Enabled = true;
@@ -142,7 +132,6 @@ namespace LAZYSHELL
                     this.npcPropertyB.Enabled = true;
                     this.npcVisible.Enabled = true;
                     this.npcZ_half.Enabled = true;
-
                     this.npcAttributes.Enabled = true;
                     this.npcAfterBattle.Enabled = npcs.EngageType == 2;
                     this.npcEngageTrigger.Enabled = true;
@@ -150,14 +139,12 @@ namespace LAZYSHELL
                     this.npcID.Enabled = true;
                     this.npcEventORPack.Enabled = true;
                     this.npcSpeedPlus.Enabled = true;
-
                     this.npcX.Value = npcs.X;
                     this.npcY.Value = npcs.Y;
                     this.npcZ.Value = npcs.Z;
                     this.npcFace.SelectedIndex = npcs.F;
                     this.npcVisible.Checked = npcs.Xb7;
                     this.npcZ_half.Checked = npcs.Yb7;
-
                     this.npcAttributes.SetItemChecked(0, npcs.B2b3);
                     this.npcAttributes.SetItemChecked(1, npcs.B2b4);
                     this.npcAttributes.SetItemChecked(2, npcs.B2b5);
@@ -173,14 +160,11 @@ namespace LAZYSHELL
                     this.npcAttributes.SetItemChecked(12, npcs.B3b7);
                     this.npcAttributes.SetItemChecked(13, npcs.B4b0);
                     this.npcAttributes.SetItemChecked(14, npcs.B4b1);
-
                     this.npcAfterBattle.SelectedIndex = npcs.AfterBattle;
-
                     this.npcEngageTrigger.SelectedIndex = npcs.EngageTrigger;
                     this.npcMovement.Value = npcs.Movement;
                     this.npcID.Value = npcs.NPCID;
                     this.npcSpeedPlus.Value = npcs.SpeedPlus;
-
                     if (this.npcEngageType.SelectedIndex == 0)
                     {
                         this.label104.Text = "NPC #+";
@@ -218,7 +202,6 @@ namespace LAZYSHELL
                     this.npcPropertyB.Value = npcs.PropertyB;
                     this.npcPropertyC.Value = npcs.PropertyC;
                     this.npcEventORPack.Value = npcs.EventORpack;
-
                     this.npcGotoA.Enabled = true;
                     this.npcGotoB.Enabled = true;
                 }
@@ -233,9 +216,7 @@ namespace LAZYSHELL
                 this.npcDuplicate.Enabled = false;
                 this.npcMoveDown.Enabled = false;
                 this.npcMoveUp.Enabled = false;
-
                 this.npcEngageType.Enabled = false;
-
                 this.npcX.Enabled = false;
                 this.npcY.Enabled = false;
                 this.npcZ.Enabled = false;
@@ -245,7 +226,6 @@ namespace LAZYSHELL
                 this.npcPropertyC.Enabled = false;
                 this.npcVisible.Enabled = false;
                 this.npcZ_half.Enabled = false;
-
                 this.npcAttributes.Enabled = false;
                 this.npcAfterBattle.Enabled = false;
                 this.npcEngageTrigger.Enabled = false;
@@ -253,23 +233,19 @@ namespace LAZYSHELL
                 this.npcID.Enabled = false;
                 this.npcEventORPack.Enabled = false;
                 this.npcSpeedPlus.Enabled = false;
-
                 this.npcX.Value = 0;
                 this.npcY.Value = 0;
                 this.npcZ.Value = 0;
                 this.npcFace.SelectedIndex = 0;
                 this.npcVisible.Checked = false;
                 this.npcZ_half.Checked = false;
-
                 for (int i = 0; i < npcAttributes.Items.Count; i++)
                     npcAttributes.SetItemChecked(i, false);
                 npcAfterBattle.SelectedIndex = 0;
-
                 this.npcEngageTrigger.SelectedIndex = 0;
                 this.npcMovement.Value = 0;
                 this.npcID.Value = 0;
                 this.npcSpeedPlus.Value = 0;
-
                 this.label104.Text = "";
                 this.label31.Text = "";
                 this.npcGotoA.Text = "";
@@ -278,20 +254,16 @@ namespace LAZYSHELL
                 this.npcPropertyB.Value = 0;
                 this.npcPropertyC.Value = 0;
                 this.npcEventORPack.Value = 0;
-
                 this.npcGotoA.Enabled = false;
                 this.npcGotoB.Enabled = false;
             }
-
             npcsBytesLeft.Text = CalculateFreeNPCSpace() + " bytes left";
             npcsBytesLeft.BackColor = CalculateFreeNPCSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
         }
         private void RefreshNPCProperties()
         {
             updatingProperties = true;
-
             if (npcs.Count != 0 && this.npcObjectTree.SelectedNode != null)
             {
                 this.npcEngageType.SelectedIndex = npcs.EngageType;
@@ -305,9 +277,7 @@ namespace LAZYSHELL
                     this.npcDuplicate.Enabled = true;
                     this.npcMoveDown.Enabled = true;
                     this.npcMoveUp.Enabled = true;
-
                     this.npcEngageType.Enabled = false;
-
                     this.npcX.Enabled = true;
                     this.npcY.Enabled = true;
                     this.npcZ.Enabled = true;
@@ -317,7 +287,6 @@ namespace LAZYSHELL
                     this.npcPropertyC.Enabled = true;
                     this.npcVisible.Enabled = true;
                     this.npcZ_half.Enabled = true;
-
                     this.npcAttributes.Enabled = false;
                     this.npcAfterBattle.Enabled = false;
                     this.npcEngageTrigger.Enabled = false;
@@ -325,14 +294,12 @@ namespace LAZYSHELL
                     this.npcID.Enabled = false;
                     this.npcEventORPack.Enabled = false;
                     this.npcSpeedPlus.Enabled = false;
-
                     this.npcX.Value = npcs.CloneX;
                     this.npcY.Value = npcs.CloneY;
                     this.npcZ.Value = npcs.CloneZ;
                     this.npcFace.SelectedIndex = npcs.CloneF;
                     this.npcVisible.Checked = npcs.CloneXb7;
                     this.npcZ_half.Checked = npcs.CloneYb7;
-
                     if (this.npcEngageType.SelectedIndex == 0)
                     {
                         this.label104.Text = "NPC #+";
@@ -369,7 +336,6 @@ namespace LAZYSHELL
                     this.npcPropertyA.Value = npcs.ClonePropertyA;
                     this.npcPropertyB.Value = npcs.ClonePropertyB;
                     this.npcPropertyC.Value = npcs.ClonePropertyC;
-
                     this.npcGotoA.Enabled = false;
                     this.npcGotoB.Enabled = false;
                 }
@@ -383,9 +349,7 @@ namespace LAZYSHELL
                     this.npcDuplicate.Enabled = true;
                     this.npcMoveDown.Enabled = true;
                     this.npcMoveUp.Enabled = true;
-
                     this.npcEngageType.Enabled = true;
-
                     this.npcX.Enabled = true;
                     this.npcY.Enabled = true;
                     this.npcZ.Enabled = true;
@@ -395,7 +359,6 @@ namespace LAZYSHELL
                     this.npcPropertyC.Enabled = true;
                     this.npcVisible.Enabled = true;
                     this.npcZ_half.Enabled = true;
-
                     this.npcAttributes.Enabled = true;
                     this.npcAfterBattle.Enabled = npcs.EngageType == 2;
                     this.npcEngageTrigger.Enabled = true;
@@ -403,14 +366,12 @@ namespace LAZYSHELL
                     this.npcID.Enabled = true;
                     this.npcEventORPack.Enabled = true;
                     this.npcSpeedPlus.Enabled = true;
-
                     this.npcX.Value = npcs.X;
                     this.npcY.Value = npcs.Y;
                     this.npcZ.Value = npcs.Z;
                     this.npcFace.SelectedIndex = npcs.F;
                     this.npcVisible.Checked = npcs.Xb7;
                     this.npcZ_half.Checked = npcs.Yb7;
-
                     this.npcAttributes.SetItemChecked(0, npcs.B2b3);
                     this.npcAttributes.SetItemChecked(1, npcs.B2b4);
                     this.npcAttributes.SetItemChecked(2, npcs.B2b5);
@@ -427,12 +388,10 @@ namespace LAZYSHELL
                     this.npcAttributes.SetItemChecked(13, npcs.B4b0);
                     this.npcAttributes.SetItemChecked(14, npcs.B4b1);
                     this.npcAfterBattle.SelectedIndex = npcs.AfterBattle;
-
                     this.npcEngageTrigger.SelectedIndex = npcs.EngageTrigger;
                     this.npcMovement.Value = npcs.Movement;
                     this.npcID.Value = npcs.NPCID;
                     this.npcSpeedPlus.Value = npcs.SpeedPlus;
-
                     if (this.npcEngageType.SelectedIndex == 0)
                     {
                         this.label104.Text = "NPC #+";
@@ -470,7 +429,6 @@ namespace LAZYSHELL
                     this.npcPropertyA.Value = npcs.PropertyA;
                     this.npcPropertyB.Value = npcs.PropertyB;
                     this.npcPropertyC.Value = npcs.PropertyC;
-
                     this.npcGotoA.Enabled = true;
                     this.npcGotoB.Enabled = true;
                 }
@@ -484,9 +442,7 @@ namespace LAZYSHELL
                 this.npcDuplicate.Enabled = false;
                 this.npcMoveDown.Enabled = false;
                 this.npcMoveUp.Enabled = false;
-
                 this.npcEngageType.Enabled = false;
-
                 this.npcX.Enabled = false;
                 this.npcY.Enabled = false;
                 this.npcZ.Enabled = false;
@@ -496,7 +452,6 @@ namespace LAZYSHELL
                 this.npcPropertyC.Enabled = false;
                 this.npcVisible.Enabled = false;
                 this.npcZ_half.Enabled = false;
-
                 this.npcAttributes.Enabled = false;
                 this.npcAfterBattle.Enabled = false;
                 this.npcEngageTrigger.Enabled = false;
@@ -504,23 +459,19 @@ namespace LAZYSHELL
                 this.npcID.Enabled = false;
                 this.npcEventORPack.Enabled = false;
                 this.npcSpeedPlus.Enabled = false;
-
                 this.npcX.Value = 0;
                 this.npcY.Value = 0;
                 this.npcZ.Value = 0;
                 this.npcFace.SelectedIndex = 0;
                 this.npcVisible.Checked = false;
                 this.npcZ_half.Checked = false;
-
                 for (int i = 0; i < npcAttributes.Items.Count; i++)
                     npcAttributes.SetItemChecked(i, false);
                 npcAfterBattle.SelectedIndex = 0;
-
                 this.npcEngageTrigger.SelectedIndex = 0;
                 this.npcMovement.Value = 0;
                 this.npcID.Value = 0;
                 this.npcSpeedPlus.Value = 0;
-
                 this.label104.Text = "";
                 this.label31.Text = "";
                 this.npcGotoA.Text = "";
@@ -529,14 +480,11 @@ namespace LAZYSHELL
                 this.npcPropertyB.Value = 0;
                 this.npcPropertyC.Value = 0;
                 this.npcEventORPack.Value = 0;
-
                 this.npcGotoA.Enabled = false;
                 this.npcGotoB.Enabled = false;
             }
-
             npcsBytesLeft.Text = CalculateFreeNPCSpace() + " bytes left";
             npcsBytesLeft.BackColor = CalculateFreeNPCSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
             if (npcEngageType.SelectedIndex == 0)
                 findNPCNumber.Reload(npcID.Value + npcPropertyA.Value);
@@ -572,29 +520,22 @@ namespace LAZYSHELL
                         npcs.New(npcObjectTree.SelectedNode.Index + 1, p);
                     else
                         npcs.New(0, p);
-
                     int reselect;
-
                     if (npcObjectTree.Nodes.Count > 0)
                         reselect = npcObjectTree.SelectedNode.Index;
                     else
                         reselect = -1;
-
                     npcObjectTree.BeginUpdate();
-
                     this.npcObjectTree.Nodes.Clear();
                     for (int i = 0, a = 0; i < npcs.Count; i++, a++)
                     {
                         this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                         npcs.CurrentNPC = i;
-
                         for (int j = 0; j < npcs.CloneAmount; j++, a++)
                             this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
                     }
-
                     this.npcObjectTree.ExpandAll();
                     this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselect + 1];
-
                     npcObjectTree.EndUpdate();
                 }
                 else
@@ -615,37 +556,29 @@ namespace LAZYSHELL
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Parent.Index;
                 else
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Index;
-
                 this.npcObjectTree.Focus();
                 int totalNumberOfNodes = npcObjectTree.GetNodeCount(true);
-
                 if (totalNumberOfNodes < 28)
                 {
                     if (npcObjectTree.SelectedNode.Parent != null)
                         npcs.NewClone(npcObjectTree.SelectedNode.Index + 1, p);
                     else
                         npcs.NewClone(0, p);
-
                     int reselectP = npcObjectTree.SelectedNode.Parent != null ?
                         npcObjectTree.SelectedNode.Parent.Index : npcObjectTree.SelectedNode.Index;
                     int reselectC = npcObjectTree.SelectedNode.Parent != null ?
                         npcObjectTree.SelectedNode.Index : -1;
-
                     this.npcObjectTree.BeginUpdate();
-
                     this.npcObjectTree.Nodes.Clear();
                     for (int i = 0, a = 0; i < npcs.Count; i++, a++)
                     {
                         this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                         npcs.CurrentNPC = i;
-
                         for (int j = 0; j < npcs.CloneAmount; j++, a++)
                             this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
                     }
-
                     this.npcObjectTree.ExpandAll();
                     this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP].Nodes[reselectC + 1];
-
                     npcObjectTree.EndUpdate();
                 }
                 else
@@ -668,29 +601,22 @@ namespace LAZYSHELL
                         npcs.New(npcObjectTree.SelectedNode.Index + 1, e);
                     else
                         npcs.New(0, e);
-
                     int reselect;
-
                     if (npcObjectTree.Nodes.Count > 0)
                         reselect = npcObjectTree.SelectedNode.Index;
                     else
                         reselect = -1;
-
                     npcObjectTree.BeginUpdate();
-
                     this.npcObjectTree.Nodes.Clear();
                     for (int i = 0, a = 0; i < npcs.Count; i++, a++)
                     {
                         this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                         npcs.CurrentNPC = i;
-
                         for (int j = 0; j < npcs.CloneAmount; j++, a++)
                             this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
                     }
-
                     this.npcObjectTree.ExpandAll();
                     this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselect + 1];
-
                     npcObjectTree.EndUpdate();
                 }
                 else
@@ -711,37 +637,29 @@ namespace LAZYSHELL
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Parent.Index;
                 else
                     npcs.CurrentNPC = npcObjectTree.SelectedNode.Index;
-
                 this.npcObjectTree.Focus();
                 int totalNumberOfNodes = npcObjectTree.GetNodeCount(true);
-
                 if (totalNumberOfNodes < 28)
                 {
                     if (npcObjectTree.SelectedNode.Parent != null)
                         npcs.NewClone(npcObjectTree.SelectedNode.Index + 1, e);
                     else
                         npcs.NewClone(0, e);
-
                     int reselectP = npcObjectTree.SelectedNode.Parent != null ?
                         npcObjectTree.SelectedNode.Parent.Index : npcObjectTree.SelectedNode.Index;
                     int reselectC = npcObjectTree.SelectedNode.Parent != null ?
                         npcObjectTree.SelectedNode.Index : -1;
-
                     this.npcObjectTree.BeginUpdate();
-
                     this.npcObjectTree.Nodes.Clear();
                     for (int i = 0, a = 0; i < npcs.Count; i++, a++)
                     {
                         this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                         npcs.CurrentNPC = i;
-
                         for (int j = 0; j < npcs.CloneAmount; j++, a++)
                             this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
                     }
-
                     this.npcObjectTree.ExpandAll();
                     this.npcObjectTree.SelectedNode = this.npcObjectTree.Nodes[reselectP].Nodes[reselectC + 1];
-
                     npcObjectTree.EndUpdate();
                 }
                 else
@@ -756,8 +674,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void npcObjectTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (this.npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -772,7 +690,6 @@ namespace LAZYSHELL
                 npcs.SelectedNPC = this.npcObjectTree.SelectedNode.Index;
                 npcs.IsCloneSelected = false;
             }
-
             if (this.npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -780,7 +697,6 @@ namespace LAZYSHELL
             }
             else
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
-
             RefreshNPCProperties();
             picture.Invalidate();
         }
@@ -792,7 +708,8 @@ namespace LAZYSHELL
         private void npcRemoveObject_Click(object sender, System.EventArgs e)
         {
             this.npcObjectTree.Focus();
-            if (this.npcObjectTree.SelectedNode == null) return;
+            if (this.npcObjectTree.SelectedNode == null)
+                return;
             if (this.npcObjectTree.SelectedNode.Parent == null &&
                 npcs.CurrentNPC == this.npcObjectTree.SelectedNode.Index)
             {
@@ -806,7 +723,6 @@ namespace LAZYSHELL
                 {
                     this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                     npcs.CurrentNPC = i;
-
                     for (int j = 0; j < npcs.CloneAmount; j++, a++)
                         this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
                 }
@@ -873,7 +789,8 @@ namespace LAZYSHELL
         //
         private void npcEngageType_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             npcs.EngageType = (byte)this.npcEngageType.SelectedIndex;
             if (this.npcEngageType.SelectedIndex == 0)
             {
@@ -930,20 +847,21 @@ namespace LAZYSHELL
         }
         private void npcSpeedPlus_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.SpeedPlus = (byte)this.npcSpeedPlus.Value;
         }
         private void npcEventORPack_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.EventORpack = (ushort)this.npcEventORPack.Value;
             picture.Invalidate();
         }
         public void npcID_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
             npcs.NPCID = (ushort)this.npcID.Value;
             npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Index;
@@ -952,20 +870,20 @@ namespace LAZYSHELL
         }
         private void npcMovement_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.Movement = (ushort)this.npcMovement.Value;
         }
         private void npcEngageTrigger_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.EngageTrigger = (byte)this.npcEngageTrigger.SelectedIndex;
         }
         private void npcPropertyA_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -989,8 +907,8 @@ namespace LAZYSHELL
         }
         private void npcPropertyB_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
                 npcs.ClonePropertyB = (byte)this.npcPropertyB.Value;
             else
@@ -999,8 +917,8 @@ namespace LAZYSHELL
         }
         private void npcPropertyC_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
                 npcs.ClonePropertyC = (byte)this.npcPropertyC.Value;
             else
@@ -1008,8 +926,8 @@ namespace LAZYSHELL
         }
         private void npcRadialPosition_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1033,8 +951,8 @@ namespace LAZYSHELL
         }
         private void npcZCoord_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1057,8 +975,8 @@ namespace LAZYSHELL
         }
         private void npcYCoord_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1081,8 +999,8 @@ namespace LAZYSHELL
         }
         private void npcXCoord_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1107,8 +1025,8 @@ namespace LAZYSHELL
         {
             if (npcVisible.Checked) npcVisible.ForeColor = Color.Black;
             else npcVisible.ForeColor = Color.Gray;
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1133,8 +1051,8 @@ namespace LAZYSHELL
         {
             if (npcZ_half.Checked) npcZ_half.ForeColor = Color.Black;
             else npcZ_half.ForeColor = Color.Gray;
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             if (npcObjectTree.SelectedNode.Parent != null)
             {
                 npcs.CurrentNPC = this.npcObjectTree.SelectedNode.Parent.Index;
@@ -1157,8 +1075,8 @@ namespace LAZYSHELL
         }
         private void npcMapHeader_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.Partition = (byte)this.npcMapHeader.Value;
         }
         private void npcAttributes_SelectedIndexChanged(object sender, EventArgs e)
@@ -1182,7 +1100,8 @@ namespace LAZYSHELL
         //
         private void npcMoveUp_Click(object sender, EventArgs e)
         {
-            if (this.npcObjectTree.SelectedNode == null) return;
+            if (this.npcObjectTree.SelectedNode == null)
+                return;
             int reselectP = 0;
             int reselectC = 0;
             bool instanceSelected = false;
@@ -1205,7 +1124,6 @@ namespace LAZYSHELL
             {
                 this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                 npcs.CurrentNPC = i;
-
                 for (int j = 0; j < npcs.CloneAmount; j++, a++)
                     this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
             }
@@ -1221,8 +1139,8 @@ namespace LAZYSHELL
         }
         private void npcMoveDown_Click(object sender, EventArgs e)
         {
-            if (this.npcObjectTree.SelectedNode == null) return;
-
+            if (this.npcObjectTree.SelectedNode == null)
+                return;
             int reselectP = 0;
             int reselectC = 0;
             bool instanceSelected = false;
@@ -1245,7 +1163,6 @@ namespace LAZYSHELL
             {
                 this.npcObjectTree.Nodes.Add(new TreeNode("NPC #" + a.ToString()));
                 npcs.CurrentNPC = i;
-
                 for (int j = 0; j < npcs.CloneAmount; j++, a++)
                     this.npcObjectTree.Nodes[i].Nodes.Add(new TreeNode("NPC #" + (a + 1).ToString()));
             }
@@ -1303,7 +1220,6 @@ namespace LAZYSHELL
                 return;
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                 Model.Program.CreateEventScriptsWindow();
-
             Model.Program.EventScripts.EventName.SelectedIndex = 0;
             Model.Program.EventScripts.EventNum.Value = npcEventORPack.Value;
             Model.Program.EventScripts.BringToFront();
@@ -1312,7 +1228,6 @@ namespace LAZYSHELL
         {
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                 Model.Program.CreateEventScriptsWindow();
-
             Model.Program.EventScripts.EventName.SelectedIndex = 1;
             Model.Program.EventScripts.EventNum.Value = npcMovement.Value;
             Model.Program.EventScripts.BringToFront();
@@ -1320,8 +1235,8 @@ namespace LAZYSHELL
         //
         private void npcAfterBattle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
-
+            if (updatingProperties)
+                return;
             npcs.AfterBattle = (byte)npcAfterBattle.SelectedIndex;
         }
         #endregion

@@ -49,7 +49,6 @@ namespace LAZYSHELL
                 Monster[] monsters = (Monster[])elements;
                 names = new string[monsters.Length];
                 unsorted = new int[monsters.Length];
-
                 for (int i = 0; i < monsters.Length; i++)
                 {
                     names[i] = new string(monsters[i].Name);
@@ -61,7 +60,6 @@ namespace LAZYSHELL
                 Spell[] spells = (Spell[])elements;
                 names = new string[spells.Length];
                 unsorted = new int[spells.Length];
-
                 for (int i = 0; i < spells.Length; i++)
                 {
                     names[i] = new string(spells[i].Name);
@@ -73,7 +71,6 @@ namespace LAZYSHELL
                 Attack[] attacks = (Attack[])elements;
                 names = new string[attacks.Length];
                 unsorted = new int[attacks.Length];
-
                 for (int i = 0; i < attacks.Length; i++)
                 {
                     names[i] = new string(attacks[i].Name);
@@ -85,7 +82,6 @@ namespace LAZYSHELL
                 Item[] items = (Item[])elements;
                 names = new string[items.Length];
                 unsorted = new int[items.Length];
-
                 for (int i = 0; i < items.Length; i++)
                 {
                     names[i] = new string(items[i].Name);

@@ -21,12 +21,11 @@ namespace LAZYSHELL
     public partial class Sprites : Form
     {
         #region Variables
-
         private long checksum;
         public long Checksum { get { return checksum; } set { checksum = value; } }
         // main
         private delegate void Function();
-        private byte[] data { get { return Model.ROM; } set { Model.ROM = value; } }
+        private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private Settings settings = Settings.Default;
         private Overlay overlay;
         private bool updating = false;
@@ -68,6 +67,7 @@ namespace LAZYSHELL
         private GraphicEditor graphicEditor;
         private Search searchWindow;
         private EditLabel labelWindow;
+        private NPCPackets npcPackets;
         // special controls
         #endregion
         #region Methods
@@ -82,7 +82,7 @@ namespace LAZYSHELL
             searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
             labelWindow = new EditLabel(name, number, "Sprites", true);
             // set data
-            this.data = Model.ROM;
+            this.rom = Model.ROM;
             this.sprites = Model.Sprites;
             this.animations = Model.Animations;
             this.palettes = Model.SpritePalettes;
@@ -156,7 +156,6 @@ namespace LAZYSHELL
         {
             int totalSize, min, max;
             int length = 0;
-
             if (sprite.AnimationPacket < 42)
             {
                 totalSize = 0x7000; min = 0; max = 42;
@@ -198,9 +197,9 @@ namespace LAZYSHELL
             {
                 if (animations[i].BUFFER.Length + offset > 0x25FFFF)
                     break;
-                Bits.SetShort(data, pointer, (ushort)offset);
-                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                Bits.SetShort(rom, pointer, (ushort)offset);
+                rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 42)
@@ -210,9 +209,9 @@ namespace LAZYSHELL
             {
                 if (animations[i].BUFFER.Length + offset > 0x26FFFF)
                     break;
-                Bits.SetShort(data, pointer, (ushort)offset);
-                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                Bits.SetShort(rom, pointer, (ushort)offset);
+                rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 107)
@@ -222,9 +221,9 @@ namespace LAZYSHELL
             {
                 if (animations[i].BUFFER.Length + offset > 0x27FFFF)
                     break;
-                Bits.SetShort(data, pointer, (ushort)offset);
-                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                Bits.SetShort(rom, pointer, (ushort)offset);
+                rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 249)
@@ -234,25 +233,22 @@ namespace LAZYSHELL
             {
                 if (animations[i].BUFFER.Length + offset > 0x36FFFF)
                     break;
-                Bits.SetShort(data, pointer, (ushort)offset);
-                data[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(data, offset, animations[i].BUFFER);
+                Bits.SetShort(rom, pointer, (ushort)offset);
+                rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
+                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 444)
                 MessageBox.Show("The available space for animation data in bank 0x360000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 444 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
-
             foreach (Sprite s in sprites)
                 s.Assemble();
             foreach (ImagePacket gp in images)
                 gp.Assemble();
             foreach (PaletteSet p in palettes)
                 p.Assemble(0);
-            Buffer.BlockCopy(Model.SpriteGraphics, 0, data, 0x280000, 0xB4000);
-
-            Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
-            Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
-            Model.HexViewer.Compare();
+            Buffer.BlockCopy(Model.SpriteGraphics, 0, rom, 0x280000, 0xB4000);
+            Model.HexEditor.SetOffset(animation.AnimationOffset);
+            Model.HexEditor.Compare();
             checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
             Do.AddHistory(this, Index, "SaveSprites");
         }
@@ -347,6 +343,11 @@ namespace LAZYSHELL
             graphicEditor.Dispose();
             paletteEditor.Dispose();
             searchWindow.Dispose();
+            if (npcPackets != null)
+            {
+                npcPackets.Close();
+                npcPackets.Dispose();
+            }
         }
         #endregion
         #region Event Handlers
@@ -378,9 +379,17 @@ namespace LAZYSHELL
         Close:
             CloseEditors();
         }
+        private void npcPacketButton_Click(object sender, EventArgs e)
+        {
+            if (npcPackets == null || !npcPackets.Visible)
+                npcPackets = new NPCPackets();
+            npcPackets.Show();
+            npcPackets.BringToFront();
+        }
         private void number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             name.SelectedIndex = (int)number.Value;
             animation.Assemble();
             RefreshSpritesEditor();
@@ -388,12 +397,14 @@ namespace LAZYSHELL
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             number.Value = name.SelectedIndex;
         }
         private void paletteIndex_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sprite.PaletteIndex = (byte)paletteIndex.Value;
             foreach (Mold mold in animation.Molds)
             {
@@ -408,7 +419,8 @@ namespace LAZYSHELL
         }
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sprite.Image = (ushort)imageNum.Value;
             paletteOffset.Value = image.PaletteNum;
             graphicOffset.Value = image.GraphicOffset;
@@ -425,7 +437,8 @@ namespace LAZYSHELL
         }
         private void paletteOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             image.PaletteNum = (int)paletteOffset.Value;
             foreach (Mold mold in animation.Molds)
             {
@@ -440,7 +453,8 @@ namespace LAZYSHELL
         }
         private void graphicOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             graphicOffset.Value = (int)graphicOffset.Value & 0xFFFFE0;
             image.GraphicOffset = (int)graphicOffset.Value;
             graphics = image.Graphics(spriteGraphics);
@@ -456,7 +470,8 @@ namespace LAZYSHELL
         }
         private void animationPacket_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             sprite.AnimationPacket = (ushort)animationPacket.Value;
             animationVRAM.Value = animation.VramAllocation;
             LoadMoldEditor();
@@ -465,7 +480,8 @@ namespace LAZYSHELL
         }
         private void animationVRAM_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             animation.VramAllocation = (ushort)animationVRAM.Value;
             molds.SetAvailableVRAM();
         }
@@ -540,10 +556,9 @@ namespace LAZYSHELL
         }
         private void hexViewer_Click(object sender, EventArgs e)
         {
-            Model.HexViewer.Offset = animation.AnimationOffset & 0xFFFFF0;
-            Model.HexViewer.SelectionStart = (animation.AnimationOffset & 15) * 3;
-            Model.HexViewer.Compare();
-            Model.HexViewer.Show();
+            Model.HexEditor.SetOffset(animation.AnimationOffset);
+            Model.HexEditor.Compare();
+            Model.HexEditor.Show();
         }
         private void allMoldImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -552,7 +567,6 @@ namespace LAZYSHELL
         }
         private void allSequenceImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
         #endregion
     }

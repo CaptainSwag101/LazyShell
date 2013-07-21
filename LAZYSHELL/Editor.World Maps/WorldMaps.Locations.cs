@@ -21,36 +21,27 @@ namespace LAZYSHELL
         // special controls
         #endregion
         #region Methods
-
         // initialize properties
         private void InitializeLocationsEditor()
         {
             updatingLocations = true;
-
             index_l = 0;
             this.locationNum.Value = 0;
-
             for (int i = 0; i < locations.Length; i++)
                 locationName.Items.Add(new string(locations[i].Name));
-
             RefreshLocationEditor();
-
             updatingLocations = false;
         }
         private void RefreshLocationEditor()
         {
             updatingLocations = true;
-
             SetLocationNames();
-
             locationName.SelectedIndex = index_l = (int)locationNum.Value;
-
             this.locationXCoord.Value = location.X;
             this.locationYCoord.Value = location.Y;
             this.showCheckBit.Value = location.ShowCheckBit;
             this.showCheckAddress.Value = location.ShowCheckAddress;
             this.leadToLocation.Checked = location.GoLocation;
-
             if (location.GoLocation)
             {
                 label52.Text = "If memory bit set";
@@ -79,7 +70,6 @@ namespace LAZYSHELL
                 goLocationB.Enabled = false;
                 runEvent.Value = location.RunEvent;
             }
-
             enableEastPath.Checked = location.EnabledToEast;
             if (location.EnabledToEast)
             {
@@ -96,7 +86,6 @@ namespace LAZYSHELL
                 toEastCheckAddress.Enabled = false;
                 toEastCheckBit.Enabled = false;
             }
-
             enableSouthPath.Checked = location.EnabledToSouth;
             if (location.EnabledToSouth)
             {
@@ -113,7 +102,6 @@ namespace LAZYSHELL
                 toSouthCheckAddress.Enabled = false;
                 toSouthCheckBit.Enabled = false;
             }
-
             enableWestPath.Checked = location.EnabledToWest;
             if (location.EnabledToWest)
             {
@@ -130,7 +118,6 @@ namespace LAZYSHELL
                 toWestCheckAddress.Enabled = false;
                 toWestCheckBit.Enabled = false;
             }
-
             enableNorthPath.Checked = location.EnabledToNorth;
             if (location.EnabledToNorth)
             {
@@ -147,12 +134,9 @@ namespace LAZYSHELL
                 toNorthCheckAddress.Enabled = false;
                 toNorthCheckBit.Enabled = false;
             }
-
             textBoxLocation.Text = Do.RawToASCII(location.Name, Lists.Keystrokes);
-
             updatingLocations = false;
         }
-
         // name editing
         private void SetLocationNames()
         {
@@ -162,7 +146,6 @@ namespace LAZYSHELL
             toSouthPoint.Items.Clear();
             toWestPoint.Items.Clear();
             toNorthPoint.Items.Clear();
-
             if (location.GoLocation)
             {
                 for (int i = 0; i < locations.Length; i++)
@@ -185,20 +168,16 @@ namespace LAZYSHELL
             for (; i < stringB.Length; i++)
                 if (stringA[loc + i] != stringB[i])
                     return false;
-
             return true;
         }
         public byte[] strToByte(string toByte)
         {
             byte[] arr = new byte[toByte.Length];
             char[] str = toByte.ToCharArray();
-
             for (int i = 0; i < str.Length; i++)
                 arr[i] = (byte)str[i];
-
             return arr;
         }
-
         private void AssembleLocationTexts()
         {
             char[][] pointNames = new char[56][];
@@ -236,7 +215,6 @@ namespace LAZYSHELL
                     }
                 }
             }
-
             // assemble
             ushort[] pointers = new ushort[56];
             int pOffset = 0x3EFD00;
@@ -269,10 +247,8 @@ namespace LAZYSHELL
                 }
             }
         }
-
         #endregion
         #region Eventhandlers
-
         private void locationNum_ValueChanged(object sender, EventArgs e)
         {
             if (locationName.SelectedIndex == locationNum.Value)
@@ -303,17 +279,14 @@ namespace LAZYSHELL
         {
             if (e.Index < 0 || e.Index > 55)
                 return;
-
             // set the pixels
             int[] temp = drawName.GetPreview(fontDialogue, fontPalettes[2].Palettes[0], locations[e.Index].Name, false);
             int[] pixels = new int[256 * 32];
-
             for (int y = 2, c = 10; c < 32; y++, c++)
             {
                 for (int x = 2, a = 8; a < 256; x++, a++)
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
-
             Bitmap icon = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
             Bitmap bgimage = Model.MenuBG_;
             if (bgimage != null)
@@ -328,15 +301,13 @@ namespace LAZYSHELL
         }
         private void textBoxLocation_TextChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.Name = Do.ASCIIToRaw(textBoxLocation.Text, Lists.Keystrokes, textBoxLocation.Text.Length);
-
             updatingLocations = true;
             locationName.Text = textBoxLocation.Text;
             locationName.Invalidate();
             updatingLocations = false;
-
             // check total length
             char[][] pointNames = new char[56][];
             char[] tempB;
@@ -398,41 +369,39 @@ namespace LAZYSHELL
         }
         private void locationXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.X = (byte)locationXCoord.Value;
-
-            if (updating) return;
-
+            if (updating)
+                return;
             pictureBoxTileset.Invalidate();
         }
         private void locationYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.Y = (byte)locationYCoord.Value;
-
-            if (updating) return;
-
+            if (updating)
+                return;
             pictureBoxTileset.Invalidate();
         }
         private void showCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.ShowCheckAddress = (ushort)showCheckAddress.Value;
         }
         private void showCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.ShowCheckBit = (byte)showCheckBit.Value;
         }
         private void leadToLocation_CheckedChanged(object sender, EventArgs e)
         {
             leadToLocation.ForeColor = leadToLocation.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.GoLocation = leadToLocation.Checked;
             goLocationA.Items.Clear();
             goLocationB.Items.Clear();
@@ -470,27 +439,27 @@ namespace LAZYSHELL
         }
         private void whichPointCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.WhichLocationCheckAddress = (ushort)whichPointCheckAddress.Value;
         }
         private void whichPointCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.WhichLocationCheckBit = (byte)whichPointCheckBit.Value;
         }
         private void goLocationA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             if (location.GoLocation)
                 location.GoLocationA = (byte)goLocationA.SelectedIndex;
         }
         private void runEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             if (!location.GoLocation)
                 location.RunEvent = (ushort)runEvent.Value;
         }
@@ -498,96 +467,94 @@ namespace LAZYSHELL
         {
             if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                 Model.Program.CreateEventScriptsWindow();
-
             Model.Program.EventScripts.EventName.SelectedIndex = 0;
             Model.Program.EventScripts.EventNum.Value = runEvent.Value;
             Model.Program.EventScripts.BringToFront();
         }
         private void goLocationB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.GoLocationB = (byte)goLocationB.SelectedIndex;
         }
         private void toEastPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.LocationToEast = (byte)toEastPoint.SelectedIndex;
         }
         private void toSouthPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.LocationToSouth = (byte)toSouthPoint.SelectedIndex;
         }
         private void toWestPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.LocationToWest = (byte)toWestPoint.SelectedIndex;
         }
         private void toNorthPoint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.LocationToNorth = (byte)toNorthPoint.SelectedIndex;
         }
         private void toEastCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckAddressToEast = (ushort)toEastCheckAddress.Value;
         }
         private void toSouthCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckAddressToSouth = (ushort)toSouthCheckAddress.Value;
         }
         private void toWestCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckAddressToWest = (ushort)toWestCheckAddress.Value;
         }
         private void toNorthCheckAddress_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckAddressToNorth = (ushort)toNorthCheckAddress.Value;
         }
         private void toEastCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckBitToEast = (byte)toEastCheckBit.Value;
         }
         private void toSouthCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckBitToSouth = (byte)toSouthCheckBit.Value;
         }
         private void toWestCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckBitToWest = (byte)toWestCheckBit.Value;
         }
         private void toNorthCheckBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.CheckBitToNorth = (byte)toNorthCheckBit.Value;
         }
         private void enableEastPath_CheckedChanged(object sender, EventArgs e)
         {
             enableEastPath.ForeColor = enableEastPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.EnabledToEast = enableEastPath.Checked;
-
             toEastPoint.Enabled = enableEastPath.Checked;
             toEastCheckAddress.Enabled = enableEastPath.Checked;
             toEastCheckBit.Enabled = enableEastPath.Checked;
@@ -595,10 +562,9 @@ namespace LAZYSHELL
         private void enableSouthPath_CheckedChanged(object sender, EventArgs e)
         {
             enableSouthPath.ForeColor = enableSouthPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.EnabledToSouth = enableSouthPath.Checked;
-
             toSouthPoint.Enabled = enableSouthPath.Checked;
             toSouthCheckAddress.Enabled = enableSouthPath.Checked;
             toSouthCheckBit.Enabled = enableSouthPath.Checked;
@@ -606,10 +572,9 @@ namespace LAZYSHELL
         private void enableWestPath_CheckedChanged(object sender, EventArgs e)
         {
             enableWestPath.ForeColor = enableWestPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.EnabledToWest = enableWestPath.Checked;
-
             toWestPoint.Enabled = enableWestPath.Checked;
             toWestCheckAddress.Enabled = enableWestPath.Checked;
             toWestCheckBit.Enabled = enableWestPath.Checked;
@@ -617,15 +582,13 @@ namespace LAZYSHELL
         private void enableNorthPath_CheckedChanged(object sender, EventArgs e)
         {
             enableNorthPath.ForeColor = enableNorthPath.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updatingLocations) return;
-
+            if (updatingLocations)
+                return;
             location.EnabledToNorth = enableNorthPath.Checked;
-
             toNorthPoint.Enabled = enableNorthPath.Checked;
             toNorthCheckAddress.Enabled = enableNorthPath.Checked;
             toNorthCheckBit.Enabled = enableNorthPath.Checked;
         }
-
         #endregion
     }
 }

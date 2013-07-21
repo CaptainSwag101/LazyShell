@@ -89,7 +89,6 @@ namespace LAZYSHELL
             get
             {
                 string[] names = new string[8];
-
                 for (int i = 0; i < 8; i++)
                 {
                     if (use[i])

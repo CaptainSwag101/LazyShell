@@ -896,7 +896,6 @@ namespace LAZYSHELL
         }
         private void wTie_Click(object sender, EventArgs e)
         {
-
         }
         //
         private void scoreWriterPicture_Paint(object sender, PaintEventArgs e)
@@ -963,7 +962,7 @@ namespace LAZYSHELL
             if (wSelect.Checked && overlay.Select != null)
             {
                 e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
-                overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1);
+                overlay.Select.DrawSelectionBox(e.Graphics, 1);
             }
         }
         private void scoreWriterPicture_MouseDown(object sender, MouseEventArgs e)
@@ -992,7 +991,7 @@ namespace LAZYSHELL
             }
             if (wSelect.Checked)
             {
-                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1);
+                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1, scoreWriterPicture);
                 scoreWriterPicture.Invalidate();
                 return;
             }
@@ -1229,7 +1228,8 @@ namespace LAZYSHELL
             saveFileDialog.Filter = "Score File (*.lsnotes)|*.lsscore";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;
-            if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                return;
             //
             Stream s = File.Create(saveFileDialog.FileName);
             BinaryFormatter b = new BinaryFormatter();

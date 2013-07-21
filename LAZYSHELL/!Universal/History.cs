@@ -114,7 +114,6 @@ namespace LAZYSHELL
         }
         private void ToolStripItemMouseDown(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.None) return;
             ToolStripItem item = (ToolStripItem)sender;
             string temp = "MouseDown \"" + item.Name + "\" | X:" + e.X + ",Y:" + e.Y + " | ";
             Type type = item.GetType();
@@ -130,7 +129,6 @@ namespace LAZYSHELL
         }
         private void ControlMouseDown(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.None) return;
             Control control = (Control)sender;
             if (control.Parent != null && control.Parent.GetType() == typeof(NumericUpDown))
                 control = control.Parent;

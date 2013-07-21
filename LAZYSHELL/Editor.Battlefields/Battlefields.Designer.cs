@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class Battlefields
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -19,9 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -141,8 +139,6 @@
             this.pictureBoxBattlefield.TabIndex = 2;
             this.pictureBoxBattlefield.TabStop = false;
             this.pictureBoxBattlefield.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxBattlefield_Paint);
-            this.pictureBoxBattlefield.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattlefield_MouseClick);
-            this.pictureBoxBattlefield.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattlefield_MouseDoubleClick);
             this.pictureBoxBattlefield.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBattlefield_MouseDown);
             this.pictureBoxBattlefield.MouseEnter += new System.EventHandler(this.pictureBoxBattlefield_MouseEnter);
             this.pictureBoxBattlefield.MouseLeave += new System.EventHandler(this.pictureBoxBattlefield_MouseLeave);
@@ -785,7 +781,6 @@
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(29, 6);
-            this.toolStripSeparator7.Visible = false;
             // 
             // buttonEditUndo
             // 
@@ -796,7 +791,6 @@
             this.buttonEditUndo.Name = "buttonEditUndo";
             this.buttonEditUndo.Size = new System.Drawing.Size(29, 12);
             this.buttonEditUndo.Text = "Undo (Ctrl+Z)";
-            this.buttonEditUndo.Visible = false;
             this.buttonEditUndo.Click += new System.EventHandler(this.buttonEditUndo_Click);
             // 
             // buttonEditRedo
@@ -808,7 +802,6 @@
             this.buttonEditRedo.Name = "buttonEditRedo";
             this.buttonEditRedo.Size = new System.Drawing.Size(29, 12);
             this.buttonEditRedo.Text = "Redo (Ctrl+Y)";
-            this.buttonEditRedo.Visible = false;
             this.buttonEditRedo.Click += new System.EventHandler(this.buttonEditRedo_Click);
             // 
             // toolStrip1
@@ -1068,11 +1061,8 @@
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.Panel panelBattlefieldTileset;
         private System.Windows.Forms.PictureBox pictureBoxBattlefield;
         private System.Windows.Forms.NumericUpDown battlefieldPaletteSetNum;

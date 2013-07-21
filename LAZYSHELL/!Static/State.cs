@@ -27,7 +27,7 @@ namespace LAZYSHELL
         private bool rails = false; public bool Rails { get { return rails; } set { rails = value; } }
         private bool tileMods = false; public bool TileMods { get { return tileMods; } set { tileMods = value; } }
         private bool solidMods = false; public bool SolidMods { get { return solidMods; } set { solidMods = value; } }
-        private bool cartesianGrid = false; public bool CartesianGrid { get { return cartesianGrid; } set { cartesianGrid = value; } }
+        private bool cartesianGrid = false; public bool TileGrid { get { return cartesianGrid; } set { cartesianGrid = value; } }
         private bool isometricGrid = false; public bool IsometricGrid { get { return isometricGrid; } set { isometricGrid = value; } }
         private bool template = false; public bool Template { get { return template; } set { ClearDrawing(); template = value; } }
         private bool draw = false; public bool Draw { get { return draw; } set { ClearDrawing(); draw = value; } }
@@ -57,7 +57,6 @@ namespace LAZYSHELL
                     }
                     return instance;
                 }
-
             }
         }
         public static State Instance2
@@ -72,7 +71,6 @@ namespace LAZYSHELL
                     }
                     return instance2;
                 }
-
             }
         }
         public byte[] PrivateKey

@@ -11,7 +11,7 @@ namespace LAZYSHELL
 {
     public partial class FormationsEditor : Form
     {
-        
+            //
         private long checksum;
         private Formations formationsEditor;
         private FormationPacks packsEditor;

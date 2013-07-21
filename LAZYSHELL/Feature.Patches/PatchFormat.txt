@@ -2,7 +2,6 @@
 			Bit 0 - Assembly Hack
 			Bit 1 - Game Hack
 			Bit 2 - Must be applied to a Fresh Rom
-
 The following fields are 1 Line of text (terminated with endl 0x0D 0x0A)
 	Patch Name
 	Author(s)

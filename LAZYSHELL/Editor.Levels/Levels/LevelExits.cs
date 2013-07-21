@@ -34,7 +34,7 @@ namespace LAZYSHELL
             }
         }
         public int SelectedExit { get { return this.selectedExit; } set { selectedExit = value; } }
-        public Exit Exit_ { get { return exit; } }
+        public Exit Exit { get { return exit; } }
         public int Length
         {
             get
@@ -49,7 +49,6 @@ namespace LAZYSHELL
         }
         public int Count { get { return exits.Count; } }
         // exit properties
-        public ushort Destination { get { return exit.Destination; } set { exit.Destination = value; } }
         public byte ExitType { get { return exit.ExitType; } set { exit.ExitType = value; } }
         public bool ShowMessage { get { return exit.ShowMessage; } set { exit.ShowMessage = value; } }
         public byte X { get { return exit.X; } set { exit.X = value; } }
@@ -61,6 +60,7 @@ namespace LAZYSHELL
         public bool X_Half { get { return exit.X_Half; } set { exit.X_Half = value; } }
         public bool Y_Half { get { return exit.Y_Half; } set { exit.Y_Half = value; } }
         // destination properties
+        public ushort Destination { get { return exit.Destination; } set { exit.Destination = value; } }
         public byte DstX { get { return exit.DstX; } set { exit.DstX = value; } }
         public byte DstY { get { return exit.DstY; } set { exit.DstY = value; } }
         public byte DstZ { get { return exit.DstZ; } set { exit.DstZ = value; } }
@@ -172,7 +172,7 @@ namespace LAZYSHELL
                 return length;
             }
         }
-        // field properties
+        // exit properties
         private ushort destination; public ushort Destination { get { return destination; } set { destination = value; } }
         private byte exitType; public byte ExitType { get { return exitType; } set { exitType = value; } }
         private bool showMessage; public bool ShowMessage { get { return showMessage; } set { showMessage = value; } }

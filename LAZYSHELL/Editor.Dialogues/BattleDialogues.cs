@@ -228,11 +228,9 @@ namespace LAZYSHELL
         public void InsertIntoBattleDialogueText(string toInsert)
         {
             char[] newText = new char[battleDialogueTextBox.Text.Length + toInsert.Length];
-
             battleDialogueTextBox.Text.CopyTo(0, newText, 0, battleDialogueTextBox.SelectionStart);
             toInsert.CopyTo(0, newText, battleDialogueTextBox.SelectionStart, toInsert.Length);
             battleDialogueTextBox.Text.CopyTo(battleDialogueTextBox.SelectionStart, newText, battleDialogueTextBox.SelectionStart + toInsert.Length, this.battleDialogueTextBox.Text.Length - this.battleDialogueTextBox.SelectionStart);
-
             if (type == 0)
             {
                 Model.BattleDialogues[index].SetCaretPosition(this.battleDialogueTextBox.SelectionStart + toInsert.Length, byteView);
@@ -356,7 +354,8 @@ namespace LAZYSHELL
         // main
         private void battleDialogueNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             if (type < 2)
             {
                 textPreview.Reset();
@@ -370,17 +369,18 @@ namespace LAZYSHELL
         }
         private void battleDialogueTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             SetTextImage();
             CalculateFreeSpace();
         }
         private void battleDialogueTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-
         }
         private void battleDlgType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             index = 0;
             if (type == 0)
@@ -435,7 +435,7 @@ namespace LAZYSHELL
             if (textImage != null && toggleText.Checked)
                 e.Graphics.DrawImage(textImage, 0, 0, 256, 32);
             if (grid.Checked)
-                overlay.DrawCartesianGrid(e.Graphics, Color.Black, pictureBoxBattleDialogue.Size, new Size(16, 16), 1, true);
+                overlay.DrawTileGrid(e.Graphics, Color.Black, pictureBoxBattleDialogue.Size, new Size(16, 16), 1, true);
         }
         private void pictureBoxBattleDialogue_MouseDown(object sender, MouseEventArgs e)
         {
@@ -444,11 +444,9 @@ namespace LAZYSHELL
         }
         private void pictureBoxBattleDialogue_MouseMove(object sender, MouseEventArgs e)
         {
-
         }
         private void pictureBoxBattleDialogue_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-
         }
         private void reset_Click(object sender, EventArgs e)
         {

@@ -65,9 +65,7 @@ namespace LAZYSHELL
             name = new char[13];
             for (int i = 0; i < name.Length; i++)
                 name[i] = (char)rom[(index * 13) + 0x3959F4 + i];
-
             int offset = (index * 4) + 0x391226;
-
             int temp = rom[offset++];
             attackLevel = (byte)(temp & 0x07);
             instantDeath = (temp & 0x08) == 0x08;

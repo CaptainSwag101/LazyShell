@@ -96,13 +96,11 @@ namespace LAZYSHELL
             }
             tileModsBytesLeft.Text = CalculateFreeTileModSpace() + " bytes left";
             tileModsBytesLeft.BackColor = CalculateFreeTileModSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
         }
         private void RefreshTileModProperties()
         {
             updatingProperties = true;
-
             if (tileMods.Mods.Count != 0 && this.tileModsFieldTree.SelectedNode != null)
             {
                 if (this.tileModsFieldTree.SelectedNode.Parent != null)
@@ -143,7 +141,6 @@ namespace LAZYSHELL
             }
             tileModsBytesLeft.Text = CalculateFreeTileModSpace() + " bytes left";
             tileModsBytesLeft.BackColor = CalculateFreeTileModSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
             picture.Invalidate();
         }
@@ -277,15 +274,11 @@ namespace LAZYSHELL
         private void InitializeSolidModProperties()
         {
             updatingProperties = true;
-
             this.solidModsFieldTree.Nodes.Clear();
-
             for (int i = 0; i < solidMods.Mods.Count; i++)
                 this.solidModsFieldTree.Nodes.Add(new TreeNode("SOLID MOD #" + i.ToString()));
-
             if (solidModsFieldTree.Nodes.Count > 0)
                 this.solidModsFieldTree.SelectedNode = this.solidModsFieldTree.Nodes[0];
-
             if (solidMods.Mods.Count != 0 && this.solidModsFieldTree.SelectedNode != null)
             {
                 solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
@@ -310,7 +303,6 @@ namespace LAZYSHELL
             }
             solidModsBytesLeft.Text = CalculateFreeSolidModSpace() + " bytes left";
             solidModsBytesLeft.BackColor = CalculateFreeSolidModSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
         }
         private void RefreshSolidModProperties()
@@ -343,7 +335,6 @@ namespace LAZYSHELL
             }
             solidModsBytesLeft.Text = CalculateFreeSolidModSpace() + " bytes left";
             solidModsBytesLeft.BackColor = CalculateFreeSolidModSpace() >= 0 ? SystemColors.Control : Color.Red;
-
             updatingProperties = false;
             picture.Invalidate();
         }
@@ -411,19 +402,22 @@ namespace LAZYSHELL
         }
         private void tileModsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             tileMods.X = (int)tileModsX.Value;
             picture.Invalidate();
         }
         private void tileModsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             tileMods.Y = (int)tileModsY.Value;
             picture.Invalidate();
         }
         private void tileModsWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             int temp = tileMods.Width;
             tileMods.Width = (int)tileModsWidth.Value;
             if (CalculateFreeTileModSpace() < 0)
@@ -441,7 +435,8 @@ namespace LAZYSHELL
         }
         private void tileModsHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             int temp = tileMods.Height;
             tileMods.Height = (int)tileModsHeight.Value;
             if (CalculateFreeTileModSpace() < 0)
@@ -459,7 +454,8 @@ namespace LAZYSHELL
         }
         public void tileModsLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             tileMods.Layer1 = tileModsLayers.GetItemChecked(0);
             tileMods.Layer2 = tileModsLayers.GetItemChecked(1);
             tileMods.Layer3 = tileModsLayers.GetItemChecked(2);
@@ -511,7 +507,8 @@ namespace LAZYSHELL
         }
         private void tileModsMoveUp_Click(object sender, EventArgs e)
         {
-            if (this.tileModsFieldTree.SelectedNode == null) return;
+            if (this.tileModsFieldTree.SelectedNode == null)
+                return;
             int index = 0;
             if (this.tileModsFieldTree.SelectedNode.Parent == null && tileMods.CurrentMod > 0)
             {
@@ -524,7 +521,8 @@ namespace LAZYSHELL
         }
         private void tileModsMoveDown_Click(object sender, EventArgs e)
         {
-            if (this.tileModsFieldTree.SelectedNode == null) return;
+            if (this.tileModsFieldTree.SelectedNode == null)
+                return;
             int index = 0;
             if (this.tileModsFieldTree.SelectedNode.Parent == null && tileMods.CurrentMod < tileMods.Mods.Count - 1)
             {
@@ -553,28 +551,30 @@ namespace LAZYSHELL
         {
             solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
             solidMods.SelectedMod = this.solidModsFieldTree.SelectedNode.Index;
-
             solidMods.CurrentMod = this.solidModsFieldTree.SelectedNode.Index;
             RefreshSolidModProperties();
             picture.Invalidate();
         }
         private void solidModsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             solidMods.X = (int)solidModsX.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
             picture.Invalidate();
         }
         private void solidModsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             solidMods.Y = (int)solidModsY.Value;
             solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
             picture.Invalidate();
         }
         private void solidModsWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             int temp = solidMods.Width;
             solidMods.Width = (int)solidModsWidth.Value;
             if (CalculateFreeSolidModSpace() < 0)
@@ -590,7 +590,8 @@ namespace LAZYSHELL
         }
         private void solidModsHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties) return;
+            if (updatingProperties)
+                return;
             int temp = solidMods.Height;
             solidMods.Height = (int)solidModsHeight.Value;
             if (CalculateFreeSolidModSpace() < 0)
@@ -658,7 +659,8 @@ namespace LAZYSHELL
         }
         private void solidModsMoveUp_Click(object sender, EventArgs e)
         {
-            if (this.solidModsFieldTree.SelectedNode == null) return;
+            if (this.solidModsFieldTree.SelectedNode == null)
+                return;
             int index = 0;
             if (this.solidModsFieldTree.SelectedNode.Parent == null && solidMods.CurrentMod > 0)
             {
@@ -675,7 +677,8 @@ namespace LAZYSHELL
         }
         private void solidModsMoveDown_Click(object sender, EventArgs e)
         {
-            if (this.solidModsFieldTree.SelectedNode == null) return;
+            if (this.solidModsFieldTree.SelectedNode == null)
+                return;
             int index = 0;
             if (this.solidModsFieldTree.SelectedNode.Parent == null && solidMods.CurrentMod < solidMods.Mods.Count - 1)
             {

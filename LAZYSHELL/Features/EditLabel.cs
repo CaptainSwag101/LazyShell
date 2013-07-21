@@ -162,12 +162,14 @@ namespace LAZYSHELL
         // event handlers
         private void number_ValueChanged(object sender, EventArgs e)
         {
-            if (Disable) return;
+            if (Disable)
+                return;
             RefreshLabel();
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Disable) return;
+            if (Disable)
+                return;
             RefreshLabel();
         }
         private void labelToolStrip_Opening(object sender, CancelEventArgs e)

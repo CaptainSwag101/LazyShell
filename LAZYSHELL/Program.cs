@@ -129,7 +129,6 @@ namespace LAZYSHELL
             saveFileDialog1.Filter = "SMC files (*.SMC)|*.SMC|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
-
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Model.FileName = saveFileDialog1.FileName;
@@ -177,7 +176,7 @@ namespace LAZYSHELL
         }
         public void CloseRomFile()
         {
-            Model.DataHash = null;
+            Model.ROMHash = null;
         }
         #region Create Editor Windows
         public void ScreencapHotkeys()

@@ -123,9 +123,9 @@ namespace LAZYSHELL
             int tilesetoffset = offset;
             foreach (Tile t in tileset_tiles.Tileset)
             {
-                if (t.TileIndex >= tilesetLength / 8)
+                if (t.Index >= tilesetLength / 8)
                     break;
-                if (t.TileIndex > 0 && t.TileIndex % 8 == 0)
+                if (t.Index > 0 && t.Index % 8 == 0)
                     offset += 32;
                 for (int i = 0; i < 4; i++)
                 {

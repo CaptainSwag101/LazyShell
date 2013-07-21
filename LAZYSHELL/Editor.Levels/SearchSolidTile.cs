@@ -17,9 +17,7 @@ namespace LAZYSHELL
         {
             this.levelsSolidTiles = levelsSolidTiles;
             this.solidTiles = solidTiles;
-
             InitializeComponent();
-
             conveyor.SelectedIndex = 0;
             conveyorBeltFast.SelectedIndex = 0;
             conveyorBeltNormal.SelectedIndex = 0;
@@ -45,11 +43,9 @@ namespace LAZYSHELL
         private void LoadSearch()
         {
             searchResults.Items.Clear();
-
             string withProp = "";
             bool notFound;
             int results = 0;
-
             if (checkHeightOfBaseTile.Checked) withProp += "Height of base tile = " + heightOfBaseTile.Value.ToString() + "\n";
             if (checkHeightOverhead.Checked) withProp += "Height overhead tile = " + heightOverhead.Value.ToString() + "\n";
             if (checkZCoordOverhead.Checked) withProp += "Z Coord of overhead tile = " + zCoordOverhead.Value.ToString() + "\n";
@@ -79,7 +75,6 @@ namespace LAZYSHELL
             if (unknownBits.GetItemChecked(2)) withProp += "Byte 5, bit 2 set\n";
             if (unknownBits.GetItemChecked(3)) withProp += "Byte 5, bit 3 set\n";
             if (unknownBits.GetItemChecked(4)) withProp += "Byte 5, bit 4 set\n";
-
             for (int i = 0; i < solidTiles.Length; i++)
             {
                 notFound = false;
@@ -162,7 +157,6 @@ namespace LAZYSHELL
                 if (checkStairs.Checked) { if (solidTiles[i].StairsDirection != stairs.SelectedIndex) notFound = true; }
                 if (checkSpecialTile.Checked) { if (solidTiles[i].SpecialTileFormat != specialTile.SelectedIndex) notFound = true; }
                 if (checkDoorFormat.Checked) { if (doorFormat.SelectedIndex != solidTiles[i].Door) notFound = true; }
-
                 if (!notFound)
                 {
                     searchResults.Items.Add("Solid Tile #" + i.ToString());

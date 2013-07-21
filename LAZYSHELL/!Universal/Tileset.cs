@@ -147,7 +147,8 @@ namespace LAZYSHELL
         // assemblers
         public void Assemble(int width, int layer)
         {
-            if (tilesets_tiles[layer] == null) return;
+            if (tilesets_tiles[layer] == null)
+                return;
             //
             int offset = 0;
             if (Type == TilesetType.Level || Type == TilesetType.Title)
@@ -178,11 +179,11 @@ namespace LAZYSHELL
                 if (Type == TilesetType.Level)
                 {
                     if (layer == 0)
-                        Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
+                        Model.EditTilesets[levelMap.TilesetL1 + 0x20] = true;
                     if (layer == 1)
-                        Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
+                        Model.EditTilesets[levelMap.TilesetL2 + 0x20] = true;
                     if (layer == 2)
-                        Model.EditTileSets[levelMap.TilesetL3] = true;
+                        Model.EditTilesets[levelMap.TilesetL3] = true;
                     //
                     Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
                     Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
@@ -239,9 +240,9 @@ namespace LAZYSHELL
                 }
                 if (Type == TilesetType.Level)
                 {
-                    Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
-                    Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
-                    Model.EditTileSets[levelMap.TilesetL3] = true;
+                    Model.EditTilesets[levelMap.TilesetL1 + 0x20] = true;
+                    Model.EditTilesets[levelMap.TilesetL2 + 0x20] = true;
+                    Model.EditTilesets[levelMap.TilesetL3] = true;
                     //
                     Buffer.BlockCopy(graphics, 0, Model.GraphicSets[levelMap.GraphicSetA + 0x48], 0, 0x2000);
                     Buffer.BlockCopy(graphics, 0x2000, Model.GraphicSets[levelMap.GraphicSetB + 0x48], 0, 0x1000);
@@ -275,7 +276,8 @@ namespace LAZYSHELL
             }
             else
             {
-                if (Tileset_tiles == null) return;
+                if (Tileset_tiles == null)
+                    return;
                 for (int y = 0; y < 16; y++)
                 {
                     for (int x = 0; x < 16; x++)
@@ -297,7 +299,7 @@ namespace LAZYSHELL
             }
         }
         // class functions
-        private void DrawTileset(byte[] src, Tile[] dst, byte[] graphics, byte format)
+        public void DrawTileset(byte[] src, Tile[] dst, byte[] graphics, byte format)
         {
             byte status = 0;
             ushort tilenum = 0;
@@ -401,7 +403,7 @@ namespace LAZYSHELL
         public int GetTileNum(int layer, int x, int y)
         {
             if (layer < 3)
-                return tilesets_tiles[layer][y * Width + x].TileIndex;
+                return tilesets_tiles[layer][y * Width + x].Index;
             else return 0;
         }
         // universal functions
@@ -414,9 +416,9 @@ namespace LAZYSHELL
                     Model.Tilesets[levelMap.TilesetL1 + 0x20] = new byte[0x2000];
                     Model.Tilesets[levelMap.TilesetL2 + 0x20] = new byte[0x2000];
                     Model.Tilesets[levelMap.TilesetL3] = new byte[0x1000];
-                    Model.EditTileSets[levelMap.TilesetL1 + 0x20] = true;
-                    Model.EditTileSets[levelMap.TilesetL2 + 0x20] = true;
-                    Model.EditTileSets[levelMap.TilesetL3] = true;
+                    Model.EditTilesets[levelMap.TilesetL1 + 0x20] = true;
+                    Model.EditTilesets[levelMap.TilesetL2 + 0x20] = true;
+                    Model.EditTilesets[levelMap.TilesetL3] = true;
                 }
                 else
                 {
@@ -426,7 +428,7 @@ namespace LAZYSHELL
                             Model.Tilesets[i] = new byte[0x1000];
                         else
                             Model.Tilesets[i] = new byte[0x2000];
-                        Model.EditTileSets[i] = true;
+                        Model.EditTilesets[i] = true;
                     }
                 }
             }

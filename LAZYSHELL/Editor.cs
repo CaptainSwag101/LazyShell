@@ -23,20 +23,16 @@ namespace LAZYSHELL
     public partial class Editor : Form, IMRUClient
     {
         #region Variables
-
         private ProgramController AppControl;
-        //private Notes notes;
         private Settings settings = Settings.Default;
         private bool cancelAnotherLoad;
-
         // MRU List manager
         private MRUManager mruManager;      // MRU list manager
         private string initialDirectory;    // Initial directory for Save/Load operations
         const string registryPath = "SOFTWARE\\LAZYSHELL\\LazyShell";  // Registry path to keep persistent data
         [DllImport("advapi32.dll", EntryPoint = "RegDeleteKey")]
         public static extern int RegDeleteKeyA(int hKey, string lpSubKey);
-
-        private Restore importElements;
+        private Restore restore;
         public Panel Panel2 { get { return panel2; } set { panel2 = value; } }
         #endregion
         // Constructor
@@ -123,15 +119,13 @@ namespace LAZYSHELL
                 MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.", "LAZY SHELL");
                 return;
             }
-            else if (Model.HexViewer != null && Model.HexViewer.Visible)
-                Model.HexViewer.Close();
+            else if (Model.HexEditor != null && Model.HexEditor.Visible)
+                Model.HexEditor.Close();
             bool ret;
-
             if (filename == null) // Load the rom
                 ret = AppControl.OpenRomFile();
             else
                 ret = AppControl.OpenRomFile(filename);
-
             if (ret && !AppControl.Locked()) // Verify it is a SMRPG rom of the correct version
             {
                 if (AppControl.GameCode() != "ARWE")
@@ -139,7 +133,6 @@ namespace LAZYSHELL
                     MessageBox.Show("The game code for this ROM is invalid. There will likely be problems editing the ROM.", "LAZY SHELL");
                     return;
                 }
-
                 if (!AppControl.HeaderPresent()) // If the rom does not have a header, we enable all the buttons
                 {
                     toolStrip2.Enabled = true;
@@ -152,7 +145,6 @@ namespace LAZYSHELL
                     this.saveToolStripMenuItem.Enabled = true;
                     this.saveAsToolStripMenuItem.Enabled = true;
                     this.restoreElementsToolStripMenuItem.Enabled = true;
-
                     AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
                 }
                 else if (AppControl.HeaderPresent()) // If the rom does have a header, we disable all the buttons and enable the Remove Header buttons
@@ -222,7 +214,7 @@ namespace LAZYSHELL
         }
         public void UpdateRomInfo()
         {
-            this.loadRomTextBox.Text = AppControl.GetFileName();
+            this.loadRomTextBox.Text = Model.FileName;
             this.romInfo.Text =
                 AppControl.GetRomName() + "\n" +
                 AppControl.HeaderPresent() + "\n" +
@@ -244,13 +236,12 @@ namespace LAZYSHELL
                     "There are changes to the rom that have not been saved.\n\n" +
                     "Would you like to save them now" + (assembleFlag == 1 ? " and quit?" : "?"), "LAZY SHELL",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
                 if (result == DialogResult.Yes)
                 {
                     if (!AppControl.SaveRomFile())
                     {
                         MessageBox.Show(
-                            "There was an error saving to \"" + AppControl.GetFileName() + "\"",
+                            "There was an error saving to \"" + Model.FileName + "\"",
                             "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -275,13 +266,10 @@ namespace LAZYSHELL
         private string GetDirectoryPath(string caption)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-
             folderBrowserDialog1.SelectedPath = settings.LastDirectory;
             folderBrowserDialog1.Description = caption;
-
             // Display the openFile dialog.
             DialogResult result = folderBrowserDialog1.ShowDialog();
-
             if (result == DialogResult.OK)
             {
                 settings.LastDirectory = folderBrowserDialog1.SelectedPath;
@@ -308,7 +296,6 @@ namespace LAZYSHELL
             try
             {
                 RegistryKey key = Registry.CurrentUser.CreateSubKey(registryPath);
-
                 initialDirectory = (string)key.GetValue(
                     "InitDir",                          // value name
                     Directory.GetCurrentDirectory());   // default value
@@ -341,7 +328,6 @@ namespace LAZYSHELL
                 // Disable/hide the remove header button
                 this.removeHeader.Enabled = false;
                 this.removeHeader.Visible = false;
-
                 AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
             }
         }
@@ -381,7 +367,7 @@ namespace LAZYSHELL
         private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             // Check if read only, if it is do a "Save As" routine
-            FileInfo file = new FileInfo(AppControl.GetFileName());
+            FileInfo file = new FileInfo(Model.FileName);
             if ((file.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
             {
                 saveAsToolStripMenuItem.PerformClick();
@@ -391,7 +377,7 @@ namespace LAZYSHELL
             FileStream fs = null;
             try
             {
-                fs = File.Open(AppControl.GetFileName(), FileMode.Open);
+                fs = File.Open(Model.FileName, FileMode.Open);
                 fs.Close();
             }
             catch
@@ -421,8 +407,8 @@ namespace LAZYSHELL
                 MessageBox.Show("All of the editor's windows must be closed before importing data from another ROM.", "LAZY SHELL");
                 return;
             }
-            importElements = new Restore();
-            importElements.ShowDialog();
+            restore = new Restore();
+            restore.ShowDialog();
         }
         private void publishRomToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -443,8 +429,8 @@ namespace LAZYSHELL
         }
         private void hexViewer_Click(object sender, EventArgs e)
         {
-            Model.HexViewer.Show();
-            Model.HexViewer.BringToFront();
+            Model.HexEditor.Show();
+            Model.HexEditor.BringToFront();
         }
         private void helpToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
@@ -603,9 +589,9 @@ namespace LAZYSHELL
         {
             AppControl.Patches();
         }
-        private void openNotes_Click(object sender, EventArgs e)
+        private void openProject_Click(object sender, EventArgs e)
         {
-            AppControl.Notes();
+            AppControl.Project();
         }
         // window editing
         private void docking_Click(object sender, EventArgs e)

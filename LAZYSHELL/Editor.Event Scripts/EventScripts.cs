@@ -22,7 +22,7 @@ namespace LAZYSHELL
         private Settings settings = Settings.Default;
         //
         private EventScript[] eventScripts { get { return Model.EventScripts; } set { Model.EventScripts = value; } }
-        public EventScript[] ThisEventScripts { get { return eventScripts; } set { eventScripts = value; } }
+        public EventScript[] EVENTScripts { get { return eventScripts; } set { eventScripts = value; } }
         private ActionScript[] actionScripts { get { return Model.ActionScripts; } set { Model.ActionScripts = value; } }
         public ActionScript[] ActionScripts { get { return actionScripts; } set { actionScripts = value; } }
         private ActionScript actionScript { get { return actionScripts[index]; } set { actionScripts[index] = value; } }
@@ -41,7 +41,7 @@ namespace LAZYSHELL
         private TreeViewWrapper treeViewWrapper;
         public TreeViewWrapper TreeViewWrapper { get { return treeViewWrapper; } }
         private bool updatingScript = true;
-        private bool updatingControls = false;
+        private bool updatingControls = true;
         private bool isActionScript = false;
         private bool isActionSelected = false;
         private int index { get { return (int)eventNum.Value; } set { eventNum.Value = value; } }
@@ -124,13 +124,10 @@ namespace LAZYSHELL
         public ToolStripNumericUpDown EventNum { get { return eventNum; } set { eventNum = value; } }
         public System.Windows.Forms.ToolStripComboBox EventName { get { return eventName; } set { eventName = value; } }
         // pointer recalibration
-        private FixPointers fixPointers;
         private bool apply; public bool Apply { get { return apply; } set { apply = value; } }
         private int delta; public int Delta { get { return delta; } set { delta = value; } }
         // other
         private Previewer previewer;
-        private ClearElements clearElements;
-        private IOElements ioElements;
         private Search searchWindow;
         private EditLabel labelWindow;
         private class Navigate
@@ -199,12 +196,9 @@ namespace LAZYSHELL
                 Lists.ActionLabels[i] = "ACTION #" + i;
             }
             eventLabel.Text = Lists.EventLabels[(int)this.eventNum.Value];
-
             treeViewWrapper = new TreeViewWrapper(this.commandTree);
             treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
-
             this.autoPointerUpdate.Checked = autoPointerUpdate.Checked;
-
             UpdateEventScriptsFreeSpace();
         }
         private void RefreshEditor()
@@ -292,12 +286,12 @@ namespace LAZYSHELL
             ControlAssembleAction();
             treeViewWrapper.InsertNode(asc.Copy());
         }
-        private void PushCommand(byte[] oldScript)
+        private void PushCommand(ScriptBuffer buffer)
         {
             if (!isActionScript)
-                commandStack.Push(new CommandEdit(eventScripts, index, oldScript, treeViewWrapper, eventName, eventNum));
+                commandStack.Push(new CommandEdit(eventScripts, index, buffer, this));
             else
-                commandStack.Push(new CommandEdit(actionScripts, index, oldScript, treeViewWrapper, eventName, eventNum));
+                commandStack.Push(new CommandEdit(actionScripts, index, buffer, this));
         }
         // Update offsets
         public void UpdateScriptOffsets()
@@ -395,10 +389,8 @@ namespace LAZYSHELL
         {
             int totalSize = 0xC000 - 0x800;
             int length = 0;
-
             for (int i = 0; i < actionScripts.Length; i++)
                 length += actionScripts[i].Script.Length;
-
             return totalSize - length - 1;
         }
         private void UpdateEventScriptsFreeSpace()
@@ -413,7 +405,6 @@ namespace LAZYSHELL
             int length = 0;
             int min;
             int max;
-
             if (currentScript < 0x600)
             {
                 totalSize = 0x10000 - 0xC00;
@@ -429,10 +420,8 @@ namespace LAZYSHELL
                 totalSize = 0xE000 - 0x800;
                 min = 0xC00; max = 0x1000;
             }
-
             for (int i = min; i < max; i++)
                 length += eventScripts[i].Script.Length;
-
             return totalSize - length - 1;
         }
         private void ResetLists()
@@ -483,37 +472,26 @@ namespace LAZYSHELL
             else
                 UpdateActionOffsets();
             // Save current script first
-
             settings.Save();
-
             if (CalculateEventScriptsLength() >= 0)
                 AssembleAllEventScripts();
             else
                 MessageBox.Show("There is not enough available space to save the event scripts to.\n\nThe event scripts were not saved.", "LAZY SHELL");
-
             if (CalculateActionScriptsLength() >= 0)
                 AssembleAllActionScripts();
             else
                 MessageBox.Show("There is not enough available space to save the action scripts to.\n\nThe action scripts were not saved.", "LAZY SHELL");
-
             if (!isActionScript)
-            {
-                Model.HexViewer.Offset = eventScript.BaseOffset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (eventScript.BaseOffset & 15) * 3;
-            }
+                Model.HexEditor.SetOffset(eventScript.BaseOffset);
             else
-            {
-                Model.HexViewer.Offset = actionScript.BaseOffset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (actionScript.BaseOffset & 15) * 3;
-            }
-            Model.HexViewer.Compare();
+                Model.HexEditor.SetOffset(actionScript.BaseOffset);
+            Model.HexEditor.Compare();
             checksum = Do.GenerateChecksum(eventScripts, actionScripts);
         }
         public void AssembleAllEventScripts()
         {
             foreach (EventScript es in eventScripts)
                 es.Assemble();
-
             int i = 0;
             int pointer = 0;
             int bank = 0x1E0000;
@@ -525,7 +503,6 @@ namespace LAZYSHELL
                 offset += (ushort)eventScripts[i].Script.Length;
             }
             for (int a = offset; a < 0x10000; a++) Model.ROM[bank + a] = 0xFF;
-
             pointer = 0;
             bank = 0x1F0000;
             offset = 0xC00;
@@ -536,7 +513,6 @@ namespace LAZYSHELL
                 offset += (ushort)eventScripts[i].Script.Length;
             }
             for (int a = offset; a < 0x10000; a++) Model.ROM[bank + a] = 0xFF;
-
             pointer = 0;
             bank = 0x200000;
             offset = 0x800;
@@ -552,7 +528,6 @@ namespace LAZYSHELL
         {
             foreach (ActionScript ac in actionScripts)
                 ac.Assemble();
-
             int i = 0;
             int pointer = 0;
             int bank = 0x210000;
@@ -589,7 +564,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void eventNum_ValueChanged(object sender, EventArgs e)
         {
-            if (!updatingScript) return;
+            if (!updatingScript)
+                return;
             RefreshEditor();
             //
             if (!disableNavigate && lastNavigate != null)
@@ -604,7 +580,8 @@ namespace LAZYSHELL
         }
         private void eventName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingScript) return;
+            if (!updatingScript)
+                return;
             updatingScript = false;
             eventNum.Value = currentScript = 0;
             if (!isActionScript)
@@ -725,9 +702,7 @@ namespace LAZYSHELL
             if (Do.GenerateChecksum(eventScripts, actionScripts) == checksum)
                 goto Close;
             DialogResult result;
-
             result = MessageBox.Show("Event Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
             if (result == DialogResult.Yes)
                 Assemble();
             else if (result == DialogResult.No)
@@ -790,9 +765,12 @@ namespace LAZYSHELL
         private void commandTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             UpdateCommandData();
-            if (!updatingScript) return;
-            if (!commandTree.Enabled) return;
-            if (eventScript.Commands.Count == 0) return;
+            if (!updatingScript)
+                return;
+            if (!commandTree.Enabled)
+                return;
+            if (eventScript.Commands.Count == 0)
+                return;
             //
             panelCommands.SuspendDrawing();
             // if selecting an action queue/script command
@@ -851,7 +829,8 @@ namespace LAZYSHELL
             Do.AddHistory(this, index, e.Node, "NodeMouseClick");
             //
             commandTree.SelectedNode = e.Node;
-            if (e.Button != MouseButtons.Right) return;
+            if (e.Button != MouseButtons.Right)
+                return;
             goToToolStripMenuItem.Click -= goToDialogue_Click;
             goToToolStripMenuItem.Click -= goToEvent_Click;
             goToToolStripMenuItem.Click -= goToOffset_Click;
@@ -893,7 +872,7 @@ namespace LAZYSHELL
                     temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
                 {
                     e.Node.ContextMenuStrip = contextMenuStripGoto;
-                    goToToolStripMenuItem.Text = "Add to notes database...";
+                    goToToolStripMenuItem.Text = "Add to project database...";
                     goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
                 }
                 else if (temp.Opcode == 0xFD)
@@ -902,7 +881,7 @@ namespace LAZYSHELL
                         temp.Param1 == 0xDC || temp.Param1 == 0xDD || temp.Param1 == 0xDE)
                     {
                         e.Node.ContextMenuStrip = contextMenuStripGoto;
-                        goToToolStripMenuItem.Text = "Add to notes database...";
+                        goToToolStripMenuItem.Text = "Add to project database...";
                         goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
                     }
                 }
@@ -929,7 +908,7 @@ namespace LAZYSHELL
                     temp.Opcode == 0xDC || temp.Opcode == 0xDD || temp.Opcode == 0xDE)
                 {
                     e.Node.ContextMenuStrip = contextMenuStripGoto;
-                    goToToolStripMenuItem.Text = "Add to notes database...";
+                    goToToolStripMenuItem.Text = "Add to project database...";
                     goToToolStripMenuItem.Click += new EventHandler(addMemoryToNotesDatabase_Click);
                 }
             }
@@ -983,7 +962,7 @@ namespace LAZYSHELL
             updatingScript = false;
             if (commandTree.SelectedNode == null)
                 return;
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             if (commandTree.SelectedNode != modifiedNode)
             {
@@ -1002,14 +981,14 @@ namespace LAZYSHELL
             updatingScript = true;
             Do.AddHistory(this, index, commandTree.SelectedNode, "MoveUpCommand");
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         private void EvtScrMoveDown_Click(object sender, EventArgs e)
         {
             updatingScript = false;
             if (commandTree.SelectedNode == null)
                 return;
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             if (commandTree.SelectedNode != modifiedNode)
             {
@@ -1028,7 +1007,7 @@ namespace LAZYSHELL
             updatingScript = true;
             Do.AddHistory(this, index, commandTree.SelectedNode, "MoveDownCommand");
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         private void EvtScrCopyCommand_Click(object sender, EventArgs e)
         {
@@ -1039,7 +1018,7 @@ namespace LAZYSHELL
         }
         private void EvtScrPasteCommand_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             if (commandTree.SelectedNode != modifiedNode)
             {
@@ -1052,11 +1031,11 @@ namespace LAZYSHELL
             commandTree.SelectedNode = treeViewWrapper.SelectedNode;
             Do.AddHistory(this, index, commandTree.SelectedNode, "PasteCommand");
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         private void EvtScrDeleteCommand_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             if (commandTree.SelectedNode != null && commandTree.SelectedNode == modifiedNode)
             {
@@ -1069,18 +1048,16 @@ namespace LAZYSHELL
             commandTree.SelectedNode = treeViewWrapper.SelectedNode;
             Do.AddHistory(this, index, commandTree.SelectedNode, "DeleteCommand");
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         private void undo_Click(object sender, EventArgs e)
         {
-            int length = eventScript.Length;
             commandTree.BeginUpdate();
             commandStack.UndoCommand();
             commandTree.EndUpdate();
         }
         private void redo_Click(object sender, EventArgs e)
         {
-            int length = eventScript.Length;
             commandTree.BeginUpdate();
             commandStack.RedoCommand();
             commandTree.EndUpdate();
@@ -1094,22 +1071,22 @@ namespace LAZYSHELL
             // action queue command
             if (commandTree.SelectedNode.Parent != null)
             {
-                esc = eventScripts[currentScript].Commands[commandTree.SelectedNode.Parent.Index];
-                asc = esc.Queue.Commands[commandTree.SelectedNode.Index];
+                this.esc = eventScripts[currentScript].Commands[commandTree.SelectedNode.Parent.Index];
+                this.asc = esc.Queue.Commands[commandTree.SelectedNode.Index];
                 ControlDisassembleAction();
             }
             // action script command
             else if (isActionScript)
             {
-                asc = actionScripts[currentScript].Commands[commandTree.SelectedNode.Index];
-                esc = null;
+                this.asc = actionScripts[currentScript].Commands[commandTree.SelectedNode.Index];
+                this.esc = null;
                 ControlDisassembleAction();
             }
             // event script command
             else
             {
-                esc = eventScripts[currentScript].Commands[commandTree.SelectedNode.Index];
-                asc = null;
+                this.esc = eventScripts[currentScript].Commands[commandTree.SelectedNode.Index];
+                this.asc = null;
                 ControlDisassembleEvent();
             }
             panelCommands.ResumeDrawing();
@@ -1136,9 +1113,8 @@ namespace LAZYSHELL
             DialogResult result = MessageBox.Show(
             "You are about to clear the current script of all commands.\n\nGo ahead with process?",
             "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-            if (result != DialogResult.Yes) return;
-
+            if (result != DialogResult.Yes)
+                return;
             treeViewWrapper.ClearAll();
             UpdateCommandData();
             Do.AddHistory(this, index, "ClearAll");
@@ -1164,7 +1140,7 @@ namespace LAZYSHELL
         }
         private void commands_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingControls)
+            if (updatingControls)
                 return;
             byte[] temp;
             int opcode;
@@ -1218,7 +1194,8 @@ namespace LAZYSHELL
         }
         private void evtNameA1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingControls) return;
+            if (updatingControls)
+                return;
             //
             panelCommands.SuspendDrawing();
             if (asc != null)
@@ -1251,8 +1228,7 @@ namespace LAZYSHELL
                         evtNumA1.Value = Model.ItemNames.GetUnsortedIndex(evtNameA1.SelectedIndex);    // Item names
                         break;
                     case 0x4E:
-                        updatingControls = false;
-
+                        updatingControls = true;
                         labelEvtA2.Text = "";
                         labelEvtA3.Text = "";
                         evtNameA2.Items.Clear(); evtNameA2.ResetText(); evtNameA2.Enabled = false; evtNameA2.DropDownWidth = evtNameA2.Width;
@@ -1300,8 +1276,7 @@ namespace LAZYSHELL
                                 break;
                         }
                         OrganizeControls();
-
-                        updatingControls = true;
+                        updatingControls = false;
                         break;
                     case 0x97:
                         labelEvtA3.Text = evtNameA1.SelectedIndex == 0 ? "Slow down" : "Speed up";
@@ -1320,15 +1295,16 @@ namespace LAZYSHELL
         }
         private void evtNameA1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void evtNumA1_ValueChanged(object sender, EventArgs e)
         {
-            if (!updatingControls) return;
-
+            if (updatingControls)
+                return;
             if (asc != null)
             {
                 switch (asc.Opcode)
@@ -1363,7 +1339,7 @@ namespace LAZYSHELL
         }
         private void evtNameA2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingControls)
+            if (updatingControls)
                 return;
             if (asc != null)
                 return;
@@ -1406,15 +1382,16 @@ namespace LAZYSHELL
         }
         private void evtNameA2_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.ItemNames, Model.FontMenu,
                 Model.FontPaletteMenu.Palettes[0], 8, 10, 0, 128, true, false, Model.MenuBG_);
         }
         private void evtNumA2_ValueChanged(object sender, EventArgs e)
         {
-            if (!updatingControls) return;
-
+            if (updatingControls)
+                return;
             if (asc == null)
             {
                 switch (esc.Opcode)
@@ -1445,7 +1422,7 @@ namespace LAZYSHELL
         }
         private void buttonInsertEvent_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             EventCommand esc;
             // if editing a non-blank script
@@ -1483,11 +1460,11 @@ namespace LAZYSHELL
                 treeViewWrapper.EditedNode = modifiedNode;
             }
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         private void buttonApplyEvent_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             if (modifiedNode != null)
             {
@@ -1508,7 +1485,7 @@ namespace LAZYSHELL
             EvtScrEditCommand.PerformClick();
             Do.AddHistory(this, index, commandTree.SelectedNode, "EditCommand");
             //
-            PushCommand(oldScript);
+            PushCommand(buffer);
         }
         // menustrip
         private void save_Click(object sender, EventArgs e)
@@ -1517,30 +1494,19 @@ namespace LAZYSHELL
             Assemble();
             Cursor.Current = Cursors.Arrow;
         }
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Form about = new About(this);
-            //about.ShowDialog(this);
-        }
         private void hexViewer_Click(object sender, EventArgs e)
         {
             if (!isActionScript)
-            {
-                Model.HexViewer.Offset = eventScript.BaseOffset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (eventScript.BaseOffset & 15) * 3;
-            }
+                Model.HexEditor.SetOffset(eventScript.BaseOffset);
             else
-            {
-                Model.HexViewer.Offset = actionScript.BaseOffset & 0xFFFFF0;
-                Model.HexViewer.SelectionStart = (actionScript.BaseOffset & 15) * 3;
-            }
-            Model.HexViewer.Compare();
-            Model.HexViewer.Show();
+                Model.HexEditor.SetOffset(actionScript.BaseOffset);
+            Model.HexEditor.Compare();
+            Model.HexEditor.Show();
         }
         // IO elements
         private void importEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             int[] baseOffsets = new int[Model.EventScripts.Length];
             int[] lengths = new int[Model.EventScripts.Length];
@@ -1593,12 +1559,12 @@ namespace LAZYSHELL
             treeViewWrapper.ChangeScript(eventScript);
             treeViewWrapper.RefreshScript();
             //
-            if (!Bits.Compare(oldScript, scriptData))
-                PushCommand(oldScript);
+            if (!Bits.Compare(buffer.OldScript, scriptData))
+                PushCommand(buffer);
         }
         private void importActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             int[] baseOffsets = new int[Model.ActionScripts.Length];
             int[] lengths = new int[Model.ActionScripts.Length];
@@ -1647,8 +1613,8 @@ namespace LAZYSHELL
             treeViewWrapper.ChangeScript(actionScript);
             treeViewWrapper.RefreshScript();
             //
-            if (!Bits.Compare(oldScript, scriptData))
-                PushCommand(oldScript);
+            if (!Bits.Compare(buffer.OldScript, scriptData))
+                PushCommand(buffer);
         }
         private void exportEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1665,36 +1631,29 @@ namespace LAZYSHELL
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.FileName = Model.GetFileNameWithoutPath() + " - eventScripts.txt";
             saveFileDialog.RestoreDirectory = true;
-
             List<EventCommand> commands;
             List<ActionCommand> queue;
             EventCommand esc;
             ActionCommand asc;
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter writer = File.CreateText(saveFileDialog.FileName);
-
                 for (int i = 0; i < eventScripts.Length; i++)
                 {
                     commands = eventScripts[i].Commands;
-
                     writer.WriteLine("[" + i.ToString("d4") + "]" +
                         "------------------------------------------------------------>");
                     for (int j = 0; j < commands.Count; j++)
                     {
                         esc = commands[j];
                         writer.Write((esc.Offset).ToString("X6") + ": ");
-
                         if (esc.Opcode <= 0x2F && esc.Param1 <= 0xF1 && !esc.Locked)
                         {
                             if (esc.Param1 == 0xF0 || esc.Param1 == 0xF1)
                                 writer.Write("{" + BitConverter.ToString(esc.CommandData, 0, 3) + "}            ");
                             else
                                 writer.Write("{" + BitConverter.ToString(esc.CommandData, 0, 2) + "}               ");
-
                             writer.Write(esc.ToString() + "\n");
-
                             if (esc.Queue.Commands != null)
                             {
                                 queue = esc.Queue.Commands;
@@ -1731,7 +1690,6 @@ namespace LAZYSHELL
                             writer.Write("{" + BitConverter.ToString(esc.CommandData) + "}");
                             for (int k = esc.Length; k < 7; k++)
                                 writer.Write("   ");
-
                             writer.Write(esc.ToString() + "\n");
                         }
                     }
@@ -1756,10 +1714,8 @@ namespace LAZYSHELL
                 for (int i = 0; i < actionScripts.Length; i++)
                 {
                     commands = actionScripts[i].Commands;
-
                     writer.WriteLine("[" + i.ToString("d4") + "]" +
                         "------------------------------------------------------------>");
-
                     if (commands != null)
                     {
                         for (int k = 0; k < commands.Count; k++)
@@ -1779,7 +1735,7 @@ namespace LAZYSHELL
         }
         private void clearEventScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             int[] lengths = new int[Model.EventScripts.Length];
             for (int i = 0; i < lengths.Length; i++)
@@ -1812,12 +1768,12 @@ namespace LAZYSHELL
             UpdateScriptOffsets(start);
             treeViewWrapper.RefreshScript();
             //
-            if (!Bits.Compare(oldScript, scriptData))
-                PushCommand(oldScript);
+            if (!Bits.Compare(buffer.OldScript, scriptData))
+                PushCommand(buffer);
         }
         private void clearActionScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte[] oldScript = Bits.Copy(scriptData);
+            ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
             //
             int[] lengths = new int[Model.ActionScripts.Length];
             for (int i = 0; i < lengths.Length; i++)
@@ -1836,8 +1792,8 @@ namespace LAZYSHELL
             UpdateActionOffsets(start);
             treeViewWrapper.RefreshScript();
             //
-            if (!Bits.Compare(oldScript, scriptData))
-                PushCommand(oldScript);
+            if (!Bits.Compare(buffer.OldScript, scriptData))
+                PushCommand(buffer);
         }
         private void reset_Click(object sender, EventArgs e)
         {
@@ -1873,21 +1829,19 @@ namespace LAZYSHELL
         // context menustrip
         private void goToDialogue_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
-
+            if (commandTree.SelectedNode == null)
+                return;
             EventCommand temp = (EventCommand)commandTree.SelectedNode.Tag;
             int num = Bits.GetShort(temp.CommandData, 1) & 0xFFF;
-
             if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
                 Model.Program.CreateDialoguesWindow();
-
             Model.Program.Dialogues.DialogueNum.Value = num;
             Model.Program.Dialogues.BringToFront();
         }
         private void addMemoryToNotesDatabase_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
-
+            if (commandTree.SelectedNode == null)
+                return;
             int address = 0x7000;
             int addressBit = 0;
             string label = "";
@@ -1930,9 +1884,7 @@ namespace LAZYSHELL
                     address = ((((temp.Opcode * 0x100) + temp.Param1) - 0xDC00) / 8) + 0x7040;
                 addressBit = temp.Param1 & 0x07;
             }
-
             label = description = "[" + address.ToString("X4") + ", bit: " + addressBit.ToString() + "]";
-
             if (Model.Program.Project == null || !Model.Program.Project.Visible)
                 Model.Program.CreateProjectWindow();
             Project note = Model.Program.Project;
@@ -1949,29 +1901,24 @@ namespace LAZYSHELL
                     MessageBoxButtons.OK);
             }
         }
-        private void addThisToNotesDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         private void goToEvent_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
-
+            if (commandTree.SelectedNode == null)
+                return;
             EventCommand temp = (EventCommand)commandTree.SelectedNode.Tag;
             int num = 0;
             if (temp.Opcode != 0xFD)
                 num = Bits.GetShort(temp.CommandData, 1) & 0xFFF;
             else
                 num = Bits.GetShort(temp.CommandData, 2) & 0xFFF;
-
             eventNum.Value = num;
         }
         private void goToOffset_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
+            if (commandTree.SelectedNode == null)
+                return;
             EventActionCommand temp = (EventActionCommand)commandTree.SelectedNode.Tag;
             int pointer;
-
             if (isActionScript)
             {
                 pointer = temp.ReadPointer() + (actionScript.BaseOffset & 0xFF0000);
@@ -1989,7 +1936,6 @@ namespace LAZYSHELL
                 }
                 return;
             }
-
             pointer = temp.ReadPointer() + (eventScript.BaseOffset & 0xFF0000);
             foreach (EventScript script in eventScripts)
             {
@@ -2024,8 +1970,8 @@ namespace LAZYSHELL
         }
         private void goToAction_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
-
+            if (commandTree.SelectedNode == null)
+                return;
             int num = index;
             if (commandTree.SelectedNode.Tag.GetType() == typeof(EventCommand))
             {
@@ -2046,69 +1992,85 @@ namespace LAZYSHELL
         private class CommandEdit : Command
         {
             private int index;
-            private byte[] oldScript;
+            private EventScripts form;
+            private ScriptBuffer buffer;
             private EventScript[] eventScripts;
             private ActionScript[] actionScripts;
             private TreeViewWrapper treeViewWrapper;
-            private System.Windows.Forms.ToolStripComboBox name;
-            private ToolStripNumericUpDown number;
             private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
-            public CommandEdit(EventScript[] eventScripts, int index, byte[] oldScript, TreeViewWrapper treeViewWrapper,
-                System.Windows.Forms.ToolStripComboBox name, ToolStripNumericUpDown number)
+            public CommandEdit(EventScript[] eventScripts, int index, ScriptBuffer buffer, EventScripts form)
             {
+                this.form = form;
                 this.index = index;
-                this.oldScript = oldScript;
+                this.buffer = buffer;
                 this.eventScripts = eventScripts;
-                this.treeViewWrapper = treeViewWrapper;
-                this.name = name;
-                this.number = number;
+                this.treeViewWrapper = form.TreeViewWrapper;
             }
-            public CommandEdit(ActionScript[] actionScripts, int index, byte[] oldScript, TreeViewWrapper treeViewWrapper,
-                System.Windows.Forms.ToolStripComboBox name, ToolStripNumericUpDown number)
+            public CommandEdit(ActionScript[] actionScripts, int index, ScriptBuffer buffer, EventScripts form)
             {
+                this.form = form;
                 this.index = index;
-                this.oldScript = oldScript;
+                this.buffer = buffer;
                 this.actionScripts = actionScripts;
-                this.treeViewWrapper = treeViewWrapper;
-                this.name = name;
-                this.number = number;
+                this.treeViewWrapper = form.TreeViewWrapper;
             }
             public void Execute()
             {
                 if (eventScripts != null)
                 {
-                    this.name.SelectedIndex = 0; // first switch back to event scripts
-                    this.number.Value = index; // then switch back to script in index
+                    eventScripts[index].Undoing = true;
+                    //
+                    this.form.type = 0; // first switch back to event scripts
+                    this.form.index = index; // then switch back to script in index
                     // now get difference in lengths
                     int length = eventScripts[index].Length;
-                    int delta = oldScript.Length - length;
+                    int delta = buffer.OldScript.Length - length;
                     treeViewWrapper.ScriptDelta += delta;
                     // next, switch the scripts
                     byte[] temp = Bits.Copy(eventScripts[index].Script);
-                    eventScripts[index].Script = Bits.Copy(oldScript);
+                    eventScripts[index].Script = Bits.Copy(buffer.OldScript);
                     eventScripts[index].Commands = null;
                     eventScripts[index].ParseScript();
-                    oldScript = temp;
+                    buffer.OldScript = temp;
                     //
-                    treeViewWrapper.RefreshScript();
+                    int newSelectedIndex = treeViewWrapper.SelectedIndex;
+                    treeViewWrapper.RefreshScript(buffer.OldSelectedIndex);
+                    buffer.OldSelectedIndex = newSelectedIndex;
+                    //
+                    eventScripts[index].Undoing = false;
                 }
                 else if (actionScripts != null)
                 {
-                    this.name.SelectedIndex = 1; // first switch back to action scripts
-                    this.number.Value = index; // then switch back to script index
+                    actionScripts[index].Undoing = true;
+                    //
+                    this.form.type = 1; // first switch back to action scripts
+                    this.form.index = index; // then switch back to script index
                     // now get difference in lengths
                     int length = actionScripts[index].Length;
-                    int delta = oldScript.Length - length;
+                    int delta = buffer.OldScript.Length - length;
                     treeViewWrapper.ScriptDelta += delta;
                     // next, switch the scripts
                     byte[] temp = Bits.Copy(actionScripts[index].Script);
-                    actionScripts[index].Script = Bits.Copy(oldScript);
+                    actionScripts[index].Script = Bits.Copy(buffer.OldScript);
                     actionScripts[index].Commands = null;
                     actionScripts[index].ParseScript();
-                    oldScript = temp;
+                    buffer.OldScript = temp;
                     //
-                    treeViewWrapper.RefreshScript();
+                    treeViewWrapper.RefreshScript(buffer.OldSelectedIndex);
+                    buffer.OldSelectedIndex = treeViewWrapper.SelectedIndex;
+                    //
+                    actionScripts[index].Undoing = false;
                 }
+            }
+        }
+        private class ScriptBuffer
+        {
+            public byte[] OldScript;
+            public int OldSelectedIndex;
+            public ScriptBuffer(byte[] oldScript, int oldSelectedIndex)
+            {
+                this.OldScript = oldScript;
+                this.OldSelectedIndex = oldSelectedIndex;
             }
         }
     }

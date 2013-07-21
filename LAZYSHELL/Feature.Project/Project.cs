@@ -269,7 +269,6 @@ namespace LAZYSHELL
                 indexLabel.Text = "";
                 indexDescription.Text = "";
             }
-
             int counter = 0;
             List<ListViewItem> listViewItems = new List<ListViewItem>();
             foreach (EIndex index in currentIndexes)
@@ -280,20 +279,18 @@ namespace LAZYSHELL
                     index.Address.ToString("X4") : index.Index.ToString()) + 
                     (elementType.SelectedItem == "Memory Bits" ? 
                     ":" + index.AddressBit.ToString() : ""),
-                    index.Label,
+                    index.Label
                 });
                 lvitem.Tag = counter++;
                 listViewItems.Add(lvitem);
             }
             elementIndexes.Items.AddRange(listViewItems.ToArray());
             elementIndexes.EndUpdate();
-
             updating = false;
         }
         private void RefreshIndex()
         {
             updating = true;
-
             buttonDelete.Enabled = true;
             buttonMoveDown.Enabled = true;
             buttonMoveUp.Enabled = true;
@@ -305,7 +302,6 @@ namespace LAZYSHELL
             indexDescription.Text = currentIndex.Description;
             address.Value = currentIndex.Address;
             addressBit.Value = currentIndex.AddressBit;
-
             updating = false;
         }
         public bool LoadProject()
@@ -381,18 +377,15 @@ namespace LAZYSHELL
                 return false;
             //
             settings.NotePathCustom = saveFileDialog.FileName;
-
             Stream s = File.Create(saveFileDialog.FileName);
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, new ProjectDB());
             s.Close();
-
             // now load the notes
             s = File.OpenRead(saveFileDialog.FileName);
             b = new BinaryFormatter();
             project = (ProjectDB)b.Deserialize(s);
             s.Close();
-
             projectFile.Text = saveFileDialog.FileName;
             InitializeFields();
             return true;
@@ -721,7 +714,8 @@ namespace LAZYSHELL
         #region Event Handlers
         private void Project_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (project == null) return;
+            if (project == null)
+                return;
             if (Do.GenerateChecksum(project) == checksum)
             {
                 return;
@@ -808,27 +802,32 @@ namespace LAZYSHELL
         // project information
         private void projectTitle_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             project.Title = projectTitle.Text;
         }
         private void projectAuthor_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             project.Author = projectAuthor.Text;
         }
         private void projectDate_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             project.Date = projectDate.Text;
         }
         private void projectWebpage_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             project.Webpage = projectWebpage.Text;
         }
         private void projectDescription_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             project.Description = projectDescription.Text;
         }
         // element lists
@@ -950,9 +949,9 @@ namespace LAZYSHELL
         }
         private void elementType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshElementIndexes();
-
             if (elementIndexes.Items.Count > 0)
                 elementIndexes.Items[0].Selected = true;
         }
@@ -965,8 +964,10 @@ namespace LAZYSHELL
         }
         private void elementIndexes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (!e.IsSelected) return;
-            if (updating) return;
+            if (!e.IsSelected)
+                return;
+            if (updating)
+                return;
             RefreshIndex();
             elementIndexes.BeginUpdate();
             elementIndexes.Items[Do.GetSelectedIndex(elementIndexes)].EnsureVisible();
@@ -974,7 +975,8 @@ namespace LAZYSHELL
         }
         private void indexNumber_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             currentIndex.Index = (int)indexNumber.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -982,7 +984,8 @@ namespace LAZYSHELL
         }
         private void indexLabel_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             currentIndex.Label = indexLabel.Text;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -990,12 +993,14 @@ namespace LAZYSHELL
         }
         private void indexDescription_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             currentIndex.Description = indexDescription.Text;
         }
         private void address_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             currentIndex.Address = (int)address.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -1003,7 +1008,8 @@ namespace LAZYSHELL
         }
         private void addressBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             currentIndex.AddressBit = (int)addressBit.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -1119,7 +1125,8 @@ namespace LAZYSHELL
         }
         private void buttonMoveUp_Click(object sender, EventArgs e)
         {
-            if (Do.GetSelectedIndex(elementIndexes) == 0) return;
+            if (Do.GetSelectedIndex(elementIndexes) == 0)
+                return;
             project.SwitchIndex(Do.GetSelectedIndex(elementIndexes) - 1, currentIndexes);
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -1127,7 +1134,8 @@ namespace LAZYSHELL
         }
         private void buttonMoveDown_Click(object sender, EventArgs e)
         {
-            if (Do.GetSelectedIndex(elementIndexes) >= elementIndexes.Items.Count - 1) return;
+            if (Do.GetSelectedIndex(elementIndexes) >= elementIndexes.Items.Count - 1)
+                return;
             project.SwitchIndex(Do.GetSelectedIndex(elementIndexes), currentIndexes);
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
             RefreshElementIndexes();
@@ -1143,7 +1151,7 @@ namespace LAZYSHELL
             if (fontTableImage == null)
                 SetFontTableImage();
             e.Graphics.DrawImage(fontTableImage, 0, 0, 256, 384);
-            overlay.DrawCartesianGrid(e.Graphics, Color.Gray, fontTableImage.Size, new Size(32, 24), false, -1);
+            overlay.DrawTileGrid(e.Graphics, Color.Gray, fontTableImage.Size, new Size(32, 24), false, -1);
         }
         private void keyBox_Enter(object sender, EventArgs e)
         {
@@ -1155,7 +1163,8 @@ namespace LAZYSHELL
         }
         private void keyBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             TextBox rtb = (TextBox)sender;
             keystrokes[(int)rtb.Tag + 32] = rtb.Text;
         }

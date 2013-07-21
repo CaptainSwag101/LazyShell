@@ -1,4 +1,5 @@
-﻿namespace LAZYSHELL
+﻿
+namespace LAZYSHELL
 {
     partial class Monsters
     {
@@ -6,7 +7,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -74,6 +74,8 @@
             this.monsterNum = new LAZYSHELL.ToolStripNumericUpDown();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.monsterNameText = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.battlePreview = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -669,7 +671,9 @@
             this.monsterName,
             this.monsterNum,
             this.toolStripSeparator3,
-            this.monsterNameText});
+            this.monsterNameText,
+            this.toolStripSeparator7,
+            this.battlePreview});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -736,6 +740,23 @@
             this.monsterNameText.Name = "monsterNameText";
             this.monsterNameText.Size = new System.Drawing.Size(140, 25);
             this.monsterNameText.TextChanged += new System.EventHandler(this.monsterNameText_TextChanged);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // battlePreview
+            // 
+            this.battlePreview.AutoSize = false;
+            this.battlePreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.battlePreview.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.battlePreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.battlePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.battlePreview.Name = "battlePreview";
+            this.battlePreview.Size = new System.Drawing.Size(22, 22);
+            this.battlePreview.Text = "Open Previewer";
+            this.battlePreview.Click += new System.EventHandler(this.battlePreview_Click);
             // 
             // toolStrip4
             // 
@@ -1516,11 +1537,8 @@
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
-
         private System.Windows.Forms.CheckedListBox MonsterProperties;
         private System.Windows.Forms.CheckedListBox MonsterElementsWeakness;
         private System.Windows.Forms.CheckedListBox MonsterEffectsNullify;
@@ -1626,5 +1644,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem dumpBattleScriptTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton battlePreview;
     }
 }

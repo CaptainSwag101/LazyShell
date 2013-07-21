@@ -12,13 +12,13 @@ namespace LAZYSHELL
         private delegate void Function();
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
-        private TilesetEditor levelsTileset;
-        private TilemapEditor levelsTilemap;
+        private TilesetEditor tilesetEditor;
+        private TilemapEditor tilemapEditor;
         private LevelsSolidTiles levelsSolidTiles;
         private LevelsTemplate levelsTemplate;
         public ToolStripButton OpenTileset { get { return openTileset; } set { openTileset = value; } }
         public ToolStripButton OpenSolidTileset { get { return openSolidTileset; } set { openSolidTileset = value; } }
-        private Previewer lp;
+        private Previewer previewer;
         #endregion
         #region Functions
         private void PaletteUpdate()
@@ -29,7 +29,7 @@ namespace LAZYSHELL
         }
         private void GraphicUpdate()
         {
-            tileset.Assemble(16, levelsTileset.Layer);
+            tileset.Assemble(16, tilesetEditor.Layer);
             fullUpdate = false;
             RefreshLevel();
         }
@@ -75,27 +75,27 @@ namespace LAZYSHELL
         }
         private void LoadTilemapEditor()
         {
-            if (levelsTilemap == null)
+            if (tilemapEditor == null)
             {
-                levelsTilemap = new TilemapEditor(
+                tilemapEditor = new TilemapEditor(
                     this, this.level, this.tilemap, this.solidityMap, this.tileset, this.overlay,
-                    this.paletteEditor, this.levelsTileset, this.levelsSolidTiles, this.levelsTemplate);
-                levelsTilemap.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                    this.paletteEditor, this.tilesetEditor, this.levelsSolidTiles, this.levelsTemplate);
+                tilemapEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                levelsTilemap.Reload(
+                tilemapEditor.Reload(
                   this, this.level, this.tilemap, this.solidityMap, this.tileset, this.overlay,
-                  this.paletteEditor, this.levelsTileset, this.levelsSolidTiles, this.levelsTemplate);
+                  this.paletteEditor, this.tilesetEditor, this.levelsSolidTiles, this.levelsTemplate);
         }
         private void LoadTilesetEditor()
         {
-            if (levelsTileset == null)
+            if (tilesetEditor == null)
             {
-                levelsTileset = new TilesetEditor(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
-                levelsTileset.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                tilesetEditor = new TilesetEditor(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
+                tilesetEditor.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                levelsTileset.Reload(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
+                tilesetEditor.Reload(this.tileset, new Function(TilesetUpdate), this.paletteSet, this.overlay);
         }
         private void LoadSolidityTileset()
         {
@@ -114,13 +114,13 @@ namespace LAZYSHELL
         }
         private void LoadPreviewer()
         {
-            if (lp == null)
+            if (previewer == null)
             {
-                lp = new Previewer(Index, EType.Level);
-                lp.FormClosing += new FormClosingEventHandler(editor_FormClosing);
+                previewer = new Previewer(Index, EType.Level);
+                previewer.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                lp.Reload((int)this.levelNum.Value, EType.Level);
+                previewer.Reload((int)this.levelNum.Value, EType.Level);
         }
         #endregion
         #region Event handlers
@@ -144,16 +144,16 @@ namespace LAZYSHELL
         }
         public void openTileset_Click(object sender, EventArgs e)
         {
-            levelsTileset.Visible = openTileset.Checked;
-            levelsTileset.Location = new Point(
-                Screen.PrimaryScreen.WorkingArea.Width - levelsTileset.Size.Width - 5, this.Location.Y);
+            tilesetEditor.Visible = openTileset.Checked;
+            tilesetEditor.Location = new Point(
+                Screen.PrimaryScreen.WorkingArea.Width - tilesetEditor.Size.Width - 5, this.Location.Y);
         }
         private void openTilemap_Click(object sender, EventArgs e)
         {
-            levelsTilemap.Visible = openTilemap.Checked;
-            levelsTilemap.Size = new Size(
-                Screen.PrimaryScreen.WorkingArea.Width - levelsTileset.Width - this.Width - 10, this.Height);
-            levelsTilemap.Location = new Point(this.Location.X + this.Size.Width, this.Location.Y);
+            tilemapEditor.Visible = openTilemap.Checked;
+            tilemapEditor.Size = new Size(
+                Screen.PrimaryScreen.WorkingArea.Width - tilesetEditor.Width - this.Width - 10, this.Height);
+            tilemapEditor.Location = new Point(this.Location.X + this.Size.Width, this.Location.Y);
         }
         public void openSolidTileset_Click(object sender, EventArgs e)
         {
@@ -167,10 +167,10 @@ namespace LAZYSHELL
             levelsTemplate.Location = new Point(
                 Screen.PrimaryScreen.WorkingArea.Width - levelsTemplate.Size.Width, this.Location.Y);
         }
-        private void levelPreviewToolStripButton_Click(object sender, EventArgs e)
+        private void openPreviewer_Click(object sender, EventArgs e)
         {
             LoadPreviewer();
-            lp.Show();
+            previewer.Show();
         }
         #endregion
     }

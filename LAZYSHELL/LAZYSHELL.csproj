@@ -193,11 +193,9 @@
     <Compile Include="Editor.Sprites\CoordAdjust.Designer.cs">
       <DependentUpon>CoordAdjust.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Sprites\NPCPacket.cs" />
     <Compile Include="Feature.Project\ProjectDB.cs" />
-    <Compile Include="Feature.Undo\AnimationEdit.cs" />
-    <Compile Include="Feature.Undo\GraphicEdit.cs" />
-    <Compile Include="Feature.Undo\ScoreEdit.cs" />
-    <Compile Include="Feature.Undo\SpriteEdit.cs" />
+    <Compile Include="Feature.Undo\UndoCommands.cs" />
     <Compile Include="Features\AnimatedGifEncoder.cs" />
     <Compile Include="Features\EditLabel.cs">
       <SubType>Form</SubType>
@@ -399,12 +397,6 @@
     </Compile>
     <Compile Include="!Static\Bits.cs" />
     <Compile Include="!Static\Comp.cs" />
-    <Compile Include="Features\FixPointers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Features\FixPointers.Designer.cs">
-      <DependentUpon>FixPointers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -574,6 +566,12 @@
     <Compile Include="Feature.Preview\Previewer.Designer.cs">
       <DependentUpon>Previewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor.Sprites\NPCPackets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor.Sprites\NPCPackets.Designer.cs">
+      <DependentUpon>NPCPackets.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramController.cs" />
     <Compile Include="Features\ProgressBar.cs">
@@ -630,6 +628,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\EditLabel.resx">
       <DependentUpon>EditLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor.Sprites\NPCPackets.resx">
+      <DependentUpon>NPCPackets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Form1.resx">
       <SubType>Designer</SubType>
@@ -768,19 +769,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\switch.gif" />
+    <None Include="Resources\Editor\openPackets.gif" />
+    <None Include="Resources\Draw\switch.gif" />
     <None Include="Resources\btn_donate_LG.gif" />
-    <None Include="Resources\addFromNotes.gif" />
-    <None Include="Resources\addToNotes.gif" />
-    <None Include="Resources\keystrokes.gif" />
-    <None Include="Resources\importTextAll.gif" />
-    <None Include="Resources\exportTextAll.gif" />
-    <None Include="Resources\overlapRemove.gif" />
-    <None Include="Resources\overlapAdd.gif" />
-    <None Include="Resources\exitRemove.gif" />
-    <None Include="Resources\exitAdd.gif" />
-    <None Include="Resources\eventRemove.gif" />
-    <None Include="Resources\eventAdd.gif" />
+    <None Include="Resources\Data\addFromNotes.gif" />
+    <None Include="Resources\Data\addToNotes.gif" />
+    <None Include="Resources\Dialog\keystrokes.gif" />
+    <None Include="Resources\Data\importTextAll.gif" />
+    <None Include="Resources\Data\exportTextAll.gif" />
+    <None Include="Resources\Toggle\overlapRemove.gif" />
+    <None Include="Resources\Toggle\overlapAdd.gif" />
+    <None Include="Resources\Toggle\exitRemove.gif" />
+    <None Include="Resources\Toggle\exitAdd.gif" />
+    <None Include="Resources\Toggle\eventRemove.gif" />
+    <None Include="Resources\Toggle\eventAdd.gif" />
     <None Include="Resources\Data\camera.gif" />
     <None Include="Resources\Data\invalid.gif" />
     <None Include="Resources\Data\warning.gif" />
@@ -954,10 +956,6 @@
     </EmbeddedResource>
     <None Include="Resources\Cursors\CursorDraw.cur" />
     <None Include="Resources\Cursors\CursorErase.cur" />
-    <EmbeddedResource Include="Features\FixPointers.resx">
-      <DependentUpon>FixPointers.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Features\IOElements.resx">
       <DependentUpon>IOElements.cs</DependentUpon>
       <SubType>Designer</SubType>

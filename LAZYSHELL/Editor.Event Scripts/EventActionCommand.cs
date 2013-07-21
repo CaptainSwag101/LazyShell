@@ -13,8 +13,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         // Used to link up pointers inside of current script
         protected int internalOffset; public int InternalOffset { get { return this.internalOffset; } set { this.internalOffset = value; } }
         // Used for updating internal offsets and pointers
-        protected bool pointerChangedA; public bool PointerChangedA { get { return this.pointerChangedA; } set { this.pointerChangedA = value; } }
-        protected bool pointerChangedB; public bool PointerChangedB { get { return this.pointerChangedB; } set { this.pointerChangedB = value; } }
+        protected bool[] pointerChanged; public bool[] PointerChanged { get { return this.pointerChanged; } set { this.pointerChanged = value; } }
         public int Delta { get { return this.offset - originalOffset; } }
         public byte Opcode { get { return GetOpcode(); } set { SetOpcode(value); } }
         public byte Param1 { get { return GetParam(1); } set { SetParam(value, 1); } }

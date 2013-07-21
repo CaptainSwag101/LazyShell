@@ -158,7 +158,6 @@ namespace LAZYSHELL
         }
         public override void Assemble()
         {
-
         }
         // notation functions
         public override void CreateNotes()

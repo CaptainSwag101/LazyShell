@@ -12,7 +12,7 @@ namespace LAZYSHELL
     public partial class LevelUps : Form
     {
         #region Variables
-        
+        //
         private Settings settings = Settings.Default;
         private bool updating = false;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
@@ -37,7 +37,6 @@ namespace LAZYSHELL
             this.characterName.Items.Clear();
             for (int i = 0; i < characters.Length; i++)
                 this.characterName.Items.Add(new string(characters[i].Name));
-
             this.levelUpSpellLearned.Items.Clear();
             for (int i = 0; i < 32; i++)
                 this.levelUpSpellLearned.Items.Add(new string(Model.Spells[i].Name));
@@ -46,7 +45,8 @@ namespace LAZYSHELL
         }
         public void RefreshLevel()
         {
-            if (updating) return;
+            if (updating)
+                return;
             character.IndexLevel = (byte)levelNum.Value;
             this.hpPlus.Value = character.LevelHpPlus;
             this.attackPlus.Value = character.LevelAttackPlus;

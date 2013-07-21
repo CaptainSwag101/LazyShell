@@ -168,7 +168,8 @@ namespace LAZYSHELL
         public void RefreshFormations()
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             this.formationNameList.SelectedIndex = Index;
             for (int i = 0; i < 8; i++)
@@ -338,12 +339,14 @@ namespace LAZYSHELL
         #region Event Handlers
         private void formationNameList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             this.formationNum.Value = this.formationNameList.SelectedIndex;
         }
         private void formationNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             RefreshFormations();
             Settings.Default.LastFormation = Index;
         }
@@ -377,19 +380,18 @@ namespace LAZYSHELL
         }
         private void bytes_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             int index = (int)((NumericUpDown)sender).Tag;
             this.formation.Monsters[index] = (byte)bytes[index].Value;
             this.names[index].SelectedIndex = this.monsterNames.GetSortedIndex((byte)bytes[index].Value);
             this.formationNameList.Items[Index] = Lists.Numerize(formation.ToString(), Index, 3);
-
             RefreshMonsterImages();
         }
         private void names_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             int index = (int)((ComboBox)sender).Tag;
             this.bytes[index].Value = this.monsterNames.GetUnsortedIndex(this.names[index].SelectedIndex);
         }
@@ -438,24 +440,25 @@ namespace LAZYSHELL
         //
         private void use_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             int index = (int)((CheckBox)sender).Tag;
             this.formation.Use[index] = use[index].Checked;
             pictureBoxFormation.Invalidate();
         }
         private void hide_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             int index = (int)((CheckBox)sender).Tag;
             this.formation.Hide[index] = hide[index].Checked;
             pictureBoxFormation.Invalidate();
         }
         private void formationMusic_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             formation.Music = (byte)formationMusic.SelectedIndex;
-
             updating = true;
             this.musicTrack.Enabled = formationMusic.SelectedIndex != 8;
             if (formationMusic.SelectedIndex != 8)
@@ -466,22 +469,21 @@ namespace LAZYSHELL
         }
         private void formationUnknown_ValueChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             formation.Unknown = (byte)formationUnknown.Value;
         }
         private void formationCantRun_CheckedChanged(object sender, EventArgs e)
         {
             formationCantRun.ForeColor = formationCantRun.Checked ? Color.Black : SystemColors.ControlDark;
-
-            if (updating) return;
-
+            if (updating)
+                return;
             formation.CantRun = formationCantRun.Checked;
         }
         private void battlefieldName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             RefreshFormationBattlefield();
         }
         private void toggleAllies_Click(object sender, EventArgs e)
@@ -507,14 +509,14 @@ namespace LAZYSHELL
         }
         private void formationBattleEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             formation.BattleEvent = (byte)formationBattleEvent.SelectedIndex;
         }
         private void musicTrack_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating) return;
-
+            if (updating)
+                return;
             Model.FormationMusics[formationMusic.SelectedIndex] = (byte)musicTrack.SelectedIndex;
         }
         //
@@ -532,7 +534,7 @@ namespace LAZYSHELL
                 if (mouseOverObject != "selection")
                 {
                     selectedObjects = null;
-                    overlay.Select = new Overlay.Selection(1, x, y, 1, 1);
+                    overlay.Select = new Overlay.Selection(1, x, y, 1, 1, pictureBoxFormation);
                 }
                 // otherwise, start dragging current selection
                 else if (mouseOverObject == "selection")
@@ -778,9 +780,9 @@ namespace LAZYSHELL
             if (select.Checked && overlay.Select != null)
             {
                 if (isometricGrid.Checked || snapIsometricLeft.Checked || snapIsometricRight.Checked)
-                    overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1, Color.Yellow);
+                    overlay.Select.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
                 else
-                    overlay.DrawSelectionBox(e.Graphics, overlay.Select.Terminal, overlay.Select.Location, 1);
+                    overlay.Select.DrawSelectionBox(e.Graphics, 1);
             }
         }
         private void pictureBoxFormation_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

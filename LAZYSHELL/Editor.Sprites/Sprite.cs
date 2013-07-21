@@ -45,7 +45,6 @@ namespace LAZYSHELL
         private void Disassemble()
         {
             int offset = (index * 4) + 0x250000;
-
             image = (ushort)(Bits.GetShort(rom, offset) & 0x1FF); offset++;
             paletteIndex = (byte)((rom[offset] & 0x0E) >> 1); offset++;
             animationPacket = Bits.GetShort(rom, offset);
@@ -53,7 +52,6 @@ namespace LAZYSHELL
         public void Assemble()
         {
             int offset = (index * 4) + 0x250000;
-
             Bits.SetShort(rom, offset, image); offset++;
             rom[offset] |= (byte)(paletteIndex << 1); offset++;
             Bits.SetShort(rom, offset, animationPacket);

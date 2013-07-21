@@ -11,18 +11,18 @@ namespace LAZYSHELL.ScriptsEditor.Commands
     public class ActionCommand : EventActionCommand
     {
         // class variables
-        private byte[] commandData; 
+        private byte[] commandData;
         public byte[] CommandData { get { return this.commandData; } set { this.commandData = value; } }
         private bool modified; public bool Modified { get { return this.modified; } set { this.modified = value; } }
         public int Length { get { return this.commandData.Length; } }
-        private bool embedded = false; 
+        private bool embedded = false;
         public bool Embedded { get { return this.embedded; } set { this.embedded = value; } }
         // accessors
         protected override byte GetOpcode()
         {
-            if (this.commandData.Length > 0) 
-                return this.commandData[0]; 
-            else return 0; 
+            if (this.commandData.Length > 0)
+                return this.commandData[0];
+            else return 0;
         }
         protected override void SetOpcode(byte opcode)
         {
@@ -30,14 +30,14 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         }
         protected override byte GetParam(int index)
         {
-            if (this.commandData.Length > 1) 
-                return this.commandData[index]; 
-            else return 0; 
+            if (this.commandData.Length > 1)
+                return this.commandData[index];
+            else return 0;
         }
         protected override void SetParam(byte param, int index)
         {
-            this.commandData[index] = param; 
-        } 
+            this.commandData[index] = param;
+        }
         // constructor
         public ActionCommand(byte[] commandData, int offset)
         {
@@ -51,19 +51,21 @@ namespace LAZYSHELL.ScriptsEditor.Commands
         {
         }
         // data managers
-        public void ModifyOffset(int delta, int conditionOffset)
+        /// <summary>
+        /// Adds/subtracts a value from the command's offset and any pointers in the command that point to or after a given offset.
+        /// </summary>
+        /// <param name="delta">The value to add/subtract from any pointers.</param>
+        /// <param name="conditionOffset">The offset to compare to.</param>
+        public void UpdatePointer(int delta, int conditionOffset)
         {
             ushort pointer;
-
             if (this.offset >= conditionOffset || conditionOffset == 0x7FFFFFFF)
             {
                 this.offset += delta;
                 this.internalOffset += delta;   // 2009-01-07
             }
-
             conditionOffset &= 0xFFFF;
-
-            if (commandData[0] == 0xE9)
+            if (Opcode == 0xE9)
             {
                 pointer = ReadPointerSpecial(0);
                 if (pointer >= conditionOffset)
@@ -78,31 +80,10 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 if (pointer >= conditionOffset)
                     WritePointer((ushort)(pointer + delta));
             }
-
-        }
-        public override void WritePointerSpecial(int index, ushort write)
-        {
-            if (commandData[0] != 0xE9)
-                throw new Exception("Not Command 0xE9");
-
-            if (index == 0)
-                Bits.SetShort(commandData, 1, write);
-            else if (index == 1)
-                Bits.SetShort(commandData, 3, write);
-        }
-        public override ushort ReadPointerSpecial(int index)
-        {
-            if (commandData[0] != 0xE9)
-                throw new Exception("Not Command 0xE9");
-            if (index == 0)
-                return Bits.GetShort(commandData, 1);
-            else if (index == 1)
-                return Bits.GetShort(commandData, 3);
-            return 0;
         }
         public override ushort ReadPointer()
         {
-            switch (commandData[0])
+            switch (Opcode)
             {
                 case 0x3A:
                 case 0x3B:
@@ -141,7 +122,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xEF:
                     return Bits.GetShort(commandData, 1);
                 case 0xE9:
-                    throw new Exception("E9"); 
+                    throw new Exception("E9");
                 case 0xFD:
                     switch (commandData[1])
                     {
@@ -153,18 +134,24 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         default:
                             return 0;
                     }
-                default: 
+                default:
                     return 0;
             }
         }
+        public override ushort ReadPointerSpecial(int index)
+        {
+            if (Opcode != 0xE9)
+                throw new Exception("Not Command 0xE9");
+            return Bits.GetShort(commandData, index * 2 + 1);
+        }
         public override void WritePointer(ushort pointer)
         {
-            switch (commandData[0])
+            switch (Opcode)
             {
                 case 0x3A:
                 case 0x3B:
                 case 0xE4:
-                case 0xE5: 
+                case 0xE5:
                     Bits.SetShort(commandData, 4, pointer); break;
                 case 0x3C:
                 case 0x3E:
@@ -174,7 +161,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xE3:
                 case 0xE6:
                 case 0xE7:
-                case 0xF8: 
+                case 0xF8:
                     Bits.SetShort(commandData, 3, pointer); break;
                 case 0x3F:
                 case 0xD8:
@@ -182,7 +169,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xDA:
                 case 0xDC:
                 case 0xDD:
-                case 0xDE: 
+                case 0xDE:
                     Bits.SetShort(commandData, 2, pointer); break;
                 case 0x3D:
                 case 0xD2:
@@ -195,7 +182,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 case 0xEC:
                 case 0xED:
                 case 0xEE:
-                case 0xEF: 
+                case 0xEF:
                     Bits.SetShort(commandData, 1, pointer); break;
                 case 0xE9:
                     throw new Exception("E9");
@@ -203,9 +190,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                     switch (commandData[1])
                     {
                         case 0x3D:
-                        case 0x3F: 
+                        case 0x3F:
                             Bits.SetShort(commandData, 3, pointer); break;
-                        case 0x3E: 
+                        case 0x3E:
                             Bits.SetShort(commandData, 5, pointer); break;
                         default:
                             break;
@@ -214,6 +201,12 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 default:
                     break;
             }
+        }
+        public override void WritePointerSpecial(int index, ushort pointer)
+        {
+            if (Opcode != 0xE9)
+                throw new Exception("Not Command 0xE9");
+            Bits.SetShort(commandData, index * 2 + 1, pointer);
         }
         public void ResetOriginalOffset()
         {

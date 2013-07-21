@@ -12,7 +12,6 @@ namespace LAZYSHELL
     public partial class Spells : Form
     {
         #region Variables
-
         private bool updating = false;
         private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
@@ -41,7 +40,8 @@ namespace LAZYSHELL
         public void RefreshSpells()
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (updating) return;
+            if (updating)
+                return;
             updating = true;
             this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             this.spellFPCost.Value = spell.FPCost;
@@ -224,7 +224,8 @@ namespace LAZYSHELL
         }
         private void spellName_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
+            if (e.Index < 0)
+                return;
             Do.DrawName(
                 sender, e, new BattleDialoguePreview(), Model.SpellNames,
                 Model.SpellNames.GetUnsortedIndex(e.Index) < 64 ? Model.FontMenu : Model.FontDialogue,
@@ -295,7 +296,6 @@ namespace LAZYSHELL
         private void spellEffectType_SelectedIndexChanged(object sender, EventArgs e)
         {
             spell.EffectType = (byte)this.spellEffectType.SelectedIndex;
-
             if (spell.EffectType == 0)
             {
                 this.groupBox8.Text = "Effect <INFLICT>";

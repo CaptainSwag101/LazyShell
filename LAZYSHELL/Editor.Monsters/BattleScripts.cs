@@ -11,7 +11,9 @@ using System.Windows.Forms;
 using LAZYSHELL.Properties;
 using LAZYSHELL.ScriptsEditor;
 using LAZYSHELL.ScriptsEditor.Commands;
+using LAZYSHELL.Undo;
 //
+
 namespace LAZYSHELL
 {
     public partial class BattleScripts : Form
@@ -31,8 +33,8 @@ namespace LAZYSHELL
         private Bitmap monsterImage;
         private BattleCommand command;
         private List<BattleCommand> commandCopies;
+        private CommandStack commandStack;
         private TreeNode modifiedNode;
-        Previewer bp;
         //
         private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
         private Monster monster { get { return monsters[index]; } set { monsters[index] = value; } }
@@ -43,6 +45,7 @@ namespace LAZYSHELL
         public BattleScripts(Monsters monsterEditor)
         {
             this.monsterEditor = monsterEditor;
+            this.commandStack = new CommandStack();
             checksum = Do.GenerateChecksum(battleScripts);
             InitializeComponent();
             Initialize();
@@ -68,11 +71,11 @@ namespace LAZYSHELL
             //
             Cursor.Current = Cursors.Arrow;
         }
-        private void RefreshScript()
+        public void RefreshScript()
         {
             RefreshScript(-1);
         }
-        private void RefreshScript(int fullIndex)
+        public void RefreshScript(int fullIndex)
         {
             List<byte> buffer = new List<byte>();
             foreach (BattleCommand bsc in battleScript.Commands)
@@ -758,6 +761,10 @@ namespace LAZYSHELL
                 CopyCommands(node.Nodes);
             }
         }
+        public void PushCommand(byte[] oldScript)
+        {
+            commandStack.Push(new CommandEdit(battleScripts, index, oldScript, this, commandTree.GetFullIndex()));
+        }
         //
         private void UpdateBattleScriptsFreeSpace()
         {
@@ -883,13 +890,13 @@ namespace LAZYSHELL
         #region Event Handlers
         private void BattleScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (bp != null)
-                bp.Close();
         }
         private void BattleScriptTree_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
             {
+                case Keys.Control | Keys.Z: undo.PerformClick(); break;
+                case Keys.Control | Keys.Y: redo.PerformClick(); break;
                 case Keys.Control | Keys.A: Do.SelectAllNodes(commandTree.Nodes, true); break;
                 case Keys.Control | Keys.D: Do.SelectAllNodes(commandTree.Nodes, false); break;
                 case Keys.Control | Keys.C: BatScrCopyCommand.PerformClick(); break;
@@ -939,7 +946,8 @@ namespace LAZYSHELL
             Do.AddHistory(this, index, e.Node, "NodeMouseClick", true);
             //
             commandTree.SelectedNode = e.Node;
-            if (e.Button != MouseButtons.Right) return;
+            if (e.Button != MouseButtons.Right)
+                return;
             goToToolStripMenuItem.Click -= goToDialogue_Click;
             goToToolStripMenuItem.Click -= goToEvent_Click;
             BattleCommand temp = (BattleCommand)commandTree.SelectedNode.Tag;
@@ -959,7 +967,8 @@ namespace LAZYSHELL
         // context menustrip
         private void goToDialogue_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
+            if (commandTree.SelectedNode == null)
+                return;
             //
             BattleCommand temp = (BattleCommand)commandTree.SelectedNode.Tag;
             int num = temp.CommandData[1];
@@ -972,7 +981,8 @@ namespace LAZYSHELL
         }
         private void goToEvent_Click(object sender, EventArgs e)
         {
-            if (commandTree.SelectedNode == null) return;
+            if (commandTree.SelectedNode == null)
+                return;
             //
             BattleCommand temp = (BattleCommand)commandTree.SelectedNode.Tag;
             int num = temp.CommandData[1];
@@ -1001,23 +1011,32 @@ namespace LAZYSHELL
         }
         private void buttonInsert_Click(object sender, EventArgs e)
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             command = command.Copy();
             ControlAssemble();
             AddCommand(command.Copy());
             listBoxCommands.Focus();
+            //
+            PushCommand(oldScript);
         }
         private void buttonApply_Click(object sender, EventArgs e)
         {
             if (modifiedNode == null)
                 return;
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             ControlAssemble();
             ReplaceCommand(command);
             BatScrEditCommand.PerformClick();
             buttonApply.Focus();
+            //
+            PushCommand(oldScript);
         }
         private void name_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (updating) return;
+            if (updating)
+                return;
             switch (command.Opcode)
             {
                 case 0xFC:
@@ -1256,33 +1275,47 @@ namespace LAZYSHELL
         }
         private void BatScrMoveUp_Click(object sender, EventArgs e)
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             if (battleScript.Commands.Count < 3)
                 return;
             if (battleScript.Commands[0].Modified)
                 return;
             MoveUp();
             RefreshScript(commandTree.GetFullIndex() - 1);
+            //
+            PushCommand(oldScript);
         }
         private void BatScrMoveDown_Click(object sender, EventArgs e)
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             if (battleScript.Commands.Count < 3)
                 return;
             if (battleScript.Commands[battleScript.Commands.Count - 2].Modified)
                 return;
             MoveDown();
             RefreshScript(commandTree.GetFullIndex() + 1);
+            //
+            PushCommand(oldScript);
         }
         private void BatScrPasteCommand_Click(object sender, EventArgs e)
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             if (commandCopies == null)
                 return;
             foreach (BattleCommand bsc in commandCopies)
                 AddCommand(bsc.Copy());
             //
             RefreshScript(commandTree.GetFullIndex() + 1);
+            //
+            PushCommand(oldScript);
         }
         private void BatScrDeleteCommand_Click(object sender, EventArgs e)
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             ResetControls();
             buttonInsert.Enabled = false;
             buttonApply.Enabled = false;
@@ -1293,6 +1326,8 @@ namespace LAZYSHELL
             //
             Remove();
             RefreshScript(commandTree.GetFullIndex());
+            //
+            PushCommand(oldScript);
         }
         private void BatScrEditCommand_Click(object sender, EventArgs e)
         {
@@ -1323,23 +1358,17 @@ namespace LAZYSHELL
         {
             commandTree.CollapseAll();
         }
-        private void BatScrClearAll_Click(object sender, EventArgs e)
+        private void undo_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "You are about to clear all commands from the current script.\n//\nGo ahead with process?",
-                "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            //
-            if (result == DialogResult.Yes)
-                RemoveAll();
+            commandTree.BeginUpdate();
+            commandStack.UndoCommand();
+            commandTree.EndUpdate();
         }
-        private void battlePreview_Click(object sender, EventArgs e)
+        private void redo_Click(object sender, EventArgs e)
         {
-            if (bp == null || !bp.Visible)
-                bp = new Previewer(index, EType.BattleScript);
-            else
-                bp.Reload(index, EType.BattleScript);
-            bp.Show();
-            bp.BringToFront();
+            commandTree.BeginUpdate();
+            commandStack.RedoCommand();
+            commandTree.EndUpdate();
         }
         // image
         private void pictureBoxMonster_MouseDown(object sender, MouseEventArgs e)
@@ -1390,7 +1419,8 @@ namespace LAZYSHELL
         {
             monster.CursorX = (byte)monsterTargetArrowX.Value;
             //
-            if (waitBothCoords) return;
+            if (waitBothCoords)
+                return;
             monsterImage = new Bitmap(monster.Image);
             pictureBoxMonster.Invalidate();
         }
@@ -1398,15 +1428,21 @@ namespace LAZYSHELL
         {
             monster.CursorY = (byte)monsterTargetArrowY.Value;
             //
-            if (waitBothCoords) return;
+            if (waitBothCoords)
+                return;
             monsterImage = new Bitmap(monster.Image);
             pictureBoxMonster.Invalidate();
         }
         // toolstrip
         public void Import()
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             new IOElements((Element[])Model.BattleScripts, index, "IMPORT BATTLE SCRIPTS...").ShowDialog();
             Initialize();
+            //
+            if (!Bits.Compare(oldScript, battleScript.Script))
+                PushCommand(oldScript);
         }
         public void Export()
         {
@@ -1415,9 +1451,46 @@ namespace LAZYSHELL
         }
         public void Clear()
         {
+            byte[] oldScript = Bits.Copy(battleScript.Script);
+            //
             new ClearElements(Model.BattleScripts, index, "CLEAR BATTLE SCRIPTS...").ShowDialog();
             Initialize();
+            //
+            if (!Bits.Compare(oldScript, battleScript.Script))
+                PushCommand(oldScript);
         }
         #endregion
+        private class CommandEdit : Command
+        {
+            private int index;
+            private byte[] oldScript;
+            private int selectedIndex;
+            private BattleScripts form;
+            private BattleScript[] battleScripts;
+            private bool autoRedo = false; public bool AutoRedo() { return this.autoRedo; }
+            public CommandEdit(BattleScript[] battleScripts, int index, byte[] oldScript, BattleScripts form, int selectedIndex)
+            {
+                this.index = index;
+                this.oldScript = oldScript;
+                this.battleScripts = battleScripts;
+                this.selectedIndex = selectedIndex;
+                this.form = form;
+            }
+            public void Execute()
+            {
+                if (battleScripts != null)
+                {
+                    this.form.index = index; // first switch back to script in index
+                    // next, switch the scripts
+                    byte[] temp = Bits.Copy(battleScripts[index].Script);
+                    battleScripts[index].Script = Bits.Copy(oldScript);
+                    battleScripts[index].Commands = null;
+                    battleScripts[index].ParseScript();
+                    oldScript = temp;
+                    //
+                    form.RefreshScript(selectedIndex);
+                }
+            }
+        }
     }
 }

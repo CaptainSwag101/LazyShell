@@ -92,7 +92,8 @@ namespace LAZYSHELL
             ushort offsetEnd = Bits.GetShort(rom, pointerOffset);
             if (index == 0x1FF) offsetEnd = 0;
             // no exit fields for level
-            if (offsetStart >= offsetEnd) return; 
+            if (offsetStart >= offsetEnd)
+                return;
             //
             int offset = offsetStart + 0x1D0000;
             if (index == 84) index = 84;
