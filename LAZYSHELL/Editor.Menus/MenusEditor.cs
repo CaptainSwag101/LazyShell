@@ -102,7 +102,7 @@ namespace LAZYSHELL
                 lastMenuText = menuText;
                 //
                 Bits.SetShort(Model.ROM, menuText.Index * 2 + 0x3EEF00, offset);
-                Bits.SetCharArray(temp, offset, menuText.Text);
+                Bits.SetChars(temp, offset, menuText.Text);
                 offset += menuText.Length;
                 temp[offset++] = 0;
                 switch (menuText.Index)
@@ -115,7 +115,7 @@ namespace LAZYSHELL
                     case 19: Bits.SetByteBits(Model.ROM, 0x03327A, (byte)(menuText.X * 2), 0x3F); break;
                 }
             }
-            Bits.SetByteArray(Model.ROM, 0x3EF000, temp);
+            Bits.SetBytes(Model.ROM, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             menus.Assemble();
             Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,

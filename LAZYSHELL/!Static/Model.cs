@@ -233,7 +233,7 @@ namespace LAZYSHELL
             get
             {
                 if (battleDialogueTileset_bytes == null)
-                    battleDialogueTileset_bytes = Bits.GetByteArray(rom, 0x015943, 0x100);
+                    battleDialogueTileset_bytes = Bits.GetBytes(rom, 0x015943, 0x100);
                 return battleDialogueTileset_bytes;
             }
             set { battleDialogueTileset_bytes = value; }
@@ -243,7 +243,7 @@ namespace LAZYSHELL
             get
             {
                 if (dialogueGraphics == null)
-                    dialogueGraphics = Bits.GetByteArray(rom, 0x3DF000, 0x700);
+                    dialogueGraphics = Bits.GetBytes(rom, 0x3DF000, 0x700);
                 return dialogueGraphics;
             }
             set { dialogueGraphics = value; }
@@ -493,7 +493,7 @@ namespace LAZYSHELL
             get
             {
                 if (numeralGraphics == null)
-                    numeralGraphics = Bits.GetByteArray(rom, 0x03F800, 0x400);
+                    numeralGraphics = Bits.GetBytes(rom, 0x03F800, 0x400);
                 return numeralGraphics;
             }
             set { numeralGraphics = value; }
@@ -528,7 +528,7 @@ namespace LAZYSHELL
             {
                 if (bonusFontGraphics == null)
                 {
-                    bonusFontGraphics = Bits.GetByteArray(Sprites[520].Graphics, 0, 0x400);
+                    bonusFontGraphics = Bits.GetBytes(Sprites[520].Graphics, 0, 0x400);
                 }
                 return bonusFontGraphics;
             }
@@ -624,7 +624,7 @@ namespace LAZYSHELL
             get
             {
                 if (titleSpriteGraphics == null)
-                    titleSpriteGraphics = Bits.GetByteArray(titleData, 0x2000, 0x4C00);
+                    titleSpriteGraphics = Bits.GetBytes(titleData, 0x2000, 0x4C00);
                 return titleSpriteGraphics;
             }
             set { titleSpriteGraphics = value; }
@@ -1514,7 +1514,7 @@ namespace LAZYSHELL
             get
             {
                 if (spriteGraphics == null)
-                    spriteGraphics = Bits.GetByteArray(rom, 0x280000, 0xB4000);
+                    spriteGraphics = Bits.GetBytes(rom, 0x280000, 0xB4000);
                 return spriteGraphics;
             }
             set { spriteGraphics = value; }
@@ -1911,18 +1911,10 @@ namespace LAZYSHELL
                                          0x20,0xA5,0x28,0x9D,0x00,0x00,0xE8,0xE8,0xC6,0x26,0x10,0xF7,0xE2,0x20,0xC8,0x80};
             if (rom.Length >= 0x400000)
             {
-                if (Bits.Compare(original, Bits.GetByteArray(rom, 0xF800, 32)))
+                if (Bits.Compare(original, Bits.GetBytes(rom, 0xF800, 32)))
                     return true;
             }
             return MessageBox.Show("file does not appear to be a Super Mario RPG rom. Use it anyways?", "LAZY SHELL", MessageBoxButtons.YesNo) == DialogResult.Yes;
-        }
-        public static void CalculateAndSetNewRomChecksum()
-        {
-            int check = 0;
-            for (int i = 0; i < rom.Length; i++)
-                check += rom[i];
-            check &= 0xFFFF;
-            Bits.SetShort(rom, 0x007FDE, (ushort)check);
         }
         public static void CreateNewMD5Checksum()
         {
@@ -1933,7 +1925,7 @@ namespace LAZYSHELL
         public static string GameCode()
         {
             Encoding encoding = Encoding.UTF8;
-            return encoding.GetString(Bits.GetByteArray(rom, 0x7FB2, 4));
+            return encoding.GetString(Bits.GetBytes(rom, 0x7FB2, 4));
         }
         public static string GetEditorNameWithoutPath()
         {
@@ -1976,8 +1968,8 @@ namespace LAZYSHELL
         {
             Encoding encoding = Encoding.UTF8;
             if (HeaderPresent())
-                return encoding.GetString(Bits.GetByteArray(rom, 0x81c0, 21));
-            return encoding.GetString(Bits.GetByteArray(rom, 0x7fc0, 21));
+                return encoding.GetString(Bits.GetBytes(rom, 0x81c0, 21));
+            return encoding.GetString(Bits.GetBytes(rom, 0x7fc0, 21));
         }
         public static bool HeaderPresent()
         {
@@ -2075,6 +2067,15 @@ namespace LAZYSHELL
             checkSum &= 0xFFFF;
             return (ushort)checkSum;
         }
+        public static void SetRomChecksum()
+        {
+            checkSum = 0;
+            for (int i = 0; i < rom.Length; i++)
+                checkSum += rom[i];
+            checkSum &= 0xFFFF;
+            Bits.SetShort(rom, 0x007FDE, (int)(checkSum & 0xFFFF));
+            Bits.SetShort(rom, 0x007FDC, (int)(checkSum ^ 0xFFFF));
+        }
         public static string FileName { get { return fileName; } set { fileName = value; } }
         public static bool VerifyMD5Checksum()
         {
@@ -2093,6 +2094,7 @@ namespace LAZYSHELL
         {
             try
             {
+                SetRomChecksum();
                 BinaryWriter binWriter = new BinaryWriter(File.Open(fileName, FileMode.Create));
                 binWriter.Write(rom);
                 binWriter.Close();
@@ -2252,7 +2254,7 @@ namespace LAZYSHELL
                 }
                 else
                     size = Bits.GetShort(rom, bank + a + 2) - Bits.GetShort(rom, bank + a);
-                original[i] = Bits.GetByteArray(rom, bank + Bits.GetShort(rom, bank + a), size);
+                original[i] = Bits.GetBytes(rom, bank + Bits.GetShort(rom, bank + a), size);
             }
             // create a progress bar
             ProgressBar progressBar = new ProgressBar(rom, "COMPRESSING " + label + "S", arrays.Length);
@@ -2314,16 +2316,16 @@ namespace LAZYSHELL
                             size = Comp.Compress(new byte[arrays[index].Length], compressed);
                         }
                     }
-                    Bits.SetByteArray(rom, bank + offset, compressed, 0, size);
+                    Bits.SetBytes(rom, bank + offset, compressed, 0, size);
                     offset += (ushort)size; // Move forward in bank
                     progressBar.PerformStep(
                         "COMPRESSING BANK 0x" + (bank >> 32).ToString("X2") + " " + label + " #" + index.ToString("d3"));
                 }
                 // fill up the rest of the bank with 0x00's
                 if (bank < (lastOffset & 0xFF0000))
-                    Bits.SetByteArray(rom, bank + offset, new byte[0x010000 - offset]);
+                    Bits.SetBytes(rom, bank + offset, new byte[0x010000 - offset]);
                 else
-                    Bits.SetByteArray(rom, bank + offset, new byte[(lastOffset & 0xFFFF) - offset]);
+                    Bits.SetBytes(rom, bank + offset, new byte[(lastOffset & 0xFFFF) - offset]);
             }
             progressBar.Close();
         }
@@ -2350,7 +2352,7 @@ namespace LAZYSHELL
                 return false;
             }
             Model.ROM[offset] = 0x01;
-            Bits.SetByteArray(Model.ROM, offset + 1, comp, 0, size);
+            Bits.SetBytes(Model.ROM, offset + 1, comp, 0, size);
             return true;
         }
         /// <summary>

@@ -284,10 +284,10 @@ namespace LAZYSHELL
                 return;
             if (L1Indexes[screenIndex] < 16)
             {
-                byte[] tilemapL1 = Bits.GetByteArray(Model.MinecartSSTilemap, L1Indexes[screenIndex] * 256, 256);
+                byte[] tilemapL1 = Bits.GetBytes(Model.MinecartSSTilemap, L1Indexes[screenIndex] * 256, 256);
                 byte[] tilemapL2;
                 if (Index == 2)
-                    tilemapL2 = Bits.GetByteArray(Model.MinecartSSTilemap, L2Indexes[screenIndex] * 256, 256);
+                    tilemapL2 = Bits.GetBytes(Model.MinecartSSTilemap, L2Indexes[screenIndex] * 256, 256);
                 else
                     tilemapL2 = new byte[256];
                 SideTilemap tilemap = new SideTilemap(tilemapL1, tilemapL2, tileset, paletteSet);
@@ -308,10 +308,10 @@ namespace LAZYSHELL
             {
                 if (L1Indexes[i] < 16)
                 {
-                    byte[] tilemapL1 = Bits.GetByteArray(Model.MinecartSSTilemap, L1Indexes[i] * 256, 256);
+                    byte[] tilemapL1 = Bits.GetBytes(Model.MinecartSSTilemap, L1Indexes[i] * 256, 256);
                     byte[] tilemapL2;
                     if (Index == 2)
-                        tilemapL2 = Bits.GetByteArray(Model.MinecartSSTilemap, L2Indexes[i] * 256, 256);
+                        tilemapL2 = Bits.GetBytes(Model.MinecartSSTilemap, L2Indexes[i] * 256, 256);
                     else
                         tilemapL2 = new byte[256];
                     SideTilemap tilemap = new SideTilemap(tilemapL1, tilemapL2, tileset, paletteSet);
@@ -540,7 +540,7 @@ namespace LAZYSHELL
             if (!Model.Compress(Model.MinecartObjects, dst, ref offset, 0x8000 - 0x1E, "object & screen data"))
                 return;
             //
-            Bits.SetByteArray(Model.ROM, 0x388000, dst);
+            Bits.SetBytes(Model.ROM, 0x388000, dst);
             Bits.SetShort(Model.ROM, 0x039670, (ushort)startX.Value);
             Bits.SetShort(Model.ROM, 0x039679, (ushort)startY.Value);
         }

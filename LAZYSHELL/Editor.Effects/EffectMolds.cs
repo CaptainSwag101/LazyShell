@@ -53,6 +53,7 @@ namespace LAZYSHELL
         private Point mouseDownPosition;
         private Point mousePosition;
         private bool mouseEnter = false;
+        public PictureBox Picture { get { return pictureBoxE_Mold; } }
         // buffers
         private bool defloating = false;
         private CopyBuffer draggedTiles;
@@ -336,7 +337,7 @@ namespace LAZYSHELL
             Point location = overlay.Select.Location;
             Point terminal = overlay.Select.Terminal;
             byte[] changes = new byte[(overlay.Select.Width / 16) * (overlay.Select.Height / 16)];
-            Bits.SetByteArray(changes, 0xFF);
+            Bits.SetBytes(changes, 0xFF);
             commandStack.Push(new TilemapCommand(
                 mold.Mold, width / 16, height / 16, changes,
                 overlay.Select.X / 16, overlay.Select.Y / 16, overlay.Select.Width / 16, overlay.Select.Height / 16));

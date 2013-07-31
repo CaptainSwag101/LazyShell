@@ -227,7 +227,7 @@ namespace LAZYSHELL
                 {
                     pointers[i] = pointer;
                     Bits.SetShort(Model.ROM, i * 2 + pOffset, pointers[i]);
-                    Bits.SetCharArray(Model.ROM, dOffset, pointNames[i]);
+                    Bits.SetChars(Model.ROM, dOffset, pointNames[i]);
                     dOffset += pointNames[i].Length;
                     pointer += (ushort)pointNames[i].Length;
                     Model.ROM[dOffset] = 6; dOffset++; pointer++;

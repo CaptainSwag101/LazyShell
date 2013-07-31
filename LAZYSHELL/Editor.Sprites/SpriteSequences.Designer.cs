@@ -78,6 +78,7 @@ namespace LAZYSHELL
             // frameMold
             // 
             this.frameMold.AutoSize = false;
+            this.frameMold.ContextMenuStrip = null;
             this.frameMold.Hexadecimal = false;
             this.frameMold.Increment = new decimal(new int[] {
             1,
@@ -108,6 +109,7 @@ namespace LAZYSHELL
             // duration
             // 
             this.duration.AutoSize = false;
+            this.duration.ContextMenuStrip = null;
             this.duration.Hexadecimal = false;
             this.duration.Increment = new decimal(new int[] {
             1,
@@ -553,6 +555,7 @@ namespace LAZYSHELL
             this.panelFrames.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.Panel panelSequence;

@@ -174,11 +174,11 @@ namespace LAZYSHELL
                     eventsList.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed is 28.",
+                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("events"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
@@ -295,11 +295,11 @@ namespace LAZYSHELL
                     eventsList.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed is 28.",
+                    MessageBox.Show("Could not insert any more event fields. The maximum number of event fields allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of events for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("events"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void eventsDeleteField_Click(object sender, EventArgs e)
@@ -376,6 +376,8 @@ namespace LAZYSHELL
         }
         private void eventsPasteField_Click(object sender, EventArgs e)
         {
+            if (copyEvent == null)
+                return;
             AddNewEvent((Event)copyEvent);
         }
         private void eventsDuplicateField_Click(object sender, EventArgs e)

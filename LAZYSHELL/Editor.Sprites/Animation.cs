@@ -36,7 +36,7 @@ namespace LAZYSHELL
         {
             animationOffset = Bits.GetInt24(rom, 0x252000 + (index * 3)) - 0xC00000;
             int animationLength = Bits.GetShort(rom, animationOffset);
-            buffer = Bits.GetByteArray(rom, animationOffset, animationLength);
+            buffer = Bits.GetBytes(rom, animationOffset, animationLength);
             //
             int offset = 2;
             ushort sequencePacketPointer = Bits.GetShort(buffer, offset); offset += 2;
@@ -171,7 +171,7 @@ namespace LAZYSHELL
             // finally, set the animation length
             Bits.SetShort(temp, 0, (ushort)offset);
             buffer = new byte[offset];
-            Bits.SetByteArray(buffer, 0, temp);
+            Bits.SetBytes(buffer, 0, temp);
         }
         // public functions
         public void Refresh()

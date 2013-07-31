@@ -169,7 +169,7 @@ namespace LAZYSHELL
                 rom[0x02C9BF] = defenseEndL2;
                 rom[0x02C9C5] = defenseEndL1;
             }
-            Bits.SetCharArray(rom, 0x3a134d + (index * 10), name);
+            Bits.SetChars(rom, 0x3a134d + (index * 10), name);
         }
         // functions
         public override string ToString()

@@ -95,7 +95,7 @@ namespace LAZYSHELL.ScriptsEditor
             int length = GetLength(bank, indexinbank);
             int offset = Bits.GetShort(rom, bank + indexinbank * 2);
             this.baseOffset = bank + offset;
-            this.script = Bits.GetByteArray(rom, bank + offset, length);
+            this.script = Bits.GetBytes(rom, bank + offset, length);
             //
             ParseScript();
         }
@@ -137,14 +137,14 @@ namespace LAZYSHELL.ScriptsEditor
                     case 0x72F: if (offset != 0x22) goto default; length = 0x3C; goto case 0xE91;
                     case 0xD01: if (offset != 0x34) goto default; length = 0x87; goto case 0xE91;
                     case 0xE91: if (index == 0xE91) { if (offset != 0x3C4) goto default; length = 0x51; }
-                        esc = new EventCommand(Bits.GetByteArray(script, offset, length), this.baseOffset + offset);
-                        esc.Queue = new ActionScript(Bits.GetByteArray(esc.CommandData, 0, esc.Length), -1, esc.Offset);
+                        esc = new EventCommand(Bits.GetBytes(script, offset, length), this.baseOffset + offset);
+                        esc.Queue = new ActionScript(Bits.GetBytes(esc.CommandData, 0, esc.Length), -1, esc.Offset);
                         esc.Locked = true;
                         commands.Add(esc);
                         break;
                     default:
                         length = GetCommandLength(script, offset);
-                        esc = new EventCommand(Bits.GetByteArray(script, offset, length), this.baseOffset + offset);
+                        esc = new EventCommand(Bits.GetBytes(script, offset, length), this.baseOffset + offset);
                         commands.Add(esc);
                         break;
                 }

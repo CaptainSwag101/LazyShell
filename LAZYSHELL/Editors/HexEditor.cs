@@ -380,7 +380,7 @@ namespace LAZYSHELL
             if (ROMData.SelectionLength < 3)
                 return;
             int column = ROMData.SelectionStart / 3;
-            clipboard = Bits.GetByteArray(rom, offset + column, ROMData.SelectionLength / 3);
+            clipboard = Bits.GetBytes(rom, offset + column, ROMData.SelectionLength / 3);
         }
         private void paste_Click(object sender, EventArgs e)
         {
@@ -388,8 +388,8 @@ namespace LAZYSHELL
             if (offset + column + clipboard.Length >= 0x400000)
                 return;
             oldProperties.Add(new Change(offset + column,
-                Bits.GetByteArray(current, offset + column, clipboard.Length), Color.Red));
-            Bits.SetByteArray(current, offset + column, clipboard);
+                Bits.GetBytes(current, offset + column, clipboard.Length), Color.Red));
+            Bits.SetBytes(current, offset + column, clipboard);
             RefreshHexEditor();
         }
         private void undo_Click(object sender, EventArgs e)
@@ -399,9 +399,9 @@ namespace LAZYSHELL
             int offset = oldProperties[oldProperties.Count - 1].Offset;
             byte[] oldValues = oldProperties[oldProperties.Count - 1].Values;
             oldProperties.RemoveAt(oldProperties.Count - 1);
-            byte[] newValues = Bits.GetByteArray(current, offset, oldValues.Length);
+            byte[] newValues = Bits.GetBytes(current, offset, oldValues.Length);
             newProperties.Add(new Change(offset, newValues, Color.Red));
-            Bits.SetByteArray(current, offset, oldValues);
+            Bits.SetBytes(current, offset, oldValues);
             RefreshHexEditor();
         }
         private void redo_Click(object sender, EventArgs e)
@@ -411,9 +411,9 @@ namespace LAZYSHELL
             int offset = newProperties[newProperties.Count - 1].Offset;
             byte[] newValues = newProperties[newProperties.Count - 1].Values;
             newProperties.RemoveAt(newProperties.Count - 1);
-            byte[] oldValues = Bits.GetByteArray(current, offset, newValues.Length);
+            byte[] oldValues = Bits.GetBytes(current, offset, newValues.Length);
             oldProperties.Add(new Change(offset, oldValues, Color.Red));
-            Bits.SetByteArray(current, offset, newValues);
+            Bits.SetBytes(current, offset, newValues);
             RefreshHexEditor();
         }
         private void fillWith_KeyDown(object sender, KeyEventArgs e)
@@ -430,7 +430,7 @@ namespace LAZYSHELL
                 byte[] values = new byte[currentROMData.SelectionLength / 3];
                 Bits.Fill(values, value);
                 oldProperties.Add(new Change(offset + column,
-                    Bits.GetByteArray(current, offset + column, values.Length), Color.Red));
+                    Bits.GetBytes(current, offset + column, values.Length), Color.Red));
                 Bits.Fill(current, value, offset + column, values.Length);
             }
             catch

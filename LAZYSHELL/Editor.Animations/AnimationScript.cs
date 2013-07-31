@@ -84,7 +84,7 @@ namespace LAZYSHELL.ScriptsEditor
                     break;
                 //
                 length = GetOpcodeLength(rom, offset);
-                temp = new AnimationCommand(Bits.GetByteArray(rom, offset, length), offset, this, null);
+                temp = new AnimationCommand(Bits.GetBytes(rom, offset, length), offset, this, null);
                 // memory modifiying commands
                 switch (temp.Opcode)
                 {

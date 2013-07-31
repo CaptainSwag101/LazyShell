@@ -277,10 +277,10 @@ namespace LAZYSHELL
             foreach (FontCharacter f in fontDialogue) f.Assemble();
             foreach (FontCharacter f in fontDescription) f.Assemble();
             foreach (FontCharacter f in fontTriangle) f.Assemble();
-            Bits.SetByteArray(rom, 0x3DF000, Model.DialogueGraphics, 0, 0x700);
-            Bits.SetByteArray(rom, 0x015943, Model.BattleDialogueTileset_bytes, 0, 0x100);
+            Bits.SetBytes(rom, 0x3DF000, Model.DialogueGraphics, 0, 0x700);
+            Bits.SetBytes(rom, 0x015943, Model.BattleDialogueTileset_bytes, 0, 0x100);
             //
-            Bits.SetByteArray(rom, 0x03F800, Model.NumeralGraphics, 0, 0x400);
+            Bits.SetBytes(rom, 0x03F800, Model.NumeralGraphics, 0, 0x400);
             Model.NumeralPaletteSet.Assemble();
             Buffer.BlockCopy(Model.BattleMenuGraphics, 0, rom, 0x1F200, 0x600);
             Buffer.BlockCopy(Model.BattleMenuGraphics, 0x600, rom, 0x1ED00, 0x140);

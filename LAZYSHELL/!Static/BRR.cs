@@ -39,7 +39,7 @@ namespace LAZYSHELL
             size = 0;
             for (int i = 0; i < blockamount; i++)
             {
-                BRR = Bits.GetByteArray(inBrr, offset, 9); offset += 9;
+                BRR = Bits.GetBytes(inBrr, offset, 9); offset += 9;
                 samples = append(samples, DecodeBRR(BRR));	//Append 16 BRR samples to existing array
                 size += 16;
             }
@@ -51,9 +51,9 @@ namespace LAZYSHELL
             //
             byte[] outWav = new byte[(size << 1) + 44];
             offset = 0;
-            Bits.SetCharArray(outWav, offset, "RIFF".ToCharArray()); offset += 4;
+            Bits.SetChars(outWav, offset, "RIFF".ToCharArray()); offset += 4;
             Bits.SetInt32(outWav, offset, (size << 1) + 36); offset += 4;
-            Bits.SetCharArray(outWav, offset, "WAVEfmt ".ToCharArray()); offset += 8;
+            Bits.SetChars(outWav, offset, "WAVEfmt ".ToCharArray()); offset += 8;
             Bits.SetInt32(outWav, offset, 16); offset += 4;
             Bits.SetShort(outWav, offset, 1); offset += 2;
             Bits.SetShort(outWav, offset, 1); offset += 2;
@@ -61,7 +61,7 @@ namespace LAZYSHELL
             Bits.SetInt32(outWav, offset, rate * 2); offset += 4;
             Bits.SetShort(outWav, offset, 2); offset += 2;
             Bits.SetShort(outWav, offset, 16); offset += 2;
-            Bits.SetCharArray(outWav, offset, "data".ToCharArray()); offset += 4;
+            Bits.SetChars(outWav, offset, "data".ToCharArray()); offset += 4;
             Bits.SetInt32(outWav, offset, size << 1); offset += 4;
             //
             for (int i = position; i < size + position; i++)
@@ -71,7 +71,7 @@ namespace LAZYSHELL
             }
             return outWav;
         }
-        static short[] DecodeBRR(byte[] Data)
+        public static short[] DecodeBRR(byte[] Data)
         {	//Decode a string of BRR bytes
             int Filter = (Data[0] & 0x0c) >> 2;
             int ShiftAmount = (Data[0] >> 4) & 0x0F;						//Read filter & shift amount

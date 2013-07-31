@@ -89,7 +89,7 @@ namespace LAZYSHELL
                 dstOffset++;
             }
             byte[] temp = new byte[dstOffset];
-            Bits.SetByteArray(temp, 0, dst);
+            Bits.SetBytes(temp, 0, dst);
             return temp;
         }
         // drawing

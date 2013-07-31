@@ -58,7 +58,7 @@ namespace LAZYSHELL
                 samples[i++] = new SampleIndex(rom[offset++], rom[offset++]);
             offset++;
             Length = Bits.GetShort(rom, offset); offset += 2;
-            spcData = Bits.GetByteArray(rom, offset, Length);
+            spcData = Bits.GetBytes(rom, offset, Length);
             //
             CreateCommands();
         }
@@ -90,7 +90,7 @@ namespace LAZYSHELL
                     spcOffset += length;
                     int opcode = spcData[spcOffset];
                     length = SPCScriptEnums.CommandLengths[opcode];
-                    byte[] commandData = Bits.GetByteArray(spcData, spcOffset, length);
+                    byte[] commandData = Bits.GetBytes(spcData, spcOffset, length);
                     channels[i].Add(new SPCCommand(commandData, this, i));
                 }
                 while (spcData[spcOffset] != 0xD0 && spcData[spcOffset] != 0xCE);
@@ -116,7 +116,7 @@ namespace LAZYSHELL
             Bits.SetShort(rom, offset, Length); offset += 2;
             //
             AssembleSPCData();
-            Bits.SetByteArray(rom, offset, spcData);
+            Bits.SetBytes(rom, offset, spcData);
             offset += spcData.Length;
         }
         public void AssembleSPCData()
@@ -151,7 +151,7 @@ namespace LAZYSHELL
                     continue;
                 foreach (SPCCommand ssc in channels[i])
                 {
-                    Bits.SetByteArray(spcData, spcOffset, ssc.CommandData);
+                    Bits.SetBytes(spcData, spcOffset, ssc.CommandData);
                     spcOffset += ssc.Length;
                 }
             }
@@ -420,18 +420,27 @@ namespace LAZYSHELL
                 return Command.Index;
             }
         }
-        public Note Prev(List<Note> notes, bool includeRests)
+        public Note Prev(List<Note> notes)
         {
             int index = notes.IndexOf(this);
-            Note note = notes[index];
-            while (index >= 0)
-                ;
+            if (index - 1 >= 0 && index - 1 < notes.Count)
+                return notes[index - 1];
+            return null;
+        }
+        public Note Next(List<Note> notes)
+        {
+            int index = notes.IndexOf(this);
+            if (index + 1 >= 0 && index + 1 < notes.Count)
+                return notes[index + 1];
             return null;
         }
         public int Sample;
         public bool Percussive;
         // public accessors
-        public Pitch Pitch { get { return (Pitch)(Command.Opcode % 14); } }
+        public Pitch Pitch
+        {
+            get { return (Pitch)(Command.Opcode % 14); }
+        }
         public Beat Beat { get { return (Beat)(Command.Opcode / 14); } }
         public bool IsNote { get { return Command.Opcode < 0xC4; } }
         public int Octave; // max is 8 (9 octaves)

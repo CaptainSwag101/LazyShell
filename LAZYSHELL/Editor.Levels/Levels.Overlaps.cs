@@ -173,11 +173,11 @@ namespace LAZYSHELL
                     overlapFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
+                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("overlaps"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
@@ -216,11 +216,11 @@ namespace LAZYSHELL
                     overlapFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed is 28.",
+                    MessageBox.Show("Could not insert any more overlaps. The maximum number of overlaps allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of overlaps for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("overlaps"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void overlapFieldDelete_Click(object sender, EventArgs e)
@@ -332,6 +332,8 @@ namespace LAZYSHELL
         }
         private void overlapFieldPaste_Click(object sender, EventArgs e)
         {
+            if (copyOverlap == null)
+                return;
             AddNewOverlap((Overlap)copyOverlap);
         }
         private void overlapFieldDuplicate_Click(object sender, EventArgs e)

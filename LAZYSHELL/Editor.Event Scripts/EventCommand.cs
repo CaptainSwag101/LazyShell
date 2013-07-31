@@ -63,9 +63,9 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                 if (commandData[0] >= 0 && commandData[0] <= 0x2F && commandData[1] <= 0xF1)
                 {
                     if (commandData[1] == 0xF0 || commandData[1] == 0xF1)
-                        queue = new ActionScript(Bits.GetByteArray(commandData, 3, commandData.Length - 3), -1, offset + 3);
+                        queue = new ActionScript(Bits.GetBytes(commandData, 3, commandData.Length - 3), -1, offset + 3);
                     else
-                        queue = new ActionScript(Bits.GetByteArray(commandData, 2, commandData.Length - 2), -1, offset + 2);
+                        queue = new ActionScript(Bits.GetBytes(commandData, 2, commandData.Length - 2), -1, offset + 2);
                 }
             }
             if (Opcode == 0xFD && Interpreter.EventCommandsFD[Param1] == "")

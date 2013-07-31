@@ -249,7 +249,7 @@ namespace LAZYSHELL.ScriptsEditor.Commands
                         if ((offset & 0xFF0000) == 0x3A0000 && offset < 0x3A60D0)
                             break;
                         length = GetOpcodeLength(rom, offset);
-                        temp = new AnimationCommand(Bits.GetByteArray(rom, offset, length), offset, script, this);
+                        temp = new AnimationCommand(Bits.GetBytes(rom, offset, length), offset, script, this);
                         commands.Add(temp);
                         if (rom[offset] == 0x07 || // end animation packet
                             rom[offset] == 0x09 || // jump directly to address (thus ending this)

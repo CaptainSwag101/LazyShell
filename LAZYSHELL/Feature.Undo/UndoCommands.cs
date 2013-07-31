@@ -133,7 +133,7 @@ namespace LAZYSHELL.Undo
                 scoreEdit = ScoreEdit.InsertNote;
                 try
                 {
-                    ((List<object>)collection).Remove(itemB);
+                    ((List<object>)collection).Remove((Note)itemB);
                 }
                 catch
                 {
@@ -149,7 +149,7 @@ namespace LAZYSHELL.Undo
                 scoreEdit = ScoreEdit.EraseNote;
                 try
                 {
-                    ((List<object>)collection).Insert(index, itemB);
+                    ((List<object>)collection).Insert(index, (Note)itemB);
                 }
                 catch
                 {

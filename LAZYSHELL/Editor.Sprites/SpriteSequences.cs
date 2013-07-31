@@ -328,17 +328,14 @@ namespace LAZYSHELL
             else
             {
                 e.Graphics.DrawImage(Resources.warning, 2, 2);
-                //Font font = new Font("Tahoma", 10F, FontStyle.Bold);
-                //SizeF size = e.Graphics.MeasureString("(INVALID MOLD INDEX)", font, new PointF(0, 0), StringFormat.GenericDefault);
-                //Point point = new Point((frame.Width - (int)size.Width) / 2, (frame.Height - (int)size.Height) / 2);
-                //Do.DrawString(e.Graphics, point, "(INVALID MOLD INDEX)", Color.Black, Color.Red, font);
             }
             if (this.indexes.Contains(index))
             {
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
                     new Rectangle(0, 0, bounds.Width - 1, bounds.Height - 1));
-                frame.Focus();
+                if (!molds.Picture.Focused)
+                    frame.Focus();
             }
             else
             {

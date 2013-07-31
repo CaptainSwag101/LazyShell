@@ -83,7 +83,7 @@ namespace LAZYSHELL.ScriptsEditor
                 length = GetLength();
                 offset = Bits.GetShort(rom, 0x210000 + (index * 2));
                 this.baseOffset = 0x210000 + offset;
-                this.script = Bits.GetByteArray(rom, 0x210000 + offset, length);
+                this.script = Bits.GetBytes(rom, 0x210000 + offset, length);
             }
             ParseScript();
         }
@@ -119,7 +119,7 @@ namespace LAZYSHELL.ScriptsEditor
                 if (script.Length - offset > 1)
                     param1 = script[offset + 1];
                 length = ScriptEnums.GetActionCommandLength(script[offset], param1);
-                commands.Add(new ActionCommand(Bits.GetByteArray(script, offset, length), this.baseOffset + offset));
+                commands.Add(new ActionCommand(Bits.GetBytes(script, offset, length), this.baseOffset + offset));
                 offset += length;
             }
         }

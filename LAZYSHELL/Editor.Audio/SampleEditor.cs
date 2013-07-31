@@ -22,33 +22,6 @@ namespace LAZYSHELL
         public int Index { get { return (int)sampleNum.Value; } set { sampleNum.Value = value; } }
         private BRRSample[] samples { get { return Model.AudioSamples; } set { Model.AudioSamples = value; } }
         private BRRSample sample { get { return samples[Index]; } set { samples[Index] = value; } }
-        private int sampleRate
-        {
-            get
-            {
-                double rate = 32000.0;
-                //if (rateFixed.Checked)
-                //    switch (sampleRateName.SelectedIndex)
-                //    {
-                //        case 0: rate = 1000.0; break;
-                //        case 1: rate = 2000.0; break;
-                //        case 2: rate = 4000.0; break;
-                //        case 3: rate = 8000.0; break;
-                //        case 4: rate = 16000.0; break;
-                //        case 5: rate = 32000.0; break;
-                //        case 6: rate = 64000.0; break;
-                //        case 7: rate = 128000.0; break;
-                //    }
-                //else if (rateManual.Checked)
-                //    rate = (double)rateManualValue.Value;
-                double power = (double)sample.RelFreq / 256.0 / 12.0;
-                if (power >= 0)
-                    rate *= Math.Pow(2.0, power);
-                else
-                    rate /= Math.Pow(2.0, -power);
-                return (int)rate;
-            }
-        }
         //
         private Search searchWindow;
         private EditLabel labelWindow;
@@ -63,16 +36,16 @@ namespace LAZYSHELL
             {
                 if (settings.LastAudioSample == 0)
                 {
-                    wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-                    loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+                    wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+                    loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
                 }
                 else
                     sampleNum.Value = settings.LastAudioSample;
             }
             else
             {
-                wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-                loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+                wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+                loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             }
             searchWindow = new Search(sampleNum, searchText, searchNames, sampleName.Items);
             labelWindow = new EditLabel(sampleName, sampleNum, "Samples", true);
@@ -86,8 +59,8 @@ namespace LAZYSHELL
             relFreq.Value = sample.RelFreq;
             relGain.Value = sample.RelGain;
             loopStart.Value = sample.LoopStart;
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
             updating = false;
         }
@@ -149,28 +122,28 @@ namespace LAZYSHELL
         }
         private void sampleRate_CheckedChanged(object sender, EventArgs e)
         {
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             sampleRateName.Enabled = rateFixed.Checked;
             rateManualValue.Enabled = rateManual.Checked;
         }
         private void sampleRateName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
         }
         private void rateManualValue_ValueChanged(object sender, EventArgs e)
         {
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
         }
         private void loopStart_ValueChanged(object sender, EventArgs e)
         {
             if (updating)
                 return;
             sample.LoopStart = (int)loopStart.Value;
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void relGain_ValueChanged(object sender, EventArgs e)
@@ -178,8 +151,8 @@ namespace LAZYSHELL
             if (updating)
                 return;
             sample.RelGain = (short)relGain.Value;
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void relFreq_ValueChanged(object sender, EventArgs e)
@@ -187,8 +160,8 @@ namespace LAZYSHELL
             if (updating)
                 return;
             sample.RelFreq = (short)relFreq.Value;
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
-            loop = BRR.BRRToWAV(sample.Sample, sampleRate, sample.LoopStart);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void play_Click(object sender, EventArgs e)
@@ -238,27 +211,27 @@ namespace LAZYSHELL
         private void import_Click(object sender, EventArgs e)
         {
             new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE WAVs...").ShowDialog();
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             pictureBox1.Invalidate();
         }
         private void importBRR_Click(object sender, EventArgs e)
         {
             new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE BRRs...").ShowDialog();
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             pictureBox1.Invalidate();
         }
         private void export_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE WAVs...", sampleRate).ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE WAVs...", sample.Rate).ShowDialog();
         }
         private void exportBRR_Click(object sender, EventArgs e)
         {
-            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE BRRs...", sampleRate).ShowDialog();
+            new IOElements((Element[])Model.AudioSamples, Index, "EXPORT SAMPLE BRRs...", sample.Rate).ShowDialog();
         }
         private void clear_Click(object sender, EventArgs e)
         {
             new ClearElements(Model.AudioSamples, Index, "CLEAR SAMPLES...").ShowDialog();
-            wav = BRR.BRRToWAV(sample.Sample, sampleRate);
+            wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             pictureBox1.Invalidate();
         }
         private void reset_Click(object sender, EventArgs e)

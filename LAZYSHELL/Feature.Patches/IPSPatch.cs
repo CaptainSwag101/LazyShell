@@ -48,7 +48,7 @@ namespace LAZYSHELL.Patches
         // class functions and accessors
         private int ParseHeader(byte[] patch)
         {
-            byte[] header = Bits.GetByteArray(patch, 0, 5);
+            byte[] header = Bits.GetBytes(patch, 0, 5);
             if (header[0] == 'P' &&
                 header[1] == 'A' &&
                 header[2] == 'T' &&
@@ -85,7 +85,7 @@ namespace LAZYSHELL.Patches
                 return 8; 
             }
             // Not RLE encoded
-            record.recordData = Bits.GetByteArray(patch, index, record.size); index += record.size;
+            record.recordData = Bits.GetBytes(patch, index, record.size); index += record.size;
             // Save the record
             this.records.Add(record); 
             // Return 
@@ -93,7 +93,7 @@ namespace LAZYSHELL.Patches
         }
         private void ApplyIPSRecord(IPSRecord record, byte[] data)
         {
-            Bits.SetByteArray(data, record.offset, record.recordData);
+            Bits.SetBytes(data, record.offset, record.recordData);
         }
         // represents one chunk of an IPS patch
         private struct IPSRecord

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,6 +21,7 @@ namespace LAZYSHELL
         #region Variables
         public int Index { get { return (int)trackNum.Value; } set { trackNum.Value = value; } }
         public int Type { get { return soundType.SelectedIndex; } set { soundType.SelectedIndex = value; } }
+        public SoundPlayer SoundPlayer = new SoundPlayer();
         private SPC[] spcs;
         private SPC spc { get { return spcs[Index]; } set { spcs[Index] = value; } }
         private Settings settings = Settings.Default;
@@ -1058,11 +1060,19 @@ namespace LAZYSHELL
                     // read to end of line
                     // at beginning of loop, b/c must reset after each command
                     #region Notes
-                    if (script.StartsWith("#"))
+                    if (script.StartsWith("#") || script.StartsWith("{Ch"))
                     {
-                        script = script.Remove(0, 1);
-                        channel = Bits.GetInt32(ref script);
-                        if (channel > sourceChannels.Length - 1)
+                        if (script.StartsWith("#"))
+                        {
+                            script = script.Remove(0, 1);
+                            channel = Bits.GetInt32(ref script);
+                        }
+                        else
+                        {
+                            script = script.Remove(0, 3);
+                            channel = Bits.GetInt32(ref script) - 1;
+                        }
+                        if (channel < 0 || channel > sourceChannels.Length - 1)
                             break;
                         if (channels[channel] == null)
                             channels[channel] = new List<SPCCommand>();
@@ -2275,7 +2285,31 @@ namespace LAZYSHELL
                 sscIndex = lastOctave == noteC.Octave ? noteC.Index : 0;
             return sscIndex;
         }
-        //
+        private void PlayNote(Note note)
+        {
+            if (note.Rest || !note.IsNote)
+                return;
+            BRRSample sample = Model.AudioSamples[note.Sample];
+            byte[] wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            Do.Play(SoundPlayer, wav, false);
+        }
+        private void SelectNote(bool writer)
+        {
+            if (mouseDownNote == -1)
+                return;
+            if (writer)
+                scoreWriterPicture.Invalidate();
+            else
+            {
+                if (mouseDownSSC == null)
+                    return;
+                int index = mouseDownSSC.Index;
+                //PlayNote(spc.Notes[mouseDownChannel][mouseDownNote]);
+                hScrollBarCT.Value = Math.Min(hScrollBarCT.Maximum, index * 24);
+                scoreViewPicture.Invalidate();
+                ControlDisassemble();
+            }
+        }
         public void Assemble(bool warning)
         {
             int offset = 0x045526;
@@ -3044,8 +3078,11 @@ namespace LAZYSHELL
                         default:
                             bool hilite = mouseEnter && indexNotes == mouseOverNote &&
                                 staffIndex == mouseOverChannel && staffIndex == mouseDownChannel;
-                            bool select = overlay.Select != null && WithinSelection(i, false) &&
-                                staffIndex == mouseDownChannel;
+                            bool select;
+                            if (overlay.Select != null)
+                                select = WithinSelection(i, false) && staffIndex == mouseDownChannel;
+                            else
+                                select = mouseDownNote == i && staffIndex == mouseDownChannel;
                             DrawNote(e.Graphics, note, lastNote, lastItem, x, staffHeight,
                                 clefSV.SelectedIndex, key, staffIndex, hilite, select);
                             break;
@@ -3163,6 +3200,7 @@ namespace LAZYSHELL
                 mouseOverPitch = Pitch.C;
                 mouseOverOctave++;
             }
+            //
             if (mouseOverChannel == mouseDownChannel)
                 labelRNote.Text += mouseOverOctave.ToString();
             else
@@ -3185,17 +3223,17 @@ namespace LAZYSHELL
             // if clicking picture right after undo/redo, we must do a manual mouseMove
             if (mouseOverNote == -1)
                 scoreViewPicture_MouseMove(sender, e);
-            // Get index to insert between notes (and commands), 64 is after the clef
+            // Get index to insert between notes (and commands)
             mouseDownSSC = mouseOverSSC;
             mouseDownNote = mouseOverNote;
             // set the selected command in the track viewer
-            if (mouseDownSSC != null && mouseDownNote != -1)
-            {
-                int index = mouseDownSSC.Index;
-                hScrollBarCT.Value = Math.Min(hScrollBarCT.Maximum, index * 24);
-                ControlDisassemble();
-            }
+            SelectNote(false);
             //
+            if (rDraw.Checked)
+            {
+                Draw(false);
+                return;
+            }
             if (rErase.Checked)
             {
                 Erase(false);
@@ -3215,117 +3253,9 @@ namespace LAZYSHELL
                     Paste(spc.Channels[mouseDownChannel].Count, false);
                 return;
             }
-            //
-            #region Draw
-            if (rDraw.Checked)
-            {
-                if (insertObject == null)
-                    return;
-                //
-                Beat beat = Beat.NULL;
-                byte opcode = 0;
-                byte param1 = 0;
-                int sscIndex = 0;
-                SPCCommand sscA = null;
-                SPCCommand sscB = null;
-                SPCCommand sscC = null;
-                switch (insertObject.Name)
-                {
-                    case "rTicksNoteButton": goto case "Note";
-                    case "rNoteWhole": beat = Beat.Whole; goto case "Note";
-                    case "rNoteHalfD": beat = Beat.HalfDotted; goto case "Note";
-                    case "rNoteHalf": beat = Beat.Half; goto case "Note";
-                    case "rNoteQuarterD": beat = Beat.QuarterDotted; goto case "Note";
-                    case "rNoteQuarter": beat = Beat.Quarter; goto case "Note";
-                    case "rNote8thD": beat = Beat.EighthDotted; goto case "Note";
-                    case "rNoteQuarterT": beat = Beat.QuarterTriplet; goto case "Note";
-                    case "rNote8th": beat = Beat.Eighth; goto case "Note";
-                    case "rNote8thT": beat = Beat.EighthTriplet; goto case "Note";
-                    case "rNote16th": beat = Beat.Sixteenth; goto case "Note";
-                    case "rNote16thT": beat = Beat.SixteenthTriplet; goto case "Note";
-                    case "rNote32nd": beat = Beat.ThirtySecond; goto case "Note";
-                    case "rNote64th": beat = Beat.SixtyFourth; goto case "Note";
-                    case "Note":
-                        if (rTie.Checked)
-                            goto case "Tie";
-                        if (rTicksNoteButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + mouseOverPitch);
-                            param1 = (byte)rTicksNoteValue.Value;
-                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + mouseOverPitch);
-                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
-                        }
-                        sscA = OctaveChangeBefore(mouseOverOctave, true);
-                        sscC = OctaveChangeAfter(mouseOverOctave, true);
-                        sscIndex = OctaveChangeIndex(mouseOverOctave, mouseOverOctave);
-                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscA, sscB, sscC));
-                        break;
-                    case "rTicksRestButton": goto case "Rest";
-                    case "rRestWhole": beat = Beat.Whole; goto case "Rest";
-                    case "rRestHalfD": beat = Beat.HalfDotted; goto case "Rest";
-                    case "rRestHalf": beat = Beat.Half; goto case "Rest";
-                    case "rRestQuarterD": beat = Beat.QuarterDotted; goto case "Rest";
-                    case "rRestQuarter": beat = Beat.Quarter; goto case "Rest";
-                    case "rRest8thD": beat = Beat.EighthDotted; goto case "Rest";
-                    case "rRestQuarterT": beat = Beat.QuarterTriplet; goto case "Rest";
-                    case "rRest8th": beat = Beat.Eighth; goto case "Rest";
-                    case "rRest8thT": beat = Beat.EighthTriplet; goto case "Rest";
-                    case "rRest16th": beat = Beat.Sixteenth; goto case "Rest";
-                    case "rRest16thT": beat = Beat.SixteenthTriplet; goto case "Rest";
-                    case "rRest32nd": beat = Beat.ThirtySecond; goto case "Rest";
-                    case "rRest64th": beat = Beat.SixtyFourth; goto case "Rest";
-                    case "Rest":
-                        if (rTie.Checked)
-                            goto case "Tie";
-                        if (rTicksRestButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + 12);
-                            param1 = (byte)rTicksRestValue.Value;
-                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + 12);
-                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
-                        }
-                        sscIndex = mouseOverSSC.Index;
-                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscB));
-                        break;
-                    case "Tie":
-                        if (mouseDownNote == 0)
-                        {
-                            MessageBox.Show("Cannot put a tied note at the beginning of the staff.", "LAZY SHELL");
-                            return;
-                        }
-                        if (rTicksNoteButton.Checked || rTicksRestButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + 13);
-                            if (rTicksNoteButton.Checked)
-                                param1 = (byte)rTicksNoteValue.Value;
-                            else if (rTicksRestButton.Checked)
-                                param1 = (byte)rTicksRestValue.Value;
-                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + 13);
-                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
-                        }
-                        sscIndex = mouseOverSSC.Index;
-                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscB));
-                        break;
-                }
-                spc.CreateNotes();
-                SetScrollBars(false);
-                if (Type == 0)
-                    ((SPCTrack)spc).AssembleSPCData();
-                channelTracks.Invalidate();
-            }
-            #endregion
+        }
+        private void scoreViewPicture_MouseUp(object sender, MouseEventArgs e)
+        {
         }
         private void scoreViewPicture_MouseEnter(object sender, EventArgs e)
         {
@@ -3338,7 +3268,7 @@ namespace LAZYSHELL
             labelRNote.Text = "...";
             scoreViewPicture.Invalidate();
         }
-        private void scoreViewPicture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void scoreViewPicture_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
             {
@@ -3350,6 +3280,31 @@ namespace LAZYSHELL
                 case Keys.Delete: rDelete.PerformClick(); break;
                 case Keys.Control | Keys.Z: rUndo.PerformClick(); break;
                 case Keys.Control | Keys.Y: rRedo.PerformClick(); break;
+                case Keys.Left:
+                    if (mouseDownNote > 0)
+                    {
+                        mouseDownNote--;
+                        Note note = spc.Notes[mouseDownChannel][mouseDownNote];
+                        int ticks = (int)((double)noteSpacing / 100.0 * note.Ticks);
+                        mouseDownSSC = note.Command;
+                        if (hScrollBarSV.Value - ticks >= 0)
+                            hScrollBarSV.Value -= ticks;
+                        SelectNote(false);
+                    }
+                    break;
+                case Keys.Right:
+                    if (mouseDownNote < spc.Notes[mouseDownChannel].Count - 1)
+                    {
+                        Note note = spc.Notes[mouseDownChannel][mouseDownNote];
+                        int ticks = (int)((double)noteSpacing / 100.0 * note.Ticks);
+                        mouseDownNote++;
+                        note = spc.Notes[mouseDownChannel][mouseDownNote];
+                        mouseDownSSC = note.Command;
+                        if (hScrollBarSV.Value + ticks <= hScrollBarSV.Maximum)
+                            hScrollBarSV.Value += ticks;
+                        SelectNote(false);
+                    }
+                    break;
             }
         }
         private void staffHeightChannel_ValueChanged(object sender, EventArgs e)

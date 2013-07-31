@@ -296,7 +296,7 @@ namespace LAZYSHELL
         public void Assemble(ref int psychopathOffset)
         {
             // name
-            Bits.SetCharArray(rom, 0x3992d1 + (index * 13), name);
+            Bits.SetChars(rom, 0x3992d1 + (index * 13), name);
             // psychopath
             int length = 0;
             Bits.SetShort(rom, 0x399FD1 + index * 2, psychopathOffset);
@@ -305,7 +305,7 @@ namespace LAZYSHELL
             else
             {
                 length = psychopath.Length;
-                Bits.SetCharArray(rom, 0x390000 + psychopathOffset, psychopath);
+                Bits.SetChars(rom, 0x390000 + psychopathOffset, psychopath);
             }
             psychopathOffset += length;
             // stats

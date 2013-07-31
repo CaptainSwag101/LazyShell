@@ -185,11 +185,11 @@ namespace LAZYSHELL
                     this.tileModsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed is 32.",
+                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed per level is 32.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the mod. " + MaximumSpaceExceeded("tile mods"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public bool AddNewTileMod()
@@ -226,14 +226,14 @@ namespace LAZYSHELL
                 }
                 else
                 {
-                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed is 32.",
+                    MessageBox.Show("Could not insert any more tile mods. The maximum number of tile mods allowed per level is 32.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("Could not insert the mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the mod. " + MaximumSpaceExceeded("tile mods"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
@@ -243,7 +243,7 @@ namespace LAZYSHELL
         {
             if (CalculateFreeTileModSpace() < 0)
             {
-                MessageBox.Show("Could not insert the alternate mod. The total number of tile mods for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the alternate mod. " + MaximumSpaceExceeded("tile mods"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
@@ -374,11 +374,11 @@ namespace LAZYSHELL
                     this.solidModsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed is 32.",
+                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed per level is 32.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the mod. The total number of solid mods for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the mod. " + MaximumSpaceExceeded("solid mods"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
@@ -540,6 +540,8 @@ namespace LAZYSHELL
         }
         private void tileModsPaste_Click(object sender, EventArgs e)
         {
+            if (copyTileMod == null)
+                return;
             AddNewTileMod((LevelTileMods.Mod)copyTileMod);
         }
         private void tileModsDuplicate_Click(object sender, EventArgs e)
@@ -633,11 +635,11 @@ namespace LAZYSHELL
                     this.solidModsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed is 32.",
+                    MessageBox.Show("Could not insert any more solid mods. The maximum number of solid mods allowed per level is 32.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the mod. The total number of solid mods for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the mod. " + MaximumSpaceExceeded("solid mods"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void solidModsDelete_Click(object sender, EventArgs e)
@@ -695,12 +697,14 @@ namespace LAZYSHELL
         }
         private void solidModsCopy_Click(object sender, EventArgs e)
         {
-            if (solidModsFieldTree.SelectedNode != null)
-                copySolidMod = solidMods.Mod_.Copy();
+            if (solidModsFieldTree.SelectedNode == null)
+                return;
+            copySolidMod = solidMods.Mod_.Copy();
         }
         private void solidModsPaste_Click(object sender, EventArgs e)
         {
-            AddNewSolidMod((LevelSolidMods.LevelMod)copySolidMod);
+            if (copySolidMod != null)
+                AddNewSolidMod((LevelSolidMods.LevelMod)copySolidMod);
         }
         private void solidModsDuplicate_Click(object sender, EventArgs e)
         {

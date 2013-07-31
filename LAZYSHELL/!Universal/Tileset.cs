@@ -106,12 +106,12 @@ namespace LAZYSHELL
             this.tilesize = 2;
             this.Type = TilesetType.Title;
             // Decompress data at offsets
-            tilesets_bytes[0] = Bits.GetByteArray(Model.TitleData, 0x0000, 0x1000);
-            tilesets_bytes[1] = Bits.GetByteArray(Model.TitleData, 0x1000, 0x1000);
-            tilesets_bytes[2] = Bits.GetByteArray(Model.TitleData, 0xBBE0, 0x300);
+            tilesets_bytes[0] = Bits.GetBytes(Model.TitleData, 0x0000, 0x1000);
+            tilesets_bytes[1] = Bits.GetBytes(Model.TitleData, 0x1000, 0x1000);
+            tilesets_bytes[2] = Bits.GetBytes(Model.TitleData, 0xBBE0, 0x300);
             // Create buffer the size of the combined graphicSets
-            graphics = Bits.GetByteArray(Model.TitleData, 0x6C00, 0x4FE0);
-            graphicsL3 = Bits.GetByteArray(Model.TitleData, 0xBEA0, 0x1BC0);
+            graphics = Bits.GetBytes(Model.TitleData, 0x6C00, 0x4FE0);
+            graphicsL3 = Bits.GetBytes(Model.TitleData, 0xBEA0, 0x1BC0);
             //
             tilesets_tiles[0] = new Tile[16 * 32];
             tilesets_tiles[1] = new Tile[16 * 32];

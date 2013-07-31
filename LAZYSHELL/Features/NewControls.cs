@@ -471,6 +471,7 @@ namespace LAZYSHELL
         static extern bool SetCursorPos(int X, int Y);
         //
         private int zoom = 1;
+        private bool zoomEnabled = true;
         private ZoomBox zoomBox;
         private int zoomBoxZoom = 4;
         private bool zoomBoxEnabled = false;
@@ -482,6 +483,7 @@ namespace LAZYSHELL
         private const int WM_SETREDRAW = 0x0B;
         //
         public int Zoom { get { return zoom; } set { zoom = value; } }
+        public bool ZoomEnabled { get { return zoomEnabled; } set { zoomEnabled = value; } }
         public ZoomBox ZoomBox { get { return zoomBox; } set { zoomBox = value; } }
         public int ZoomBoxZoom { get { return zoomBoxZoom; } set { zoomBoxZoom = value; } }
         public bool ZoomBoxEnabled
@@ -506,6 +508,8 @@ namespace LAZYSHELL
         // functions
         public void ZoomIn(int x, int y)
         {
+            if (!zoomEnabled)
+                return;
             if (this.Parent == null || zoom >= 8 ||
                 Width >= 8192 || Height >= 8192)
                 return;
@@ -533,6 +537,8 @@ namespace LAZYSHELL
         }
         public void ZoomOut(int x, int y)
         {
+            if (!zoomEnabled)
+                return;
             if (this.Parent == null || zoom <= 1)
                 return;
             if (this.Parent.GetType() != typeof(NewPanel))

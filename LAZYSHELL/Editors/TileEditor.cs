@@ -60,10 +60,10 @@ namespace LAZYSHELL
         }
         public void Reload(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
-            this.update = update;
-            this.tile = tile;
             if (updatingThis)
                 return;
+            this.update = update;
+            this.tile = tile;
             this.tileBackup = tile.Copy();
             this.graphics = graphics;
             this.paletteSet = paletteSet;

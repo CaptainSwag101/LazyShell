@@ -104,8 +104,8 @@ namespace LAZYSHELL
             updating = true;
             //
             this.commandStack = new CommandStack();
-            animationBank = Bits.GetByteArray(Model.ROM, 0x350000, 0x10000);
-            battleBank = Bits.GetByteArray(Model.ROM, 0x3A6000, 0xA000);
+            animationBank = Bits.GetBytes(Model.ROM, 0x350000, 0x10000);
+            battleBank = Bits.GetBytes(Model.ROM, 0x3A6000, 0xA000);
             //
             this.menuTextPreview = new MenuTextPreview();
             this.battleDialoguePreview = new BattleDialoguePreview();
@@ -1636,7 +1636,7 @@ namespace LAZYSHELL
         //
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Bits.GetByteArray(Model.ROM, 0x350000, 0x10000), Bits.GetByteArray(Model.ROM, 0x3A6000, 0xA000)) == this.checksum)
+            if (Do.GenerateChecksum(Bits.GetBytes(Model.ROM, 0x350000, 0x10000), Bits.GetBytes(Model.ROM, 0x3A6000, 0xA000)) == this.checksum)
                 goto Close;
             DialogResult result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)

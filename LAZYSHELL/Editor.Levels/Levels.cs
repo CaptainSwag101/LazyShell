@@ -43,6 +43,7 @@ namespace LAZYSHELL
         private Partitions[] npcSpritePartitions { get { return Model.NPCSpritePartitions; } }
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
         // updating
+        private bool closingEditor = false;
         private bool updatingLevel = false; // indicates that we are currently updating the level so we dont update during an update
         public bool UpdatingLevel { get { return updatingLevel; } set { updatingLevel = value; } }
         private bool updatingProperties = false; // indicates whether to update or save properties
@@ -260,9 +261,11 @@ namespace LAZYSHELL
             levelInfo.Items.Clear();
             levelInfo.Items.AddRange(listViewItems);
         }
-        public void AlertLabel()
+        private string MaximumSpaceExceeded(string name)
         {
-            //Do.AlertLabel(labelAlert, "Move the mouse cursor over the selection to click and drag.", Color.Lime);
+            return
+                "The total number of " + name + " for all levels has exceeded the maximum allotted space.\n\n" +
+                "Try removing some " + name + " to increase the amount of free space for new " + name + ".";
         }
         // directories
         private bool CreateDir(string dir)
@@ -481,13 +484,13 @@ namespace LAZYSHELL
             if (!updatingLevel)
                 RefreshLevel();
             if (CalculateFreeNPCSpace() < 0)
-                MessageBox.Show("The total number of NPCs for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(MaximumSpaceExceeded("npcs"), "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (CalculateFreeExitSpace() < 0)
-                MessageBox.Show("The total number of exit fields for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(MaximumSpaceExceeded("exits"), "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (CalculateFreeEventSpace() < 0)
-                MessageBox.Show("The total number of event fields for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(MaximumSpaceExceeded("events"), "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             if (CalculateFreeOverlapSpace() < 0)
-                MessageBox.Show("The total number of overlaps for all levels has exceeded the maximum allotted space.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(MaximumSpaceExceeded("overlaps"), "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void exportLevelDataAll_Click(object sender, EventArgs e)
         {
@@ -1152,14 +1155,17 @@ namespace LAZYSHELL
                 return;
             }
         Close:
+            closingEditor = true;
             searchWindow.Close();
-            tilesetEditor.TileEditor.Close();
+            if (tilesetEditor.TileEditor != null)
+                tilesetEditor.TileEditor.Close();
             levelsSolidTiles.SearchSolidTile.Close();
             paletteEditor.Close();
             graphicEditor.Close();
             findNPCNumber.Close();
             searchWindow.Dispose();
-            tilesetEditor.TileEditor.Dispose();
+            if (tilesetEditor.TileEditor != null)
+                tilesetEditor.TileEditor.Dispose();
             levelsSolidTiles.SearchSolidTile.Dispose();
             paletteEditor.Dispose();
             graphicEditor.Dispose();
@@ -1171,6 +1177,7 @@ namespace LAZYSHELL
             if (partitionBrowser != null)
                 partitionBrowser.Close();
             settings.Save();
+            closingEditor = false;
         }
         private void Levels_FormClosed(object sender, FormClosedEventArgs e)
         {

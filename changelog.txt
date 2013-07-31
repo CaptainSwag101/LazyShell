@@ -1,5 +1,19 @@
 Major changes/additions are indicated by ***
 
+v3.18.1 (2013-07-30)
+--------------------------------------
+Additions:
+*Audio: move back/forth between notes with arrow keys
+
+Changes:
+*Now recalculates checksum when saving a modified ROM
+
+Fixes:
+*Effect: again, the mold image losing focus when keydown
+*Levels: tile editor loading tile 0 if doing auto-update
+*Sprites: yet again the mold image losing focus when keydown
+
+
 v3.18.0 (2013-07-21)
 --------------------------------------
 Additions:

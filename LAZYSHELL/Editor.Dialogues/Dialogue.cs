@@ -80,7 +80,7 @@ namespace LAZYSHELL
                 dlgOffset = offset + 0x230000;
             else
                 dlgOffset = offset + 0x220000;
-            Bits.SetCharArray(rom, dlgOffset, text);
+            Bits.SetChars(rom, dlgOffset, text);
             offset += text.Length;
         }
         // class functions

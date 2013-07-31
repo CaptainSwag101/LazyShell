@@ -25,7 +25,7 @@ namespace LAZYSHELL
         }
         public byte[] Graphics
         {
-            get { return Bits.GetByteArray(rom, GraphicOffset, 0x4000); }
+            get { return Bits.GetBytes(rom, GraphicOffset, 0x4000); }
         }
         public int[] Palette
         {
@@ -78,7 +78,7 @@ namespace LAZYSHELL
             int animationOffset = Bits.GetInt24(rom, 0x252000 + (animationNum * 3)) - 0xC00000;
             int animationLength = Bits.GetShort(rom, animationOffset);
             // get mold data
-            byte[] sm = Bits.GetByteArray(rom, animationOffset, animationLength);
+            byte[] sm = Bits.GetBytes(rom, animationOffset, animationLength);
             int offset = Bits.GetShort(sm, 2);
             if (byFCoord)
                 switch (fCoord)
@@ -190,7 +190,7 @@ namespace LAZYSHELL
             int bank = (int)(((rom[offset] & 0x0F) << 16) + 0x280000);
             int graphicOffset = (int)((Bits.GetShort(rom, offset) & 0xFFF0) + bank); offset += 2;
             //
-            byte[] graphics = Bits.GetByteArray(rom, graphicOffset, 0x4000);
+            byte[] graphics = Bits.GetBytes(rom, graphicOffset, 0x4000);
             int[] palette = Palette;
             Animation animation = Model.Animations[animationPacket];
             Mold mold = animation.Molds[0];

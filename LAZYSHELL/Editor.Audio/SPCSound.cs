@@ -69,7 +69,7 @@ namespace LAZYSHELL
                     soundOffset += length;
                     int opcode = rom[soundOffset];
                     length = SPCScriptEnums.CommandLengths[opcode];
-                    byte[] commandData = Bits.GetByteArray(rom, soundOffset, length);
+                    byte[] commandData = Bits.GetBytes(rom, soundOffset, length);
                     channels[i].Add(new SPCCommand(commandData, this, i));
                 }
                 while (rom[soundOffset] != 0xD0 && rom[soundOffset] != 0xCD && rom[soundOffset] != 0xCE);
@@ -143,13 +143,13 @@ namespace LAZYSHELL
             if (channels[0] != null && activeChannels[0])
                 foreach (SPCCommand ssc in channels[0])
                 {
-                    Bits.SetByteArray(rom, offsetStart1, ssc.CommandData);
+                    Bits.SetBytes(rom, offsetStart1, ssc.CommandData);
                     offsetStart1 += ssc.Length;
                 }
             if (channels[1] != null && activeChannels[1])
                 foreach (SPCCommand ssc in channels[1])
                 {
-                    Bits.SetByteArray(rom, offsetStart2, ssc.CommandData);
+                    Bits.SetBytes(rom, offsetStart2, ssc.CommandData);
                     offsetStart2 += ssc.Length;
                 }
             if (channel2in1)

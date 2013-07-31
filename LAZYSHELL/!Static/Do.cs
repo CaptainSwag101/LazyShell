@@ -409,7 +409,7 @@ namespace LAZYSHELL
             {
                 if (fontCharacters[i].Type == FontType.Dialogue && (i == 59 || i == 61))    // skip [ and ]
                     continue;
-                character = Bits.GetByteArray(temp, i * fontCharacters[i].Graphics.Length, fontCharacters[i].Graphics.Length);
+                character = Bits.GetBytes(temp, i * fontCharacters[i].Graphics.Length, fontCharacters[i].Graphics.Length);
                 CopyOverBPPGraphics(
                     character, fontCharacters[i].Graphics,
                     new Rectangle(0, 0, fontCharacters[i].MaxWidth, fontCharacters[i].Height),
@@ -1049,7 +1049,7 @@ namespace LAZYSHELL
         {
             // set tileset
             Subtile[] frameTileset = new Subtile[16 * 2];
-            int[] framePalette = Bits.GetIntArray(palette, 12, 4);
+            int[] framePalette = Bits.GetInts(palette, 12, 4);
             for (int i = 0; i < frameTileset.Length; i++)
                 frameTileset[i] = new Subtile(i, graphics, i * 0x10, framePalette, false, false, false, true);
             // draw tiles to pixels
@@ -3792,9 +3792,9 @@ namespace LAZYSHELL
             string command;
             int line = 0;
             scriptCmds = eventScript.Commands;
-            for (int j = 0; j < scriptCmds.Count && line < lines; j++, line++)
+            for (int i = 0; i < scriptCmds.Count && line < lines; i++, line++)
             {
-                esc = scriptCmds[j];
+                esc = scriptCmds[i];
                 if (esc.Opcode <= 0x2F && esc.Param1 <= 0xF1 && !esc.Locked)
                 {
                     if (esc.Param1 == 0xF0 || esc.Param1 == 0xF1)
@@ -3807,9 +3807,9 @@ namespace LAZYSHELL
                     if (esc.Queue.Commands != null)
                     {
                         actionQueues = esc.Queue.Commands;
-                        for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
+                        for (int a = 0; a < actionQueues.Count && line < lines; a++, line++)
                         {
-                            asc = actionQueues[k];
+                            asc = actionQueues[a];
                             command = asc.ToString();
                             if (command.Length > length)
                                 command = command.Remove(length) + "...";
@@ -3824,9 +3824,9 @@ namespace LAZYSHELL
                     if (esc.Queue.Commands != null)
                     {
                         actionQueues = esc.Queue.Commands;
-                        for (int k = 0; k < actionQueues.Count && line < lines; k++, line++)
+                        for (int a = 0; a < actionQueues.Count && line < lines; a++, line++)
                         {
-                            asc = actionQueues[k];
+                            asc = actionQueues[a];
                             command = asc.ToString();
                             if (command.Length > length)
                                 command = command.Remove(length) + "...";

@@ -594,6 +594,217 @@ namespace LAZYSHELL
             return index >= selectionStart && index < selectionEnd;
         }
         //
+        private void Draw(bool writer)
+        {
+            if (insertObject == null)
+                return;
+            //
+            if (writer)
+            {
+                if (insertObject == null)
+                    return;
+                //
+                Beat beat = Beat.NULL;
+                byte opcode = 0;
+                byte param1 = 0;
+                Note note;
+                SPCCommand ssc;
+                switch (insertObject.Name)
+                {
+                    case "ticksNoteButton": goto case "Note";
+                    case "wNoteWhole": beat = Beat.Whole; goto case "Note";
+                    case "wNoteHalfD": beat = Beat.HalfDotted; goto case "Note";
+                    case "wNoteHalf": beat = Beat.Half; goto case "Note";
+                    case "wNoteQuarterD": beat = Beat.QuarterDotted; goto case "Note";
+                    case "wNoteQuarter": beat = Beat.Quarter; goto case "Note";
+                    case "wNote8thD": beat = Beat.EighthDotted; goto case "Note";
+                    case "wNoteQuarterT": beat = Beat.QuarterTriplet; goto case "Note";
+                    case "wNote8th": beat = Beat.Eighth; goto case "Note";
+                    case "wNote8thT": beat = Beat.EighthTriplet; goto case "Note";
+                    case "wNote16th": beat = Beat.Sixteenth; goto case "Note";
+                    case "wNote16thT": beat = Beat.SixteenthTriplet; goto case "Note";
+                    case "wNote32nd": beat = Beat.ThirtySecond; goto case "Note";
+                    case "wNote64th": beat = Beat.SixtyFourth; goto case "Note";
+                    case "Note":
+                        if (wTie.Checked)
+                            goto case "Tie";
+                        if (ticksNoteButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + mouseOverPitch);
+                            param1 = (byte)ticksNoteValue.Value;
+                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + mouseOverPitch);
+                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
+                        }
+                        note = new Note(ssc, mouseOverOctave, false, 0);
+                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
+                        break;
+                    case "ticksRestButton": goto case "Rest";
+                    case "wRestWhole": beat = Beat.Whole; goto case "Rest";
+                    case "wRestHalfD": beat = Beat.HalfDotted; goto case "Rest";
+                    case "wRestHalf": beat = Beat.Half; goto case "Rest";
+                    case "wRestQuarterD": beat = Beat.QuarterDotted; goto case "Rest";
+                    case "wRestQuarter": beat = Beat.Quarter; goto case "Rest";
+                    case "wRest8thD": beat = Beat.EighthDotted; goto case "Rest";
+                    case "wRestQuarterT": beat = Beat.QuarterTriplet; goto case "Rest";
+                    case "wRest8th": beat = Beat.Eighth; goto case "Rest";
+                    case "wRest8thT": beat = Beat.EighthTriplet; goto case "Rest";
+                    case "wRest16th": beat = Beat.Sixteenth; goto case "Rest";
+                    case "wRest16thT": beat = Beat.SixteenthTriplet; goto case "Rest";
+                    case "wRest32nd": beat = Beat.ThirtySecond; goto case "Rest";
+                    case "wRest64th": beat = Beat.SixtyFourth; goto case "Rest";
+                    case "Rest":
+                        if (wTie.Checked)
+                            goto case "Tie";
+                        if (ticksRestButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + 12);
+                            param1 = (byte)ticksRestValue.Value;
+                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + 12);
+                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
+                        }
+                        note = new Note(ssc, mouseOverOctave, false, 0);
+                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
+                        break;
+                    case "Tie":
+                        if (mouseDownNote == 0)
+                        {
+                            MessageBox.Show("Cannot put a tied note at the beginning of the staff.", "LAZY SHELL");
+                            return;
+                        }
+                        if (ticksNoteButton.Checked || ticksRestButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + 13);
+                            if (ticksNoteButton.Checked)
+                                param1 = (byte)ticksNoteValue.Value;
+                            else if (ticksRestButton.Checked)
+                                param1 = (byte)ticksRestValue.Value;
+                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + 13);
+                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
+                        }
+                        note = new Note(ssc, mouseOverOctave, false, 0);
+                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
+                        break;
+                }
+                SetScrollBars(true);
+            }
+            else
+            {
+                Beat beat = Beat.NULL;
+                byte opcode = 0;
+                byte param1 = 0;
+                int sscIndex = 0;
+                SPCCommand sscA = null;
+                SPCCommand sscB = null;
+                SPCCommand sscC = null;
+                switch (insertObject.Name)
+                {
+                    case "rTicksNoteButton": goto case "Note";
+                    case "rNoteWhole": beat = Beat.Whole; goto case "Note";
+                    case "rNoteHalfD": beat = Beat.HalfDotted; goto case "Note";
+                    case "rNoteHalf": beat = Beat.Half; goto case "Note";
+                    case "rNoteQuarterD": beat = Beat.QuarterDotted; goto case "Note";
+                    case "rNoteQuarter": beat = Beat.Quarter; goto case "Note";
+                    case "rNote8thD": beat = Beat.EighthDotted; goto case "Note";
+                    case "rNoteQuarterT": beat = Beat.QuarterTriplet; goto case "Note";
+                    case "rNote8th": beat = Beat.Eighth; goto case "Note";
+                    case "rNote8thT": beat = Beat.EighthTriplet; goto case "Note";
+                    case "rNote16th": beat = Beat.Sixteenth; goto case "Note";
+                    case "rNote16thT": beat = Beat.SixteenthTriplet; goto case "Note";
+                    case "rNote32nd": beat = Beat.ThirtySecond; goto case "Note";
+                    case "rNote64th": beat = Beat.SixtyFourth; goto case "Note";
+                    case "Note":
+                        if (rTie.Checked)
+                            goto case "Tie";
+                        if (rTicksNoteButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + mouseOverPitch);
+                            param1 = (byte)rTicksNoteValue.Value;
+                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + mouseOverPitch);
+                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
+                        }
+                        sscA = OctaveChangeBefore(mouseOverOctave, true);
+                        sscC = OctaveChangeAfter(mouseOverOctave, true);
+                        sscIndex = OctaveChangeIndex(mouseOverOctave, mouseOverOctave);
+                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscA, sscB, sscC));
+                        break;
+                    case "rTicksRestButton": goto case "Rest";
+                    case "rRestWhole": beat = Beat.Whole; goto case "Rest";
+                    case "rRestHalfD": beat = Beat.HalfDotted; goto case "Rest";
+                    case "rRestHalf": beat = Beat.Half; goto case "Rest";
+                    case "rRestQuarterD": beat = Beat.QuarterDotted; goto case "Rest";
+                    case "rRestQuarter": beat = Beat.Quarter; goto case "Rest";
+                    case "rRest8thD": beat = Beat.EighthDotted; goto case "Rest";
+                    case "rRestQuarterT": beat = Beat.QuarterTriplet; goto case "Rest";
+                    case "rRest8th": beat = Beat.Eighth; goto case "Rest";
+                    case "rRest8thT": beat = Beat.EighthTriplet; goto case "Rest";
+                    case "rRest16th": beat = Beat.Sixteenth; goto case "Rest";
+                    case "rRest16thT": beat = Beat.SixteenthTriplet; goto case "Rest";
+                    case "rRest32nd": beat = Beat.ThirtySecond; goto case "Rest";
+                    case "rRest64th": beat = Beat.SixtyFourth; goto case "Rest";
+                    case "Rest":
+                        if (rTie.Checked)
+                            goto case "Tie";
+                        if (rTicksRestButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + 12);
+                            param1 = (byte)rTicksRestValue.Value;
+                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + 12);
+                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
+                        }
+                        sscIndex = mouseOverSSC.Index;
+                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscB));
+                        break;
+                    case "Tie":
+                        if (mouseDownNote == 0)
+                        {
+                            MessageBox.Show("Cannot put a tied note at the beginning of the staff.", "LAZY SHELL");
+                            return;
+                        }
+                        if (rTicksNoteButton.Checked || rTicksRestButton.Checked)
+                        {
+                            opcode = (byte)(13 * 14 + 13);
+                            if (rTicksNoteButton.Checked)
+                                param1 = (byte)rTicksNoteValue.Value;
+                            else if (rTicksRestButton.Checked)
+                                param1 = (byte)rTicksRestValue.Value;
+                            sscB = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverChannel);
+                        }
+                        else
+                        {
+                            opcode = (byte)((int)beat * 14 + 13);
+                            sscB = new SPCCommand(new byte[] { opcode }, spc, mouseOverChannel);
+                        }
+                        sscIndex = mouseOverSSC.Index;
+                        commandStackR.Push(new ScoreEditCommand(ScoreEdit.InsertNote, spc.Channels[mouseOverChannel], sscIndex, sscB));
+                        break;
+                }
+                spc.CreateNotes();
+                SetScrollBars(false);
+                if (Type == 0)
+                    ((SPCTrack)spc).AssembleSPCData();
+                channelTracks.Invalidate();
+            }
+        }
         private void Erase(bool writer)
         {
             if (writer)
@@ -937,8 +1148,11 @@ namespace LAZYSHELL
                     }
                     bool hilite = mouseEnter && indexNotes == mouseOverNote &&
                         staffIndex == mouseOverStaff && staffIndex == mouseDownStaff;
-                    bool select = overlay.Select != null && WithinSelection(i, true) &&
-                        staffIndex == mouseDownStaff;
+                    bool select;
+                    if (overlay.Select != null)
+                        select = WithinSelection(i, true) && staffIndex == mouseDownStaff;
+                    else
+                        select = mouseDownNote == i && staffIndex == mouseDownStaff;
                     DrawNote(e.Graphics, note, lastNote, lastItem, x, staffHeight,
                         staff.Clef, score.Key, staffIndex, hilite, select);
                     x += (int)((double)noteSpacingSW.Value / 100.0 * note.Ticks);
@@ -984,6 +1198,14 @@ namespace LAZYSHELL
                 scoreWriterPicture_MouseMove(sender, e);
             // Get index to insert between notes (and commands), 64 is after the clef
             mouseDownNote = mouseOverNote;
+            // set the selected command in the track viewer
+            SelectNote(true);
+            //
+            if (wDraw.Checked)
+            {
+                Draw(true);
+                return;
+            }
             if (wErase.Checked)
             {
                 Erase(true);
@@ -1000,107 +1222,9 @@ namespace LAZYSHELL
                 Paste(mouseDownNote, true);
                 return;
             }
-            //
-            if (wDraw.Checked)
-            {
-                if (insertObject == null)
-                    return;
-                //
-                Beat beat = Beat.NULL;
-                byte opcode = 0;
-                byte param1 = 0;
-                Note note;
-                SPCCommand ssc;
-                switch (insertObject.Name)
-                {
-                    case "ticksNoteButton": goto case "Note";
-                    case "wNoteWhole": beat = Beat.Whole; goto case "Note";
-                    case "wNoteHalfD": beat = Beat.HalfDotted; goto case "Note";
-                    case "wNoteHalf": beat = Beat.Half; goto case "Note";
-                    case "wNoteQuarterD": beat = Beat.QuarterDotted; goto case "Note";
-                    case "wNoteQuarter": beat = Beat.Quarter; goto case "Note";
-                    case "wNote8thD": beat = Beat.EighthDotted; goto case "Note";
-                    case "wNoteQuarterT": beat = Beat.QuarterTriplet; goto case "Note";
-                    case "wNote8th": beat = Beat.Eighth; goto case "Note";
-                    case "wNote8thT": beat = Beat.EighthTriplet; goto case "Note";
-                    case "wNote16th": beat = Beat.Sixteenth; goto case "Note";
-                    case "wNote16thT": beat = Beat.SixteenthTriplet; goto case "Note";
-                    case "wNote32nd": beat = Beat.ThirtySecond; goto case "Note";
-                    case "wNote64th": beat = Beat.SixtyFourth; goto case "Note";
-                    case "Note":
-                        if (wTie.Checked)
-                            goto case "Tie";
-                        if (ticksNoteButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + mouseOverPitch);
-                            param1 = (byte)ticksNoteValue.Value;
-                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + mouseOverPitch);
-                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
-                        }
-                        note = new Note(ssc, mouseOverOctave, false, 0);
-                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
-                        break;
-                    case "ticksRestButton": goto case "Rest";
-                    case "wRestWhole": beat = Beat.Whole; goto case "Rest";
-                    case "wRestHalfD": beat = Beat.HalfDotted; goto case "Rest";
-                    case "wRestHalf": beat = Beat.Half; goto case "Rest";
-                    case "wRestQuarterD": beat = Beat.QuarterDotted; goto case "Rest";
-                    case "wRestQuarter": beat = Beat.Quarter; goto case "Rest";
-                    case "wRest8thD": beat = Beat.EighthDotted; goto case "Rest";
-                    case "wRestQuarterT": beat = Beat.QuarterTriplet; goto case "Rest";
-                    case "wRest8th": beat = Beat.Eighth; goto case "Rest";
-                    case "wRest8thT": beat = Beat.EighthTriplet; goto case "Rest";
-                    case "wRest16th": beat = Beat.Sixteenth; goto case "Rest";
-                    case "wRest16thT": beat = Beat.SixteenthTriplet; goto case "Rest";
-                    case "wRest32nd": beat = Beat.ThirtySecond; goto case "Rest";
-                    case "wRest64th": beat = Beat.SixtyFourth; goto case "Rest";
-                    case "Rest":
-                        if (wTie.Checked)
-                            goto case "Tie";
-                        if (ticksRestButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + 12);
-                            param1 = (byte)ticksRestValue.Value;
-                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + 12);
-                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
-                        }
-                        note = new Note(ssc, mouseOverOctave, false, 0);
-                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
-                        break;
-                    case "Tie":
-                        if (mouseDownNote == 0)
-                        {
-                            MessageBox.Show("Cannot put a tied note at the beginning of the staff.", "LAZY SHELL");
-                            return;
-                        }
-                        if (ticksNoteButton.Checked || ticksRestButton.Checked)
-                        {
-                            opcode = (byte)(13 * 14 + 13);
-                            if (ticksNoteButton.Checked)
-                                param1 = (byte)ticksNoteValue.Value;
-                            else if (ticksRestButton.Checked)
-                                param1 = (byte)ticksRestValue.Value;
-                            ssc = new SPCCommand(new byte[] { opcode, param1 }, spc, mouseOverStaff);
-                        }
-                        else
-                        {
-                            opcode = (byte)((int)beat * 14 + 13);
-                            ssc = new SPCCommand(new byte[] { opcode }, spc, mouseOverStaff);
-                        }
-                        note = new Note(ssc, mouseOverOctave, false, 0);
-                        commandStackW.Push(new ScoreEditCommand(ScoreEdit.InsertNote, staffs[mouseOverStaff].Notes, mouseDownNote, note));
-                        break;
-                }
-                SetScrollBars(true);
-            }
+        }
+        private void scoreWriterPicture_MouseUp(object sender, MouseEventArgs e)
+        {
         }
         private void scoreWriterPicture_MouseEnter(object sender, EventArgs e)
         {
@@ -1197,6 +1321,7 @@ namespace LAZYSHELL
                 mouseOverPitch = Pitch.C;
                 mouseOverOctave++;
             }
+            //
             if (mouseOverStaff == mouseDownStaff)
                 labelWNote.Text += mouseOverOctave.ToString();
             else
@@ -1204,7 +1329,7 @@ namespace LAZYSHELL
             #endregion
             scoreWriterPicture.Invalidate();
         }
-        private void scoreWriterPicture_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void scoreWriterPicture_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
             {
@@ -1216,6 +1341,29 @@ namespace LAZYSHELL
                 case Keys.Delete: wDelete.PerformClick(); break;
                 case Keys.Control | Keys.Z: undo.PerformClick(); break;
                 case Keys.Control | Keys.Y: redo.PerformClick(); break;
+                case Keys.Left:
+                    if (mouseDownNote > 0)
+                    {
+                        mouseDownNote--;
+                        Note note = (Note)staffs[mouseDownStaff].Notes[mouseDownNote];
+                        int ticks = (int)((double)noteSpacing / 100.0 * note.Ticks);
+                        if (hScrollBarSW.Value - ticks >= 0)
+                            hScrollBarSW.Value -= ticks;
+                        SelectNote(true);
+                    }
+                    break;
+                case Keys.Right:
+                    if (mouseDownNote < staffs[mouseDownStaff].Notes.Count - 1)
+                    {
+                        Note note = (Note)staffs[mouseDownStaff].Notes[mouseDownNote];
+                        int ticks = (int)((double)noteSpacing / 100.0 * note.Ticks);
+                        mouseDownNote++;
+                        note = (Note)staffs[mouseDownStaff].Notes[mouseDownNote];
+                        if (hScrollBarSW.Value + ticks <= hScrollBarSW.Maximum)
+                            hScrollBarSW.Value += ticks;
+                        SelectNote(true);
+                    }
+                    break;
             }
         }
         // Common commands
@@ -1344,8 +1492,6 @@ namespace LAZYSHELL
             while (index < commands.Count)
             {
                 SPCCommand ssc = commands[index++];
-                if (ssc.Opcode >= 0xC4)
-                    notes.Add(ssc);
                 switch (ssc.Opcode)
                 {
                     case 0xC4: octave++; break;
@@ -1376,8 +1522,6 @@ namespace LAZYSHELL
             while (count > 0 && index < commands.Count)
             {
                 SPCCommand ssc = commands[index++];
-                if (count == 1 && ssc.Opcode >= 0xC4)
-                    notes.Add(ssc);
                 if (ssc.Opcode == 0xD6 && count == 1)
                 {
                     while (index < commands.Count && commands[index].Opcode != 0xD5) index++; break;

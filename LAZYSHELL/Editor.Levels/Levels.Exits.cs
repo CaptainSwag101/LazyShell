@@ -261,11 +261,11 @@ namespace LAZYSHELL
                     exitsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
+                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("exits"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
@@ -453,11 +453,11 @@ namespace LAZYSHELL
                     exitsFieldTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed is 28.",
+                    MessageBox.Show("Could not insert any more exit fields. The maximum number of exit fields allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the field. The total number of exits for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the field. " + MaximumSpaceExceeded("exits"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void exitsDeleteField_Click(object sender, EventArgs e)
@@ -492,6 +492,8 @@ namespace LAZYSHELL
         }
         private void exitsPasteField_Click(object sender, EventArgs e)
         {
+            if (copyExit == null)
+                return;
             AddNewExit((Exit)copyExit);
         }
         private void exitsDuplicateField_Click(object sender, EventArgs e)

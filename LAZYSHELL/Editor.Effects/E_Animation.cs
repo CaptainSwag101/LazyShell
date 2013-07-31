@@ -53,7 +53,7 @@ namespace LAZYSHELL
         {
             animationOffset = Bits.GetInt24(rom, 0x252C00 + (index * 3)) - 0xC00000;
             ushort animationLength = Bits.GetShort(rom, animationOffset);
-            buffer = Bits.GetByteArray(rom, animationOffset, Bits.GetShort(rom, animationOffset));
+            buffer = Bits.GetBytes(rom, animationOffset, Bits.GetShort(rom, animationOffset));
             //
             int offset = 2;
             ushort graphicSetPointer = Bits.GetShort(buffer, offset); offset += 2;
@@ -196,7 +196,7 @@ namespace LAZYSHELL
             // finally, set the animation length
             Bits.SetShort(temp, 0, (ushort)offset);
             this.buffer = new byte[offset];
-            Bits.SetByteArray(this.buffer, 0, temp);
+            Bits.SetBytes(this.buffer, 0, temp);
             //Do.Export(sm, "test.bin");
             return size - this.buffer.Length;
         }

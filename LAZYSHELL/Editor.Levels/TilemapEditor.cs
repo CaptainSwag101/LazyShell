@@ -491,11 +491,11 @@ namespace LAZYSHELL
                 // cancel if no selection in the tileset is made
                 if (overlay.SelectTS == null)
                     return;
-                // cancel if writing same tile over itself
-                if (CompareTiles(x, y, layer))
-                    return;
                 // cancel if layer doesn't exist
                 if (this.tileset.Tilesets_tiles[layer] == null)
+                    return;
+                // cancel if writing same tile over itself
+                if (CompareTiles(x, y, layer))
                     return;
                 p1Image = null;
                 Point location = new Point(x, y);
@@ -657,11 +657,11 @@ namespace LAZYSHELL
                 // cancel if no selection in the tileset is made
                 if (overlay.SelectTS == null)
                     return;
-                // cancel if writing same tile over itself
-                if (CompareTiles(x, y, layer))
-                    return;
                 // cancel if layer doesn't exist
                 if (this.tileset.Tilesets_tiles[layer] == null)
+                    return;
+                // cancel if writing same tile over itself
+                if (CompareTiles(x, y, layer))
                     return;
                 p1Image = null;
                 // store changes
@@ -1021,7 +1021,7 @@ namespace LAZYSHELL
             if (!state.SolidityLayer && !state.SolidMods)
             {
                 int layer = tilesetEditor.Layer;
-                if (this.tileset.Tilesets_tiles[layer] == null || overlay.Select.Size == new Size(0, 0))
+                if (this.tileset.Tilesets_tiles[layer] == null)
                     return;
                 if (overlay.Select == null)
                     return;
@@ -1841,10 +1841,10 @@ namespace LAZYSHELL
                     if (state.Events && events.Count != 0 && mouseOverObject == null)
                     {
                         int index_evt = 0;
-                        foreach (Event event_ in events.Events)
+                        foreach (Event EVENT in events.Events)
                         {
-                            if (event_.X == mouseIsometricPosition.X &&
-                                event_.Y == mouseIsometricPosition.Y)
+                            if (EVENT.X == mouseIsometricPosition.X &&
+                                EVENT.Y == mouseIsometricPosition.Y)
                             {
                                 this.pictureBoxLevel.Cursor = Cursors.Hand;
                                 mouseOverEventField = index_evt;
@@ -2637,11 +2637,11 @@ namespace LAZYSHELL
             }
             else if (objectFunctionToolStripMenuItem.Text == "Edit event's script")
             {
-                Event event_ = events.Events[(int)objectFunctionToolStripMenuItem.Tag];
+                Event EVENT = events.Events[(int)objectFunctionToolStripMenuItem.Tag];
                 if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
                     Model.Program.CreateEventScriptsWindow();
                 Model.Program.EventScripts.EventName.SelectedIndex = 0;
-                Model.Program.EventScripts.EventNum.Value = event_.RunEvent;
+                Model.Program.EventScripts.EventNum.Value = EVENT.RunEvent;
                 Model.Program.EventScripts.BringToFront();
             }
             else if (objectFunctionToolStripMenuItem.Text == "Edit npc's script")

@@ -28,13 +28,13 @@ namespace LAZYSHELL.ScriptsEditor
             int bank = 0x390000;
             int offset = Bits.GetShort(rom, bank + 0x30AA + (index * 2));
             int length = GetLength(bank + offset);
-            this.script = Bits.GetByteArray(rom, bank + offset, length);
+            this.script = Bits.GetBytes(rom, bank + offset, length);
             //
             ParseScript();
         }
         public void Assemble(ref int offset)
         {
-            Bits.SetByteArray(rom, offset, script);
+            Bits.SetBytes(rom, offset, script);
             offset += script.Length;
         }
         // class functions and accessors
@@ -48,7 +48,7 @@ namespace LAZYSHELL.ScriptsEditor
             while (offset < script.Length)
             {
                 length = Lists.BattleLengths[script[offset]];
-                bsc = new BattleCommand(Bits.GetByteArray(script, offset, length));
+                bsc = new BattleCommand(Bits.GetBytes(script, offset, length));
                 commands.Add(bsc);
                 offset += length;
             }

@@ -31,28 +31,28 @@ namespace LAZYSHELL
             {
                 case FontType.Menu: // menu font
                     width = (byte)rom[index + 0x249300]; maxWidth = 8; height = 12;
-                    graphics = Bits.GetByteArray(rom, index * 0x18 + 0x249400, 0x18);
+                    graphics = Bits.GetBytes(rom, index * 0x18 + 0x249400, 0x18);
                     break;
                 case FontType.Dialogue: // dialogue font
                     width = (byte)rom[index + 0x249280]; maxWidth = 16; height = 12;
-                    graphics = Bits.GetByteArray(rom, index * 0x30 + 0x37C000, 0x30);
+                    graphics = Bits.GetBytes(rom, index * 0x30 + 0x37C000, 0x30);
                     break;
                 case FontType.Description: // description font
                     width = (byte)rom[index + 0x249380]; maxWidth = 8; height = 8;
-                    graphics = Bits.GetByteArray(rom, index * 0x10 + 0x37D800, 0x10);
+                    graphics = Bits.GetBytes(rom, index * 0x10 + 0x37D800, 0x10);
                     break;
                 case FontType.Triangles: // triangles
                     if (index < 7) { width = maxWidth = 8; height = 16; }
                     else { width = maxWidth = 16; height = 8; }
-                    graphics = Bits.GetByteArray(rom, index * 0x20 + 0x3DFA00, 0x20);
+                    graphics = Bits.GetBytes(rom, index * 0x20 + 0x3DFA00, 0x20);
                     break;
                 case FontType.BattleMenu: // battle menu font
                     width = 8; maxWidth = 8; height = 8;
-                    graphics = Bits.GetByteArray(Model.BattleMenuGraphics, index * 0x20, 0x20);
+                    graphics = Bits.GetBytes(Model.BattleMenuGraphics, index * 0x20, 0x20);
                     break;
                 case FontType.FlowerBonus: // flower bonus font
                     width = 8; maxWidth = 8; height = 8;
-                    graphics = Bits.GetByteArray(Model.BonusFontGraphics, index * 0x20, 0x20);
+                    graphics = Bits.GetBytes(Model.BonusFontGraphics, index * 0x20, 0x20);
                     break;
             }
         }
@@ -62,21 +62,21 @@ namespace LAZYSHELL
             {
                 case FontType.Menu: // menu font
                     rom[index + 0x249300] = width;
-                    Bits.SetByteArray(rom, index * 0x18 + 0x249400, graphics);
+                    Bits.SetBytes(rom, index * 0x18 + 0x249400, graphics);
                     break;
                 case FontType.Dialogue: // dialogue font
                     rom[index + 0x249280] = width;
-                    Bits.SetByteArray(rom, index * 0x30 + 0x37C000, graphics);
+                    Bits.SetBytes(rom, index * 0x30 + 0x37C000, graphics);
                     break;
                 case FontType.Description: // description font
                     rom[index + 0x249380] = width;
-                    Bits.SetByteArray(rom, index * 0x10 + 0x37D800, graphics);
+                    Bits.SetBytes(rom, index * 0x10 + 0x37D800, graphics);
                     break;
                 case FontType.Triangles: // triangles
-                    Bits.SetByteArray(rom, index * 0x20 + 0x3DFA00, graphics);
+                    Bits.SetBytes(rom, index * 0x20 + 0x3DFA00, graphics);
                     break;
                 case FontType.BattleMenu: // battle menu font
-                    Bits.SetByteArray(rom, index * 0x20, graphics);
+                    Bits.SetBytes(rom, index * 0x20, graphics);
                     break;
             }
         }

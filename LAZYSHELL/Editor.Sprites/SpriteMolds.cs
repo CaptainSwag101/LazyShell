@@ -61,6 +61,7 @@ namespace LAZYSHELL
         private CommandStack commandStack;
         private CopyBuffer selectedTiles;
         private CopyBuffer copiedTiles;
+        public PictureBox Picture { get { return pictureBoxMold; } }
         // editors
         public TileEditor tileEditor;
         #endregion
@@ -958,8 +959,6 @@ namespace LAZYSHELL
                 case Keys.Down:
                     if (overlay.Select == null)
                         break;
-                    if (e.Modifiers != Keys.Shift)
-                        break;
                     if (selectedTiles == null)
                         Drag();
                     int x = 0;
@@ -1474,7 +1473,7 @@ namespace LAZYSHELL
                 {
                     for (int x = 0; x < uniqueTile.Width / 8; x++)
                     {
-                        byte[] subtile = Bits.GetByteArray(graphics, (y * 2 + x) * 0x20, 0x20);
+                        byte[] subtile = Bits.GetBytes(graphics, (y * 2 + x) * 0x20, 0x20);
                         if (Bits.Empty(subtile))
                         {
                             uniqueTile.Subtile_bytes[y * 2 + x] = 0;

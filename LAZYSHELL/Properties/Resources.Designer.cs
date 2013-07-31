@@ -838,7 +838,7 @@ namespace LAZYSHELL.Properties {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;LAZYSHELL_xsl.xsl&quot;?&gt;
         ///&lt;LAZYSHELL form=&quot;Editor&quot; icon=&quot;icons/main.gif&quot; title=&quot;LAZY SHELL - Super Mario RPG Editor&quot;&gt;
-        ///  &lt;Properties version=&quot;3.17.0&quot; date=&quot;June 23, 2013&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
+        ///  &lt;Properties version=&quot;3.18.1&quot; date=&quot;July 30, 2013&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
         ///  &lt;Read&gt;
         ///    &lt;header&gt;Read this first&lt;/header&gt;
         ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/introduction&gt; [rest of string was truncated]&quot;;.
@@ -860,8 +860,9 @@ namespace LAZYSHELL.Properties {
         ///        &lt;script type=&quot;text/javascript&quot;&gt;
         ///          &lt;![CDATA[
         ///            var z = 0;
-        ///            function ShowHide(editor, faq) {
-        ///               [rest of string was truncated]&quot;;.
+        ///            function ShowHide(editor, faq) 
+        ///            {
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string LAZYSHELL_xsl {
             get {

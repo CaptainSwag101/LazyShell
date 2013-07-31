@@ -488,9 +488,9 @@ namespace LAZYSHELL
                 {
                     Model.Program.Audio.Assemble(false);
                     if (this.behavior == EType.SPCEvent)
-                        soundFX = Bits.GetByteArray(Model.ROM, 0x042826, 0x1600);
+                        soundFX = Bits.GetBytes(Model.ROM, 0x042826, 0x1600);
                     else if (this.behavior == EType.SPCBattle)
-                        soundFX = Bits.GetByteArray(Model.ROM, 0x043E26, 0x1600);
+                        soundFX = Bits.GetBytes(Model.ROM, 0x043E26, 0x1600);
                 }
                 PrepareImage();
                 // Backup filename
@@ -860,16 +860,16 @@ namespace LAZYSHELL
             Entrance ent;
             foreach (Level lvl in Model.Levels) // For every level
             {
-                foreach (Event event_ in lvl.LevelEvents.Events)
+                foreach (Event EVENT in lvl.LevelEvents.Events)
                 {
-                    if (event_.RunEvent == this.selectNum) // If this exit points to the level we want
+                    if (EVENT.RunEvent == this.selectNum) // If this exit points to the level we want
                     {
                         ent = new Entrance();
                         ent.Destination = (ushort)lvl.Index;
-                        ent.X = event_.X;
-                        ent.Y = event_.Y;
-                        ent.Z = event_.Z;
-                        ent.F = event_.F;
+                        ent.X = EVENT.X;
+                        ent.Y = EVENT.Y;
+                        ent.Z = EVENT.Z;
+                        ent.F = EVENT.F;
                         ent.ShowMessage = false;
                         ent.Flag = false;
                         eventTriggers.Add(ent); // Add the event trigger

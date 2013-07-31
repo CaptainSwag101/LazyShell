@@ -199,7 +199,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(rom, pointer, (ushort)offset);
                 rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
+                Bits.SetBytes(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 42)
@@ -211,7 +211,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(rom, pointer, (ushort)offset);
                 rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
+                Bits.SetBytes(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 107)
@@ -223,7 +223,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(rom, pointer, (ushort)offset);
                 rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
+                Bits.SetBytes(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 249)
@@ -235,7 +235,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(rom, pointer, (ushort)offset);
                 rom[pointer + 2] = (byte)((offset >> 16) + 0xC0);
-                Bits.SetByteArray(rom, offset, animations[i].BUFFER);
+                Bits.SetBytes(rom, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 444)

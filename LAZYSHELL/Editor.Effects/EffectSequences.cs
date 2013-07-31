@@ -220,7 +220,8 @@ namespace LAZYSHELL
                 e.Graphics.DrawRectangle(
                     new Pen(new SolidBrush(Color.Red)),
                     new Rectangle(0, 0, frame.Width - 1, frame.Height - 1));
-                frame.Focus();
+                if (!molds.Picture.Focused)
+                    frame.Focus();
             }
             else
             {

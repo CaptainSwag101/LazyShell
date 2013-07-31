@@ -90,6 +90,8 @@ namespace LAZYSHELL.Undo
                     }
                     else
                     {
+                        if (layer == 2 && updater.LevelMap.GraphicSetL3 == 0xFF)
+                            break;
                         if (changes[layer] == null)
                             continue;
                         temp = tilemap.GetTileNum(layer, tileX, tileY); // Save the current tileNum for later undo

@@ -90,6 +90,10 @@ namespace LAZYSHELL
                 return null;
             }
         }
+        public Note Note
+        {
+            get { return new Note(this); }
+        }
         // constructor
         public SPCCommand(byte[] commandData, SPC spc, int channel)
         {

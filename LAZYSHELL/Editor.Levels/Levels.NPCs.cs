@@ -539,11 +539,11 @@ namespace LAZYSHELL
                     npcObjectTree.EndUpdate();
                 }
                 else
-                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed is 28.",
+                    MessageBox.Show("Could not insert any more NPCs. The maximum number of NPCs plus NPC clones allowed per level is 28.",
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the NPC. " + MaximumSpaceExceeded("NPCs"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void AddNewInstance()
@@ -586,7 +586,7 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the NPC. " + MaximumSpaceExceeded("NPCs"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void AddNewNPC(NPC e)
@@ -624,7 +624,7 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the NPC. " + MaximumSpaceExceeded("NPCs"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void AddNewInstance(NPC.Clone e)
@@ -667,7 +667,7 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Could not insert the NPC. The total number of NPCs for all levels has exceeded the maximum allotted space.",
+                MessageBox.Show("Could not insert the NPC. " + MaximumSpaceExceeded("NPCs"),
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
@@ -1188,6 +1188,8 @@ namespace LAZYSHELL
         }
         private void npcPaste_Click(object sender, EventArgs e)
         {
+            if (copyNPC == null)
+                return;
             try
             {
                 if (npcObjectTree.SelectedNode == null)

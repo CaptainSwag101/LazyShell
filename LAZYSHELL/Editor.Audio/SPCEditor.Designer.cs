@@ -122,7 +122,7 @@ namespace LAZYSHELL
             this.groupBoxSV = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.scoreViewPicture = new System.Windows.Forms.PictureBox();
+            this.scoreViewPicture = new LAZYSHELL.NewPictureBox();
             this.hScrollBarSV = new System.Windows.Forms.HScrollBar();
             this.labelRNote = new System.Windows.Forms.Label();
             this.rToolStripAct = new System.Windows.Forms.ToolStrip();
@@ -207,7 +207,7 @@ namespace LAZYSHELL
             this.redo = new System.Windows.Forms.ToolStripButton();
             this.labelWNote = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.scoreWriterPicture = new System.Windows.Forms.PictureBox();
+            this.scoreWriterPicture = new LAZYSHELL.NewPictureBox();
             this.hScrollBarSW = new System.Windows.Forms.HScrollBar();
             this.wToolStripNote = new System.Windows.Forms.ToolStrip();
             this.wSharp = new System.Windows.Forms.ToolStripButton();
@@ -1430,12 +1430,14 @@ namespace LAZYSHELL
             this.scoreViewPicture.Size = new System.Drawing.Size(486, 768);
             this.scoreViewPicture.TabIndex = 2;
             this.scoreViewPicture.TabStop = false;
+            this.scoreViewPicture.ZoomEnabled = false;
             this.scoreViewPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.scoreViewPicture_Paint);
             this.scoreViewPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.scoreViewPicture_MouseDown);
             this.scoreViewPicture.MouseEnter += new System.EventHandler(this.scoreViewPicture_MouseEnter);
             this.scoreViewPicture.MouseLeave += new System.EventHandler(this.scoreViewPicture_MouseLeave);
             this.scoreViewPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreViewPicture_MouseMove);
-            this.scoreViewPicture.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.scoreViewPicture_PreviewKeyDown);
+            this.scoreViewPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.scoreViewPicture_MouseUp);
+            this.scoreViewPicture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scoreViewPicture_KeyDown);
             // 
             // hScrollBarSV
             // 
@@ -2404,7 +2406,7 @@ namespace LAZYSHELL
             this.wToolStripAct.Location = new System.Drawing.Point(3, 67);
             this.wToolStripAct.Name = "wToolStripAct";
             this.wToolStripAct.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.wToolStripAct.Size = new System.Drawing.Size(32, 403);
+            this.wToolStripAct.Size = new System.Drawing.Size(24, 403);
             this.wToolStripAct.TabIndex = 6;
             this.wToolStripAct.Text = "toolStrip6";
             // 
@@ -2428,7 +2430,7 @@ namespace LAZYSHELL
             this.wErase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wErase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wErase.Name = "wErase";
-            this.wErase.Size = new System.Drawing.Size(29, 17);
+            this.wErase.Size = new System.Drawing.Size(21, 17);
             this.wErase.Text = "Erase (E)";
             this.wErase.CheckedChanged += new System.EventHandler(this.wErase_CheckedChanged);
             // 
@@ -2440,7 +2442,7 @@ namespace LAZYSHELL
             this.wSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wSelect.Name = "wSelect";
-            this.wSelect.Size = new System.Drawing.Size(29, 17);
+            this.wSelect.Size = new System.Drawing.Size(21, 17);
             this.wSelect.Text = "Select (S)";
             this.wSelect.CheckedChanged += new System.EventHandler(this.wSelect_CheckedChanged);
             // 
@@ -2456,7 +2458,7 @@ namespace LAZYSHELL
             this.wCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wCut.Name = "wCut";
-            this.wCut.Size = new System.Drawing.Size(29, 17);
+            this.wCut.Size = new System.Drawing.Size(21, 17);
             this.wCut.Text = "Cut (Ctrl+X)";
             this.wCut.Click += new System.EventHandler(this.wCut_Click);
             // 
@@ -2467,7 +2469,7 @@ namespace LAZYSHELL
             this.wCopy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wCopy.Name = "wCopy";
-            this.wCopy.Size = new System.Drawing.Size(29, 17);
+            this.wCopy.Size = new System.Drawing.Size(21, 17);
             this.wCopy.Text = "Copy (Ctrl+C)";
             this.wCopy.Click += new System.EventHandler(this.wCopy_Click);
             // 
@@ -2479,7 +2481,7 @@ namespace LAZYSHELL
             this.wPaste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wPaste.Name = "wPaste";
-            this.wPaste.Size = new System.Drawing.Size(29, 17);
+            this.wPaste.Size = new System.Drawing.Size(21, 17);
             this.wPaste.Text = "Paste (Ctrl+V)";
             this.wPaste.CheckedChanged += new System.EventHandler(this.wPaste_CheckedChanged);
             // 
@@ -2490,7 +2492,7 @@ namespace LAZYSHELL
             this.wDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.wDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.wDelete.Name = "wDelete";
-            this.wDelete.Size = new System.Drawing.Size(29, 15);
+            this.wDelete.Size = new System.Drawing.Size(21, 15);
             this.wDelete.Text = "Delete (Del)";
             this.wDelete.Click += new System.EventHandler(this.wDelete_Click);
             // 
@@ -2558,12 +2560,14 @@ namespace LAZYSHELL
             this.scoreWriterPicture.Size = new System.Drawing.Size(861, 700);
             this.scoreWriterPicture.TabIndex = 0;
             this.scoreWriterPicture.TabStop = false;
+            this.scoreWriterPicture.ZoomEnabled = false;
             this.scoreWriterPicture.Paint += new System.Windows.Forms.PaintEventHandler(this.scoreWriterPicture_Paint);
             this.scoreWriterPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.scoreWriterPicture_MouseDown);
             this.scoreWriterPicture.MouseEnter += new System.EventHandler(this.scoreWriterPicture_MouseEnter);
             this.scoreWriterPicture.MouseLeave += new System.EventHandler(this.scoreWriterPicture_MouseLeave);
             this.scoreWriterPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.scoreWriterPicture_MouseMove);
-            this.scoreWriterPicture.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.scoreWriterPicture_PreviewKeyDown);
+            this.scoreWriterPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.scoreWriterPicture_MouseUp);
+            this.scoreWriterPicture.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scoreWriterPicture_KeyDown);
             // 
             // hScrollBarSW
             // 
@@ -3704,6 +3708,7 @@ namespace LAZYSHELL
             this.panelSPC.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -3745,7 +3750,7 @@ namespace LAZYSHELL
         private ToolStripCheckBox autoLaunch;
         private System.Windows.Forms.GroupBox groupBoxSV;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox scoreViewPicture;
+        private LAZYSHELL.NewPictureBox scoreViewPicture;
         private System.Windows.Forms.HScrollBar hScrollBarSV;
         private System.Windows.Forms.Label labelRNote;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -3792,7 +3797,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton wVolume;
         private System.Windows.Forms.ToolStripButton wBalance;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.PictureBox scoreWriterPicture;
+        private LAZYSHELL.NewPictureBox scoreWriterPicture;
         private System.Windows.Forms.ToolStrip wToolStripNote;
         private System.Windows.Forms.ToolStripButton wSharp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;

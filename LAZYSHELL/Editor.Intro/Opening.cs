@@ -26,8 +26,8 @@ namespace LAZYSHELL
         {
             this.intro = intro;
             //
-            openingTileset = Bits.GetByteArray(Model.OpeningData, 0, 0x480);
-            openingGraphics = Bits.GetByteArray(Model.OpeningData, 0x480);
+            openingTileset = Bits.GetBytes(Model.OpeningData, 0, 0x480);
+            openingGraphics = Bits.GetBytes(Model.OpeningData, 0x480);
             tileset = new Tileset(openingTileset, openingGraphics, paletteSet, 16, 9, TilesetType.Opening);
             InitializeComponent();
             if (Model.ROM[0x00087D] == 0xEA &&

@@ -23,21 +23,29 @@ namespace LAZYSHELL
         #region Functions
         private void PaletteUpdate()
         {
+            if (closingEditor)
+                return;
             fullUpdate = false;
             RefreshLevel();
             checksum--;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
+            if (closingEditor)
+                return;
             tileset.Assemble(16, tilesetEditor.Layer);
             fullUpdate = false;
             RefreshLevel();
         }
         private void TilemapUpdate()
         {
+            if (closingEditor)
+                return;
         }
         private void TilesetUpdate()
         {
+            if (closingEditor)
+                return;
             tilemap.Assemble();
             tilemap = new LevelTilemap(level, tileset);
             fullUpdate = false;
@@ -45,6 +53,8 @@ namespace LAZYSHELL
         }
         private void SolidityUpdate()
         {
+            if (closingEditor)
+                return;
             fullUpdate = true;
             solidityMap = new LevelSolidMap(levelMap);
             solidityMap.Image = null;
@@ -171,6 +181,7 @@ namespace LAZYSHELL
         {
             LoadPreviewer();
             previewer.Show();
+            previewer.BringToFront();
         }
         #endregion
     }

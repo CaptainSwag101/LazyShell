@@ -157,7 +157,7 @@ namespace LAZYSHELL
                 else
                 {
                     Model.ROM[dOffset] = 1; dOffset++;
-                    Bits.SetByteArray(Model.ROM, dOffset, compress, 0, size - 1);
+                    Bits.SetBytes(Model.ROM, dOffset, compress, 0, size - 1);
                     dOffset += size;
                     pOffset += 2;
                 }

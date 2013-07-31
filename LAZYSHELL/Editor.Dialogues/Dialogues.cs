@@ -507,7 +507,7 @@ namespace LAZYSHELL
                     totalSize + " bytes) exceeds 302 bytes.\n\n" + "The menu palettes were not saved.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                Bits.SetByteArray(Model.ROM, 0x3E2D54, compressed, 0, totalSize - 1);
+                Bits.SetBytes(Model.ROM, 0x3E2D54, compressed, 0, totalSize - 1);
             //
             fonts.Assemble();
             battleDialogues.Assemble();

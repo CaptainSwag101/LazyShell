@@ -17,7 +17,16 @@ namespace LAZYSHELL
         // main
         private delegate void Function();
         private Delegate update;
-        public int Layer { get { return tabControl1.SelectedIndex; } set { tabControl1.SelectedIndex = value; } }
+        public int Layer
+        {
+            get
+            {
+                if (tabControl1.SelectedIndex >= 0)
+                    return tabControl1.SelectedIndex;
+                return 0;
+            }
+            set { tabControl1.SelectedIndex = value; }
+        }
         private PictureBox pictureBox
         {
             get
@@ -94,7 +103,16 @@ namespace LAZYSHELL
             this.pictureBoxTilesetL2.Height = height;
             this.pictureBoxTilesetL3.Height = height;
             if (this.tileset.Tilesets_tiles[Layer] == null)
-                this.Layer = 0;
+            {
+                if (this.tileset.Tilesets_tiles[0] != null)
+                    this.Layer = 0;
+                else if (this.tileset.Tilesets_tiles[1] != null)
+                    this.Layer = 1;
+                else if (this.tileset.Tilesets_tiles[2] != null)
+                    this.Layer = 2;
+                else
+                    this.Layer = 0;
+            }
             LoadTileEditor();
             SetTileSetImage();
         }
@@ -110,7 +128,16 @@ namespace LAZYSHELL
             this.overlay = overlay;
             this.update = update;
             if (this.tileset.Tilesets_tiles[Layer] == null)
-                this.Layer = 0;
+            {
+                if (this.tileset.Tilesets_tiles[0] != null)
+                    this.Layer = 0;
+                else if (this.tileset.Tilesets_tiles[1] != null)
+                    this.Layer = 1;
+                else if (this.tileset.Tilesets_tiles[2] != null)
+                    this.Layer = 2;
+                else
+                    this.Layer = 0;
+            }
             LoadTileEditor();
             SetTileSetImage();
         }
@@ -121,16 +148,22 @@ namespace LAZYSHELL
                 tabControl1.TabPages.Insert(index++, tabPage1);
             else if (!L1 && tabControl1.Contains(tabPage1))
                 tabControl1.TabPages.Remove(tabPage1);
+            else if (tabControl1.Contains(tabPage1))
+                index++;
             //
             if (L2 && !tabControl1.TabPages.Contains(tabPage2))
                 tabControl1.TabPages.Insert(index++, tabPage2);
             else if (!L2 && tabControl1.Contains(tabPage2))
                 tabControl1.TabPages.Remove(tabPage2);
+            else if (tabControl1.Contains(tabPage2))
+                index++;
             //
             if (L3 && !tabControl1.TabPages.Contains(tabPage3))
                 tabControl1.TabPages.Insert(index++, tabPage3);
             else if (!L3 && tabControl1.Contains(tabPage3))
                 tabControl1.TabPages.Remove(tabPage3);
+            else if (tabControl1.Contains(tabPage3))
+                index++;
         }
         private void SetTileSetImage()
         {
@@ -661,7 +694,6 @@ namespace LAZYSHELL
         }
         private void lockEditing_CheckedChanged(object sender, EventArgs e)
         {
-            buttonToggleTileEditor.Enabled = !lockEditing.Checked;
             buttonEditDelete.Enabled = !lockEditing.Checked;
             buttonEditCut.Enabled = !lockEditing.Checked;
             buttonEditCopy.Enabled = !lockEditing.Checked;

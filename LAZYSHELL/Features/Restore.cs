@@ -43,7 +43,7 @@ namespace LAZYSHELL
                     fStream.Close();
                     // Check if valid rom
                     System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-                    if (encoding.GetString(Bits.GetByteArray(temp, 0x7FB2, 4)) != "ARWE")
+                    if (encoding.GetString(Bits.GetBytes(temp, 0x7FB2, 4)) != "ARWE")
                     {
                         MessageBox.Show("The game code for this ROM is invalid.", "LAZY SHELL");
                         return;

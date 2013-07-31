@@ -17,31 +17,6 @@ namespace LAZYSHELL
         LiveAlly = 2, Enemy = 4, All = 16, WoundedOnly = 32, OnePartyOnly = 64, NotSelf = 128
     }
     // scripts
-    public enum EventCategory
-    {
-        Objects, Joypad, PartyMembers, Inventory,
-        Battle, Levels, Menus, Dialogues,
-        Events, JumpTo, ScreenEffects, AudioPlayback,
-        Memory, Memory7000, PauseScript, Return
-    }
-    public enum ActionCategory
-    {
-        Properties, Palette, SpriteSequence, SpriteAnimation,
-        Shift1xStep, ShiftIsometric, Shift1pxUnit, FaceDirection,
-        ShiftToCoords, AudioPlayback, Memory, Memory700C,
-        JumpTo, ObjectMemory, PauseScript, Return
-    }
-    public enum EventObjects
-    {
-        ActionQueue, FreezeAllObjects, UnfreezeAllObjects,
-        IfObjectPresent, IfMarioOnTop, IfDistanceBetween,
-        IfDistanceBetweenZEQ, IfMarioInAir, CreateNPCatObject,
-        CreateNPCatMario, IfMarioOnTopAnyObject, SetObjPresence,
-        SetObjEventTrigger, SetObjMem70A8PresenceTrue, SetObjMem70A8PresentFalse,
-        SetObjMem70A8EventTriggerTrue, SetObjMem70A8EventTriggerFalse,
-        IfObjectInLevel, RememberLastObject, IfRunningAction, IfUnderwater,
-        IfInAir, CreateNPCatMarioEvent, MarioGlows
-    }
     // other
     public enum MenuType
     {

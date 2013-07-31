@@ -101,11 +101,11 @@ namespace LAZYSHELL
             if (events.Count == 0) 
                 return; 
             //
-            foreach (Event event_ in events)
+            foreach (Event EVENT in events)
             {
-                event_.Assemble(rom, offset);
+                EVENT.Assemble(rom, offset);
                 offset += 5;
-                if (event_.Width > 0)
+                if (EVENT.Width > 0)
                     offset++;
             }
             offsetStart = (ushort)(offset - 0x200000);

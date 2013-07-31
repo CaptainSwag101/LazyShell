@@ -59,7 +59,7 @@ namespace LAZYSHELL
             Bits.SetShort(rom, 0x249000 + index * 2, pointer);
             int offset = pointer + 0x249100;
             char[] raw = new char[text.Length + 1]; text.CopyTo(raw, 0);
-            Bits.SetCharArray(rom, offset, raw);
+            Bits.SetChars(rom, offset, raw);
             pointer += raw.Length;
         }
         // class functions

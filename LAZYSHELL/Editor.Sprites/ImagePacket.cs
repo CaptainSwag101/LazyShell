@@ -46,7 +46,7 @@ namespace LAZYSHELL
         // accessor functions
         public byte[] Graphics(byte[] spriteGraphics)
         {
-            return Bits.GetByteArray(spriteGraphics, graphicOffset - 0x280000, 0x4000);
+            return Bits.GetBytes(spriteGraphics, graphicOffset - 0x280000, 0x4000);
         }
     }
 }

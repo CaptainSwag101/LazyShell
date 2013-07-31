@@ -149,7 +149,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(Model.ROM, pointer, (ushort)offset);
                 Bits.SetByte(Model.ROM, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(Model.ROM, offset, animations[i].BUFFER);
+                Bits.SetBytes(Model.ROM, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 39)
@@ -161,7 +161,7 @@ namespace LAZYSHELL
                     break;
                 Bits.SetShort(Model.ROM, pointer, (ushort)offset);
                 Bits.SetByte(Model.ROM, pointer + 2, (byte)((offset >> 16) + 0xC0));
-                Bits.SetByteArray(Model.ROM, offset, animations[i].BUFFER);
+                Bits.SetBytes(Model.ROM, offset, animations[i].BUFFER);
                 offset += animations[i].BUFFER.Length;
             }
             if (i < 64)

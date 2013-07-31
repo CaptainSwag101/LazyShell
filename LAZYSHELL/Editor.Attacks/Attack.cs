@@ -91,7 +91,7 @@ namespace LAZYSHELL
         }
         public void Assemble()
         {
-            Bits.SetCharArray(rom, 0x3959F4 + (index * 13), name);
+            Bits.SetChars(rom, 0x3959F4 + (index * 13), name);
             //
             int offset = (index * 4) + 0x391226;
             rom[offset] = attackLevel;

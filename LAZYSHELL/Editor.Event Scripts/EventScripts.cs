@@ -499,7 +499,7 @@ namespace LAZYSHELL
             for (; i < 1536; i++, pointer += 2)
             {
                 Bits.SetShort(Model.ROM, bank + pointer, offset);
-                Bits.SetByteArray(Model.ROM, bank + offset, eventScripts[i].Script);
+                Bits.SetBytes(Model.ROM, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
             for (int a = offset; a < 0x10000; a++) Model.ROM[bank + a] = 0xFF;
@@ -509,7 +509,7 @@ namespace LAZYSHELL
             for (; i < 3072; i++, pointer += 2)
             {
                 Bits.SetShort(Model.ROM, bank + pointer, offset);
-                Bits.SetByteArray(Model.ROM, bank + offset, eventScripts[i].Script);
+                Bits.SetBytes(Model.ROM, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
             for (int a = offset; a < 0x10000; a++) Model.ROM[bank + a] = 0xFF;
@@ -519,7 +519,7 @@ namespace LAZYSHELL
             for (; i < 4096; i++, pointer += 2)
             {
                 Bits.SetShort(Model.ROM, bank + pointer, offset);
-                Bits.SetByteArray(Model.ROM, bank + offset, eventScripts[i].Script);
+                Bits.SetBytes(Model.ROM, bank + offset, eventScripts[i].Script);
                 offset += (ushort)eventScripts[i].Script.Length;
             }
             for (int a = offset; a < 0xE000; a++) Model.ROM[bank + a] = 0xFF;
@@ -535,7 +535,7 @@ namespace LAZYSHELL
             for (; i < actionScripts.Length; i++, pointer += 2)
             {
                 Bits.SetShort(Model.ROM, bank + pointer, offset);
-                Bits.SetByteArray(Model.ROM, bank + offset, actionScripts[i].Script);
+                Bits.SetBytes(Model.ROM, bank + offset, actionScripts[i].Script);
                 offset += (ushort)actionScripts[i].Script.Length;
             }
         }

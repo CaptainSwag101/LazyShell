@@ -335,7 +335,7 @@ namespace LAZYSHELL
                 thisCounter++;
             }
             byte[] temp = new byte[offset];
-            Bits.SetByteArray(temp, 0, mold);
+            Bits.SetBytes(temp, 0, mold);
             return temp;
         }
         private bool CompareTiles(Tile tileA, Tile tileB, bool checkIfAtLeastOne)
@@ -604,10 +604,10 @@ namespace LAZYSHELL
                     byte[] temp;
                     switch (format)
                     {
-                        case 0: temp = Bits.GetByteArray(buffer, offset, 9); length += 9; break;
-                        case 1: temp = Bits.GetByteArray(buffer, offset, 12); length += 12; break;
-                        case 2: temp = Bits.GetByteArray(buffer, offset, 12); length += 12; break;
-                        case 3: temp = Bits.GetByteArray(buffer, offset, 16); length += 16; break;
+                        case 0: temp = Bits.GetBytes(buffer, offset, 9); length += 9; break;
+                        case 1: temp = Bits.GetBytes(buffer, offset, 12); length += 12; break;
+                        case 2: temp = Bits.GetBytes(buffer, offset, 12); length += 12; break;
+                        case 3: temp = Bits.GetBytes(buffer, offset, 16); length += 16; break;
                         default: goto case 0;
                     }
                     subtile_bytes = new ushort[16];

@@ -312,7 +312,7 @@ namespace LAZYSHELL
         }
         public void Assemble(ref int descriptionOffset)
         {
-            Bits.SetCharArray(rom, 0x3A137F + (index * 15), name);
+            Bits.SetChars(rom, 0x3A137F + (index * 15), name);
             // description
             int length = 0;
             if (index <= 0x1A)
@@ -323,7 +323,7 @@ namespace LAZYSHELL
                 else
                 {
                     length = description.Length;
-                    Bits.SetCharArray(rom, 0x3A0000 + descriptionOffset, description); // Write the actual description
+                    Bits.SetChars(rom, 0x3A0000 + descriptionOffset, description); // Write the actual description
                 }
             }
             descriptionOffset += length;

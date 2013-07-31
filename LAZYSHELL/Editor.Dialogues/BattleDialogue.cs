@@ -52,7 +52,7 @@ namespace LAZYSHELL
             Bits.SetShort(rom, pointerOffset + index * 2, offset);
             this.offset = offset + baseOffset;
             //
-            Bits.SetCharArray(rom, this.offset, text);
+            Bits.SetChars(rom, this.offset, text);
             offset += text.Length;
         }
         // class functions

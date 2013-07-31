@@ -515,96 +515,96 @@ namespace LAZYSHELL
             int index = 0;
             int total = 0;
             List<Event> sorted = new List<Event>();
-            foreach (Event event_ in events.Events)
+            foreach (Event EVENT in events.Events)
             {
-                event_.Hilite = events.SelectedEvent == index;
-                event_.Index = total++;
-                sorted.Add(event_);
+                EVENT.Hilite = events.SelectedEvent == index;
+                EVENT.Index = total++;
+                sorted.Add(EVENT);
                 index++;
             }
             sorted.Sort(delegate(Event event1, Event event2) { return event1.Y.CompareTo(event2.Y); });
-            foreach (Event event_ in sorted)
-                DrawLevelEvent(event_, g, z);
+            foreach (Event EVENT in sorted)
+                DrawLevelEvent(EVENT, g, z);
         }
-        private void DrawLevelEvent(Event event_, Graphics g, int z)
+        private void DrawLevelEvent(Event EVENT, Graphics g, int z)
         {
             if (eventFieldBaseImage == null)
                 GenerateEventFields();
             if (fieldBaseShadowImage == null)
                 GenerateNPCFields();
-            int x = ((event_.X & 127) * 32) + (16 * (event_.Y & 1)) - 16;
-            int y = ((event_.Y & 127) * 8) - 8;
+            int x = ((EVENT.X & 127) * 32) + (16 * (EVENT.Y & 1)) - 16;
+            int y = ((EVENT.Y & 127) * 8) - 8;
             Rectangle rsrc, rdst;
             // Draw the complete # of blocks
-            if (event_.Width > 0)
+            if (EVENT.Width > 0)
             {
-                if (event_.F == 0)
+                if (EVENT.F == 0)
                 {
-                    y -= event_.Width * 8;
-                    x += event_.Width * 16;
+                    y -= EVENT.Width * 8;
+                    x += EVENT.Width * 16;
                 }
                 // draw shadow
-                for (int w = 0; w <= event_.Width; w++)
+                for (int w = 0; w <= EVENT.Width; w++)
                 {
-                    if (event_.Z > 0)
+                    if (EVENT.Z > 0)
                     {
-                        if (event_.F == 0)
+                        if (EVENT.F == 0)
                             rsrc = new Rectangle(-(w * 16) + x, w * 8 + y, 32, 16);
                         else
                             rsrc = new Rectangle(w * 16 + x, w * 8 + y, 32, 16);
                         rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                        g.DrawImage(event_.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                        g.DrawImage(EVENT.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                     }
                 }
                 // draw field base
-                for (int w = 0; w <= event_.Width; w++)
+                for (int w = 0; w <= EVENT.Width; w++)
                 {
                     if (w == 0)
-                        y -= event_.Z * 16;
-                    if (event_.Height == 0)
+                        y -= EVENT.Z * 16;
+                    if (EVENT.Height == 0)
                     {
                         rsrc = new Rectangle(x, y, 32, 16);
                         rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                        g.DrawImage(event_.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                        g.DrawImage(EVENT.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                     }
-                    else if (event_.Height > 0)
+                    else if (EVENT.Height > 0)
                     {
                         y -= 16;
-                        for (int h = 0; h < event_.Height; h++)
+                        for (int h = 0; h < EVENT.Height; h++)
                         {
                             rsrc = new Rectangle(x, y - (h * 16), 32, 32);
                             rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                            g.DrawImage(event_.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                            g.DrawImage(EVENT.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                         }
                         y += 16;
                     }
-                    x += event_.F == 0 ? -16 : 16;
+                    x += EVENT.F == 0 ? -16 : 16;
                     y += 8;
                 }
             }
             else
             {
-                if (event_.Z > 0)
+                if (EVENT.Z > 0)
                 {
                     rsrc = new Rectangle(x, y, 32, 16);
                     rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                    g.DrawImage(event_.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    g.DrawImage(EVENT.Hilite ? fieldBaseShadowImageH : fieldBaseShadowImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                 }
-                y -= event_.Z * 16;
-                if (event_.Height == 0)
+                y -= EVENT.Z * 16;
+                if (EVENT.Height == 0)
                 {
                     rsrc = new Rectangle(x, y, 32, 16);
                     rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                    g.DrawImage(event_.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                    g.DrawImage(EVENT.Hilite ? eventFieldBaseImageH : eventFieldBaseImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                 }
-                else if (event_.Height > 0)
+                else if (EVENT.Height > 0)
                 {
                     y -= 16;
-                    for (int h = 0; h < event_.Height; h++)
+                    for (int h = 0; h < EVENT.Height; h++)
                     {
                         rsrc = new Rectangle(x, y - (h * 16), 32, 32);
                         rdst = new Rectangle(rsrc.X * z, rsrc.Y * z, rsrc.Width * z, rsrc.Height * z);
-                        g.DrawImage(event_.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
+                        g.DrawImage(EVENT.Hilite ? eventFieldBlockImageH : eventFieldBlockImage, rdst, 0, 0, rsrc.Width, rsrc.Height, GraphicsUnit.Pixel);
                     }
                 }
             }
@@ -614,10 +614,10 @@ namespace LAZYSHELL
             if (events.Count == 0)
                 return;
             // draw event strings
-            foreach (Event event_ in events.Events)
+            foreach (Event EVENT in events.Events)
             {
-                if (event_ != events.Event)
-                    DrawLevelEventTag(g, events, event_, z);
+                if (EVENT != events.Event)
+                    DrawLevelEventTag(g, events, EVENT, z);
             }
             if (events.Event != null)
                 DrawLevelEventTag(g, events, events.Event, z);
