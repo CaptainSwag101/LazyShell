@@ -15,7 +15,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Project : Form
+    public partial class Project : NewForm
     {
         #region Variables
         private Settings settings = Settings.Default;
@@ -58,9 +58,7 @@ namespace LAZYSHELL
                 return Bits.GetInt32(listViewList.SelectedItems[0].SubItems[0].Text);
             }
         }
-        private long checksum;
-        private bool updating = false;
-        private Overlay overlay = new Overlay();
+                private Overlay overlay = new Overlay();
         //
         private FontCharacter[] font
         {
@@ -171,11 +169,10 @@ namespace LAZYSHELL
             closeButton.Enabled = true;
             save.Enabled = true;
             saveAs.Enabled = true;
-            checksum = Do.GenerateChecksum(project);
         }
         private void RefreshElementIndexes()
         {
-            updating = true;
+            this.Updating = true;
             panelAddressBit.Visible = false;
             panelIndexNumber.Visible = true;
             panelIndexNumber.BringToFront();
@@ -253,7 +250,7 @@ namespace LAZYSHELL
                     indexDescription.Text = "";
                     elementIndexes.EndUpdate();
                     elementIndexes.EndUpdate();
-                    updating = false;
+                    this.Updating = false;
                     return;
             }
             panel1.Enabled = true;
@@ -286,11 +283,11 @@ namespace LAZYSHELL
             }
             elementIndexes.Items.AddRange(listViewItems.ToArray());
             elementIndexes.EndUpdate();
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshIndex()
         {
-            updating = true;
+            this.Updating = true;
             buttonDelete.Enabled = true;
             buttonMoveDown.Enabled = true;
             buttonMoveUp.Enabled = true;
@@ -302,7 +299,7 @@ namespace LAZYSHELL
             indexDescription.Text = currentIndex.Description;
             address.Value = currentIndex.Address;
             addressBit.Value = currentIndex.AddressBit;
-            updating = false;
+            this.Updating = false;
         }
         public bool LoadProject()
         {
@@ -410,7 +407,6 @@ namespace LAZYSHELL
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, project);
             s.Close();
-            checksum = Do.GenerateChecksum(project);
         }
         private void SaveAsNewProject()
         {
@@ -431,7 +427,6 @@ namespace LAZYSHELL
             BinaryFormatter b = new BinaryFormatter();
             b.Serialize(s, project);
             s.Close();
-            checksum = Do.GenerateChecksum(project);
         }
         private void AddNewIndex()
         {
@@ -660,7 +655,7 @@ namespace LAZYSHELL
         }
         private void InitializeKeystrokes()
         {
-            updating = true;
+            this.Updating = true;
             panelFontTable.SuspendDrawing();
             panelFontTable.Controls.Clear();
             TextBox keyBox;
@@ -694,11 +689,11 @@ namespace LAZYSHELL
                 }
             }
             panelFontTable.ResumeDrawing();
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshKeystrokes()
         {
-            updating = true;
+            this.Updating = true;
             panelFontTable.SuspendDrawing();
             foreach (TextBox keyBox in panelFontTable.Controls)
             {
@@ -708,7 +703,7 @@ namespace LAZYSHELL
                 keyBox.Text = keystrokes[index + 32];
             }
             panelFontTable.ResumeDrawing();
-            updating = false;
+            this.Updating = false;
         }
         #endregion
         #region Event Handlers
@@ -716,7 +711,7 @@ namespace LAZYSHELL
         {
             if (project == null)
                 return;
-            if (Do.GenerateChecksum(project) == checksum)
+            if (!this.Modified)
             {
                 return;
             }
@@ -802,31 +797,31 @@ namespace LAZYSHELL
         // project information
         private void projectTitle_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             project.Title = projectTitle.Text;
         }
         private void projectAuthor_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             project.Author = projectAuthor.Text;
         }
         private void projectDate_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             project.Date = projectDate.Text;
         }
         private void projectWebpage_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             project.Webpage = projectWebpage.Text;
         }
         private void projectDescription_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             project.Description = projectDescription.Text;
         }
@@ -949,7 +944,7 @@ namespace LAZYSHELL
         }
         private void elementType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshElementIndexes();
             if (elementIndexes.Items.Count > 0)
@@ -966,7 +961,7 @@ namespace LAZYSHELL
         {
             if (!e.IsSelected)
                 return;
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshIndex();
             elementIndexes.BeginUpdate();
@@ -975,7 +970,7 @@ namespace LAZYSHELL
         }
         private void indexNumber_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentIndex.Index = (int)indexNumber.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
@@ -984,7 +979,7 @@ namespace LAZYSHELL
         }
         private void indexLabel_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentIndex.Label = indexLabel.Text;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
@@ -993,13 +988,13 @@ namespace LAZYSHELL
         }
         private void indexDescription_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentIndex.Description = indexDescription.Text;
         }
         private void address_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentIndex.Address = (int)address.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
@@ -1008,7 +1003,7 @@ namespace LAZYSHELL
         }
         private void addressBit_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentIndex.AddressBit = (int)addressBit.Value;
             int selectedIndex = Do.GetSelectedIndex(elementIndexes);
@@ -1163,7 +1158,7 @@ namespace LAZYSHELL
         }
         private void keyBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             TextBox rtb = (TextBox)sender;
             keystrokes[(int)rtb.Tag + 32] = rtb.Text;

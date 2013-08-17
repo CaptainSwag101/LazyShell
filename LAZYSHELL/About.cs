@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class About : Form
+    public partial class About : NewForm
     {
         private Editor form1;
         // constructor

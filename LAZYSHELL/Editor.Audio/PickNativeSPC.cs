@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class PickNativeSPC : Form
+    public partial class PickNativeSPC : NewForm
     {
         public PickNativeSPC()
         {

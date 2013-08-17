@@ -8,10 +8,9 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class NPCPackets : Form
+    public partial class NPCPackets : NewForm
     {
-        private bool updating = false;
-        private NPCPacket[] npcPackets { get { return Model.NPCPackets; } set { Model.NPCPackets = value; } }
+                private NPCPacket[] npcPackets { get { return Model.NPCPackets; } set { Model.NPCPackets = value; } }
         private NPCPacket npcPacket { get { return npcPackets[index]; } set { npcPackets[index] = value; } }
         private int index { get { return (int)packetNum.Value; } set { packetNum.Value = value; } }
         private Bitmap spriteImage;
@@ -27,7 +26,7 @@ namespace LAZYSHELL
         }
         private void InitializePackets()
         {
-            updating = true;
+            this.Updating = true;
             this.spriteName.SelectedIndex = npcPacket.Sprite;
             this.action.Value = npcPacket.Action;
             this.byte0.Value = npcPacket.B0;
@@ -41,7 +40,7 @@ namespace LAZYSHELL
             this.showShadow.Checked = npcPacket.ShowShadow;
             this.byte2.Value = npcPacket.B2;
             SetSpriteImage();
-            updating = false;
+            this.Updating = false;
         }
         private void SetSpriteImage()
         {
@@ -88,7 +87,7 @@ namespace LAZYSHELL
         private void spriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
             spriteNum.Value = spriteName.SelectedIndex + 192;
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.Sprite = (byte)spriteName.SelectedIndex;
             SetSpriteImage();
@@ -107,7 +106,7 @@ namespace LAZYSHELL
         }
         private void action_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.Action = (ushort)action.Value;
         }
@@ -122,37 +121,37 @@ namespace LAZYSHELL
         }
         private void byte0_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B0 = (byte)byte0.Value;
         }
         private void byte1a_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B1a = (byte)byte1a.Value;
         }
         private void byte1b_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B1b = (byte)byte1b.Value;
         }
         private void byte1c_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B1c = (byte)byte1c.Value;
         }
         private void byte4_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B4 = (byte)byte4.Value;
         }
         private void unknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B2b2 = unknownBits.GetItemChecked(0);
             npcPacket.B2b3 = unknownBits.GetItemChecked(1);
@@ -162,13 +161,13 @@ namespace LAZYSHELL
         private void showShadow_CheckedChanged(object sender, EventArgs e)
         {
             showShadow.ForeColor = showShadow.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.ShowShadow = showShadow.Checked;
         }
         private void byte2_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             npcPacket.B2 = (byte)byte2.Value;
         }

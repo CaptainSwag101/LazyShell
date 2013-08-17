@@ -9,10 +9,9 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Spells : Form
+    public partial class Spells : NewForm
     {
         #region Variables
-        private bool updating = false;
         private Spell[] spells { get { return Model.Spells; } set { Model.Spells = value; } }
         private Spell spell { get { return spells[index]; } set { spells[index] = value; } }
         public Spell Spell { get { return spell; } set { spell = value; } }
@@ -34,15 +33,15 @@ namespace LAZYSHELL
             RefreshTimingSpellsTwo();
             labelWindow = new EditLabel(spellName, spellNum, "Spells", false);
             //
-            new History(this, spellName, spellNum);
+            this.History = new History(this, spellName, spellNum);
         }
         #region Functions
         public void RefreshSpells()
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             this.spellName.SelectedIndex = Model.SpellNames.GetSortedIndex(index);
             this.spellFPCost.Value = spell.FPCost;
             this.spellMagPower.Value = spell.MagicPower;
@@ -132,7 +131,7 @@ namespace LAZYSHELL
                 RefreshTimingRapidSpellMax();
             if (index == 1 || index == 3 || index == 5)
                 RefreshTimingFireballSpells();
-            updating = false;
+            this.Updating = false;
             Cursor.Current = Cursors.Arrow;
         }
         private void RefreshTimingSpellsOne()

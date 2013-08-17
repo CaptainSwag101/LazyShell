@@ -10,14 +10,12 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Monsters : Form
+    public partial class Monsters : NewForm
     {
         #region Variables
             //
         private delegate void Function();
-        private long checksum;
-        private bool updatingMonsters = false;
-        private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
+                private Monster[] monsters { get { return Model.Monsters; } set { Model.Monsters = value; } }
         private Monster monster { get { return monsters[Index]; } set { monsters[Index] = value; } }
         private FontCharacter[] fontMenu { get { return Model.FontMenu; } }
         private int[] fontPaletteBattle { get { return Model.FontPaletteBattle.Palettes[0]; } }
@@ -59,11 +57,10 @@ namespace LAZYSHELL
             InitializeStrings();
             RefreshMonsterTab();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, monsterName, monsterNum);
+            this.History = new History(this, monsterName, monsterNum);
             //
             if (settings.RememberLastIndex)
                 Index = settings.LastMonster;
-            checksum = Do.GenerateChecksum(monsters);
             //MessageBox.Show(battleScriptsEditor.Width + " x " + battleScriptsEditor.Height);
         }
         private void InitializeStrings()
@@ -81,10 +78,10 @@ namespace LAZYSHELL
         }
         private void RefreshMonsterTab()
         {
-            if (!updatingMonsters)
+            if (!this.Updating)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                updatingMonsters = true;
+                this.Updating = true;
                 this.monsterName.SelectedIndex = Model.MonsterNames.GetSortedIndex(Index);
                 this.monsterNameText.Text = Do.RawToASCII(monster.Name, Lists.KeystrokesMenu);
                 this.MonsterValHP.Value = monster.HP;
@@ -135,7 +132,7 @@ namespace LAZYSHELL
                 CalculateFreeSpace();
                 SetDialogueImages();
                 //
-                updatingMonsters = false;
+                this.Updating = false;
                 Cursor.Current = Cursors.Arrow;
             }
         }
@@ -194,13 +191,12 @@ namespace LAZYSHELL
                     "The allotted space for psychopath dialogues has been exceeded. Not all psychopath dialogues have been saved.",
                     "LAZY SHELL");
             battleScriptsEditor.Assemble();
-            checksum = Do.GenerateChecksum(monsters);
         }
         #endregion
         #region Event Handlers
         private void Monsters_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(monsters) == checksum && battleScriptsEditor.ChecksumNotChanged())
+            if (!this.Modified && !battleScriptsEditor.Modified)
             {
                 if (hackingToolsWindow.Visible) hackingToolsWindow.Close();
                 return;

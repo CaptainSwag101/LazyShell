@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.18.1
+    <value>Lazy Shell, Version 3.18.3
 
 Copyright © 2007-2013  giangurgolo &amp; Omega
 
@@ -130,6 +130,7 @@ Main Contributors and Supporters:
 ElementalPowerStar -  notable donator, principle bug-finder, positive feedback
 Yakibomb - principle bug-finder and tester, positive feedback
 Ryan H. - donator, supporter
+
 Special Thanks:
 Alex Farber - MRU list manager
 Bregalad - source code for BRR encoding and decoding

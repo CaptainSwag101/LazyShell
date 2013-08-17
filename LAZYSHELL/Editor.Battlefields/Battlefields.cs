@@ -11,14 +11,12 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Battlefields : Form
+    public partial class Battlefields : NewForm
     {
         #region Variables
-        private long checksum;
         private Settings settings = Settings.Default;
         // main
         private delegate void Function();
-        private bool updating = false;
         private int index
         {
             get { return (int)battlefieldNum.Value; }
@@ -96,16 +94,15 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, battlefieldName, battlefieldNum);
+            this.History = new History(this, battlefieldName, battlefieldNum);
             if (settings.RememberLastIndex)
                 index = settings.LastBattlefield;
             //
-            checksum = Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets);
         }
         public void RefreshBattlefield()
         {
             Cursor.Current = Cursors.WaitCursor;
-            updating = true;
+            this.Updating = true;
             tileset = new BattlefieldTileset(battlefield, paletteSets[battlefield.PaletteSet]);
             // Update fields
             battlefieldName.SelectedIndex = index;
@@ -128,7 +125,7 @@ namespace LAZYSHELL
             LoadPaletteEditor();
             LoadGraphicEditor();
             LoadTileEditor();
-            updating = false;
+            this.Updating = false;
             Cursor.Current = Cursors.Arrow;
         }
         private void SetBattlefieldImage()
@@ -158,7 +155,6 @@ namespace LAZYSHELL
             foreach (Battlefield bf in battlefields)
                 bf.Assemble();
             Model.Compress(Model.TilesetsBF, Model.EditTilesetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
-            checksum = Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets);
         }
         // Editor loading
         private void LoadPaletteEditor()
@@ -209,7 +205,7 @@ namespace LAZYSHELL
             SetBattlefieldImage();
             LoadGraphicEditor();
             LoadTileEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -427,7 +423,7 @@ namespace LAZYSHELL
         }
         private void Battlefields_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(battlefields, Model.TilesetsBF, paletteSets) == checksum)
+            if (!this.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Battlefields have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -467,7 +463,7 @@ namespace LAZYSHELL
         }
         private void battlefieldPaletteSetNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.PaletteSet = (byte)battlefieldPaletteSetNum.Value;
             battlefieldPaletteSetName.SelectedIndex = (int)battlefieldPaletteSetNum.Value;
@@ -480,13 +476,13 @@ namespace LAZYSHELL
         }
         private void battlefieldPaletteSetName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldPaletteSetNum.Value = battlefieldPaletteSetName.SelectedIndex;
         }
         private void battlefieldGFXSet1Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.GraphicSetA = (byte)battlefieldGFXSet1Num.Value;
             battlefieldGFXSet1Name.SelectedIndex = (int)battlefieldGFXSet1Num.Value;
@@ -499,13 +495,13 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet1Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldGFXSet1Num.Value = battlefieldGFXSet1Name.SelectedIndex;
         }
         private void battlefieldGFXSet2Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.GraphicSetB = (byte)battlefieldGFXSet2Num.Value;
             battlefieldGFXSet2Name.SelectedIndex = (int)battlefieldGFXSet2Num.Value;
@@ -518,13 +514,13 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet2Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldGFXSet2Num.Value = battlefieldGFXSet2Name.SelectedIndex;
         }
         private void battlefieldGFXSet3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.GraphicSetC = (byte)battlefieldGFXSet3Num.Value;
             battlefieldGFXSet3Name.SelectedIndex = (int)battlefieldGFXSet3Num.Value;
@@ -537,13 +533,13 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldGFXSet3Num.Value = battlefieldGFXSet3Name.SelectedIndex;
         }
         private void battlefieldGFXSet4Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.GraphicSetD = (byte)battlefieldGFXSet4Num.Value;
             battlefieldGFXSet4Name.SelectedIndex = (int)battlefieldGFXSet4Num.Value;
@@ -556,13 +552,13 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet4Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldGFXSet4Num.Value = battlefieldGFXSet4Name.SelectedIndex;
         }
         private void battlefieldGFXSet5Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.GraphicSetE = (byte)battlefieldGFXSet5Num.Value;
             battlefieldGFXSet5Name.SelectedIndex = (int)battlefieldGFXSet5Num.Value;
@@ -575,13 +571,13 @@ namespace LAZYSHELL
         }
         private void battlefieldGFXSet5Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldGFXSet5Num.Value = battlefieldGFXSet5Name.SelectedIndex;
         }
         private void battlefieldTilesetNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefield.TileSet = (byte)battlefieldTilesetNum.Value;
             battlefieldTilesetName.SelectedIndex = (int)battlefieldTilesetNum.Value;
@@ -594,7 +590,7 @@ namespace LAZYSHELL
         }
         private void battlefieldTilesetName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             battlefieldTilesetNum.Value = battlefieldTilesetName.SelectedIndex;
         }

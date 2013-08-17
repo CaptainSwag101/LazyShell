@@ -14,11 +14,10 @@ using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
-    public partial class EventScripts : Form
+    public partial class EventScripts : NewForm
     {
         #region Variables
         // main
-        private long checksum;
         private Settings settings = Settings.Default;
         //
         private EventScript[] eventScripts { get { return Model.EventScripts; } set { Model.EventScripts = value; } }
@@ -40,9 +39,7 @@ namespace LAZYSHELL
         //
         private TreeViewWrapper treeViewWrapper;
         public TreeViewWrapper TreeViewWrapper { get { return treeViewWrapper; } }
-        private bool updatingScript = true;
-        private bool updatingControls = true;
-        private bool isActionScript = false;
+                private bool isActionScript = false;
         private bool isActionSelected = false;
         private int index { get { return (int)eventNum.Value; } set { eventNum.Value = value; } }
         private int type { get { return eventName.SelectedIndex; } set { eventName.SelectedIndex = value; } }
@@ -148,26 +145,15 @@ namespace LAZYSHELL
             InitializeComponent();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip4, Keys.F2, baseConvertor);
-            InitializeEditor();
             searchWindow = new Search(eventNum, searchLabelsText, searchLabels, Lists.EventLabels);
             labelWindow = new EditLabel(eventLabel, eventNum, "Event Scripts", true);
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, null, eventNum);
-            disableNavigate = true;
-            if (settings.RememberLastIndex)
-            {
-                int lastEventScript = settings.LastEventScript;
-                type = Math.Max(0, settings.LastEventScriptCat);
-                index = Math.Min((int)eventNum.Maximum, lastEventScript);
-            }
-            else
-                type = 0;
-            disableNavigate = false;
-            lastNavigate = new Navigate(index, type);
-            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
+            this.History = new History(this, null, eventNum);
+            InitializeEditor();
         }
         private void InitializeEditor()
         {
+            this.Updating = true;
             for (int i = 0; i < Lists.EventLabels.Length; i++)
             {
                 if (Lists.EventLabels[i] != null)
@@ -200,6 +186,20 @@ namespace LAZYSHELL
             treeViewWrapper.ChangeScript(eventScripts[(int)this.eventNum.Value]);
             this.autoPointerUpdate.Checked = autoPointerUpdate.Checked;
             UpdateEventScriptsFreeSpace();
+            this.Updating = false;
+            //
+            disableNavigate = true;
+            if (settings.RememberLastIndex)
+            {
+                int lastEventScript = settings.LastEventScript;
+                type = Math.Max(0, settings.LastEventScriptCat);
+                index = Math.Min((int)eventNum.Maximum, lastEventScript);
+            }
+            else
+                type = 0;
+            disableNavigate = false;
+            lastNavigate = new Navigate(index, type);
+            this.Modified = false;
         }
         private void RefreshEditor()
         {
@@ -221,6 +221,8 @@ namespace LAZYSHELL
             // Update Event Script Offsets
             currentScript = (int)this.eventNum.Value;
             ResetLists();
+            //
+            this.Updating = true;
             commandTree.BeginUpdate();
             if (isActionScript)
             {
@@ -263,6 +265,7 @@ namespace LAZYSHELL
                 eventLabel.Text = Lists.EventLabels[currentScript];
             else
                 eventLabel.Text = Lists.ActionLabels[currentScript];
+            this.Updating = false;
         }
         // GUI settings
         private string[] DialogueNames()
@@ -464,6 +467,43 @@ namespace LAZYSHELL
                 UpdateActionScriptsFreeSpace();
             }
         }
+        private void UpdateCommandGUI()
+        {
+            byte[] temp;
+            int opcode;
+            int param1;
+            if (!isActionSelected)
+            {
+                opcode = Lists.EventOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
+                param1 = Lists.EventParams[categories_es.SelectedIndex][commands.SelectedIndex];
+                temp = new byte[ScriptEnums.GetEventCommandLength(opcode, param1)];
+                temp[0] = (byte)opcode;
+                if (temp.Length > 1)
+                    temp[1] = (byte)param1;
+                esc = new EventCommand(temp, 0);
+                asc = null;
+            }
+            else
+            {
+                opcode = Lists.ActionOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
+                param1 = Lists.ActionParams[categories_aq.SelectedIndex][commands.SelectedIndex];
+                temp = new byte[ScriptEnums.GetActionCommandLength(opcode, param1)];
+                temp[0] = (byte)opcode;
+                if (temp.Length > 1)
+                    temp[1] = (byte)param1;
+                asc = new ActionCommand(temp, 0);
+            }
+            modifiedNode = null;  // the COMMAND PROPERTIES panel now contains a new node instead (2008-11-09)
+            panelCommands.SuspendDrawing();
+            ResetControls();
+            if (!isActionSelected)
+                ControlDisassembleEvent();
+            else
+                ControlDisassembleAction();
+            panelCommands.ResumeDrawing();
+            buttonInsertEvent.Enabled = true;
+            buttonApplyEvent.Enabled = false;
+        }
         // Saving
         public void Assemble()
         {
@@ -486,7 +526,6 @@ namespace LAZYSHELL
             else
                 Model.HexEditor.SetOffset(actionScript.BaseOffset);
             Model.HexEditor.Compare();
-            checksum = Do.GenerateChecksum(eventScripts, actionScripts);
         }
         public void AssembleAllEventScripts()
         {
@@ -564,7 +603,7 @@ namespace LAZYSHELL
         #region Event Handlers
         private void eventNum_ValueChanged(object sender, EventArgs e)
         {
-            if (!updatingScript)
+            if (this.Updating)
                 return;
             RefreshEditor();
             //
@@ -580,9 +619,9 @@ namespace LAZYSHELL
         }
         private void eventName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingScript)
+            if (this.Updating)
                 return;
-            updatingScript = false;
+            this.Updating = true;
             eventNum.Value = currentScript = 0;
             if (!isActionScript)
                 UpdateScriptOffsets();
@@ -604,7 +643,7 @@ namespace LAZYSHELL
                 eventLabel.Text = Lists.ActionLabels[currentScript];
                 labelWindow.SetElement("Action Scripts");
             }
-            updatingScript = true;
+            this.Updating = false;
             //
             if (!disableNavigate && lastNavigate != null)
             {
@@ -697,29 +736,6 @@ namespace LAZYSHELL
                 }
             }
         }
-        private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (Do.GenerateChecksum(eventScripts, actionScripts) == checksum)
-                goto Close;
-            DialogResult result;
-            result = MessageBox.Show("Event Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-                Assemble();
-            else if (result == DialogResult.No)
-            {
-                Model.EventScripts = null;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-        Close:
-            settings.Save();
-            searchWindow.Close();
-            if (previewer != null)
-                previewer.Close();
-        }
         private void navigateBck_Click(object sender, EventArgs e)
         {
             if (navigateBackward.Count < 1)
@@ -764,14 +780,15 @@ namespace LAZYSHELL
         // tree
         private void commandTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            UpdateCommandData();
-            if (!updatingScript)
+            if (this.Updating)
                 return;
             if (!commandTree.Enabled)
                 return;
             if (eventScript.Commands.Count == 0)
                 return;
             //
+            this.Updating = true;
+            UpdateCommandData();
             panelCommands.SuspendDrawing();
             // if selecting an action queue/script command
             if (commandTree.SelectedNode.Parent != null || isActionScript)
@@ -785,6 +802,7 @@ namespace LAZYSHELL
                     commands.Items.AddRange(Lists.ActionNames(categories_aq.SelectedIndex));
                     categories_aq.SelectedIndex = 0;
                     commands.SelectedIndex = 0;
+                    UpdateCommandGUI();
                 }
                 if (asc == null && modifiedNode == null)    // if an event command is in the COMMAND PROPERTIES panel
                 {
@@ -806,6 +824,7 @@ namespace LAZYSHELL
                     commands.Items.AddRange(Lists.EventNames(categories_es.SelectedIndex));
                     categories_es.SelectedIndex = 0;
                     commands.SelectedIndex = 0;
+                    UpdateCommandGUI();
                 }
                 if (asc != null && modifiedNode == null)    // if an action queue command is in the COMMAND PROPERTIES panel
                 {
@@ -816,6 +835,7 @@ namespace LAZYSHELL
             treeViewWrapper.SelectedNode = commandTree.SelectedNode;
             //
             panelCommands.ResumeDrawing();
+            this.Updating = false;
         }
         private void commandTree_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -826,8 +846,6 @@ namespace LAZYSHELL
         }
         private void commandTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Do.AddHistory(this, index, e.Node, "NodeMouseClick");
-            //
             commandTree.SelectedNode = e.Node;
             if (e.Button != MouseButtons.Right)
                 return;
@@ -959,7 +977,7 @@ namespace LAZYSHELL
         // functions
         private void EvtScrMoveUp_Click(object sender, EventArgs e)
         {
-            updatingScript = false;
+            this.Updating = true;
             if (commandTree.SelectedNode == null)
                 return;
             ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
@@ -977,15 +995,13 @@ namespace LAZYSHELL
             {
             }
             treeViewWrapper.MoveUp();
-            checksum--;
-            updatingScript = true;
-            Do.AddHistory(this, index, commandTree.SelectedNode, "MoveUpCommand");
+            this.Updating = false;
             //
             PushCommand(buffer);
         }
         private void EvtScrMoveDown_Click(object sender, EventArgs e)
         {
-            updatingScript = false;
+            this.Updating = true;
             if (commandTree.SelectedNode == null)
                 return;
             ScriptBuffer buffer = new ScriptBuffer(Bits.Copy(scriptData), treeViewWrapper.SelectedIndex);
@@ -1003,9 +1019,7 @@ namespace LAZYSHELL
             {
             }
             treeViewWrapper.MoveDown();
-            checksum--;
-            updatingScript = true;
-            Do.AddHistory(this, index, commandTree.SelectedNode, "MoveDownCommand");
+            this.Updating = false;
             //
             PushCommand(buffer);
         }
@@ -1014,7 +1028,6 @@ namespace LAZYSHELL
             if (commandTree.SelectedNode == null)
                 return;
             treeViewWrapper.Copy();
-            Do.AddHistory(this, index, commandTree.SelectedNode, "CopyCommand");
         }
         private void EvtScrPasteCommand_Click(object sender, EventArgs e)
         {
@@ -1029,7 +1042,6 @@ namespace LAZYSHELL
             UpdateCommandData();
             //
             commandTree.SelectedNode = treeViewWrapper.SelectedNode;
-            Do.AddHistory(this, index, commandTree.SelectedNode, "PasteCommand");
             //
             PushCommand(buffer);
         }
@@ -1046,7 +1058,6 @@ namespace LAZYSHELL
             UpdateCommandData();
             //
             commandTree.SelectedNode = treeViewWrapper.SelectedNode;
-            Do.AddHistory(this, index, commandTree.SelectedNode, "DeleteCommand");
             //
             PushCommand(buffer);
         }
@@ -1117,7 +1128,6 @@ namespace LAZYSHELL
                 return;
             treeViewWrapper.ClearAll();
             UpdateCommandData();
-            Do.AddHistory(this, index, "ClearAll");
         }
         private void EventPreview_Click(object sender, EventArgs e)
         {
@@ -1140,42 +1150,9 @@ namespace LAZYSHELL
         }
         private void commands_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
-            byte[] temp;
-            int opcode;
-            int param1;
-            if (!isActionSelected)
-            {
-                opcode = Lists.EventOpcodes[categories_es.SelectedIndex][commands.SelectedIndex];
-                param1 = Lists.EventParams[categories_es.SelectedIndex][commands.SelectedIndex];
-                temp = new byte[ScriptEnums.GetEventCommandLength(opcode, param1)];
-                temp[0] = (byte)opcode;
-                if (temp.Length > 1)
-                    temp[1] = (byte)param1;
-                esc = new EventCommand(temp, 0);
-                asc = null;
-            }
-            else
-            {
-                opcode = Lists.ActionOpcodes[categories_aq.SelectedIndex][commands.SelectedIndex];
-                param1 = Lists.ActionParams[categories_aq.SelectedIndex][commands.SelectedIndex];
-                temp = new byte[ScriptEnums.GetActionCommandLength(opcode, param1)];
-                temp[0] = (byte)opcode;
-                if (temp.Length > 1)
-                    temp[1] = (byte)param1;
-                asc = new ActionCommand(temp, 0);
-            }
-            modifiedNode = null;  // the COMMAND PROPERTIES panel now contains a new node instead (2008-11-09)
-            panelCommands.SuspendDrawing();
-            ResetControls();
-            if (!isActionSelected)
-                ControlDisassembleEvent();
-            else
-                ControlDisassembleAction();
-            panelCommands.ResumeDrawing();
-            buttonInsertEvent.Enabled = true;
-            buttonApplyEvent.Enabled = false;
+            UpdateCommandGUI();
         }
         private void button1_CheckedChanged(object sender, EventArgs e)
         {
@@ -1194,7 +1171,7 @@ namespace LAZYSHELL
         }
         private void evtNameA1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             //
             panelCommands.SuspendDrawing();
@@ -1228,7 +1205,7 @@ namespace LAZYSHELL
                         evtNumA1.Value = Model.ItemNames.GetUnsortedIndex(evtNameA1.SelectedIndex);    // Item names
                         break;
                     case 0x4E:
-                        updatingControls = true;
+                        this.Updating = true;
                         labelEvtA2.Text = "";
                         labelEvtA3.Text = "";
                         evtNameA2.Items.Clear(); evtNameA2.ResetText(); evtNameA2.Enabled = false; evtNameA2.DropDownWidth = evtNameA2.Width;
@@ -1276,7 +1253,7 @@ namespace LAZYSHELL
                                 break;
                         }
                         OrganizeControls();
-                        updatingControls = false;
+                        this.Updating = false;
                         break;
                     case 0x97:
                         labelEvtA3.Text = evtNameA1.SelectedIndex == 0 ? "Slow down" : "Speed up";
@@ -1303,7 +1280,7 @@ namespace LAZYSHELL
         }
         private void evtNumA1_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             if (asc != null)
             {
@@ -1339,7 +1316,7 @@ namespace LAZYSHELL
         }
         private void evtNameA2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             if (asc != null)
                 return;
@@ -1390,7 +1367,7 @@ namespace LAZYSHELL
         }
         private void evtNumA2_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             if (asc == null)
             {
@@ -1483,7 +1460,6 @@ namespace LAZYSHELL
             }
             UpdateCommandData();
             EvtScrEditCommand.PerformClick();
-            Do.AddHistory(this, index, commandTree.SelectedNode, "EditCommand");
             //
             PushCommand(buffer);
         }
@@ -1987,6 +1963,30 @@ namespace LAZYSHELL
             type = 1;
             disableNavigate = false;
             eventNum.Value = num;
+        }
+        //
+        private void EventScripts_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.Modified)
+                goto Close;
+            DialogResult result;
+            result = MessageBox.Show("Event Scripts have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+                Assemble();
+            else if (result == DialogResult.No)
+            {
+                Model.EventScripts = null;
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+        Close:
+            settings.Save();
+            searchWindow.Close();
+            if (previewer != null)
+                previewer.Close();
         }
         #endregion
         private class CommandEdit : Command

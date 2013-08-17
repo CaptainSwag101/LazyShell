@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class HackingTools : Form
+    public partial class HackingTools : NewForm
     {
         private double percent { get { return (double)percentControl.Value * 0.01; } }
         private Delegate update;

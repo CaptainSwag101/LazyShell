@@ -10,7 +10,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Restore : Form
+    public partial class Restore : NewForm
     {
         private Settings settings = Settings.Default;
         private byte[] romDst { get { return Model.ROM; } set { Model.ROM = value; } }

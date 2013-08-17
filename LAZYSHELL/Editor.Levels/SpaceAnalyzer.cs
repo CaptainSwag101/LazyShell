@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace LAZYSHELL
 {
-    public partial class SpaceAnalyzer : Form
+    public partial class SpaceAnalyzer : NewForm
     {
         // variables
             //

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class Opening : Form
+    public partial class Opening : NewForm
     {
         // variables
         private delegate void Function();
@@ -20,7 +20,6 @@ namespace LAZYSHELL
         private PaletteEditor paletteEditor;
         private GraphicEditor graphicEditor;
         private PaletteSet paletteSet { get { return Model.OpeningPalette; } set { Model.OpeningPalette = value; } }
-        private long checksum { get { return intro.checksum; } set { intro.checksum = value; } }
         // constructor
         public Opening(Intro intro)
         {
@@ -77,7 +76,7 @@ namespace LAZYSHELL
             tileset = new Tileset(openingTileset, openingGraphics, paletteSet, 16, 9, TilesetType.Opening);
             SetTilesetImage();
             LoadGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -103,9 +102,7 @@ namespace LAZYSHELL
             paletteSet.Assemble();
             tileset.Assemble(256);
             if (Model.Compress(Model.OpeningData, 0x3F1913, 0x17C0, 0x85A, "Opening"))
-                checksum = Do.GenerateChecksum(
-                    Model.OpeningData, Model.TitleData, Model.TitlePalettes,
-                    Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+                this.Modified = false;
             //
             if (disableGardenLoad.Checked)
             {
@@ -199,11 +196,11 @@ namespace LAZYSHELL
         }
         private void disableGardenLoad_CheckedChanged(object sender, EventArgs e)
         {
-            checksum--;
+            this.Modified = true;
         }
         private void disableGardenNew_CheckedChanged(object sender, EventArgs e)
         {
-            checksum--;
+            this.Modified = true;
         }
         private void editor_FormClosing(object sender, FormClosingEventArgs e)
         {

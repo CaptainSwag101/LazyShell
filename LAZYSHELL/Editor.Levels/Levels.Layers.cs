@@ -76,9 +76,9 @@ namespace LAZYSHELL
         }
         private void layerPrioritySet_ValueChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
                 layer.PrioritySet = (byte)layerPrioritySet.Value;
-            updatingProperties = true;
+            this.Updating = true;
             this.layerMainscreenL1.Checked = prioritySets[layer.PrioritySet].MainscreenL1;
             this.layerMainscreenL2.Checked = prioritySets[layer.PrioritySet].MainscreenL2;
             this.layerMainscreenL3.Checked = prioritySets[layer.PrioritySet].MainscreenL3;
@@ -94,18 +94,18 @@ namespace LAZYSHELL
             this.layerColorMathBG.Checked = prioritySets[layer.PrioritySet].ColorMathBG;
             this.layerColorMathIntensity.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathHalfIntensity;
             this.layerColorMathMode.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathMinusSubscreen;
-            updatingProperties = false;
-            if (!updatingLevel)
+            this.Updating = false;
+            if (!this.Updating)
             {
                 RefreshLevel();
             }
         }
         private void layerMainscreenL1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL1 = layerMainscreenL1.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerMainscreenL1.Checked) layerMainscreenL1.ForeColor = Color.Black;
@@ -113,10 +113,10 @@ namespace LAZYSHELL
         }
         private void layerMainscreenL2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL2 = layerMainscreenL2.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerMainscreenL2.Checked) layerMainscreenL2.ForeColor = Color.Black;
@@ -124,10 +124,10 @@ namespace LAZYSHELL
         }
         private void layerMainscreenL3_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL3 = layerMainscreenL3.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerMainscreenL3.Checked) layerMainscreenL3.ForeColor = Color.Black;
@@ -135,10 +135,10 @@ namespace LAZYSHELL
         }
         private void layerMainscreenNPC_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenOBJ = layerMainscreenNPC.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerMainscreenNPC.Checked) layerMainscreenNPC.ForeColor = Color.Black;
@@ -146,10 +146,10 @@ namespace LAZYSHELL
         }
         private void layerSubscreenL1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL1 = layerSubscreenL1.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerSubscreenL1.Checked) layerSubscreenL1.ForeColor = Color.Black;
@@ -157,10 +157,10 @@ namespace LAZYSHELL
         }
         private void layerSubscreenL2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL2 = layerSubscreenL2.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerSubscreenL2.Checked) layerSubscreenL2.ForeColor = Color.Black;
@@ -168,10 +168,10 @@ namespace LAZYSHELL
         }
         private void layerSubscreenL3_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL3 = layerSubscreenL3.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerSubscreenL3.Checked) layerSubscreenL3.ForeColor = Color.Black;
@@ -179,10 +179,10 @@ namespace LAZYSHELL
         }
         private void layerSubscreenNPC_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenOBJ = layerSubscreenNPC.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerSubscreenNPC.Checked) layerSubscreenNPC.ForeColor = Color.Black;
@@ -190,10 +190,10 @@ namespace LAZYSHELL
         }
         private void layerColorMathL1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL1 = layerColorMathL1.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerColorMathL1.Checked) layerColorMathL1.ForeColor = Color.Black;
@@ -201,10 +201,10 @@ namespace LAZYSHELL
         }
         private void layerColorMathL2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL2 = layerColorMathL2.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerColorMathL2.Checked) layerColorMathL2.ForeColor = Color.Black;
@@ -212,10 +212,10 @@ namespace LAZYSHELL
         }
         private void layerColorMathL3_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL3 = layerColorMathL3.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerColorMathL3.Checked) layerColorMathL3.ForeColor = Color.Black;
@@ -223,10 +223,10 @@ namespace LAZYSHELL
         }
         private void layerColorMathNPC_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathOBJ = layerColorMathNPC.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerColorMathNPC.Checked) layerColorMathNPC.ForeColor = Color.Black;
@@ -234,10 +234,10 @@ namespace LAZYSHELL
         }
         private void layerColorMathBG_CheckedChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathBG = layerColorMathBG.Checked;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
             if (layerColorMathBG.Checked) layerColorMathBG.ForeColor = Color.Black;
@@ -245,25 +245,25 @@ namespace LAZYSHELL
         }
         private void layerColorMathIntensity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 if (layerColorMathIntensity.SelectedIndex == 0)
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 0;//false;
                 else if (layerColorMathIntensity.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 1;//true;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
         }
         private void layerColorMathMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!updatingProperties)
+            if (!this.Updating)
             {
                 if (layerColorMathMode.SelectedIndex == 0)
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 0;//false;
                 else if (layerColorMathMode.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 1;// true;
-                if (!updatingLevel)
+                if (!this.Updating)
                     RefreshLevel();
             }
         }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class NewMessageBox : Form
+    public partial class NewMessageBox : NewForm
     {
         public Button Button1 { get { return button1; } set { button1 = value; } }
         public NewMessageBox(string title, string description, string contents)

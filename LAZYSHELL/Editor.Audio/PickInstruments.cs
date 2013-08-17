@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class PickInstruments : Form
+    public partial class PickInstruments : NewForm
     {
         private List<int> foundInstruments;
         private List<int> newInstruments;

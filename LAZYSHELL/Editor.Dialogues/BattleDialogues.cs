@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class BattleDialogues : Form
+    public partial class BattleDialogues : NewForm
     {
         #region Variables
         // main
@@ -23,7 +23,6 @@ namespace LAZYSHELL
         private Bitmap textImage;
         private Overlay overlay;
         private Search search;
-        private bool updating = false;
         // accessors
         private BattleDialogue[] dialogues
         {
@@ -82,11 +81,11 @@ namespace LAZYSHELL
             LoadGraphicEditor();
             LoadTileEditor();
             // controls
-            updating = true;
+            this.Updating = true;
             type = 0;
             search = new Search(battleDialogueNum, searchBox, searchButton, dialogues);
             RefreshBattleDialogue();
-            updating = false;
+            this.Updating = false;
         }
         public new void Close()
         {
@@ -103,7 +102,7 @@ namespace LAZYSHELL
         }
         public void RefreshBattleDialogue()
         {
-            updating = true;
+            this.Updating = true;
             this.index = (int)this.battleDialogueNum.Value;
             if (type == 0)
             {
@@ -117,7 +116,7 @@ namespace LAZYSHELL
             }
             CalculateFreeSpace();
             SetTextImage();
-            updating = false;
+            this.Updating = false;
         }
         private void SetTilesetImage()
         {
@@ -335,7 +334,7 @@ namespace LAZYSHELL
             tileset = new BattleDialogueTileset(fontPalette);
             SetTilesetImage();
             SetTextImage();
-            dialoguesEditor.Checksum--;   // b/c switching colors won't modify checksum
+            dialoguesEditor.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void PaletteMenuUpdate()
         {
@@ -354,7 +353,7 @@ namespace LAZYSHELL
         // main
         private void battleDialogueNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (type < 2)
             {
@@ -369,7 +368,7 @@ namespace LAZYSHELL
         }
         private void battleDialogueTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             SetTextImage();
             CalculateFreeSpace();
@@ -379,9 +378,9 @@ namespace LAZYSHELL
         }
         private void battleDlgType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             index = 0;
             if (type == 0)
                 battleDialogueNum.Maximum = 255;
@@ -396,7 +395,7 @@ namespace LAZYSHELL
             searchButton.Visible = type < 2;
             bonusTextBox.Visible = type == 2;
             bonusPreview.Visible = type == 2;
-            updating = false;
+            this.Updating = false;
             if (type < 2)
             {
                 search.Names = dialogues;

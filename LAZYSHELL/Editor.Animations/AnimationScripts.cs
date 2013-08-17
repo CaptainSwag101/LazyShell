@@ -13,10 +13,9 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class AnimationScripts : Form
+    public partial class AnimationScripts : NewForm
     {
         #region Variables
-        private long checksum;
         private A_TreeViewWrapper wrapper;
         private AnimationScript[] animationScripts
         {
@@ -61,8 +60,6 @@ namespace LAZYSHELL
         private ToolTipLabel toolTipLabel;
         private EditLabel labelWindow;
         private byte[] animationBank, battleBank;
-        private bool updating = false;
-        private bool updatingControls = false;
         Previewer ap;
         #endregion
         // constructor
@@ -93,15 +90,14 @@ namespace LAZYSHELL
                 toolStripCommands.Items.Insert(i + 9, numUpDown);
             }
             InitializeEditor();
-            new History(this, animationName, animationNum);
+            this.History = new History(this, animationName, animationNum);
             //
             commands.Items.AddRange(Lists.AnimationCommands);
-            checksum = Do.GenerateChecksum(animationBank, battleBank);
         }
         #region Methods
         private void InitializeEditor()
         {
-            updating = true;
+            this.Updating = true;
             //
             this.commandStack = new CommandStack();
             animationBank = Bits.GetBytes(Model.ROM, 0x350000, 0x10000);
@@ -119,7 +115,7 @@ namespace LAZYSHELL
             if (settings.RememberLastIndex)
                 animationNum.Value = Math.Min((int)animationNum.Maximum, settings.LastAnimation);
             //
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshEditor()
         {
@@ -241,10 +237,10 @@ namespace LAZYSHELL
         //
         private void ControlDisassemble(AnimationCommand asc)
         {
-            updatingControls = true;
             panelAniControls.SuspendDrawing();
             ResetControls();
             //
+            this.Updating = true;
             switch (asc.Opcode)
             {
                 case 0x00:
@@ -803,7 +799,7 @@ namespace LAZYSHELL
             commands.SelectedIndex = -1;
             //
             panelAniControls.ResumeDrawing();
-            updatingControls = false;
+            this.Updating = false;
         }
         private void ControlAssemble()
         {
@@ -1086,7 +1082,7 @@ namespace LAZYSHELL
         }
         private void ResetControls()
         {
-            updatingControls = true;
+            this.Updating = true;
             aniNameA1.DrawMode = DrawMode.Normal; aniNameA1.ItemHeight = 13; aniNameA1.BackColor = SystemColors.Window;
             aniNameA1.Items.Clear(); aniNameA1.ResetText(); aniNameA1.Enabled = false; aniNameA1.DropDownWidth = aniNameA1.Width;
             aniNameA2.Items.Clear(); aniNameA2.ResetText(); aniNameA2.Enabled = false; aniNameA2.DropDownWidth = aniNameA2.Width;
@@ -1107,7 +1103,7 @@ namespace LAZYSHELL
             aniLabelB2.Text = "";
             aniLabelC1.Text = "";
             aniLabelC2.Text = "";
-            updatingControls = false;
+            this.Updating = false;
         }
         private void OrganizeControls()
         {
@@ -1192,7 +1188,7 @@ namespace LAZYSHELL
                 animationCategory.SelectedIndex == 4;
             // so it won't try to load the label editor if we haven't loaded the battle events
             labelWindow.Disable = animationCategory.SelectedIndex != 7;
-            if (updating)
+            if (this.Updating)
                 return;
             animationNum.Value = 0;
             RefreshEditor();
@@ -1316,6 +1312,7 @@ namespace LAZYSHELL
         //
         private void animationScriptTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            this.Updating = true;
             wrapper.SelectedNode = e.Node;
             asc = (AnimationCommand)e.Node.Tag;
             ascCopy = null;
@@ -1345,6 +1342,7 @@ namespace LAZYSHELL
             panelAniControls.Enabled = true;
             applyAnimation.Enabled = true;
             ControlDisassemble(asc);
+            this.Updating = false;
         }
         private void animationScriptTree_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1454,7 +1452,7 @@ namespace LAZYSHELL
         //
         private void commands_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (commands.SelectedIndex == -1)
                 return;
@@ -1524,7 +1522,7 @@ namespace LAZYSHELL
         }
         private void aniNameA1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             switch (asc.Opcode)
             {
@@ -1618,7 +1616,7 @@ namespace LAZYSHELL
         }
         private void aniNumA1_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingControls)
+            if (this.Updating)
                 return;
             AnimationCommand asc = ascCopy != null ? ascCopy : this.asc;
             switch (asc.Opcode)
@@ -1636,7 +1634,7 @@ namespace LAZYSHELL
         //
         private void AnimationScripts_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Bits.GetBytes(Model.ROM, 0x350000, 0x10000), Bits.GetBytes(Model.ROM, 0x3A6000, 0xA000)) == this.checksum)
+            if (!this.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show("Animations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)

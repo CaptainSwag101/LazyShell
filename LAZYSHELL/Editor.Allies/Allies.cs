@@ -10,7 +10,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Allies : Form
+    public partial class Allies : NewForm
     {
         #region Variables
         private Settings settings = Settings.Default;
@@ -19,7 +19,6 @@ namespace LAZYSHELL
         private Slot[] slots { get { return Model.Slots; } set { Model.Slots = value; } }
         private Slot slot { get { return slots[(int)slotNum.Value]; } set { slots[(int)slotNum.Value] = value; } }
         //
-        private bool updating = false;
         private int index = 0; public int Index { get { return index; } }
         #endregion
         #region Functions
@@ -38,11 +37,11 @@ namespace LAZYSHELL
             this.lvl2TimingEnd.Value = characters[0].DefenseEndL2;
             this.lvl1TimingEnd.Value = characters[0].DefenseEndL1;
             //
-            new History(this, characterName, null);
+            this.History = new History(this, characterName, null);
         }
         private void InitializeStrings()
         {
-            updating = true;
+            this.Updating = true;
             this.characterName.Items.Clear();
             for (int i = 0; i < characters.Length; i++)
                 this.characterName.Items.Add(new string(characters[i].Name));
@@ -62,13 +61,13 @@ namespace LAZYSHELL
             this.startingSpecialItem.Items.AddRange(Model.ItemNames.Names);
             this.startingEquipment.Items.Clear();
             this.startingEquipment.Items.AddRange(Model.ItemNames.Names);
-            updating = false;
+            this.Updating = false;
         }
         public void RefreshCharacter()
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             this.characterName.SelectedIndex = index;
             this.textBoxCharacterName.Text = Do.RawToASCII(character.Name, Lists.KeystrokesMenu);
             this.startingLevel.Value = character.StartingLevel;
@@ -87,7 +86,7 @@ namespace LAZYSHELL
             for (int i = 0; i < character.StartingMagic.Length; i++)
                 this.startingMagic.SetItemChecked(i, character.StartingMagic[i]);
             this.characterName.Invalidate();
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshSlots()
         {
@@ -108,7 +107,7 @@ namespace LAZYSHELL
         #region Event Handlers
         private void characterName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             index = characterName.SelectedIndex;
             RefreshCharacter();
@@ -129,15 +128,15 @@ namespace LAZYSHELL
         }
         private void textBoxCharacterName_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             character.Name = Do.ASCIIToRaw(textBoxCharacterName.Text, Lists.KeystrokesMenu, 10);
-            updating = true;
+            this.Updating = true;
             this.characterName.Items.Clear();
             for (int i = 0; i < characters.Length; i++)
                 this.characterName.Items.Add(new string(characters[i].Name));
             this.characterName.SelectedIndex = index;
-            updating = false;
+            this.Updating = false;
         }
         private void textBoxCharacterName_Leave(object sender, EventArgs e)
         {

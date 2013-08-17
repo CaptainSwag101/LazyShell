@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace LAZYSHELL
 {
-    public class ToolTipForm : Form
+    public class ToolTipForm : NewForm
     {
         // constructor
         public ToolTipForm(Color backColor)

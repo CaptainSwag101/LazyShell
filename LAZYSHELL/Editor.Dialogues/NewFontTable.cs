@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class NewFontTable : Form
+    public partial class NewFontTable : NewForm
     {
         #region Variables
             //

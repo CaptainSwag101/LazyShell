@@ -27,7 +27,7 @@ namespace LAZYSHELL
                 return;
             fullUpdate = false;
             RefreshLevel();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {

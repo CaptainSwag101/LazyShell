@@ -1,5 +1,15 @@
 Major changes/additions are indicated by ***
 
+v3.18.3 (2013-08-16)
+--------------------------------------
+Changes:
+*History logging now more practical, loading times now faster
+
+Fixes:
+*Graphics Editor: crash when making selection < 4 pixels wide/high
+*Graphics Editor: not nulling selection when delselecting
+
+
 v3.18.1 (2013-07-30)
 --------------------------------------
 Additions:

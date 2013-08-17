@@ -13,7 +13,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL.Patches
 {
-    public partial class GamePatches : Form
+    public partial class GamePatches : NewForm
     {
         private Settings settings = Settings.Default;
         private string verifyType = "LAZYSHELL PATCH INFORMATION";

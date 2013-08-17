@@ -12,7 +12,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class EffectMolds : Form
+    public partial class EffectMolds : NewForm
     {
         #region Variables
         // main
@@ -31,8 +31,7 @@ namespace LAZYSHELL
         private int index { get { return e_molds.SelectedIndex; } set { e_molds.SelectedIndex = value; } }
         private Bitmap tilemapImage;
         private Bitmap tilesetImage;
-        private bool updating = false;
-        private Overlay overlay;
+                private Overlay overlay;
         private int zoom { get { return pictureBoxE_Mold.Zoom; } set { pictureBoxE_Mold.Zoom = value; } }
         private int width { get { return animation.Width * 16; } }
         private int height { get { return animation.Height * 16; } }
@@ -74,14 +73,14 @@ namespace LAZYSHELL
             this.commandStack = new CommandStack(true);
             InitializeComponent();
             this.pictureBoxE_Mold.ZoomBoxPosition = new Point(64, 0);
-            updating = true;
+            this.Updating = true;
             for (int i = 0; i < animation.Molds.Count; i++)
                 this.e_molds.Items.Add("Mold " + i.ToString());
             this.e_molds.SelectedIndex = 0;
             e_moldWidth.Value = animation.Width;
             e_moldHeight.Value = animation.Height;
             e_tileSetSize.Value = animation.TilesetLength;
-            updating = false;
+            this.Updating = false;
             SetTilesetImage();
             SetTilemapImage();
             LoadTileEditor();
@@ -96,7 +95,7 @@ namespace LAZYSHELL
             this.draggedTiles = null;
             this.copiedTiles = null;
             this.selection = null;
-            updating = true;
+            this.Updating = true;
             this.e_molds.Items.Clear();
             for (int i = 0; i < animation.Molds.Count; i++)
                 this.e_molds.Items.Add("Mold " + i.ToString());
@@ -104,7 +103,7 @@ namespace LAZYSHELL
             e_moldWidth.Value = animation.Width;
             e_moldHeight.Value = animation.Height;
             e_tileSetSize.Value = animation.TilesetLength;
-            updating = false;
+            this.Updating = false;
             SetTilesetImage();
             SetTilemapImage();
             LoadTileEditor();
@@ -701,12 +700,12 @@ namespace LAZYSHELL
         }
         private void e_molds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             int index = e_molds.SelectedIndex;
             if (draggedTiles != null && e_molds.LastSelectedIndex != -1)
             {
-                updating = true;
+                this.Updating = true;
                 e_molds.BeginUpdate();
                 //
                 e_molds.SelectedIndex = e_molds.LastSelectedIndex;
@@ -714,14 +713,14 @@ namespace LAZYSHELL
                 e_molds.SelectedIndex = index;
                 //
                 e_molds.EndUpdate();
-                updating = false;
+                this.Updating = false;
             }
             e_molds.LastSelectedIndex = index;
             RefreshMold();
         }
         private void e_tileSetSize_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             overlay.SelectTS = null;
             if (animation.Codec == 0)
@@ -736,7 +735,7 @@ namespace LAZYSHELL
         }
         private void e_moldWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             Defloat();
             int width = animation.Width;
@@ -768,7 +767,7 @@ namespace LAZYSHELL
         }
         private void e_moldHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             Defloat();
             animation.Height = (byte)e_moldHeight.Value;
@@ -793,13 +792,13 @@ namespace LAZYSHELL
             }
             int index = this.index;
             molds.Insert(index + 1, mold.New());
-            updating = true;
+            this.Updating = true;
             e_molds.BeginUpdate();
             e_molds.Items.Clear();
             for (int i = 0; i < animation.Molds.Count; i++)
                 this.e_molds.Items.Add("Mold " + i.ToString());
             e_molds.EndUpdate();
-            updating = false;
+            this.Updating = false;
             this.index = index + 1;
             sequences.SetSequenceFrameImages();
             sequences.RealignFrames();
@@ -817,11 +816,11 @@ namespace LAZYSHELL
             }
             int index = this.index;
             molds.RemoveAt(index);
-            updating = true;
+            this.Updating = true;
             e_molds.Items.RemoveAt(index);
             for (int i = 0; i < e_molds.Items.Count; i++)
                 e_molds.Items[i] = "Mold " + i;
-            updating = false;
+            this.Updating = false;
             if (index >= molds.Count && molds.Count != 0)
                 this.index = index - 1;
             else if (molds.Count != 0)
@@ -843,13 +842,13 @@ namespace LAZYSHELL
             }
             int index = this.index;
             molds.Insert(index + 1, mold.Copy());
-            updating = true;
+            this.Updating = true;
             e_molds.BeginUpdate();
             e_molds.Items.Clear();
             for (int i = 0; i < animation.Molds.Count; i++)
                 this.e_molds.Items.Add("Mold " + i.ToString());
             e_molds.EndUpdate();
-            updating = false;
+            this.Updating = false;
             this.index = index + 1;
             sequences.SetSequenceFrameImages();
             sequences.RealignFrames();

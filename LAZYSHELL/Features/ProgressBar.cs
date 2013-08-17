@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace LAZYSHELL
 {
-    public partial class ProgressBar : Form
+    public partial class ProgressBar : NewForm
     {
         private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private BackgroundWorker backgroundWorker;

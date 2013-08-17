@@ -16,7 +16,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class SPCEditor : Form
+    public partial class SPCEditor : NewForm
     {
         #region Variables
         public int Index { get { return (int)trackNum.Value; } set { trackNum.Value = value; } }
@@ -25,7 +25,6 @@ namespace LAZYSHELL
         private SPC[] spcs;
         private SPC spc { get { return spcs[Index]; } set { spcs[Index] = value; } }
         private Settings settings = Settings.Default;
-        private bool updating = false;
         private SPCCommand mouseDownSSC;
         private SPCCommand mouseOverSSC;
         private int mouseOverChannel;
@@ -47,7 +46,7 @@ namespace LAZYSHELL
         {
             InitializeComponent();
             //
-            updating = true;
+            this.Updating = true;
             //
             this.commandStackW = new CommandStack();
             this.commandStackR = new CommandStack();
@@ -134,14 +133,14 @@ namespace LAZYSHELL
             keySV.SelectedIndex = 0;
             //
             RefreshSPC();
-            updating = false;
+            this.Updating = false;
             //
-            new History(this, trackName, trackNum);
+            this.History = new History(this, trackName, trackNum);
         }
         #region Functions
         private void RefreshSPC()
         {
-            updating = true;
+            this.Updating = true;
             //
             importSPC.Enabled = Index != 0 || Type != 0;
             exportSPC.Enabled = Index != 0 || Type != 0;
@@ -196,7 +195,7 @@ namespace LAZYSHELL
             hScrollBarSV.Maximum = 0;
             mouseDownSSC = null;
             ControlDisassemble();
-            updating = true;
+            this.Updating = true;
             if (Index != 0 || Type != 0)
             {
                 for (int i = 0; i < spc.Channels.Length; i++)
@@ -224,7 +223,7 @@ namespace LAZYSHELL
             scoreViewPicture.Invalidate();
             CalculateFreeSpace(Type, true, false);
             //
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshPercussive()
         {
@@ -335,7 +334,7 @@ namespace LAZYSHELL
         }
         private void ControlDisassemble()
         {
-            updating = true;
+            this.Updating = true;
             labelOpcode1.Text = "Opcode 1";
             labelParameter1.Text = "Parameter 1";
             labelParameter2.Text = "Parameter 2";
@@ -608,7 +607,7 @@ namespace LAZYSHELL
                         break;
                 }
             CalculateFreeSpace(Type, true, false);
-            updating = false;
+            this.Updating = false;
         }
         private void ControlAssemble()
         {
@@ -1652,7 +1651,7 @@ namespace LAZYSHELL
                 new NewMessageBox("LAZY SHELL", "There were some errors importing the channel script.", error, "", MessageIcon.Warning).ShowDialog();
             //
             #region Finalize
-            updating = true;
+            this.Updating = true;
             for (int i = 0; i < sourceChannels.Length; i++)
             {
                 sourceChannels[i] = channels[i];
@@ -1732,7 +1731,7 @@ namespace LAZYSHELL
             // set percussives
             spc.Percussives = percussives;
             //
-            updating = false;
+            this.Updating = false;
             #endregion
             return true;
         }
@@ -2329,7 +2328,7 @@ namespace LAZYSHELL
         #region Event Handlers
         private void soundType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             trackName.Items.Clear();
             if (Type == 0)
@@ -2365,7 +2364,7 @@ namespace LAZYSHELL
         }
         private void trackNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             trackName.SelectedIndex = (int)trackNum.Value;
             if (settings.RememberLastIndex)
@@ -2374,14 +2373,14 @@ namespace LAZYSHELL
         }
         private void trackName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             trackNum.Value = trackName.SelectedIndex;
         }
         // Instruments
         private void sampleIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             int index = (int)((ComboBox)sender).Tag;
             for (int i = 0; i < spc.Channels.Length; i++)
@@ -2400,14 +2399,14 @@ namespace LAZYSHELL
         }
         private void volume_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             int index = (int)((NumericUpDown)sender).Tag;
             spc.Samples[index].Volume = (int)volumes[index].Value;
         }
         private void activeInstrument_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             int index = (int)((CheckBox)sender).Tag;
             if (activeInstruments[index].Checked)
@@ -2432,19 +2431,19 @@ namespace LAZYSHELL
         // Reverb
         private void delayTime_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.DelayTime = (byte)delayTime.Value;
         }
         private void decayFactor_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.DecayFactor = (byte)decayFactor.Value;
         }
         private void echo_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.Echo = (byte)((sbyte)echo.Value);
         }
@@ -2458,11 +2457,11 @@ namespace LAZYSHELL
             }
             int index = percussives.SelectedIndex + 1;
             spc.Percussives.Insert(index, new Percussives(0, 0, 0, 0, 0));
-            updating = true;
+            this.Updating = true;
             percussives.Items.Insert(index, Lists.Numerize(Lists.SampleNames, 0, 3));
             percussives.SelectedIndex = Math.Min(percussives.Items.Count - 1, index);
             RefreshPercussive();
-            updating = false;
+            this.Updating = false;
         }
         private void deletePercussive_Click(object sender, EventArgs e)
         {
@@ -2475,49 +2474,49 @@ namespace LAZYSHELL
             }
             int index = percussives.SelectedIndex;
             spc.Percussives.RemoveAt(index);
-            updating = true;
+            this.Updating = true;
             percussives.Items.RemoveAt(index);
             percussives.SelectedIndex = Math.Min(percussives.Items.Count - 1, index);
             RefreshPercussive();
-            updating = false;
+            this.Updating = false;
         }
         private void percussives_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshPercussive();
         }
         private void percussivePitchIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.Percussives[percussives.SelectedIndex].PitchIndex = (Pitch)percussivePitchIndex.SelectedIndex;
         }
         private void percussiveName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             int index = percussiveName.SelectedIndex;
             percussives.Items[percussives.SelectedIndex] = Lists.Numerize(Lists.SampleNames[index], index, 3);
             spc.Percussives[percussives.SelectedIndex].Sample = (byte)index;
-            updating = false;
+            this.Updating = false;
         }
         private void percussivePitch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.Percussives[percussives.SelectedIndex].Pitch = (byte)percussivePitch.SelectedIndex;
         }
         private void percussiveVolume_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.Percussives[percussives.SelectedIndex].Volume = (byte)percussiveVolume.Value;
         }
         private void percussiveBalance_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             spc.Percussives[percussives.SelectedIndex].Balance = (byte)percussiveBalance.Value;
         }
@@ -2713,7 +2712,7 @@ namespace LAZYSHELL
         }
         private void activeChannel_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             CheckBox activeChannel = (CheckBox)sender;
             int channel = (int)activeChannel.Tag;
@@ -2902,7 +2901,7 @@ namespace LAZYSHELL
         // Track editor, commands
         private void opcodeByte1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2918,7 +2917,7 @@ namespace LAZYSHELL
         }
         private void parameterByte1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2933,7 +2932,7 @@ namespace LAZYSHELL
         }
         private void parameterByte2_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2948,7 +2947,7 @@ namespace LAZYSHELL
         }
         private void parameterByte3_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2963,7 +2962,7 @@ namespace LAZYSHELL
         }
         private void parameterName1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2978,7 +2977,7 @@ namespace LAZYSHELL
         }
         private void noteNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -2993,7 +2992,7 @@ namespace LAZYSHELL
         }
         private void noteLengthName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -3008,7 +3007,7 @@ namespace LAZYSHELL
         }
         private void noteLengthByte_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             try
             {
@@ -3331,7 +3330,7 @@ namespace LAZYSHELL
             if (Index == 0 && Type == 0)
                 return;
             noteSpacingSV.Value = (int)noteSpacingSV.Value / 10 * 10;
-            updating = true;
+            this.Updating = true;
             hScrollBarSV.Maximum = 0;
             for (int i = 0; i < spc.Channels.Length; i++)
             {
@@ -3347,7 +3346,7 @@ namespace LAZYSHELL
                             hScrollBarSV.Maximum = maximum;
                     }
             }
-            updating = false;
+            this.Updating = false;
             scoreViewPicture.Invalidate();
         }
         private void showRests_CheckedChanged(object sender, EventArgs e)

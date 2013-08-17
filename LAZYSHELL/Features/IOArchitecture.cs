@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class IOArchitecture : Form
+    public partial class IOArchitecture : NewForm
     {
         private string action;
         private int index;

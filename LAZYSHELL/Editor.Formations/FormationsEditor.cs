@@ -9,10 +9,9 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class FormationsEditor : Form
+    public partial class FormationsEditor : NewForm
     {
             //
-        private long checksum;
         private Formations formationsEditor;
         private FormationPacks packsEditor;
         private Settings settings = Settings.Default;
@@ -38,13 +37,11 @@ namespace LAZYSHELL
             formationsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this, false);
             if (settings.RememberLastIndex)
             {
                 packsEditor.Index = Settings.Default.LastFormationPack;
                 formationsEditor.Index = Settings.Default.LastFormation;
             }
-            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // functions
         public void Assemble()
@@ -55,12 +52,11 @@ namespace LAZYSHELL
                 fp.Assemble();
             for (int i = 0; i < Model.FormationMusics.Length; i++)
                 Model.ROM[0x029F51 + i] = Model.FormationMusics[i];
-            checksum = Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics);
         }
         // event handlers
         private void FormationsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Model.Formations, Model.FormationPacks, Model.FormationMusics) == checksum)
+            if (!this.Modified && !formationsEditor.Modified && ! packsEditor.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Formations have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

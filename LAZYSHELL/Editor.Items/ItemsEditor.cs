@@ -9,11 +9,8 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class ItemsEditor : Form
+    public partial class ItemsEditor : NewForm
     {
-            //
-        private long checksum;
-        public long Checksum { get { return checksum; } set { checksum = value; } }
         private Settings settings = Settings.Default;
         public Items itemsEditor;
         public Shops shopsEditor;
@@ -38,8 +35,6 @@ namespace LAZYSHELL
             itemsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this, false);
-            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         // functions
         public void Assemble()
@@ -56,12 +51,11 @@ namespace LAZYSHELL
                 MessageBox.Show("Not enough space to save all item descriptions.");
             foreach (Shop shop in Model.Shops)
                 shop.Assemble();
-            checksum = Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops);
         }
         #region Event handlers
         private void ItemsEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Model.Items, Model.ItemNames, Model.Shops) == checksum)
+            if (!this.Modified && !itemsEditor.Modified && !shopsEditor.Modified)
                 return;
             DialogResult result = MessageBox.Show(
                 "Items and shops have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

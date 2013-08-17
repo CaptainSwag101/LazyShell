@@ -828,8 +828,8 @@ namespace LAZYSHELL
             this.Name = "Editor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "LAZY SHELL - Super Mario RPG Editor";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Editor_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Editor_FormClosed);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);

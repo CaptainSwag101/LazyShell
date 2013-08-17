@@ -12,10 +12,7 @@ namespace LAZYSHELL
 {
     public class NewCheckedListBox : CheckedListBox
     {
-        public NewCheckedListBox()
-            : base()
-        {
-        }
+        public NewCheckedListBox() : base() { }
         public new event DrawItemEventHandler DrawItem;
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
@@ -31,62 +28,14 @@ namespace LAZYSHELL
     }
     public class NewForm : Form
     {
-        private Timer timer = new Timer();
-        private int originalExStyle = -1;
-        private bool antiFlicker = true;
+        public NewForm() : base() { }
         //
-        private void DisableAntiFlicker()
-        {
-            // return if already disabled
-            if (!antiFlicker)
-                return;
-            antiFlicker = false;
-            this.MaximizeBox = true;
-        }
-        private void EnableAntiFlicker()
-        {
-            // return if already enabled
-            if (antiFlicker)
-                return;
-            antiFlicker = true;
-            this.MaximizeBox = true;
-        }
-        //
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                if (originalExStyle == -1)
-                    originalExStyle = base.CreateParams.ExStyle;
-                CreateParams cp = base.CreateParams;
-                if (antiFlicker)
-                    cp.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED
-                else
-                    cp.ExStyle = originalExStyle;
-                return cp;
-            }
-        }
-        // disables anti-flicker when activated
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-            timer.Start();
-        }
-        // enables anti-flicker when deactivated
-        protected override void OnDeactivate(EventArgs e)
-        {
-            base.OnDeactivate(e);
-            EnableAntiFlicker();
-        }
-        // set timer for waiting until all controls drawn
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            timer.Tick += new EventHandler(delegate
-                {
-                    timer.Stop(); DisableAntiFlicker();
-                });
-        }
+        private History history;
+        public History History { get { return history; } set { history = value; } }
+        private bool updating;
+        public bool Updating { get { return updating; } set { updating = value; } }
+        private bool modified;
+        public bool Modified { get { return modified; } set { modified = value; } }
     }
     public class NewListView : ListView
     {

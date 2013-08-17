@@ -13,7 +13,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class LevelsTemplate : Form
+    public partial class LevelsTemplate : NewForm
     {
         // variables
         //

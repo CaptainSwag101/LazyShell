@@ -16,7 +16,7 @@ using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
-    public partial class IOElements : Form
+    public partial class IOElements : NewForm
     {
         private Settings settings = Settings.Default;
         private object element;

@@ -10,11 +10,9 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class MineCart : Form
+    public partial class MineCart : NewForm
     {
         #region Variables
-        public long checksum;
-        private bool updating;
         private delegate void Function();
         private Settings settings = Settings.Default;
         public MiniGames MiniGames;
@@ -83,8 +81,8 @@ namespace LAZYSHELL
                 if (L1Indexes.Count > 0)
                 {
                     screens.Tag = value;
-                    updating = true;
-                    updating = false;
+                    this.Updating = true;
+                    this.Updating = false;
                     RefreshScreen();
                 }
                 foreach (PictureBox picture in screens.Controls)
@@ -139,12 +137,12 @@ namespace LAZYSHELL
             InitializeComponent();
             this.music.Items.AddRange(Lists.Numerize(Lists.MusicNames));
             this.music.SelectedIndex = Model.ROM[0x0393EF];
-            updating = true;
+            this.Updating = true;
             if (settings.RememberLastIndex)
                 Index = settings.LastMineCart;
             else
                 Index = 0;
-            updating = false;
+            this.Updating = false;
             //
             MinecartData = new MinecartData(Model.MinecartObjects);
             RefreshLevel();
@@ -158,11 +156,7 @@ namespace LAZYSHELL
             tilemapEditor.Show();
             tilesetEditor.Show();
             //
-            checksum = Do.GenerateChecksum(MinecartData, Model.MinecartM7Graphics, Model.MinecartM7PaletteSet,
-                Model.MinecartM7TilemapA, Model.MinecartM7TilemapB, Model.MinecartM7TilesetPalettes, Model.MinecartM7TilesetSubtiles,
-                Model.MinecartObjectGraphics, Model.MinecartObjectPaletteSet, Model.MinecartSSBGTileset, Model.MinecartSSGraphics, Model.MinecartSSPaletteSet);
-            //
-            new History(this, levelName, null);
+            this.History = new History(this, levelName, null);
         }
         public void Reload(MiniGames miniGames)
         {
@@ -225,7 +219,7 @@ namespace LAZYSHELL
         }
         private void InitializeScreens()
         {
-            updating = true;
+            this.Updating = true;
             pictureBoxScreens.Width = L1Indexes.Count * 256;
             screens.AutoScrollPosition = new Point(0, 0);
             if (L1Indexes.Count == 0)
@@ -239,21 +233,21 @@ namespace LAZYSHELL
                     this.screenL2Number.Value = L2Indexes[screenIndex];
                 this.screenL2Number.Enabled = Index == 2;
             }
-            updating = false;
+            this.Updating = false;
             SetScreenImages();
         }
         private void RefreshObject()
         {
-            updating = true;
+            this.Updating = true;
             objectType.SelectedIndex = minecartObject.Type;
             rowSize.Value = minecartObject.Count;
             objectX.Value = minecartObject.X;
             objectY.Value = minecartObject.Y;
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshScreen()
         {
-            updating = true;
+            this.Updating = true;
             if (L1Indexes != null && L1Indexes.Count != 0)
             {
                 this.screenL1Number.Enabled = true;
@@ -274,7 +268,7 @@ namespace LAZYSHELL
                 screenL2Number.Enabled = false;
                 screenL2Number.Value = 0;
             }
-            updating = false;
+            this.Updating = false;
         }
         public void SetScreenImage()
         {
@@ -354,7 +348,7 @@ namespace LAZYSHELL
             screenBGImage = null;
             SetScreenImages();
             //
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void StageGraphicUpdate()
         {
@@ -548,14 +542,14 @@ namespace LAZYSHELL
         #region Event Handlers
         private void levelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshLevel();
             settings.LastMineCart = levelName.SelectedIndex;
         }
         private void music_SelectedIndexChanged(object sender, EventArgs e)
         {
-            checksum--;
+            this.Modified = true;
         }
         private void stagePalettesMenuItem_Click(object sender, EventArgs e)
         {
@@ -723,7 +717,7 @@ namespace LAZYSHELL
         // screen data
         private void screenWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (Index == 2)
                 MinecartData.WidthA = (int)screenWidth.Value;
@@ -732,14 +726,14 @@ namespace LAZYSHELL
         }
         private void screenL1Number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             L1Indexes[screenIndex] = (int)screenL1Number.Value;
             SetScreenImage();
         }
         private void screenL2Number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             L2Indexes[screenIndex] = (int)screenL2Number.Value;
             SetScreenImage();

@@ -1009,7 +1009,7 @@ namespace LAZYSHELL
             foreach (Tile tile in tileset)
             {
                 int contains = Contains(tile, tileset);
-                if (Bits.Compare(tile.Pixels, new int[16 * 16]))
+                if (Bits.Empty(tile.Pixels))
                     tile.Index = 0xFF;
                 else if (tile.Index == contains)
                     tilesetTiles.Add(tile);
@@ -3091,8 +3091,15 @@ namespace LAZYSHELL
                     if (index >= tileset.Length)
                         continue;
                     if (!priority1)
-                        Do.PixelsToPixels(tileset[index].Pixels, pixels, width * 16,
-                            new Rectangle(x * 16, y * 16, 16, 16));
+                    {
+                        for (int z = 0; z < 4; z++)
+                        {
+                            int X = (x * 16) + ((z % 2) * 8);
+                            int Y = (y * 16) + ((z / 2) * 8);
+                            Do.PixelsToPixels(tileset[index].Subtiles[z].Pixels,
+                                pixels, width * 16, new Rectangle(X, Y, 8, 8));
+                        }
+                    }
                     else
                         Do.PixelsToPixels(tileset[index].Pixels_P1, pixels, width * 16,
                             new Rectangle(x * 16, y * 16, 16, 16));
@@ -4870,22 +4877,22 @@ namespace LAZYSHELL
             StopWatch = new Stopwatch();
             StopWatch.Start();
         }
-        public static void StopWatchStop(bool showMessage)
+        public static string StopWatchStop(bool showMessage)
         {
             StopWatch.Stop();
-            if (!showMessage)
-                return;
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = StopWatch.Elapsed;
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-            MessageBox.Show(elapsedTime);
+            if (showMessage)
+                MessageBox.Show(elapsedTime);
+            return elapsedTime;
         }
-        public static void StopWatchStop()
+        public static string StopWatchStop()
         {
-            StopWatchStop(false);
+            return StopWatchStop(false);
         }
         public static void AddHistory(Form form, int index, TreeNode node, string action, bool noreadoffset)
         {
@@ -4919,7 +4926,7 @@ namespace LAZYSHELL
         }
         public static void AddHistory(string message)
         {
-            string text = message + " | " + DateTime.Now.ToString() + "\r\n";
+            string text = message + "\r\n";// +" | " + DateTime.Now.ToString() + "\r\n";
             Model.History = Model.History.Insert(0, text);
         }
         public static void CompareImages()

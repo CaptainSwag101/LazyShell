@@ -18,7 +18,7 @@ namespace LAZYSHELL
         #region Methods
         private void InitializeEventFieldProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             this.eventMusic.SelectedIndex = events.Music;
             this.eventExit.Value = events.EntranceEvent;
             this.eventsList.Nodes.Clear();
@@ -80,11 +80,11 @@ namespace LAZYSHELL
             }
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         private void RefreshEventFieldProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             if (events.Count != 0 && this.eventsList.SelectedNode != null)
             {
                 events.CurrentEvent = this.eventsList.SelectedNode.Index;
@@ -137,7 +137,7 @@ namespace LAZYSHELL
             }
             eventsBytesLeft.Text = CalculateFreeEventSpace() + " bytes left";
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         public int CalculateFreeEventSpace()
         {
@@ -193,26 +193,26 @@ namespace LAZYSHELL
         }
         private void eventsExitEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.EntranceEvent = (ushort)this.eventExit.Value;
         }
         private void eventsAreaMusic_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.Music = (byte)this.eventMusic.SelectedIndex;
         }
         private void eventsRunEvent_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.RunEvent = (ushort)this.eventEvent.Value;
             picture.Invalidate();
         }
         private void eventsFieldHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Height = (byte)this.eventHeight.Value;
@@ -221,7 +221,7 @@ namespace LAZYSHELL
         }
         private void eventsFieldLength_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Width = (byte)(this.eventLength.Value - 1);
@@ -231,7 +231,7 @@ namespace LAZYSHELL
         }
         private void eventsFieldZCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Z = (byte)this.eventZ.Value;
@@ -241,7 +241,7 @@ namespace LAZYSHELL
         }
         private void eventsFieldYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Y = (byte)this.eventY.Value;
@@ -251,7 +251,7 @@ namespace LAZYSHELL
         }
         private void eventsFieldXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.X = (byte)this.eventX.Value;
@@ -261,7 +261,7 @@ namespace LAZYSHELL
         }
         private void eventsFieldRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.F = (byte)this.eventFace.SelectedIndex;
@@ -331,7 +331,7 @@ namespace LAZYSHELL
         {
             if (eventsWidthXPlusHalf.Checked) eventsWidthXPlusHalf.ForeColor = Color.Black;
             else eventsWidthXPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.X_Half = this.eventsWidthXPlusHalf.Checked;
@@ -343,7 +343,7 @@ namespace LAZYSHELL
         {
             if (eventsWidthYPlusHalf.Checked) eventsWidthYPlusHalf.ForeColor = Color.Black;
             else eventsWidthYPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.Y_Half = this.eventsWidthYPlusHalf.Checked;

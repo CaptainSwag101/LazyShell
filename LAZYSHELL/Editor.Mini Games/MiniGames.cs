@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class MiniGames : Form
+    public partial class MiniGames : NewForm
     {
         private MineCart minecart; public MineCart Minecart { get { return minecart; } set { minecart = value; } }
         private State state = State.Instance2;
@@ -29,8 +29,6 @@ namespace LAZYSHELL
             new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
-            new History(this, false);
-            //
         }
         private void LoadMineCartEditor()
         {
@@ -83,10 +81,7 @@ namespace LAZYSHELL
         //
         private void MiniGames_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(minecart.MinecartData, Model.MinecartM7Graphics, Model.MinecartM7PaletteSet,
-                Model.MinecartM7TilemapA, Model.MinecartM7TilemapB, Model.MinecartM7TilesetPalettes, Model.MinecartM7TilesetSubtiles,
-                Model.MinecartObjectGraphics, Model.MinecartObjectPaletteSet,
-                Model.MinecartSSBGTileset, Model.MinecartSSGraphics, Model.MinecartSSPaletteSet) == minecart.checksum)
+            if (!this.Modified)
                 goto Close;
             state.Draw = false;
             state.Erase = false;

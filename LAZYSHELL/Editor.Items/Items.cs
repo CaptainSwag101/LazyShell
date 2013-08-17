@@ -9,12 +9,11 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Items : Form
+    public partial class Items : NewForm
     {
         #region Variables
         private Settings settings = Settings.Default;
-        private bool updating = false;
-        private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
+                private Item[] items { get { return Model.Items; } set { Model.Items = value; } }
         private Item item { get { return items[index]; } set { items[index] = value; } }
         public Item Item { get { return item; } set { item = value; } }
         private int index { get { return (int)itemNum.Value; } set { itemNum.Value = value; } }
@@ -40,7 +39,7 @@ namespace LAZYSHELL
             if (settings.RememberLastIndex)
                 index = settings.LastItem;
             //
-            new History(this, itemName, itemNum);
+            this.History = new History(this, itemName, itemNum);
         }
         #region Functions
         private void InitializeStrings()
@@ -56,9 +55,9 @@ namespace LAZYSHELL
         public void RefreshItems()
         {
             Cursor.Current = Cursors.WaitCursor;
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             this.itemName.SelectedIndex = Model.ItemNames.GetSortedIndex(index);
             this.itemName.Invalidate();
             this.itemCoinValue.Value = item.Price;
@@ -136,7 +135,7 @@ namespace LAZYSHELL
                 this.lvl2TimingEnd.Value = item.WeaponEndLevel2;
                 this.lvl1TimingEnd.Value = item.WeaponEndLevel1;
             }
-            updating = false;
+            this.Updating = false;
             Cursor.Current = Cursors.Arrow;
         }
         private void UpdateAttackType()

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class LevelsSolidTiles : Form
+    public partial class LevelsSolidTiles : NewForm
     {
         #region Variables
         //
@@ -18,8 +18,7 @@ namespace LAZYSHELL
         public int Index { get { return (int)physicalTileNum.Value; } set { physicalTileNum.Value = value; } }
         private SolidityTile[] solidityTiles { get { return Model.SolidTiles; } set { Model.SolidTiles = value; } }
         private SolidityTile solidityTile { get { return solidityTiles[index]; } set { solidityTiles[index] = value; } }
-        private bool updating = false;
-        private Bitmap solidTileImage;
+                private Bitmap solidTileImage;
         private Solidity solids;
         public Solidity Solids { get { return solids; } }
         public SearchSolidTile SearchSolidTile;
@@ -42,7 +41,7 @@ namespace LAZYSHELL
         }
         private void RefreshPhysicalTile()
         {
-            updating = true;
+            this.Updating = true;
             // SIZE/COORDS;
             heightOfBaseTile.Value = solidityTile.BaseTileHeight;
             heightOverhead.Value = solidityTile.OverheadTileHeight;
@@ -74,7 +73,7 @@ namespace LAZYSHELL
             specialTile.SelectedIndex = solidityTile.SpecialTileFormat;
             doorFormat.SelectedIndex = solidityTile.Door;
             SetSolidTileImage();
-            updating = false;
+            this.Updating = false;
         }
         #endregion
         #region Event handlers
@@ -106,7 +105,7 @@ namespace LAZYSHELL
         //
         private void heightOfBaseTile_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.BaseTileHeight = (byte)heightOfBaseTile.Value;
             SetSolidTileImage();
@@ -114,7 +113,7 @@ namespace LAZYSHELL
         }
         private void zCoordOverhead_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.OverheadTileZ = (byte)zCoordOverhead.Value;
             SetSolidTileImage();
@@ -122,7 +121,7 @@ namespace LAZYSHELL
         }
         private void heightOverhead_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.OverheadTileHeight = (byte)heightOverhead.Value;
             SetSolidTileImage();
@@ -130,7 +129,7 @@ namespace LAZYSHELL
         }
         private void zCoordWater_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.WaterTileZ = (byte)zCoordWater.Value;
             SetSolidTileImage();
@@ -138,7 +137,7 @@ namespace LAZYSHELL
         }
         private void zCoordPlusHalf_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.BaseTileHeight_Half = zCoordPlusHalf.SelectedIndex == 1;
             SetSolidTileImage();
@@ -146,7 +145,7 @@ namespace LAZYSHELL
         }
         private void solidTile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidTile = solidTile.SelectedIndex == 1;
             SetSolidTileImage();
@@ -154,7 +153,7 @@ namespace LAZYSHELL
         }
         private void solidQuadrant_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidQuadrantFlag = solidQuadrant.SelectedIndex == 1;
             SetSolidTileImage();
@@ -162,7 +161,7 @@ namespace LAZYSHELL
         }
         private void solidQuadrantN_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidTopQuadrant = solidQuadrantN.SelectedIndex == 1;
             SetSolidTileImage();
@@ -170,7 +169,7 @@ namespace LAZYSHELL
         }
         private void solidQuadrantW_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidLeftQuadrant = solidQuadrantW.SelectedIndex == 1;
             SetSolidTileImage();
@@ -178,7 +177,7 @@ namespace LAZYSHELL
         }
         private void solidQuadrantE_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidRightQuadrant = solidQuadrantE.SelectedIndex == 1;
             SetSolidTileImage();
@@ -186,7 +185,7 @@ namespace LAZYSHELL
         }
         private void solidQuadrantS_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidBottomQuadrant = solidQuadrantS.SelectedIndex == 1;
             SetSolidTileImage();
@@ -194,67 +193,67 @@ namespace LAZYSHELL
         }
         private void solidEdgeNW_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidNWEdge = solidEdgeNW.SelectedIndex == 1;
         }
         private void solidEdgeNE_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidNEEdge = solidEdgeNE.SelectedIndex == 1;
         }
         private void solidEdgeSW_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidSWEdge = solidEdgeSW.SelectedIndex == 1;
         }
         private void solidEdgeSE_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SolidSEEdge = solidEdgeSE.SelectedIndex == 1;
         }
         private void p3OnEdge_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.P3ObjectOnEdge = p3OnEdge.SelectedIndex == 1;
         }
         private void p3OverEdge_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.P3ObjectAboveEdge = p3OverEdge.SelectedIndex == 1;
         }
         private void p3OnTile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.P3ObjectOnTile = p3OnTile.SelectedIndex == 1;
         }
         private void conveyor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.ConveryorBeltDirection = (byte)conveyor.SelectedIndex;
         }
         private void conveyorBeltFast_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.ConveyorBeltFast = conveyorBeltFast.SelectedIndex == 1;
         }
         private void conveyorBeltNormal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.ConveyorBeltNormal = conveyorBeltNormal.SelectedIndex == 1;
         }
         private void stairs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.StairsDirection = (byte)stairs.SelectedIndex;
             SetSolidTileImage();
@@ -262,7 +261,7 @@ namespace LAZYSHELL
         }
         private void specialTile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.SpecialTileFormat = (byte)specialTile.SelectedIndex;
             SetSolidTileImage();
@@ -270,13 +269,13 @@ namespace LAZYSHELL
         }
         private void doorFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.Door = (byte)doorFormat.SelectedIndex;
         }
         private void unknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             solidityTile.B5b0 = unknownBits.GetItemChecked(0);
             solidityTile.B5b1 = unknownBits.GetItemChecked(1);

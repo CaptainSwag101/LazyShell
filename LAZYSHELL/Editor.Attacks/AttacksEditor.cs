@@ -9,11 +9,10 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AttacksEditor : Form
+    public partial class AttacksEditor : NewForm
     {
         // variables
             //
-        private long checksum;
         private Settings settings = Settings.Default;
         public Spells spellsEditor;
         public Attacks attacksEditor;
@@ -37,14 +36,12 @@ namespace LAZYSHELL
             panel1.Controls.Add(spellsEditor);
             spellsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, false);
             //
             if (settings.RememberLastIndex)
             {
                 spellsEditor.Index = settings.LastSpell;
                 attacksEditor.Index = settings.LastAttack;
             }
-            checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
         }
         // functions
         public void Assemble()
@@ -61,7 +58,6 @@ namespace LAZYSHELL
                  Model.Spells[i].Assemble(ref length);
             if (i != Model.Spells.Length)
                 System.Windows.Forms.MessageBox.Show("Spell Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
-            checksum = Do.GenerateChecksum(Model.Attacks, Model.Spells);
         }
         // event handlers
         private void importSpellsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,7 +99,7 @@ namespace LAZYSHELL
         //
         private void AttacksEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Model.Attacks, Model.Spells) == this.checksum)
+            if (!this.Modified && !attacksEditor.Modified && !spellsEditor.Modified)
                 return;
             DialogResult result = MessageBox.Show(
                 "Attacks and spells have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

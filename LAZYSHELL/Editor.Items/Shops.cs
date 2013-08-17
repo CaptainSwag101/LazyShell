@@ -9,14 +9,13 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Shops : Form
+    public partial class Shops : NewForm
     {
         private Settings settings = Settings.Default;
         private Shop[] shops { get { return Model.Shops; } set { Model.Shops = value; } }
         private Shop shop { get { return shops[index]; } set { shops[index] = value; } }
         public Shop Shop { get { return shop; } set { shop = value; } }
-        private bool updating = false;
-        private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
+                private int index { get { return (int)shopName.SelectedIndex; } set { shopName.SelectedIndex = value; } }
         public int Index { get { return index; } set { index = value; } }
         private ComboBox[] shopItems = new ComboBox[15];
         private ComboBox selectedItem;
@@ -51,7 +50,7 @@ namespace LAZYSHELL
             RefreshShops();
             labelWindow = new EditLabel(shopName, null, "Shops", true);
             //
-            new History(this, shopName, null);
+            this.History = new History(this, shopName, null);
         }
         // functions
         private void InitializeStrings()
@@ -65,16 +64,16 @@ namespace LAZYSHELL
         }
         public void ResortStrings()
         {
-            updating = true;
+            this.Updating = true;
             for (int i = 0; i < shopItems.Length; i++)
                 shopItems[i].SelectedIndex = Model.ItemNames.GetSortedIndex(shop.Items[i]);
-            updating = false;
+            this.Updating = false;
         }
         public void RefreshShops()
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             for (int i = 0; i < shopItems.Length; i++)
                 shopItems[i].SelectedIndex = Model.ItemNames.GetSortedIndex(shop.Items[i]);
             this.shopBuyOptions.SetItemChecked(0, shop.BuyFrogCoinOne);
@@ -85,7 +84,7 @@ namespace LAZYSHELL
             this.shopDiscounts.SetItemChecked(1, shop.Discount12);
             this.shopDiscounts.SetItemChecked(2, shop.Discount25);
             this.shopDiscounts.SetItemChecked(3, shop.Discount50);
-            updating = false;
+            this.Updating = false;
         }
         #region Event Handlers
         private void shopName_SelectedIndexChanged(object sender, EventArgs e)

@@ -9,12 +9,11 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Attacks : Form
+    public partial class Attacks : NewForm
     {
         // variables
         //
         private Settings settings = Settings.Default;
-        private bool updating = false;
         private Attack[] attacks { get { return Model.Attacks; } set { Model.Attacks = value; } }
         public Attack Attack { get { return attacks[index]; } set { attacks[index] = value; } }
         private int index { get { return (int)attackNum.Value; } set { attackNum.Value = value; } }
@@ -28,7 +27,7 @@ namespace LAZYSHELL
             RefreshAttacks();
             labelWindow = new EditLabel(attackName, attackNum, "Attacks", false);
             //
-            new History(this, attackName, attackNum);
+            this.History = new History(this, attackName, attackNum);
         }
         // functions
         private void InitializeStrings()
@@ -38,9 +37,9 @@ namespace LAZYSHELL
         }
         public void RefreshAttacks()
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             this.attackName.SelectedIndex = Model.AttackNames.GetSortedIndex(index);
             this.attackHitRate.Value = attacks[index].HitRate;
             this.attackAtkLevel.Value = attacks[index].AttackLevel;
@@ -60,7 +59,7 @@ namespace LAZYSHELL
             this.attackAtkType.SetItemChecked(1, attacks[index].NoDamageA);
             this.attackAtkType.SetItemChecked(2, attacks[index].HideDigits);
             this.attackAtkType.SetItemChecked(3, attacks[index].NoDamageB);
-            updating = false;
+            this.Updating = false;
         }
         #region Event Handlers
         private void attackNum_ValueChanged(object sender, EventArgs e)

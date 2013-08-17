@@ -20,7 +20,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Editor : Form, IMRUClient
+    public partial class Editor : NewForm, IMRUClient
     {
         #region Variables
         private ProgramController AppControl;
@@ -75,8 +75,7 @@ namespace LAZYSHELL
                         "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            new History(this);
-            Do.AddHistory("LOADED LAZY SHELL APPLICATION");
+            this.History = new History(this);
             if (!settings.FirstLoad)
                 Help.CreateHelp(Model.LAZYSHELL_xml, true);
             settings.FirstLoad = true;
@@ -484,13 +483,12 @@ namespace LAZYSHELL
             Process.Start("help\\LAZYSHELL_xml.xml");
         }
         // other
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Do.AddHistory("CLOSED LAZY SHELL APPLICATION");
             FinalizeAndSave(e, 1);
             settings.Save();
         }
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Editor_FormClosed(object sender, FormClosedEventArgs e)
         {
         }
         // Editor buttons

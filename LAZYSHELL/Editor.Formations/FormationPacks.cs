@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class FormationPacks : Form
+    public partial class FormationPacks : NewForm
     {
         #region Variables
         //
@@ -19,8 +19,7 @@ namespace LAZYSHELL
         private FormationPack[] packs { get { return Model.FormationPacks; } set { Model.FormationPacks = value; } }
         private FormationPack pack { get { return packs[index]; } set { packs[index] = value; } }
         public FormationPack Pack { get { return pack; } set { pack = value; } }
-        private bool updating = false;
-        private Formation[] formations { get { return Model.Formations; } }
+                private Formation[] formations { get { return Model.Formations; } }
         private Formations formationsEditor;
         public Search searchWindow;
         private EditLabel labelWindow;
@@ -34,19 +33,19 @@ namespace LAZYSHELL
             labelWindow = new EditLabel(null, packNum, "Packs", false);
             RefreshFormationPacks();
             //
-            new History(this, null, packNum);
+            this.History = new History(this, null, packNum);
         }
         // functions
         public void RefreshFormationPacks()
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             this.packFormation1.Value = pack.Formations[0];
             this.packFormation2.Value = pack.Formations[1];
             this.packFormation3.Value = pack.Formations[2];
             RefreshFormationPackStrings();
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshFormationPackStrings()
         {
@@ -113,21 +112,21 @@ namespace LAZYSHELL
         }
         private void packFormation1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             pack.Formations[0] = (ushort)packFormation1.Value;
             RefreshFormationPackStrings();
         }
         private void packFormation2_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             pack.Formations[1] = (ushort)packFormation2.Value;
             RefreshFormationPackStrings();
         }
         private void packFormation3_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             pack.Formations[2] = (ushort)packFormation3.Value;
             RefreshFormationPackStrings();

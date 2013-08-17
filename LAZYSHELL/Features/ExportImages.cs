@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class ExportImages : Form
+    public partial class ExportImages : NewForm
     {
         #region Variables
         private int currentIndex;

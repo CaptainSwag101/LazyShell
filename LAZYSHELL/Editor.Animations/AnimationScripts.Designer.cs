@@ -27,6 +27,7 @@ namespace LAZYSHELL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("");
             this.panelAniControls = new LAZYSHELL.NewPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.applyAnimation = new System.Windows.Forms.Button();
@@ -125,7 +126,7 @@ namespace LAZYSHELL
             // 
             this.panel1.Controls.Add(this.applyAnimation);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 220);
+            this.panel1.Location = new System.Drawing.Point(0, 265);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 25);
             this.panel1.TabIndex = 5;
@@ -149,7 +150,7 @@ namespace LAZYSHELL
             this.aniTitleD.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.aniTitleD.Controls.Add(this.aniBits);
             this.aniTitleD.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniTitleD.Location = new System.Drawing.Point(0, 195);
+            this.aniTitleD.Location = new System.Drawing.Point(0, 240);
             this.aniTitleD.Name = "aniTitleD";
             this.aniTitleD.Size = new System.Drawing.Size(282, 25);
             this.aniTitleD.TabIndex = 3;
@@ -175,10 +176,10 @@ namespace LAZYSHELL
             this.aniTitleC.Controls.Add(this.aniPanelC2);
             this.aniTitleC.Controls.Add(this.aniPanelC1);
             this.aniTitleC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniTitleC.Location = new System.Drawing.Point(0, 146);
+            this.aniTitleC.Location = new System.Drawing.Point(0, 176);
             this.aniTitleC.Name = "aniTitleC";
             this.aniTitleC.Padding = new System.Windows.Forms.Padding(3, 3, 3, 4);
-            this.aniTitleC.Size = new System.Drawing.Size(282, 49);
+            this.aniTitleC.Size = new System.Drawing.Size(282, 64);
             this.aniTitleC.TabIndex = 2;
             this.aniTitleC.TabStop = false;
             // 
@@ -187,7 +188,7 @@ namespace LAZYSHELL
             this.aniPanelC2.Controls.Add(this.aniNumC2);
             this.aniPanelC2.Controls.Add(this.aniLabelC2);
             this.aniPanelC2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelC2.Location = new System.Drawing.Point(3, 37);
+            this.aniPanelC2.Location = new System.Drawing.Point(3, 38);
             this.aniPanelC2.Name = "aniPanelC2";
             this.aniPanelC2.Size = new System.Drawing.Size(276, 22);
             this.aniPanelC2.TabIndex = 6;
@@ -223,7 +224,7 @@ namespace LAZYSHELL
             this.aniPanelC1.Controls.Add(this.aniNumC1);
             this.aniPanelC1.Controls.Add(this.aniLabelC1);
             this.aniPanelC1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelC1.Location = new System.Drawing.Point(3, 16);
+            this.aniPanelC1.Location = new System.Drawing.Point(3, 17);
             this.aniPanelC1.Name = "aniPanelC1";
             this.aniPanelC1.Size = new System.Drawing.Size(276, 21);
             this.aniPanelC1.TabIndex = 6;
@@ -261,10 +262,10 @@ namespace LAZYSHELL
             this.aniTitleB.Controls.Add(this.aniPanelB2);
             this.aniTitleB.Controls.Add(this.aniPanelB1);
             this.aniTitleB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniTitleB.Location = new System.Drawing.Point(0, 97);
+            this.aniTitleB.Location = new System.Drawing.Point(0, 112);
             this.aniTitleB.Name = "aniTitleB";
             this.aniTitleB.Padding = new System.Windows.Forms.Padding(3, 3, 3, 4);
-            this.aniTitleB.Size = new System.Drawing.Size(282, 49);
+            this.aniTitleB.Size = new System.Drawing.Size(282, 64);
             this.aniTitleB.TabIndex = 1;
             this.aniTitleB.TabStop = false;
             // 
@@ -273,7 +274,7 @@ namespace LAZYSHELL
             this.aniPanelB2.Controls.Add(this.aniNumB2);
             this.aniPanelB2.Controls.Add(this.aniLabelB2);
             this.aniPanelB2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelB2.Location = new System.Drawing.Point(3, 37);
+            this.aniPanelB2.Location = new System.Drawing.Point(3, 38);
             this.aniPanelB2.Name = "aniPanelB2";
             this.aniPanelB2.Size = new System.Drawing.Size(276, 22);
             this.aniPanelB2.TabIndex = 6;
@@ -309,7 +310,7 @@ namespace LAZYSHELL
             this.aniPanelB1.Controls.Add(this.aniNumB1);
             this.aniPanelB1.Controls.Add(this.aniLabelB1);
             this.aniPanelB1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelB1.Location = new System.Drawing.Point(3, 16);
+            this.aniPanelB1.Location = new System.Drawing.Point(3, 17);
             this.aniPanelB1.Name = "aniPanelB1";
             this.aniPanelB1.Size = new System.Drawing.Size(276, 21);
             this.aniPanelB1.TabIndex = 6;
@@ -350,7 +351,7 @@ namespace LAZYSHELL
             this.aniTitleA.Location = new System.Drawing.Point(0, 48);
             this.aniTitleA.Name = "aniTitleA";
             this.aniTitleA.Padding = new System.Windows.Forms.Padding(3, 3, 3, 4);
-            this.aniTitleA.Size = new System.Drawing.Size(282, 49);
+            this.aniTitleA.Size = new System.Drawing.Size(282, 64);
             this.aniTitleA.TabIndex = 0;
             this.aniTitleA.TabStop = false;
             // 
@@ -360,7 +361,7 @@ namespace LAZYSHELL
             this.aniPanelA2.Controls.Add(this.aniNameA2);
             this.aniPanelA2.Controls.Add(this.aniLabelA2);
             this.aniPanelA2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelA2.Location = new System.Drawing.Point(3, 37);
+            this.aniPanelA2.Location = new System.Drawing.Point(3, 38);
             this.aniPanelA2.Name = "aniPanelA2";
             this.aniPanelA2.Size = new System.Drawing.Size(276, 22);
             this.aniPanelA2.TabIndex = 6;
@@ -427,7 +428,7 @@ namespace LAZYSHELL
             this.aniPanelA1.Controls.Add(this.aniNameA1);
             this.aniPanelA1.Controls.Add(this.aniLabelA1);
             this.aniPanelA1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aniPanelA1.Location = new System.Drawing.Point(3, 16);
+            this.aniPanelA1.Location = new System.Drawing.Point(3, 17);
             this.aniPanelA1.Name = "aniPanelA1";
             this.aniPanelA1.Size = new System.Drawing.Size(276, 21);
             this.aniPanelA1.TabIndex = 6;
@@ -499,6 +500,9 @@ namespace LAZYSHELL
             this.commandTree.FullRowSelect = true;
             this.commandTree.HideSelection = false;
             this.commandTree.HotTracking = true;
+            treeNode1.Name = "";
+            treeNode1.Text = "";
+            this.commandTree.LastNode = treeNode1;
             this.commandTree.Location = new System.Drawing.Point(0, 25);
             this.commandTree.Name = "commandTree";
             this.commandTree.Size = new System.Drawing.Size(468, 585);
@@ -572,6 +576,7 @@ namespace LAZYSHELL
             // 
             // animationCategory
             // 
+            this.animationCategory.ContextMenuStrip = null;
             this.animationCategory.DrawMode = System.Windows.Forms.DrawMode.Normal;
             this.animationCategory.DropDownHeight = 106;
             this.animationCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -587,6 +592,7 @@ namespace LAZYSHELL
             // animationName
             // 
             this.animationName.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.animationName.ContextMenuStrip = null;
             this.animationName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.animationName.DropDownHeight = 500;
             this.animationName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -823,6 +829,7 @@ namespace LAZYSHELL
             this.toolStripCommands.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private LAZYSHELL.NewPanel panelAniControls;

@@ -23,7 +23,7 @@ namespace LAZYSHELL
         #region Methods
         private void InitializeOverlapProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             this.overlapFieldTree.Nodes.Clear();
             for (int i = 0; i < overlaps.Count; i++)
             {
@@ -83,11 +83,11 @@ namespace LAZYSHELL
             pictureBoxOverlaps.Invalidate();
             overlapsBytesLeft.Text = CalculateFreeOverlapSpace() + " bytes left";
             overlapsBytesLeft.BackColor = CalculateFreeOverlapSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         private void RefreshOverlapProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             if (overlaps.Count != 0 && this.overlapFieldTree.SelectedNode != null)
             {
                 overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
@@ -137,7 +137,7 @@ namespace LAZYSHELL
             pictureBoxOverlaps.Invalidate();
             overlapsBytesLeft.Text = CalculateFreeOverlapSpace() + " bytes left";
             overlapsBytesLeft.BackColor = CalculateFreeOverlapSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         public int CalculateFreeOverlapSpace()
         {
@@ -248,7 +248,7 @@ namespace LAZYSHELL
         }
         private void overlapCoordX_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.X = (byte)this.overlapX.Value;
@@ -257,7 +257,7 @@ namespace LAZYSHELL
         }
         private void overlapCoordY_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Y = (byte)this.overlapY.Value;
@@ -266,7 +266,7 @@ namespace LAZYSHELL
         }
         private void overlapCoordZ_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Z = (byte)this.overlapZ.Value;
@@ -276,7 +276,7 @@ namespace LAZYSHELL
         private void overlapCoordZPlusHalf_CheckedChanged(object sender, EventArgs e)
         {
             overlapCoordZPlusHalf.ForeColor = overlapCoordZPlusHalf.Checked ? Color.Black : Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.B1b7 = this.overlapCoordZPlusHalf.Checked;
@@ -285,7 +285,7 @@ namespace LAZYSHELL
         }
         private void overlapType_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Type = (byte)this.overlapType.Value;
@@ -300,7 +300,7 @@ namespace LAZYSHELL
         }
         private void overlapUnknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             overlaps.B0b7 = overlapUnknownBits.GetItemChecked(0);
             overlaps.B2b5 = overlapUnknownBits.GetItemChecked(1);

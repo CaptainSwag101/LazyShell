@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class Search : Form
+    public partial class Search : NewForm
     {
         #region Variables
         private delegate void Function();

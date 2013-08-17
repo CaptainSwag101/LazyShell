@@ -9,7 +9,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class NPCEditor : Form
+    public partial class NPCEditor : NewForm
     {
         #region Variables
         private NPCProperties _npcProperty;
@@ -22,8 +22,7 @@ namespace LAZYSHELL
         private Levels level;
         private int index { get { return (int)npcNum.Value; } set { npcNum.Value = value; } }
         private Search searchWindow;
-        private bool updating = false;
-        #endregion
+                #endregion
         // constructor
         public NPCEditor(Levels level, decimal npcID)
         {
@@ -35,7 +34,7 @@ namespace LAZYSHELL
             npcNum.Value = npcID;
             InitializeNPCs();
             searchWindow = new Search(searchSpriteName, spriteNameTextBox, searchSpriteNames, searchSpriteName.Items);
-            new History(this, null, npcNum);
+            this.History = new History(this, null, npcNum);
         }
         // functions
         public void Reload(decimal npcID)
@@ -45,7 +44,7 @@ namespace LAZYSHELL
         }
         private void InitializeNPCs()
         {
-            updating = true;
+            this.Updating = true;
             this.spriteName.SelectedIndex = npcProperty.Sprite;
             this.layerPriority.SetItemChecked(0, npcProperty.Priority0);
             this.layerPriority.SetItemChecked(1, npcProperty.Priority1);
@@ -68,7 +67,7 @@ namespace LAZYSHELL
             this.unknownBits.SetItemChecked(6, npcProperty.B5b7);
             this.unknownBits.SetItemChecked(7, npcProperty.B6b2);
             SetSpriteImage();
-            updating = false;
+            this.Updating = false;
             //if (level.npcs.NumberOfNPCs != 0)
             //    level.NPCID.Value = npcNum.Value;
         }
@@ -116,7 +115,7 @@ namespace LAZYSHELL
         private void spriteName_SelectedIndexChanged(object sender, EventArgs e)
         {
             spriteNum.Value = spriteName.SelectedIndex;
-            if (updating)
+            if (this.Updating)
                 return;
             SetSpriteImage();
         }
@@ -129,7 +128,7 @@ namespace LAZYSHELL
         }
         private void layerPriority_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void showShadow_CheckedChanged(object sender, EventArgs e)
@@ -138,27 +137,27 @@ namespace LAZYSHELL
         }
         private void yPixelShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void axisAcute_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void axisObtuse_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void height_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void shadow_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         private void cannotClone_CheckedChanged(object sender, EventArgs e)
@@ -167,7 +166,7 @@ namespace LAZYSHELL
         }
         private void unknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
         }
         //

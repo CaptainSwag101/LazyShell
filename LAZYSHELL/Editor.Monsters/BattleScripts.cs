@@ -16,11 +16,10 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class BattleScripts : Form
+    public partial class BattleScripts : NewForm
     {
         #region Variables
         //
-        private long checksum;
         private Monsters monsterEditor;
         public BattleScript[] battleScripts { get { return Model.BattleScripts; } set { Model.BattleScripts = value; } }
         private BattleScript battleScript { get { return battleScripts[index]; } set { battleScripts[index] = value; } }
@@ -29,7 +28,6 @@ namespace LAZYSHELL
         private SortedList attackNames { get { return Model.AttackNames; } set { Model.AttackNames = value; } }
         private SortedList itemNames { get { return Model.ItemNames; } set { Model.ItemNames = value; } }
         public int index { get { return monsterEditor.Index; } set { monsterEditor.Index = value; } }
-        private bool updating = false;
         private Bitmap monsterImage;
         private BattleCommand command;
         private List<BattleCommand> commandCopies;
@@ -46,7 +44,6 @@ namespace LAZYSHELL
         {
             this.monsterEditor = monsterEditor;
             this.commandStack = new CommandStack();
-            checksum = Do.GenerateChecksum(battleScripts);
             InitializeComponent();
             Initialize();
         }
@@ -121,7 +118,7 @@ namespace LAZYSHELL
         // Disassembler Commands
         private void ControlDisassemble()
         {
-            updating = true;
+            this.Updating = true;
             buttonInsert.Enabled = true;
             buttonApply.Enabled = true;
             //
@@ -494,7 +491,7 @@ namespace LAZYSHELL
             }
             OrganizeControls();
             panelRight.ResumeDrawing();
-            updating = false;
+            this.Updating = false;
         }
         private void ControlAssemble()
         {
@@ -606,7 +603,7 @@ namespace LAZYSHELL
         }
         private void ResetControls()
         {
-            updating = true;
+            this.Updating = true;
             //
             nameA.BackColor = SystemColors.ControlDarkDark; nameA.ItemHeight = 15;
             nameA.Items.Clear(); nameA.ResetText(); nameA.DropDownWidth = nameA.Width;
@@ -645,7 +642,7 @@ namespace LAZYSHELL
             bit6.Checked = false;
             bit7.Checked = false;
             //
-            updating = false;
+            this.Updating = false;
         }
         private void OrganizeControls()
         {
@@ -795,7 +792,7 @@ namespace LAZYSHELL
         //
         private void SetInitialBits(byte bits)
         {
-            updating = true;
+            this.Updating = true;
             //
             if ((bits & 0x01) != 0) bit0.Checked = true;
             if ((bits & 0x02) != 0) bit1.Checked = true;
@@ -806,14 +803,13 @@ namespace LAZYSHELL
             if ((bits & 0x40) != 0) bit6.Checked = true;
             if ((bits & 0x80) != 0) bit7.Checked = true;
             //
-            updating = false;
+            this.Updating = false;
         }
         public void Assemble()
         {
             if (CalculateBattleScriptsLength() >= 0)
             {
                 AssembleAllBattleScripts();
-                checksum = Do.GenerateChecksum(battleScripts);
             }
             else
                 MessageBox.Show("There is not enough available space to save the battle scripts to.\n//\nThe battle scripts were not saved.", "LAZY SHELL");
@@ -840,12 +836,6 @@ namespace LAZYSHELL
             if (i != battleScripts.Length)
                 MessageBox.Show("Not enough space to save all battlescripts.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-        public bool ChecksumNotChanged()
-        {
-            if (Do.GenerateChecksum(battleScripts) == this.checksum)
-                return true;
-            return false;
         }
         public void DumpBattlescriptText()
         {
@@ -943,8 +933,6 @@ namespace LAZYSHELL
         }
         private void BattleScriptTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Do.AddHistory(this, index, e.Node, "NodeMouseClick", true);
-            //
             commandTree.SelectedNode = e.Node;
             if (e.Button != MouseButtons.Right)
                 return;
@@ -1035,7 +1023,7 @@ namespace LAZYSHELL
         }
         private void name_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1067,7 +1055,7 @@ namespace LAZYSHELL
         }
         private void numA_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1098,7 +1086,7 @@ namespace LAZYSHELL
         }
         private void nameA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1131,7 +1119,7 @@ namespace LAZYSHELL
         }
         private void numB_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1155,7 +1143,7 @@ namespace LAZYSHELL
         }
         private void nameB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1184,7 +1172,7 @@ namespace LAZYSHELL
         }
         private void numC_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1199,7 +1187,7 @@ namespace LAZYSHELL
         }
         private void nameC_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             switch (command.Opcode)
             {
@@ -1218,7 +1206,7 @@ namespace LAZYSHELL
         private void doNothingA_CheckedChanged(object sender, EventArgs e)
         {
             doNothingA.ForeColor = doNothingA.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updating)
+            if (this.Updating)
                 return;
             if (doNothingA.Checked)
             {
@@ -1235,7 +1223,7 @@ namespace LAZYSHELL
         private void doNothingB_CheckedChanged(object sender, EventArgs e)
         {
             doNothingB.ForeColor = doNothingB.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updating)
+            if (this.Updating)
                 return;
             if (doNothingB.Checked)
             {
@@ -1252,7 +1240,7 @@ namespace LAZYSHELL
         private void doNothingC_CheckedChanged(object sender, EventArgs e)
         {
             doNothingC.ForeColor = doNothingC.Checked ? SystemColors.ControlText : SystemColors.ControlDark;
-            if (updating)
+            if (this.Updating)
                 return;
             if (doNothingC.Checked)
             {

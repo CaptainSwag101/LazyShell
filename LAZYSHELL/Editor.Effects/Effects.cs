@@ -14,17 +14,14 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Effects : Form
+    public partial class Effects : NewForm
     {
         #region Variables
-        private long checksum;
-        public long Checksum { get { return checksum; } set { checksum = value; } }
         private Settings settings = Settings.Default;
         // main
         private delegate void Function();
         private Overlay overlay = new Overlay();
-        private bool updating = false;
-        private Effect[] effects { get { return Model.Effects; } set { Model.Effects = value; } }
+                private Effect[] effects { get { return Model.Effects; } set { Model.Effects = value; } }
         private E_Animation[] animations { get { return Model.E_animations; } set { Model.E_animations = value; } }
         private int availableBytes = 0;
         // indexed variables
@@ -62,7 +59,7 @@ namespace LAZYSHELL
             searchWindow = new Search(number, searchText, searchEffectNames, name.Items);
             labelWindow = new EditLabel(name, number, "Effects", true);
             // set control values
-            updating = true;
+            this.Updating = true;
             this.animation.Tileset_tiles = new E_Tileset(animation, palette);
             this.name.Items.AddRange(Lists.Numerize(Lists.EffectNames));
             this.name.SelectedIndex = 0;
@@ -72,7 +69,7 @@ namespace LAZYSHELL
                 a.Assemble();
             }
             RefreshEffectsEditor();
-            updating = false;
+            this.Updating = false;
             GC.Collect();
             // create editors
             molds.TopLevel = false;
@@ -89,15 +86,14 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this, name, number);
+            this.History = new History(this, name, number);
             if (settings.RememberLastIndex)
                 index = settings.LastEffect;
-            checksum = Do.GenerateChecksum(animations, effects);
         }
         private void RefreshEffectsEditor()
         {
             Cursor.Current = Cursors.WaitCursor;
-            updating = true;
+            this.Updating = true;
             // main properties
             imageNum.Value = effect.AnimationPacket;
             e_paletteIndex.Value = palette = effect.PaletteIndex;
@@ -115,7 +111,7 @@ namespace LAZYSHELL
             LoadPaletteEditor();
             LoadGraphicEditor();
             CalculateFreeSpace();
-            updating = false;
+            this.Updating = false;
             GC.Collect();
             Cursor.Current = Cursors.Arrow;
         }
@@ -166,7 +162,6 @@ namespace LAZYSHELL
             }
             if (i < 64)
                 MessageBox.Show("The available space for animation data in bank 0x340000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 63 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
-            checksum = Do.GenerateChecksum(animations, effects);
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -234,7 +229,7 @@ namespace LAZYSHELL
             sequences.InvalidateFrameImages();
             LoadGraphicEditor();
             molds.LoadTileEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -244,13 +239,13 @@ namespace LAZYSHELL
             sequences.SetSequenceFrameImages();
             sequences.InvalidateFrameImages();
             molds.LoadTileEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         #endregion
         #region Event handlers
         private void Effects_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(animations, effects) == checksum)
+            if (!this.Modified && !molds.Modified && !sequences.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Effects have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -279,7 +274,7 @@ namespace LAZYSHELL
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             name.SelectedIndex = (int)number.Value;
             if (animation.Tileset_tiles != null)
@@ -289,14 +284,14 @@ namespace LAZYSHELL
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             number.Value = name.SelectedIndex;
         }
         // basic
         private void e_paletteIndex_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             effect.PaletteIndex = (byte)e_paletteIndex.Value;
             animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);
@@ -306,19 +301,19 @@ namespace LAZYSHELL
         }
         private void xNegShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             effect.X = (byte)xNegShift.Value;
         }
         private void yNegShift_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             effect.Y = (byte)yNegShift.Value;
         }
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             effect.AnimationPacket = (byte)imageNum.Value;
             // image properties
@@ -334,7 +329,7 @@ namespace LAZYSHELL
         }
         private void e_paletteSetSize_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             animation.PaletteSetLength = (ushort)e_paletteSetSize.Value;
             // update free space
@@ -344,7 +339,7 @@ namespace LAZYSHELL
         private void e_graphicSetSize_ValueChanged(object sender, EventArgs e)
         {
             e_graphicSetSize.Value = (int)e_graphicSetSize.Value & (animation.Codec == 1 ? 0xFFFFF0 : 0xFFFFE0);
-            if (updating)
+            if (this.Updating)
                 return;
             animation.GraphicSetLength = (int)e_graphicSetSize.Value;
             // update free space
@@ -355,7 +350,7 @@ namespace LAZYSHELL
         private void e_codec_SelectedIndexChanged(object sender, EventArgs e)
         {
             e_graphicSetSize.Minimum = e_codec.SelectedIndex == 1 ? 16 : 32;
-            if (updating)
+            if (this.Updating)
                 return;
             animation.Codec = (ushort)e_codec.SelectedIndex;
             animation.Tileset_tiles = new E_Tileset(animation, effect.PaletteIndex);

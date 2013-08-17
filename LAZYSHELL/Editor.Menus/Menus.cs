@@ -10,10 +10,9 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Menus : Form
+    public partial class Menus : NewForm
     {
         #region Variables
-        private long checksum { get { return menusEditor.Checksum; } set { menusEditor.Checksum = value; } }
         // main
         private delegate void Function();
         private MenuType index
@@ -106,8 +105,7 @@ namespace LAZYSHELL
         private List<TextObject> textObjects;
         private int mouseOverTextObject = -1;
         //
-        private bool updating;
-        // editors
+                // editors
         private MenusEditor menusEditor;
         private PaletteEditor bgPaletteEditor;
         private GraphicEditor bgGraphicEditor;
@@ -131,9 +129,9 @@ namespace LAZYSHELL
                 CursorSprites[i] = new CursorSprite(i);
             cursorName.SelectedIndex = 0;
             //
-            updating = true;
+            this.Updating = true;
             index = MenuType.GameSelect;
-            updating = false;
+            this.Updating = false;
             //
             SetAllyImages();
             SetBackgroundImage();
@@ -143,7 +141,7 @@ namespace LAZYSHELL
             SetPreviewImage();
             SetTextObjects();
             //
-            new History(this, menuName, null);
+            this.History = new History(this, menuName, null);
         }
         public void Reload(MenusEditor menusEditor)
         {
@@ -156,9 +154,9 @@ namespace LAZYSHELL
                 CursorSprites[i] = new CursorSprite(i);
             cursorName.SelectedIndex = 0;
             //
-            updating = true;
+            this.Updating = true;
             index = MenuType.GameSelect;
-            updating = false;
+            this.Updating = false;
             //
             SetAllyImages();
             SetBackgroundImage();
@@ -591,7 +589,7 @@ namespace LAZYSHELL
             SetBackgroundImage();
             SetPreviewImage();
             LoadBGGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void BGGraphicUpdate()
         {
@@ -600,42 +598,42 @@ namespace LAZYSHELL
             Model.GameBG = null;
             SetBackgroundImage();
             SetPreviewImage();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void FGPaletteUpdate()
         {
             SetForegroundImage();
             SetPreviewImage();
             LoadFGGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void FGGraphicUpdate()
         {
             SetForegroundImage();
             SetPreviewImage();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void CursorsPaletteUpdate()
         {
             SetCursorImages();
             SetPreviewImage();
             LoadCursorsGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void CursorsGraphicUpdate()
         {
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void SpeakersPaletteUpdate()
         {
             SetSpeakersImages();
             LoadSpeakersGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void SpeakersGraphicUpdate()
         {
             SetSpeakersImages();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         //
         private void ImportBackground(Bitmap import)
@@ -677,7 +675,7 @@ namespace LAZYSHELL
             SetPreviewImage();
             LoadBGGraphicEditor();
             LoadBGPaletteEditor();
-            checksum--;
+            this.Modified = true;
         }
         private void ImportForeground(Bitmap import)
         {
@@ -760,7 +758,7 @@ namespace LAZYSHELL
             SetPreviewImage();
             LoadFGGraphicEditor();
             LoadFGPaletteEditor();
-            checksum--;
+            this.Modified = true;
         }
         //
         public void Assemble()
@@ -804,9 +802,6 @@ namespace LAZYSHELL
             Buffer.BlockCopy(dst, 0, Model.ROM, 0x3E0000, 0x0E);
             // store compressed data (starting at start of data)
             Buffer.BlockCopy(dst, 0x4C, Model.ROM, 0x3E004C, dst.Length - 0x4C);
-            //
-            checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, CursorSprites);
         }
         public new void Close()
         {
@@ -1114,7 +1109,7 @@ namespace LAZYSHELL
         }
         private void menuName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshMenu();
         }

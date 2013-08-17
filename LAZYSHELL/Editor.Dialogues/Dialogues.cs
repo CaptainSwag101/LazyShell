@@ -13,10 +13,9 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Dialogues : Form
+    public partial class Dialogues : NewForm
     {
         #region Variables
-        public long Checksum;
         private Settings settings = Settings.Default;
         // main
         private delegate void Function(RichTextBox richTextBox, StringComparison stringComparison, bool matchWholeWord, bool replaceAll, string replaceWith);
@@ -52,7 +51,6 @@ namespace LAZYSHELL
         private TextHelper textHelper;
         private bool byteView { get { return !textView.Checked; } set { textView.Checked = !value; } }
         public int index { get { return (int)dialogueNum.Value; } set { dialogueNum.Value = value; } }
-        private bool updatingDialogue;
         private bool[] isDialogueChanged = new bool[4096];
         private bool warning;
         private bool modifyDTE;
@@ -88,7 +86,7 @@ namespace LAZYSHELL
             dialogueTileset = new DialogueTileset(Model.FontPaletteDialogue);
             SetTilesetImage();
             // compression table
-            updatingDialogue = true;
+            this.Updating = true;
             this.dct0E.Text = dte[0].GetText(byteView); dct0E.Tag = 0;
             this.dct0F.Text = dte[1].GetText(byteView); dct0F.Tag = 1;
             this.dct10.Text = dte[2].GetText(byteView); dct10.Tag = 2;
@@ -101,7 +99,7 @@ namespace LAZYSHELL
             this.dct17.Text = dte[9].GetText(byteView); dct17.Tag = 9;
             this.dct18.Text = dte[10].GetText(byteView); dct18.Tag = 10;
             this.dct19.Text = dte[11].GetText(byteView); dct19.Tag = 11;
-            updatingDialogue = false;
+            this.Updating = false;
             // editors
             LoadFontEditor();
             option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16));
@@ -113,25 +111,22 @@ namespace LAZYSHELL
             battleDialogues.Show();
             fonts.BringToFront();
             // set controls
-            updatingDialogue = true;
+            this.Updating = true;
             if (settings.RememberLastIndex)
                 index = settings.LastDialogue;
             variables.SelectedIndex = 0;
             RefreshDialogueEditor();
             CalculateFreeTableSpace();
             SetTextImage();
-            updatingDialogue = false;
+            this.Updating = false;
             new ToolTipLabel(this, baseConvertor, helpTips);
             new ToolTipLabel(fonts.NewFontTable, baseConvertor, helpTips);
             //
-            new History(this, null, dialogueNum);
-            Checksum = Do.GenerateChecksum(dialogues, dte, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
-                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);
+            this.History = new History(this, null, dialogueNum);
         }
         private void RefreshDialogueEditor()
         {
-            updatingDialogue = true;
+            this.Updating = true;
             if (dialogue.Reference != index)
                 dialogueTextBox.BackColor = SystemColors.Info;
             else
@@ -141,7 +136,7 @@ namespace LAZYSHELL
             int temp = CalculateFreeSpace();
             this.freeBytes.Text = temp.ToString() + " characters left";
             this.freeBytes.BackColor = temp >= 0 ? SystemColors.Control : Color.Red;
-            updatingDialogue = false;
+            this.Updating = false;
         }
         private void SetTilesetImage()
         {
@@ -605,9 +600,6 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Checksum = Do.GenerateChecksum(dialogues, dte, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
-                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages);
         }
         #endregion
         #region Event Handlers
@@ -616,9 +608,7 @@ namespace LAZYSHELL
         {
             if (modifyDTE)
                 EncodeDialogues();
-            if (Do.GenerateChecksum(dialogues, dte, Model.BattleDialogues, Model.BattleMessages, battleDialogues.Tileset,
-                fontDialogue, Model.FontMenu, Model.FontDescription, fontTriangle,
-                Model.NumeralGraphics, Model.BattleMenuGraphics, Model.BonusMessages) == Checksum)
+            if (!this.Modified && !battleDialogues.Modified && !fonts.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Dialogues have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -665,7 +655,7 @@ namespace LAZYSHELL
         }
         private void dialogueNum_ValueChanged(object sender, System.EventArgs e)
         {
-            if (updatingDialogue)
+            if (this.Updating)
                 return;
             dialoguePreview.Reset();
             RefreshDialogueEditor();
@@ -722,7 +712,7 @@ namespace LAZYSHELL
         }
         private void dialogueTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updatingDialogue)
+            if (this.Updating)
                 return;
             SetTextImage();
             int temp = CalculateFreeSpace();
@@ -967,7 +957,7 @@ namespace LAZYSHELL
         }
         private void dct_TextChanged(object sender, EventArgs e)
         {
-            if (updatingDialogue)
+            if (this.Updating)
                 return;
             SetDialogueTable((TextBox)sender);
             modifyDTE = CalculateFreeTableSpace() >= 0;
@@ -977,7 +967,7 @@ namespace LAZYSHELL
         }
         private void panel1_Leave(object sender, EventArgs e)
         {
-            if (updatingDialogue)
+            if (this.Updating)
                 return;
             if (modifyDTE)
                 EncodeDialogues();

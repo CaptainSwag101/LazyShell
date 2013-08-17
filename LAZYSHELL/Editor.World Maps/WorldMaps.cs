@@ -12,14 +12,12 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class WorldMaps : Form
+    public partial class WorldMaps : NewForm
     {
         #region Variables
-        private long checksum;
         // main
         private delegate void Function();
-        private bool updating = false;
-        private int index { get { return (int)worldMapName.SelectedIndex; } }
+                private int index { get { return (int)worldMapName.SelectedIndex; } }
         private WorldMap[] worldMaps { get { return Model.WorldMaps; } set { Model.WorldMaps = value; } }
         private PaletteSet palettes { get { return Model.Palettes; } set { Model.Palettes = value; } }
         private WorldMap worldMap { get { return worldMaps[index]; } set { worldMaps[index] = value; } }
@@ -90,14 +88,12 @@ namespace LAZYSHELL
             //LoadLogoGraphicEditor();
             LoadTileEditor();
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, worldMapName, null);
-            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations);
+            this.History = new History(this, worldMapName, null);
         }
         private void RefreshWorldMap()
         {
             Cursor.Current = Cursors.WaitCursor;
-            updating = true;
+            this.Updating = true;
             this.worldMapTileset.Value = worldMap.Tileset;
             this.pointCount.Value = worldMap.Locations;
             this.worldMapXCoord.Value = worldMap.X;
@@ -117,7 +113,7 @@ namespace LAZYSHELL
             SetWorldMapImage();
             SetLocationsImage();
             SetBannerImage();
-            updating = false;
+            this.Updating = false;
             GC.Collect();
             Cursor.Current = Cursors.Arrow;
         }
@@ -170,8 +166,6 @@ namespace LAZYSHELL
             foreach (Location mp in locations)
                 mp.Assemble();
             AssembleLocationTexts();
-            checksum = Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations);
         }
         private void AddLocations()
         {
@@ -350,7 +344,7 @@ namespace LAZYSHELL
             SetWorldMapImage();
             LoadGraphicEditor();
             LoadTileEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {
@@ -363,13 +357,13 @@ namespace LAZYSHELL
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
             SetBannerImage();
             LoadLogoGraphicEditor();
-            checksum--;
+            this.Modified = true;
         }
         private void LogoGraphicUpdate()
         {
             logoTileset = new Tileset(Model.WorldMapLogoTileset, Model.WorldMapLogos, logoPalette, 16, 16, TilesetType.WorldMapLogo);
             SetBannerImage();
-            checksum--;
+            this.Modified = true;
         }
         // Editing
         private void DrawHoverBox(Graphics g)
@@ -549,8 +543,7 @@ namespace LAZYSHELL
         }
         private void WorldMaps_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(worldMaps, Model.WorldMapGraphics, Model.WorldMapPalettes,
-                Model.WorldMapSprites, Model.WorldMapTilesets, Model.Locations) == checksum)
+            if (!this.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "World Maps have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -633,7 +626,7 @@ namespace LAZYSHELL
         }
         private void pointCount_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             worldMap.Locations = (byte)pointCount.Value;
             AddLocations();
@@ -641,7 +634,7 @@ namespace LAZYSHELL
         }
         private void worldMapTileset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             worldMap.Tileset = (byte)worldMapTileset.Value;
             tileset = new Tileset(tileset_bytes, Model.WorldMapGraphics, palettes, 16, 16, TilesetType.WorldMap);
@@ -649,14 +642,14 @@ namespace LAZYSHELL
         }
         private void worldMapXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             worldMap.X = (sbyte)worldMapXCoord.Value;
             pictureBoxTileset.Invalidate();
         }
         private void worldMapYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             worldMap.Y = (sbyte)worldMapYCoord.Value;
             pictureBoxTileset.Invalidate();

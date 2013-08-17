@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class EffectSequences : Form
+    public partial class EffectSequences : NewForm
     {
         #region Variables
         // main editor accessed variables
@@ -20,8 +20,7 @@ namespace LAZYSHELL
         private E_Animation animation { get { return effectsEditor.Animation; } set { effectsEditor.Animation = value; } }
         private int availableBytes { get { return effectsEditor.AvailableBytes; } set { effectsEditor.AvailableBytes = value; } }
         // local variables
-        private bool updating = false;
-        private E_Tileset tileset { get { return animation.Tileset_tiles; } set { animation.Tileset_tiles = value; } }
+                private E_Tileset tileset { get { return animation.Tileset_tiles; } set { animation.Tileset_tiles = value; } }
         private E_Mold mold { get { return (E_Mold)animation.Molds[(int)frameMold.Value]; } }
         private E_Sequence sequence { get { return (E_Sequence)animation.Sequences[0]; } }
         private E_Sequence.Frame frame { get { return (E_Sequence.Frame)sequence.Frames[index]; } }
@@ -37,9 +36,9 @@ namespace LAZYSHELL
                 if (sequence.Frames.Count > 0)
                 {
                     frames.Tag = value;
-                    updating = true;
+                    this.Updating = true;
                     listBoxFrames.SelectedIndex = value;
-                    updating = false;
+                    this.Updating = false;
                     RefreshFrame();
                 }
                 foreach (PictureBox picture in frames.Controls)
@@ -80,7 +79,7 @@ namespace LAZYSHELL
         }
         private void InitializeFrames()
         {
-            updating = true;
+            this.Updating = true;
             panelFrames.AutoScrollPosition = new Point(0, 0);
             DrawFrames();
             if (sequence.Frames.Count == 0)
@@ -92,12 +91,12 @@ namespace LAZYSHELL
                 this.frameMold.Value = frame.Mold;
                 this.duration.Value = frame.Duration;
             }
-            updating = false;
+            this.Updating = false;
             SetSequenceFrameImages();
         }
         private void RefreshFrame()
         {
-            updating = true;
+            this.Updating = true;
             if (sequence.Frames.Count != 0)
             {
                 this.frameMold.Enabled = true;
@@ -112,7 +111,7 @@ namespace LAZYSHELL
                 duration.Enabled = false; duration.Value = 1;
                 sequenceImage = null;
             }
-            updating = false;
+            this.Updating = false;
         }
         public void DrawFrames()
         {
@@ -262,20 +261,20 @@ namespace LAZYSHELL
         }
         private void listBoxFrames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             index = listBoxFrames.SelectedIndex;
         }
         private void duration_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             frame.Duration = (byte)duration.Value;
             SetSequenceFrameImages();
         }
         private void frameMold_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if ((int)frameMold.Value >= animation.Molds.Count)
                 frameMold.Value = animation.Molds.Count - 1;
@@ -325,7 +324,7 @@ namespace LAZYSHELL
         }
         private void PlaybackSequence_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            updating = false;
+            this.Updating = false;
             effectsEditor.EnableOnPlayback(true);
             panelFrames.BringToFront();
             RefreshFrame();

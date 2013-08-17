@@ -11,7 +11,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class TilesetEditor : Form
+    public partial class TilesetEditor : NewForm
     {
         #region Variables
         // main
@@ -683,6 +683,7 @@ namespace LAZYSHELL
                 else
                 {
                     overlay.SelectTS = null;
+                    Cursor.Position = Cursor.Position;
                     pictureBox.Invalidate();
                 }
             }

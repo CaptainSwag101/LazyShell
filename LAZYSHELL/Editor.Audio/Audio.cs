@@ -9,9 +9,8 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Audio : Form
+    public partial class Audio : NewForm
     {
-        private long checksum;
         private SampleEditor sampleEditor;
         private SPCEditor spcEditor;
         //
@@ -35,25 +34,22 @@ namespace LAZYSHELL
             panel1.Controls.Add(sampleEditor);
             sampleEditor.Visible = true;
             new ToolTipLabel(this, null, helpTips);
-            new History(this, false);
             if (Settings.Default.RememberLastIndex)
             {
                 sampleEditor.Index = Settings.Default.LastAudioSample;
                 spcEditor.Index = Settings.Default.LastSPC;
             }
-            checksum = Do.GenerateChecksum(Model.AudioSamples, Model.SPCs, Model.SPCEvent, Model.SPCBattle);
         }
         public void Assemble(bool warning)
         {
             sampleEditor.Assemble();
             spcEditor.Assemble(warning);
-            checksum = Do.GenerateChecksum(Model.AudioSamples, Model.SPCs, Model.SPCEvent, Model.SPCBattle);
         }
         //
         private void Audio_FormClosing(object sender, FormClosingEventArgs e)
         {
             sampleEditor.SoundPlayer.Stop();
-            if (Do.GenerateChecksum(Model.AudioSamples, Model.SPCs, Model.SPCEvent, Model.SPCBattle) == checksum)
+            if (!this.Modified && !sampleEditor.Modified && !spcEditor.Modified)
                 return;
             sampleEditor.SoundPlayer.Stop();
             DialogResult result = MessageBox.Show(

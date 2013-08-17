@@ -12,7 +12,7 @@ using LAZYSHELL.ScriptsEditor;
 
 namespace LAZYSHELL
 {
-    public partial class Previewer : Form
+    public partial class Previewer : NewForm
     {
         #region Variables
         private Settings settings = Settings.Default;
@@ -23,8 +23,7 @@ namespace LAZYSHELL
         private List<Entrance> eventTriggers;
         private bool snes9x;
         private EType behavior;
-        private bool updating = false;
-        private int category;
+                private int category;
         private int index;
         private bool automatic = false;
         private byte[] soundFX;
@@ -312,7 +311,7 @@ namespace LAZYSHELL
             this.allyAccessory.Items.Clear();
             this.allyAccessory.Items.AddRange(Model.ItemNames.Names);
             //
-            updating = true;
+            this.Updating = true;
             this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
             this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
             this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
@@ -322,7 +321,7 @@ namespace LAZYSHELL
                 alliesInParty.SetItemChecked(i, Bits.GetBit(settings.PreviewAllies, i));
             this.enableDebug.Checked = settings.EnableDebug;
             //
-            updating = false;
+            this.Updating = false;
             //
             romPath = GetRomPath();
             this.initializing = false;
@@ -1107,7 +1106,7 @@ namespace LAZYSHELL
         }
         private void battleBGListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             settings.PreviewBattlefield = battleBG.SelectedIndex;
             settings.Save();
@@ -1115,7 +1114,7 @@ namespace LAZYSHELL
         //
         private void alliesInParty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             byte bits = settings.PreviewAllies;
             for (int i = 0; i < 4; i++)
@@ -1125,7 +1124,7 @@ namespace LAZYSHELL
         }
         private void level_ValueChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             settings.PreviewLevel = (int)level.Value;
             settings.Save();
@@ -1146,17 +1145,17 @@ namespace LAZYSHELL
         }
         private void allyName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
-            updating = true;
+            this.Updating = true;
             this.allyWeapon.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3));
             this.allyArmor.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 1));
             this.allyAccessory.SelectedIndex = Model.ItemNames.GetSortedIndex(Bits.StringToByte(settings.AllyEquipment, allyName.SelectedIndex * 3 + 2));
-            updating = false;
+            this.Updating = false;
         }
         private void allyWeapon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             byte number = (byte)Model.ItemNames.GetUnsortedIndex(allyWeapon.SelectedIndex);
             settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3) * 2, 2);
@@ -1165,7 +1164,7 @@ namespace LAZYSHELL
         }
         private void allyArmor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             byte number = (byte)Model.ItemNames.GetUnsortedIndex(allyArmor.SelectedIndex);
             settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3 + 1) * 2, 2);
@@ -1174,7 +1173,7 @@ namespace LAZYSHELL
         }
         private void allyAccessory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             byte number = (byte)Model.ItemNames.GetUnsortedIndex(allyAccessory.SelectedIndex);
             settings.AllyEquipment = settings.AllyEquipment.Remove((allyName.SelectedIndex * 3 + 2) * 2, 2);
@@ -1189,7 +1188,7 @@ namespace LAZYSHELL
             allyWeapon.Enabled = !maxOutStats.Checked;
             allyArmor.Enabled = !maxOutStats.Checked;
             allyAccessory.Enabled = !maxOutStats.Checked;
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             settings.PreviewMaxStats = maxOutStats.Checked;
             settings.Save();
@@ -1207,7 +1206,7 @@ namespace LAZYSHELL
         }
         private void enableDebug_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating || initializing)
+            if (this.Updating || initializing)
                 return;
             settings.EnableDebug = enableDebug.Checked;
             settings.Save();

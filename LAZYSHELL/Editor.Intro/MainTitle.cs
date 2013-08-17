@@ -9,12 +9,11 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class MainTitle : Form
+    public partial class MainTitle : NewForm
     {
         #region Variables
         // main
         private delegate void Function();
-        private long checksum { get { return intro.checksum; } set { intro.checksum = value; } }
         private PaletteSet paletteSet { get { return Model.TitlePalettes; } set { Model.TitlePalettes = value; } }
         private PaletteSet spritePaletteSet { get { return Model.TitleSpritePalettes; } set { Model.TitleSpritePalettes = value; } }
         private Tileset tileset { get { return Model.TitleTileSet; } set { Model.TitleTileSet = value; } }
@@ -50,7 +49,7 @@ namespace LAZYSHELL
             SetTilesetImages();
             //
             GC.Collect();
-            new History(this);
+            this.History = new History(this);
         }
         // assemblers
         public void Assemble()
@@ -61,9 +60,7 @@ namespace LAZYSHELL
             tileset.Assemble(16);
             // Tilesets
             if (Model.Compress(Model.TitleData, 0x3F216E, 0xDA60, 0x7E92, "Main title"))
-                checksum = Do.GenerateChecksum(
-                    Model.OpeningData, Model.OpeningPalette, Model.TitleData, Model.TitlePalettes,
-                    Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+                this.Modified = false;
         }
         // drawing
         private void SetTilesetImages()
@@ -143,7 +140,7 @@ namespace LAZYSHELL
             SetTilesetImages();
             LoadGraphicEditor();
             LoadTilesetEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         private void GraphicUpdate()
         {

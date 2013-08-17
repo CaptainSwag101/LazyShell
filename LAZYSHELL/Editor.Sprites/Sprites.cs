@@ -18,18 +18,15 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class Sprites : Form
+    public partial class Sprites : NewForm
     {
         #region Variables
-        private long checksum;
-        public long Checksum { get { return checksum; } set { checksum = value; } }
         // main
         private delegate void Function();
         private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
         private Settings settings = Settings.Default;
         private Overlay overlay;
-        private bool updating = false;
-        private Sprite[] sprites;
+                private Sprite[] sprites;
         private Animation[] animations;
         private PaletteSet[] palettes;
         private ImagePacket[] images;
@@ -90,7 +87,7 @@ namespace LAZYSHELL
             this.overlay = new Overlay();
             graphics = image.Graphics(spriteGraphics);
             // controls
-            updating = true;
+            this.Updating = true;
             for (int i = 0; i < Lists.SpriteNames.Length; i++)
             {
                 string itemName = Lists.SpriteNames[i];
@@ -112,7 +109,7 @@ namespace LAZYSHELL
             foreach (Animation a in animations)
                 a.Assemble();
             RefreshSpritesEditor();
-            updating = false;
+            this.Updating = false;
             GC.Collect();
             // editors
             molds.TopLevel = false;
@@ -129,13 +126,12 @@ namespace LAZYSHELL
             sequences.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
-            new History(this, name, number);
-            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
+            this.History = new History(this, name, number);
         }
         private void RefreshSpritesEditor()
         {
             Cursor.Current = Cursors.WaitCursor;
-            updating = true;
+            this.Updating = true;
             paletteIndex.Value = sprite.PaletteIndex;
             imageNum.Value = sprite.Image;
             paletteOffset.Value = image.PaletteNum;
@@ -148,7 +144,7 @@ namespace LAZYSHELL
             LoadPaletteEditor();
             LoadGraphicEditor();
             CalculateFreeSpace();
-            updating = false;
+            this.Updating = false;
             GC.Collect();
             Cursor.Current = Cursors.Arrow;
         }
@@ -249,8 +245,6 @@ namespace LAZYSHELL
             Buffer.BlockCopy(Model.SpriteGraphics, 0, rom, 0x280000, 0xB4000);
             Model.HexEditor.SetOffset(animation.AnimationOffset);
             Model.HexEditor.Compare();
-            checksum = Do.GenerateChecksum(sprites, animations, images, palettes, graphics);
-            Do.AddHistory(this, Index, "SaveSprites");
         }
         public void EnableOnPlayback(bool enable)
         {
@@ -320,7 +314,7 @@ namespace LAZYSHELL
             sequences.SetSequenceFrameImages();
             sequences.InvalidateImages();
             LoadGraphicEditor();
-            checksum--;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify checksum
         }
         public void GraphicUpdate()
         {
@@ -354,7 +348,7 @@ namespace LAZYSHELL
         // main
         private void Sprites_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(sprites, animations, images, palettes, graphics) == checksum)
+            if (!this.Modified && !molds.Modified && !sequences.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Sprites have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -388,7 +382,7 @@ namespace LAZYSHELL
         }
         private void number_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             name.SelectedIndex = (int)number.Value;
             animation.Assemble();
@@ -397,13 +391,13 @@ namespace LAZYSHELL
         }
         private void name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             number.Value = name.SelectedIndex;
         }
         private void paletteIndex_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sprite.PaletteIndex = (byte)paletteIndex.Value;
             foreach (Mold mold in animation.Molds)
@@ -419,7 +413,7 @@ namespace LAZYSHELL
         }
         private void imageNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sprite.Image = (ushort)imageNum.Value;
             paletteOffset.Value = image.PaletteNum;
@@ -437,7 +431,7 @@ namespace LAZYSHELL
         }
         private void paletteOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             image.PaletteNum = (int)paletteOffset.Value;
             foreach (Mold mold in animation.Molds)
@@ -453,7 +447,7 @@ namespace LAZYSHELL
         }
         private void graphicOffset_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             graphicOffset.Value = (int)graphicOffset.Value & 0xFFFFE0;
             image.GraphicOffset = (int)graphicOffset.Value;
@@ -470,7 +464,7 @@ namespace LAZYSHELL
         }
         private void animationPacket_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sprite.AnimationPacket = (ushort)animationPacket.Value;
             animationVRAM.Value = animation.VramAllocation;
@@ -480,7 +474,7 @@ namespace LAZYSHELL
         }
         private void animationVRAM_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             animation.VramAllocation = (ushort)animationVRAM.Value;
             molds.SetAvailableVRAM();

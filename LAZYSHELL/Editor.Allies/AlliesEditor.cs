@@ -11,17 +11,15 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class AlliesEditor : Form
+    public partial class AlliesEditor : NewForm
     {
         // variables
-        private long checksum;
         private Settings settings = Settings.Default;
         private Allies alliesEditor;
         private LevelUps levelUpsEditor;
         // constructor
         public AlliesEditor()
         {
-            checksum = Do.GenerateChecksum(Model.Characters, Model.Slots);
             //
             InitializeComponent();
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
@@ -40,7 +38,6 @@ namespace LAZYSHELL
             panel1.Controls.Add(alliesEditor);
             alliesEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this, false);
         }
         // functions
         public void Assemble()
@@ -49,12 +46,11 @@ namespace LAZYSHELL
                 c.Assemble();
             foreach (Slot s in Model.Slots)
                 s.Assemble();
-            checksum = Do.GenerateChecksum(Model.Characters, Model.Slots);
         }
         // event handlers
         private void AlliesEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Model.Characters, Model.Slots) == this.checksum)
+            if (!this.Modified && !alliesEditor.Modified && !levelUpsEditor.Modified)
                 return;
             //
             DialogResult result = MessageBox.Show(

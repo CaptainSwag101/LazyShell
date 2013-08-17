@@ -11,7 +11,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class SettingsEditor : Form
+    public partial class SettingsEditor : NewForm
     {
         private Settings settings = Settings.Default;
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();

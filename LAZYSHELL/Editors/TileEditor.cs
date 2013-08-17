@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class TileEditor : Form
+    public partial class TileEditor : NewForm
     {
         private Delegate update;
         private Tile tile;
@@ -17,9 +17,7 @@ namespace LAZYSHELL
         private byte[] graphics;
         private PaletteSet paletteSet;
         private byte format;
-        private bool updatingThis;
-        private bool updatingSubtile;
-        private int currentSubtile;
+                        private int currentSubtile;
         private Bitmap tileImage, subtileImage;
         // constructor
         /// <summary>
@@ -60,7 +58,7 @@ namespace LAZYSHELL
         }
         public void Reload(Delegate update, Tile tile, byte[] graphics, PaletteSet paletteSet, byte format)
         {
-            if (updatingThis)
+            if (this.Updating)
                 return;
             this.update = update;
             this.tile = tile;
@@ -82,17 +80,17 @@ namespace LAZYSHELL
             SetTileImage();
             SetSubtileImage();
             this.BringToFront();
-            new History(this);
+            this.History = new History(this);
         }
         private void InitializeSubtile()
         {
-            updatingSubtile = true;
+            this.Updating = true;
             subtileIndex.Value = tile.Subtiles[currentSubtile].Index;
             subtilePalette.Value = tile.Subtiles[currentSubtile].Palette;
             subtileStatus.SetItemChecked(0, tile.Subtiles[currentSubtile].Priority1);
             subtileStatus.SetItemChecked(1, tile.Subtiles[currentSubtile].Mirror);
             subtileStatus.SetItemChecked(2, tile.Subtiles[currentSubtile].Invert);
-            updatingSubtile = false;
+            this.Updating = false;
         }
         private void SetTileImage()
         {
@@ -146,43 +144,43 @@ namespace LAZYSHELL
         }
         private void tilePalette_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingSubtile)
+            if (this.Updating)
                 return;
             if (subtilePalette.Value >= paletteSet.Palettes.Length)
                 subtilePalette.Value = paletteSet.Palettes.Length - 1;
             tile.Subtiles[currentSubtile] = CreateNewSubtile();
             SetTileImage();
             SetSubtileImage();
-            updatingThis = true;
+            this.Updating = true;
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
-            updatingThis = false;
+            this.Updating = false;
         }
         private void tileAttributes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingSubtile)
+            if (this.Updating)
                 return;
             tile.Subtiles[currentSubtile] = CreateNewSubtile();
             SetTileImage();
             SetSubtileImage();
-            updatingThis = true;
+            this.Updating = true;
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
-            updatingThis = false;
+            this.Updating = false;
         }
         private void tile8x8Tile_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingSubtile)
+            if (this.Updating)
                 return;
             if (subtileIndex.Value * format >= graphics.Length)
                 subtileIndex.Value = (graphics.Length / format) - 1;
             tile.Subtiles[currentSubtile] = CreateNewSubtile();
             SetTileImage();
             SetSubtileImage();
-            updatingThis = true;
+            this.Updating = true;
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
-            updatingThis = false;
+            this.Updating = false;
         }
         private void pictureBoxSubtile_Paint(object sender, PaintEventArgs e)
         {
@@ -238,10 +236,10 @@ namespace LAZYSHELL
         {
             for (int i = 0; i < 4; i++)
                 this.tile.Subtiles[i] = this.tileBackup.Subtiles[i];
-            updatingThis = true;
+            this.Updating = true;
             if (autoUpdate.Checked)
                 update.DynamicInvoke();
-            updatingThis = false;
+            this.Updating = false;
             InitializeSubtile();
             SetTileImage();
             SetSubtileImage();

@@ -12,7 +12,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class TilemapEditor : Form
+    public partial class TilemapEditor : NewForm
     {
         #region Variables
         // main
@@ -91,7 +91,7 @@ namespace LAZYSHELL
         private int mouseOverTile = 0;
         private int mouseOverSolidTile = 0;
         private int mouseOverNPC = -1;
-        private int mouseOverNPCInstance = -1;
+        private int mouseOverNPCClone = -1;
         private int mouseOverExitField = -1;
         private int mouseOverEventField = -1;
         private int mouseOverOverlap = -1;
@@ -107,7 +107,7 @@ namespace LAZYSHELL
         private int mouseOverMushroom = -1;
         private string mouseDownObject;
         private int mouseDownNPC = -1;
-        private int mouseDownNPCInstance = -1;
+        private int mouseDownNPCClone = -1;
         private int mouseDownExitField = -1;
         private int mouseDownEventField = -1;
         private int mouseDownOverlap = -1;
@@ -1370,16 +1370,16 @@ namespace LAZYSHELL
                     npcs.IsCloneSelected = false;
                     levels.NpcObjectTree.SelectedNode = levels.NpcObjectTree.Nodes[npcs.CurrentNPC];
                 }
-                if (state.NPCs && mouseOverObject == "npc instance" && mouseDownObject == null)
+                if (state.NPCs && mouseOverObject == "npc clone" && mouseDownObject == null)
                 {
                     levels.TabControl.SelectedIndex = 2;
-                    mouseDownObject = "npc instance";
+                    mouseDownObject = "npc clone";
                     mouseDownNPC = mouseOverNPC;
-                    mouseDownNPCInstance = mouseOverNPCInstance;
+                    mouseDownNPCClone = mouseOverNPCClone;
                     npcs.CurrentNPC = mouseDownNPC;
                     npcs.SelectedNPC = mouseDownNPC;
-                    npcs.CurrentClone = mouseDownNPCInstance;
-                    npcs.SelectedClone = mouseDownNPCInstance;
+                    npcs.CurrentClone = mouseDownNPCClone;
+                    npcs.SelectedClone = mouseDownNPCClone;
                     npcs.IsCloneSelected = true;
                     levels.NpcObjectTree.SelectedNode = levels.NpcObjectTree.Nodes[npcs.CurrentNPC].Nodes[npcs.CurrentClone];
                 }
@@ -1489,7 +1489,7 @@ namespace LAZYSHELL
             mouseDownExitField = -1;
             mouseDownEventField = -1;
             mouseDownNPC = -1;
-            mouseDownNPCInstance = -1;
+            mouseDownNPCClone = -1;
             mouseDownOverlap = -1;
             mouseDownSolidTile = 0;
             mouseDownSolidTileIndex = -1;
@@ -1507,7 +1507,7 @@ namespace LAZYSHELL
                     pictureBoxLevel.Invalidate();
             }
             pictureBoxLevel.Focus(form);
-            levels.checksum++;
+            levels.Modified = true;
         }
         private void pictureBoxLevel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1699,36 +1699,36 @@ namespace LAZYSHELL
                     {
                         if (levels.ExitX.Value != mouseIsometricPosition.X &&
                             levels.ExitY.Value != mouseIsometricPosition.Y)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.ExitX.Value = mouseIsometricPosition.X;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.ExitY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "event")
                     {
                         if (levels.EventX.Value != mouseIsometricPosition.X &&
                             levels.EventY.Value != mouseIsometricPosition.Y)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.EventX.Value = mouseIsometricPosition.X;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.EventY.Value = mouseIsometricPosition.Y;
                     }
-                    if (mouseDownObject == "npc" || mouseDownObject == "npc instance")
+                    if (mouseDownObject == "npc" || mouseDownObject == "npc clone")
                     {
                         if (levels.NpcXCoord.Value != mouseIsometricPosition.X &&
                             levels.NpcYCoord.Value != mouseIsometricPosition.Y)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.NpcXCoord.Value = mouseIsometricPosition.X;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.NpcYCoord.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "overlap")
                     {
                         if (levels.OverlapX.Value != mouseIsometricPosition.X &&
                             levels.OverlapY.Value != mouseIsometricPosition.Y)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.OverlapX.Value = mouseIsometricPosition.X;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.OverlapY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "tilemod")
@@ -1737,18 +1737,18 @@ namespace LAZYSHELL
                         int b = Math.Min(Math.Max(0, mouseTilePosition.Y - mouseDownPosition.Y), 63);
                         if (levels.TileModsX.Value != a &&
                             levels.TileModsY.Value != b)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.TileModsX.Value = a;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.TileModsY.Value = b;
                     }
                     if (mouseDownObject == "solidmod")
                     {
                         if (levels.SolidModsX.Value != mouseIsometricPosition.X &&
                             levels.SolidModsY.Value != mouseIsometricPosition.Y)
-                            levels.UpdatingLevel = true;
+                            levels.Updating = true;
                         levels.SolidModsX.Value = mouseIsometricPosition.X;
-                        levels.UpdatingLevel = false;
+                        levels.Updating = false;
                         levels.SolidModsY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "solid tile")
@@ -1870,7 +1870,7 @@ namespace LAZYSHELL
                             {
                                 this.pictureBoxLevel.Cursor = Cursors.Hand;
                                 mouseOverNPC = index_npc;
-                                mouseOverNPCInstance = -1;
+                                mouseOverNPCClone = -1;
                                 mouseOverObject = "npc";
                                 break;
                             }
@@ -1889,14 +1889,14 @@ namespace LAZYSHELL
                                 {
                                     this.pictureBoxLevel.Cursor = Cursors.Hand;
                                     mouseOverNPC = index_npc;
-                                    mouseOverNPCInstance = index_ins;
-                                    mouseOverObject = "npc instance";
+                                    mouseOverNPCClone = index_ins;
+                                    mouseOverObject = "npc clone";
                                     goto finish;
                                 }
                                 else
                                 {
                                     this.pictureBoxLevel.Cursor = Cursors.Arrow;
-                                    mouseOverNPCInstance = -1;
+                                    mouseOverNPCClone = -1;
                                     mouseOverObject = null;
                                 }
                                 index_ins++;
@@ -2377,7 +2377,7 @@ namespace LAZYSHELL
                 objectFunctionToolStripMenuItem.Tag = mouseOverEventField;
                 objectFunctionToolStripMenuItem.Visible = true;
             }
-            else if (mouseOverObject == "npc" || mouseOverObject == "npc instance")
+            else if (mouseOverObject == "npc" || mouseOverObject == "npc clone")
             {
                 foreach (ToolStripItem item in contextMenuStrip1.Items)
                     item.Visible = false;
@@ -2385,7 +2385,7 @@ namespace LAZYSHELL
                     objectFunctionToolStripMenuItem.Text = "Edit npc's script";
                 else if (npcs.Npcs[mouseOverNPC].EngageType == 2)
                     objectFunctionToolStripMenuItem.Text = "Edit npc's formation pack";
-                objectFunctionToolStripMenuItem.Tag = new List<int> { mouseOverNPC, mouseOverNPCInstance };
+                objectFunctionToolStripMenuItem.Tag = new List<int> { mouseOverNPC, mouseOverNPCClone };
                 objectFunctionToolStripMenuItem.Visible = true;
             }
             else if (minecart != null)
@@ -2402,7 +2402,7 @@ namespace LAZYSHELL
         }
         private void findInTileset_Click(object sender, EventArgs e)
         {
-            int index;
+            int index = 0;
             if (state.SolidityLayer)
             {
                 index = solidityMap.GetTileNum(solidity.PixelTiles[mousePosition.Y * width + mousePosition.X]);
@@ -2422,16 +2422,19 @@ namespace LAZYSHELL
             // first, use "see-through" approach to look for the exact visible tile clicked on
             int layer = 0;
             bool ignoreTransparent = minecart == null;
-            index = tilemap.GetTileNum(0, mousePosition.X, mousePosition.Y, ignoreTransparent);
+            if (state.Layer1)
+                index = tilemap.GetTileNum(0, mousePosition.X, mousePosition.Y, ignoreTransparent);
             if (index == 0)
             {
                 layer++;
-                index = tilemap.GetTileNum(1, mousePosition.X, mousePosition.Y, ignoreTransparent);
+                if (state.Layer2)
+                    index = tilemap.GetTileNum(1, mousePosition.X, mousePosition.Y, ignoreTransparent);
             }
             if (index == 0)
             {
                 layer++;
-                index = tilemap.GetTileNum(2, mousePosition.X, mousePosition.Y, ignoreTransparent);
+                if (state.Layer3)
+                    index = tilemap.GetTileNum(2, mousePosition.X, mousePosition.Y, ignoreTransparent);
             }
             if (index != 0) // only if not all layers empty
             {
@@ -2441,16 +2444,19 @@ namespace LAZYSHELL
             }
             // if all empty, use raw opaque tile searching approach
             layer = 0;
-            index = tilemap.GetTileNum(0, mousePosition.X, mousePosition.Y, false);
+            if (state.Layer1)
+                index = tilemap.GetTileNum(0, mousePosition.X, mousePosition.Y, false);
             if (index == 0)
             {
                 layer++;
-                index = tilemap.GetTileNum(1, mousePosition.X, mousePosition.Y, false);
+                if (state.Layer2)
+                    index = tilemap.GetTileNum(1, mousePosition.X, mousePosition.Y, false);
             }
             if (index == 0)
             {
                 layer++;
-                index = tilemap.GetTileNum(2, mousePosition.X, mousePosition.Y, false);
+                if (state.Layer3)
+                    index = tilemap.GetTileNum(2, mousePosition.X, mousePosition.Y, false);
             }
             if (index != 0) // only if not all layers empty
                 tilesetEditor.Layer = layer;

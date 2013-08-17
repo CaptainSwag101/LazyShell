@@ -8,9 +8,8 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class Intro : Form
+    public partial class Intro : NewForm
     {
-        public long checksum;
         private Opening opening;
         private MainTitle mainTitle;
         public Intro()
@@ -32,9 +31,7 @@ namespace LAZYSHELL
             mainTitle.Visible = true;
             //
             new ToolTipLabel(this, null, helpTips);
-            checksum = Do.GenerateChecksum(
-                Model.OpeningData, Model.OpeningPalette, Model.TitleData, Model.TitlePalettes,
-                Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet);
+            this.History = new History(this);
         }
         public void Assemble()
         {
@@ -47,9 +44,7 @@ namespace LAZYSHELL
         }
         private void Intro_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(
-                Model.OpeningData, Model.OpeningPalette, Model.TitleData, Model.TitlePalettes,
-                Model.TitleSpriteGraphics, Model.TitleSpritePalettes, Model.TitleTileSet) == checksum)
+            if (!this.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Opening Credits and Main Title have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",

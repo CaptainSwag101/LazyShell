@@ -13,13 +13,12 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class Fonts : Form
+    public partial class Fonts : NewForm
     {
         #region Variables
         // main
         private delegate void Function();
         private Dialogues dialoguesEditor;
-        private bool updating;
         private Overlay overlay;
         // accessors
         private byte[] rom { get { return Model.ROM; } set { Model.ROM = value; } }
@@ -162,11 +161,11 @@ namespace LAZYSHELL
             this.overlay = new Overlay();
             this.dialoguesEditor = dialoguesEditor;
             InitializeComponent();
-            updating = true;
+            this.Updating = true;
             FontType = FontType.Dialogue;
             InitializeFonts();
             SetFontTableImage();
-            updating = false;
+            this.Updating = false;
             //
             LoadPaletteEditor();
             LoadGraphicEditor();
@@ -183,7 +182,7 @@ namespace LAZYSHELL
         }
         private void InitializeFonts()
         {
-            updating = true;
+            this.Updating = true;
             switch (FontType)
             {
                 case FontType.Menu: fontWidth.Enabled = true; fontWidth.Maximum = 8; break;
@@ -193,7 +192,7 @@ namespace LAZYSHELL
             }
             InitializeFontCharacter();
             InitializeKeystrokes();
-            updating = false;
+            this.Updating = false;
         }
         private void InitializeKeystrokes()
         {
@@ -204,7 +203,7 @@ namespace LAZYSHELL
                 RefreshKeystrokes();
                 return;
             }
-            updating = true;
+            this.Updating = true;
             fontTable.SuspendDrawing();
             fontTable.Controls.Clear();
             RichTextBox keyBox;
@@ -237,11 +236,11 @@ namespace LAZYSHELL
                 }
             }
             fontTable.ResumeDrawing();
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshKeystrokes()
         {
-            updating = true;
+            this.Updating = true;
             fontTable.SuspendDrawing();
             foreach (RichTextBox keyBox in fontTable.Controls)
             {
@@ -251,15 +250,15 @@ namespace LAZYSHELL
                 keyBox.Text = keystrokes[index + 32];
             }
             fontTable.ResumeDrawing();
-            updating = false;
+            this.Updating = false;
         }
         private void InitializeFontCharacter()
         {
-            updating = true;
+            this.Updating = true;
             if (FontType < FontType.Triangles)
                 fontWidth.Value = font[currentFontChar].Width;
             LoadFontGraphicEditor();
-            updating = false;
+            this.Updating = false;
         }
         public void RedrawText()
         {
@@ -350,7 +349,7 @@ namespace LAZYSHELL
         private void PaletteUpdate()
         {
             LoadGraphicEditor();
-            dialoguesEditor.Checksum--;
+            dialoguesEditor.Modified = true;
         }
         private void LoadMenuGraphicEditor()
         {
@@ -380,7 +379,7 @@ namespace LAZYSHELL
         private void MenuPaletteUpdate()
         {
             LoadMenuGraphicEditor();
-            dialoguesEditor.Checksum--;
+            dialoguesEditor.Modified = true;
         }
         private void LoadFontGraphicEditor()
         {
@@ -407,22 +406,22 @@ namespace LAZYSHELL
             //LoadFontGraphicEditor();
             SetFontTableImage();
             dialoguesEditor.RedrawText();
-            dialoguesEditor.Checksum--;
+            dialoguesEditor.Modified = true;
         }
         #endregion
         #region Event handlers
         private void fontType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             currentFontChar = 0;
-            updating = true;
+            this.Updating = true;
             fontWidth.Enabled = FontType < FontType.Triangles;
             toggleKeystrokes.Enabled = FontType < FontType.Triangles;
             if (toggleKeystrokes.Checked)
                 toggleKeystrokes.Checked = FontType < FontType.Triangles;
             openNewFontTable.Enabled = FontType < FontType.Triangles;
-            updating = false;
+            this.Updating = false;
             InitializeFonts();
             SetFontTableImage();
             if (FontType < FontType.Triangles)
@@ -601,7 +600,7 @@ namespace LAZYSHELL
         }
         private void keyBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RichTextBox rtb = (RichTextBox)sender;
             keystrokes[(int)rtb.Tag + 32] = rtb.Text;
@@ -628,7 +627,7 @@ namespace LAZYSHELL
         }
         private void fontWidth_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             font[currentFontChar].Width = (byte)fontWidth.Value;
             LoadFontGraphicEditor();

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class EditLabel : Form
+    public partial class EditLabel : NewForm
     {
         // variables
         public bool Disable = false;
@@ -43,8 +43,7 @@ namespace LAZYSHELL
             }
         }
         private Timer timer = new Timer();
-        private bool updating = false;
-        // constructor
+                // constructor
         public EditLabel(ToolStripControlHost name, ToolStripNumericUpDown number, string element, bool canEditLabel)
         {
             InitializeComponent();
@@ -130,14 +129,14 @@ namespace LAZYSHELL
         }
         private void RefreshLabel()
         {
-            updating = true;
+            this.Updating = true;
             if (elist != null && index >= 0 && index < elist.Labels.Length)
                 labelText.Text = elist.Labels[index];
             else if (elist != null && index >= elist.Labels.Length)
                 MessageBox.Show("Error loading label in \"" + elist.Name +
                     "\" for index " + index + ". Please report this.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            updating = false;
+            this.Updating = false;
         }
         private bool CheckLoadedProject()
         {
@@ -179,7 +178,7 @@ namespace LAZYSHELL
         }
         private void editLabel_Click(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             // make sure project loaded, if not cancel and hide this form
             if (!CheckLoadedProject())
@@ -217,7 +216,7 @@ namespace LAZYSHELL
         }
         private void labelText_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (elist == null)
                 return;

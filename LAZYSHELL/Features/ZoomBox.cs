@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class ZoomBox : Form
+    public partial class ZoomBox : NewForm
     {
         private int zoom;
         public int Zoom

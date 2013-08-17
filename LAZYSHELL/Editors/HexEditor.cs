@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace LAZYSHELL
 {
-    public partial class HexEditor : Form
+    public partial class HexEditor : NewForm
     {
         #region Variables
         private byte[] rom
@@ -23,8 +23,7 @@ namespace LAZYSHELL
         private byte[] current;
         private byte[] original;
         private int selection { get { return ROMData.SelectionStart / 3 + offset; } }
-        private bool updating = false;
-        private bool atLowerNibble { get { return ROMData.SelectionStart % 3 == 1; } }
+                private bool atLowerNibble { get { return ROMData.SelectionStart % 3 == 1; } }
         private bool atUpperNibble = false;
         private int end { get { return ((line_count - 1) * 16 + 15) * 3; } }
         private int offset;
@@ -117,7 +116,7 @@ namespace LAZYSHELL
         }
         public void RefreshHexEditor()
         {
-            updating = true;
+            this.Updating = true;
             vScrollBar1.Value = offset / 16;
             string bytes2 = "";
             string bytes3 = "";
@@ -187,7 +186,7 @@ namespace LAZYSHELL
             ROMData.EndUpdate();
             //
             UpdateInformationLabels();
-            updating = false;
+            this.Updating = false;
         }
         private void UpdateInformationLabels()
         {
@@ -214,9 +213,9 @@ namespace LAZYSHELL
         }
         private void richTextBox_SelectionChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             ROMData.BeginUpdate();
             if (ROMData.SelectionStart / 3 + offset >= rom.Length)
                 ROMData.SelectionStart = end;
@@ -228,7 +227,7 @@ namespace LAZYSHELL
             atUpperNibble = ROMData.SelectionStart % 3 == 0;
             UpdateInformationLabels();
             ROMData.EndUpdate();
-            updating = false;
+            this.Updating = false;
         }
         private void richTextBox_MouseDown(object sender, MouseEventArgs e)
         {
@@ -358,7 +357,7 @@ namespace LAZYSHELL
         }
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             offset = Math.Min(vScrollBar1.Value * 16, 0x400000 - (line_count * 16));
             RefreshHexEditor();
@@ -441,9 +440,9 @@ namespace LAZYSHELL
         }
         private void baseConvDec_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             try
             {
                 long value = Convert.ToInt64(baseConvDec.Text, 10);
@@ -454,13 +453,13 @@ namespace LAZYSHELL
             {
                 baseConvHex.Text = "";
             }
-            updating = false;
+            this.Updating = false;
         }
         private void baseConvHex_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             try
             {
                 long value = Convert.ToInt64(baseConvHex.Text, 16);
@@ -470,7 +469,7 @@ namespace LAZYSHELL
             {
                 baseConvDec.Text = "";
             }
-            updating = false;
+            this.Updating = false;
         }
         // toolstrip1
         private void viewCurrent_Click(object sender, EventArgs e)

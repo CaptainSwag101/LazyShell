@@ -18,7 +18,7 @@ namespace LAZYSHELL
         #region Methods
         private void InitializeExitFieldProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             this.exitsFieldTree.Nodes.Clear();
             for (int i = 0; i < exits.Count; i++)
             {
@@ -116,11 +116,11 @@ namespace LAZYSHELL
             }
             exitsBytesLeft.Text = CalculateFreeExitSpace() + " bytes left";
             exitsBytesLeft.BackColor = CalculateFreeExitSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         private void RefreshExitFieldProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             if (exits.Count != 0 && this.exitsFieldTree.SelectedNode != null)
             {
                 exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
@@ -211,7 +211,7 @@ namespace LAZYSHELL
             }
             exitsBytesLeft.Text = CalculateFreeExitSpace() + " bytes left";
             exitsBytesLeft.BackColor = CalculateFreeExitSpace() >= 0 ? SystemColors.Control : Color.Red;
-            updatingProperties = false;
+            this.Updating = false;
         }
         private void SetExitDestinationItems()
         {
@@ -283,7 +283,7 @@ namespace LAZYSHELL
         {
             if (exits45LengthPlusHalf.Checked) exits45LengthPlusHalf.ForeColor = Color.Black;
             else exits45LengthPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.X_Half = this.exits45LengthPlusHalf.Checked;
@@ -295,7 +295,7 @@ namespace LAZYSHELL
         {
             if (exits135LengthPlusHalf.Checked) exits135LengthPlusHalf.ForeColor = Color.Black;
             else exits135LengthPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Y_Half = this.exits135LengthPlusHalf.Checked;
@@ -305,7 +305,7 @@ namespace LAZYSHELL
         }
         private void exitsType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             if (CalculateFreeExitSpace() >= 0)
             {
@@ -323,19 +323,19 @@ namespace LAZYSHELL
         }
         private void exitsMarioZCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.DstZ = (byte)this.exitDestZ.Value;
         }
         private void exitsMarioYCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.DstY = (byte)this.exitDestY.Value;
         }
         private void exitsMarioXCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.DstX = (byte)this.exitDestX.Value;
         }
@@ -343,13 +343,13 @@ namespace LAZYSHELL
         {
             if (marioZCoordPlusHalf.Checked) marioZCoordPlusHalf.ForeColor = Color.Black;
             else marioZCoordPlusHalf.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.DstYb7 = this.marioZCoordPlusHalf.Checked;
         }
         private void exitsFieldHeight_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Height = (byte)this.exitHeight.Value;
@@ -359,7 +359,7 @@ namespace LAZYSHELL
         }
         private void exitsFieldLength_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Width = (byte)(this.exitLength.Value - 1);
@@ -369,13 +369,13 @@ namespace LAZYSHELL
         }
         private void exitsMarioRadialPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.DstF = (byte)this.exitDestFace.SelectedIndex;
         }
         private void exitsZ_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Z = (byte)this.exitZ.Value;
@@ -385,7 +385,7 @@ namespace LAZYSHELL
         }
         private void exitsY_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.Y = (byte)this.exitY.Value;
@@ -395,7 +395,7 @@ namespace LAZYSHELL
         }
         private void exitsX_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.X = (byte)this.exitX.Value;
@@ -405,7 +405,7 @@ namespace LAZYSHELL
         }
         private void exitsFace_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.CurrentExit = this.exitsFieldTree.SelectedNode.Index;
             exits.F = (byte)this.exitFace.SelectedIndex;
@@ -416,13 +416,13 @@ namespace LAZYSHELL
         {
             if (exitsShowMessage.Checked) exitsShowMessage.ForeColor = Color.Black;
             else exitsShowMessage.ForeColor = Color.Gray;
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.ShowMessage = this.exitsShowMessage.Checked;
         }
         private void exitsDestination_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             exits.Destination = (ushort)this.exitDest.SelectedIndex;
             picture.Invalidate();

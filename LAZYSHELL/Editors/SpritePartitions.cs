@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class SpritePartitions : Form
+    public partial class SpritePartitions : NewForm
     {
         private Levels level;
         private int index { get { return (int)partitionNum.Value; } set { partitionNum.Value = value; } }
@@ -18,8 +18,7 @@ namespace LAZYSHELL
         //private Bitmap previewImage;
         private LevelNPCs levelNPCs { get { return level.Level.LevelNPCs; } }
         private List<NPC> npcs { get { return levelNPCs.Npcs; } }
-        private bool updating;
-        // constructor
+                // constructor
         public SpritePartitions(Levels level, Partitions[] partitions, int index)
         {
             InitializeComponent();
@@ -27,7 +26,7 @@ namespace LAZYSHELL
             this.partitions = partitions;
             this.index = index;
             RefreshPartition();
-            new History(this);
+            this.History = new History(this);
         }
         public void Reload(int index)
         {
@@ -36,7 +35,7 @@ namespace LAZYSHELL
         // functions
         private void RefreshPartition()
         {
-            updating = true;
+            this.Updating = true;
             extraSpriteBuffer.Value = partition.ExtraSpriteBuffer;
             allyCount.Value = partition.AllySpriteBuffer;
             extraSprites.Checked = partition.ExtraSprites;
@@ -51,7 +50,7 @@ namespace LAZYSHELL
             byte4b.SelectedIndex = partition.CloneCMain;
             byte4.Checked = partition.CloneCIndexing;
             SetPreviewImage();
-            updating = false;
+            this.Updating = false;
         }
         private void SetPreviewImage()
         {
@@ -228,13 +227,13 @@ namespace LAZYSHELL
         //
         private void extraSpriteBuffer_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.ExtraSpriteBuffer = (byte)extraSpriteBuffer.Value;
         }
         private void allyCount_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.AllySpriteBuffer = (byte)allyCount.Value;
             SetPreviewImage();
@@ -242,76 +241,76 @@ namespace LAZYSHELL
         private void extraSprites_CheckedChanged(object sender, EventArgs e)
         {
             extraSpriteBuffer.Enabled = extraSprites.Checked;
-            if (updating)
+            if (this.Updating)
                 return;
             partition.ExtraSprites = extraSprites.Checked;
             SetPreviewImage();
         }
         private void noWaterPalettes_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.FullPaletteBuffer = noWaterPalettes.Checked;
         }
         private void byte2a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneASprite = (byte)byte2a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte2b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneAMain = (byte)byte2b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte2_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneAIndexing = byte2.Checked;
             SetPreviewImage();
         }
         private void byte3a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneBSprite = (byte)byte3a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte3b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneBMain = (byte)byte3b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte3_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneBIndexing = byte3.Checked;
             SetPreviewImage();
         }
         private void byte4a_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneCSprite = (byte)byte4a.SelectedIndex;
             SetPreviewImage();
         }
         private void byte4b_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneCMain = (byte)byte4b.SelectedIndex;
             SetPreviewImage();
         }
         private void byte4_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             partition.CloneCIndexing = byte4.Checked;
             SetPreviewImage();

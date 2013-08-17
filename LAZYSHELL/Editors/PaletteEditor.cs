@@ -10,11 +10,10 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class PaletteEditor : Form
+    public partial class PaletteEditor : NewForm
     {
         #region Variables
-        private bool updating = false;
-        private Overlay overlay = new Overlay();
+                private Overlay overlay = new Overlay();
         private List<CheckBox> rows = new List<CheckBox>();
         private List<CheckBox> cols = new List<CheckBox>();
         private Delegate update;
@@ -99,7 +98,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip2, Keys.F2, baseConvertor);
             new ToolTipLabel(this, baseConvertor, helpTips);
-            new History(this);
+            this.History = new History(this);
         }
         public void Reload(Delegate update, PaletteSet paletteSet, int count, int startRow, int max)
         {
@@ -150,7 +149,7 @@ namespace LAZYSHELL
         #region Functions
         private void InitializeColor()
         {
-            updating = true;
+            this.Updating = true;
             pictureBoxCurrentColor.Invalidate();
             currentRed.Value = paletteSet.Reds[currentColor];
             currentGreen.Value = paletteSet.Greens[currentColor];
@@ -158,7 +157,7 @@ namespace LAZYSHELL
             currentHTML.Text = paletteSet.Reds[currentColor].ToString("X2");
             currentHTML.Text += paletteSet.Greens[currentColor].ToString("X2");
             currentHTML.Text += paletteSet.Blues[currentColor].ToString("X2");
-            updating = false;
+            this.Updating = false;
         }
         private void SetColorMapImage()
         {
@@ -211,7 +210,7 @@ namespace LAZYSHELL
         //
         private void DoAdjustment()
         {
-            if (updating)
+            if (this.Updating)
                 return;
             for (int i = startRow * 16; i < paletteSetBackup.Palette.Length; i++)
             {
@@ -670,7 +669,7 @@ namespace LAZYSHELL
                 trackBar1.Value = (int)currentRed.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar1")
                 currentRed.Value = trackBar1.Value & 0xF8;
-            if (updating)
+            if (this.Updating)
                 return;
             paletteSet.Reds[currentColor] = (int)currentRed.Value & 0xF8;
             paletteSetBackup.Reds[currentColor] = paletteSet.Reds[currentColor];
@@ -686,7 +685,7 @@ namespace LAZYSHELL
                 trackBar2.Value = (int)currentGreen.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar2")
                 currentGreen.Value = trackBar2.Value & 0xF8;
-            if (updating)
+            if (this.Updating)
                 return;
             paletteSet.Greens[currentColor] = (int)currentGreen.Value & 0xF8;
             paletteSetBackup.Greens[currentColor] = paletteSet.Greens[currentColor];
@@ -702,7 +701,7 @@ namespace LAZYSHELL
                 trackBar3.Value = (int)currentBlue.Value & 0xF8;
             else if (((Control)sender).Name == "trackBar3")
                 currentBlue.Value = trackBar3.Value & 0xF8;
-            if (updating)
+            if (this.Updating)
                 return;
             paletteSet.Blues[currentColor] = (int)currentBlue.Value & 0xF8;
             paletteSetBackup.Blues[currentColor] = paletteSet.Blues[currentColor];
@@ -714,7 +713,7 @@ namespace LAZYSHELL
         }
         private void currentHTML_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (currentHTML.Text.Length != 6)
                 return;
@@ -917,7 +916,7 @@ namespace LAZYSHELL
         }
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            updating = true;
+            this.Updating = true;
             levelsReds.Value = levelsRedsBar.Value = 0;
             levelsGreens.Value = levelsGreensBar.Value = 0;
             levelsBlues.Value = levelsBluesBar.Value = 0;
@@ -933,7 +932,7 @@ namespace LAZYSHELL
             colorizeApply.Checked = false;
             colorizeHue.Value = colorizeHueBar.Value = 128;
             colorizeSaturation.Value = colorizeSaturationBar.Value = 128;
-            updating = false;
+            this.Updating = false;
             paletteSetBackup2.CopyTo(paletteSetBackup);
             DoAdjustment();
             paletteSetBackup2.CopyTo(paletteSet);
@@ -1067,23 +1066,23 @@ namespace LAZYSHELL
         }
         private void invertSelectedRows_CheckedChanged(object sender, EventArgs e)
         {
-            updating = true;
+            this.Updating = true;
             foreach (CheckBox checkBox in rows)
                 checkBox.Checked = !checkBox.Checked;
-            updating = false;
+            this.Updating = false;
             DoAdjustment();
         }
         private void invertSelectedCols_CheckedChanged(object sender, EventArgs e)
         {
-            updating = true;
+            this.Updating = true;
             foreach (CheckBox checkBox in cols)
                 checkBox.Checked = !checkBox.Checked;
-            updating = false;
+            this.Updating = false;
             DoAdjustment();
         }
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             DoAdjustment();
         }

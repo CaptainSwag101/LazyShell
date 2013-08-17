@@ -255,6 +255,8 @@ namespace LAZYSHELL
             }
             private void antTimer_Tick(object sender, EventArgs e)
             {
+                if (Width < 4 || Height < 4)
+                    return;
                 antOffset--;
                 if (antOffset < 0)
                     antOffset = 63;
@@ -704,11 +706,11 @@ namespace LAZYSHELL
                 npc.Index = total++;
                 sorted.Add(npc);
                 int index_ = 0;
-                foreach (NPC instance in npc.Clones)
+                foreach (NPC clone in npc.Clones)
                 {
-                    instance.Hilite = npcs.SelectedNPC == index && npcs.IsCloneSelected && npcs.SelectedClone == index_;
-                    instance.Index = total++;
-                    sorted.Add(instance);
+                    clone.Hilite = npcs.SelectedNPC == index && npcs.IsCloneSelected && npcs.SelectedClone == index_;
+                    clone.Index = total++;
+                    sorted.Add(clone);
                     index_++;
                 }
                 index++;
@@ -758,10 +760,10 @@ namespace LAZYSHELL
                     DrawLevelNPCTag(npcs, g, npc, index++, null, z);
                 else
                     current = index++;
-                foreach (NPC instance in npc.Clones)
+                foreach (NPC clone in npc.Clones)
                 {
-                    if (npc != npcs.Npc || instance != npcs.Npc.Clone_ || !npcs.IsCloneSelected)
-                        DrawLevelNPCTag(npcs, g, instance, index++, null, z);
+                    if (npc != npcs.Npc || clone != npcs.Npc.Clone_ || !npcs.IsCloneSelected)
+                        DrawLevelNPCTag(npcs, g, clone, index++, null, z);
                     else
                         current = index++;
                 }

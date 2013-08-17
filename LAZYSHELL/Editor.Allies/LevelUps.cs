@@ -9,12 +9,11 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class LevelUps : Form
+    public partial class LevelUps : NewForm
     {
         #region Variables
         //
         private Settings settings = Settings.Default;
-        private bool updating = false;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
         private Character character_;
@@ -28,12 +27,12 @@ namespace LAZYSHELL
             index = 0;
             RefreshLevel();
             //
-            new History(this);
+            this.History = new History(this);
         }
         // functions
         private void InitializeStrings()
         {
-            updating = true;
+            this.Updating = true;
             this.characterName.Items.Clear();
             for (int i = 0; i < characters.Length; i++)
                 this.characterName.Items.Add(new string(characters[i].Name));
@@ -41,11 +40,11 @@ namespace LAZYSHELL
             for (int i = 0; i < 32; i++)
                 this.levelUpSpellLearned.Items.Add(new string(Model.Spells[i].Name));
             this.levelUpSpellLearned.Items.Add("{NOTHING}");
-            updating = false;
+            this.Updating = false;
         }
         public void RefreshLevel()
         {
-            if (updating)
+            if (this.Updating)
                 return;
             character.IndexLevel = (byte)levelNum.Value;
             this.hpPlus.Value = character.LevelHpPlus;

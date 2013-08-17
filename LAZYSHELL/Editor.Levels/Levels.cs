@@ -16,10 +16,9 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class Levels : Form
+    public partial class Levels : NewForm
     {
         #region Variables
-        public long checksum;
         private int index { get { return (int)levelNum.Value; } set { levelNum.Value = value; } }
         public int Index { get { return index; } set { index = value; } }
         private Stack<int> navigateBackward = new Stack<int>();
@@ -44,9 +43,6 @@ namespace LAZYSHELL
         private NPCProperties[] npcProperties { get { return Model.NPCProperties; } set { Model.NPCProperties = value; } }
         // updating
         private bool closingEditor = false;
-        private bool updatingLevel = false; // indicates that we are currently updating the level so we dont update during an update
-        public bool UpdatingLevel { get { return updatingLevel; } set { updatingLevel = value; } }
-        private bool updatingProperties = false; // indicates whether to update or save properties
         private bool fullUpdate = false; // indicates that we need to do a complete update instead of a fast update
         private string fullPath; public string FullPath { set { fullPath = value; } }
         // control accessors
@@ -91,7 +87,7 @@ namespace LAZYSHELL
             this.mapPhysicalMapName.Items.AddRange(Lists.Numerize(Lists.SolidityMapNames));
             this.mapPaletteSetName.Items.AddRange(Lists.Numerize(Lists.PaletteSetNames));
             this.eventMusic.Items.AddRange(Lists.Numerize(Lists.MusicNames));
-            updatingLevel = true;
+            this.Updating = true;
             if (settings.RememberLastIndex)
             {
                 levelNum.Value = settings.LastLevel;
@@ -99,21 +95,19 @@ namespace LAZYSHELL
             }
             else
                 levelName.SelectedIndex = 0;
-            updatingLevel = false;
+            this.Updating = false;
             LoadSolidityTileset();
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
-            updatingLevel = true;
+            this.Updating = true;
             Initialize(); // Sets initial control settings
-            updatingLevel = false;
+            this.Updating = false;
             new ToolTipLabel(this, baseConvertor, helpTips);
             findNPCNumber = new NPCEditor(this, npcID.Value);
             new ToolTipLabel(findNPCNumber, baseConvertor, helpTips);
             //
-            new History(this, levelName, levelNum);
+            this.History = new History(this, levelName, levelNum);
             lastNavigate = index;
-            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
-                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
         }
         #region Functions
         private void Initialize()
@@ -148,7 +142,7 @@ namespace LAZYSHELL
         public void RefreshLevel()
         {
             Cursor.Current = Cursors.WaitCursor;
-            updatingLevel = true; // Start
+            this.Updating = true; // Start
             try
             {
                 if (levelCheck.Index == index && !fullUpdate)
@@ -177,7 +171,7 @@ namespace LAZYSHELL
             {
                 CreateNewLevelData();
             }
-            updatingLevel = false; // Done
+            this.Updating = false; // Done
             Cursor.Current = Cursors.Arrow;
         }
         private void CreateNewLevelData()
@@ -377,14 +371,13 @@ namespace LAZYSHELL
             Model.Compress(Model.Tilesets, Model.EditTilesets, 0x3B0000, 0x3DC000, "TILE SET",
                 0, 58, 91);
             Model.HexEditor.Compare();
-            checksum = Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
-                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties);
+            this.Modified = false;
         }
         #endregion
         #region Event Handlers
         private void levelNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingLevel)
+            if (this.Updating)
                 return;
             levelName.SelectedIndex = (int)levelNum.Value;
             LevelChange();
@@ -400,7 +393,7 @@ namespace LAZYSHELL
         }
         private void levelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingLevel)
+            if (this.Updating)
                 return;
             levelNum.Value = levelName.SelectedIndex;
         }
@@ -410,10 +403,10 @@ namespace LAZYSHELL
                 return;
             navigateForward.Push(index);
             //
-            updatingLevel = true;
+            this.Updating = true;
             index = navigateBackward.Peek();
             levelName.SelectedIndex = index;
-            updatingLevel = false;
+            this.Updating = false;
             //
             LevelChange();
             levelNum.Focus();
@@ -429,10 +422,10 @@ namespace LAZYSHELL
                 return;
             navigateBackward.Push(index);
             //
-            updatingLevel = true;
+            this.Updating = true;
             index = navigateForward.Peek();
             levelName.SelectedIndex = index;
-            updatingLevel = false;
+            this.Updating = false;
             //
             LevelChange();
             levelNum.Focus();
@@ -468,7 +461,7 @@ namespace LAZYSHELL
             if (new IOArchitecture("import", index, levelMap, paletteSet, tileset, tilemap, prioritySets[layer.PrioritySet]).ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void exportArchitectureToolStripMenuItem_Click(object sender, EventArgs e)
@@ -481,7 +474,7 @@ namespace LAZYSHELL
             if (ioElements.ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
             if (CalculateFreeNPCSpace() < 0)
                 MessageBox.Show(MaximumSpaceExceeded("npcs"), "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -506,7 +499,7 @@ namespace LAZYSHELL
             if (new ClearElements(null, (int)levelNum.Value, "CLEAR LEVEL DATA...").ShowDialog() == DialogResult.Cancel)
                 return;
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void clearTilesetsAll_Click(object sender, EventArgs e)
@@ -517,7 +510,7 @@ namespace LAZYSHELL
             if (levelMap.GraphicSetL3 != 0xFF)
                 new ClearElements(null, (int)(levelMap.TilesetL3), "CLEAR TILESETS...").AcceptButton.PerformClick();
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void clearTilemapsAll_Click(object sender, EventArgs e)
@@ -528,7 +521,7 @@ namespace LAZYSHELL
             if (levelMap.GraphicSetL3 != 0xFF)
                 new ClearElements(null, (int)(levelMap.TilemapL3), "CLEAR TILEMAPS...").AcceptButton.PerformClick();
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void clearPhysicalMapsAll_Click(object sender, EventArgs e)
@@ -583,7 +576,7 @@ namespace LAZYSHELL
                 Model.EditTilesetsBF[i] = true;
             }
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
             solidityMap.Image = null;
         }
@@ -608,7 +601,7 @@ namespace LAZYSHELL
             Model.EditTilemaps[levelMap.TilemapL3] = true;
             solidityMap.Clear(1);
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
             solidityMap.Image = null;
         }
@@ -642,7 +635,7 @@ namespace LAZYSHELL
                 }
             }
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void unusedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -672,7 +665,7 @@ namespace LAZYSHELL
                 }
             }
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void unusedToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -702,7 +695,7 @@ namespace LAZYSHELL
                 }
             }
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void unusedToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -730,7 +723,7 @@ namespace LAZYSHELL
                 }
             }
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void unusedToolStripMenuItem3_Click(object sender, EventArgs e)
@@ -874,6 +867,68 @@ namespace LAZYSHELL
             catch
             {
                 MessageBox.Show("There was a problem importing the arrays.", "LAZY SHELL");
+            }
+        }
+        private void graphicSetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BinaryWriter binWriter;
+            string path = GetDirectoryPath("Where do you want to save the graphic sets?");
+            path += "\\" + Model.GetFileNameWithoutPath() + " - Graphic Sets\\";
+            if (!CreateDir(path))
+                return;
+            if (path == null)
+                return;
+            try
+            {
+                for (int i = 0; i < Model.GraphicSets.Length; i++)
+                {
+                    binWriter = new BinaryWriter(File.Open(path + "graphicSet." + i.ToString("d3") + ".bin", FileMode.Create));
+                    binWriter.Write(Model.GraphicSets[i]);
+                    binWriter.Close();
+                }
+            }
+            catch (Exception ioexc)
+            {
+                MessageBox.Show("Lazy Shell was unable to save the graphic sets.\n\n" + ioexc.Message, "LAZY SHELL");
+            }
+        }
+        private void graphicSetsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string filename;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = settings.LastRomPath;
+            openFileDialog1.Title = "Import graphic set";
+            openFileDialog1.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+                filename = openFileDialog1.FileName;
+            else
+                return;
+            string num = filename.Substring(filename.LastIndexOf('.') - 2, 2);
+            int index = Int32.Parse(num, System.Globalization.NumberStyles.HexNumber);
+            try
+            {
+                FileInfo fInfo = new FileInfo(filename);
+                if (fInfo.Length != 8192)
+                {
+                    MessageBox.Show("File is incorrect size, Graphic Sets are 8192 bytes", "LAZY SHELL");
+                    return;
+                }
+                FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fStream);
+                Model.GraphicSets[index] = br.ReadBytes((int)fInfo.Length);
+                Model.EditGraphicSets[index] = true;
+                br.Close();
+                fStream.Close();
+                fullUpdate = true;
+                RefreshLevel();
+                return;
+            }
+            catch (Exception ioexc)
+            {
+                MessageBox.Show("Lazy Shell was unable to Import the Graphic Set.\n\n" + ioexc.Message, "LAZY SHELL");
+                return;
             }
         }
         private void dumpTextToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1025,7 +1080,7 @@ namespace LAZYSHELL
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetD + 0x48, levelMap.GraphicSetD + 0x49, false);
             Model.Decompress(Model.GraphicSets, 0x0A0000, 0x150000, 0x2000, "", levelMap.GraphicSetE + 0x48, levelMap.GraphicSetE + 0x49, false);
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void resetPaletteSetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1036,7 +1091,7 @@ namespace LAZYSHELL
             int palette = levelMap.PaletteSet;
             paletteSet = new PaletteSet(Model.ROM, palette, (palette * 0xD4) + 0x249FE2, 8, 16, 30);
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void resetTilesetsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1048,7 +1103,7 @@ namespace LAZYSHELL
             Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL2 + 0x20, levelMap.TilesetL2 + 0x21, false);
             Model.Decompress(Model.Tilesets, 0x3B0000, 0x3E0000, 0x1000, "", levelMap.TilesetL3, levelMap.TilesetL2 + 1, false);
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void resetTilemapsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1060,7 +1115,7 @@ namespace LAZYSHELL
             Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL2 + 0x40, levelMap.TilemapL2 + 0x41, false);
             Model.Decompress(Model.Tilemaps, 0x160000, 0x1B0000, 0x1000, 0x2000, "", 0x40, levelMap.TilemapL3, levelMap.TilemapL3 + 1, false);
             fullUpdate = true;
-            if (!updatingLevel)
+            if (!this.Updating)
                 RefreshLevel();
         }
         private void resetSolidityMapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1123,8 +1178,7 @@ namespace LAZYSHELL
         }
         private void Levels_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(levels, levelMaps, Model.GraphicSets, Model.Tilesets,
-                Model.Tilemaps, Model.SolidityMaps, Model.PaletteSets, Model.NPCProperties) == checksum)
+            if (!this.Modified && !tilemapEditor.Modified && !tilesetEditor.Modified)
                 goto Close;
             state.Draw = false;
             state.Erase = false;

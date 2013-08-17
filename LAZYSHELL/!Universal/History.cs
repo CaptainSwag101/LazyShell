@@ -11,72 +11,93 @@ namespace LAZYSHELL
     public class History
     {
         // variables
-        private Form form;
+        private NewForm form;
         private ToolStripControlHost name;
         private ToolStripNumericUpDown number;
         private bool includeChildForms = true;
         // constructor
-        public History(Form form)
+        public History(NewForm form)
         {
             this.form = form;
-            foreach (Control c in form.Controls)
-            {
-                //c.KeyDown += new KeyEventHandler(ControlKeyDown);
-                c.MouseDown += new MouseEventHandler(ControlMouseDown);
-                SetEventHandlers(c);
-            }
+            if (form.Name != "SpritePartitions" &&
+                form.Name != "PaletteEditor" &&
+                form.Name != "GraphicEditor" &&
+                form.Name != "TileEditor" &&
+                form.Name != "NPCEditor")
+                Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
+            this.form.FormClosed += new FormClosedEventHandler(FormClosed);
+            foreach (Control control in form.Controls)
+                SetEventHandler(control);
         }
-        public History(Form form, bool includeChildForms)
+        public History(NewForm form, bool includeChildForms)
         {
             this.form = form;
             this.includeChildForms = includeChildForms;
-            foreach (Control c in form.Controls)
-            {
-                //c.KeyDown += new KeyEventHandler(ControlKeyDown);
-                c.MouseDown += new MouseEventHandler(ControlMouseDown);
-                Type type = c.GetType();
-                if (type.BaseType != typeof(Form) || includeChildForms)
-                    SetEventHandlers(c);
-            }
+            Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
+            this.form.FormClosed += new FormClosedEventHandler(FormClosed);
+            foreach (Control control in form.Controls)
+                SetEventHandler(control);
         }
-        public History(Form form, ToolStripControlHost name, ToolStripNumericUpDown number)
+        public History(NewForm form, ToolStripControlHost name, ToolStripNumericUpDown number)
         {
             this.form = form;
             this.name = name;
             this.number = number;
-            foreach (Control c in form.Controls)
-            {
-                //c.KeyDown += new KeyEventHandler(ControlKeyDown);
-                c.MouseDown += new MouseEventHandler(ControlMouseDown);
-                SetEventHandlers(c);
-            }
+            Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
+            this.form.FormClosed += new FormClosedEventHandler(FormClosed);
+            foreach (Control control in form.Controls)
+                SetEventHandler(control);
         }
         // functions
         private void SetEventHandlers(Control control)
         {
             if (control.GetType() == typeof(ToolStrip))
+            {
                 foreach (ToolStripItem item in ((ToolStrip)control).Items)
-                    item.MouseDown += new MouseEventHandler(ToolStripItemMouseDown);
+                    SetEventHandler(item);
+            }
             else
-                foreach (Control c in control.Controls)
-                {
-                    //c.KeyDown += new KeyEventHandler(ControlKeyDown);
-                    c.MouseDown += new MouseEventHandler(ControlMouseDown);
-                    Type type = c.GetType();
-                    if (type.BaseType != typeof(Form) || includeChildForms)
-                        SetEventHandlers(c);
-                }
+            {
+                foreach (Control child in control.Controls)
+                    SetEventHandler(child);
+            }
         }
-        private void AddValue(Control control, ref string temp)
+        private void SetEventHandler(Control control)
         {
-            if (control.GetType() == typeof(NumericUpDown))
-                temp += "Value = " + ((NumericUpDown)control).Value + " | ";
-            else if (control.GetType() == typeof(ComboBox))
-                temp += "SelectedIndex = " + ((ComboBox)control).SelectedIndex + " | ";
-            else if (control.GetType() == typeof(CheckedListBox) ||
-                control.GetType() == typeof(NewCheckedListBox) ||
-                control.GetType() == typeof(ListBox))
-                temp += "SelectedIndex = " + ((ListBox)control).SelectedIndex + " | ";
+            Type type = control.GetType();
+            if (type == typeof(NumericUpDown))
+                ((NumericUpDown)control).ValueChanged += new EventHandler(ValueChanged);
+            else if (type == typeof(ComboBox))
+                ((ComboBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
+            else if (type == typeof(CheckedListBox) || type == typeof(NewCheckedListBox))
+                ((CheckedListBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
+            else if (type == typeof(ListBox))
+                ((ListBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
+            else if (type == typeof(TreeView) || type == typeof(NewTreeView))
+                ((TreeView)control).NodeMouseClick += new TreeNodeMouseClickEventHandler(NodeMouseClick);
+            else if (type == typeof(CheckBox))
+                ((CheckBox)control).CheckedChanged += new EventHandler(CheckedChanged);
+            else if (type == typeof(PictureBox) || type == typeof(NewPictureBox))
+                ((PictureBox)control).MouseDown += new MouseEventHandler(MouseDown);
+            else if (type == typeof(RichTextBox))
+                ((RichTextBox)control).TextChanged += new EventHandler(TextChanged);
+            else if (type == typeof(TextBox))
+                ((TextBox)control).TextChanged += new EventHandler(TextChanged);
+            //
+            if (type.BaseType != typeof(Form) || includeChildForms)
+                SetEventHandlers(control);
+        }
+        private void SetEventHandler(ToolStripItem item)
+        {
+            Type type = item.GetType();
+            if (type == typeof(ToolStripNumericUpDown))
+                ((ToolStripNumericUpDown)item).ValueChanged += new EventHandler(ValueChanged);
+            else if (type == typeof(ToolStripComboBox))
+                ((ToolStripComboBox)item).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
+            else if (type == typeof(ToolStripButton))
+                ((ToolStripButton)item).Click += new EventHandler(Click);
+            else if (type == typeof(ToolStripTextBox))
+                ((ToolStripTextBox)item).TextChanged += new EventHandler(TextChanged);
         }
         private void AddElementIndex(ref string temp)
         {
@@ -98,45 +119,177 @@ namespace LAZYSHELL
                 else
                     nameTag = name.Text;
             }
-            temp += numberTag + nameTag + "\r\n";
+            temp += numberTag + nameTag.Trim();
         }
         // event handlers
-        private void ControlKeyDown(object sender, KeyEventArgs e)
+        private void CheckedChanged(object sender, EventArgs e)
         {
-            Control control = (Control)sender;
-            if (control.Name == "")
+            if (form.Updating)
                 return;
-            string temp = "KeyDown \"" + control.Name + "\" | ";
-            AddValue(control, ref temp);
-            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString();
+            CheckBox control = (CheckBox)sender;
+            string temp = "\"" + control.Name + "\" | ";
+            temp += "Checked = " + control.Checked;
+            temp += " | Form \"" + form.Name + "\"";
             AddElementIndex(ref temp);
-            Model.History = Model.History.Insert(0, temp);
+            //
+            Do.AddHistory(temp);
+            form.Modified = true;
         }
-        private void ToolStripItemMouseDown(object sender, MouseEventArgs e)
+        private void Click(object sender, EventArgs e)
         {
-            ToolStripItem item = (ToolStripItem)sender;
-            string temp = "MouseDown \"" + item.Name + "\" | X:" + e.X + ",Y:" + e.Y + " | ";
-            Type type = item.GetType();
-            if (type == typeof(ToolStripNumericUpDown))
-                temp += "Value = " + ((ToolStripNumericUpDown)item).Value + " | ";
-            else if (type == typeof(LAZYSHELL.ToolStripComboBox))
-                temp += "SelectedIndex = " + ((LAZYSHELL.ToolStripComboBox)item).SelectedIndex + " | ";
-            else if (type == typeof(System.Windows.Forms.ToolStripComboBox))
-                temp += "SelectedIndex = " + ((System.Windows.Forms.ToolStripComboBox)item).SelectedIndex + " | ";
-            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString();
+            if (form.Updating)
+                return;
+            string temp = "";
+            Type type = sender.GetType();
+            if (type == typeof(ToolStripButton))
+            {
+                ToolStripButton control = (ToolStripButton)sender;
+                temp = "\"" + control.Name + "\" | ";
+                temp += "Checked = " + control.Checked;
+            }
+            temp += " | Form \"" + form.Name + "\"";
             AddElementIndex(ref temp);
-            Model.History = Model.History.Insert(0, temp);
+            //
+            Do.AddHistory(temp);
+            //form.Modified = true;
         }
-        private void ControlMouseDown(object sender, MouseEventArgs e)
+        private void FormClosed(object sender, FormClosedEventArgs e)
         {
+            Do.AddHistory("CLOSED FORM \"" + form.Name + "\"");
+            LAZYSHELL.Properties.Settings.Default.Save();
+        }
+        private void MouseDown(object sender, MouseEventArgs e)
+        {
+            if (form.Updating)
+                return;
             Control control = (Control)sender;
-            if (control.Parent != null && control.Parent.GetType() == typeof(NumericUpDown))
-                control = control.Parent;
-            string temp = "MouseDown \"" + control.Name + "\" | X:" + e.X + ",Y:" + e.Y + " | ";
-            AddValue(control, ref temp);
-            temp += "Form \"" + form.Name + "\" | " + DateTime.Now.ToString();
+            string temp = "\"" + control.Name + "\" | ";
+            temp += "MouseDown = (X:" + e.X + ",Y:" + e.Y + ")";
+            temp += " | Form \"" + form.Name + "\"";
             AddElementIndex(ref temp);
-            Model.History = Model.History.Insert(0, temp);
+            //
+            Do.AddHistory(temp);
+            form.Modified = true;
+        }
+        private void NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (form.Updating)
+                return;
+            TreeView control = (TreeView)sender;
+            string text = e.Node.Text;
+            string temp = "\"" + control.Name + "\" | ";
+            temp += "\"" + text.Substring(0, Math.Min(30, text.Length));
+            if (text.Length > 30)
+                temp += "...";
+            temp += "\"";
+            temp += " | Form \"" + form.Name + "\"";
+            AddElementIndex(ref temp);
+            //
+            Do.AddHistory(temp);
+            //form.Modified = true;
+        }
+        private void SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (form.Updating)
+                return;
+            string temp = "";
+            Type type = sender.GetType();
+            if (type == typeof(ComboBox))
+            {
+                ComboBox control = (ComboBox)sender;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "SelectedIndex = " + control.SelectedIndex;
+            }
+            else if (type == typeof(ToolStripComboBox))
+            {
+                ToolStripComboBox control = (ToolStripComboBox)sender;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "SelectedIndex = " + control.SelectedIndex;
+            }
+            else if (type == typeof(CheckedListBox) || type == typeof(NewCheckedListBox))
+            {
+                CheckedListBox control = (CheckedListBox)sender;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "\"" + control.SelectedItem.ToString().Trim() + "\" = ";
+                temp += control.GetItemChecked(control.SelectedIndex);
+            }
+            else if (type == typeof(ListBox))
+            {
+                ListBox control = (ListBox)sender;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "\"" + control.SelectedItem.ToString().Trim();
+            }
+            temp += " | Form \"" + form.Name + "\"";
+            AddElementIndex(ref temp);
+            //
+            Do.AddHistory(temp);
+            if (sender != name && type != typeof(ListBox))
+                form.Modified = true;
+        }
+        private void TextChanged(object sender, EventArgs e)
+        {
+            if (form.Updating)
+                return;
+            string temp = "";
+            Type type = sender.GetType();
+            if (type == typeof(RichTextBox))
+            {
+                RichTextBox control = (RichTextBox)sender;
+                string text = control.Text;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "Text = \"" + text.Substring(0, Math.Min(30, text.Length));
+                if (text.Length > 30)
+                    temp += "...";
+            }
+            else if (type == typeof(TextBox))
+            {
+                TextBox control = (TextBox)sender;
+                string text = control.Text;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "Text = \"" + text.Substring(0, Math.Min(30, text.Length));
+                if (text.Length > 30)
+                    temp += "...";
+            }
+            else if (type == typeof(ToolStripTextBox))
+            {
+                ToolStripTextBox control = (ToolStripTextBox)sender;
+                string text = control.Text;
+                temp += "\"" + control.Name + "\" | ";
+                temp += "Text = \"" + text.Substring(0, Math.Min(30, text.Length));
+                if (text.Length > 30)
+                    temp += "...";
+            }
+            temp += "\"";
+            temp += " | Form \"" + form.Name + "\"";
+            AddElementIndex(ref temp);
+            //
+            Do.AddHistory(temp);
+            form.Modified = true;
+        }
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            if (form.Updating || sender == number)
+                return;
+            string temp = "";
+            Type type = sender.GetType();
+            if (type == typeof(NumericUpDown))
+            {
+                NumericUpDown control = (NumericUpDown)sender;
+                temp = "\"" + control.Name + "\" | ";
+                temp += "Value = " + control.Value;
+            }
+            else if (type == typeof(ToolStripNumericUpDown))
+            {
+                ToolStripNumericUpDown control = (ToolStripNumericUpDown)sender;
+                temp = "\"" + control.Name + "\" | ";
+                temp += "Value = " + control.Value;
+            }
+            temp += " | Form \"" + form.Name + "\"";
+            AddElementIndex(ref temp);
+            //
+            Do.AddHistory(temp);
+            if (sender != number)
+                form.Modified = true;
         }
     }
 }

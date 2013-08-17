@@ -8,11 +8,11 @@ using LAZYSHELL.ScriptsEditor.Commands;
 
 namespace LAZYSHELL
 {
-    public partial class EventScripts : Form
+    public partial class EventScripts : NewForm
     {
         private void ControlDisassembleEvent()
         {
-            updatingControls = true;
+            this.Updating = true;
             panelCommands.SuspendDrawing();
             int[] tree = categoryCommand;
             if (tree != null)
@@ -1189,7 +1189,7 @@ namespace LAZYSHELL
             OrganizeControls();
             //
             panelCommands.ResumeDrawing();
-            updatingControls = false;
+            this.Updating = false;
         }
         private void ControlAssembleEvent()
         {
@@ -1765,7 +1765,7 @@ namespace LAZYSHELL
         //
         private void ControlDisassembleAction()
         {
-            updatingControls = true;
+            this.Updating = true;
             panelCommands.SuspendDrawing();
             int[] tree = categoryCommand;
             if (tree != null)
@@ -2381,7 +2381,7 @@ namespace LAZYSHELL
             }
             OrganizeControls();
             panelCommands.ResumeDrawing();
-            updatingControls = false;
+            this.Updating = false;
         }
         private void ControlAssembleAction()
         {
@@ -2720,7 +2720,7 @@ namespace LAZYSHELL
         //
         private void ResetControls()
         {
-            updatingControls = true;
+            this.Updating = true;
             evtNameA1.DropDownWidth = evtNameA1.Width; evtNameA1.Items.Clear(); evtNameA1.ResetText(); evtNameA1.Enabled = false;
             evtNameA1.DrawMode = DrawMode.Normal; evtNameA1.ItemHeight = 13; evtNameA1.BackColor = SystemColors.Window;
             evtNameA2.DropDownWidth = evtNameA2.Width; evtNameA2.Items.Clear(); evtNameA2.ResetText(); evtNameA2.Enabled = false;
@@ -2741,7 +2741,7 @@ namespace LAZYSHELL
             labelEvtA4.Text = "";
             labelEvtC1.Text = "";
             labelEvtC2.Text = "";
-            updatingControls = false;
+            this.Updating = false;
         }
         private void OrganizeControls()
         {

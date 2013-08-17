@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class StatusCalculator : Form
+    public partial class StatusCalculator : NewForm
     {
         private SortedList itemNames { get { return Model.ItemNames; } }
         private SortedList monsterNames { get { return Model.MonsterNames; } }
@@ -21,12 +21,11 @@ namespace LAZYSHELL
         private Attack[] attacks { get { return Model.Attacks; } }
         private Spell[] spells { get { return Model.Spells; } }
         private Monster[] monsters { get { return Model.Monsters; } }
-        private bool updating = false;
-        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+                private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         // constructor
         public StatusCalculator()
         {
-            updating = true;
+            this.Updating = true;
             InitializeComponent();
             this.listView1.ListViewItemSorter = lvwColumnSorter;
             this.attackerWeapon.Items.Clear();
@@ -55,7 +54,7 @@ namespace LAZYSHELL
             this.targetName.SelectedIndex = monsterNames.GetSortedIndex(0);
             this.attackerBonus.SelectedIndex = 0;
             this.targetBonus.SelectedIndex = 0;
-            updating = false;
+            this.Updating = false;
             CalculatePhysical();
             CalculateSpells();
             this.attackerBonus.SelectedIndex = 0;
@@ -64,7 +63,7 @@ namespace LAZYSHELL
         // functions
         private void CalculateLevel(bool attacker)
         {
-            updating = true;
+            this.Updating = true;
             ComboBox bonus;
             NumericUpDown hp_;
             NumericUpDown attack_;
@@ -183,7 +182,7 @@ namespace LAZYSHELL
             }
             CalculatePhysical();
             CalculateSpells();
-            updating = false;
+            this.Updating = false;
         }
         private void CalculatePhysical()
         {
@@ -305,7 +304,7 @@ namespace LAZYSHELL
         // event handlers
         private void attackerType_CheckedChanged(object sender, EventArgs e)
         {
-            updating = true;
+            this.Updating = true;
             if (!attackerTypeMonster.Checked)  // ally
             {
                 this.attackerName.Items.Clear();
@@ -327,12 +326,12 @@ namespace LAZYSHELL
                 this.timedAttackL1.Visible = false;
                 this.timedAttackL2.Visible = false;
             }
-            updating = false;
+            this.Updating = false;
             loadProperties(sender, e);
         }
         private void targetType_CheckedChanged(object sender, EventArgs e)
         {
-            updating = true;
+            this.Updating = true;
             if (!targetTypeMonster.Checked)  // ally
             {
                 this.targetName.Items.Clear();
@@ -354,7 +353,7 @@ namespace LAZYSHELL
                 this.targetDefensePosition.Visible = false;
                 this.targetWeakness.Visible = true;
             }
-            updating = false;
+            this.Updating = false;
             loadProperties(sender, e);
         }
         private void attackerName_DrawItem(object sender, DrawItemEventArgs e)
@@ -381,7 +380,7 @@ namespace LAZYSHELL
         }
         private void loadProperties(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             CalculateLevel(
                 sender == attackerTypeAlly ||
@@ -391,7 +390,7 @@ namespace LAZYSHELL
         }
         private void calculateTotal(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if (sender == timedAttackL1 && timedAttackL1.Checked)
                 timedAttackL2.Checked = false;
@@ -413,7 +412,7 @@ namespace LAZYSHELL
             int weapon = attackerWeapon.SelectedIndex;
             int armor = attackerArmor.SelectedIndex;
             int accessory = attackerAccessory.SelectedIndex;
-            updating = true;
+            this.Updating = true;
             if (targetTypeMonster.Checked)
                 attackerTypeMonster.Checked = true;
             else
@@ -437,7 +436,7 @@ namespace LAZYSHELL
             targetArmor.SelectedIndex = armor;
             targetAccessory.SelectedIndex = accessory;
             CalculateLevel(false);
-            updating = false;
+            this.Updating = false;
         }
     }
 }

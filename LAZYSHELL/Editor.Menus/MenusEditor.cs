@@ -10,16 +10,14 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class MenusEditor : Form
+    public partial class MenusEditor : NewForm
     {
-        public long Checksum;
         private Menus menus; public Menus Menus { get { return menus; } set { menus = value; } }
         private Settings settings = Settings.Default;
         private TextHelperReduced textHelper = TextHelperReduced.Instance;
         public int Index { get { return menuTextName.SelectedIndex; } set { menuTextName.SelectedIndex = value; } }
         private MenuTexts menuText { get { return Model.MenuTexts[Index]; } set { Model.MenuTexts[Index] = value; } }
-        private bool updating;
-        //
+                //
         public MenusEditor()
         {
             //
@@ -41,21 +39,17 @@ namespace LAZYSHELL
             new ToolTipLabel(this, null, helpTips);
             //
             GC.Collect();
-            new History(this, false);
-            //
-            Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites);
         }
         private void RefreshMenuText()
         {
-            updating = true;
+            this.Updating = true;
             this.menuTextBox.Text = menuText.GetMenuString(textView.Checked);
             this.toolStripSeparator2.Visible =
                 this.toolStripLabel2.Visible =
                 this.xCoord.Visible = menuText.Index >= 14 && menuText.Index <= 19;
             this.xCoord.Value = menuText.X;
             CalculateFreeSpace();
-            updating = false;
+            this.Updating = false;
         }
         private void LoadOverworldEditor()
         {
@@ -118,8 +112,6 @@ namespace LAZYSHELL
             Bits.SetBytes(Model.ROM, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             menus.Assemble();
-            Checksum = Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites);
         }
         //
         private void save_Click(object sender, EventArgs e)
@@ -128,8 +120,7 @@ namespace LAZYSHELL
         }
         private void MenusEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Do.GenerateChecksum(Model.MenuTexts, Model.MenuFrameGraphics, Model.MenuBGGraphics,
-                Model.GameSelectGraphics, Model.GameSelectTileset, Model.GameSelectSpeakers, menus.CursorSprites) == Checksum)
+            if (!this.Modified && !menus.Modified)
                 goto Close;
             DialogResult result = MessageBox.Show(
                 "Menus have not been saved.\n\nWould you like to save changes?", "LAZY SHELL",
@@ -163,25 +154,25 @@ namespace LAZYSHELL
         }
         private void menuTextNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             menuTextName.SelectedIndex = (int)menuTextNum.Value;
-            updating = false;
+            this.Updating = false;
             RefreshMenuText();
         }
         private void menuTextName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
-            updating = true;
+            this.Updating = true;
             menuTextNum.Value = menuTextName.SelectedIndex;
-            updating = false;
+            this.Updating = false;
             RefreshMenuText();
         }
         private void menuTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             //
             char[] text = menuTextBox.Text.ToCharArray();
@@ -209,14 +200,14 @@ namespace LAZYSHELL
             {
                 menuText.SetMenuString(menuTextBox.Text, textView.Checked);
                 menuText.Error = textHelper.Error;
-                updating = true;
+                this.Updating = true;
                 int index = this.Index;
                 menuTextName.Items.RemoveAt(index);
                 menuTextName.Items.Insert(index, menuTextBox.Text);
                 menuTextName.Text = menuTextBox.Text;
                 menuTextName.Invalidate();
                 this.Index = index;
-                updating = false;
+                this.Updating = false;
             }
             CalculateFreeSpace();
             menus.Picture.Invalidate();
@@ -226,7 +217,7 @@ namespace LAZYSHELL
         }
         private void xCoord_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             menuText.X = (int)xCoord.Value;
             menus.SetTextObjects();

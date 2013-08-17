@@ -12,7 +12,7 @@ using LAZYSHELL.Undo;
 
 namespace LAZYSHELL
 {
-    public partial class GraphicEditor : Form
+    public partial class GraphicEditor : NewForm
     {
         #region Variables
         private Delegate update;
@@ -148,7 +148,7 @@ namespace LAZYSHELL
             this.BringToFront();
             Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
             new ToolTipLabel(this, null, helpTips);
-            new History(this);
+            this.History = new History(this);
         }
         private void Initialize(Delegate update, FontCharacter character, PaletteSet paletteSet, int startRow, int startCol, byte format)
         {
@@ -177,7 +177,7 @@ namespace LAZYSHELL
             this.BringToFront();
             Do.AddShortcut(toolStrip2, Keys.F1, helpTips);
             new ToolTipLabel(this, null, helpTips);
-            new History(this);
+            this.History = new History(this);
         }
         public void Reload(Delegate update, byte[] graphics, int length, int offset, PaletteSet paletteSet, int startRow, byte format)
         {
@@ -756,7 +756,7 @@ namespace LAZYSHELL
             }
             else if (action == Drawing.ReplaceColor)
                 Draw(g, x, y, color, colorBack);
-            else if (subtileSelect.Checked && overlay.Select != null)
+            else if (subtileSelect.Checked)
             {
                 // if making a new selection
                 if (e.Button == MouseButtons.Left && mouseDownObject == null && overlay.Select != null)
@@ -770,11 +770,10 @@ namespace LAZYSHELL
                         Math.Max(0, Math.Min(e.Y / zoom, this.height / zoom)));
                 }
                 // if dragging the current selection
-                else if (e.Button == MouseButtons.Left && mouseDownObject == "selection" && !mouseWithinSameBounds)
+                else if (e.Button == MouseButtons.Left && mouseDownObject == "selection" && overlay.Select != null && !mouseWithinSameBounds)
                     overlay.Select.Location = new Point((x / zoom) - mouseDownPosition.X, (y / zoom) - mouseDownPosition.Y);
                 // if mouse not clicked and within the current selection
-                else if (e.Button == MouseButtons.None && overlay.Select != null &&
-                    overlay.Select.MouseWithin(x / zoom, y / zoom))
+                else if (e.Button == MouseButtons.None && overlay.Select != null && overlay.Select.MouseWithin(x / zoom, y / zoom))
                 {
                     mouseOverObject = "selection";
                     pictureBoxGraphicSet.Cursor = Cursors.SizeAll;
@@ -935,7 +934,7 @@ namespace LAZYSHELL
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = "graphicSet.bin";
+            saveFileDialog.FileName = "graphicSet";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;

@@ -11,14 +11,13 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class SampleEditor : Form
+    public partial class SampleEditor : NewForm
     {
         // variables
         private Settings settings = Settings.Default;
         public SoundPlayer SoundPlayer = new SoundPlayer();
         private byte[] wav;
         private byte[] loop;
-        private bool updating = false;
         public int Index { get { return (int)sampleNum.Value; } set { sampleNum.Value = value; } }
         private BRRSample[] samples { get { return Model.AudioSamples; } set { Model.AudioSamples = value; } }
         private BRRSample sample { get { return samples[Index]; } set { samples[Index] = value; } }
@@ -50,19 +49,19 @@ namespace LAZYSHELL
             searchWindow = new Search(sampleNum, searchText, searchNames, sampleName.Items);
             labelWindow = new EditLabel(sampleName, sampleNum, "Samples", true);
             //
-            new History(this, sampleName, sampleNum);
+            this.History = new History(this, sampleName, sampleNum);
         }
         // functions
         private void RefreshSample()
         {
-            updating = true;
+            this.Updating = true;
             relFreq.Value = sample.RelFreq;
             relGain.Value = sample.RelGain;
             loopStart.Value = sample.LoopStart;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
-            updating = false;
+            this.Updating = false;
         }
         private void DrawWavelength(Graphics g, int width, int height, byte[] wav)
         {
@@ -139,7 +138,7 @@ namespace LAZYSHELL
         }
         private void loopStart_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sample.LoopStart = (int)loopStart.Value;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
@@ -148,7 +147,7 @@ namespace LAZYSHELL
         }
         private void relGain_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sample.RelGain = (short)relGain.Value;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
@@ -157,7 +156,7 @@ namespace LAZYSHELL
         }
         private void relFreq_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sample.RelFreq = (short)relFreq.Value;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);

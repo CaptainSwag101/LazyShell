@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class NewExceptionForm : Form
+    public partial class NewExceptionForm : NewForm
     {
         public NewExceptionForm(Exception exception)
         {

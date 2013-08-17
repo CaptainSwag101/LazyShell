@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class CoordAdjust : Form
+    public partial class CoordAdjust : NewForm
     {
         public Point Point;
         public bool ApplyToAll;

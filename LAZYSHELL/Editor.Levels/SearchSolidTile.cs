@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class SearchSolidTile : Form
+    public partial class SearchSolidTile : NewForm
     {
         private LevelsSolidTiles levelsSolidTiles;
         private SolidityTile[] solidTiles;

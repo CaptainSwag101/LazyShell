@@ -31,7 +31,7 @@ namespace LAZYSHELL
         #region Methods
         private void InitializeMapProperties()
         {
-            updatingProperties = true;
+            this.Updating = true;
             levelMap = levelMaps[level.LevelMap];
             paletteSet = paletteSets[levelMaps[level.LevelMap].PaletteSet];
             this.mapNum.Value = level.LevelMap;
@@ -88,7 +88,7 @@ namespace LAZYSHELL
             this.mapSetL3Priority.Checked = levelMap.TopPriorityL3;
             this.mapPaletteSetNum.Value = levelMap.PaletteSet;
             this.mapPaletteSetName.SelectedIndex = levelMap.PaletteSet;
-            updatingProperties = false;
+            this.Updating = false;
         }
         // set images
         private Image SetPaletteOverlay(Size s, Size u, int index)  // s = palette dimen, u = color dimen
@@ -119,81 +119,18 @@ namespace LAZYSHELL
             }
             return Do.PixelsToImage(pixels, s.Width, s.Height);
         }
-        // import / export
-        private void graphicSetsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            BinaryWriter binWriter;
-            string path = GetDirectoryPath("Where do you want to save the graphic sets?");
-            path += "\\" + Model.GetFileNameWithoutPath() + " - Graphic Sets\\";
-            if (!CreateDir(path))
-                return;
-            if (path == null)
-                return;
-            try
-            {
-                for (int i = 0; i < Model.GraphicSets.Length; i++)
-                {
-                    binWriter = new BinaryWriter(File.Open(path + "graphicSet." + i.ToString("d3") + ".bin", FileMode.Create));
-                    binWriter.Write(Model.GraphicSets[i]);
-                    binWriter.Close();
-                }
-            }
-            catch (Exception ioexc)
-            {
-                MessageBox.Show("Lazy Shell was unable to save the graphic sets.\n\n" + ioexc.Message, "LAZY SHELL");
-            }
-        }
-        private void graphicSetsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            string filename;
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = settings.LastRomPath;
-            openFileDialog1.Title = "Import graphic set";
-            openFileDialog1.Filter = "Binary files (*.bin)|*.bin|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
-                filename = openFileDialog1.FileName;
-            else
-                return;
-            string num = filename.Substring(filename.LastIndexOf('.') - 2, 2);
-            int index = Int32.Parse(num, System.Globalization.NumberStyles.HexNumber);
-            try
-            {
-                FileInfo fInfo = new FileInfo(filename);
-                if (fInfo.Length != 8192)
-                {
-                    MessageBox.Show("File is incorrect size, Graphic Sets are 8192 bytes", "LAZY SHELL");
-                    return;
-                }
-                FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fStream);
-                Model.GraphicSets[index] = br.ReadBytes((int)fInfo.Length);
-                Model.EditGraphicSets[index] = true;
-                br.Close();
-                fStream.Close();
-                fullUpdate = true;
-                RefreshLevel();
-                return;
-            }
-            catch (Exception ioexc)
-            {
-                MessageBox.Show("Lazy Shell was unable to Import the Graphic Set.\n\n" + ioexc.Message, "LAZY SHELL");
-                return;
-            }
-        }
         #endregion
         #region Event Handlers
         private void mapNum_ValueChanged(object sender, EventArgs e)
         {
             //SaveMapProperties(); // Save any changes must save changes prior to this point
             // Every property has to save itself
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             tilemap.Assemble(); // Assemble the edited tileMap into the model
             level.LevelMap = (int)mapNum.Value; // Set the levels mapNum to the new value
             InitializeMapProperties(); // Load the new Map properties
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -201,11 +138,11 @@ namespace LAZYSHELL
         }
         private void mapGFXSet1Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet1Name.SelectedIndex = (int)mapGFXSet1Num.Value;
             levelMap.GraphicSetA = (byte)this.mapGFXSet1Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -213,17 +150,17 @@ namespace LAZYSHELL
         }
         private void mapGFXSet1Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet1Num.Value = mapGFXSet1Name.SelectedIndex;
         }
         private void mapGFXSet2Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet2Name.SelectedIndex = (int)mapGFXSet2Num.Value;
             levelMap.GraphicSetB = (byte)this.mapGFXSet2Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -231,17 +168,17 @@ namespace LAZYSHELL
         }
         private void mapGFXSet2Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet2Num.Value = mapGFXSet2Name.SelectedIndex;
         }
         private void mapGFXSet3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet3Name.SelectedIndex = (int)mapGFXSet3Num.Value;
             levelMap.GraphicSetC = (byte)this.mapGFXSet3Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -249,17 +186,17 @@ namespace LAZYSHELL
         }
         private void mapGFXSet3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet3Num.Value = mapGFXSet3Name.SelectedIndex;
         }
         private void mapGFXSet4Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet4Name.SelectedIndex = (int)mapGFXSet4Num.Value;
             levelMap.GraphicSetD = (byte)this.mapGFXSet4Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -267,17 +204,17 @@ namespace LAZYSHELL
         }
         private void mapGFXSet4Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet4Num.Value = mapGFXSet4Name.SelectedIndex;
         }
         private void mapGFXSet5Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet5Name.SelectedIndex = (int)mapGFXSet5Num.Value;
             levelMap.GraphicSetE = (byte)this.mapGFXSet5Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -285,13 +222,13 @@ namespace LAZYSHELL
         }
         private void mapGFXSet5Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSet5Num.Value = mapGFXSet5Name.SelectedIndex;
         }
         private void mapGFXSetL3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSetL3Name.SelectedIndex = (int)mapGFXSetL3Num.Value;
             if (this.mapGFXSetL3Num.Value > 0x1b)
@@ -312,7 +249,7 @@ namespace LAZYSHELL
                 this.mapTilemapL3Num.Enabled = true;
                 this.mapTilemapL3Name.Enabled = true;
             }
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -320,17 +257,17 @@ namespace LAZYSHELL
         }
         private void mapGFXSetL3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapGFXSetL3Num.Value = mapGFXSetL3Name.SelectedIndex;
         }
         private void mapTilesetL1Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL1Name.SelectedIndex = (int)mapTilesetL1Num.Value;
             levelMap.TilesetL1 = (byte)this.mapTilesetL1Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -338,17 +275,17 @@ namespace LAZYSHELL
         }
         private void mapTilesetL1Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL1Num.Value = mapTilesetL1Name.SelectedIndex;
         }
         private void mapTilesetL2Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL2Name.SelectedIndex = (int)mapTilesetL2Num.Value;
             levelMap.TilesetL2 = (byte)this.mapTilesetL2Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -356,17 +293,17 @@ namespace LAZYSHELL
         }
         private void mapTilesetL2Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL2Num.Value = mapTilesetL2Name.SelectedIndex;
         }
         private void mapTilesetL3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL3Name.SelectedIndex = (int)mapTilesetL3Num.Value;
             levelMap.TilesetL3 = (byte)this.mapTilesetL3Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -374,17 +311,17 @@ namespace LAZYSHELL
         }
         private void mapTilesetL3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilesetL3Num.Value = mapTilesetL3Name.SelectedIndex;
         }
         private void mapTilemapL1Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL1Name.SelectedIndex = (int)mapTilemapL1Num.Value;
             levelMap.TilemapL1 = (byte)this.mapTilemapL1Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -392,17 +329,17 @@ namespace LAZYSHELL
         }
         private void mapTilemapL1Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL1Num.Value = mapTilemapL1Name.SelectedIndex;
         }
         private void mapTilemapL2Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL2Name.SelectedIndex = (int)mapTilemapL2Num.Value;
             levelMap.TilemapL2 = (byte)this.mapTilemapL2Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -410,17 +347,17 @@ namespace LAZYSHELL
         }
         private void mapTilemapL2Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL2Num.Value = mapTilemapL2Name.SelectedIndex;
         }
         private void mapTilemapL3Num_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL3Name.SelectedIndex = (int)mapTilemapL3Num.Value;
             levelMap.TilemapL3 = (byte)this.mapTilemapL3Num.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -428,30 +365,30 @@ namespace LAZYSHELL
         }
         private void mapTilemapL3Name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapTilemapL3Num.Value = mapTilemapL3Name.SelectedIndex;
         }
         private void mapBattlefieldNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             levelMap.Battlefield = (byte)this.mapBattlefieldNum.Value;
             mapBattlefieldName.SelectedIndex = (int)mapBattlefieldNum.Value;
         }
         private void mapBattlefieldName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapBattlefieldNum.Value = mapBattlefieldName.SelectedIndex;
         }
         private void mapPhysicalMapNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapPhysicalMapName.SelectedIndex = (int)mapPhysicalMapNum.Value;
             levelMap.SolidityMap = (byte)this.mapPhysicalMapNum.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 solidityMap = new LevelSolidMap(levelMap);
@@ -461,7 +398,7 @@ namespace LAZYSHELL
         }
         private void mapPhysicalMapName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapPhysicalMapNum.Value = mapPhysicalMapName.SelectedIndex;
         }
@@ -469,7 +406,7 @@ namespace LAZYSHELL
         {
             mapSetL3Priority.ForeColor = mapSetL3Priority.Checked ? Color.Black : Color.Gray;
             levelMap.TopPriorityL3 = mapSetL3Priority.Checked;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -477,11 +414,11 @@ namespace LAZYSHELL
         }
         private void mapPaletteSetNum_ValueChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapPaletteSetName.SelectedIndex = (int)mapPaletteSetNum.Value;
             levelMap.PaletteSet = (byte)this.mapPaletteSetNum.Value;
-            if (!updatingLevel)
+            if (!this.Updating)
             {
                 fullUpdate = true;
                 RefreshLevel();
@@ -489,7 +426,7 @@ namespace LAZYSHELL
         }
         private void mapPaletteSetName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updatingProperties)
+            if (this.Updating)
                 return;
             mapPaletteSetNum.Value = mapPaletteSetName.SelectedIndex;
         }

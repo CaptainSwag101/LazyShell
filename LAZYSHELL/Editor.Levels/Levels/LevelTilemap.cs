@@ -312,14 +312,14 @@ namespace LAZYSHELL
                 if (colorMath == null)
                     colorMath = new int[Width_p * Height_p];
                 else
-                    Array.Clear(colorMath, 0, colorMath.Length);
+                    colorMath = new int[colorMath.Length];
                 if (prioritySets[levelLayer.PrioritySet].ColorMathBG && state.BG)
                 {
                     for (int i = 0; i < Width_p * Height_p; i++)
                         colorMath[i] = bgcolor;
                     DoColorMath(colorMath);
                     CopyToPixelArray(pixels, colorMath);
-                    Array.Clear(colorMath, 0, colorMath.Length);
+                    colorMath = new int[colorMath.Length];
                 }
                 else if (state.BG)
                 {
@@ -334,7 +334,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -342,7 +342,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -350,7 +350,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -358,7 +358,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -366,7 +366,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
                     {
@@ -374,7 +374,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                 }
                 else if (!levelMap.TopPriorityL3) // [3,0][3,1][2,0][1,0][2,1][1,1]
@@ -385,7 +385,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL3 && state.Layer3 && levelMap.GraphicSetL3 != 0xFF)
                     {
@@ -393,7 +393,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL3)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -401,7 +401,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -409,7 +409,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL2 && state.Layer2)
                     {
@@ -417,7 +417,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL2)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                     if (prioritySets[levelLayer.PrioritySet].MainscreenL1 && state.Layer1)
                     {
@@ -425,7 +425,7 @@ namespace LAZYSHELL
                         if (prioritySets[levelLayer.PrioritySet].ColorMathL1)
                             DoColorMath(colorMath);
                         CopyToPixelArray(pixels, colorMath);
-                        Array.Clear(colorMath, 0, colorMath.Length);
+                        colorMath = new int[colorMath.Length];
                     }
                 }
             }
@@ -1028,9 +1028,9 @@ namespace LAZYSHELL
             L2Priority1 = new int[Width_p * Height_p];
             L3Priority1 = new int[Width_p * Height_p];
             DrawAllLayers();
-            Array.Clear(pixels, 0, pixels.Length);
+            pixels = new int[pixels.Length];
             if (subscreen != null)
-                Array.Clear(subscreen, 0, subscreen.Length);
+                subscreen = new int[subscreen.Length];
             if ((prioritySets[levelLayer.PrioritySet].SubscreenL1 && state.Layer1) ||
                     (prioritySets[levelLayer.PrioritySet].SubscreenL2 && state.Layer2) ||
                     (prioritySets[levelLayer.PrioritySet].SubscreenL3 && state.Layer3) ||

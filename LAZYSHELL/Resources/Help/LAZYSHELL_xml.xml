@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.18.1" date="July 30, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="3.18.3" date="August 16, 2013" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -1242,7 +1242,7 @@ Action scripts are basically the same as action queues found in event scripts, e
       </FAQ>
     </EventScripts>
     <Formations form="FormationsEditor" icon="icons/mainFormations.gif" title="Formations" type="editor">
-      <description>This editor has 2 subwindows: Formations and packs.</description>
+      <description>This editor has 2 subwindows: NewFormations and packs.</description>
       <Formations form="Formations" icon="icons/mainFormations.gif" title="Formations" type="subwindow">
         <description>A formation is a set of monsters encountered in battle. A formation is chosen when a battle is called through either an event script or through the property of an NPC in a level.</description>
         <tooltip control="formationNameList" control2="formationNum">

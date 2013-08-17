@@ -14,7 +14,7 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class SpriteSequences : Form
+    public partial class SpriteSequences : NewForm
     {
         #region Variables
         // main editor accessed variables
@@ -26,8 +26,7 @@ namespace LAZYSHELL
         private int[] palette { get { return spritesEditor.Palette; } }
         private int availableBytes { get { return spritesEditor.AvailableBytes; } set { spritesEditor.AvailableBytes = value; } }
         // local variables
-        private bool updating = false;
-        private Mold mold { get { return animation.Molds[(int)frameMold.Value]; } }
+                private Mold mold { get { return animation.Molds[(int)frameMold.Value]; } }
         private Sequence sequence { get { return animation.Sequences[sequences.SelectedIndex]; } }
         private Sequence.Frame frame { get { return sequence.Frames[index]; } }
         private int index
@@ -48,9 +47,9 @@ namespace LAZYSHELL
                 if (sequence.Frames.Count > 0)
                 {
                     frames.Tag = value;
-                    updating = true;
+                    this.Updating = true;
                     listBoxFrames.SelectedIndex = value;
-                    updating = false;
+                    this.Updating = false;
                     RefreshFrame();
                 }
                 foreach (PictureBox picture in frames.Controls)
@@ -83,7 +82,7 @@ namespace LAZYSHELL
             this.spritesEditor = spritesEditor;
             InitializeComponent();
             this.skip.Add(pause);
-            updating = true;
+            this.Updating = true;
             this.sequences.Items.Clear();
             for (int i = 0; i < animation.Sequences.Count; i++)
             {
@@ -104,14 +103,14 @@ namespace LAZYSHELL
             sequenceActive.Checked = sequence.Active;
             InitializeFrames();
             index = 0;
-            updating = false;
+            this.Updating = false;
         }
         public void Reload(Sprites spritesEditor)
         {
             if (PlaybackSequence.IsBusy)
                 PlaybackSequence.CancelAsync();
             this.spritesEditor = spritesEditor;
-            updating = true;
+            this.Updating = true;
             this.sequences.Items.Clear();
             for (int i = 0; i < animation.Sequences.Count; i++)
             {
@@ -132,15 +131,15 @@ namespace LAZYSHELL
             sequenceActive.Checked = sequence.Active;
             InitializeFrames();
             index = 0;
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshSequence()
         {
             if (PlaybackSequence.IsBusy)
                 PlaybackSequence.CancelAsync();
-            updating = true;
+            this.Updating = true;
             sequenceActive.Checked = sequence.Active;
-            updating = false;
+            this.Updating = false;
             if (sequence.Frames.Count != 0)
             {
                 toolStrip1.Enabled = true;
@@ -173,7 +172,7 @@ namespace LAZYSHELL
         //
         private void InitializeFrames()
         {
-            updating = true;
+            this.Updating = true;
             panelFrames.AutoScrollPosition = new Point(0, 0);
             SetSequenceFrameImages();
             DrawFrames();
@@ -186,11 +185,11 @@ namespace LAZYSHELL
                 this.frameMold.Value = frame.Mold;
                 this.duration.Value = frame.Duration;
             }
-            updating = false;
+            this.Updating = false;
         }
         private void RefreshFrame()
         {
-            updating = true;
+            this.Updating = true;
             if (sequence.Frames.Count != 0)
             {
                 this.frameMold.Enabled = true;
@@ -206,7 +205,7 @@ namespace LAZYSHELL
                 sequenceImage = null;
             }
             SetSequenceFrameImage();
-            updating = false;
+            this.Updating = false;
         }
         private void DrawFrames()
         {
@@ -353,10 +352,10 @@ namespace LAZYSHELL
             index = (int)frame.Tag;
             if ((Control.ModifierKeys & Keys.Control) == 0) // multi-select if Ctrl pressed
             {
-                updating = true;
+                this.Updating = true;
                 listBoxFrames.ClearSelected();
                 listBoxFrames.SelectedIndex = index;
-                updating = false;
+                this.Updating = false;
             }
             if (panelFrames.HorizontalScroll.Visible)
                 panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
@@ -369,18 +368,18 @@ namespace LAZYSHELL
             if (e.KeyData == Keys.Right || e.KeyData == Keys.Down)
             {
                 index++;
-                updating = true;
+                this.Updating = true;
                 listBoxFrames.ClearSelected();
                 listBoxFrames.SelectedIndex = index;
             }
             if (e.KeyData == Keys.Left || e.KeyData == Keys.Up)
             {
                 index--;
-                updating = true;
+                this.Updating = true;
                 listBoxFrames.ClearSelected();
                 listBoxFrames.SelectedIndex = index;
             }
-            updating = false;
+            this.Updating = false;
             if (panelFrames.HorizontalScroll.Visible)
                 panelFrames.HorizontalScroll.Value = index * (bounds.Width + 4);
         }
@@ -398,7 +397,7 @@ namespace LAZYSHELL
         {
             if (PlaybackSequence.IsBusy)
                 PlaybackSequence.CancelAsync();
-            if (updating)
+            if (this.Updating)
                 return;
             index = listBoxFrames.SelectedIndex;
             if (panelFrames.HorizontalScroll.Visible)
@@ -406,20 +405,20 @@ namespace LAZYSHELL
         }
         private void sequences_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             RefreshSequence();
             sequences.Focus();
         }
         private void duration_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             frame.Duration = (byte)duration.Value;
         }
         private void frameMold_ValueChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             if ((int)frameMold.Value >= animation.Molds.Count)
                 frameMold.Value = animation.Molds.Count - 1;
@@ -443,18 +442,18 @@ namespace LAZYSHELL
         private void back_Click(object sender, EventArgs e)
         {
             index--;
-            updating = true;
+            this.Updating = true;
             listBoxFrames.ClearSelected();
             listBoxFrames.SelectedIndex = index;
-            updating = false;
+            this.Updating = false;
         }
         private void foward_Click(object sender, EventArgs e)
         {
             index++;
-            updating = true;
+            this.Updating = true;
             listBoxFrames.ClearSelected();
             listBoxFrames.SelectedIndex = index;
-            updating = false;
+            this.Updating = false;
         }
         private void PlaybackSequence_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -505,7 +504,7 @@ namespace LAZYSHELL
         // adding,deleting
         private void sequenceActive_CheckedChanged(object sender, EventArgs e)
         {
-            if (updating)
+            if (this.Updating)
                 return;
             sequence.Active = sequenceActive.Checked;
         }
@@ -544,13 +543,13 @@ namespace LAZYSHELL
             }
             int index = sequences.SelectedIndex + 1;
             animation.Sequences.Insert(index, sequence.New());
-            updating = true;
+            this.Updating = true;
             sequences.BeginUpdate();
             sequences.Items.Insert(index, "Sequence " + index);
             for (int i = 0; i < sequences.Items.Count; i++)
                 sequences.Items[i] = "Sequence " + i;
             sequences.EndUpdate();
-            updating = false;
+            this.Updating = false;
             sequences.SelectedIndex = index;
         }
         private void deleteSequence_Click(object sender, EventArgs e)
@@ -563,13 +562,13 @@ namespace LAZYSHELL
             }
             int index = sequences.SelectedIndex;
             animation.Sequences.RemoveAt(index);
-            updating = true;
+            this.Updating = true;
             sequences.BeginUpdate();
             sequences.Items.RemoveAt(index);
             for (int i = 0; i < sequences.Items.Count; i++)
                 sequences.Items[i] = "Sequence " + i;
             sequences.EndUpdate();
-            updating = false;
+            this.Updating = false;
             if (index < sequences.Items.Count)
                 sequences.SelectedIndex = index;
             else
@@ -585,13 +584,13 @@ namespace LAZYSHELL
             }
             int index = sequences.SelectedIndex + 1;
             animation.Sequences.Insert(index, sequence.Copy());
-            updating = true;
+            this.Updating = true;
             sequences.BeginUpdate();
             sequences.Items.Insert(index, "Sequence " + index);
             for (int i = 0; i < sequences.Items.Count; i++)
                 sequences.Items[i] = "Sequence " + i;
             sequences.EndUpdate();
-            updating = false;
+            this.Updating = false;
             sequences.SelectedIndex = index;
         }
         private void moveSequenceBack_Click(object sender, EventArgs e)
@@ -600,9 +599,9 @@ namespace LAZYSHELL
                 return;
             int index = sequences.SelectedIndex - 1;
             animation.Sequences.Reverse(index, 2);
-            updating = true;
+            this.Updating = true;
             sequences.SelectedIndex--;
-            updating = false;
+            this.Updating = false;
         }
         private void moveSeqeuenceFoward_Click(object sender, EventArgs e)
         {
@@ -610,9 +609,9 @@ namespace LAZYSHELL
                 return;
             int index = sequences.SelectedIndex;
             animation.Sequences.Reverse(index, 2);
-            updating = true;
+            this.Updating = true;
             sequences.SelectedIndex++;
-            updating = false;
+            this.Updating = false;
         }
         private void newFrame_Click(object sender, EventArgs e)
         {

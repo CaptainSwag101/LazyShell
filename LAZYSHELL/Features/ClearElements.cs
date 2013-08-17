@@ -9,7 +9,7 @@ using LAZYSHELL.ScriptsEditor;
 
 namespace LAZYSHELL
 {
-    public partial class ClearElements : Form
+    public partial class ClearElements : NewForm
     {
         private object element;
         private int currentIndex;
