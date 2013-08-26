@@ -589,7 +589,7 @@ namespace LAZYSHELL
             SetBackgroundImage();
             SetPreviewImage();
             LoadBGGraphicEditor();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void BGGraphicUpdate()
         {
@@ -598,42 +598,42 @@ namespace LAZYSHELL
             Model.GameBG = null;
             SetBackgroundImage();
             SetPreviewImage();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void FGPaletteUpdate()
         {
             SetForegroundImage();
             SetPreviewImage();
             LoadFGGraphicEditor();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void FGGraphicUpdate()
         {
             SetForegroundImage();
             SetPreviewImage();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void CursorsPaletteUpdate()
         {
             SetCursorImages();
             SetPreviewImage();
             LoadCursorsGraphicEditor();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void CursorsGraphicUpdate()
         {
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void SpeakersPaletteUpdate()
         {
             SetSpeakersImages();
             LoadSpeakersGraphicEditor();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         private void SpeakersGraphicUpdate()
         {
             SetSpeakersImages();
-            this.Modified = true;   // b/c switching colors won't modify checksum
+            this.Modified = true;   // b/c switching colors won't modify
         }
         //
         private void ImportBackground(Bitmap import)

@@ -300,7 +300,7 @@ namespace LAZYSHELL
         private void SetLevelImage()
         {
             int[] pixels = tilemap.Pixels;
-            tilemapImage = new Bitmap(Do.PixelsToImage(pixels, tilemap.Width_p, tilemap.Height_p));
+            tilemapImage = Do.PixelsToImage(pixels, tilemap.Width_p, tilemap.Height_p);
             pictureBoxLevel.Invalidate();
         }
         private void UpdateCoordLabels()
@@ -374,7 +374,7 @@ namespace LAZYSHELL
                         pixels[y * 32 + x] = Color.FromArgb(255, r, n, b).ToArgb();
                 }
             }
-            return new Bitmap(Do.PixelsToImage(pixels, 32, 784));
+            return Do.PixelsToImage(pixels, 32, 784);
         }
         private void DrawHoverBox(Graphics g)
         {
@@ -855,15 +855,13 @@ namespace LAZYSHELL
             else
                 tilemap = this.tilemap;
             if (editAllLayers.Checked)
-                selection = new Bitmap(
-                    Do.PixelsToImage(
+                selection = Do.PixelsToImage(
                     tilemap.GetPixels(location, overlay.Select.Size),
-                    overlay.Select.Width, overlay.Select.Height));
+                    overlay.Select.Width, overlay.Select.Height);
             else
-                selection = new Bitmap(
-                    Do.PixelsToImage(
+                selection = Do.PixelsToImage(
                     tilemap.GetPixels(layer, location, overlay.Select.Size),
-                    overlay.Select.Width, overlay.Select.Height));
+                    overlay.Select.Width, overlay.Select.Height);
             int[][] copiedTiles = new int[3][];
             this.copiedTiles = new CopyBuffer(overlay.Select.Width, overlay.Select.Height);
             for (int l = 0; l < 3; l++)
@@ -907,15 +905,13 @@ namespace LAZYSHELL
                     tilemap = this.tilemap;
                 }
                 if (editAllLayers.Checked)
-                    selection = new Bitmap(
-                        Do.PixelsToImage(
+                    selection = Do.PixelsToImage(
                         tilemap.GetPixels(location, overlay.Select.Size),
-                        overlay.Select.Width, overlay.Select.Height));
+                        overlay.Select.Width, overlay.Select.Height);
                 else
-                    selection = new Bitmap(
-                        Do.PixelsToImage(
+                    selection = Do.PixelsToImage(
                         tilemap.GetPixels(layer, location, overlay.Select.Size),
-                        overlay.Select.Width, overlay.Select.Height));
+                        overlay.Select.Width, overlay.Select.Height);
                 int[][] copiedTiles = new int[3][];
                 this.draggedTiles = new CopyBuffer(overlay.Select.Width, overlay.Select.Height);
                 for (int l = 0; l < 3; l++)
@@ -1133,7 +1129,16 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(tilemapImage.Clone(clone, PixelFormat.DontCare), dest, source, GraphicsUnit.Pixel);
             }
             if (state.TileMods)
+            {
+                foreach (LevelTileMods.Mod mod in tileMods.Mods)
+                {
+                    if (mod.TilemapA == null)
+                        mod.TilemapA = new LevelTilemap(level, tileset, mod, false);
+                    if (mod.Set && mod.TilemapB == null)
+                        mod.TilemapB = new LevelTilemap(level, tileset, mod, true);
+                }
                 overlay.DrawLevelTileMods(tileMods, e.Graphics, ia, zoom);
+            }
             if (state.Move && selection != null)
             {
                 Rectangle rsrc = new Rectangle(0, 0, overlay.Select.Width, overlay.Select.Height);
@@ -1149,7 +1154,7 @@ namespace LAZYSHELL
                 cm.Matrix33 = 0.50F;
                 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 if (p1Image == null)
-                    p1Image = new Bitmap(Do.PixelsToImage(tilemap.GetPriority1Pixels(), width, height));
+                    p1Image = Do.PixelsToImage(tilemap.GetPriority1Pixels(), width, height);
                 e.Graphics.DrawImage(p1Image, rdst, 0, 0, width, height, GraphicsUnit.Pixel, ia);
             }
             if (state.SolidityLayer)
@@ -1161,7 +1166,7 @@ namespace LAZYSHELL
                 if (state.Priority1)
                 {
                     if (p1SolidityImage == null)
-                        p1SolidityImage = new Bitmap(Do.PixelsToImage(solidity.GetPriority1Pixels(solidityMap), 1024, 1024));
+                        p1SolidityImage = Do.PixelsToImage(solidity.GetPriority1Pixels(solidityMap), 1024, 1024);
                     e.Graphics.DrawImage(p1SolidityImage, rdst, 0, 0, width, height, GraphicsUnit.Pixel, ia);
                 }
                 if (selsolidt != null)
@@ -1699,36 +1704,36 @@ namespace LAZYSHELL
                     {
                         if (levels.ExitX.Value != mouseIsometricPosition.X &&
                             levels.ExitY.Value != mouseIsometricPosition.Y)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.ExitX.Value = mouseIsometricPosition.X;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.ExitY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "event")
                     {
                         if (levels.EventX.Value != mouseIsometricPosition.X &&
                             levels.EventY.Value != mouseIsometricPosition.Y)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.EventX.Value = mouseIsometricPosition.X;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.EventY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "npc" || mouseDownObject == "npc clone")
                     {
                         if (levels.NpcXCoord.Value != mouseIsometricPosition.X &&
                             levels.NpcYCoord.Value != mouseIsometricPosition.Y)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.NpcXCoord.Value = mouseIsometricPosition.X;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.NpcYCoord.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "overlap")
                     {
                         if (levels.OverlapX.Value != mouseIsometricPosition.X &&
                             levels.OverlapY.Value != mouseIsometricPosition.Y)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.OverlapX.Value = mouseIsometricPosition.X;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.OverlapY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "tilemod")
@@ -1737,18 +1742,18 @@ namespace LAZYSHELL
                         int b = Math.Min(Math.Max(0, mouseTilePosition.Y - mouseDownPosition.Y), 63);
                         if (levels.TileModsX.Value != a &&
                             levels.TileModsY.Value != b)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.TileModsX.Value = a;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.TileModsY.Value = b;
                     }
                     if (mouseDownObject == "solidmod")
                     {
                         if (levels.SolidModsX.Value != mouseIsometricPosition.X &&
                             levels.SolidModsY.Value != mouseIsometricPosition.Y)
-                            levels.Updating = true;
+                            levels.Refreshing = true;
                         levels.SolidModsX.Value = mouseIsometricPosition.X;
-                        levels.Updating = false;
+                        levels.Refreshing = false;
                         levels.SolidModsY.Value = mouseIsometricPosition.Y;
                     }
                     if (mouseDownObject == "solid tile")

@@ -29,7 +29,7 @@ namespace LAZYSHELL
         {
             this.formationsEditor = formationsEditor;
             InitializeComponent();
-            searchWindow = new Search(packNum, packNameTextBox, searchFormationPacks, new Function(LoadSearch), "treeView");
+            searchWindow = new Search(packNum, searchBox, searchFormationPacks, new Function(LoadSearch), "treeView");
             labelWindow = new EditLabel(null, packNum, "Packs", false);
             RefreshFormationPacks();
             //
@@ -57,7 +57,7 @@ namespace LAZYSHELL
         {
             treeView.BeginUpdate();
             treeView.Nodes.Clear();
-            if (packNameTextBox.Text == "")
+            if (searchBox.Text == "")
             {
                 treeView.EndUpdate();
                 return;
@@ -68,33 +68,33 @@ namespace LAZYSHELL
             {
                 if (Do.Contains(
                     formations[fp.Formations[0]].ToString(),
-                    packNameTextBox.Text, stringComparison, matchWholeWord) ||
+                    searchBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
                     formations[fp.Formations[1]].ToString(),
-                    packNameTextBox.Text, stringComparison, matchWholeWord) ||
+                    searchBox.Text, stringComparison, matchWholeWord) ||
                     Do.Contains(
                     formations[fp.Formations[2]].ToString(),
-                    packNameTextBox.Text, stringComparison, matchWholeWord))
+                    searchBox.Text, stringComparison, matchWholeWord))
                 {
                     tn = treeView.Nodes.Add("PACK #" + fp.Index);
                     tn.Tag = (int)fp.Index;
                     if (Do.Contains(
                         formations[fp.Formations[0]].ToString(),
-                        packNameTextBox.Text, stringComparison, matchWholeWord))
+                        searchBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.Formations[0]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
                         formations[fp.Formations[1]].ToString(),
-                        packNameTextBox.Text, stringComparison, matchWholeWord))
+                        searchBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.Formations[1]].ToString());
                         cn.Tag = (int)fp.Index;
                     }
                     if (Do.Contains(
                         formations[fp.Formations[2]].ToString(),
-                        packNameTextBox.Text, stringComparison, matchWholeWord))
+                        searchBox.Text, stringComparison, matchWholeWord))
                     {
                         cn = tn.Nodes.Add(formations[fp.Formations[2]].ToString());
                         cn.Tag = (int)fp.Index;

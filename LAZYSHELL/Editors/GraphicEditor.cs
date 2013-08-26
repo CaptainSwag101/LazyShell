@@ -346,19 +346,19 @@ namespace LAZYSHELL
             if (character == null)
             {
                 pixels = Do.GetPixelRegion(graphics, format, palette, size.Width, 0, 0, size.Width, size.Height, this.offset);
-                graphicsImage = new Bitmap(Do.PixelsToImage(pixels, size.Width * 8, size.Height * 8));
+                graphicsImage = Do.PixelsToImage(pixels, size.Width * 8, size.Height * 8);
             }
             else
             {
                 pixels = character.GetPixels(paletteSet.Palettes[currentPalette]);
-                graphicsImage = new Bitmap(Do.PixelsToImage(pixels, character.MaxWidth, character.Height));
+                graphicsImage = Do.PixelsToImage(pixels, character.MaxWidth, character.Height);
             }
             pictureBoxGraphicSet.Invalidate();
         }
         private void SetPaletteImage()
         {
             int[] palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, paletteSet.Palettes.Length, startRow, startCol + 1);
-            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, paletteSet.Palettes.Length * 8 - (startRow * 8)));
+            paletteImage = Do.PixelsToImage(palettePixels, 128, paletteSet.Palettes.Length * 8 - (startRow * 8));
             pictureBoxPalette.Invalidate();
         }
         private void SetSelectionImage(CopyBuffer buffer)

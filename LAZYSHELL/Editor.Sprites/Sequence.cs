@@ -78,7 +78,7 @@ namespace LAZYSHELL
             {
                 int[] cropped = Do.GetPixelRegion(pixels, thisBounds, 256, 256);
                 Bits.Fill(cropped, Color.FromArgb(127, 127, 127).ToArgb(), true);
-                Bitmap imageCropped = new Bitmap(Do.PixelsToImage(cropped, thisBounds.Width, thisBounds.Height));
+                Bitmap imageCropped = Do.PixelsToImage(cropped, thisBounds.Width, thisBounds.Height);
                 croppedFrames.Add(new Bitmap(imageCropped));
             }
             return croppedFrames.ToArray();

@@ -45,7 +45,7 @@ namespace LAZYSHELL
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.npcNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.spriteNameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchSpriteNames = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.spriteName = new System.Windows.Forms.ToolStripComboBox();
@@ -281,9 +281,9 @@ namespace LAZYSHELL
             this.searchResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchResults.FormattingEnabled = true;
             this.searchResults.IntegralHeight = false;
-            this.searchResults.Location = new System.Drawing.Point(2, 67);
+            this.searchResults.Location = new System.Drawing.Point(2, 86);
             this.searchResults.Name = "searchResults";
-            this.searchResults.Size = new System.Drawing.Size(228, 484);
+            this.searchResults.Size = new System.Drawing.Size(228, 465);
             this.searchResults.TabIndex = 2;
             this.searchResults.SelectedIndexChanged += new System.EventHandler(this.searchResults_SelectedIndexChanged);
             // 
@@ -309,6 +309,7 @@ namespace LAZYSHELL
             // npcNum
             // 
             this.npcNum.AutoSize = false;
+            this.npcNum.ContextMenuStrip = null;
             this.npcNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.npcNum.Hexadecimal = false;
             this.npcNum.Increment = new decimal(new int[] {
@@ -337,10 +338,10 @@ namespace LAZYSHELL
             0});
             this.npcNum.ValueChanged += new System.EventHandler(this.npcNum_ValueChanged);
             // 
-            // spriteNameTextBox
+            // searchBox
             // 
-            this.spriteNameTextBox.Name = "spriteNameTextBox";
-            this.spriteNameTextBox.Size = new System.Drawing.Size(200, 21);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(200, 21);
             // 
             // searchSpriteNames
             // 
@@ -381,6 +382,7 @@ namespace LAZYSHELL
             // spriteNum
             // 
             this.spriteNum.AutoSize = false;
+            this.spriteNum.ContextMenuStrip = null;
             this.spriteNum.Hexadecimal = false;
             this.spriteNum.Increment = new decimal(new int[] {
             1,
@@ -595,13 +597,13 @@ namespace LAZYSHELL
             // 
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.searchSpriteName,
-            this.spriteNameTextBox,
+            this.searchBox,
             this.searchSpriteNames});
             this.toolStrip3.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.toolStrip3.Location = new System.Drawing.Point(2, 25);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(228, 42);
+            this.toolStrip3.Size = new System.Drawing.Size(228, 61);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -668,6 +670,7 @@ namespace LAZYSHELL
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
         private System.Windows.Forms.PictureBox spritePictureBox;
@@ -691,7 +694,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripComboBox spriteName;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStripTextBox spriteNameTextBox;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.ToolStripButton searchSpriteNames;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ToolStrip toolStrip3;

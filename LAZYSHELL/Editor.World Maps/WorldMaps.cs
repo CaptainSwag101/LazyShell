@@ -166,6 +166,7 @@ namespace LAZYSHELL
             foreach (Location mp in locations)
                 mp.Assemble();
             AssembleLocationTexts();
+            this.Modified = false;
         }
         private void AddLocations()
         {
@@ -180,7 +181,7 @@ namespace LAZYSHELL
         private void SetWorldMapImage()
         {
             int[] pixels = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 16, 0, false);
-            tilesetImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
+            tilesetImage = Do.PixelsToImage(pixels, 256, 256);
             pictureBoxTileset.BackColor = Color.FromArgb(palettes.Reds[0], palettes.Greens[0], palettes.Blues[0]);
             pictureBoxTileset.Invalidate();
         }
@@ -192,7 +193,7 @@ namespace LAZYSHELL
         private void SetBannerImage()
         {
             int[] pixels = Do.TilesetToPixels(logoTileset.Tileset_tiles, 16, 16, 0, false);
-            logoImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
+            logoImage = Do.PixelsToImage(pixels, 256, 256);
             pictureBoxTileset.Invalidate();
         }
         private void SetWorldMapTextImage()
@@ -200,7 +201,7 @@ namespace LAZYSHELL
             int[] pixels = drawName.GetPreview(fontDialogue, Model.FontPaletteDialogue.Palettes[1], locations[index_l].Name, false);
             int[] cropped;
             Rectangle region = Do.Crop(pixels, out cropped, 256, 32, true, false, true, false);
-            locationText = new Bitmap(Do.PixelsToImage(cropped, region.Width, region.Height));
+            locationText = Do.PixelsToImage(cropped, region.Width, region.Height);
             pictureBoxTileset.Invalidate();
         }
         // drawing
@@ -684,11 +685,11 @@ namespace LAZYSHELL
                 foreach (Location location in worldMapLocations[index])
                 {
                     if (locationImage == null)
-                        locationImage = new Bitmap(Do.PixelsToImage(GetLocationPixels(false), 16, 8));
+                        locationImage = Do.PixelsToImage(GetLocationPixels(false), 16, 8);
                     if (locationImage_S == null)
-                        locationImage_S = new Bitmap(Do.PixelsToImage(GetLocationPixels(true), 16, 8));
+                        locationImage_S = Do.PixelsToImage(GetLocationPixels(true), 16, 8);
                     if (marioImage == null)
-                        marioImage = new Bitmap(Do.PixelsToImage(GetMarioPixels(), 16, 32));
+                        marioImage = Do.PixelsToImage(GetMarioPixels(), 16, 32);
                     if (location.Index == locationNum.Value)
                     {
                         e.Graphics.DrawImage(locationImage_S, location.X, location.Y);

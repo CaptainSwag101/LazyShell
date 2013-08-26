@@ -47,7 +47,7 @@ namespace LAZYSHELL
             if (closingEditor)
                 return;
             tilemap.Assemble();
-            tilemap = new LevelTilemap(level, tileset);
+            tilemap.RedrawTilemaps();// = new LevelTilemap(level, tileset);
             fullUpdate = false;
             RefreshLevel();
         }

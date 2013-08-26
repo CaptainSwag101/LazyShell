@@ -1177,6 +1177,7 @@ namespace LAZYSHELL
         //
         public void Assemble()
         {
+            this.Modified = false;
         }
         #endregion
         #region Event Handlers
@@ -1289,7 +1290,7 @@ namespace LAZYSHELL
                         for (int x = 2, a = 8; a < 256; x++, a++)
                             pixels[y * 256 + x] = temp[c * 256 + a];
                     }
-                    icon = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
+                    icon = Do.PixelsToImage(pixels, 256, 32);
                 }
                 else
                 {
@@ -1299,7 +1300,7 @@ namespace LAZYSHELL
                         for (int x = 2, a = 0; x < 256; x++, a++)
                             pixels[y * 256 + x] = temp[c * 256 + a];
                     }
-                    icon = new Bitmap(Do.PixelsToImage(pixels, 256, 14));
+                    icon = Do.PixelsToImage(pixels, 256, 14);
                 }
                 e.Graphics.DrawImage(new Bitmap(icon), new Point(e.Bounds.X, e.Bounds.Y));
             }

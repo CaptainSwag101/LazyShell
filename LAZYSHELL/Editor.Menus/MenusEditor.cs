@@ -38,6 +38,7 @@ namespace LAZYSHELL
             menus.Visible = true;
             new ToolTipLabel(this, null, helpTips);
             //
+            this.History = new History(this, false);
             GC.Collect();
         }
         private void RefreshMenuText()
@@ -112,6 +113,8 @@ namespace LAZYSHELL
             Bits.SetBytes(Model.ROM, 0x3EF000, temp);
             //Bits.SetShort(Model.Data, 0x3EF600, 0x344F);
             menus.Assemble();
+            menus.Modified = false;
+            this.Modified = false;
         }
         //
         private void save_Click(object sender, EventArgs e)

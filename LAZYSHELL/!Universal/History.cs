@@ -12,14 +12,18 @@ namespace LAZYSHELL
     {
         // variables
         private NewForm form;
+        private bool mouseDownControl;
         private ToolStripControlHost name;
         private ToolStripNumericUpDown number;
         private bool includeChildForms = true;
+        private DateTime dateTime;
         // constructor
         public History(NewForm form)
         {
             this.form = form;
-            if (form.Name != "SpritePartitions" &&
+            if (form.Name == "Editor")
+                Do.AddHistory("LOADED LAZY SHELL APPLICATION");
+            else if (form.Name != "SpritePartitions" &&
                 form.Name != "PaletteEditor" &&
                 form.Name != "GraphicEditor" &&
                 form.Name != "TileEditor" &&
@@ -33,7 +37,14 @@ namespace LAZYSHELL
         {
             this.form = form;
             this.includeChildForms = includeChildForms;
-            Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
+            if (form.Name == "Editor")
+                Do.AddHistory("LOADED LAZY SHELL APPLICATION");
+            else if (form.Name != "SpritePartitions" &&
+                form.Name != "PaletteEditor" &&
+                form.Name != "GraphicEditor" &&
+                form.Name != "TileEditor" &&
+                form.Name != "NPCEditor")
+                Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
             this.form.FormClosed += new FormClosedEventHandler(FormClosed);
             foreach (Control control in form.Controls)
                 SetEventHandler(control);
@@ -43,7 +54,14 @@ namespace LAZYSHELL
             this.form = form;
             this.name = name;
             this.number = number;
-            Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
+            if (form.Name == "Editor")
+                Do.AddHistory("LOADED LAZY SHELL APPLICATION");
+            else if (form.Name != "SpritePartitions" &&
+                form.Name != "PaletteEditor" &&
+                form.Name != "GraphicEditor" &&
+                form.Name != "TileEditor" &&
+                form.Name != "NPCEditor")
+                Do.AddHistory("OPENED FORM \"" + form.Name + "\"");
             this.form.FormClosed += new FormClosedEventHandler(FormClosed);
             foreach (Control control in form.Controls)
                 SetEventHandler(control);
@@ -51,7 +69,8 @@ namespace LAZYSHELL
         // functions
         private void SetEventHandlers(Control control)
         {
-            if (control.GetType() == typeof(ToolStrip))
+            if (control.GetType() == typeof(ToolStrip) || 
+                control.GetType() == typeof(NewToolStrip))
             {
                 foreach (ToolStripItem item in ((ToolStrip)control).Items)
                     SetEventHandler(item);
@@ -71,20 +90,25 @@ namespace LAZYSHELL
                 ((ComboBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
             else if (type == typeof(CheckedListBox) || type == typeof(NewCheckedListBox))
                 ((CheckedListBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
-            else if (type == typeof(ListBox))
+            else if (type == typeof(ListBox) || type == typeof(NewListBox))
                 ((ListBox)control).SelectedIndexChanged += new EventHandler(SelectedIndexChanged);
             else if (type == typeof(TreeView) || type == typeof(NewTreeView))
                 ((TreeView)control).NodeMouseClick += new TreeNodeMouseClickEventHandler(NodeMouseClick);
             else if (type == typeof(CheckBox))
                 ((CheckBox)control).CheckedChanged += new EventHandler(CheckedChanged);
             else if (type == typeof(PictureBox) || type == typeof(NewPictureBox))
+            {
                 ((PictureBox)control).MouseDown += new MouseEventHandler(MouseDown);
+                ((PictureBox)control).MouseUp += new MouseEventHandler(MouseUp);
+            }
             else if (type == typeof(RichTextBox))
                 ((RichTextBox)control).TextChanged += new EventHandler(TextChanged);
             else if (type == typeof(TextBox))
                 ((TextBox)control).TextChanged += new EventHandler(TextChanged);
+            else if (type == typeof(Button))
+                ((Button)control).Click += new EventHandler(Click);
             //
-            if (type.BaseType != typeof(Form) || includeChildForms)
+            if ((type.BaseType != typeof(Form) && type.BaseType != typeof(NewForm)) || includeChildForms)
                 SetEventHandlers(control);
         }
         private void SetEventHandler(ToolStripItem item)
@@ -121,10 +145,53 @@ namespace LAZYSHELL
             }
             temp += numberTag + nameTag.Trim();
         }
+        private bool LoggingAccept(object sender)
+        {
+            if (form.Updating)
+                return false;
+            if (sender == this.name || sender == this.number)
+                return false;
+            Type type = sender.GetType();
+            if (type == typeof(ToolStripButton))
+            {
+                ToolStripButton control = (ToolStripButton)sender;
+                string name = control.Name;
+                if (!control.CheckOnClick && !name.Contains("navigate") && name != "save")
+                {
+                    form.Modified = true;
+                    //MessageBox.Show(sender.ToString());
+                }
+            }
+            else if (type == typeof(ToolStripTextBox))
+            {
+                ToolStripTextBox control = (ToolStripTextBox)sender;
+                string name = control.Name;
+                if (!name.Contains("search") && !name.Contains("goto"))
+                {
+                    form.Modified = true;
+                    //MessageBox.Show(sender.ToString());
+                }
+            }
+            else if (type != typeof(ListBox) &&
+                type != typeof(NewTreeView) &&
+                type != typeof(TreeView) &&
+                type != typeof(TreeNode))
+            {
+                form.Modified = true;
+                //MessageBox.Show(sender.ToString());
+            }
+            if (mouseDownControl)
+                return false;
+            // 1 second = 1000 milliseconds
+            // 1 millisecond = 10000 ticks
+            if (dateTime.Ticks > DateTime.Now.Ticks - (10000L * 1000L))
+                return false;
+            return true;
+        }
         // event handlers
         private void CheckedChanged(object sender, EventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
             CheckBox control = (CheckBox)sender;
             string temp = "\"" + control.Name + "\" | ";
@@ -133,25 +200,29 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            form.Modified = true;
+            dateTime = DateTime.Now;
         }
         private void Click(object sender, EventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
             string temp = "";
             Type type = sender.GetType();
-            if (type == typeof(ToolStripButton))
+            if (type == typeof(Button))
+            {
+                Button control = (Button)sender;
+                temp = "\"" + control.Name + "\"";
+            }
+            else if (type == typeof(ToolStripButton))
             {
                 ToolStripButton control = (ToolStripButton)sender;
-                temp = "\"" + control.Name + "\" | ";
-                temp += "Checked = " + control.Checked;
+                temp = "\"" + control.Name + "\"";
             }
             temp += " | Form \"" + form.Name + "\"";
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            //form.Modified = true;
+            dateTime = DateTime.Now;
         }
         private void FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -160,8 +231,9 @@ namespace LAZYSHELL
         }
         private void MouseDown(object sender, MouseEventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
+            mouseDownControl = true;
             Control control = (Control)sender;
             string temp = "\"" + control.Name + "\" | ";
             temp += "MouseDown = (X:" + e.X + ",Y:" + e.Y + ")";
@@ -169,11 +241,15 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            form.Modified = true;
+            dateTime = DateTime.Now;
+        }
+        private void MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDownControl = false;
         }
         private void NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
             TreeView control = (TreeView)sender;
             string text = e.Node.Text;
@@ -186,11 +262,11 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            //form.Modified = true;
+            dateTime = DateTime.Now;
         }
         private void SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
             string temp = "";
             Type type = sender.GetType();
@@ -213,7 +289,7 @@ namespace LAZYSHELL
                 temp += "\"" + control.SelectedItem.ToString().Trim() + "\" = ";
                 temp += control.GetItemChecked(control.SelectedIndex);
             }
-            else if (type == typeof(ListBox))
+            else if (type == typeof(ListBox) || type == typeof(NewListBox))
             {
                 ListBox control = (ListBox)sender;
                 temp += "\"" + control.Name + "\" | ";
@@ -223,12 +299,11 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            if (sender != name && type != typeof(ListBox))
-                form.Modified = true;
+            dateTime = DateTime.Now;
         }
         private void TextChanged(object sender, EventArgs e)
         {
-            if (form.Updating)
+            if (!LoggingAccept(sender))
                 return;
             string temp = "";
             Type type = sender.GetType();
@@ -264,11 +339,11 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            form.Modified = true;
+            dateTime = DateTime.Now;
         }
         private void ValueChanged(object sender, EventArgs e)
         {
-            if (form.Updating || sender == number)
+            if (!LoggingAccept(sender))
                 return;
             string temp = "";
             Type type = sender.GetType();
@@ -288,8 +363,7 @@ namespace LAZYSHELL
             AddElementIndex(ref temp);
             //
             Do.AddHistory(temp);
-            if (sender != number)
-                form.Modified = true;
+            dateTime = DateTime.Now;
         }
     }
 }

@@ -56,7 +56,7 @@ namespace LAZYSHELL
             this.panel69 = new System.Windows.Forms.Panel();
             this.pictureBoxDialogue = new System.Windows.Forms.PictureBox();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.textBoxSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.search = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
@@ -441,7 +441,7 @@ namespace LAZYSHELL
             this.toolStrip5.CanOverflow = false;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dialogueNum,
-            this.textBoxSearch,
+            this.searchBox,
             this.search});
             this.toolStrip5.Location = new System.Drawing.Point(0, 0);
             this.toolStrip5.Name = "toolStrip5";
@@ -450,10 +450,10 @@ namespace LAZYSHELL
             this.toolStrip5.TabIndex = 0;
             this.toolStrip5.Text = "toolStrip5";
             // 
-            // textBoxSearch
+            // searchBox
             // 
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(145, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(145, 25);
             // 
             // search
             // 
@@ -1017,6 +1017,7 @@ namespace LAZYSHELL
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.Panel panelDialogues;
@@ -1056,7 +1057,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripButton search;
-        private System.Windows.Forms.ToolStripTextBox textBoxSearch;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private ToolStripNumericUpDown dialogueNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;

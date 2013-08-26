@@ -36,7 +36,7 @@ namespace LAZYSHELL
         public void SetSolidTileImage()
         {
             int[] physicalTilePixels = solids.GetTilePixels(solidityTile);
-            solidTileImage = new Bitmap(Do.PixelsToImage(physicalTilePixels, 32, 784));
+            solidTileImage = Do.PixelsToImage(physicalTilePixels, 32, 784);
             pictureBoxPhysicalTile.Invalidate();
         }
         private void RefreshPhysicalTile()

@@ -101,10 +101,6 @@ namespace LAZYSHELL
         {
             return Model.GameCode();
         }
-        public bool RemoveHeader()
-        {
-            return Model.RemoveHeader();
-        }
         public long GetFileSize()
         {
             return Model.GetFileSize();

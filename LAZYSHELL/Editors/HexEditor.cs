@@ -530,16 +530,16 @@ namespace LAZYSHELL
         }
         private void searchValues_KeyDown(object sender, KeyEventArgs e)
         {
-            if (searchValues.Text == "" ||
-                searchValues.Text.Length % 2 != 0 ||
+            if (searchBox.Text == "" ||
+                searchBox.Text.Length % 2 != 0 ||
                 e.KeyData != Keys.Enter)
                 return;
             try
             {
-                byte[] values = new byte[searchValues.Text.Length / 2];
-                for (int i = 0; i < searchValues.Text.Length / 2; i++)
+                byte[] values = new byte[searchBox.Text.Length / 2];
+                for (int i = 0; i < searchBox.Text.Length / 2; i++)
                 {
-                    string ascii = searchValues.Text.Substring(i * 2, 2);
+                    string ascii = searchBox.Text.Substring(i * 2, 2);
                     byte value = Convert.ToByte(ascii, 16);
                     values[i] = value;
                 }
@@ -552,7 +552,7 @@ namespace LAZYSHELL
                     selectionStart = (foundAt & 15) * 3;
                     selectionLength = values.Length * 3;
                     RefreshHexEditor();
-                    searchValues.Focus();
+                    searchBox.Focus();
                 }
                 else if (MessageBox.Show("Search string was not found.\n\n" + "Restart from beginning?", "LAZY SHELL",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -565,7 +565,7 @@ namespace LAZYSHELL
                         selectionStart = (foundAt & 15) * 3;
                         selectionLength = values.Length * 3;
                         RefreshHexEditor();
-                        searchValues.Focus();
+                        searchBox.Focus();
                     }
                     else
                         MessageBox.Show("Search string was not found.");

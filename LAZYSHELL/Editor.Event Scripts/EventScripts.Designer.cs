@@ -27,6 +27,7 @@ namespace LAZYSHELL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("");
             this.evtNameA2 = new System.Windows.Forms.ComboBox();
             this.evtNumA4 = new System.Windows.Forms.NumericUpDown();
             this.evtNameA1 = new System.Windows.Forms.ComboBox();
@@ -68,9 +69,9 @@ namespace LAZYSHELL
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.gotoAddrButton = new System.Windows.Forms.ToolStripButton();
-            this.gotoAddr = new System.Windows.Forms.ToolStripTextBox();
+            this.gotoAddress = new System.Windows.Forms.ToolStripTextBox();
             this.searchLabels = new System.Windows.Forms.ToolStripButton();
-            this.searchLabelsText = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.labelBytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.label1 = new System.Windows.Forms.ToolStripLabel();
@@ -374,6 +375,9 @@ namespace LAZYSHELL
             this.commandTree.FullRowSelect = true;
             this.commandTree.HideSelection = false;
             this.commandTree.HotTracking = true;
+            treeNode1.Name = "";
+            treeNode1.Text = "";
+            this.commandTree.LastNode = treeNode1;
             this.commandTree.Location = new System.Drawing.Point(0, 50);
             this.commandTree.Name = "commandTree";
             this.commandTree.Size = new System.Drawing.Size(520, 598);
@@ -411,7 +415,7 @@ namespace LAZYSHELL
             this.panel1.Controls.Add(this.buttonInsertEvent);
             this.panel1.Controls.Add(this.buttonApplyEvent);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 511);
+            this.panel1.Location = new System.Drawing.Point(0, 526);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(282, 29);
             this.panel1.TabIndex = 7;
@@ -423,7 +427,7 @@ namespace LAZYSHELL
             this.groupBoxC.Controls.Add(this.evtNumC1);
             this.groupBoxC.Controls.Add(this.labelEvtC1);
             this.groupBoxC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxC.Location = new System.Drawing.Point(0, 467);
+            this.groupBoxC.Location = new System.Drawing.Point(0, 482);
             this.groupBoxC.Name = "groupBoxC";
             this.groupBoxC.Size = new System.Drawing.Size(282, 44);
             this.groupBoxC.TabIndex = 6;
@@ -436,7 +440,7 @@ namespace LAZYSHELL
             this.groupBoxB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxB.Controls.Add(this.evtEffects);
             this.groupBoxB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxB.Location = new System.Drawing.Point(0, 442);
+            this.groupBoxB.Location = new System.Drawing.Point(0, 457);
             this.groupBoxB.Name = "groupBoxB";
             this.groupBoxB.Size = new System.Drawing.Size(282, 25);
             this.groupBoxB.TabIndex = 5;
@@ -454,7 +458,7 @@ namespace LAZYSHELL
             this.groupBoxA.Location = new System.Drawing.Point(0, 371);
             this.groupBoxA.Name = "groupBoxA";
             this.groupBoxA.Padding = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.groupBoxA.Size = new System.Drawing.Size(282, 71);
+            this.groupBoxA.Size = new System.Drawing.Size(282, 86);
             this.groupBoxA.TabIndex = 4;
             this.groupBoxA.TabStop = false;
             this.groupBoxA.Visible = false;
@@ -466,7 +470,7 @@ namespace LAZYSHELL
             this.panelEvtA3_4.Controls.Add(this.evtNumA3);
             this.panelEvtA3_4.Controls.Add(this.labelEvtA3);
             this.panelEvtA3_4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA3_4.Location = new System.Drawing.Point(3, 58);
+            this.panelEvtA3_4.Location = new System.Drawing.Point(3, 59);
             this.panelEvtA3_4.Name = "panelEvtA3_4";
             this.panelEvtA3_4.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA3_4.TabIndex = 5;
@@ -478,7 +482,7 @@ namespace LAZYSHELL
             this.panelEvtA2.Controls.Add(this.evtNameA2);
             this.panelEvtA2.Controls.Add(this.labelEvtA2);
             this.panelEvtA2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA2.Location = new System.Drawing.Point(3, 37);
+            this.panelEvtA2.Location = new System.Drawing.Point(3, 38);
             this.panelEvtA2.Name = "panelEvtA2";
             this.panelEvtA2.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA2.TabIndex = 5;
@@ -490,7 +494,7 @@ namespace LAZYSHELL
             this.panelEvtA1.Controls.Add(this.evtNameA1);
             this.panelEvtA1.Controls.Add(this.labelEvtA1);
             this.panelEvtA1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelEvtA1.Location = new System.Drawing.Point(3, 16);
+            this.panelEvtA1.Location = new System.Drawing.Point(3, 17);
             this.panelEvtA1.Name = "panelEvtA1";
             this.panelEvtA1.Size = new System.Drawing.Size(276, 21);
             this.panelEvtA1.TabIndex = 5;
@@ -609,9 +613,9 @@ namespace LAZYSHELL
             this.navigateFwd,
             this.toolStripSeparator7,
             this.gotoAddrButton,
-            this.gotoAddr,
+            this.gotoAddress,
             this.searchLabels,
-            this.searchLabelsText});
+            this.searchBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -709,13 +713,13 @@ namespace LAZYSHELL
             this.gotoAddrButton.ToolTipText = "Goto Address";
             this.gotoAddrButton.Click += new System.EventHandler(this.gotoAddrButton_Click);
             // 
-            // gotoAddr
+            // gotoAddress
             // 
-            this.gotoAddr.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gotoAddr.MaxLength = 6;
-            this.gotoAddr.Name = "gotoAddr";
-            this.gotoAddr.Size = new System.Drawing.Size(100, 25);
-            this.gotoAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gotoAddr_KeyDown);
+            this.gotoAddress.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gotoAddress.MaxLength = 6;
+            this.gotoAddress.Name = "gotoAddress";
+            this.gotoAddress.Size = new System.Drawing.Size(100, 25);
+            this.gotoAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gotoAddress_KeyDown);
             // 
             // searchLabels
             // 
@@ -727,10 +731,10 @@ namespace LAZYSHELL
             this.searchLabels.Size = new System.Drawing.Size(23, 22);
             this.searchLabels.Text = "Find script";
             // 
-            // searchLabelsText
+            // searchBox
             // 
-            this.searchLabelsText.Name = "searchLabelsText";
-            this.searchLabelsText.Size = new System.Drawing.Size(100, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(100, 25);
             // 
             // labelBytesLeft
             // 
@@ -1273,7 +1277,7 @@ namespace LAZYSHELL
         private ToolStripNumericUpDown eventNum;
         private System.Windows.Forms.ToolStripButton searchLabels;
         private System.Windows.Forms.ListBox commands;
-        private System.Windows.Forms.ToolStripTextBox searchLabelsText;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.ToolStripTextBox eventHexText;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem addThisToNotesDatabaseToolStripMenuItem;
@@ -1300,7 +1304,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.ToolStripButton navigateBck;
         private System.Windows.Forms.ToolStripButton navigateFwd;
-        private System.Windows.Forms.ToolStripTextBox gotoAddr;
+        private System.Windows.Forms.ToolStripTextBox gotoAddress;
         private System.Windows.Forms.GroupBox groupBoxA;
         private System.Windows.Forms.GroupBox groupBoxB;
         private System.Windows.Forms.GroupBox groupBoxC;

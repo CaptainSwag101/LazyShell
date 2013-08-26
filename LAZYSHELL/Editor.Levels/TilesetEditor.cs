@@ -172,8 +172,8 @@ namespace LAZYSHELL
                 int height = Layer < 2 ? tileset.Height : tileset.HeightL3;
                 int[] tileSetPixels = Do.TilesetToPixels(tileset.Tilesets_tiles[Layer], 16, height, 0, false);
                 int[] priority1Pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[Layer], 16, height, 0, true);
-                tilesetImage = new Bitmap(Do.PixelsToImage(tileSetPixels, 256, height * 16));
-                priority1 = new Bitmap(Do.PixelsToImage(priority1Pixels, 256, height * 16));
+                tilesetImage = Do.PixelsToImage(tileSetPixels, 256, height * 16);
+                priority1 = Do.PixelsToImage(priority1Pixels, 256, height * 16);
                 pictureBox.Height = height * 16;
                 pictureBox.Invalidate();
             }

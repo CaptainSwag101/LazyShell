@@ -46,7 +46,7 @@ namespace LAZYSHELL
                 wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
                 loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             }
-            searchWindow = new Search(sampleNum, searchText, searchNames, sampleName.Items);
+            searchWindow = new Search(sampleNum, searchBox, searchNames, sampleName.Items);
             labelWindow = new EditLabel(sampleName, sampleNum, "Samples", true);
             //
             this.History = new History(this, sampleName, sampleNum);
@@ -57,7 +57,7 @@ namespace LAZYSHELL
             this.Updating = true;
             relFreq.Value = sample.RelFreq;
             relGain.Value = sample.RelGain;
-            loopStart.Value = sample.LoopStart;
+            loopStart.Value = sample.LoopStart / 9;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
@@ -140,7 +140,7 @@ namespace LAZYSHELL
         {
             if (this.Updating)
                 return;
-            sample.LoopStart = (int)loopStart.Value;
+            sample.LoopStart = (int)loopStart.Value * 9;
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
@@ -162,6 +162,19 @@ namespace LAZYSHELL
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
             loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
+        }
+        private void buttonPitch_Click(object sender, EventArgs e)
+        {
+            if (pitchChange.SelectedIndex < 0)
+                return;
+            if (pitchChange.SelectedIndex == 0 && relFreq.Value - 512 >= -32768)
+                relFreq.Value -= 512;
+            if (pitchChange.SelectedIndex == 1 && relFreq.Value - 256 >= -32768)
+                relFreq.Value -= 256;
+            if (pitchChange.SelectedIndex == 2 && relFreq.Value + 256 <= 32767)
+                relFreq.Value += 256;
+            if (pitchChange.SelectedIndex == 3 && relFreq.Value + 512 <= 32767)
+                relFreq.Value += 512;
         }
         private void play_Click(object sender, EventArgs e)
         {
@@ -211,12 +224,14 @@ namespace LAZYSHELL
         {
             new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE WAVs...").ShowDialog();
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void importBRR_Click(object sender, EventArgs e)
         {
             new IOElements((Element[])Model.AudioSamples, Index, "IMPORT SAMPLE BRRs...").ShowDialog();
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void export_Click(object sender, EventArgs e)
@@ -231,6 +246,7 @@ namespace LAZYSHELL
         {
             new ClearElements(Model.AudioSamples, Index, "CLEAR SAMPLES...").ShowDialog();
             wav = BRR.BRRToWAV(sample.Sample, sample.Rate);
+            loop = BRR.BRRToWAV(sample.Sample, sample.Rate, sample.LoopStart);
             pictureBox1.Invalidate();
         }
         private void reset_Click(object sender, EventArgs e)

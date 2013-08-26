@@ -121,7 +121,7 @@ namespace LAZYSHELL
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBoxSV = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.scoreViewPanel = new LAZYSHELL.NewPanel();
             this.scoreViewPicture = new LAZYSHELL.NewPictureBox();
             this.hScrollBarSV = new System.Windows.Forms.HScrollBar();
             this.labelRNote = new System.Windows.Forms.Label();
@@ -206,7 +206,7 @@ namespace LAZYSHELL
             this.undo = new System.Windows.Forms.ToolStripButton();
             this.redo = new System.Windows.Forms.ToolStripButton();
             this.labelWNote = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.scoreWriterPanel = new LAZYSHELL.NewPanel();
             this.scoreWriterPicture = new LAZYSHELL.NewPictureBox();
             this.hScrollBarSW = new System.Windows.Forms.HScrollBar();
             this.wToolStripNote = new System.Windows.Forms.ToolStrip();
@@ -314,7 +314,7 @@ namespace LAZYSHELL
             ((System.ComponentModel.ISupportInitialize)(this.noteLengthByte)).BeginInit();
             this.groupBoxSV.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.scoreViewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).BeginInit();
             this.rToolStripAct.SuspendLayout();
             this.rToolStripNote.SuspendLayout();
@@ -322,7 +322,7 @@ namespace LAZYSHELL
             this.groupBoxRV.SuspendLayout();
             this.groupBoxSW.SuspendLayout();
             this.wToolStripAct.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.scoreWriterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scoreWriterPicture)).BeginInit();
             this.wToolStripNote.SuspendLayout();
             this.wToolStripMain.SuspendLayout();
@@ -1400,7 +1400,7 @@ namespace LAZYSHELL
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.scoreViewPanel);
             this.panel2.Controls.Add(this.hScrollBarSV);
             this.panel2.Controls.Add(this.labelRNote);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1409,17 +1409,17 @@ namespace LAZYSHELL
             this.panel2.Size = new System.Drawing.Size(506, 403);
             this.panel2.TabIndex = 17;
             // 
-            // panel3
+            // scoreViewPanel
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.scoreViewPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.AutoScroll = true;
-            this.panel3.Controls.Add(this.scoreViewPicture);
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(502, 362);
-            this.panel3.TabIndex = 0;
+            this.scoreViewPanel.AutoScroll = true;
+            this.scoreViewPanel.Controls.Add(this.scoreViewPicture);
+            this.scoreViewPanel.Location = new System.Drawing.Point(0, 0);
+            this.scoreViewPanel.Name = "panel3";
+            this.scoreViewPanel.Size = new System.Drawing.Size(502, 362);
+            this.scoreViewPanel.TabIndex = 0;
             // 
             // scoreViewPicture
             // 
@@ -2375,7 +2375,7 @@ namespace LAZYSHELL
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxSW.Controls.Add(this.wToolStripAct);
             this.groupBoxSW.Controls.Add(this.labelWNote);
-            this.groupBoxSW.Controls.Add(this.panel4);
+            this.groupBoxSW.Controls.Add(this.scoreWriterPanel);
             this.groupBoxSW.Controls.Add(this.hScrollBarSW);
             this.groupBoxSW.Controls.Add(this.wToolStripNote);
             this.groupBoxSW.Controls.Add(this.wToolStripMain);
@@ -2538,18 +2538,18 @@ namespace LAZYSHELL
             this.labelWNote.Text = "...";
             this.labelWNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel4
+            // scoreWriterPanel
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.scoreWriterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.AutoScroll = true;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.scoreWriterPicture);
-            this.panel4.Location = new System.Drawing.Point(29, 67);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(881, 361);
-            this.panel4.TabIndex = 2;
+            this.scoreWriterPanel.AutoScroll = true;
+            this.scoreWriterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.scoreWriterPanel.Controls.Add(this.scoreWriterPicture);
+            this.scoreWriterPanel.Location = new System.Drawing.Point(29, 67);
+            this.scoreWriterPanel.Name = "panel4";
+            this.scoreWriterPanel.Size = new System.Drawing.Size(881, 361);
+            this.scoreWriterPanel.TabIndex = 2;
             // 
             // scoreWriterPicture
             // 
@@ -3685,7 +3685,7 @@ namespace LAZYSHELL
             this.groupBoxSV.ResumeLayout(false);
             this.groupBoxSV.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.scoreViewPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scoreViewPicture)).EndInit();
             this.rToolStripAct.ResumeLayout(false);
             this.rToolStripAct.PerformLayout();
@@ -3699,7 +3699,7 @@ namespace LAZYSHELL
             this.groupBoxSW.PerformLayout();
             this.wToolStripAct.ResumeLayout(false);
             this.wToolStripAct.PerformLayout();
-            this.panel4.ResumeLayout(false);
+            this.scoreWriterPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scoreWriterPicture)).EndInit();
             this.wToolStripNote.ResumeLayout(false);
             this.wToolStripNote.PerformLayout();
@@ -3755,7 +3755,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.Label labelRNote;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton scoreViewer;
-        private System.Windows.Forms.Panel panel3;
+        private LAZYSHELL.NewPanel scoreViewPanel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBoxRV;
@@ -3796,7 +3796,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton wInstrument;
         private System.Windows.Forms.ToolStripButton wVolume;
         private System.Windows.Forms.ToolStripButton wBalance;
-        private System.Windows.Forms.Panel panel4;
+        private LAZYSHELL.NewPanel scoreWriterPanel;
         private LAZYSHELL.NewPictureBox scoreWriterPicture;
         private System.Windows.Forms.ToolStrip wToolStripNote;
         private System.Windows.Forms.ToolStripButton wSharp;

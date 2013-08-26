@@ -261,7 +261,7 @@ namespace LAZYSHELL
                 if (frame.Mold < animation.Molds.Count)
                 {
                     int[] pixels = animation.Molds[frame.Mold].MoldPixels();
-                    this.frameImage = new Bitmap(Do.PixelsToImage(pixels, 256, 256));
+                    this.frameImage = Do.PixelsToImage(pixels, 256, 256);
                     this.sequenceImages.Add(new Bitmap(frameImage));
                     Rectangle bounds = Do.Crop(pixels, 256, 256);
                     // if the mold is empty

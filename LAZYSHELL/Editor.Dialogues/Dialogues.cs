@@ -78,7 +78,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.Control | Keys.S, new EventHandler(save_Click));
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
-            searchWindow = new Search(dialogueNum, textBoxSearch, search, new Function(LoadSearch), "richTextBox");
+            searchWindow = new Search(dialogueNum, searchBox, search, new Function(LoadSearch), "richTextBox");
             labelWindow = new EditLabel(null, dialogueNum, "Dialogues", false);
             // tileset
             textHelper = TextHelper.Instance;
@@ -102,7 +102,7 @@ namespace LAZYSHELL
             this.Updating = false;
             // editors
             LoadFontEditor();
-            option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16));
+            option.Image = Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16);
             battleDialogues = new BattleDialogues(this);
             battleDialogues.TopLevel = false;
             battleDialogues.Dock = DockStyle.Bottom;
@@ -140,8 +140,8 @@ namespace LAZYSHELL
         }
         private void SetTilesetImage()
         {
-            dialogueBGImage = new Bitmap(Do.PixelsToImage(
-                Do.TilesetToPixels(dialogueTileset.Tileset_tiles, 16, 4, 0, false), 256, 56));
+            dialogueBGImage = Do.PixelsToImage(
+                Do.TilesetToPixels(dialogueTileset.Tileset_tiles, 16, 4, 0, false), 256, 56);
             pictureBoxDialogue.Invalidate();
         }
         private void SetTextImage()
@@ -186,7 +186,7 @@ namespace LAZYSHELL
             {
                 dialogue.SetText(dialogueTextBox.Text, byteView, dteStr);
                 int[] pixels = dialoguePreview.GetPreview(fontDialogue, fontTriangle, fontPalette.Palettes[1], fontPalette.Palettes[1], dialogue.Text, 16);
-                dialogueTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 56));
+                dialogueTextImage = Do.PixelsToImage(pixels, 256, 56);
             }
             pictureBoxDialogue.Invalidate();
         }
@@ -437,12 +437,12 @@ namespace LAZYSHELL
             for (int i = 0; i < dialogues.Length; i++)
             {
                 string dialogue = dialogues[i].GetText(byteView, dteStr);
-                int index = dialogue.IndexOf(textBoxSearch.Text, stringComparison);
+                int index = dialogue.IndexOf(searchBox.Text, stringComparison);
                 if (index >= 0)
                 {
                     if (matchWholeWord)
                     {
-                        if (index + textBoxSearch.Text.Length < dialogue.Length && Char.IsLetter(dialogue, index + textBoxSearch.Text.Length))
+                        if (index + searchBox.Text.Length < dialogue.Length && Char.IsLetter(dialogue, index + searchBox.Text.Length))
                             continue;
                         if (index - 1 >= 0 && Char.IsLetter(dialogue, index - 1))
                             continue;
@@ -450,7 +450,7 @@ namespace LAZYSHELL
                     j++;
                     if (replaceAll)
                     {
-                        dialogue = dialogue.Replace(textBoxSearch.Text, replaceWith);
+                        dialogue = dialogue.Replace(searchBox.Text, replaceWith);
                         dialogues[i].SetText(dialogue, byteView, dteStr);
                     }
                     dialogueSearch += "[" + dialogues[i].Index.ToString() + "]\n";
@@ -488,7 +488,7 @@ namespace LAZYSHELL
         {
             SetTextImage();
             battleDialogues.SetTextImage();
-            option.Image = new Bitmap(Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16));
+            option.Image = Do.PixelsToImage(fontTriangle[0].GetPixels(fontPalette.Palettes[1]), 8, 16);
         }
         // assembler
         public void Assemble()
@@ -600,6 +600,9 @@ namespace LAZYSHELL
             else
                 MessageBox.Show("The dialogue in bank 3 was not saved. Please delete the necessary number of bytes for space.\n\nLast dialogue saved was #" + i.ToString() + ". It should have been #2047",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            battleDialogues.Modified = false;
+            fonts.Modified = false;
+            this.Modified = false;
         }
         #endregion
         #region Event Handlers

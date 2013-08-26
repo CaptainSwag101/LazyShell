@@ -66,11 +66,11 @@ namespace LAZYSHELL
         private void SetTilesetImages()
         {
             int[] pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[0], 16, 32, 0, false);
-            tilesetImage[0] = new Bitmap(Do.PixelsToImage(pixels, 256, 512));
+            tilesetImage[0] = Do.PixelsToImage(pixels, 256, 512);
             pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[1], 16, 32, 0, false);
-            tilesetImage[1] = new Bitmap(Do.PixelsToImage(pixels, 256, 512));
+            tilesetImage[1] = Do.PixelsToImage(pixels, 256, 512);
             pixels = Do.TilesetToPixels(tileset.Tilesets_tiles[2], 16, 6, 0, false);
-            tilesetImage[2] = new Bitmap(Do.PixelsToImage(pixels, 256, 96));
+            tilesetImage[2] = Do.PixelsToImage(pixels, 256, 96);
             pictureBoxTitle.Invalidate();
         }
         // loading

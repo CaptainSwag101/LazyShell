@@ -33,7 +33,7 @@ namespace LAZYSHELL
             searchSpriteName.SelectedIndex = 0;
             npcNum.Value = npcID;
             InitializeNPCs();
-            searchWindow = new Search(searchSpriteName, spriteNameTextBox, searchSpriteNames, searchSpriteName.Items);
+            searchWindow = new Search(searchSpriteName, searchBox, searchSpriteNames, searchSpriteName.Items);
             this.History = new History(this, null, npcNum);
         }
         // functions
@@ -94,7 +94,7 @@ namespace LAZYSHELL
                 size.Width = 1;
                 size.Height = 1;
             }
-            spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, size.Width, size.Height));
+            spriteImage = Do.PixelsToImage(spritePixels, size.Width, size.Height);
             spritePictureBox.Invalidate();
         }
         #region Event handlers

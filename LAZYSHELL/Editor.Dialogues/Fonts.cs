@@ -311,7 +311,7 @@ namespace LAZYSHELL
             }
             pictureBoxFontTable.Width = width;
             pictureBoxFontTable.Height = height;
-            fontTableImage = new Bitmap(Do.PixelsToImage(pixels, width, height));
+            fontTableImage = Do.PixelsToImage(pixels, width, height);
             if (FontType == FontType.Triangles)
                 pictureBoxFontTable.BackColor = Color.FromArgb(palette[0]);
             else if (FontType == FontType.BattleMenu)

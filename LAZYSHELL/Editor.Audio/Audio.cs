@@ -39,11 +39,14 @@ namespace LAZYSHELL
                 sampleEditor.Index = Settings.Default.LastAudioSample;
                 spcEditor.Index = Settings.Default.LastSPC;
             }
+            this.History = new History(this, false);
         }
         public void Assemble(bool warning)
         {
             sampleEditor.Assemble();
             spcEditor.Assemble(warning);
+            sampleEditor.Modified = false;
+            spcEditor.Modified = false;
         }
         //
         private void Audio_FormClosing(object sender, FormClosingEventArgs e)

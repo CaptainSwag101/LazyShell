@@ -120,8 +120,8 @@ namespace LAZYSHELL
         }
         private void SetTilesetImage()
         {
-            tilesetImage = new Bitmap(Do.PixelsToImage(
-                Do.TilesetToPixels(tileset.Tileset_tiles, 16, 2, 0, false), 256, 32));
+            tilesetImage = Do.PixelsToImage(
+                Do.TilesetToPixels(tileset.Tileset_tiles, 16, 2, 0, false), 256, 32);
             pictureBoxBattleDialogue.BackColor = Color.FromArgb(fontPalette.Palette[0]);
             pictureBoxBattleDialogue.Invalidate();
         }
@@ -174,7 +174,7 @@ namespace LAZYSHELL
             {
                 dialogue.SetText(battleDialogueTextBox.Text, byteView);
                 int[] pixels = textPreview.GetPreview(fontDialogue, fontPalette.Palettes[1], dialogue.Text, false);
-                textImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
+                textImage = Do.PixelsToImage(pixels, 256, 32);
             }
             pictureBoxBattleDialogue.Invalidate();
         }

@@ -191,6 +191,8 @@ namespace LAZYSHELL
                     "The allotted space for psychopath dialogues has been exceeded. Not all psychopath dialogues have been saved.",
                     "LAZY SHELL");
             battleScriptsEditor.Assemble();
+            battleScriptsEditor.Modified = false;
+            this.Modified = false;
         }
         #endregion
         #region Event Handlers
@@ -504,7 +506,7 @@ namespace LAZYSHELL
                 {
                     monster.SetPsychopath(MonsterPsychopath.Text, byteView);
                     int[] pixels = battleDialoguePreview.GetPreview(fontDialogue, fontPaletteDialogue, monster.RawPsychopath, false);
-                    psychopathTextImage = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
+                    psychopathTextImage = Do.PixelsToImage(pixels, 256, 32);
                     pictureBoxPsychopath.Invalidate();
                 }
             }

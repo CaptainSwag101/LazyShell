@@ -833,7 +833,7 @@ namespace LAZYSHELL
                 this.npcEventORPack.Maximum = 255;
                 this.npcAfterBattle.Enabled = true;
             }
-            if (!this.Updating && state.NPCs)
+            if (!this.Refreshing && state.NPCs)
                 overlay.NPCImages = null;
             if (npcObjectTree.SelectedNode.Parent != null)
             {

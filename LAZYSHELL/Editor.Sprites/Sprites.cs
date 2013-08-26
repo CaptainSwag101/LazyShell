@@ -76,7 +76,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip3, Keys.F1, helpTips);
             Do.AddShortcut(toolStrip3, Keys.F2, baseConvertor);
             toolTip1.InitialDelay = 0;
-            searchWindow = new Search(number, nameTextBox, searchEffectNames, name.Items);
+            searchWindow = new Search(number, searchBox, searchEffectNames, name.Items);
             labelWindow = new EditLabel(name, number, "Sprites", true);
             // set data
             this.rom = Model.ROM;
@@ -245,6 +245,9 @@ namespace LAZYSHELL
             Buffer.BlockCopy(Model.SpriteGraphics, 0, rom, 0x280000, 0xB4000);
             Model.HexEditor.SetOffset(animation.AnimationOffset);
             Model.HexEditor.Compare();
+            molds.Modified = false;
+            sequences.Modified = false;
+            this.Modified = false;
         }
         public void EnableOnPlayback(bool enable)
         {

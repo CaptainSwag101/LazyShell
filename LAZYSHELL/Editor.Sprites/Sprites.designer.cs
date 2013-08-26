@@ -78,7 +78,7 @@ namespace LAZYSHELL
             this.npcPacketButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
-            this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showMain = new System.Windows.Forms.ToolStripButton();
@@ -578,7 +578,7 @@ namespace LAZYSHELL
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
-            this.nameTextBox,
+            this.searchBox,
             this.searchEffectNames,
             this.toolStripSeparator1,
             this.showMain,
@@ -604,10 +604,10 @@ namespace LAZYSHELL
             this.name.Size = new System.Drawing.Size(214, 25);
             this.name.SelectedIndexChanged += new System.EventHandler(this.name_SelectedIndexChanged);
             // 
-            // nameTextBox
+            // searchBox
             // 
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(200, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(200, 25);
             // 
             // searchEffectNames
             // 
@@ -736,6 +736,7 @@ namespace LAZYSHELL
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private BackgroundWorker PlaybackSequence;
@@ -769,7 +770,7 @@ namespace LAZYSHELL
         private ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripComboBox name;
         private ToolStripButton searchEffectNames;
-        private ToolStripTextBox nameTextBox;
+        private ToolStripTextBox searchBox;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton showMain;
         private ToolStripSeparator toolStripSeparator3;

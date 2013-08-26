@@ -42,6 +42,7 @@ namespace LAZYSHELL
                 spellsEditor.Index = settings.LastSpell;
                 attacksEditor.Index = settings.LastAttack;
             }
+            this.History = new History(this, false);
         }
         // functions
         public void Assemble()
@@ -58,6 +59,9 @@ namespace LAZYSHELL
                  Model.Spells[i].Assemble(ref length);
             if (i != Model.Spells.Length)
                 System.Windows.Forms.MessageBox.Show("Spell Descriptions total length exceeds max size, decrease total size to save correctly.\nNote: not all text has been saved.");
+            attacksEditor.Modified = false;
+            spellsEditor.Modified = false;
+            this.Modified = false;
         }
         // event handlers
         private void importSpellsToolStripMenuItem_Click(object sender, EventArgs e)

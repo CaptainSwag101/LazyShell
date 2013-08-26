@@ -15,6 +15,7 @@ namespace LAZYSHELL
     {
         public NewExceptionForm(Exception exception)
         {
+            Model.Crashing = true;
             InitializeComponent();
             Bitmap icon = SystemIcons.Error.ToBitmap();
             pictureBox1.Size = icon.Size;
@@ -57,6 +58,7 @@ namespace LAZYSHELL
         }
         private void ignoreError_Click(object sender, EventArgs e)
         {
+            Model.Crashing = false;
             this.Close();
         }
         private void saveAndClose_Click(object sender, EventArgs e)

@@ -110,7 +110,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < 64; x++)
                     pixels[y * 64 + x] = temp[y / 4 * 16 + (x / 4)];
             }
-            tileImage = new Bitmap(Do.PixelsToImage(pixels, 64, 64));
+            tileImage = Do.PixelsToImage(pixels, 64, 64);
             pictureBoxTile.Invalidate();
         }
         private void SetSubtileImage()
@@ -125,7 +125,7 @@ namespace LAZYSHELL
                 for (int x = 0; x < 64; x++)
                     pixels[y * 64 + x] = temp[y / 8 * 8 + (x / 8)];
             }
-            subtileImage = new Bitmap(Do.PixelsToImage(pixels, 64, 64));
+            subtileImage = Do.PixelsToImage(pixels, 64, 64);
             pictureBoxSubtile.Invalidate();
         }
         private Subtile CreateNewSubtile()

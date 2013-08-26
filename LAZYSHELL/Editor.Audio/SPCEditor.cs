@@ -2543,7 +2543,7 @@ namespace LAZYSHELL
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x042826) - 0x3400 + 0x042C26;
             else
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x043E26) - 0x3400 + 0x044226;
-            Model.HexEditor.SetOffset(offset);
+            Model.HexEditor.SetOffset(offset - 0xC00000);
             Model.HexEditor.Compare();
             Model.HexEditor.Show();
         }

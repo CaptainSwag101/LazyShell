@@ -43,10 +43,9 @@ namespace LAZYSHELL
             {
                 {
                     if (tiles != null && pixels == null)
-                        return new Bitmap(
-                            Do.PixelsToImage(Do.TilesetToPixels(tiles, width / 16, height / 16, 0, false), width, height));
+                        return Do.PixelsToImage(Do.TilesetToPixels(tiles, width / 16, height / 16, 0, false), width, height);
                     if (tiles == null && pixels != null)
-                        return new Bitmap(Do.PixelsToImage(pixels, width, height));
+                        return Do.PixelsToImage(pixels, width, height);
                     return null;
                 }
             }

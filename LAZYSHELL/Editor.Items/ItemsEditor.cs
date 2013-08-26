@@ -35,6 +35,7 @@ namespace LAZYSHELL
             itemsEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
             //
+            this.History = new History(this, false);
         }
         // functions
         public void Assemble()
@@ -51,6 +52,9 @@ namespace LAZYSHELL
                 MessageBox.Show("Not enough space to save all item descriptions.");
             foreach (Shop shop in Model.Shops)
                 shop.Assemble();
+            itemsEditor.Modified = false;
+            shopsEditor.Modified = false;
+            this.Modified = false;
         }
         #region Event handlers
         private void ItemsEditor_FormClosing(object sender, FormClosingEventArgs e)

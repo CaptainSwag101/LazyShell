@@ -165,7 +165,7 @@ namespace LAZYSHELL
                 if (frame.Mold < animation.Molds.Count)
                 {
                     int[] pixels = ((E_Mold)animation.Molds[frame.Mold]).MoldPixels(animation, tileset);
-                    frameImage = new Bitmap(Do.PixelsToImage(pixels, width, height));
+                    frameImage = Do.PixelsToImage(pixels, width, height);
                     sequenceImages.Add(new Bitmap(frameImage));
                 }
                 else

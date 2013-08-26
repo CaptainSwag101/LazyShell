@@ -56,7 +56,7 @@ namespace LAZYSHELL
             Do.AddShortcut(toolStrip2, Keys.F2, baseConvertor);
             // tooltips
             toolTip1.InitialDelay = 0;
-            searchWindow = new Search(number, searchText, searchEffectNames, name.Items);
+            searchWindow = new Search(number, searchBox, searchEffectNames, name.Items);
             labelWindow = new EditLabel(name, number, "Effects", true);
             // set control values
             this.Updating = true;
@@ -162,6 +162,9 @@ namespace LAZYSHELL
             }
             if (i < 64)
                 MessageBox.Show("The available space for animation data in bank 0x340000 has exceeded the alotted space.\nAnimation #'s " + i.ToString() + " through 63 will not saved. Please make sure the available animation bytes is not negative.", "LAZY SHELL");
+            molds.Modified = false;
+            sequences.Modified = false;
+            this.Modified = false;
         }
         public void EnableOnPlayback(bool enable)
         {

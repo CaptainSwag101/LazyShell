@@ -30,7 +30,7 @@ namespace LAZYSHELL
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.gotoAddress = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.searchValues = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.baseConvDec = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
@@ -71,7 +71,7 @@ namespace LAZYSHELL
             this.toolStripLabel1,
             this.gotoAddress,
             this.toolStripLabel2,
-            this.searchValues,
+            this.searchBox,
             this.toolStripLabel4,
             this.baseConvDec,
             this.toolStripLabel5,
@@ -112,14 +112,14 @@ namespace LAZYSHELL
             this.toolStripLabel2.Size = new System.Drawing.Size(22, 22);
             this.toolStripLabel2.ToolTipText = "Search for value(s)";
             // 
-            // searchValues
+            // searchBox
             // 
-            this.searchValues.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.searchValues.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchValues.MaxLength = 24;
-            this.searchValues.Name = "searchValues";
-            this.searchValues.Size = new System.Drawing.Size(132, 25);
-            this.searchValues.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchValues_KeyDown);
+            this.searchBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.searchBox.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBox.MaxLength = 24;
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(132, 25);
+            this.searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchValues_KeyDown);
             // 
             // toolStripLabel4
             // 
@@ -455,6 +455,7 @@ namespace LAZYSHELL
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -467,7 +468,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.Label info_value;
         private System.Windows.Forms.Label info_offset;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox searchValues;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripButton save;

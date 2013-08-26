@@ -286,7 +286,7 @@ namespace LAZYSHELL
                 for (int x = 2, a = 8; a < 256; x++, a++)
                     pixels[y * 256 + x] = temp[c * 256 + a];
             }
-            Bitmap icon = new Bitmap(Do.PixelsToImage(pixels, 256, 32));
+            Bitmap icon = Do.PixelsToImage(pixels, 256, 32);
             Bitmap bgimage = Model.MenuBG_;
             if (bgimage != null)
             {

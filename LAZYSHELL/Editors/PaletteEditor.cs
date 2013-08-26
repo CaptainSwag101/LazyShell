@@ -198,13 +198,13 @@ namespace LAZYSHELL
                         Math.Min(Math.Max(g + l, 0), 248),
                         Math.Min(Math.Max(b + l, 0), 248)).ToArgb();
             }
-            colorMapImage = new Bitmap(Do.PixelsToImage(colorMapPixels, 186, 186), 186, 186);
+            colorMapImage = Do.PixelsToImage(colorMapPixels, 186, 186);
             pictureBoxColorMap.Invalidate();
         }
         private void SetPaletteImage()
         {
             palettePixels = Do.PaletteToPixels(paletteSet.Palettes, 8, 8, 16, count, startRow, 0);
-            paletteImage = new Bitmap(Do.PixelsToImage(palettePixels, 128, (count * 8) - (startRow * 8)));
+            paletteImage = Do.PixelsToImage(palettePixels, 128, (count * 8) - (startRow * 8));
             pictureBoxPalette.Invalidate();
         }
         //

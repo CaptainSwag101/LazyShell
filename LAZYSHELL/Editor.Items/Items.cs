@@ -169,7 +169,7 @@ namespace LAZYSHELL
                     Model.FontDescription, Model.FontPaletteMenu.Palettes[0],
                     item.RawDescription,
                     new Size(120, 48), new Point(8, 8), 4);
-                descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 48));
+                descriptionText = Do.PixelsToImage(pixels, 120, 48);
                 if (descriptionBGEquip == null)
                 {
                     int[] bgPixels = Do.ImageToPixels(Model.MenuBG);
@@ -183,7 +183,7 @@ namespace LAZYSHELL
                     Model.FontDescription, Model.FontPaletteMenu.Palettes[0],
                     item.RawDescription,
                     new Size(136, 64), new Point(16, 16), 4);
-                descriptionText = new Bitmap(Do.PixelsToImage(pixels, 136, 64));
+                descriptionText = Do.PixelsToImage(pixels, 136, 64);
                 if (descriptionBGItem == null)
                 {
                     int[] bgPixels = Do.ImageToPixels(Model.MenuBG);

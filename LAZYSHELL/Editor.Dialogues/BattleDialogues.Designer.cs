@@ -112,6 +112,7 @@ namespace LAZYSHELL
             // battleDialogueNum
             // 
             this.battleDialogueNum.AutoSize = false;
+            this.battleDialogueNum.ContextMenuStrip = null;
             this.battleDialogueNum.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.battleDialogueNum.Hexadecimal = false;
             this.battleDialogueNum.Increment = new decimal(new int[] {
@@ -119,7 +120,7 @@ namespace LAZYSHELL
             0,
             0,
             0});
-            this.battleDialogueNum.Location = new System.Drawing.Point(160, 2);
+            this.battleDialogueNum.Location = new System.Drawing.Point(129, 2);
             this.battleDialogueNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -478,6 +479,7 @@ namespace LAZYSHELL
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.RichTextBox battleDialogueTextBox;

@@ -31,12 +31,15 @@ namespace LAZYSHELL
             mainTitle.Visible = true;
             //
             new ToolTipLabel(this, null, helpTips);
-            this.History = new History(this);
+            this.History = new History(this, false);
         }
         public void Assemble()
         {
             opening.Assemble();
             mainTitle.Assemble();
+            opening.Modified = false;
+            mainTitle.Modified = false;
+            this.Modified = false;
         }
         private void save_Click(object sender, EventArgs e)
         {

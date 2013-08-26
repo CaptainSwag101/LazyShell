@@ -41,7 +41,7 @@ namespace LAZYSHELL
             this.AppControl = controls;
             //
             InitializeComponent();
-            LoadWebpage();
+            //LoadWebpage();
             Do.AddShortcut(toolStrip4, Keys.Control | Keys.S, new EventHandler(saveToolStripMenuItem_Click));
             loadRomTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             // MRU
@@ -132,31 +132,15 @@ namespace LAZYSHELL
                     MessageBox.Show("The game code for this ROM is invalid. There will likely be problems editing the ROM.", "LAZY SHELL");
                     return;
                 }
-                if (!AppControl.HeaderPresent()) // If the rom does not have a header, we enable all the buttons
-                {
-                    toolStrip2.Enabled = true;
-                    toolStrip3.Enabled = true;
-                    foreach (ToolStripItem item in toolStrip4.Items)
-                        if (item != recentFiles && item != openSettings)
-                            item.Enabled = true;
-                    this.removeHeader.Enabled = false;
-                    this.removeHeader.Visible = false;
-                    this.saveToolStripMenuItem.Enabled = true;
-                    this.saveAsToolStripMenuItem.Enabled = true;
-                    this.restoreElementsToolStripMenuItem.Enabled = true;
-                    AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
-                }
-                else if (AppControl.HeaderPresent()) // If the rom does have a header, we disable all the buttons and enable the Remove Header buttons
-                {
-                    toolStrip2.Enabled = false;
-                    toolStrip3.Enabled = false;
-                    foreach (ToolStripItem item in toolStrip4.Items)
-                        if (item != recentFiles && item != openSettings)
-                            item.Enabled = false;
-                    this.removeHeader.Enabled = true;
-                    this.removeHeader.Visible = true;
-                    loadRomTextBox.Width = toolStrip1.Width - 95 - removeHeader.Width;
-                }
+                toolStrip2.Enabled = true;
+                toolStrip3.Enabled = true;
+                foreach (ToolStripItem item in toolStrip4.Items)
+                    if (item != recentFiles && item != openSettings)
+                        item.Enabled = true;
+                this.saveToolStripMenuItem.Enabled = true;
+                this.saveAsToolStripMenuItem.Enabled = true;
+                this.restoreElementsToolStripMenuItem.Enabled = true;
+                AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
                 UpdateRomInfo();
             }
             else if (ret)
@@ -173,7 +157,6 @@ namespace LAZYSHELL
                 foreach (ToolStripItem item in toolStrip4.Items)
                     if (item != recentFiles && item != openSettings)
                         item.Enabled = false;
-                this.removeHeader.Visible = false;
             }
             if (ret)
             {
@@ -207,7 +190,6 @@ namespace LAZYSHELL
             foreach (ToolStripItem item in toolStrip4.Items)
                 if (item != recentFiles && item != openSettings && item != info)
                     item.Enabled = false;
-            this.removeHeader.Visible = false;
             this.loadRomTextBox.Text = "";
             this.romInfo.Text = "";
         }
@@ -314,28 +296,9 @@ namespace LAZYSHELL
             if (!cancelAnotherLoad)
                 Open(null);
         }
-        private void removeHeader_Click(object sender, System.EventArgs e)
-        {
-            if (AppControl.RemoveHeader())
-            {
-                // Enable all the editors
-                toolStrip2.Enabled = true;
-                toolStrip3.Enabled = true;
-                foreach (ToolStripItem item in toolStrip4.Items)
-                    if (item != recentFiles)
-                        item.Enabled = true;
-                // Disable/hide the remove header button
-                this.removeHeader.Enabled = false;
-                this.removeHeader.Visible = false;
-                AppControl.CreateNewMd5Checksum(); // Create a new checksum for a new rom
-            }
-        }
         private void toolStrip1_SizeChanged(object sender, EventArgs e)
         {
-            if (!removeHeader.Visible)
-                loadRomTextBox.Width = toolStrip1.Width - 95;
-            else
-                loadRomTextBox.Width = toolStrip1.Width - 95 - removeHeader.Width;
+            loadRomTextBox.Width = toolStrip1.Width - 95;
         }
         // toolstripMenuItems : File
         private void openToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -485,6 +448,8 @@ namespace LAZYSHELL
         // other
         private void Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Model.Crashing)
+                return;
             FinalizeAndSave(e, 1);
             settings.Save();
         }

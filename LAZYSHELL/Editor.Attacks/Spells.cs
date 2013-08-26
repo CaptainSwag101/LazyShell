@@ -422,7 +422,7 @@ namespace LAZYSHELL
             int[] pixels = new MenuDescriptionPreview().GetPreview(
                 Model.FontDescription, Model.FontPaletteMenu.Palettes[0], spell.RawDescription,
                 new Size(120, 88), new Point(8, 8), 6);
-            descriptionText = new Bitmap(Do.PixelsToImage(pixels, 120, 88));
+            descriptionText = Do.PixelsToImage(pixels, 120, 88);
             pictureBoxSpellDesc.Invalidate();
         }
         private void byteOrText_Click(object sender, EventArgs e)

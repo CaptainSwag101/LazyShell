@@ -2918,19 +2918,13 @@ namespace LAZYSHELL
         /// <returns></returns>
         public static Bitmap PixelsToImage(int[] array, int width, int height)
         {
-            Bitmap image = null;
-            unsafe
-            {
-                fixed (void* firstPixel = &array[0])
-                {
-                    IntPtr ip = new IntPtr(firstPixel);
-                    if (image != null)
-                        image.Dispose();
-                    image = new Bitmap(width, height, width * 4,
-                        System.Drawing.Imaging.PixelFormat.Format32bppPArgb, ip);
-                }
-            }
-            return new Bitmap(image);
+            Bitmap bitmap = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
+            Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+            BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            IntPtr pNative = bitmapData.Scan0;
+            Marshal.Copy(array, 0, pNative, width * height);
+            bitmap.UnlockBits(bitmapData);
+            return bitmap;
         }
         /// <summary>
         /// Draws a pixel array to a region in another pixel array.
@@ -3615,7 +3609,7 @@ namespace LAZYSHELL
         {
             int[] src = Do.ImageToPixels(image);
             int[] dst = Hilite(src, width, height);
-            return new Bitmap(Do.PixelsToImage(dst, width, height));
+            return Do.PixelsToImage(dst, width, height);
         }
         public static int[] Hilite(int[] src, int width, int height)
         {
@@ -4358,7 +4352,7 @@ namespace LAZYSHELL
             }
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                 e.DrawBackground();
-            e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), new Point(e.Bounds.X, e.Bounds.Y));
+            e.Graphics.DrawImage(Do.PixelsToImage(pixels, 256, 14), new Point(e.Bounds.X, e.Bounds.Y));
         }
         /// <summary>
         /// Paints the items in a DDList collection to a list control. 
@@ -4403,7 +4397,7 @@ namespace LAZYSHELL
             if (lastEmpty && names.GetUnsortedIndex(e.Index) == names.Names.Length - 1)
                 e.Graphics.DrawString("/// NOTHING ///", new Font("Arial Black", 7F), Brushes.White, e.Bounds.Location);
             else
-                e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 14)), e.Bounds.Location);
+                e.Graphics.DrawImage(Do.PixelsToImage(pixels, 256, 14), e.Bounds.Location);
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, SortedList names,
@@ -4438,7 +4432,7 @@ namespace LAZYSHELL
             if (lastEmpty && e.Index == names.Length - 1)
                 e.Graphics.DrawString("/// NOTHING ///", new Font("Arial Black", 7F), Brushes.White, e.Bounds.Location);
             else
-                e.Graphics.DrawImage(new Bitmap(Do.PixelsToImage(pixels, 256, 15)), e.Bounds.Location);
+                e.Graphics.DrawImage(Do.PixelsToImage(pixels, 256, 15), e.Bounds.Location);
         }
         public static void DrawName(
             object sender, DrawItemEventArgs e, Preview preview, SortedList names,
@@ -4467,7 +4461,7 @@ namespace LAZYSHELL
         public static void DrawText(string text, int x, int y, Graphics g, Preview preview, FontCharacter[] fontCharacters, int[] palette)
         {
             int[] temp = preview.GetPreview(fontCharacters, palette, text.ToCharArray(), false, false);
-            g.DrawImage(new Bitmap(Do.PixelsToImage(temp, 256, 14)), x, y);
+            g.DrawImage(Do.PixelsToImage(temp, 256, 14), x, y);
         }
         public static void DrawText(int[] dst, int dstWidth, char[] text, int x, int y, int rowHeight, FontCharacter[] fontCharacters, int[] palette)
         {

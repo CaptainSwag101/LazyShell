@@ -151,7 +151,6 @@ namespace LAZYSHELL
                 int x = 0, y = 0;
                 if (this.element == "levels")
                 {
-                    Image image = null;
                     LevelMap lmap = levelMaps[levels[a].LevelMap];
                     LevelLayer layr = levels[a].Layer;
                     PaletteSet pset = paletteSets[levelMaps[levels[a].LevelMap].PaletteSet];
@@ -172,16 +171,7 @@ namespace LAZYSHELL
                         region = new Rectangle(0, 0, 1024, 1024);
                         pixels = tmap.Pixels;
                     }
-                    unsafe
-                    {
-                        fixed (void* firstPixel = &pixels[0])
-                        {
-                            IntPtr ip = new IntPtr(firstPixel);
-                            if (image != null)
-                                image.Dispose();
-                            image = new Bitmap(region.Width, region.Height, region.Width * 4, PixelFormat.Format32bppPArgb, ip);
-                        }
-                    }
+                    Bitmap image = Do.PixelsToImage(pixels, region.Width, region.Height);
                     if (!current)
                         image.Save(fullPath + "Level #" + a.ToString("d3") + ".png", ImageFormat.Png);
                     else

@@ -28,7 +28,7 @@ namespace LAZYSHELL
         {
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.packNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.packNameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchFormationPacks = new System.Windows.Forms.ToolStripButton();
             this.packFormation3 = new System.Windows.Forms.NumericUpDown();
             this.packFormation1 = new System.Windows.Forms.NumericUpDown();
@@ -56,7 +56,7 @@ namespace LAZYSHELL
             this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.packNum,
-            this.packNameTextBox,
+            this.searchBox,
             this.searchFormationPacks});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -95,10 +95,10 @@ namespace LAZYSHELL
             0});
             this.packNum.ValueChanged += new System.EventHandler(this.packNum_ValueChanged);
             // 
-            // packNameTextBox
+            // searchBox
             // 
-            this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(105, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(105, 25);
             // 
             // searchFormationPacks
             // 
@@ -281,12 +281,13 @@ namespace LAZYSHELL
             this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip2;
         private ToolStripNumericUpDown packNum;
         private System.Windows.Forms.ToolStripButton searchFormationPacks;
-        private System.Windows.Forms.ToolStripTextBox packNameTextBox;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.NumericUpDown packFormation3;
         private System.Windows.Forms.NumericUpDown packFormation1;
         private System.Windows.Forms.Button packFormationButton1;

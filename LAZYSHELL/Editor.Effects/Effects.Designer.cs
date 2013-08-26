@@ -55,7 +55,7 @@ namespace LAZYSHELL
             this.baseConvertor = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
-            this.searchText = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showMain = new System.Windows.Forms.ToolStripButton();
@@ -424,7 +424,7 @@ namespace LAZYSHELL
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.name,
             this.number,
-            this.searchText,
+            this.searchBox,
             this.searchEffectNames,
             this.toolStripSeparator2,
             this.showMain,
@@ -451,10 +451,10 @@ namespace LAZYSHELL
             this.name.Size = new System.Drawing.Size(214, 25);
             this.name.SelectedIndexChanged += new System.EventHandler(this.name_SelectedIndexChanged);
             // 
-            // searchText
+            // searchBox
             // 
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(200, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(200, 25);
             // 
             // searchEffectNames
             // 
@@ -622,6 +622,7 @@ namespace LAZYSHELL
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.NumericUpDown yNegShift;
@@ -651,7 +652,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openGraphics;
         private System.Windows.Forms.ToolStripButton openSequences;
         private System.Windows.Forms.ToolStripButton openMolds;
-        private System.Windows.Forms.ToolStripTextBox searchText;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.Panel panelMolds;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripButton showMain;

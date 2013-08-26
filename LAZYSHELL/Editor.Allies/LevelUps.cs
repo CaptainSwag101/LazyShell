@@ -16,7 +16,6 @@ namespace LAZYSHELL
         private Settings settings = Settings.Default;
         private Character[] characters { get { return Model.Characters; } set { Model.Characters = value; } }
         private Character character { get { return characters[index]; } set { characters[index] = value; } }
-        private Character character_;
         private int index { get { return characterName.SelectedIndex; } set { characterName.SelectedIndex = value; } }
         #endregion
         // constructor
@@ -27,7 +26,7 @@ namespace LAZYSHELL
             index = 0;
             RefreshLevel();
             //
-            this.History = new History(this);
+            this.History = new History(this, characterName, null);
         }
         // functions
         private void InitializeStrings()
@@ -46,6 +45,7 @@ namespace LAZYSHELL
         {
             if (this.Updating)
                 return;
+            this.Updating = true;
             character.IndexLevel = (byte)levelNum.Value;
             this.hpPlus.Value = character.LevelHpPlus;
             this.attackPlus.Value = character.LevelAttackPlus;
@@ -60,7 +60,7 @@ namespace LAZYSHELL
             this.expNeeded.Value = characters[0].LevelExpNeeded;
             this.levelUpSpellLearned.SelectedIndex = character.LevelSpellLearned;
             this.characterName.Invalidate();
-            character_ = new Character(index);
+            this.Updating = false;
         }
         #region Event Handlers
         private void characterName_SelectedIndexChanged(object sender, EventArgs e)

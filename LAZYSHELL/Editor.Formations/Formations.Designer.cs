@@ -40,7 +40,7 @@ namespace LAZYSHELL
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.formationNameList = new System.Windows.Forms.ToolStripComboBox();
             this.formationNum = new LAZYSHELL.ToolStripNumericUpDown();
-            this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchFormationNames = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -208,7 +208,7 @@ namespace LAZYSHELL
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formationNameList,
             this.formationNum,
-            this.nameTextBox,
+            this.searchBox,
             this.searchFormationNames});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -258,11 +258,11 @@ namespace LAZYSHELL
             0});
             this.formationNum.ValueChanged += new System.EventHandler(this.formationNum_ValueChanged);
             // 
-            // nameTextBox
+            // searchBox
             // 
-            this.nameTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(240, 25);
+            this.searchBox.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(240, 25);
             // 
             // searchFormationNames
             // 
@@ -540,6 +540,7 @@ namespace LAZYSHELL
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.Panel panel10;
@@ -555,7 +556,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox formationNameList;
         private System.Windows.Forms.ToolStripButton searchFormationNames;
-        private System.Windows.Forms.ToolStripTextBox nameTextBox;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private ToolStripNumericUpDown formationNum;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;

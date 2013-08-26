@@ -649,7 +649,7 @@ namespace LAZYSHELL
         {
             int[] palette = this.palette;
             int[] pixels = Do.DrawFontTable(font, palette, 8, 256, 384, 32, 24, 8, 16);
-            fontTableImage = new Bitmap(Do.PixelsToImage(pixels, 256, 384));
+            fontTableImage = Do.PixelsToImage(pixels, 256, 384);
             pictureBox1.BackColor = Color.FromArgb(palette[3]);
             pictureBox1.Invalidate();
         }

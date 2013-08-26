@@ -41,6 +41,9 @@ namespace LAZYSHELL
                     byte[] temp = br.ReadBytes((int)numBytes);
                     br.Close();
                     fStream.Close();
+                    // remove header if it has one
+                    if ((temp.Length & 0x200) == 0x200)
+                        temp = Bits.GetBytes(temp, 0x200);
                     // Check if valid rom
                     System.Text.Encoding encoding = System.Text.Encoding.UTF8;
                     if (encoding.GetString(Bits.GetBytes(temp, 0x7FB2, 4)) != "ARWE")

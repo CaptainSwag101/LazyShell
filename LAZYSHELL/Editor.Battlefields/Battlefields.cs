@@ -139,7 +139,7 @@ namespace LAZYSHELL
             Do.PixelsToPixels(battlefieldPixelsQ2, battlefieldPixels, 512, new Rectangle(256, 0, 256, 256));
             Do.PixelsToPixels(battlefieldPixelsQ3, battlefieldPixels, 512, new Rectangle(0, 256, 256, 256));
             Do.PixelsToPixels(battlefieldPixelsQ4, battlefieldPixels, 512, new Rectangle(256, 256, 256, 256));
-            battlefieldImage = new Bitmap(Do.PixelsToImage(battlefieldPixels, 512, 512));
+            battlefieldImage = Do.PixelsToImage(battlefieldPixels, 512, 512);
             pictureBoxBattlefield.Invalidate();
         }
         private void Clear()
@@ -155,6 +155,7 @@ namespace LAZYSHELL
             foreach (Battlefield bf in battlefields)
                 bf.Assemble();
             Model.Compress(Model.TilesetsBF, Model.EditTilesetsBF, 0x150000, 0x15FFFF, "BATTLEFIELD", 0);
+            this.Modified = false;
         }
         // Editor loading
         private void LoadPaletteEditor()

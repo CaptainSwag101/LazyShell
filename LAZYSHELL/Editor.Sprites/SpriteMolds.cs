@@ -346,13 +346,13 @@ namespace LAZYSHELL
             if (mold.Gridplane)
             {
                 pixels = (mold.Tiles[0]).GetGridplanePixels();
-                tilesetImage = new Bitmap(Do.PixelsToImage(pixels, 32, 32));
+                tilesetImage = Do.PixelsToImage(pixels, 32, 32);
                 pictureBoxTileset.Size = new Size(128, 128);
             }
             else
             {
                 pixels = animation.TilesetPixels();
-                tilesetImage = new Bitmap(Do.PixelsToImage(pixels, 128, (((animation.UniqueTiles.Count - 1) / 8) + 1) * 16));
+                tilesetImage = Do.PixelsToImage(pixels, 128, (((animation.UniqueTiles.Count - 1) / 8) + 1) * 16);
                 pictureBoxTileset.Size = tilesetImage.Size;
             }
             pictureBoxTileset.Invalidate();
@@ -360,13 +360,13 @@ namespace LAZYSHELL
         public void SetTilemapImage()
         {
             tileImages = new List<Bitmap>();
-            tilemapImage = new Bitmap(Do.PixelsToImage(mold.MoldPixels(), 256, 256));
+            tilemapImage = Do.PixelsToImage(mold.MoldPixels(), 256, 256);
             if (mold.Gridplane)
                 tileImages.Add(tilemapImage);
             else
             {
                 foreach (Mold.Tile tile in mold.Tiles)
-                    tileImages.Add(new Bitmap(Do.PixelsToImage(tile.Get16x16TilePixels(), 16, 16)));
+                    tileImages.Add(Do.PixelsToImage(tile.Get16x16TilePixels(), 16, 16));
             }
             pictureBoxMold.Invalidate();
         }

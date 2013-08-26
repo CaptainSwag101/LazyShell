@@ -342,7 +342,7 @@ namespace LAZYSHELL
             this.navigateBck = new System.Windows.Forms.ToolStripButton();
             this.navigateFwd = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.nameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
             this.searchLevelNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.levelGotoEvent = new System.Windows.Forms.ToolStripButton();
@@ -4690,7 +4690,7 @@ namespace LAZYSHELL
             this.navigateBck,
             this.navigateFwd,
             this.toolStripSeparator17,
-            this.nameTextBox,
+            this.searchBox,
             this.searchLevelNames,
             this.toolStripSeparator7,
             this.levelGotoEvent,
@@ -4732,10 +4732,10 @@ namespace LAZYSHELL
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(6, 25);
             // 
-            // nameTextBox
+            // searchBox
             // 
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(145, 25);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(145, 25);
             // 
             // searchLevelNames
             // 
@@ -5877,7 +5877,7 @@ namespace LAZYSHELL
         private Panel panelLevels;
         private System.Windows.Forms.ToolStripComboBox levelName;
         private ToolStripButton searchLevelNames;
-        private ToolStripTextBox nameTextBox;
+        private ToolStripTextBox searchBox;
         private ToolStrip toolStripToggle;
         private ToolStripButton save;
         private ToolStripDropDownButton import;

@@ -1,5 +1,22 @@
 Major changes/additions are indicated by ***
 
+v3.18.4 (2013-08-26)
+--------------------------------------
+Additions:
+*Audio: can now adjust sample rel freq by half/full pitch amount
+
+Changes:
+*Image drawing code now safer and much faster
+*Audio: loop start value now divided by 9 for greater precision
+
+Fixes:
+*Never removed header after save b/c romLength not being updated
+*Some problems with new history logging format, dragging objects
+*Nearly all editors asking to save during close even after saving
+*Audio: score vscrollbar not staying put when writing music
+*Audio: crash if try to open hex editor b/c passing HiRom offset
+
+
 v3.18.3 (2013-08-16)
 --------------------------------------
 Changes:

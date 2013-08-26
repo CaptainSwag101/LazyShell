@@ -1104,7 +1104,6 @@
     <None Include="Resources\Data\play.gif" />
     <None Include="Resources\Data\publish.gif" />
     <None Include="Resources\Data\recentFiles.gif" />
-    <None Include="Resources\Data\removeHeader.gif" />
     <None Include="Resources\Data\romInfo.gif" />
     <None Include="Resources\Data\saveAs_small.gif" />
     <None Include="Resources\Data\save_small.gif" />

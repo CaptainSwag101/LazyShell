@@ -34,7 +34,6 @@ namespace LAZYSHELL
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.loadRom = new System.Windows.Forms.ToolStripButton();
             this.loadRomTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.removeHeader = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.openAllies = new System.Windows.Forms.ToolStripButton();
             this.openAnimations = new System.Windows.Forms.ToolStripButton();
@@ -159,8 +158,7 @@ namespace LAZYSHELL
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadRom,
-            this.loadRomTextBox,
-            this.removeHeader});
+            this.loadRomTextBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -188,17 +186,6 @@ namespace LAZYSHELL
             this.loadRomTextBox.Name = "loadRomTextBox";
             this.loadRomTextBox.ReadOnly = true;
             this.loadRomTextBox.Size = new System.Drawing.Size(433, 25);
-            // 
-            // removeHeader
-            // 
-            this.removeHeader.Image = global::LAZYSHELL.Properties.Resources.removeHeader;
-            this.removeHeader.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.removeHeader.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.removeHeader.Name = "removeHeader";
-            this.removeHeader.Size = new System.Drawing.Size(23, 22);
-            this.removeHeader.ToolTipText = "Remove Header";
-            this.removeHeader.Visible = false;
-            this.removeHeader.Click += new System.EventHandler(this.removeHeader_Click);
             // 
             // toolStrip2
             // 
@@ -457,13 +444,13 @@ namespace LAZYSHELL
             this.openWorldMaps.ToolTipText = "Edit world maps, locations, palettes, and graphics";
             this.openWorldMaps.Click += new System.EventHandler(this.openWorldMaps_Click);
             // 
-            // openNotes
+            // openProject
             // 
             this.openProject.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
             this.openProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openProject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.openProject.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openProject.Name = "openNotes";
+            this.openProject.Name = "openProject";
             this.openProject.Size = new System.Drawing.Size(94, 22);
             this.openProject.Text = "Project";
             this.openProject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -514,6 +501,7 @@ namespace LAZYSHELL
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(428, 456);
             this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.Visible = false;
             // 
             // toolStrip4
             // 
@@ -844,6 +832,7 @@ namespace LAZYSHELL
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -853,7 +842,6 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton loadRom;
         private System.Windows.Forms.ToolStripTextBox loadRomTextBox;
-        private System.Windows.Forms.ToolStripButton removeHeader;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton openMonsters;
         private System.Windows.Forms.ToolStripButton openLevels;

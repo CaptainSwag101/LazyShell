@@ -285,7 +285,7 @@ namespace LAZYSHELL
                 else
                     tilemapL2 = new byte[256];
                 SideTilemap tilemap = new SideTilemap(tilemapL1, tilemapL2, tileset, paletteSet);
-                screenImages[screenIndex] = new Bitmap(Do.PixelsToImage(tilemap.Pixels, 256, 256));
+                screenImages[screenIndex] = Do.PixelsToImage(tilemap.Pixels, 256, 256);
             }
             else
             {
@@ -309,7 +309,7 @@ namespace LAZYSHELL
                     else
                         tilemapL2 = new byte[256];
                     SideTilemap tilemap = new SideTilemap(tilemapL1, tilemapL2, tileset, paletteSet);
-                    Bitmap screenImage = new Bitmap(Do.PixelsToImage(tilemap.Pixels, 256, 256));
+                    Bitmap screenImage = Do.PixelsToImage(tilemap.Pixels, 256, 256);
                     screenImages.Add(new Bitmap(screenImage));
                 }
                 else
@@ -599,7 +599,7 @@ namespace LAZYSHELL
                             if (screenBGImage == null)
                             {
                                 int[] BGPixels = Do.TilesetToPixels(bgtileset.Tileset_tiles, 32, 16, 0, false);
-                                screenBGImage = new Bitmap(Do.PixelsToImage(BGPixels, 512, 256));
+                                screenBGImage = Do.PixelsToImage(BGPixels, 512, 256);
                             }
                             dst.Width = 512;
                             src.Width = 512;

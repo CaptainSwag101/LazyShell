@@ -45,7 +45,7 @@ namespace LAZYSHELL
         private void SetTilesetImage()
         {
             int[] pixels = Do.TilesetToPixels(tileset.Tileset_tiles, 16, 9, 0, false);
-            tilesetImage = new Bitmap(Do.PixelsToImage(pixels, 256, 144));
+            tilesetImage = Do.PixelsToImage(pixels, 256, 144);
             pictureBox1.Invalidate();
         }
         private void LoadPaletteEditor()

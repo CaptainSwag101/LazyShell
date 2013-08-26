@@ -95,7 +95,7 @@ namespace LAZYSHELL
             this.layerColorMathIntensity.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathHalfIntensity;
             this.layerColorMathMode.SelectedIndex = prioritySets[layer.PrioritySet].ColorMathMinusSubscreen;
             this.Updating = false;
-            if (!this.Updating)
+            if (!this.Refreshing)
             {
                 RefreshLevel();
             }
@@ -105,7 +105,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL1 = layerMainscreenL1.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerMainscreenL1.Checked) layerMainscreenL1.ForeColor = Color.Black;
@@ -116,7 +116,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL2 = layerMainscreenL2.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerMainscreenL2.Checked) layerMainscreenL2.ForeColor = Color.Black;
@@ -127,7 +127,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenL3 = layerMainscreenL3.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerMainscreenL3.Checked) layerMainscreenL3.ForeColor = Color.Black;
@@ -138,7 +138,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].MainscreenOBJ = layerMainscreenNPC.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerMainscreenNPC.Checked) layerMainscreenNPC.ForeColor = Color.Black;
@@ -149,7 +149,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL1 = layerSubscreenL1.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerSubscreenL1.Checked) layerSubscreenL1.ForeColor = Color.Black;
@@ -160,7 +160,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL2 = layerSubscreenL2.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerSubscreenL2.Checked) layerSubscreenL2.ForeColor = Color.Black;
@@ -171,7 +171,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenL3 = layerSubscreenL3.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerSubscreenL3.Checked) layerSubscreenL3.ForeColor = Color.Black;
@@ -182,7 +182,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].SubscreenOBJ = layerSubscreenNPC.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerSubscreenNPC.Checked) layerSubscreenNPC.ForeColor = Color.Black;
@@ -193,7 +193,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL1 = layerColorMathL1.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerColorMathL1.Checked) layerColorMathL1.ForeColor = Color.Black;
@@ -204,7 +204,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL2 = layerColorMathL2.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerColorMathL2.Checked) layerColorMathL2.ForeColor = Color.Black;
@@ -215,7 +215,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathL3 = layerColorMathL3.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerColorMathL3.Checked) layerColorMathL3.ForeColor = Color.Black;
@@ -226,7 +226,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathOBJ = layerColorMathNPC.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerColorMathNPC.Checked) layerColorMathNPC.ForeColor = Color.Black;
@@ -237,7 +237,7 @@ namespace LAZYSHELL
             if (!this.Updating)
             {
                 this.prioritySets[layer.PrioritySet].ColorMathBG = layerColorMathBG.Checked;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
             if (layerColorMathBG.Checked) layerColorMathBG.ForeColor = Color.Black;
@@ -251,7 +251,7 @@ namespace LAZYSHELL
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 0;//false;
                 else if (layerColorMathIntensity.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathHalfIntensity = 1;//true;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
         }
@@ -263,7 +263,7 @@ namespace LAZYSHELL
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 0;//false;
                 else if (layerColorMathMode.SelectedIndex == 1)
                     this.prioritySets[layer.PrioritySet].ColorMathMinusSubscreen = 1;// true;
-                if (!this.Updating)
+                if (!this.Refreshing)
                     RefreshLevel();
             }
         }

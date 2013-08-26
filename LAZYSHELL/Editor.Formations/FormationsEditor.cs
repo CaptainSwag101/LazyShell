@@ -42,6 +42,7 @@ namespace LAZYSHELL
                 packsEditor.Index = Settings.Default.LastFormationPack;
                 formationsEditor.Index = Settings.Default.LastFormation;
             }
+            this.History = new History(this, false);
         }
         // functions
         public void Assemble()
@@ -52,6 +53,9 @@ namespace LAZYSHELL
                 fp.Assemble();
             for (int i = 0; i < Model.FormationMusics.Length; i++)
                 Model.ROM[0x029F51 + i] = Model.FormationMusics[i];
+            formationsEditor.Modified = false;
+            packsEditor.Modified = false;
+            this.Modified = false;
         }
         // event handlers
         private void FormationsEditor_FormClosing(object sender, FormClosingEventArgs e)

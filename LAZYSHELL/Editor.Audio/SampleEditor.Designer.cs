@@ -29,6 +29,8 @@ namespace LAZYSHELL
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.sampleName = new System.Windows.Forms.ToolStripComboBox();
             this.sampleNum = new LAZYSHELL.ToolStripNumericUpDown();
+            this.searchBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchNames = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripDropDownButton();
             this.importWAV = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +48,10 @@ namespace LAZYSHELL
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.infiniteLoop = new LAZYSHELL.ToolStripCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonPitch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pitchChange = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.loopStart = new System.Windows.Forms.NumericUpDown();
             this.relGain = new System.Windows.Forms.NumericUpDown();
@@ -60,8 +64,6 @@ namespace LAZYSHELL
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.searchText = new System.Windows.Forms.ToolStripTextBox();
-            this.searchNames = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loopStart)).BeginInit();
@@ -79,7 +81,7 @@ namespace LAZYSHELL
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sampleName,
             this.sampleNum,
-            this.searchText,
+            this.searchBox,
             this.searchNames,
             this.toolStripSeparator4,
             this.import,
@@ -138,6 +140,21 @@ namespace LAZYSHELL
             0,
             0});
             this.sampleNum.ValueChanged += new System.EventHandler(this.sampleNum_ValueChanged);
+            // 
+            // searchBox
+            // 
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(150, 25);
+            // 
+            // searchNames
+            // 
+            this.searchNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.searchNames.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.searchNames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.searchNames.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.searchNames.Name = "searchNames";
+            this.searchNames.Size = new System.Drawing.Size(23, 22);
+            this.searchNames.Text = "Search for effect";
             // 
             // toolStripSeparator4
             // 
@@ -289,8 +306,10 @@ namespace LAZYSHELL
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonPitch);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.pitchChange);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.loopStart);
             this.groupBox1.Controls.Add(this.relGain);
@@ -303,10 +322,21 @@ namespace LAZYSHELL
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
             // 
+            // buttonPitch
+            // 
+            this.buttonPitch.Location = new System.Drawing.Point(6, 20);
+            this.buttonPitch.Name = "buttonPitch";
+            this.buttonPitch.Size = new System.Drawing.Size(57, 21);
+            this.buttonPitch.TabIndex = 6;
+            this.buttonPitch.Text = "Pitch +/-";
+            this.buttonPitch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPitch.UseVisualStyleBackColor = true;
+            this.buttonPitch.Click += new System.EventHandler(this.buttonPitch_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 68);
+            this.label3.Location = new System.Drawing.Point(6, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 4;
@@ -315,16 +345,31 @@ namespace LAZYSHELL
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 46);
+            this.label2.Location = new System.Drawing.Point(6, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Rel. Gain";
             // 
+            // pitchChange
+            // 
+            this.pitchChange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pitchChange.FormattingEnabled = true;
+            this.pitchChange.Items.AddRange(new object[] {
+            "–1 step",
+            "–½ step",
+            "+½ step",
+            "+1 step"});
+            this.pitchChange.Location = new System.Drawing.Point(69, 20);
+            this.pitchChange.Name = "pitchChange";
+            this.pitchChange.Size = new System.Drawing.Size(63, 21);
+            this.pitchChange.TabIndex = 1;
+            this.pitchChange.SelectedIndexChanged += new System.EventHandler(this.sampleRateName_SelectedIndexChanged);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 24);
+            this.label4.Location = new System.Drawing.Point(6, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 0;
@@ -332,9 +377,9 @@ namespace LAZYSHELL
             // 
             // loopStart
             // 
-            this.loopStart.Location = new System.Drawing.Point(69, 64);
+            this.loopStart.Location = new System.Drawing.Point(69, 88);
             this.loopStart.Maximum = new decimal(new int[] {
-            65535,
+            7281,
             0,
             0,
             0});
@@ -346,7 +391,7 @@ namespace LAZYSHELL
             // 
             // relGain
             // 
-            this.relGain.Location = new System.Drawing.Point(69, 42);
+            this.relGain.Location = new System.Drawing.Point(69, 66);
             this.relGain.Maximum = new decimal(new int[] {
             32767,
             0,
@@ -365,7 +410,7 @@ namespace LAZYSHELL
             // 
             // relFreq
             // 
-            this.relFreq.Location = new System.Drawing.Point(69, 20);
+            this.relFreq.Location = new System.Drawing.Point(69, 44);
             this.relFreq.Maximum = new decimal(new int[] {
             32767,
             0,
@@ -489,21 +534,6 @@ namespace LAZYSHELL
             this.groupBox2.Text = "Rate";
             this.groupBox2.Visible = false;
             // 
-            // searchText
-            // 
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(150, 25);
-            // 
-            // searchEffectNames
-            // 
-            this.searchNames.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.searchNames.Image = global::LAZYSHELL.Properties.Resources.search;
-            this.searchNames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.searchNames.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.searchNames.Name = "searchEffectNames";
-            this.searchNames.Size = new System.Drawing.Size(23, 22);
-            this.searchNames.Text = "Search for effect";
-            // 
             // SampleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,6 +560,7 @@ namespace LAZYSHELL
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -566,7 +597,9 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton reset;
         private System.Windows.Forms.NumericUpDown relFreq;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ToolStripTextBox searchText;
+        private System.Windows.Forms.ToolStripTextBox searchBox;
         private System.Windows.Forms.ToolStripButton searchNames;
+        private System.Windows.Forms.Button buttonPitch;
+        private System.Windows.Forms.ComboBox pitchChange;
     }
 }

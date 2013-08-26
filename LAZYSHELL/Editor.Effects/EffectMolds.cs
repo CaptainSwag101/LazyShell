@@ -115,14 +115,14 @@ namespace LAZYSHELL
         public void SetTilesetImage()
         {
             int[] pixels = Do.TilesetToPixels(tileset.Tileset, 8, 8, 0, false);
-            tilesetImage = new Bitmap(Do.PixelsToImage(pixels, 128, (int)e_tileSetSize.Value / 64 * 16));
+            tilesetImage = Do.PixelsToImage(pixels, 128, (int)e_tileSetSize.Value / 64 * 16);
             pictureBoxEffectTileset.Size = tilesetImage.Size;
             pictureBoxEffectTileset.Invalidate();
         }
         public void SetTilemapImage()
         {
             int[] pixels = mold.MoldPixels(animation, tileset);
-            tilemapImage = new Bitmap(Do.PixelsToImage(pixels, animation.Width * 16, animation.Height * 16));
+            tilemapImage = Do.PixelsToImage(pixels, animation.Width * 16, animation.Height * 16);
             pictureBoxE_Mold.Size = new Size(tilemapImage.Width * zoom, tilemapImage.Height * zoom);
             pictureBoxE_Mold.Invalidate();
         }

@@ -13,7 +13,7 @@ namespace LAZYSHELL
     public partial class Formations : NewForm
     {
         #region Variables
-                private bool waitBothCoords = false;
+        private bool waitBothCoords = false;
         private int mouseOverMonster = -1;
         private int mouseDownMonster = -1;
         private string mouseOverObject;
@@ -36,7 +36,7 @@ namespace LAZYSHELL
         private int[] palette { get { return Model.FontPaletteBattle.Palette; } }
         private Monster[] monsters { get { return Model.Monsters; } }
         public int Index { get { return (int)formationNum.Value; } set { formationNum.Value = value; } }
-        public ToolStripTextBox FormationName { get { return nameTextBox; } }
+        public ToolStripTextBox FormationName { get { return searchBox; } }
         public System.Windows.Forms.ToolStripComboBox FormationNames { get { return formationNameList; } }
         public Search searchWindow;
         private EditLabel labelWindow;
@@ -64,7 +64,7 @@ namespace LAZYSHELL
             Model.MonsterNames.SortAlphabetically();
             InitializeComponent();
             SetControls();
-            searchWindow = new Search(formationNum, nameTextBox, searchFormationNames, formationNameList.Items);
+            searchWindow = new Search(formationNum, searchBox, searchFormationNames, formationNameList.Items);
             labelWindow = new EditLabel(formationNameList, formationNum, "Formations", false);
             InitializeStrings();
             this.formationNameList.SelectedIndex = 0;
@@ -224,7 +224,7 @@ namespace LAZYSHELL
             Do.PixelsToPixels(quadrant2, pixels, 512, new Rectangle(256, 0, 256, 256));
             Do.PixelsToPixels(quadrant3, pixels, 512, new Rectangle(0, 256, 256, 256));
             Do.PixelsToPixels(quadrant4, pixels, 512, new Rectangle(256, 256, 256, 256));
-            formationBGImage = new Bitmap(Do.PixelsToImage(pixels, 512, 512));
+            formationBGImage = Do.PixelsToImage(pixels, 512, 512);
             pictureBoxFormation.Invalidate();
         }
         private void SetAllyImages()
@@ -414,7 +414,8 @@ namespace LAZYSHELL
             //
             if (waitBothCoords)
                 return;
-            formation.PixelIndexes = null;
+            if (!move)
+                formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
         private void coordY_ValueChanged(object sender, EventArgs e)
@@ -433,7 +434,8 @@ namespace LAZYSHELL
             //
             if (waitBothCoords)
                 return;
-            formation.PixelIndexes = null;
+            if (!move)
+                formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
         }
         //

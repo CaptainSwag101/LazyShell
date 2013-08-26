@@ -75,8 +75,10 @@ namespace LAZYSHELL
                 settings.History = lines;
             }
         }
+        public static bool Crashing = false;
         // rom signature
-        private static long romLength = 0;
+        private static byte[] header;
+        private static int romLength = 0;
         private static string fileName;
         private static long checkSum = 0;
         private static bool locked = false;
@@ -207,9 +209,9 @@ namespace LAZYSHELL
             get
             {
                 if (battleDialogueTilesetImage == null)
-                    battleDialogueTilesetImage = new Bitmap(Do.PixelsToImage(
+                    battleDialogueTilesetImage = Do.PixelsToImage(
                         Do.TilesetToPixels(BattleDialogueTileset_tiles.Tileset_tiles,
-                        16, 2, 0, false), 256, 32));
+                        16, 2, 0, false), 256, 32);
                 return battleDialogueTilesetImage;
             }
             set
@@ -1984,7 +1986,7 @@ namespace LAZYSHELL
             try
             {
                 FileInfo fInfo = new FileInfo(fileName);
-                romLength = fInfo.Length;
+                romLength = (int)fInfo.Length;
                 FileStream fStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fStream);
                 rom = br.ReadBytes((int)romLength);
@@ -2017,6 +2019,7 @@ namespace LAZYSHELL
                             MessageBox.Show("Could not create backup ROM.\n\nThe backup ROM directory has been moved, renamed, or no longer exists.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                RemoveHeader();
                 hexEditor = new HexEditor(rom, Bits.Copy(rom));
                 return true;
             }
@@ -2031,20 +2034,37 @@ namespace LAZYSHELL
         }
         public static bool RemoveHeader()
         {
+            header = null;
+            if ((romLength & 0x200) != 0x200)
+                return false;
             try
             {
-                byte[] noHeader = new byte[romLength - 0x200];
-                for (int i = 0; i < romLength - 0x200; i++)
-                {
-                    noHeader[i] = rom[i + 0x200];
-                }
                 romLength -= 0x200;
-                rom = noHeader;
+                header = Bits.GetBytes(rom, 0, 0x200);
+                byte[] temp = Bits.GetBytes(rom, 0x200, romLength);
+                rom = temp;
                 return true;
             }
             catch
             {
-                MessageBox.Show("Error removing header, please remove manually", "LAZY SHELL");
+                MessageBox.Show("Error removing header; please remove manually.");
+                return false;
+            }
+        }
+        public static bool AddHeader()
+        {
+            if (header == null) return false;
+            try
+            {
+                romLength += 0x200;
+                byte[] temp = new byte[rom.Length];
+                header.CopyTo(temp, 0);
+                rom.CopyTo(temp, 0x200);
+                rom = temp;
+                return true;
+            }
+            catch
+            {
                 return false;
             }
         }
@@ -2095,6 +2115,7 @@ namespace LAZYSHELL
             try
             {
                 SetRomChecksum();
+                AddHeader();
                 BinaryWriter binWriter = new BinaryWriter(File.Open(fileName, FileMode.Create));
                 binWriter.Write(rom);
                 binWriter.Close();
@@ -2125,6 +2146,7 @@ namespace LAZYSHELL
                             MessageBox.Show("Could not create backup ROM.\n\nThe backup ROM directory has been moved, renamed, or no longer exists.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                RemoveHeader();
                 return true;
             }
             catch (Exception ex)

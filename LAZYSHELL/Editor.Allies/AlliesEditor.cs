@@ -38,6 +38,7 @@ namespace LAZYSHELL
             panel1.Controls.Add(alliesEditor);
             alliesEditor.Visible = true;
             new ToolTipLabel(this, baseConvertor, helpTips);
+            this.History = new History(this, false);
         }
         // functions
         public void Assemble()
@@ -46,6 +47,9 @@ namespace LAZYSHELL
                 c.Assemble();
             foreach (Slot s in Model.Slots)
                 s.Assemble();
+            levelUpsEditor.Modified = false;
+            alliesEditor.Modified = false;
+            this.Modified = false;
         }
         // event handlers
         private void AlliesEditor_FormClosing(object sender, FormClosingEventArgs e)

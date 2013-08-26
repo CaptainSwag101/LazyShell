@@ -52,7 +52,7 @@ namespace LAZYSHELL
                 size.Width = 1;
                 size.Height = 1;
             }
-            spriteImage = new Bitmap(Do.PixelsToImage(spritePixels, size.Width, size.Height));
+            spriteImage = Do.PixelsToImage(spritePixels, size.Width, size.Height);
             spritePictureBox.Invalidate();
         }
         // event handlers

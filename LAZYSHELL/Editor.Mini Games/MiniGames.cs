@@ -27,6 +27,7 @@ namespace LAZYSHELL
             //openMenus.Checked = true;
             minecart.Visible = true;
             new ToolTipLabel(this, null, helpTips);
+            this.History = new History(this, false);
             //
             GC.Collect();
         }
@@ -40,6 +41,8 @@ namespace LAZYSHELL
         public void Assemble()
         {
             minecart.Assemble();
+            minecart.Modified = false;
+            this.Modified = false;
         }
         //
         private void save_Click(object sender, EventArgs e)
