@@ -496,13 +496,15 @@ namespace LAZYSHELL
             // Assemble the overworld menu palette
             Model.FontPaletteMenu.Assemble(Model.MenuPalettes, 0);
             byte[] compressed = new byte[0x200];
+            int pointerOffset = Bits.GetShort(Model.ROM, 0x3E000C);  // may have changed when menus last saved
+            int maxSize = Bits.GetShort(Model.ROM, 0x3E000E) - pointerOffset;  // may have changed when menus last saved
             int totalSize = Comp.Compress(Model.MenuPalettes, compressed);
-            if (totalSize > 0x12E)
+            if (totalSize > maxSize)
                 MessageBox.Show("Not enough space for compressed menu palettes. The total required space (" +
-                    totalSize + " bytes) exceeds 302 bytes.\n\n" + "The menu palettes were not saved.",
+                    totalSize + " bytes) exceeds " + maxSize +  " bytes.\n\n" + "The menu palettes were not saved.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                Bits.SetBytes(Model.ROM, 0x3E2D54, compressed, 0, totalSize - 1);
+                Bits.SetBytes(Model.ROM, pointerOffset + 0x3E0000 + 1, compressed, 0, totalSize - 1);
             //
             fonts.Assemble();
             battleDialogues.Assemble();

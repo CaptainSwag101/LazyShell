@@ -319,7 +319,7 @@ namespace LAZYSHELL
             int index = (int)frame.Tag;
             if (molds.ShowBG)
                 e.Graphics.Clear(Color.FromArgb(palette[0]));
-            if (sequence.Frames[index].Mold < animation.Molds.Count)
+            if (index < sequence.Frames.Count && sequence.Frames[index].Mold < animation.Molds.Count)
             {
                 if (index < sequenceImages.Count)
                     e.Graphics.DrawImage(sequenceImages[index], -bounds.X, -bounds.Y, 256, 256);

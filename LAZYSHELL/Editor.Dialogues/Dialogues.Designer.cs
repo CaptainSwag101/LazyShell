@@ -159,7 +159,7 @@ namespace LAZYSHELL
             this.panelDialogues.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDialogues.Location = new System.Drawing.Point(244, 25);
             this.panelDialogues.Name = "panelDialogues";
-            this.panelDialogues.Size = new System.Drawing.Size(458, 664);
+            this.panelDialogues.Size = new System.Drawing.Size(488, 664);
             this.panelDialogues.TabIndex = 2;
             // 
             // panel60
@@ -779,7 +779,7 @@ namespace LAZYSHELL
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip3.Size = new System.Drawing.Size(702, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(732, 25);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -982,7 +982,7 @@ namespace LAZYSHELL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 689);
+            this.ClientSize = new System.Drawing.Size(732, 689);
             this.Controls.Add(this.panelDialogues);
             this.Controls.Add(this.panel60);
             this.Controls.Add(this.toolStrip3);

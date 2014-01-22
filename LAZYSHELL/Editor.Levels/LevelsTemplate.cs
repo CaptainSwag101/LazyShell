@@ -50,7 +50,7 @@ namespace LAZYSHELL
         // event handlers
         private void templateTransfer_Click(object sender, EventArgs e)
         {
-            if (overlay.Select == null || overlay.Select.Size == new Size(0, 0))
+            if (overlay.Select.Empty || overlay.Select.Size == new Size(0, 0))
             {
                 MessageBox.Show("Need to make a selection before creating a new template.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);

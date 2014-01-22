@@ -18,7 +18,7 @@ namespace LAZYSHELL
         public List<LevelMod> Mods { get { return mods; } set { mods = value; } }
         public int Count { get { return mods.Count; } }
         // external selectors
-        private LevelMod mod; public LevelMod Mod_ { get { return mod; } }
+        private LevelMod mod; public LevelMod MOD { get { return mod; } }
         private int currentMod = 0;
         public int CurrentMod
         {

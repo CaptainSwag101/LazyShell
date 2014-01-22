@@ -1,5 +1,29 @@
 Major changes/additions are indicated by ***
 
+v3.19.0 (2013-01-22)
+--------------------------------------
+Changes:
+*Now allows user to load any ROM file, with a warning
+*Restore elements node "Main Title" renamed to "Intro"
+*Selection marching ant timers no longer run infinitely in background
+*Dialogue: palette for disabled menu items (dark blue) now editable
+
+Fixes:
+*Sometimes crashed when creating selection because of dash offset
+*Audio: score viewer shouldn't be enabled if sound effect loaded
+*Audio: only set percussive pitch if reading notes when MML importing
+*Dialogue: not reading pointer when compressing/saving menu palettes
+*History: crash if using mouse/keyboard at same time in listboxes
+*Levels: crash if drag solidity tile & solid mods enabled but no mods
+*Levels: deleting selection in solid mod not saving to undo history
+*Levels: rapidly ctrl+clicking tiles to select in tileset creates lag
+*Levels: crash when toggle layers, try to redraw tilemod maps b/c null
+*Mini-games: crash if edit tilemap b/c reading from null levels form
+*Monsters: ignoring user-set target in "If target affected" commands
+*Monsters: ignoring user-set "Do Nothing" for "Do 1 of 3" commands
+*Sprites: crash if moving through sequences while clicking sometimes
+
+
 v3.18.4 (2013-08-26)
 --------------------------------------
 Additions:

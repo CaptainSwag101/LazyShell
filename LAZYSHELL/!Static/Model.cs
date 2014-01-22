@@ -485,7 +485,7 @@ namespace LAZYSHELL
             get
             {
                 if (fontPaletteMenu == null)
-                    fontPaletteMenu = new PaletteSet(MenuPalettes, 0, 0, 1, 16, 32);
+                    fontPaletteMenu = new PaletteSet(MenuPalettes, 0, 0, 2, 16, 32);
                 return fontPaletteMenu;
             }
             set { palettes = value; }

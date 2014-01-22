@@ -1,6 +1,6 @@
 ﻿LAZY SHELL - Super Mario RPG Editor
-Version: 3.18.4
-Date: August 26, 2013
+Version: 3.19.0
+Date: January 22, 2014
 Home Page: http://home.comcast.net/~giangurgolo/smrpg/
 Written by giangurgolo and Omega
 

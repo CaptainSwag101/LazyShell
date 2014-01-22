@@ -416,7 +416,7 @@ namespace LAZYSHELL
         }
         private void Drag()
         {
-            if (overlay.Select == null || overlay.Select.Size == new Size(0, 0))
+            if (overlay.Select.Empty || overlay.Select.Size == new Size(0, 0))
                 return;
             int[] buffer = new int[overlay.Select.Width * overlay.Select.Height];
             for (int y = overlay.Select.Y, i = 0; y < overlay.Select.Terminal.Y; y++)
@@ -435,7 +435,7 @@ namespace LAZYSHELL
         }
         private void Cut()
         {
-            if (overlay.Select == null || overlay.Select.Size == new Size(0, 0))
+            if (overlay.Select.Empty || overlay.Select.Size == new Size(0, 0))
                 return;
             Copy();
             Delete();
@@ -447,7 +447,7 @@ namespace LAZYSHELL
         }
         private void Copy()
         {
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return;
             int[] buffer = new int[overlay.Select.Width * overlay.Select.Height];
             for (int y = overlay.Select.Y, i = 0; y < overlay.Select.Terminal.Y; y++)
@@ -469,7 +469,7 @@ namespace LAZYSHELL
                 return;
             moving = true;
             // now dragging a new selection
-            overlay.Select = new Overlay.Selection(1, location, copiedColors.Size, pictureBoxGraphicSet);
+            overlay.Select.Refresh(1, location, copiedColors.Size, pictureBoxGraphicSet);
             pictureBoxGraphicSet.Invalidate();
             defloating = false;
         }
@@ -481,7 +481,7 @@ namespace LAZYSHELL
         {
             if (buffer == null)
                 return;
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return;
             original = Bits.Copy(graphics);
             for (int y = overlay.Select.Y, i = 0; y < overlay.Select.Terminal.Y; y++)
@@ -515,7 +515,7 @@ namespace LAZYSHELL
                 draggedColors = null;
             }
             moving = false;
-            overlay.Select = null;
+            overlay.Select.Clear();
         }
         private void Delete()
         {
@@ -617,10 +617,7 @@ namespace LAZYSHELL
                 if (overlay.Select != null)
                 {
                     e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
-                    if (graphicShowPixelGrid.Checked && zoom >= 4)
-                        overlay.Select.DrawSelectionBox(e.Graphics, zoom, Color.Yellow);
-                    else
-                        overlay.Select.DrawSelectionBox(e.Graphics, zoom);
+                    overlay.Select.DrawSelectionBox(e.Graphics, zoom);
                     e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
                 }
             }
@@ -701,7 +698,7 @@ namespace LAZYSHELL
                     action = Drawing.Select;
                     // if we're not inside a current selection to move it, create a new selection
                     if (mouseOverObject != "selection")
-                        overlay.Select = new Overlay.Selection(1, x, y, 1, 1, pictureBoxGraphicSet);
+                        overlay.Select.Refresh(1, x, y, 1, 1, pictureBoxGraphicSet);
                     // otherwise, start dragging current selection
                     else if (mouseOverObject == "selection")
                     {

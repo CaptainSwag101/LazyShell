@@ -17,7 +17,7 @@ namespace LAZYSHELL
         #region Variables
         // main
         private delegate void Function();
-                private int index { get { return (int)worldMapName.SelectedIndex; } }
+        private int index { get { return (int)worldMapName.SelectedIndex; } }
         private WorldMap[] worldMaps { get { return Model.WorldMaps; } set { Model.WorldMaps = value; } }
         private PaletteSet palettes { get { return Model.Palettes; } set { Model.Palettes = value; } }
         private WorldMap worldMap { get { return worldMaps[index]; } set { worldMaps[index] = value; } }
@@ -374,7 +374,7 @@ namespace LAZYSHELL
         }
         private void Copy()
         {
-            if (overlay.SelectTS == null)
+            if (overlay.SelectTS.Empty)
                 return;
             if (draggedTiles != null)
             {
@@ -401,7 +401,7 @@ namespace LAZYSHELL
         /// </summary>
         private void Drag()
         {
-            if (overlay.SelectTS == null)
+            if (overlay.SelectTS.Empty)
                 return;
             // make the copy
             int x_ = overlay.SelectTS.Location.X / 16;
@@ -422,7 +422,7 @@ namespace LAZYSHELL
         }
         private void Cut()
         {
-            if (overlay.SelectTS == null || overlay.SelectTS.Size == new Size(0, 0))
+            if (overlay.SelectTS.Empty || overlay.SelectTS.Size == new Size(0, 0))
                 return;
             Copy();
             Delete();
@@ -440,7 +440,7 @@ namespace LAZYSHELL
             // now dragging a new selection
             draggedTiles = buffer;
             selection = buffer.Image;
-            overlay.SelectTS = new Overlay.Selection(16, location, buffer.Size, pictureBoxTileset);
+            overlay.SelectTS.Refresh(16, location, buffer.Size, pictureBoxTileset);
             pictureBoxTileset.Invalidate();
             defloating = false;
         }
@@ -485,12 +485,12 @@ namespace LAZYSHELL
                 draggedTiles = null;
             }
             moving = false;
-            overlay.SelectTS = null;
+            overlay.SelectTS.Clear();
             Cursor.Position = Cursor.Position;
         }
         private void Delete()
         {
-            if (overlay.SelectTS == null)
+            if (overlay.SelectTS.Empty)
                 return;
             byte[] oldTileset = Bits.Copy(tileset.Tileset_bytes);
             //
@@ -511,7 +511,7 @@ namespace LAZYSHELL
         {
             if (draggedTiles != null)
                 Defloat(draggedTiles);
-            if (overlay.SelectTS == null)
+            if (overlay.SelectTS.Empty)
                 return;
             int x_ = overlay.SelectTS.Location.X / 16;
             int y_ = overlay.SelectTS.Location.Y / 16;
@@ -603,7 +603,7 @@ namespace LAZYSHELL
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
                     Defloat(draggedTiles);
-                overlay.SelectTS = null;
+                overlay.SelectTS.Clear();
                 pictureBoxTileset.Cursor = Cursors.SizeAll;
             }
             else
@@ -618,7 +618,7 @@ namespace LAZYSHELL
                 buttonEditSelect.Checked = false;
                 if (draggedTiles != null)
                     Defloat(draggedTiles);
-                overlay.SelectTS = null;
+                overlay.SelectTS.Clear();
                 pictureBoxTileset.Cursor = Cursors.SizeAll;
             }
             else
@@ -729,12 +729,7 @@ namespace LAZYSHELL
             if (buttonToggleCartGrid.Checked)
                 overlay.DrawTileGrid(e.Graphics, Color.Gray, pictureBoxTileset.Size, new Size(16, 16), 1, true);
             if (overlay.SelectTS != null)
-            {
-                if (buttonToggleCartGrid.Checked)
-                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
-                else
-                    overlay.SelectTS.DrawSelectionBox(e.Graphics, 1);
-            }
+                overlay.SelectTS.DrawSelectionBox(e.Graphics, 1);
         }
         private void pictureBoxTileset_MouseDown(object sender, MouseEventArgs e)
         {
@@ -763,7 +758,7 @@ namespace LAZYSHELL
                 }
                 // if making a new selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == null)
-                    overlay.SelectTS = new Overlay.Selection(16, x / 16 * 16, y / 16 * 16, 16, 16, pictureBoxTileset);
+                    overlay.SelectTS.Refresh(16, x / 16 * 16, y / 16 * 16, 16, 16, pictureBoxTileset);
                 // if moving a current selection
                 if (e.Button == MouseButtons.Left && mouseOverObject == "selection")
                 {
@@ -890,12 +885,12 @@ namespace LAZYSHELL
                         Defloat(draggedTiles);
                     else
                     {
-                        overlay.SelectTS = null;
+                        overlay.SelectTS.Clear();
                         pictureBoxTileset.Invalidate();
                     }
                     break;
                 case Keys.Control | Keys.A:
-                    overlay.SelectTS = new Overlay.Selection(16, 0, 0, 256, 256, pictureBoxTileset);
+                    overlay.SelectTS.Refresh(16, 0, 0, 256, 256, pictureBoxTileset);
                     pictureBoxTileset.Invalidate();
                     break;
                 case Keys.Control | Keys.Z: buttonEditUndo.PerformClick(); break;

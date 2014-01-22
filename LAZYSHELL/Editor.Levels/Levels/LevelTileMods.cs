@@ -161,8 +161,9 @@ namespace LAZYSHELL
         {
             foreach (Mod mod in mods)
             {
-                mod.TilemapA.RedrawTilemaps();
-                if (mod.Set)
+                if (mod.TilemapA != null)
+                    mod.TilemapA.RedrawTilemaps();
+                if (mod.Set && mod.TilemapB != null)
                     mod.TilemapB.RedrawTilemaps();
             }
             ClearImages();

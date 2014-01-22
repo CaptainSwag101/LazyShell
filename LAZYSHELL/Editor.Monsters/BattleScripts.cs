@@ -499,9 +499,18 @@ namespace LAZYSHELL
             {
                 case 0xE0:
                 case 0xF0:
-                    command.Param1 = (byte)numA.Value;
-                    command.Param2 = (byte)numB.Value;
-                    command.Param3 = (byte)numC.Value;
+                    if (!doNothingA.Checked)
+                        command.Param1 = (byte)numA.Value;
+                    else
+                        command.Param1 = 0xFB;
+                    if (!doNothingB.Checked)
+                        command.Param2 = (byte)numB.Value;
+                    else
+                        command.Param2 = 0xFB;
+                    if (!doNothingC.Checked)
+                        command.Param3 = (byte)numC.Value;
+                    else
+                        command.Param3 = 0xFB;
                     break;
                 case 0xE2:
                     command.Param1 = (byte)target.SelectedIndex;
@@ -564,6 +573,7 @@ namespace LAZYSHELL
                             break;
                         case 0x08:
                         case 0x09:
+                            command.Param2 = (byte)target.SelectedIndex;
                             Bits.SetBit(command.CommandData, 3, 0, effects.GetItemChecked(0));
                             Bits.SetBit(command.CommandData, 3, 1, effects.GetItemChecked(1));
                             Bits.SetBit(command.CommandData, 3, 2, effects.GetItemChecked(2));

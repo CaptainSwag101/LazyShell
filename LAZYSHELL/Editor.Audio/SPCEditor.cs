@@ -190,7 +190,7 @@ namespace LAZYSHELL
             if (Index != 0 || Type != 0)
                 spc.CreateNotes();
             groupBoxCT.Enabled = Index != 0 || Type != 0;
-            groupBoxSV.Enabled = Index != 0 || Type != 0;
+            groupBoxSV.Enabled = Index != 0 && Type == 0;
             hScrollBarCT.Maximum = 0;
             hScrollBarSV.Maximum = 0;
             mouseDownSSC = null;
@@ -1102,6 +1102,8 @@ namespace LAZYSHELL
                             else if (script.StartsWith("f")) { pitch = Pitch.F; script = script.Remove(0, 1); }
                             else if (script.StartsWith("g+")) { pitch = Pitch.Gs; script = script.Remove(0, 2); }
                             else if (script.StartsWith("g")) { pitch = Pitch.G; script = script.Remove(0, 1); }
+                            if (percussiveMode)
+                                pitch = percussivePitch;
                         }
                         else if (script.StartsWith("r")) // Stop
                         {
@@ -1113,8 +1115,6 @@ namespace LAZYSHELL
                             pitch = Pitch.Tie;
                             script = script.Remove(0, 1);
                         }
-                        if (percussiveMode)
-                            pitch = percussivePitch;
                         // only if not followed by number
                         if (script.StartsWith("="))
                         {
@@ -3209,7 +3209,7 @@ namespace LAZYSHELL
         }
         private void scoreViewPicture_MouseDown(object sender, MouseEventArgs e)
         {
-            overlay.Select = null;
+            overlay.Select.Clear();
             if (!spc.ActiveChannels[mouseOverChannel])
                 return;
             if (mouseOverChannel == -1)
@@ -3240,7 +3240,7 @@ namespace LAZYSHELL
             }
             if (rSelect.Checked)
             {
-                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1, scoreViewPicture);
+                overlay.Select.Refresh(1, e.X, e.Y, 1, 1, scoreViewPicture);
                 scoreViewPicture.Invalidate();
                 return;
             }
@@ -3575,7 +3575,7 @@ namespace LAZYSHELL
             }
             else
             {
-                overlay.Select = null;
+                overlay.Select.Clear();
                 scoreViewPicture.Cursor = Cursors.Arrow;
             }
             scoreViewPicture.Invalidate();

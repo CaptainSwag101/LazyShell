@@ -32,8 +32,8 @@ namespace LAZYSHELL
         private Bitmap overlapFieldBaseImageH;
         public int alpha = 255;
         // selecting
-        public Selection Select;
-        public Selection SelectTS;
+        public Selection Select = new Selection();
+        public Selection SelectTS = new Selection();
         //
         public class Selection
         {
@@ -44,7 +44,7 @@ namespace LAZYSHELL
             public PictureBox Picture { get { return picture; } set { picture = value; } }
             // marching ants
             private Timer antTimer;
-            private int antOffset = 63;
+            private int antOffset = 15;
             private Timer glowTimer;
             private int glowOpacity = 0;
             private Timer zoomTimer;
@@ -132,31 +132,63 @@ namespace LAZYSHELL
                         Math.Abs(initial.Y - final.Y));
                 }
             }
+            public bool Empty
+            {
+                get
+                {
+                    return size.Width == 0 || size.Height == 0;
+                }
+            }
             /// <summary>
             /// Returns a rectangle containing the location and size of the selection.
             /// </summary>
             public Rectangle Region { get { return new Rectangle(Location, Size); } }
-            public Selection(int unit, Point initial, Size size, PictureBox picture)
+            public Selection()
             {
+            }
+            public void Refresh(int unit, Point initial, Size size, PictureBox picture)
+            {
+                Clear();
                 this.unit = unit;
                 this.initial = new Point(initial.X / unit * unit, initial.Y / unit * unit);
                 this.size = new Size(size.Width / unit * unit, size.Height / unit * unit);
                 this.final = new Point(initial.X + size.Width, initial.Y + size.Height);
                 this.picture = picture;
-                this.antTimer = new Timer();
-                this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                if (this.antTimer == null)
+                {
+                    this.antTimer = new Timer();
+                    this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                }
                 this.antTimer.Start();
             }
-            public Selection(int unit, int x, int y, int width, int height, PictureBox picture)
+            public void Refresh(int unit, int x, int y, int width, int height, PictureBox picture)
             {
+                Clear();
                 this.unit = unit;
                 this.initial = new Point(x / unit * unit, y / unit * unit);
                 this.size = new Size(width / unit * unit, height / unit * unit);
                 this.final = new Point(x + size.Width, y + size.Height);
                 this.picture = picture;
-                this.antTimer = new Timer();
-                this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                if (this.antTimer == null)
+                {
+                    this.antTimer = new Timer();
+                    this.antTimer.Tick += new EventHandler(antTimer_Tick);
+                }
                 this.antTimer.Start();
+            }
+            public void Clear()
+            {
+                this.unit = 1;
+                this.initial = new Point(0, 0);
+                this.size = new Size(0, 0);
+                this.final = new Point(0, 0);
+                if (this.antTimer != null)
+                    this.antTimer.Stop();
+                this.antOffset = 15;
+                if (this.zoomRegion != null)
+                    this.zoomRegion.Dispose();
+                if (this.zoomTimer != null)
+                    this.zoomTimer.Stop();
             }
             /// <summary>
             /// Returns the mouse's relative position within the selection.
@@ -198,31 +230,40 @@ namespace LAZYSHELL
             // drawing the selection box
             public void DrawSelectionBox(Graphics g, int z, Color color)
             {
-                Point start = Location;
-                Point stop = Terminal;
-                if (stop.X == start.X)
-                    return;
-                if (stop.Y == start.Y)
-                    return;
-                Point p = new Point(start.X * z, start.Y * z);
-                Size s = new Size((stop.X * z) - (start.X * z) - 1, (stop.Y * z) - (start.Y * z) - 1);
-                Pen penw = new Pen(color);
-                Pen penb = new Pen(Color.FromArgb(color.R / 4, color.G / 4, color.B / 4));
-                penb.DashOffset = antOffset;
-                penb.DashPattern = new float[] { 4, 4 };
-                Rectangle src = new Rectangle(p, s);
-                if (glowOpacity > 0)
-                    g.FillRectangle(new SolidBrush(Color.FromArgb(glowOpacity, color)), src);
-                g.DrawRectangle(penw, src);
-                g.DrawRectangle(penb, src);
-                //
-                if (zoomFactor > 1 && zoomRegion != null)
+                // to prevent crashing b/c of memory overflow
+                try
                 {
-                    int x = src.X - ((Width * zoomFactor - Width) / 2);
-                    int y = src.Y - ((Height * zoomFactor - Height) / 2);
-                    Rectangle dst = new Rectangle(x, y, Width * zoomFactor, Height * zoomFactor);
-                    src = new Rectangle(0, 0, Width + 1, Height + 1);
-                    g.DrawImage(zoomRegion, dst, src, GraphicsUnit.Pixel);
+                    Point start = Location;
+                    Point stop = Terminal;
+                    if (stop.X == start.X)
+                        return;
+                    if (stop.Y == start.Y)
+                        return;
+                    Point p = new Point(start.X * z, start.Y * z);
+                    Size s = new Size((stop.X * z) - (start.X * z) - 1, (stop.Y * z) - (start.Y * z) - 1);
+                    Pen penw = new Pen(color);
+                    Pen penb = new Pen(Color.FromArgb(color.R / 4, color.G / 4, color.B / 4));
+                    if (antOffset < 0)
+                        antOffset = 15;
+                    penb.DashOffset = antOffset;
+                    penb.DashPattern = new float[] { 4, 4 };
+                    Rectangle src = new Rectangle(p, s);
+                    if (glowOpacity > 0)
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(glowOpacity, color)), src);
+                    g.DrawRectangle(penw, src);
+                    g.DrawRectangle(penb, src);
+                    //
+                    if (zoomFactor > 1 && zoomRegion != null)
+                    {
+                        int x = src.X - ((Width * zoomFactor - Width) / 2);
+                        int y = src.Y - ((Height * zoomFactor - Height) / 2);
+                        Rectangle dst = new Rectangle(x, y, Width * zoomFactor, Height * zoomFactor);
+                        src = new Rectangle(0, 0, Width + 1, Height + 1);
+                        g.DrawImage(zoomRegion, dst, src, GraphicsUnit.Pixel);
+                    }
+                }
+                catch
+                {
                 }
             }
             public void DrawSelectionBox(Graphics g, int z)
@@ -259,7 +300,7 @@ namespace LAZYSHELL
                     return;
                 antOffset--;
                 if (antOffset < 0)
-                    antOffset = 63;
+                    antOffset = 15;
                 this.picture.Refresh();
             }
             private void zoomTimer_Tick(object sender, EventArgs e)
@@ -267,7 +308,9 @@ namespace LAZYSHELL
                 zoomFactor--;
                 if (zoomFactor <= 1)
                 {
-                    zoomRegion = null;
+                    zoomFactor = 1;
+                    if (zoomRegion != null)
+                        zoomRegion.Dispose();
                     zoomTimer.Stop();
                 }
                 this.picture.Refresh();
@@ -935,13 +978,13 @@ namespace LAZYSHELL
             Solidity solidity = Solidity.Instance;
             foreach (LevelSolidMods.LevelMod mod in solidMods.Mods)
             {
-                if (mod == solidMods.Mod_)
+                if (mod == solidMods.MOD)
                     continue;
                 g.DrawImage(mod.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
             }
             if (solidMods.Mods.Count == 0)
                 return;
-            g.DrawImage(solidMods.Mod_.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
+            g.DrawImage(solidMods.MOD.Image, rdst, 0, 0, 1024, 1024, GraphicsUnit.Pixel, ia);
         }
         public void DrawLevelSolidMods(LevelSolidMods solidMods, Graphics g, int z)
         {
@@ -955,12 +998,12 @@ namespace LAZYSHELL
                 Point right = new Point(top.X + (mod.Width * 16), y + (mod.Width * 8));
                 Point bottom = new Point(right.X - (mod.Height * 16), right.Y + (mod.Height * 8));
                 Point left = new Point(bottom.X - (mod.Width * 16), bottom.Y - (mod.Width * 8));
-                top.Y -= mod != solidMods.Mod_ ? 2 : 4; top.X *= z; top.Y *= z;
-                right.X += mod != solidMods.Mod_ ? 4 : 6; right.X *= z; right.Y *= z;
-                bottom.Y += mod != solidMods.Mod_ ? 2 : 4; bottom.X *= z; bottom.Y *= z;
-                left.X -= mod != solidMods.Mod_ ? 4 : 6; left.X *= z; left.Y *= z;
+                top.Y -= mod != solidMods.MOD ? 2 : 4; top.X *= z; top.Y *= z;
+                right.X += mod != solidMods.MOD ? 4 : 6; right.X *= z; right.Y *= z;
+                bottom.Y += mod != solidMods.MOD ? 2 : 4; bottom.X *= z; bottom.Y *= z;
+                left.X -= mod != solidMods.MOD ? 4 : 6; left.X *= z; left.Y *= z;
                 Pen pen = new Pen(Color.Red);
-                pen.Width = mod != solidMods.Mod_ ? 2 * z : 4 * z; pen.DashStyle = DashStyle.Dot;
+                pen.Width = mod != solidMods.MOD ? 2 * z : 4 * z; pen.DashStyle = DashStyle.Dot;
                 g.DrawPolygon(pen, new Point[] { top, right, bottom, left, top });
             }
         }

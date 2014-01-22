@@ -184,6 +184,12 @@ namespace LAZYSHELL
             {
                 Buffer.BlockCopy(romSrc, 0x39222A, romDst, 0x39222A, 0x400);  // packs
             }
+            // Intro
+            if (elements.Nodes["Intro"].Checked)
+            {
+                Buffer.BlockCopy(romSrc, 0x3F216F, romDst, 0x3F216F, 0x3FA000 - 0x3F216F);    // compressed data
+                Buffer.BlockCopy(romSrc, 0x3F0088, romDst, 0x3F0088, 0x3F0228 - 0x3F0088);    // palettes
+            }
             // Items
             if (elements.Nodes["Items"].Nodes["Items"].Checked)
             {
@@ -247,12 +253,6 @@ namespace LAZYSHELL
             if (elements.Nodes["Levels"].Nodes["SolidityMaps"].Checked)   // solidity maps
             {
                 Buffer.BlockCopy(romSrc, 0x1B0000, romDst, 0x1B0000, 0x18000);
-            }
-            // Main Title
-            if (elements.Nodes["MainTitle"].Checked)
-            {
-                Buffer.BlockCopy(romSrc, 0x3F216F, romDst, 0x3F216F, 0x3FA000 - 0x3F216F);    // compressed data
-                Buffer.BlockCopy(romSrc, 0x3F0088, romDst, 0x3F0088, 0x3F0228 - 0x3F0088);    // palettes
             }
             // Menus
             if (elements.Nodes["Menus"].Checked)

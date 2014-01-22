@@ -577,7 +577,7 @@ namespace LAZYSHELL
         }
         private bool WithinSelection(int index, bool writer)
         {
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return false;
             int selectionStart;
             int selectionEnd;
@@ -829,7 +829,7 @@ namespace LAZYSHELL
         }
         private void Delete(bool writer)
         {
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return;
             if (writer)
             {
@@ -868,7 +868,7 @@ namespace LAZYSHELL
         }
         private void Copy(bool writer)
         {
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return;
             if (writer)
             {
@@ -964,7 +964,7 @@ namespace LAZYSHELL
         #region Event Handlers
         private void scoreWriter_Click(object sender, EventArgs e)
         {
-            overlay.Select = null;
+            overlay.Select.Clear();
             groupBoxSW.Visible = scoreWriter.Checked;
             groupBoxSW.BringToFront();
         }
@@ -1045,7 +1045,7 @@ namespace LAZYSHELL
             }
             else
             {
-                overlay.Select = null;
+                overlay.Select.Clear();
                 scoreWriterPicture.Cursor = Cursors.Arrow;
             }
             scoreWriterPicture.Invalidate();
@@ -1181,7 +1181,7 @@ namespace LAZYSHELL
         }
         private void scoreWriterPicture_MouseDown(object sender, MouseEventArgs e)
         {
-            overlay.Select = null;
+            overlay.Select.Clear();
             if (staffs.Count == 0)
                 return;
             if (mouseOverStaff == -1)
@@ -1213,7 +1213,7 @@ namespace LAZYSHELL
             }
             if (wSelect.Checked)
             {
-                overlay.Select = new Overlay.Selection(1, e.X, e.Y, 1, 1, scoreWriterPicture);
+                overlay.Select.Refresh(1, e.X, e.Y, 1, 1, scoreWriterPicture);
                 scoreWriterPicture.Invalidate();
                 return;
             }

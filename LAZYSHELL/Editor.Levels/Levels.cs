@@ -116,7 +116,7 @@ namespace LAZYSHELL
             InitializeMapProperties();
             InitializeNPCProperties();
             InitializeExitFieldProperties();
-            InitializeEventFieldProperties();
+            InitializeEventProperties();
             InitializeOverlapProperties();
             InitializeTileModProperties();
             InitializeSolidModProperties();
@@ -161,7 +161,7 @@ namespace LAZYSHELL
                     InitializeMapProperties();
                     InitializeNPCProperties();
                     InitializeExitFieldProperties();
-                    InitializeEventFieldProperties();
+                    InitializeEventProperties();
                     InitializeOverlapProperties();
                     InitializeTileModProperties();
                     InitializeSolidModProperties();
@@ -1016,7 +1016,7 @@ namespace LAZYSHELL
                 "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             events = new LevelEvents(index);
-            InitializeEventFieldProperties();
+            InitializeEventProperties();
         }
         private void resetExitDataToolStripMenuItem_Click(object sender, EventArgs e)
         {

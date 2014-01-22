@@ -289,11 +289,11 @@ namespace LAZYSHELL
         {
             if (paletteEditorMenu == null)
             {
-                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0, 1);
+                paletteEditorMenu = new PaletteEditor(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 2, 0, 2);
                 paletteEditorMenu.FormClosing += new FormClosingEventHandler(editor_FormClosing);
             }
             else
-                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 1, 0, 1);
+                paletteEditorMenu.Reload(new Function(PaletteMenuUpdate), Model.FontPaletteMenu, 2, 0, 2);
         }
         public void LoadGraphicEditor()
         {

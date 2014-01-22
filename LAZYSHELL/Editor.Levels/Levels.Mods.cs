@@ -562,7 +562,7 @@ namespace LAZYSHELL
             if (this.Updating)
                 return;
             solidMods.X = (int)solidModsX.Value;
-            solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
+            solidMods.MOD.Pixels = solidity.GetTilemapPixels(solidMods.MOD);
             picture.Invalidate();
         }
         private void solidModsY_ValueChanged(object sender, EventArgs e)
@@ -570,7 +570,7 @@ namespace LAZYSHELL
             if (this.Updating)
                 return;
             solidMods.Y = (int)solidModsY.Value;
-            solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
+            solidMods.MOD.Pixels = solidity.GetTilemapPixels(solidMods.MOD);
             picture.Invalidate();
         }
         private void solidModsWidth_ValueChanged(object sender, EventArgs e)
@@ -585,7 +585,7 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not change the width. There is not enough free space available.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
+            solidMods.MOD.Pixels = solidity.GetTilemapPixels(solidMods.MOD);
             solidModsBytesLeft.Text = CalculateFreeSolidModSpace() + " bytes left";
             solidModsBytesLeft.BackColor = CalculateFreeSolidModSpace() >= 0 ? SystemColors.Control : Color.Red;
             picture.Invalidate();
@@ -602,7 +602,7 @@ namespace LAZYSHELL
                 MessageBox.Show("Could not change the height. There is not enough free space available.",
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            solidMods.Mod_.Pixels = solidity.GetTilemapPixels(solidMods.Mod_);
+            solidMods.MOD.Pixels = solidity.GetTilemapPixels(solidMods.MOD);
             solidModsBytesLeft.Text = CalculateFreeSolidModSpace() + " bytes left";
             solidModsBytesLeft.BackColor = CalculateFreeSolidModSpace() >= 0 ? SystemColors.Control : Color.Red;
             picture.Invalidate();
@@ -699,7 +699,7 @@ namespace LAZYSHELL
         {
             if (solidModsFieldTree.SelectedNode == null)
                 return;
-            copySolidMod = solidMods.Mod_.Copy();
+            copySolidMod = solidMods.MOD.Copy();
         }
         private void solidModsPaste_Click(object sender, EventArgs e)
         {
@@ -708,7 +708,7 @@ namespace LAZYSHELL
         }
         private void solidModsDuplicate_Click(object sender, EventArgs e)
         {
-            AddNewSolidMod(solidMods.Mod_.Copy());
+            AddNewSolidMod(solidMods.MOD.Copy());
         }
         #endregion
     }

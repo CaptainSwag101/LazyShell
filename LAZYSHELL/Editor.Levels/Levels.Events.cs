@@ -16,7 +16,7 @@ namespace LAZYSHELL
         public NumericUpDown EventY { get { return eventY; } set { eventY = value; } }
         #endregion
         #region Methods
-        private void InitializeEventFieldProperties()
+        private void InitializeEventProperties()
         {
             this.Updating = true;
             this.eventMusic.SelectedIndex = events.Music;
@@ -82,7 +82,7 @@ namespace LAZYSHELL
             eventsBytesLeft.BackColor = CalculateFreeEventSpace() >= 0 ? SystemColors.Control : Color.Red;
             this.Updating = false;
         }
-        private void RefreshEventFieldProperties()
+        private void RefreshEventProperties()
         {
             this.Updating = true;
             if (events.Count != 0 && this.eventsList.SelectedNode != null)
@@ -188,7 +188,7 @@ namespace LAZYSHELL
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
             events.SelectedEvent = this.eventsList.SelectedNode.Index;
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            RefreshEventFieldProperties();
+            RefreshEventProperties();
             picture.Invalidate();
         }
         private void eventsExitEvent_ValueChanged(object sender, EventArgs e)
@@ -321,7 +321,7 @@ namespace LAZYSHELL
                 {
                     this.eventsList.SelectedNode = null;
                     //
-                    RefreshEventFieldProperties();
+                    RefreshEventProperties();
                     picture.Invalidate();
                 }
                 eventsList.EndUpdate();
@@ -337,7 +337,7 @@ namespace LAZYSHELL
             events.X_Half = this.eventsWidthXPlusHalf.Checked;
             //
             events.CurrentEvent = this.eventsList.SelectedNode.Index;
-            RefreshEventFieldProperties();
+            RefreshEventProperties();
         }
         private void eventsWidthYPlusHalf_CheckedChanged(object sender, EventArgs e)
         {

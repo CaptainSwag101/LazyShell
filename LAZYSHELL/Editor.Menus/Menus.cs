@@ -775,7 +775,7 @@ namespace LAZYSHELL
             //
             Model.GameSelectPaletteSet.Assemble();
             Model.GameSelectBGPalette.Assemble();
-            Model.FontPaletteMenu.Assemble();
+            Model.FontPaletteMenu.Assemble(Model.MenuPalettes, 0);
             Model.MenuBGPalette.Assemble();
             Model.ShopBGPalette.Assemble();
             Model.CursorPaletteSet.Assemble(Model.MenuPalettes, 0x100);

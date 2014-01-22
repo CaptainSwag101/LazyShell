@@ -11,7 +11,7 @@ namespace LAZYSHELL
     {
         #region Variables
         private LevelOverlaps overlaps { get { return level.LevelOverlaps; } set { level.LevelOverlaps = value; } } // Overlaps for the current level
-        private Overlay.Selection overlapSelection;
+        private Overlay.Selection overlapSelection = new Overlay.Selection();
         private OverlapTileset overlapTileset;
         private Bitmap overlapsImage;
         private int[] overlapsPixels;
@@ -78,7 +78,7 @@ namespace LAZYSHELL
                 this.overlapUnknownBits.SetItemChecked(3, false);
             }
             //
-            overlapSelection = new Overlay.Selection(32, 0, 0, 32, 32, pictureBoxOverlaps); 
+            overlapSelection.Refresh(32, 0, 0, 32, 32, pictureBoxOverlaps);
             //
             pictureBoxOverlaps.Invalidate();
             overlapsBytesLeft.Text = CalculateFreeOverlapSpace() + " bytes left";
@@ -285,18 +285,18 @@ namespace LAZYSHELL
         }
         private void overlapType_ValueChanged(object sender, EventArgs e)
         {
+            int x = (int)overlapType.Value % 8 * 32;
+            int y = (int)overlapType.Value / 8 * 32;
+            overlapSelection.Refresh(32, x, y, 32, 32, pictureBoxOverlaps);
+            //
+            pictureBoxOverlaps.Invalidate();
+            picture.Invalidate();
+            //
             if (this.Updating)
                 return;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
             overlaps.Type = (byte)this.overlapType.Value;
             overlaps.CurrentOverlap = this.overlapFieldTree.SelectedNode.Index;
-            //
-            int x = (int)overlapType.Value % 8 * 32;
-            int y = (int)overlapType.Value / 8 * 32;
-            overlapSelection = new Overlay.Selection(32, x, y, 32, 32, pictureBoxOverlaps);
-            //
-            pictureBoxOverlaps.Invalidate();
-            picture.Invalidate();
         }
         private void overlapUnknownBits_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -322,7 +322,7 @@ namespace LAZYSHELL
             e.Graphics.DrawImage(overlapsImage, 0, 0);
             overlay.DrawTileGrid(e.Graphics, Color.Gray, new Size(256, 416), new Size(32, 32), 1, true);
             if (overlapSelection != null)
-                overlapSelection.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
+                overlapSelection.DrawSelectionBox(e.Graphics, 1);
         }
         //
         private void overlapFieldCopy_Click(object sender, EventArgs e)

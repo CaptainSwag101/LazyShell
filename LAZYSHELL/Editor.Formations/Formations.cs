@@ -285,7 +285,7 @@ namespace LAZYSHELL
         // drawing
         private void Drag()
         {
-            if (overlay.Select == null)
+            if (overlay.Select.Empty)
                 return;
             selectedObjects = new List<SelectedObject>();
             for (int y = overlay.Select.Y; y < overlay.Select.Terminal.Y; y++)
@@ -313,7 +313,7 @@ namespace LAZYSHELL
                 coordY[i].Value = formation.Y[i];
             }
             this.Updating = false;
-            overlay.Select = null;
+            overlay.Select.Clear();
             selectedObjects = null;
             formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
@@ -329,7 +329,7 @@ namespace LAZYSHELL
                 coordY[i].Value = formation.Y[i];
             }
             this.Updating = false;
-            overlay.Select = null;
+            overlay.Select.Clear();
             selectedObjects = null;
             formation.PixelIndexes = null;
             pictureBoxFormation.Invalidate();
@@ -535,7 +535,7 @@ namespace LAZYSHELL
                 if (mouseOverObject != "selection")
                 {
                     selectedObjects = null;
-                    overlay.Select = new Overlay.Selection(1, x, y, 1, 1, pictureBoxFormation);
+                    overlay.Select.Refresh(1, x, y, 1, 1, pictureBoxFormation);
                 }
                 // otherwise, start dragging current selection
                 else if (mouseOverObject == "selection")
@@ -779,12 +779,7 @@ namespace LAZYSHELL
                 e.Graphics.DrawImage(portraits[3], 68 - 128, 34 - 96 - 1);
             }
             if (select.Checked && overlay.Select != null)
-            {
-                if (isometricGrid.Checked || snapIsometricLeft.Checked || snapIsometricRight.Checked)
-                    overlay.Select.DrawSelectionBox(e.Graphics, 1, Color.Yellow);
-                else
-                    overlay.Select.DrawSelectionBox(e.Graphics, 1);
-            }
+                overlay.Select.DrawSelectionBox(e.Graphics, 1);
         }
         private void pictureBoxFormation_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {

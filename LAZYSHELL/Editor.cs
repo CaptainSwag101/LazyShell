@@ -115,7 +115,8 @@ namespace LAZYSHELL
         {
             if (AppControl.AssembleAndCloseWindows())
             {
-                MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.", "LAZY SHELL");
+                MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.",
+                    "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else if (Model.HexEditor != null && Model.HexEditor.Visible)
@@ -129,7 +130,8 @@ namespace LAZYSHELL
             {
                 if (AppControl.GameCode() != "ARWE")
                 {
-                    MessageBox.Show("The game code for this ROM is invalid. There will likely be problems editing the ROM.", "LAZY SHELL");
+                    if (MessageBox.Show("The game code for this ROM is invalid. There will likely be problems editing the ROM.\n\nLoad anyways?",
+                        "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     return;
                 }
                 toolStrip2.Enabled = true;

@@ -149,8 +149,8 @@ namespace LAZYSHELL
         {
             if (form.Updating)
                 return false;
-            if (sender == this.name || sender == this.number)
-                return false;
+            //if (sender == this.name || sender == this.number)
+            //    return false;
             Type type = sender.GetType();
             if (type == typeof(ToolStripButton))
             {
@@ -184,7 +184,7 @@ namespace LAZYSHELL
                 return false;
             // 1 second = 1000 milliseconds
             // 1 millisecond = 10000 ticks
-            if (dateTime.Ticks > DateTime.Now.Ticks - (10000L * 1000L))
+            if (dateTime.Ticks > DateTime.Now.Ticks - (10000L * 100L)) // 1/10 of a second
                 return false;
             return true;
         }
@@ -286,6 +286,8 @@ namespace LAZYSHELL
             {
                 CheckedListBox control = (CheckedListBox)sender;
                 temp += "\"" + control.Name + "\" | ";
+                if (control.SelectedItem == null)
+                    return;
                 temp += "\"" + control.SelectedItem.ToString().Trim() + "\" = ";
                 temp += control.GetItemChecked(control.SelectedIndex);
             }
@@ -293,6 +295,8 @@ namespace LAZYSHELL
             {
                 ListBox control = (ListBox)sender;
                 temp += "\"" + control.Name + "\" | ";
+                if (control.SelectedItem == null)
+                    return;
                 temp += "\"" + control.SelectedItem.ToString().Trim();
             }
             temp += " | Form \"" + form.Name + "\"";
