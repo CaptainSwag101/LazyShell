@@ -8,17 +8,20 @@ using System.Windows.Forms;
 
 namespace LAZYSHELL
 {
-    public partial class About : NewForm
+    public partial class About : Controls.NewForm
     {
-        private Editor form1;
-        // constructor
-        public About(Editor form1)
+        // Variables
+        private MainForm ownerForm;
+
+        // Constructor
+        public About(MainForm ownerForm)
         {
-            this.form1 = form1;
+            this.ownerForm = ownerForm;
             InitializeComponent();
         }
-        // event handlers
-        private void richTextBox1_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
+
+        // Event Handlers
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
         }

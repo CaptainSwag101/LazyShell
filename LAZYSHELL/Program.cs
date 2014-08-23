@@ -7,53 +7,65 @@ using System.Windows.Forms;
 using System.Threading;
 using LAZYSHELL.Properties;
 using LAZYSHELL.Patches;
-using LAZYSHELL.ScriptsEditor;
+using LAZYSHELL.EventScripts;
 
 namespace LAZYSHELL
 {
     public class Program
     {
-        // class variables and accessors
+        #region Variables
+
         private Settings settings = Settings.Default;
-        private bool dockEditors;
-        public bool DockEditors { get { return dockEditors; } set { dockEditors = value; } }
+        public bool DockEditors { get; set; }
+
         #region Editor Windows
-        private AlliesEditor allies; public AlliesEditor Allies { get { return allies; } }
-        private AnimationScripts animations; public AnimationScripts Animations { get { return animations; } }
-        private AttacksEditor attacks; public AttacksEditor Attacks { get { return attacks; } }
-        private Audio audio; public Audio Audio { get { return audio; } }
-        private Battlefields battlefields; public Battlefields Battlefields { get { return battlefields; } }
-        private Dialogues dialogues; public Dialogues Dialogues { get { return dialogues; } }
-        private Effects effects; public Effects Effects { get { return effects; } }
-        private FormationsEditor formations; public FormationsEditor Formations { get { return formations; } }
-        private ItemsEditor items; public ItemsEditor Items { get { return items; } }
-        private Levels levels; public Levels Levels { get { return levels; } }
-        private Intro intro; public Intro Intro { get { return intro; } }
-        private MenusEditor menus; public MenusEditor Menus { get { return menus; } }
-        private MiniGames miniGames; public MiniGames MiniGames { get { return miniGames; } }
-        private Monsters monsters; public Monsters Monsters { get { return monsters; } }
-        private EventScripts eventScripts; public EventScripts EventScripts { get { return eventScripts; } }
-        private Sprites sprites; public Sprites Sprites { get { return sprites; } }
-        private WorldMaps worldMaps; public WorldMaps WorldMaps { get { return worldMaps; } }
-        private GamePatches patches;
-        private Project project; public Project Project { get { return project; } }
-        private Editor editor
+
+        private List<Form> loadedForms = new List<Form>();
+        public Animations.OwnerForm Animations { get; set; }
+        public Areas.OwnerForm Areas { get; set; }
+        public Attacks.OwnerForm Attacks { get; set; }
+        public Audio.OwnerForm Audio { get; set; }
+        public Battlefields.OwnerForm Battlefields { get; set; }
+        public Dialogues.OwnerForm Dialogues { get; set; }
+        public Effects.OwnerForm Effects { get; set; }
+        public EventScripts.OwnerForm EventScripts { get; set; }
+        public Fonts.OwnerForm Fonts { get; set; }
+        public Formations.OwnerForm Formations { get; set; }
+        public Intro.OwnerForm Intro { get; set; }
+        public Items.OwnerForm Items { get; set; }
+        public LevelUps.OwnerForm LevelUps { get; set; }
+        public Magic.OwnerForm Magic { get; set; }
+        public Menus.OwnerForm Menus { get; set; }
+        public Minecart.OwnerForm Minecart { get; set; }
+        public Monsters.OwnerForm Monsters { get; set; }
+        public NewGame.OwnerForm NewGame { get; set; }
+        public Shops.OwnerForm Shops { get; set; }
+        public Sprites.OwnerForm Sprites { get; set; }
+        public WorldMaps.OwnerForm WorldMaps { get; set; }
+        public PatchesForm Patches { get; set; }
+        public ProjectForm Project { get; set; }
+        public HexEditor HexEditor { get; set; }
+        public MainForm MainForm
         {
             get
             {
                 if (Application.OpenForms.Count == 0)
                     return null;
-                return (Editor)Application.OpenForms[0];
+                return Application.OpenForms[0] as MainForm;
             }
             set
             {
                 if (Application.OpenForms.Count == 0)
                     return;
-                Editor main = (Editor)Application.OpenForms[0];
+                var main = Application.OpenForms[0] as MainForm;
                 main = value;
             }
         }
+
         #endregion
+
+        #endregion
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -63,19 +75,24 @@ namespace LAZYSHELL
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             Program App = new Program();
         }
-        // custom exception form
+
+        #region Methods
+
+        // Custom exception form
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Model.History += "***EXCEPTION*** " + e.Exception.Message + ")\n";
             new NewExceptionForm(e.Exception).ShowDialog();
         }
+
         // Constructor
         public Program()
         {
-            Model.Program = this;
+            LAZYSHELL.Model.Program = this;
             ProgramController controls = new ProgramController(this);
-            Editor.GuiMain(controls);
+            MainForm.GuiMain(controls);
         }
+
         // File Managing
         public bool OpenRomFile()
         {
@@ -115,7 +132,7 @@ namespace LAZYSHELL
         }
         public bool SaveRomFile()
         {
-            Assemble();
+            WriteToROM();
             if (Model.WriteRom())
             {
                 Model.CreateNewMD5Checksum();
@@ -133,7 +150,7 @@ namespace LAZYSHELL
             {
                 Model.FileName = saveFileDialog1.FileName;
                 // Assemble all changes
-                Assemble();
+                WriteToROM();
                 if (Model.WriteRom())
                 {
                     settings.LastRomPath = Model.GetPathWithoutFileName();
@@ -145,322 +162,390 @@ namespace LAZYSHELL
             }
             return true;
         }
-        public void Assemble()
+        public void WriteToROM()
         {
-            if (allies != null && allies.Visible)
-                allies.Assemble();
-            if (animations != null && animations.Visible)
-                animations.Assemble();
-            if (attacks != null && attacks.Visible)
-                attacks.Assemble();
-            if (battlefields != null && battlefields.Visible)
-                battlefields.Assemble();
-            if (dialogues != null && dialogues.Visible)
-                dialogues.Assemble();
-            if (eventScripts != null && eventScripts.Visible)
-                eventScripts.Assemble();
-            if (formations != null && formations.Visible)
-                formations.Assemble();
-            if (items != null && items.Visible)
-                items.Assemble();
-            if (levels != null && levels.Visible)
-                levels.Assemble();
-            if (monsters != null && monsters.Visible)
-                monsters.Assemble();
-            if (sprites != null && sprites.Visible)
-                sprites.Assemble();
-            if (intro != null && intro.Visible)
-                intro.Assemble();
-            if (worldMaps != null && worldMaps.Visible)
-                worldMaps.Assemble();
+            if (NewGame != null && NewGame.Visible)
+                NewGame.WriteToROM();
+            if (Animations != null && Animations.Visible)
+                Animations.WriteToROM();
+            if (Attacks != null && Attacks.Visible)
+                Attacks.WriteToROM();
+            if (Battlefields != null && Battlefields.Visible)
+                Battlefields.WriteToROM();
+            if (Dialogues != null && Dialogues.Visible)
+                Dialogues.WriteToROM();
+            if (EventScripts != null && EventScripts.Visible)
+                EventScripts.WriteToROM();
+            if (Fonts != null && Fonts.Visible)
+                Fonts.WriteToROM();
+            if (Formations != null && Formations.Visible)
+                Formations.WriteToROM();
+            if (Items != null && Items.Visible)
+                Items.WriteToROM();
+            if (Areas != null && Areas.Visible)
+                Areas.WriteToROM();
+            if (Monsters != null && Monsters.Visible)
+                Monsters.WriteToROM();
+            if (Sprites != null && Sprites.Visible)
+                Sprites.WriteToROM();
+            if (Intro != null && Intro.Visible)
+                Intro.WriteToROM();
+            if (WorldMaps != null && WorldMaps.Visible)
+                WorldMaps.WriteToROM();
         }
         public void CloseRomFile()
         {
             Model.ROMHash = null;
         }
+
         #region Create Editor Windows
-        public void ScreencapHotkeys()
-        {
-            if (allies == null || !allies.Visible) allies = new AlliesEditor();
-            if (animations == null || !animations.Visible) animations = new AnimationScripts();
-            if (attacks == null || !attacks.Visible) attacks = new AttacksEditor();
-            if (audio == null || !audio.Visible) audio = new Audio();
-            if (battlefields == null || !battlefields.Visible) battlefields = new Battlefields();
-            if (dialogues == null || !dialogues.Visible) dialogues = new Dialogues();
-            if (effects == null || !effects.Visible) effects = new Effects();
-            if (eventScripts == null || !eventScripts.Visible) eventScripts = new EventScripts();
-            if (formations == null || !formations.Visible) formations = new FormationsEditor();
-            if (items == null || !items.Visible) items = new ItemsEditor();
-            if (levels == null || !levels.Visible) levels = new Levels();
-            if (monsters == null || !monsters.Visible) monsters = new Monsters();
-            if (intro == null || !intro.Visible) intro = new Intro();
-            if (menus == null || !menus.Visible) menus = new MenusEditor();
-            if (miniGames == null || !miniGames.Visible) miniGames = new MiniGames();
-            if (sprites == null || !sprites.Visible) sprites = new Sprites();
-            if (worldMaps == null || !worldMaps.Visible) worldMaps = new WorldMaps();
-        }
-        public void CreateAlliesWindow()
-        {
-            if (allies == null || !allies.Visible)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                allies = new AlliesEditor();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, allies);
-                else
-                    allies.Show();
-                Cursor.Current = Cursors.Arrow;
-            }
-            allies.KeyDown += new KeyEventHandler(editor_KeyDown);
-            allies.BringToFront();
-        }
+
+        // Editors
         public void CreateAnimationsWindow()
         {
-            if (animations == null || !animations.Visible)
+            if (Animations == null || !Animations.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                animations = new AnimationScripts();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, animations);
+                Animations = new Animations.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Animations);
                 else
-                    animations.Show();
+                    Animations.Show();
+                loadedForms.Add(Animations);
                 Cursor.Current = Cursors.Arrow;
             }
-            animations.KeyDown += new KeyEventHandler(editor_KeyDown);
-            animations.BringToFront();
+            Animations.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Animations.BringToFront();
+        }
+        public void CreateAreasWindow()
+        {
+            if (Areas == null || !Areas.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Areas = new Areas.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Areas);
+                else
+                    Areas.Show();
+                loadedForms.Add(Areas);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Areas.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Areas.BringToFront();
         }
         public void CreateAttacksWindow()
         {
-            if (attacks == null || !attacks.Visible)
+            if (Attacks == null || !Attacks.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                attacks = new AttacksEditor();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, attacks);
+                Attacks = new Attacks.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Attacks);
                 else
-                    attacks.Show();
+                    Attacks.Show();
+                loadedForms.Add(Attacks);
                 Cursor.Current = Cursors.Arrow;
             }
-            attacks.KeyDown += new KeyEventHandler(editor_KeyDown);
-            attacks.BringToFront();
+            Attacks.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Attacks.BringToFront();
         }
         public void CreateAudioWindow()
         {
-            if (audio == null || !audio.Visible)
+            if (Audio == null || !Audio.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                audio = new Audio();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, audio);
+                Audio = new Audio.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Audio);
                 else
-                    audio.Show();
+                    Audio.Show();
+                loadedForms.Add(Audio);
                 Cursor.Current = Cursors.Arrow;
             }
-            audio.KeyDown += new KeyEventHandler(editor_KeyDown);
-            audio.BringToFront();
+            Audio.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Audio.BringToFront();
         }
         public void CreateBattlefieldsWindow()
         {
-            if (battlefields == null || !battlefields.Visible)
+            if (Battlefields == null || !Battlefields.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                battlefields = new Battlefields();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, battlefields);
+                Battlefields = new Battlefields.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Battlefields);
                 else
-                    battlefields.Show();
+                    Battlefields.Show();
+                loadedForms.Add(Battlefields);
                 Cursor.Current = Cursors.Arrow;
             }
-            battlefields.KeyDown += new KeyEventHandler(editor_KeyDown);
-            battlefields.BringToFront();
+            Battlefields.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Battlefields.BringToFront();
         }
         public void CreateDialoguesWindow()
         {
-            if (dialogues == null || !dialogues.Visible)
+            if (Dialogues == null || !Dialogues.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                dialogues = new Dialogues();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, dialogues);
+                Dialogues = new Dialogues.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Dialogues);
                 else
-                    dialogues.Show();
+                    Dialogues.Show();
+                loadedForms.Add(Dialogues);
                 Cursor.Current = Cursors.Arrow;
             }
-            dialogues.KeyDown += new KeyEventHandler(editor_KeyDown);
-            dialogues.BringToFront();
+            Dialogues.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Dialogues.BringToFront();
         }
         public void CreateEffectsWindow()
         {
-            if (effects == null || !effects.Visible)
+            if (Effects == null || !Effects.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                effects = new Effects();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, effects);
+                Effects = new Effects.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Effects);
                 else
-                    effects.Show();
+                    Effects.Show();
+                loadedForms.Add(Effects);
                 Cursor.Current = Cursors.Arrow;
             }
-            effects.KeyDown += new KeyEventHandler(editor_KeyDown);
-            effects.BringToFront();
+            Effects.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Effects.BringToFront();
         }
         public void CreateEventScriptsWindow()
         {
-            if (eventScripts == null || !eventScripts.Visible)
+            if (EventScripts == null || !EventScripts.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                eventScripts = new EventScripts();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, eventScripts);
+                EventScripts = new OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, EventScripts);
                 else
-                    eventScripts.Show();
+                    EventScripts.Show();
+                loadedForms.Add(EventScripts);
                 Cursor.Current = Cursors.Arrow;
             }
-            eventScripts.KeyDown += new KeyEventHandler(editor_KeyDown);
-            eventScripts.BringToFront();
+            EventScripts.KeyDown += new KeyEventHandler(editor_KeyDown);
+            EventScripts.BringToFront();
+        }
+        public void CreateFontsWindow()
+        {
+            if (Fonts == null || !Fonts.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Fonts = new Fonts.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Fonts);
+                else
+                    Fonts.Show();
+                loadedForms.Add(Fonts);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Fonts.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Fonts.BringToFront();
         }
         public void CreateFormationsWindow()
         {
-            if (formations == null || !formations.Visible)
+            if (Formations == null || !Formations.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                formations = new FormationsEditor();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, formations);
+                Formations = new Formations.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Formations);
                 else
-                    formations.Show();
+                    Formations.Show();
+                loadedForms.Add(Formations);
                 Cursor.Current = Cursors.Arrow;
             }
-            formations.KeyDown += new KeyEventHandler(editor_KeyDown);
-            formations.BringToFront();
-        }
-        public void CreateItemsWindow()
-        {
-            if (items == null || !items.Visible)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                items = new ItemsEditor();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, items);
-                else
-                    items.Show();
-                Cursor.Current = Cursors.Arrow;
-            }
-            items.KeyDown += new KeyEventHandler(editor_KeyDown);
-            items.BringToFront();
-        }
-        public void CreateLevelsWindow()
-        {
-            if (levels == null || !levels.Visible)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                levels = new Levels();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, levels);
-                else
-                    levels.Show();
-                Cursor.Current = Cursors.Arrow;
-            }
-            levels.KeyDown += new KeyEventHandler(editor_KeyDown);
-            levels.BringToFront();
-        }
-        public void CreateMonstersWindow()
-        {
-            if (monsters == null || !monsters.Visible)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                monsters = new Monsters();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, monsters);
-                else
-                    monsters.Show();
-                Cursor.Current = Cursors.Arrow;
-            }
-            monsters.KeyDown += new KeyEventHandler(editor_KeyDown);
-            monsters.BringToFront();
+            Formations.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Formations.BringToFront();
         }
         public void CreateIntroWindow()
         {
-            if (intro == null || !intro.Visible)
+            if (Intro == null || !Intro.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                intro = new Intro();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, intro);
+                Intro = new Intro.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Intro);
                 else
-                    intro.Show();
+                    Intro.Show();
+                loadedForms.Add(Intro);
                 Cursor.Current = Cursors.Arrow;
             }
-            intro.KeyDown += new KeyEventHandler(editor_KeyDown);
-            intro.BringToFront();
+            Intro.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Intro.BringToFront();
+        }
+        public void CreateItemsWindow()
+        {
+            if (Items == null || !Items.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Items = new Items.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Items);
+                else
+                    Items.Show();
+                loadedForms.Add(Items);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Items.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Items.BringToFront();
+        }
+        public void CreateLevelUpsWindow()
+        {
+            if (LevelUps == null || !LevelUps.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                LevelUps = new LevelUps.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, LevelUps);
+                else
+                    LevelUps.Show();
+                loadedForms.Add(LevelUps);
+                Cursor.Current = Cursors.Arrow;
+            }
+            LevelUps.KeyDown += new KeyEventHandler(editor_KeyDown);
+            LevelUps.BringToFront();
+        }
+        public void CreateMagicWindow()
+        {
+            if (Magic == null || !Magic.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Magic = new Magic.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Magic);
+                else
+                    Magic.Show();
+                loadedForms.Add(Magic);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Magic.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Magic.BringToFront();
+        }
+        public void CreateMonstersWindow()
+        {
+            if (Monsters == null || !Monsters.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Monsters = new Monsters.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Monsters);
+                else
+                    Monsters.Show();
+                loadedForms.Add(Monsters);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Monsters.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Monsters.BringToFront();
+        }
+        public void CreateNewGameWindow()
+        {
+            if (NewGame == null || !NewGame.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                NewGame = new NewGame.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, NewGame);
+                else
+                    NewGame.Show();
+                loadedForms.Add(NewGame);
+                Cursor.Current = Cursors.Arrow;
+            }
+            NewGame.KeyDown += new KeyEventHandler(editor_KeyDown);
+            NewGame.BringToFront();
         }
         public void CreateMenusWindow()
         {
-            if (menus == null || !menus.Visible)
+            if (Menus == null || !Menus.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                menus = new MenusEditor();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, menus);
+                Menus = new Menus.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Menus);
                 else
-                    menus.Show();
+                    Menus.Show();
+                loadedForms.Add(Menus);
                 Cursor.Current = Cursors.Arrow;
             }
-            menus.KeyDown += new KeyEventHandler(editor_KeyDown);
-            menus.BringToFront();
+            Menus.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Menus.BringToFront();
         }
-        public void CreateMiniGamesWindow()
+        public void CreateMinecartWindow()
         {
-            if (miniGames == null || !miniGames.Visible)
+            if (Minecart == null || !Minecart.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                miniGames = new MiniGames();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, miniGames);
+                Minecart = new Minecart.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Minecart);
                 else
-                    miniGames.Show();
+                    Minecart.Show();
+                loadedForms.Add(Minecart);
                 Cursor.Current = Cursors.Arrow;
             }
-            miniGames.KeyDown += new KeyEventHandler(editor_KeyDown);
-            miniGames.BringToFront();
+            Minecart.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Minecart.BringToFront();
+        }
+        public void CreateShopsWindow()
+        {
+            if (Shops == null || !Shops.Visible)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Shops = new Shops.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Shops);
+                else
+                    Shops.Show();
+                loadedForms.Add(Shops);
+                Cursor.Current = Cursors.Arrow;
+            }
+            Shops.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Shops.BringToFront();
         }
         public void CreateSpritesWindow()
         {
-            if (sprites == null || !sprites.Visible)
+            if (Sprites == null || !Sprites.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                sprites = new Sprites();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, sprites);
+                Sprites = new Sprites.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, Sprites);
                 else
-                    sprites.Show();
+                    Sprites.Show();
+                loadedForms.Add(Sprites);
                 Cursor.Current = Cursors.Arrow;
             }
-            sprites.KeyDown += new KeyEventHandler(editor_KeyDown);
-            sprites.BringToFront();
+            Sprites.KeyDown += new KeyEventHandler(editor_KeyDown);
+            Sprites.BringToFront();
         }
         public void CreateWorldMapsWindow()
         {
-            if (worldMaps == null || !worldMaps.Visible)
+            if (WorldMaps == null || !WorldMaps.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                worldMaps = new WorldMaps();
-                if (dockEditors)
-                    Do.AddControl(editor.Panel2, worldMaps);
+                WorldMaps = new WorldMaps.OwnerForm();
+                if (DockEditors)
+                    Do.AddControl(MainForm.PanelForms, WorldMaps);
                 else
-                    worldMaps.Show();
+                    WorldMaps.Show();
+                loadedForms.Add(WorldMaps);
                 Cursor.Current = Cursors.Arrow;
             }
-            worldMaps.KeyDown += new KeyEventHandler(editor_KeyDown);
-            worldMaps.BringToFront();
+            WorldMaps.KeyDown += new KeyEventHandler(editor_KeyDown);
+            WorldMaps.BringToFront();
         }
+
+        // Non-editors
         public void CreatePatchesWindow()
         {
-            if ((levels != null && levels.Visible) ||
-                (eventScripts != null && eventScripts.Visible) ||
-                (sprites != null && sprites.Visible))
+            if ((Areas != null && Areas.Visible) ||
+                (EventScripts != null && EventScripts.Visible) ||
+                (Sprites != null && Sprites.Visible))
             {
-                DialogResult result = MessageBox.Show(
+                var result = MessageBox.Show(
                     "It is highly recommended that you close and save any editor windows before patching.\n\n" +
                     "Would you like to save and close all current windows?",
                     "LAZY SHELL", MessageBoxButtons.YesNoCancel);
@@ -470,263 +555,139 @@ namespace LAZYSHELL
                     if (result == DialogResult.Cancel)
                         return;
             }
-            if (patches == null || !patches.Visible)
+            if (Patches == null || !Patches.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                patches = new GamePatches();
-                patches.Show();
-                patches.StartDownloadingPatches();
+                Patches = new PatchesForm();
+                Patches.Show();
+                Patches.StartDownloadingPatches();
                 Cursor.Current = Cursors.Arrow;
             }
         }
         public void CreateProjectWindow()
         {
-            if (project == null || !project.Visible)
+            if (Project == null || !Project.Visible)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                project = new Project();
-                project.Show();
+                Project = new ProjectForm();
+                Project.Show();
                 Cursor.Current = Cursors.Arrow;
             }
         }
+        public void CreateHexEditor()
+        {
+            if (HexEditor == null || !HexEditor.Visible)
+            {
+                HexEditor = new HexEditor(Model.ROM, Bits.Copy(Model.ROM));
+                HexEditor.Owner = MainForm;
+            }
+        }
+
         #endregion
-        // editor managing
+
+        // Window management
         public void Dock()
         {
-            if (allies != null && allies.Visible)
-                Do.AddControl(editor.Panel2, allies);
-            if (animations != null && animations.Visible)
-                Do.AddControl(editor.Panel2, animations);
-            if (attacks != null && attacks.Visible)
-                Do.AddControl(editor.Panel2, attacks);
-            if (audio != null && audio.Visible)
-                Do.AddControl(editor.Panel2, audio);
-            if (battlefields != null && battlefields.Visible)
-                Do.AddControl(editor.Panel2, battlefields);
-            if (dialogues != null && dialogues.Visible)
-                Do.AddControl(editor.Panel2, dialogues);
-            if (effects != null && effects.Visible)
-                Do.AddControl(editor.Panel2, effects);
-            if (eventScripts != null && eventScripts.Visible)
-                Do.AddControl(editor.Panel2, eventScripts);
-            if (formations != null && formations.Visible)
-                Do.AddControl(editor.Panel2, formations);
-            if (items != null && items.Visible)
-                Do.AddControl(editor.Panel2, items);
-            if (levels != null && levels.Visible)
-                Do.AddControl(editor.Panel2, levels);
-            if (intro != null && intro.Visible)
-                Do.AddControl(editor.Panel2, intro);
-            if (menus != null && menus.Visible)
-                Do.AddControl(editor.Panel2, menus);
-            if (miniGames != null && miniGames.Visible)
-                Do.AddControl(editor.Panel2, miniGames);
-            if (monsters != null && monsters.Visible)
-                Do.AddControl(editor.Panel2, monsters);
-            if (sprites != null && sprites.Visible)
-                Do.AddControl(editor.Panel2, sprites);
-            if (worldMaps != null && worldMaps.Visible)
-                Do.AddControl(editor.Panel2, worldMaps);
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    Do.AddControl(MainForm.PanelForms, form);
+            }
         }
         public void Undock()
         {
-            if (allies != null && allies.Visible)
-                Do.RemoveControl(allies);
-            if (animations != null && animations.Visible)
-                Do.RemoveControl(animations);
-            if (attacks != null && attacks.Visible)
-                Do.RemoveControl(attacks);
-            if (audio != null && audio.Visible)
-                Do.RemoveControl(audio);
-            if (battlefields != null && battlefields.Visible)
-                Do.RemoveControl(battlefields);
-            if (dialogues != null && dialogues.Visible)
-                Do.RemoveControl(dialogues);
-            if (effects != null && effects.Visible)
-                Do.RemoveControl(effects);
-            if (eventScripts != null && eventScripts.Visible)
-                Do.RemoveControl(eventScripts);
-            if (formations != null && formations.Visible)
-                Do.RemoveControl(formations);
-            if (items != null && items.Visible)
-                Do.RemoveControl(items);
-            if (levels != null && levels.Visible)
-                Do.RemoveControl(levels);
-            if (intro != null && intro.Visible)
-                Do.RemoveControl(intro);
-            if (menus != null && menus.Visible)
-                Do.RemoveControl(menus);
-            if (miniGames != null && miniGames.Visible)
-                Do.RemoveControl(miniGames);
-            if (monsters != null && monsters.Visible)
-                Do.RemoveControl(monsters);
-            if (sprites != null && sprites.Visible)
-                Do.RemoveControl(sprites);
-            if (worldMaps != null && worldMaps.Visible)
-                Do.RemoveControl(worldMaps);
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    Do.RemoveControl(form);
+            }
         }
         public void OpenAll()
         {
-            CreateAlliesWindow();
             CreateAnimationsWindow();
+            CreateAreasWindow();
             CreateAttacksWindow();
             CreateAudioWindow();
             CreateBattlefieldsWindow();
             CreateDialoguesWindow();
             CreateEffectsWindow();
             CreateEventScriptsWindow();
+            CreateFontsWindow();
             CreateFormationsWindow();
             CreateItemsWindow();
-            CreateLevelsWindow();
             CreateIntroWindow();
+            CreateMagicWindow();
             CreateMenusWindow();
-            CreateMiniGamesWindow();
+            CreateMinecartWindow();
+            CreateNewGameWindow();
             CreateMonstersWindow();
+            CreateShopsWindow();
             CreateSpritesWindow();
             CreateWorldMapsWindow();
         }
         public void MinimizeAll()
         {
-            if (allies != null && allies.Visible)
-                allies.WindowState = FormWindowState.Minimized;
-            if (animations != null && animations.Visible)
-                animations.WindowState = FormWindowState.Minimized;
-            if (attacks != null && attacks.Visible)
-                attacks.WindowState = FormWindowState.Minimized;
-            if (audio != null && audio.Visible)
-                audio.WindowState = FormWindowState.Minimized;
-            if (battlefields != null && battlefields.Visible)
-                battlefields.WindowState = FormWindowState.Minimized;
-            if (dialogues != null && dialogues.Visible)
-                dialogues.WindowState = FormWindowState.Minimized;
-            if (effects != null && effects.Visible)
-                effects.WindowState = FormWindowState.Minimized;
-            if (eventScripts != null && eventScripts.Visible)
-                eventScripts.WindowState = FormWindowState.Minimized;
-            if (formations != null && formations.Visible)
-                formations.WindowState = FormWindowState.Minimized;
-            if (items != null && items.Visible)
-                items.WindowState = FormWindowState.Minimized;
-            if (levels != null && levels.Visible)
-                levels.WindowState = FormWindowState.Minimized;
-            if (intro != null && intro.Visible)
-                intro.WindowState = FormWindowState.Minimized;
-            if (menus != null && menus.Visible)
-                menus.WindowState = FormWindowState.Minimized;
-            if (miniGames != null && miniGames.Visible)
-                miniGames.WindowState = FormWindowState.Minimized;
-            if (monsters != null && monsters.Visible)
-                monsters.WindowState = FormWindowState.Minimized;
-            if (sprites != null && sprites.Visible)
-                sprites.WindowState = FormWindowState.Minimized;
-            if (worldMaps != null && worldMaps.Visible)
-                worldMaps.WindowState = FormWindowState.Minimized;
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    form.WindowState = FormWindowState.Minimized;
+            }
         }
         public void RestoreAll()
         {
-            if (allies != null && allies.Visible)
-                allies.WindowState = FormWindowState.Normal;
-            if (animations != null && animations.Visible)
-                animations.WindowState = FormWindowState.Normal;
-            if (attacks != null && attacks.Visible)
-                attacks.WindowState = FormWindowState.Normal;
-            if (audio != null && audio.Visible)
-                audio.WindowState = FormWindowState.Normal;
-            if (battlefields != null && battlefields.Visible)
-                battlefields.WindowState = FormWindowState.Normal;
-            if (dialogues != null && dialogues.Visible)
-                dialogues.WindowState = FormWindowState.Normal;
-            if (effects != null && effects.Visible)
-                effects.WindowState = FormWindowState.Normal;
-            if (eventScripts != null && eventScripts.Visible)
-                eventScripts.WindowState = FormWindowState.Normal;
-            if (formations != null && formations.Visible)
-                formations.WindowState = FormWindowState.Normal;
-            if (items != null && items.Visible)
-                items.WindowState = FormWindowState.Normal;
-            if (levels != null && levels.Visible)
-                levels.WindowState = FormWindowState.Normal;
-            if (intro != null && intro.Visible)
-                intro.WindowState = FormWindowState.Normal;
-            if (menus != null && menus.Visible)
-                menus.WindowState = FormWindowState.Normal;
-            if (miniGames != null && miniGames.Visible)
-                miniGames.WindowState = FormWindowState.Normal;
-            if (monsters != null && monsters.Visible)
-                monsters.WindowState = FormWindowState.Normal;
-            if (sprites != null && sprites.Visible)
-                sprites.WindowState = FormWindowState.Normal;
-            if (worldMaps != null && worldMaps.Visible)
-                worldMaps.WindowState = FormWindowState.Normal;
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    form.WindowState = FormWindowState.Normal;
+            }
         }
         public bool CloseAll()
         {
-            if (allies != null && allies.Visible)
-                allies.Close();
-            if (animations != null && animations.Visible)
-                animations.Close();
-            if (attacks != null && attacks.Visible)
-                attacks.Close();
-            if (audio != null && audio.Visible)
-                audio.Close();
-            if (battlefields != null && battlefields.Visible)
-                battlefields.Close();
-            if (dialogues != null && dialogues.Visible)
-                dialogues.Close();
-            if (effects != null && effects.Visible)
-                effects.Close();
-            if (eventScripts != null && eventScripts.Visible)
-                eventScripts.Close();
-            if (formations != null && formations.Visible)
-                formations.Close();
-            if (items != null && items.Visible)
-                items.Close();
-            if (levels != null && levels.Visible)
-                levels.Close();
-            if (monsters != null && monsters.Visible)
-                monsters.Close();
-            if (sprites != null && sprites.Visible)
-                sprites.Close();
-            if (intro != null && intro.Visible)
-                intro.Close();
-            if (menus != null && menus.Visible)
-                menus.Close();
-            if (miniGames != null && miniGames.Visible)
-                miniGames.Close();
-            if (worldMaps != null && worldMaps.Visible)
-                worldMaps.Close();
-            if ((allies != null && allies.Visible) ||
-                (animations != null && animations.Visible) ||
-                (attacks != null && attacks.Visible) ||
-                (battlefields != null && battlefields.Visible) ||
-                (dialogues != null && dialogues.Visible) ||
-                (effects != null && effects.Visible) ||
-                (eventScripts != null && eventScripts.Visible) ||
-                (formations != null && formations.Visible) ||
-                (items != null && items.Visible) ||
-                (levels != null && levels.Visible) ||
-                (monsters != null && monsters.Visible) ||
-                (sprites != null && sprites.Visible) ||
-                (intro != null && intro.Visible) ||
-                (menus != null && menus.Visible) ||
-                (miniGames != null && miniGames.Visible) ||
-                (worldMaps != null && worldMaps.Visible))
-                return true;
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                if (i >= Application.OpenForms.Count)
+                    continue;
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    form.Close();
+            }
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                if (i >= Application.OpenForms.Count)
+                    continue;
+                var form = Application.OpenForms[i];
+                if (form != MainForm && form.Owner == null)
+                    return true;
+            }
             return false;
         }
+        public void ScreencapHotkeys()
+        {
+
+        }
+
+        // Data management
         public void LoadAll()
         {
             Model.LoadAll();
         }
         public void ClearAll()
         {
-            Model.ClearModel();
+            Model.ClearAll();
         }
+
+        // Event Handlers
         private void editor_KeyDown(object sender, KeyEventArgs e)
         {
-            Form editor = (Form)sender;
+            Form editor = sender as Form;
             if (e.KeyData == Keys.F3)
                 Do.CaptureScreens(editor);
         }
+
+        #endregion
     }
 }

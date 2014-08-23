@@ -126,9 +126,9 @@ namespace LAZYSHELL
             // 
             this.patchHTTPServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.patchHTTPServer.Location = new System.Drawing.Point(6, 24);
+            this.patchHTTPServer.Location = new System.Drawing.Point(7, 24);
             this.patchHTTPServer.Name = "patchHTTPServer";
-            this.patchHTTPServer.Size = new System.Drawing.Size(349, 21);
+            this.patchHTTPServer.Size = new System.Drawing.Size(325, 21);
             this.patchHTTPServer.TabIndex = 4;
             // 
             // groupBox1
@@ -137,7 +137,7 @@ namespace LAZYSHELL
             this.groupBox1.Controls.Add(this.visualThemeStandard);
             this.groupBox1.Location = new System.Drawing.Point(12, 154);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(87, 60);
+            this.groupBox1.Size = new System.Drawing.Size(110, 60);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Visual Theme";
@@ -217,9 +217,9 @@ namespace LAZYSHELL
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.patchHTTPServer);
-            this.groupBox5.Location = new System.Drawing.Point(105, 154);
+            this.groupBox5.Location = new System.Drawing.Point(128, 154);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(361, 60);
+            this.groupBox5.Size = new System.Drawing.Size(338, 60);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Patch HTTP Server";
@@ -237,10 +237,9 @@ namespace LAZYSHELL
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.buttonDefault);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = global::LAZYSHELL.Properties.Resources.LAZYSHELL_icon;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SettingsEditor";
-            this.Text = "LAZY SHELL - Settings";
+            this.Text = "LAZY SHELL - Preferences";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -248,6 +247,7 @@ namespace LAZYSHELL
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
         private System.Windows.Forms.CheckedListBox checkedListBox1;

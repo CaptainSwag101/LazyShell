@@ -7,29 +7,42 @@ namespace LAZYSHELL
 {
     public class ProgramController
     {
+        #region Variables
+
         private Program App;
-        public bool DockEditors { get { return App.DockEditors; } set { App.DockEditors = value; } }
+        public bool DockEditors
+        {
+            get { return App.DockEditors; }
+            set { App.DockEditors = value; }
+        }
+
+        #endregion
+
         // Constructor
         public ProgramController(Program app)
         {
             this.App = app;
         }
-        // assemblers
-        public void Assemble()
+
+        #region Methods
+
+        // Saving
+        public void WriteToROM()
         {
-            App.Assemble();
+            App.WriteToROM();
         }
-        public bool AssembleAndCloseWindows()
+        public bool WriteToROMAndCloseWindows()
         {
             return App.CloseAll();
         }
-        // functions
+
         #region File Managing
+
         public bool OpenRomFile()
         {
             if (App.OpenRomFile())
             {
-                Model.ClearModel();
+                Model.ClearAll();
                 State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
@@ -44,7 +57,7 @@ namespace LAZYSHELL
         {
             if (App.OpenRomFile(filename))
             {
-                Model.ClearModel();
+                Model.ClearAll();
                 State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
                 if (!VerifyRom())
@@ -64,7 +77,7 @@ namespace LAZYSHELL
         }
         public void CloseRomFile()
         {
-            Model.ClearModel();
+            Model.ClearAll();
             State.Instance.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
             State.Instance2.PrivateKey = null; // Clear the PrivateKey whenever we load a new rom
             App.CloseRomFile();
@@ -95,7 +108,7 @@ namespace LAZYSHELL
         }
         public string RomChecksum()
         {
-            return Model.RomChecksum();
+            return Model.GetRomChecksum();
         }
         public string GameCode()
         {
@@ -105,8 +118,11 @@ namespace LAZYSHELL
         {
             return Model.GetFileSize();
         }
+
         #endregion
+
         #region MD5 hash methods
+
         public void CreateNewMd5Checksum()
         {
             Model.CreateNewMD5Checksum();
@@ -115,8 +131,11 @@ namespace LAZYSHELL
         {
             return Model.VerifyMD5Checksum();
         }
+
         #endregion
+
         #region Author Stamp
+
         public bool Locked()
         {
             return Model.Locked;
@@ -129,15 +148,18 @@ namespace LAZYSHELL
                 return App.SaveRomFileAs(); // Save
             return false;
         }
+
         #endregion
+
         #region Create Editor Windows
-        public void Allies()
-        {
-            App.CreateAlliesWindow();
-        }
+
         public void Animations()
         {
             App.CreateAnimationsWindow();
+        }
+        public void Areas()
+        {
+            App.CreateAreasWindow();
         }
         public void Attacks()
         {
@@ -159,17 +181,29 @@ namespace LAZYSHELL
         {
             App.CreateEffectsWindow();
         }
+        public void EventScripts()
+        {
+            App.CreateEventScriptsWindow();
+        }
         public void Formations()
         {
             App.CreateFormationsWindow();
+        }
+        public void Fonts()
+        {
+            App.CreateFontsWindow();
         }
         public void Items()
         {
             App.CreateItemsWindow();
         }
-        public void Levels()
+        public void LevelUps()
         {
-            App.CreateLevelsWindow();
+            App.CreateLevelUpsWindow();
+        }
+        public void Magic()
+        {
+            App.CreateMagicWindow();
         }
         public void MainTitle()
         {
@@ -181,15 +215,19 @@ namespace LAZYSHELL
         }
         public void MiniGames()
         {
-            App.CreateMiniGamesWindow();
+            App.CreateMinecartWindow();
         }
         public void Monsters()
         {
             App.CreateMonstersWindow();
         }
-        public void Scripts()
+        public void NewGame()
         {
-            App.CreateEventScriptsWindow();
+            App.CreateNewGameWindow();
+        }
+        public void Shops()
+        {
+            App.CreateShopsWindow();
         }
         public void Sprites()
         {
@@ -207,6 +245,15 @@ namespace LAZYSHELL
         {
             App.CreateProjectWindow();
         }
+        public void HexEditor()
+        {
+            App.CreateHexEditor();
+        }
+
+        #endregion
+
+        #region Window management
+
         public void Dock()
         {
             App.Dock();
@@ -231,6 +278,11 @@ namespace LAZYSHELL
         {
             App.CloseAll();
         }
+
+        #endregion
+
+        #region Data management
+
         public void LoadAll()
         {
             App.LoadAll();
@@ -239,6 +291,9 @@ namespace LAZYSHELL
         {
             App.ClearAll();
         }
+
+        #endregion
+
         #endregion
     }
 }

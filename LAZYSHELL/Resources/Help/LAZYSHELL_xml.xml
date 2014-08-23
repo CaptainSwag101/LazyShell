@@ -243,7 +243,7 @@ http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
       <definition>Example: TERRAPIN is an index in the monster element (index 0). The level for Mario's Pad is index 16 in the levels element, etc. You can modify the properties of each index by switching to or among them in the editors using either its drop down list or immediately with its numeric up/down.</definition>
     </entry>
     <entry term="isometric">
-      <definition>The pseudo 3-D orientation of Super Mario RPG. Other games like Final Fantasy Tactics and Tactics Ogre are isometrically oriented. Something is called "isometric" when, instead of being in a flat gridplane, it is shaped like a diamond and arranged at an angle. Nevertheless Mario RPG's levels are drawn with square 16x16 tiles and not diamond-shaped tiles, whereas the solidity tiles are.</definition>
+      <definition>The pseudo 3-D orientation of Super Mario RPG. Other games like Final Fantasy Tactics and Tactics Ogre are isometrically oriented. Something is called "isometric" when, instead of being in a flat gridplane, it is shaped like a diamond and arranged at an angle. Nevertheless Mario RPG's levels are drawn with square 16x16 tiles and not diamond-shaped tiles, whereas the collision tiles are.</definition>
     </entry>
     <entry term="layer">
       <definition>SMRPG uses five layers: L1, L2, L3, NPCs, BG. By default, NPCs appear on top of all other layers (excluding priority 1 tiles). After that, L1 appears on top, followed by L2, L3, and BG. The BG is simply the solid background color behind everything else.</definition>
@@ -258,7 +258,7 @@ http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
       <definition>Mode 7 is a format in SNES which can display a 2D map in a 3D manner. The 1st and 2nd mine cart levels are in mode 7 format, for instance. It can also do transformations such as the stretching effect on the world maps.</definition>
     </entry>
     <entry term="mods">
-      <definition>These can change the tiles or solidity tiles of a level. In the levels editor, there are two types of mods: tile mods and solidity mods. Example: Croco blowing up the wall in Moleville Mines. Example: the green button in Rose Town removing/adding stairs outside.</definition>
+      <definition>These can change the tiles or collision tiles of a level. In the levels editor, there are two types of mods: tile mods and collision mods. Example: Croco blowing up the wall in Moleville Mines. Example: the green button in Rose Town removing/adding stairs outside.</definition>
     </entry>
     <entry term="mold">
       <definition>An arrangement of tiles that form a complete image (ie. a sprite image). A mold is similar to the orientation of a tilemap, except that sprite molds can either be in a format that arranges the tiles in a grid (gridplane) or a coordinate system (tilemap). One or more molds may be contained in a sprite or effect and are used to create a sequence animation.</definition>
@@ -281,8 +281,8 @@ http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
     <entry term="sequence">
       <definition>An animation. Two types of elements use sequences: sprites and effects. A sequence is a collection of frames. Each frame is assigned a mold index from the sprite or effect's mold collection and plays back the frames as a fully animated sequence.</definition>
     </entry>
-    <entry term="solidity">
-      <definition>Also varyingly called called "physical field" or "collision tiles". The physical properties of something, like a map. Levels in most games have solidity maps, but usually as tilesets associated with the regular graphical tileset. As tilesets in SMRPG are grid-based and not isometric like the solidity tiles, the tilemaps and not the tilesets have their own solidity maps.</definition>
+    <entry term="collision">
+      <definition>Also varyingly called called "physical field" or "collision tiles". The physical properties of something, like a map. Levels in most games have collision maps, but usually as tilesets associated with the regular graphical tileset. As tilesets in SMRPG are grid-based and not isometric like the collision tiles, the tilemaps and not the tilesets have their own collision maps.</definition>
     </entry>
     <entry term="tilemap">
       <definition>An example: Levels are 64 rows of tiles, each row is 64 tiles. Many sprites are "tilemaps" themselves, but here each tile would have its own coordinate instead of being placed in a grid like levels. Do not mistake tilemaps with tilesets. "tileset" A collection or "palette" of tiles used to draw to a tilemap.</definition>
@@ -1242,7 +1242,7 @@ Action scripts are basically the same as action queues found in event scripts, e
       </FAQ>
     </EventScripts>
     <Formations form="FormationsEditor" icon="icons/mainFormations.gif" title="Formations" type="editor">
-      <description>This editor has 2 subwindows: NewFormations and packs.</description>
+      <description>This editor has 2 subwindows: Controls.NewFormations and packs.</description>
       <Formations form="Formations" icon="icons/mainFormations.gif" title="Formations" type="subwindow">
         <description>A formation is a set of monsters encountered in battle. A formation is chosen when a battle is called through either an event script or through the property of an NPC in a level.</description>
         <tooltip control="formationNameList" control2="formationNum">
@@ -1628,9 +1628,9 @@ Many levels use the same map as other levels, such as the Booster Tower levels, 
           <description>The tilemap used by Layer 3 in the current map. Layer 3 is most often the "effect" layer which usually includes water, fog effects, translucent images, clouds, etc..</description>
         </tooltip>
         <tooltip control="mapPhysicalMapNum">
-          <title>Solidity Map</title>
-          <description>The solidity map, also referred to as a physical map or collision tiles, is a map of solid tiles in the orientation of an isometric map. An isometric map is a 2D map that projects a 3D-like image.
-The solidity map can be shown/hidden using the block-like button in the toolstrip above the level image.</description>
+          <title>Collision Map</title>
+          <description>The collision map, also referred to as a physical map or solidity map, is a map of solid tiles in the orientation of an isometric map. An isometric map is a 2D map that projects a 3D-like image.
+The collision map can be shown/hidden using the block-like button in the toolstrip above the level image.</description>
         </tooltip>
         <tooltip control="mapBattlefieldNum">
           <title>Battlefield</title>
@@ -2010,15 +2010,15 @@ NOTE: the two treasure chest options are ALWAYS stored to clone buffer A, and th
           </tooltip>
           <tooltip control="axisAcute">
             <title>Acute axis</title>
-            <description>The length, in pixels, from the top-left to the bottom-right of the NPC's solidity field. Its solidity field is the area which Mario and other NPCs cannot pass.</description>
+            <description>The length, in pixels, from the top-left to the bottom-right of the NPC's collision field. Its collision field is the area which Mario and other NPCs cannot pass.</description>
           </tooltip>
           <tooltip control="axisObtuse">
             <title>Obtuse axis</title>
-            <description>The length, in pixels, from the top-right to the bottom-left of the NPC's solidity field. Its solidity field is the area which Mario and other NPCs cannot pass.</description>
+            <description>The length, in pixels, from the top-right to the bottom-left of the NPC's collision field. Its collision field is the area which Mario and other NPCs cannot pass.</description>
           </tooltip>
           <tooltip control="height">
             <title>Height</title>
-            <description>The height, in pixels, of the NPC's solidity field.</description>
+            <description>The height, in pixels, of the NPC's collision field.</description>
           </tooltip>
           <tooltip control="vramStore">
             <title>Store</title>
@@ -2243,7 +2243,7 @@ A tile mod can also have an "alternate" tile mod, which can be selected in prefe
         </tooltip>
       </TileMods>
       <SolidMods title="Solid Mods" type="section">
-        <description>A solid mod is similar to a tile mod in that the solidity map can be manually altered through an event script command. Its placement and dimensions, of course, are isometric.</description>
+        <description>A solid mod is similar to a tile mod in that the collision map can be manually altered through an event script command. Its placement and dimensions, of course, are isometric.</description>
         <tooltip control="solidModsFieldTree">
           <title>Solid Mod Collection</title>
           <description>The collection of solid mods for the level.</description>
@@ -2266,11 +2266,11 @@ A tile mod can also have an "alternate" tile mod, which can be selected in prefe
         </tooltip>
       </SolidMods>
       <SolidTiles form="LevelsSolidTiles" icon="icons/buttonPhysicalTiles.gif" title="Solid Tiles" type="subwindow">
-        <description>Here a solidity tile is selected to draw to the level map.
-Solidity tiles, like the solidity map they're drawn in, are isometric in make-up. All of these properties are in isometric units.
-Solidity tiles are color-coded. Places where there are no tiles at all can be walked on. Grey tiles are tiles that can also (generally) be walked on. Slanted grey tiles are stairs that can be walked on. Pink tiles are those tiles or portions of tiles that cannot be walked on at all. White tiles are "floating" tiles, or tiles that hover above a base tile of the same tile. Dark grey tiles are simply base tiles which have a "floating" tile above them. Light blue tiles are water tiles that can be waded through. Dark blue tiles are water tiles that can be swum through. Green tiles are vine tiles that can be climbed.
-A solidity tile is arranged in four quadrants (north, south, east, west) each quadrant having its own set of properties. It also has four edges (NW, SW, NE, SE) which also have a set of attributes.
-The following is a list of the most common solidity tiles:</description>
+        <description>Here a collision tile is selected to draw to the level map.
+Collision tiles, like the collision map they're drawn in, are isometric in make-up. All of these properties are in isometric units.
+Collision tiles are color-coded. Places where there are no tiles at all can be walked on. Grey tiles are tiles that can also (generally) be walked on. Slanted grey tiles are stairs that can be walked on. Pink tiles are those tiles or portions of tiles that cannot be walked on at all. White tiles are "floating" tiles, or tiles that hover above a base tile of the same tile. Dark grey tiles are simply base tiles which have a "floating" tile above them. Light blue tiles are water tiles that can be waded through. Dark blue tiles are water tiles that can be swum through. Green tiles are vine tiles that can be climbed.
+A collision tile is arranged in four quadrants (north, south, east, west) each quadrant having its own set of properties. It also has four edges (NW, SW, NE, SE) which also have a set of attributes.
+The following is a list of the most common collision tiles:</description>
         <attribute>
           <description>Tile #0 is the empty tile--erasing a tile is the same as drawing tile #0 in its place. Therefore it is strongly recommended to leave this tile alone.
 Tile #255 is commonly used to set the physical boundaries of a level, just as the layer mask sets the visible boundaries.
@@ -2282,7 +2282,7 @@ Tile #256 is exactly the same as tile #0, only that it has priority 3 for object
         </tooltip>
         <tooltip control="heightOfBaseTile">
           <title>Height of base tile</title>
-          <description>The height of the solidity tile from ground zero.</description>
+          <description>The height of the collision tile from ground zero.</description>
         </tooltip>
         <tooltip control="heightOverhead">
           <title>Height of overhead tile</title>
@@ -2383,15 +2383,15 @@ Some of these properties are unknown, but seem to call automatic tile mods.</des
         </tooltip>
       </SolidTiles>
       <SpaceAnalyzer form="SpaceAnalyzer" icon="icons/spaceAnalyzer.gif" title="Space Analyzer" type="section">
-        <description>The Space Analyzer window is for monitoring the space available in the banks that store the compressed level map data for tile maps and solidity maps. The size of the uncompressed map data that the user interacts with in the editor is compressed to analyze the actual space which will be used in each bank.
-Each tab contains the entire list of tilemaps and solidity maps used by all levels, and the data for accessing each. Collections of rows are color-coded to separate the banks from one another. The most import column is probably the "Bytes left" column, which shows how many available bytes there are for that bank, starting at that map.
+        <description>The Space Analyzer window is for monitoring the space available in the banks that store the compressed level map data for tile maps and collision maps. The size of the uncompressed map data that the user interacts with in the editor is compressed to analyze the actual space which will be used in each bank.
+Each tab contains the entire list of tilemaps and collision maps used by all levels, and the data for accessing each. Collections of rows are color-coded to separate the banks from one another. The most import column is probably the "Bytes left" column, which shows how many available bytes there are for that bank, starting at that map.
 If one or more rows (ie. maps) at the end of the bank are red, then there is not enough space to store all of the compressed maps and the editor will fail to save those map rows marked red.</description>
         <tooltip control="tilemapListView">
           <title>Tile Maps</title>
           <description>This is the entire collection of tilemaps for all levels.</description>
         </tooltip>
         <tooltip control="soliditymapListView">
-          <title>Solidity Maps</title>
+          <title>Collision Maps</title>
           <description>This is the entire collection of tilemaps for all levels.</description>
         </tooltip>
       </SpaceAnalyzer>
@@ -2414,11 +2414,11 @@ If one or more rows (ie. maps) at the end of the bank are red, then there is not
         </entry>
         <entry>
           <question>Some tiles keep overlapping the NPCs.</question>
-          <answer>Those tiles most likely have priority 1 enabled on one or more of their subtiles. To stop this, replace the solidity tile at that spot with a corresponding solidity tile with the "Priority 1 enabled for objects on tile" checked. Otherwise, it could be an overlap tile. To stop this, delete the overlap at that spot.</answer>
+          <answer>Those tiles most likely have priority 1 enabled on one or more of their subtiles. To stop this, replace the collision tile at that spot with a corresponding collision tile with the "Priority 1 enabled for objects on tile" checked. Otherwise, it could be an overlap tile. To stop this, delete the overlap at that spot.</answer>
         </entry>
         <entry>
           <question>When I stand on the edge of a block it overlaps Mario and NPCs.</question>
-          <answer>Look for a solidity tile with "Priority 3 for object on edge" enabled in the solidity tile search and draw it there.</answer>
+          <answer>Look for a collision tile with "Priority 3 for object on edge" enabled in the collision tile search and draw it there.</answer>
         </entry>
         <entry>
           <question>How do I get an NPC to start a dialogue?</question>
@@ -2438,7 +2438,7 @@ If one or more rows (ie. maps) at the end of the bank are red, then there is not
         </entry>
         <entry>
           <question>Walking off an edge causes Mario to fall and get stuck.</question>
-          <answer>Most likely you forgot to draw in a solidity tile somewhere. The isometric orientation of the solidity map sometimes makes it tricky to fill in all tiles. Also, make sure to seal off the edges of the walkable area with impassable tiles (usually with solid tile #255).</answer>
+          <answer>Most likely you forgot to draw in a collision tile somewhere. The isometric orientation of the collision map sometimes makes it tricky to fill in all tiles. Also, make sure to seal off the edges of the walkable area with impassable tiles (usually with solid tile #255).</answer>
         </entry>
         <entry>
           <question>How can I prevent a monster from reappearing after battle?</question>

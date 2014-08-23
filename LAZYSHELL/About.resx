@@ -118,9 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 3.19.0
-
-Copyright © 2007-2013  giangurgolo &amp; Omega
+    <value>Lazy Shell, Version 4.0.0
+Copyright © 2007-2014  giangurgolo &amp; Omega
 
 Created by Omega &amp; giangurgolo
 
@@ -131,6 +130,11 @@ ElementalPowerStar -  notable donator, principle bug-finder, positive feedback
 Yakibomb - principle bug-finder and tester, positive feedback
 Ryan H. - donator, supporter
 
+Icon Sets Used:
+FatCow Icons (http://www.fatcow.com/free-icons)
+OxygenTeam (https://github.com/pasnox/oxygen-icons-png)
+Led24 Icon Set (http://led24.de/iconset/)
+
 Special Thanks:
 Alex Farber - MRU list manager
 Bregalad - source code for BRR encoding and decoding
@@ -140,7 +144,7 @@ Kevin Weiner - animated GIF encoder class
 KP9000 - beta testing, discovered many bugs with pre-release version
 MathOnNapkins - helped with some coding
 Serge Meunier - image processing function code
-spel werdz rite - original resolution for running program under a 64-bit OS
+spel werdz rite - original resolution for running program under 64-bit OS
 romhacking community - various feedback</value>
   </data>
 </root>

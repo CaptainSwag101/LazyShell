@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
+// Associated with an assembly.
 [assembly: AssemblyTitle("LAZY SHELL")]
 [assembly: AssemblyDescription("Super Mario RPG Editor")]
 [assembly: AssemblyConfiguration("")]
@@ -25,5 +25,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("3.19.0.0")]
-[assembly: AssemblyFileVersion("3.19.0.0")]
+[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

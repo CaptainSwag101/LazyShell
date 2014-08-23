@@ -42,13 +42,12 @@ namespace LAZYSHELL
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(469, 388);
+            this.panel1.Size = new System.Drawing.Size(474, 442);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -60,19 +59,19 @@ namespace LAZYSHELL
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 56);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(465, 328);
+            this.panel2.Size = new System.Drawing.Size(474, 386);
             this.panel2.TabIndex = 0;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(65, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(394, 316);
+            this.richTextBox1.Size = new System.Drawing.Size(403, 374);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
@@ -84,7 +83,7 @@ namespace LAZYSHELL
             this.pictureBox2.Image = global::LAZYSHELL.Properties.Resources.TITLE_FG;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(465, 56);
+            this.pictureBox2.Size = new System.Drawing.Size(474, 56);
             this.pictureBox2.TabIndex = 314;
             this.pictureBox2.TabStop = false;
             // 
@@ -93,10 +92,9 @@ namespace LAZYSHELL
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(469, 23);
+            this.button1.Size = new System.Drawing.Size(474, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "CLOSE WINDOW";
             this.button1.UseVisualStyleBackColor = false;
@@ -106,26 +104,24 @@ namespace LAZYSHELL
             // 
             this.panel3.Controls.Add(this.button1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 388);
+            this.panel3.Location = new System.Drawing.Point(0, 442);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(469, 23);
+            this.panel3.Size = new System.Drawing.Size(474, 23);
             this.panel3.TabIndex = 3;
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 411);
+            this.ClientSize = new System.Drawing.Size(474, 465);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "About";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ABOUT LAZY SHELL...";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

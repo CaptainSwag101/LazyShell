@@ -11,22 +11,30 @@ using LAZYSHELL.Properties;
 
 namespace LAZYSHELL
 {
-    public partial class SettingsEditor : NewForm
+    public partial class SettingsEditor : Controls.NewForm
     {
-        private Settings settings = Settings.Default;
-        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        // constructor
+        // Variables
+        private Settings settings;
+
+        // Constructor
         public SettingsEditor()
         {
             InitializeComponent();
-            InitializeSettings();
+            InitializeVariables();
+            LoadSettings();
         }
-        // functions
-        private void InitializeSettings()
+
+        #region Methods
+
+        private void InitializeVariables()
+        {
+            settings = Settings.Default;
+        }
+        private void LoadSettings()
         {
             checkedListBox1.SetItemChecked(0, settings.LoadLastUsedROM);
             checkedListBox1.SetItemChecked(1, settings.LoadAllData);
-            checkedListBox1.SetItemChecked(2, settings.LoadNotes);
+            checkedListBox1.SetItemChecked(2, settings.LoadProject);
             checkedListBox1.SetItemChecked(3, settings.CreateBackupROMSave);
             checkedListBox1.SetItemChecked(4, settings.CreateBackupROM);
             checkedListBox1.SetItemChecked(5, settings.UnverifiedRomWarning);
@@ -57,7 +65,11 @@ namespace LAZYSHELL
             }
             this.patchHTTPServer.Text = this.settings.PatchServerURL;
         }
-        // event handlers
+
+        #endregion
+
+        #region Event Handlers
+
         private void buttonCustomDirectory_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -69,18 +81,18 @@ namespace LAZYSHELL
         }
         private void buttonDefault_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
+            var result = MessageBox.Show(
                 "You are about to reset the application's settings. You will lose all custom settings.\n\n" +
                 "Are you sure you want to do this?", "LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
                 settings.Reset();
-            InitializeSettings();
+            LoadSettings();
         }
         private void buttonApply_Click(object sender, EventArgs e)
         {
             settings.LoadLastUsedROM = checkedListBox1.GetItemChecked(0);
             settings.LoadAllData = checkedListBox1.GetItemChecked(1);
-            settings.LoadNotes = checkedListBox1.GetItemChecked(2);
+            settings.LoadProject = checkedListBox1.GetItemChecked(2);
             settings.CreateBackupROMSave = checkedListBox1.GetItemChecked(3);
             settings.CreateBackupROM = checkedListBox1.GetItemChecked(4);
             settings.UnverifiedRomWarning = checkedListBox1.GetItemChecked(5);
@@ -103,5 +115,7 @@ namespace LAZYSHELL
         {
             this.Close();
         }
+
+        #endregion
     }
 }

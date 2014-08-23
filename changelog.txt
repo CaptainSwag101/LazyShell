@@ -1,6 +1,34 @@
 Major changes/additions are indicated by ***
 
-v3.19.0 (2013-01-22)
+v4.0.0 (2014-??-??)
+--------------------------------------
+Additions:
+*Reference finding feature added to several editors
+
+Changes:
+***Subwindows split up into separate movable forms***
+***Attacks, fonts, level-ups, and shops moved to separate editors***
+*New icons from http://led24.de/iconset/
+*New icons from http://www.fatcow.com/free-icons
+*New icons from http://p.yusukekamiyamane.com/
+*New custom editor icons, buttons moved around in main form
+*Animations: command editing GUI moved to separate form
+*Areas: levels renamed to areas b/c less confusion and more specific
+*Areas: automatically compresses NPC clones, no more hassling
+*Areas: GUIs for map, layer, object properties moved to separate forms
+*Audio: separate forms for score viewer, channel tracks, instruments
+*Dialogues: automatically compresses duplicates, no more warnings
+*Event Scripts: command editing GUI moved to separate form
+*Formations: can enable/disable background in formation image
+*Formations: monster list drawn using game BG and font
+*Monsters: command editing GUI moved to separate form
+*Shops: shop inventory drawn using game BG and font
+
+Fixes:
+*Closing application in error message window now works 100%
+
+
+v3.19.0 (2014-01-22)
 --------------------------------------
 Changes:
 *Now allows user to load any ROM file, with a warning

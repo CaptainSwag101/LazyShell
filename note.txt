@@ -1,0 +1,5 @@
+I've been working on v4.0 which is a reworking of the GUI and the organization of the editors. Several editors have been moved into their own designated windows, e.g. the shops, fonts, level-up stats, and attacks are separate editors in the main form's ribbon. A more colorful icon set (using icons the FatCow icon set) will be present in v4.0.
+
+Also, a reference finding feature has been added to many editors to find references to the loaded index in other elements, e.g. find all event commands across all scripts that reference a loaded dialogue.
+
+The purpose of this future update is to reduce clutter and confusion for users and keep the editor's components organized and more easily manageable. It is a modest attempt to make the editor and it's code appear more professional and sophisticated as well as more organized.

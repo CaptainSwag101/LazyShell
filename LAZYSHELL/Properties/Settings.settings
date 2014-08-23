@@ -65,7 +65,7 @@
     <Setting Name="LastItem" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="LastLevel" Type="System.Int32" Scope="User">
+    <Setting Name="LastArea" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastMineCart" Type="System.Int32" Scope="User">
@@ -77,11 +77,11 @@
     <Setting Name="LastRomPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">"C:\\"</Value>
     </Setting>
-    <Setting Name="LastSoundType" Type="System.Int32" Scope="User">
+    <Setting Name="LastSPCType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LastSPC" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="LastSpell" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -95,10 +95,10 @@
     <Setting Name="LoadLastUsedROM" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LoadNotes" Type="System.Boolean" Scope="User">
+    <Setting Name="LoadProject" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="NotePathCustom" Type="System.String" Scope="User">
+    <Setting Name="ProjectPathCustom" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PatchServerURL" Type="System.String" Scope="User">
@@ -122,7 +122,7 @@
     <Setting Name="PreviewFirstTime" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="PreviewLevel" Type="System.Int32" Scope="User">
+    <Setting Name="PreviewArea" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="PreviewMaxStats" Type="System.Boolean" Scope="User">

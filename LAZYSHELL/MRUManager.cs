@@ -86,7 +86,10 @@ namespace LAZYSHELL
         private int maxDisplayLength = 60;      // maximum length of file name for display
         private string currentDirectory;        // current directory
         private ArrayList mruList;              // MRU list (file names)
-        public ArrayList MRUList { get { return mruList; } }
+        public ArrayList MRUList
+        {
+            get { return mruList; }
+        }
         private const string regEntryName = "file";  // entry name to keep MRU (file0, file1...)
 
         #endregion
@@ -306,7 +309,7 @@ namespace LAZYSHELL
             try
             {
                 // cast sender object to ToolStripMenuItem
-                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                var item = sender as ToolStripMenuItem;
                 if (item != null)
                 {
                     // Get file name from list using item index
