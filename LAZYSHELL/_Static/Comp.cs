@@ -16,12 +16,12 @@ namespace LAZYSHELL
         #region Variables
 
         [DllImport("Lunar Compress.dll")]
-        static extern int LunarOpenRAMFile(
+        static extern int ExtLunarOpenRAMFile(
             [MarshalAs(UnmanagedType.LPArray)] byte[] data, 
             int fileMode, 
             int size);
         [DllImport("Lunar Compress.dll")]
-        static extern int LunarDecompress(
+        static extern int ExtLunarDecompress(
             [MarshalAs(UnmanagedType.LPArray)] byte[] destination, 
             int addressToStart, 
             int maxDataSize, 
@@ -29,9 +29,9 @@ namespace LAZYSHELL
             int format2, 
             int DoNotUseThisYet); // int * to save end addr for calculating size
         [DllImport("Lunar Compress.dll")]
-        static extern int LunarSaveRAMFile(string fileName);
+        static extern int ExtLunarSaveRAMFile(string fileName);
         [DllImport("Lunar Compress.dll")]
-        static extern int LunarRecompress(
+        static extern int ExtLunarRecompress(
             [MarshalAs(UnmanagedType.LPArray)] byte[] source, 
             [MarshalAs(UnmanagedType.LPArray)] byte[] destination, 
             uint dataSize, 
@@ -388,13 +388,89 @@ namespace LAZYSHELL
 
 				return true;
 			}
-	        catch (Exception e)
+			catch (Exception e)
 	        {
 		        MessageBox.Show("Failed to copy \"Lunar Compress.dll\" to program directory!\n" + e.Message + "\n" + e.StackTrace);
 		        return false;
 	        }
 		}
 
-        #endregion
-    }
+	    public static int LunarOpenRAMFile([MarshalAs(UnmanagedType.LPArray)] byte[] data, int fileMode, int size)
+	    {
+		    try
+		    {
+			    return ExtLunarOpenRAMFile(data, fileMode, size);
+		    }
+			catch (BadImageFormatException)
+			{
+				if (Environment.Is64BitProcess)
+					MessageBox.Show("Error: You are attempting to use a 32-bit LunarCompress DLL with a 64-bit version of Lazy Shell. " +
+					                "Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+				else
+					MessageBox.Show("Error: You are attempting to use a 64-bit LunarCompress DLL with a 32-bit version of Lazy Shell. " +
+					                "Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+
+				return -1;
+			}
+	    }
+
+		public static int LunarDecompress([MarshalAs(UnmanagedType.LPArray)] byte[] destination, int addressToStart, int maxDataSize, int format1, int format2, int DoNotUseThisYet)
+		{
+			try
+			{
+				return ExtLunarDecompress(destination, addressToStart, maxDataSize, format1, format2, DoNotUseThisYet);
+			}
+			catch (BadImageFormatException)
+			{
+				if (Environment.Is64BitProcess)
+					MessageBox.Show("Error: You are attempting to use a 32-bit LunarCompress DLL with a 64-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+				else
+					MessageBox.Show("Error: You are attempting to use a 64-bit LunarCompress DLL with a 32-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+
+				return -1;
+			}
+		}
+
+	    public static int LunarSaveRAMFile(string fileName)
+	    {
+			try
+			{
+				return ExtLunarSaveRAMFile(fileName);
+			}
+			catch (BadImageFormatException)
+			{
+				if (Environment.Is64BitProcess)
+					MessageBox.Show("Error: You are attempting to use a 32-bit LunarCompress DLL with a 64-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+				else
+					MessageBox.Show("Error: You are attempting to use a 64-bit LunarCompress DLL with a 32-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+
+				return -1;
+			}
+		}
+
+	    public static int LunarRecompress([MarshalAs(UnmanagedType.LPArray)] byte[] source, [MarshalAs(UnmanagedType.LPArray)] byte[] destination, uint dataSize, uint maxDataSize, uint format, uint format2)
+	    {
+			try
+			{
+				return ExtLunarRecompress(source, destination, dataSize, maxDataSize, format, format2);
+			}
+			catch (BadImageFormatException)
+			{
+				if (Environment.Is64BitProcess)
+					MessageBox.Show("Error: You are attempting to use a 32-bit LunarCompress DLL with a 64-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+				else
+					MessageBox.Show("Error: You are attempting to use a 64-bit LunarCompress DLL with a 32-bit version of Lazy Shell. " +
+									"Please delete \"Lunar Compress.dll\" from the program directory, and it will automatically be replaced with the proper DLL.");
+
+				return -1;
+			}
+		}
+
+		#endregion
+	}
 }
