@@ -192,7 +192,7 @@
             dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
             dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
             dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
-            this.dockPanel.Skin = dockPanelSkin1;
+            //this.dockPanel.Skin = dockPanelSkin1;
             this.dockPanel.TabIndex = 17;
             // 
             // OwnerForm

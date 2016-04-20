@@ -436,7 +436,7 @@ namespace LAZYSHELL.Monsters
             dockPaneStripToolWindowGradient2.InactiveTabGradient = tabGradient14;
             dockPaneStripSkin2.ToolWindowGradient = dockPaneStripToolWindowGradient2;
             dockPanelSkin2.DockPaneStripSkin = dockPaneStripSkin2;
-            this.dockPanel.Skin = dockPanelSkin2;
+            //this.dockPanel.Skin = dockPanelSkin2;
             this.dockPanel.TabIndex = 3;
             // 
             // OwnerForm
