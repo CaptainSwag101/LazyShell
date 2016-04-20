@@ -367,13 +367,33 @@ namespace LAZYSHELL
         /// <returns></returns>
         public static bool LunarCompressExists()
         {
-            if (!File.Exists("Lunar Compress.dll"))
-            {
-                byte[] lc = Resources.Lunar_Compress;
-                File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
-            }
-            return true;
-        }
+	        try
+	        {
+				if (Environment.Is64BitProcess)
+				{
+					if (!File.Exists("Lunar Compress.dll"))
+					{
+						byte[] lc = Resources.Lunar_Compress_x64;
+						File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
+					}
+				}
+				else
+				{
+					if (!File.Exists("Lunar Compress.dll"))
+					{
+						byte[] lc = Resources.Lunar_Compress;
+						File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
+					}
+				}
+
+				return true;
+			}
+	        catch (Exception e)
+	        {
+		        MessageBox.Show("Failed to copy \"Lunar Compress.dll\" to program directory!\n" + e.Message + "\n" + e.StackTrace);
+		        return false;
+	        }
+		}
 
         #endregion
     }

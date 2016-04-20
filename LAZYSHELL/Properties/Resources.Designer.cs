@@ -1263,6 +1263,16 @@ namespace LAZYSHELL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Lunar_Compress_x64 {
+            get {
+                object obj = ResourceManager.GetObject("Lunar_Compress_x64", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap main {
