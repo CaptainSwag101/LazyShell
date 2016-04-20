@@ -221,27 +221,27 @@ namespace LAZYSHELL.Audio
             {
                 SPCs = Model.SPCs;
                 trackName.Items.AddRange(Lists.Numerize(Lists.SPCTracks));
-                trackName.SelectedIndex = 1;
                 trackNum.Minimum = 1;
                 trackNum.Value = 1;
+				trackName.SelectedIndex = 1;
                 labelWindow.SetElement("Songs");
             }
             else if (Type == ElementType.SPCEvent)
             {
                 SPCs = Model.SPCEvent;
                 trackName.Items.AddRange(Lists.Numerize(Lists.SPCEventSounds));
-                trackName.SelectedIndex = 0;
                 trackNum.Minimum = 0;
                 trackNum.Value = 0;
+				trackName.SelectedIndex = 0;
                 labelWindow.SetElement("Sound FX (Event)");
             }
             else
             {
                 SPCs = Model.SPCBattle;
                 trackName.Items.AddRange(Lists.Numerize(Lists.SPCBattleSounds));
-                trackName.SelectedIndex = 0;
                 trackNum.Minimum = 0;
                 trackNum.Value = 0;
+				trackName.SelectedIndex = 0;
                 labelWindow.SetElement("Sound FX (Battle)");
             }
             trackNum.Maximum = SPCs.Length - 1;
