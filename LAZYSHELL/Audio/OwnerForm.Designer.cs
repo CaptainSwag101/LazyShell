@@ -118,7 +118,7 @@ namespace LAZYSHELL.Audio
             // 
             // findReferences
             // 
-            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.find_references;
+            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
             this.findReferences.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.findReferences.Name = "findReferences";
             this.findReferences.Size = new System.Drawing.Size(23, 22);

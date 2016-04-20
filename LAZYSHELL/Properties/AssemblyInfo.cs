@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("LAZY SHELL")]
-[assembly: AssemblyCopyright("Copyright ©  2007-2014  giangurgolo & Omega")]
+[assembly: AssemblyCopyright("Copyright ©  2007-2016  giangurgolo, Omega & CaptainSwag101")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -25,5 +25,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyVersion("4.0.0.1")]
+[assembly: AssemblyFileVersion("4.0.0.1")]

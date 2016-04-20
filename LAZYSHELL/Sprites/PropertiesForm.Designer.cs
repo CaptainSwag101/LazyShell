@@ -229,7 +229,7 @@
             this.findReferencesAnimation.AutoSize = true;
             this.findReferencesAnimation.FlatAppearance.BorderSize = 0;
             this.findReferencesAnimation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findReferencesAnimation.Image = global::LAZYSHELL.Properties.Resources.find_references;
+            this.findReferencesAnimation.Image = global::LAZYSHELL.Properties.Resources.findReferences;
             this.findReferencesAnimation.Location = new System.Drawing.Point(153, 132);
             this.findReferencesAnimation.Name = "findReferencesAnimation";
             this.findReferencesAnimation.Size = new System.Drawing.Size(22, 22);
@@ -242,7 +242,7 @@
             this.findReferencesImage.AutoSize = true;
             this.findReferencesImage.FlatAppearance.BorderSize = 0;
             this.findReferencesImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findReferencesImage.Image = global::LAZYSHELL.Properties.Resources.find_references;
+            this.findReferencesImage.Image = global::LAZYSHELL.Properties.Resources.findReferences;
             this.findReferencesImage.Location = new System.Drawing.Point(150, 27);
             this.findReferencesImage.Name = "findReferencesImage";
             this.findReferencesImage.Size = new System.Drawing.Size(22, 22);

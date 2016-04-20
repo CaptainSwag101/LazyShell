@@ -146,7 +146,7 @@ namespace LAZYSHELL.Audio
             // 
             // findReferences
             // 
-            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.find_references;
+            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
             this.findReferences.Name = "findReferences";
             this.findReferences.Size = new System.Drawing.Size(23, 22);
             this.findReferences.ToolTipText = "Find all references to sample";
