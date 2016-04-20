@@ -34,11 +34,15 @@ namespace LAZYSHELL.Areas
         // Constructor
         public ExitTriggerCollection(int index)
         {
-            this.AreaIndex = index;
-            this.Triggers = new List<ExitTrigger>();
+            AreaIndex = index;
+            Triggers = new List<ExitTrigger>();
             ReadFromROM();
         }
-        public ExitTriggerCollection() { }
+
+	    public ExitTriggerCollection()
+	    {
+		    Triggers = new List<ExitTrigger>();
+	    }
 
         #region Methods
 
@@ -99,12 +103,12 @@ namespace LAZYSHELL.Areas
         // Collection members
         public ExitTrigger this[int index]
         {
-            get { return this.Triggers[index]; }
-            set { this.Triggers[index] = value; }
+            get { return Triggers[index]; }
+            set { Triggers[index] = value; }
         }
         public void Add(ExitTrigger value)
         {
-            this.Triggers.Add(value);
+            Triggers.Add(value);
         }
         public void Clear()
         {
@@ -392,8 +396,8 @@ namespace LAZYSHELL.Areas
         public ExitEnumerator(ExitTriggerCollection collection)
         {
             this.collection = collection;
-            this.currentExit = default(ExitTrigger);
-            this.currentIndex = -1;
+            currentExit = default(ExitTrigger);
+            currentIndex = -1;
         }
         public ExitTrigger Current
         {
