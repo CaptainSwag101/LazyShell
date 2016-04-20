@@ -16,12 +16,12 @@ namespace LAZYSHELL
         #region Variables
 
         [DllImport("Lunar Compress.dll")]
-        static extern int ExtLunarOpenRAMFile(
+        static extern int LunarOpenRAMFile(
             [MarshalAs(UnmanagedType.LPArray)] byte[] data, 
             int fileMode, 
             int size);
         [DllImport("Lunar Compress.dll")]
-        static extern int ExtLunarDecompress(
+        static extern int LunarDecompress(
             [MarshalAs(UnmanagedType.LPArray)] byte[] destination, 
             int addressToStart, 
             int maxDataSize, 
@@ -29,9 +29,9 @@ namespace LAZYSHELL
             int format2, 
             int DoNotUseThisYet); // int * to save end addr for calculating size
         [DllImport("Lunar Compress.dll")]
-        static extern int ExtLunarSaveRAMFile(string fileName);
+        static extern int LunarSaveRAMFile(string fileName);
         [DllImport("Lunar Compress.dll")]
-        static extern int ExtLunarRecompress(
+        static extern int LunarRecompress(
             [MarshalAs(UnmanagedType.LPArray)] byte[] source, 
             [MarshalAs(UnmanagedType.LPArray)] byte[] destination, 
             uint dataSize, 
@@ -56,9 +56,9 @@ namespace LAZYSHELL
             if (!LunarCompressExists())
                 return -1;
             if (dst == null)
-                return LunarRecompress(src, dst, (uint)src.Length, 0, 3, 3);
+                return ExtLunarRecompress(src, dst, (uint)src.Length, 0, 3, 3);
             else
-                return LunarRecompress(src, dst, (uint)src.Length, (uint)dst.Length, 3, 3);
+                return ExtLunarRecompress(src, dst, (uint)src.Length, (uint)dst.Length, 3, 3);
         }
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace LAZYSHELL
             byte[] dst = new byte[maxSize];
             for (int i = 0; ((i < ram.Length) && ((offset + i) < src.Length)); i++)
                 ram[i] = src[offset + i]; // Copy over all the source data
-            if (LunarOpenRAMFile(ram, 0, ram.Length) == 0) // Load source data as RAMFile
+            if (ExtLunarOpenRAMFile(ram, 0, ram.Length) == 0) // Load source data as RAMFile
                 return null;
-            int size = LunarDecompress(dst, 0, dst.Length, 3, 0, 0);
+            int size = ExtLunarDecompress(dst, 0, dst.Length, 3, 0, 0);
             if (size != 0)
                 return dst;
             return null;
@@ -101,9 +101,9 @@ namespace LAZYSHELL
             byte[] ram = new byte[maxSize];
             for (int i = 0; ((i < ram.Length) && ((offset + i) < src.Length)); i++)
                 ram[i] = src[offset + i]; // Copy over all the source data
-            if (LunarOpenRAMFile(ram, 0, ram.Length) == 0) // Load source data as RAMFile
+            if (ExtLunarOpenRAMFile(ram, 0, ram.Length) == 0) // Load source data as RAMFile
                 return 0;
-            int size = LunarDecompress(dst, 0, dst.Length, 3, 0, 0);
+            int size = ExtLunarDecompress(dst, 0, dst.Length, 3, 0, 0);
             return size;
         }
         /// <summary>
@@ -395,11 +395,11 @@ namespace LAZYSHELL
 	        }
 		}
 
-	    public static int LunarOpenRAMFile([MarshalAs(UnmanagedType.LPArray)] byte[] data, int fileMode, int size)
+	    public static int ExtLunarOpenRAMFile([MarshalAs(UnmanagedType.LPArray)] byte[] data, int fileMode, int size)
 	    {
 		    try
 		    {
-			    return ExtLunarOpenRAMFile(data, fileMode, size);
+			    return LunarOpenRAMFile(data, fileMode, size);
 		    }
 			catch (BadImageFormatException)
 			{
@@ -414,11 +414,11 @@ namespace LAZYSHELL
 			}
 	    }
 
-		public static int LunarDecompress([MarshalAs(UnmanagedType.LPArray)] byte[] destination, int addressToStart, int maxDataSize, int format1, int format2, int DoNotUseThisYet)
+		public static int ExtLunarDecompress([MarshalAs(UnmanagedType.LPArray)] byte[] destination, int addressToStart, int maxDataSize, int format1, int format2, int DoNotUseThisYet)
 		{
 			try
 			{
-				return ExtLunarDecompress(destination, addressToStart, maxDataSize, format1, format2, DoNotUseThisYet);
+				return LunarDecompress(destination, addressToStart, maxDataSize, format1, format2, DoNotUseThisYet);
 			}
 			catch (BadImageFormatException)
 			{
@@ -433,11 +433,11 @@ namespace LAZYSHELL
 			}
 		}
 
-	    public static int LunarSaveRAMFile(string fileName)
+	    public static int ExtLunarSaveRAMFile(string fileName)
 	    {
 			try
 			{
-				return ExtLunarSaveRAMFile(fileName);
+				return LunarSaveRAMFile(fileName);
 			}
 			catch (BadImageFormatException)
 			{
@@ -452,11 +452,11 @@ namespace LAZYSHELL
 			}
 		}
 
-	    public static int LunarRecompress([MarshalAs(UnmanagedType.LPArray)] byte[] source, [MarshalAs(UnmanagedType.LPArray)] byte[] destination, uint dataSize, uint maxDataSize, uint format, uint format2)
+	    public static int ExtLunarRecompress([MarshalAs(UnmanagedType.LPArray)] byte[] source, [MarshalAs(UnmanagedType.LPArray)] byte[] destination, uint dataSize, uint maxDataSize, uint format, uint format2)
 	    {
 			try
 			{
-				return ExtLunarRecompress(source, destination, dataSize, maxDataSize, format, format2);
+				return LunarRecompress(source, destination, dataSize, maxDataSize, format, format2);
 			}
 			catch (BadImageFormatException)
 			{
