@@ -1,8 +1,34 @@
 ﻿LAZY SHELL - Super Mario RPG Editor
-Version: 3.19.0
-Date: January 22, 2014
-Home Page: http://home.comcast.net/~giangurgolo/smrpg/
-Written by giangurgolo and Omega
+Version: 4.0.0.1
+Date: April 21, 2016
+Home Page: https://github.com/jpmac26/LazyShell
+Written by giangurgolo, Omega and CaptainSwag101
+
+_______________________________________________________________________
+
+DISCLAIMER ABOUT THIS REPOSITORY
+_______________________________________________________________________
+
+This repository was made using the timestamped source zips from 
+giangurolo's original SourceForge webpage, so commits up to version
+v4.0 only jump by version number, and probably will not reflect
+giangurolo's changes to the code 100% accurately with regards to
+time and date.
+
+Additionally, since this repo is only maintained by CaptainSwag101,
+do not report bugs to any of the links given below, only to the above
+GitHub page link. This repo was created to preserve, maintain, and
+improve LazyShell, because it seems giangurolo and Omega have mostly
+finished working on the program, despite the existence of a v4.0
+update which (as far as I know) was never announced publicly, but
+was still officially made in August of 2014.
+
+Anyway, that was a very long-winded way of saying that this is an
+unofficially-maintained repo of LazyShell, and any bugs should be
+reported here and only here. Also, feel free to fork this repo
+and submit pull requests if you want to contribute!
+
+--James "CaptainSwag101" Pelster, A.K.A. "jpmac26"
 
 _______________________________________________________________________
 
@@ -61,7 +87,7 @@ _______________________________________________________________________
 PROGRAM REQUIREMENTS
 _______________________________________________________________________
 
-Microsoft .NET Framework 2.0 or higher must be installed on the system
+Microsoft .NET Framework 4.0 or higher must be installed on the system
 for the application to run at all.
 Minimal system requirements:
 512MB of RAM (1GB recommended)
@@ -328,7 +354,7 @@ F.A.Q. (FREQUENTLY ASKED QUESTIONS)
 _______________________________________________________________________
 
 Q: The editor will not run at all.
-A: You need .NET Framework 2 or higher installed on your system.
+A: You need .NET Framework 4.0 or higher installed on your system.
 
 Q: I have no idea what this stuff means!
 A: First, look in the glossary at the end of this readme file. Also,
