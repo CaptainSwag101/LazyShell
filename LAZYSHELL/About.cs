@@ -29,5 +29,23 @@ namespace LAZYSHELL
         {
             this.Close();
         }
-    }
+
+		private void About_Load(object sender, EventArgs e)
+		{
+			if (Environment.Is64BitProcess)
+			{
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1 64-bit" +
+										"\nCopyright © 2007 - 2016  giangurgolo, Omega & CaptainSwag101" +
+										"\n" +
+										"\nCreated by Omega & giangurgolo";
+			}
+			else
+			{
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1" +
+										"\nCopyright © 2007 - 2016  giangurgolo, Omega & CaptainSwag101" +
+				                        "\n" +
+				                        "\nCreated by Omega & giangurgolo";
+			}
+		}
+	}
 }

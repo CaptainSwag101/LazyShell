@@ -117,13 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Lazy Shell, Version 4.0.0
-Copyright © 2007-2014  giangurgolo &amp; Omega
-
-Created by Omega &amp; giangurgolo
-
-Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
+  <data name="infoTextBox.Text" xml:space="preserve">
+    <value>Home Page:   http://home.comcast.net/~giangurgolo/smrpg/
 
 Main Contributors and Supporters:
 ElementalPowerStar -  notable donator, principle bug-finder, positive feedback

@@ -274,9 +274,9 @@ namespace LAZYSHELL
         {
             App.RestoreAll();
         }
-        public void CloseAll()
+        public void CloseAll(bool force = false)
         {
-            App.CloseAll();
+            App.CloseAll(force);
         }
 
         #endregion

@@ -10,7 +10,7 @@ DISCLAIMER ABOUT THIS REPOSITORY
 _______________________________________________________________________
 
 This repository was made using the timestamped source zips from 
-giangurolo's original SourceForge webpage, so commits up to version
+giangurgolo's original SourceForge webpage, so commits up to version
 v4.0 only jump by version number, and probably will not reflect
 giangurolo's changes to the code 100% accurately with regards to
 time and date.
