@@ -140,8 +140,8 @@
     <Setting Name="UnverifiedRomWarning" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="VisualThemeSystem" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="VisualTheme" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ZSNESPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
