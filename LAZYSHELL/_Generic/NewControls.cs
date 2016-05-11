@@ -90,7 +90,8 @@ namespace LAZYSHELL.Controls
     public class NewCheckedListBox : CheckedListBox
     {
         // Constructor
-        public NewCheckedListBox() : base() { }
+        public NewCheckedListBox()
+		{ }
 
         #region Drawing
 
@@ -116,7 +117,6 @@ namespace LAZYSHELL.Controls
     public class DockForm : DockContent
     {
         public DockForm()
-            : base()
         {
             this.DoubleBuffered = true;
             this.Font = new Font("Tahoma", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -196,7 +196,6 @@ namespace LAZYSHELL.Controls
     public class NewForm : Form
     {
         public NewForm()
-            : base()
         {
             this.DoubleBuffered = true;
             this.Font = new Font("Tahoma", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);

@@ -66,10 +66,14 @@ namespace LAZYSHELL
 			// 
 			// copyrightTextBox
 			// 
+			this.copyrightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.copyrightTextBox.BackColor = System.Drawing.SystemColors.Control;
 			this.copyrightTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.copyrightTextBox.Cursor = System.Windows.Forms.Cursors.Default;
 			this.copyrightTextBox.Location = new System.Drawing.Point(65, 7);
 			this.copyrightTextBox.Name = "copyrightTextBox";
+			this.copyrightTextBox.ReadOnly = true;
 			this.copyrightTextBox.Size = new System.Drawing.Size(407, 55);
 			this.copyrightTextBox.TabIndex = 1;
 			this.copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1\nCopyright © 2007-2014  giangurgolo, Omega & CaptainSw" +

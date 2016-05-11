@@ -31,7 +31,7 @@ namespace LAZYSHELL
 			this.buttonDefault = new System.Windows.Forms.Button();
 			this.buttonApply = new System.Windows.Forms.Button();
 			this.visualThemeSystem = new System.Windows.Forms.RadioButton();
-			this.visualThemeStandard = new System.Windows.Forms.RadioButton();
+			this.visualThemeSimple = new System.Windows.Forms.RadioButton();
 			this.patchHTTPServer = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -111,16 +111,16 @@ namespace LAZYSHELL
 			this.visualThemeSystem.Text = "System";
 			this.visualThemeSystem.UseVisualStyleBackColor = true;
 			// 
-			// visualThemeStandard
+			// visualThemeSimple
 			// 
-			this.visualThemeStandard.AutoSize = true;
-			this.visualThemeStandard.Location = new System.Drawing.Point(6, 37);
-			this.visualThemeStandard.Name = "visualThemeStandard";
-			this.visualThemeStandard.Size = new System.Drawing.Size(69, 17);
-			this.visualThemeStandard.TabIndex = 1;
-			this.visualThemeStandard.TabStop = true;
-			this.visualThemeStandard.Text = "Standard";
-			this.visualThemeStandard.UseVisualStyleBackColor = true;
+			this.visualThemeSimple.AutoSize = true;
+			this.visualThemeSimple.Location = new System.Drawing.Point(6, 37);
+			this.visualThemeSimple.Name = "visualThemeSimple";
+			this.visualThemeSimple.Size = new System.Drawing.Size(55, 17);
+			this.visualThemeSimple.TabIndex = 1;
+			this.visualThemeSimple.TabStop = true;
+			this.visualThemeSimple.Text = "Simple";
+			this.visualThemeSimple.UseVisualStyleBackColor = true;
 			// 
 			// patchHTTPServer
 			// 
@@ -134,7 +134,7 @@ namespace LAZYSHELL
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.visualThemeSystem);
-			this.groupBox1.Controls.Add(this.visualThemeStandard);
+			this.groupBox1.Controls.Add(this.visualThemeSimple);
 			this.groupBox1.Location = new System.Drawing.Point(12, 154);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(110, 60);
@@ -256,7 +256,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.Button buttonDefault;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.RadioButton visualThemeSystem;
-        private System.Windows.Forms.RadioButton visualThemeStandard;
+        private System.Windows.Forms.RadioButton visualThemeSimple;
         private System.Windows.Forms.TextBox patchHTTPServer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;

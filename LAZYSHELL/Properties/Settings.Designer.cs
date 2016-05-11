@@ -11,11 +11,11 @@
 namespace LAZYSHELL.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
             get {
@@ -23,9 +23,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")]
         public string AllyEquipment {
             get {
                 return ((string)(this["AllyEquipment"]));
@@ -35,9 +35,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("")]
         public string BackupROMDirectory {
             get {
                 return ((string)(this["BackupROMDirectory"]));
@@ -47,9 +47,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CreateBackupROM {
             get {
                 return ((bool)(this["CreateBackupROM"]));
@@ -59,9 +59,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CreateBackupROMSave {
             get {
                 return ((bool)(this["CreateBackupROMSave"]));
@@ -71,9 +71,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EnableDebug {
             get {
                 return ((bool)(this["EnableDebug"]));
@@ -83,9 +83,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool FirstLoad {
             get {
                 return ((bool)(this["FirstLoad"]));
@@ -95,9 +95,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("")]
         public string History {
             get {
                 return ((string)(this["History"]));
@@ -107,9 +107,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastAnimation {
             get {
                 return ((int)(this["LastAnimation"]));
@@ -119,9 +119,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastAnimationCat {
             get {
                 return ((int)(this["LastAnimationCat"]));
@@ -131,9 +131,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastAttack {
             get {
                 return ((int)(this["LastAttack"]));
@@ -143,9 +143,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastAudioSample {
             get {
                 return ((int)(this["LastAudioSample"]));
@@ -155,9 +155,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastBattleDialogue {
             get {
                 return ((int)(this["LastBattleDialogue"]));
@@ -167,9 +167,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastBattlefield {
             get {
                 return ((int)(this["LastBattlefield"]));
@@ -179,9 +179,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastDialogue {
             get {
                 return ((int)(this["LastDialogue"]));
@@ -191,9 +191,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
         public string LastDirectory {
             get {
                 return ((string)(this["LastDirectory"]));
@@ -203,9 +203,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastEffect {
             get {
                 return ((int)(this["LastEffect"]));
@@ -215,9 +215,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastEventScript {
             get {
                 return ((int)(this["LastEventScript"]));
@@ -227,9 +227,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastEventScriptCat {
             get {
                 return ((int)(this["LastEventScriptCat"]));
@@ -239,9 +239,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastFormation {
             get {
                 return ((int)(this["LastFormation"]));
@@ -251,9 +251,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastFormationPack {
             get {
                 return ((int)(this["LastFormationPack"]));
@@ -263,9 +263,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastItem {
             get {
                 return ((int)(this["LastItem"]));
@@ -275,9 +275,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastArea {
             get {
                 return ((int)(this["LastArea"]));
@@ -287,9 +287,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastMineCart {
             get {
                 return ((int)(this["LastMineCart"]));
@@ -299,9 +299,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastMonster {
             get {
                 return ((int)(this["LastMonster"]));
@@ -311,9 +311,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("\"C:\\\\\"")]
         public string LastRomPath {
             get {
                 return ((string)(this["LastRomPath"]));
@@ -323,9 +323,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastSPCType {
             get {
                 return ((int)(this["LastSPCType"]));
@@ -335,9 +335,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("1")]
         public int LastSPC {
             get {
                 return ((int)(this["LastSPC"]));
@@ -347,9 +347,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastSpell {
             get {
                 return ((int)(this["LastSpell"]));
@@ -359,9 +359,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int LastSprite {
             get {
                 return ((int)(this["LastSprite"]));
@@ -371,9 +371,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LoadAllData {
             get {
                 return ((bool)(this["LoadAllData"]));
@@ -383,9 +383,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool LoadLastUsedROM {
             get {
                 return ((bool)(this["LoadLastUsedROM"]));
@@ -395,9 +395,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LoadProject {
             get {
                 return ((bool)(this["LoadProject"]));
@@ -407,9 +407,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("")]
         public string ProjectPathCustom {
             get {
                 return ((string)(this["ProjectPathCustom"]));
@@ -419,9 +419,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://home.comcast.net/~giangurgolo/patches/")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("http://home.comcast.net/~giangurgolo/patches/")]
         public string PatchServerURL {
             get {
                 return ((string)(this["PatchServerURL"]));
@@ -431,9 +431,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public byte PreviewAllies {
             get {
                 return ((byte)(this["PreviewAllies"]));
@@ -443,18 +443,18 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
+        [System.Configuration.ApplicationScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
         public string PreviewArgsDefault {
             get {
                 return ((string)(this["PreviewArgsDefault"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("-m -zs 0 -v 2")]
         public string PreviewArguments {
             get {
                 return ((string)(this["PreviewArguments"]));
@@ -464,9 +464,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("0")]
         public int PreviewBattlefield {
             get {
                 return ((int)(this["PreviewBattlefield"]));
@@ -476,9 +476,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PreviewDynamicRomName {
             get {
                 return ((bool)(this["PreviewDynamicRomName"]));
@@ -488,9 +488,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PreviewFirstTime {
             get {
                 return ((bool)(this["PreviewFirstTime"]));
@@ -500,9 +500,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("1")]
         public int PreviewArea {
             get {
                 return ((int)(this["PreviewArea"]));
@@ -512,9 +512,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("False")]
         public bool PreviewMaxStats {
             get {
                 return ((bool)(this["PreviewMaxStats"]));
@@ -524,9 +524,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool RememberLastIndex {
             get {
                 return ((bool)(this["RememberLastIndex"]));
@@ -536,9 +536,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ShowEncryptionWarnings {
             get {
                 return ((bool)(this["ShowEncryptionWarnings"]));
@@ -548,9 +548,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("65535")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("65535")]
         public int UndoStackSize {
             get {
                 return ((int)(this["UndoStackSize"]));
@@ -560,9 +560,9 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UnverifiedRomWarning {
             get {
                 return ((bool)(this["UnverifiedRomWarning"]));
@@ -572,21 +572,21 @@ namespace LAZYSHELL.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool VisualThemeSystem {
+        [System.Configuration.UserScopedSetting()]
+        [System.Diagnostics.DebuggerNonUserCode()]
+        [System.Configuration.DefaultSettingValue("True")]
+        public int VisualTheme {
             get {
-                return ((bool)(this["VisualThemeSystem"]));
+                return ((int)(this["VisualTheme"]));
             }
             set {
-                this["VisualThemeSystem"] = value;
+                this["VisualTheme"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [System.Configuration.UserScopedSettingAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.Configuration.DefaultSettingValueAttribute("")]
         public string ZSNESPath {
             get {
                 return ((string)(this["ZSNESPath"]));
