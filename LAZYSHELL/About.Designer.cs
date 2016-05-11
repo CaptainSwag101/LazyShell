@@ -76,7 +76,7 @@ namespace LAZYSHELL
 			this.copyrightTextBox.ReadOnly = true;
 			this.copyrightTextBox.Size = new System.Drawing.Size(407, 55);
 			this.copyrightTextBox.TabIndex = 1;
-			this.copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1\nCopyright © 2007-2014  giangurgolo&  Omega, © 2016 Ca" +
+			this.copyrightTextBox.Text = "Lazy Shell, Version 4.0.0b\nCopyright © 2007-2014  giangurgolo & Omega, © 2016 Ca" +
     "ptainSwag101\n\nCreated by Omega & giangurgolo";
 			// 
 			// infoTextBox

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
 <LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="3.19.0" date="January 22, 2014" homepage="http://home.comcast.net/~giangurgolo/smrpg/" author="giangurgolo and Omega" />
+  <Properties version="4.0.0b" date="May 11, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -10,7 +10,7 @@
     <precaution>3. If the unfortunate occasion might arise that the application actually does corrupt your ROM, you can try resetting the corrupted elements by importing those specific elements from a fresh SMRPG ROM. Click the button "Import elements from another ROM" (a down-arrow over a small white box), select a fresh ROM, and check the elements you want to import.</precaution>
     <conclusion>Should you encounter any issues, errors, problems, or irritations using the application, please post them to one of the following links:
 http://acmlm.kafuka.org/board/thread.php?id=7005
-http://www.smwcentral.net/?p=viewthread&amp;t=45572
+http://www.smwcentral.net?p=viewthread&amp;t=83715
 Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank you for using the program.</conclusion>
   </Read>
   <section>
@@ -19,7 +19,7 @@ Press Ctrl+Ins to copy the contents of this message box to the clipboard. Thank 
   </section>
   <section>
     <header>Program Requirements</header>
-    <body>Microsoft .NET Framework 2.0 or higher must be installed on the system for the application to run at all.
+    <body>Microsoft .NET Framework 4.0 or higher must be installed on the system for the application to run at all.
 Minimal system requirements:
 512MB of RAM (1GB recommended)
 10MB HD space (more if ROM back-ups used)</body>
@@ -97,10 +97,10 @@ Base savestates for SNES9X and ZSNES, respectively. These are needed for preview
   <section>
     <header>Bugs, errors, exceptions and complications in functionality.</header>
     <body>The editor may occasionally crash or not function properly due to certain errors in the code (although with each new bugfix I am aiming to completely remove the possibility of this ever happening). Please remember that this is almost certainly the programmer's fault and NOT yours, the user's. As often is the case, when an error surfaces or the program behaves in a buggy fashion, the user tends to immediately feel that they are to blame or the programmer is blaming them for the error. This is not correct: almost all of the time, it's the programmer's fault. Incidences when it might be the fault of the user may be due to a corrupt ROM being loaded (a corrupt ROM basically means any SMRPG rom which has been modified in any way, shape or form). This includes a ROM edited by Lazy Shell, but errors may occur if a ROM has been modified outside of Lazy Shell (ie. a hex editor), or often times in much older versions of Lazy Shell (v2.5 seems to be popular among users who find problems with v3.x).
-If the editor crashes, make sure it is the latest version of Lazy Shell by clicking the "(i)" button in the main window and comparing the version there to the version posted on the home page (http://home.comcast.net/~giangurgolo/smrpg/).
+If the editor crashes, make sure it is the latest version of Lazy Shell by clicking the "(i)" button in the main window and comparing the version there to the version posted on the home page ( https://github.com/jpmac26/LazyShell ).
 If you are using the latest version, make a new post in one of these threads:
 http://acmlm.kafuka.org/board/thread.php?id=7005
-http://www.smwcentral.net/?p=viewthread&amp;t=45572
+http://www.smwcentral.net?p=viewthread&amp;t=83715
 Explain exactly what you did to produce this error or cause this disfunctionality to occur, what editor it was in, what order you did your actions to produce this error or disfunctionality, etc. Also, when the editor bugs out, an exception prompt appears. If you can manage to copy the error message after this:
 ************** Exception Text **************
 and include it in your post, it will definitely help. But most importantly, you must explain in your post what you did. Only posting the exception text alone will not be adequate enough.
@@ -122,7 +122,7 @@ romhacking community - various feedback</body>
     <header>F.A.Q. (Frequently Asked Questions)</header>
     <entry>
       <question>The editor will not run at all.</question>
-      <answer>You need .NET Framework 2 or higher installed on your system.</answer>
+      <answer>You need .NET Framework 4 or higher installed on your system.</answer>
     </entry>
     <entry>
       <question>I have no idea what this stuff means!</question>
@@ -156,7 +156,7 @@ romhacking community - various feedback</body>
       <question>What do these "B#,b#" things mean?</question>
       <answer>These are unknown bits. "B0,b0" means "Byte 0, bit 0" and refers to bit 0 in the first byte of the index's property data chunk. If you're confident you have discovered exactly what these bits do, feel free to post it in one of the bug report thread:
 http://acmlm.kafuka.org/board/thread.php?id=7005
-http://www.smwcentral.net/?p=viewthread&amp;t=45572</answer>
+http://www.smwcentral.net?p=viewthread&amp;t=83715</answer>
     </entry>
     <entry>
       <question>Is there free space in the ROM where I can insert graphics?</question>

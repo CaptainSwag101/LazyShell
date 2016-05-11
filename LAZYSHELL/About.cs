@@ -34,15 +34,15 @@ namespace LAZYSHELL
 		{
 			if (Environment.Is64BitProcess)
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1 64-bit" +
-										"\nCopyright © 2007-2014  giangurgolo&  Omega, © 2016 CaptainSwag101" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0b 64-bit" +
+										"\nCopyright © 2007-2014  giangurgolo & Omega, © 2016 CaptainSwag101" +
 										"\n" +
 										"\nCreated by Omega & giangurgolo";
 			}
 			else
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.1" +
-										"\nCopyright © 2007-2014  giangurgolo&  Omega, © 2016 CaptainSwag101" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0b" +
+										"\nCopyright © 2007-2014  giangurgolo & Omega, © 2016 CaptainSwag101" +
 				                        "\n" +
 				                        "\nCreated by Omega & giangurgolo";
 			}
