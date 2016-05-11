@@ -51,24 +51,22 @@ namespace LAZYSHELL
                 customDirectory.Checked = true;
                 customDirectoryTextBox.Text = settings.BackupROMDirectory;
             }
-            if (settings.VisualTheme == 0)
+
+            if (visualThemeSystem.Checked)
             {
+	            settings.VisualTheme = 0;
                 visualThemeSystem.Checked = true;
                 visualThemeSimple.Checked = false;
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
             }
-            else if (settings.VisualTheme == 1)
+            else
             {
-                visualThemeSystem.Checked = false;
+				settings.VisualTheme = 1;
+				visualThemeSystem.Checked = false;
                 visualThemeSimple.Checked = true;
                 Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
-            else
-            {
-				visualThemeSystem.Checked = false;
-				visualThemeSimple.Checked = true;
-				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-			}
+           
             this.patchHTTPServer.Text = this.settings.PatchServerURL;
         }
 
@@ -114,12 +112,9 @@ namespace LAZYSHELL
 			}
 			else if (visualThemeSimple.Checked)
 			{
-				
+				settings.VisualTheme = 1;
 			}
-			else
-			{
-				
-			}
+
             settings.PatchServerURL = patchHTTPServer.Text;
             settings.Save();
         }
