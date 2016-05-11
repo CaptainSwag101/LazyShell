@@ -129,6 +129,8 @@ namespace LAZYSHELL.Dialogues
             SetFreeBytesLabel();
             SetTilesetImage();
             SetTextImage();
+
+	        typeName.SelectedIndex = 0;
         }
 
         #region Methods
