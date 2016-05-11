@@ -102,6 +102,7 @@ namespace LAZYSHELL
 			}
 			//
 			this.History = new History(this);
+			LoadWebpage();
 		}
 
 		#region Methods
@@ -176,6 +177,8 @@ namespace LAZYSHELL
 				documentText += "</p></div>";
 			}
 			documentText += "<br/></body></html>";
+
+			webBrowser1.DocumentText = documentText;
 		}
 
 		// Opening ROM
@@ -472,9 +475,10 @@ namespace LAZYSHELL
 				Directory.CreateDirectory("help");
 			if (!Directory.Exists("help//icons"))
 				Directory.CreateDirectory("help//icons");
-			File.WriteAllText("help//LAZYSHELL_xml.xml", Resources.LAZYSHELL_xml);
-			File.WriteAllText("help//LAZYSHELL_xsl.xsl", Resources.LAZYSHELL_xsl);
+			//File.WriteAllText("help//LAZYSHELL_xml.xml", Resources.LAZYSHELL_xml);
+			//File.WriteAllText("help//LAZYSHELL_xsl.xsl", Resources.LAZYSHELL_xsl);
 			File.WriteAllText("help//LAZYSHELL_css.css", Resources.LAZYSHELL_css);
+			File.WriteAllText("help//LAZYSHELL_html.html", Resources.LAZYSHELL_html);
 			foreach (XmlNode icon in icons)
 			{
 				string path = icon.Attributes["icon"].Value;
@@ -485,7 +489,7 @@ namespace LAZYSHELL
 					continue;
 				image.Save("help//icons//" + file);
 			}
-			Process.Start("help\\LAZYSHELL_xml.xml");
+			Process.Start("help\\LAZYSHELL_html.html");
 		}
 		private void about_Click(object sender, System.EventArgs e)
 		{

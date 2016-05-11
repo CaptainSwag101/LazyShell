@@ -88,10 +88,12 @@ namespace LAZYSHELL
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.help = new System.Windows.Forms.ToolStripButton();
 			this.info = new System.Windows.Forms.ToolStripButton();
+			this.webBrowser1 = new System.Windows.Forms.WebBrowser();
 			this.panel4.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.toolStrip4.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -478,6 +480,7 @@ namespace LAZYSHELL
 			this.panel2.AllowDrop = true;
 			this.panel2.AutoScroll = true;
 			this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+			this.panel2.Controls.Add(this.webBrowser1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 130);
 			this.panel2.Name = "panel2";
@@ -733,6 +736,15 @@ namespace LAZYSHELL
 			this.info.ToolTipText = "About";
 			this.info.Click += new System.EventHandler(this.about_Click);
 			// 
+			// webBrowser1
+			// 
+			this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+			this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+			this.webBrowser1.Name = "webBrowser1";
+			this.webBrowser1.Size = new System.Drawing.Size(542, 443);
+			this.webBrowser1.TabIndex = 0;
+			// 
 			// MainForm
 			// 
 			this.AllowDrop = true;
@@ -756,6 +768,7 @@ namespace LAZYSHELL
 			this.toolStrip1.PerformLayout();
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
+			this.panel2.ResumeLayout(false);
 			this.toolStrip4.ResumeLayout(false);
 			this.toolStrip4.PerformLayout();
 			this.ResumeLayout(false);
@@ -826,6 +839,7 @@ namespace LAZYSHELL
         private System.Windows.Forms.ToolStripButton openFonts;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripTextBox loadRomTextBox;
-    }
+		private System.Windows.Forms.WebBrowser webBrowser1;
+	}
 }
 

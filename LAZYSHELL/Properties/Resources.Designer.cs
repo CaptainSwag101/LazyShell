@@ -1197,6 +1197,25 @@ namespace LAZYSHELL.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html SYSTEM &quot;about:legacy-compat&quot;&gt;&lt;html xmlns:msxsl=&quot;urn:schemas-microsoft-com:xslt&quot;&gt;
+        ///&lt;head&gt;
+        ///&lt;META http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-16&quot;&gt;
+        ///&lt;link href=&quot;LAZYSHELL_css.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;&gt;&lt;script type=&quot;text/javascript&quot;&gt;
+        ///          
+        ///            var z = 0;
+        ///            function ShowHide(editor, faq) 
+        ///            {
+        ///                document.getElementById(editor).style.display = &quot;block&quot;;
+        ///                document.getElementById(editor).style.zIndex = ++z;
+        ///  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LAZYSHELL_html {
+            get {
+                return ResourceManager.GetString("LAZYSHELL_html", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon LAZYSHELL_icon {

@@ -1075,6 +1075,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Help\LAZYSHELL_html.html" />
     <None Include="Resources\Lunar Compress x64.dll" />
     <None Include="Resources\toggleScreens.png" />
     <None Include="Resources\toggleTilesetL3.png" />
