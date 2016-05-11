@@ -408,7 +408,6 @@ namespace LAZYSHELL.Dialogues
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "BattleDialoguesForm";
             this.Text = "Battle Dialogues";
-            this.TilesetForm = null;
             this.TilesetForms = new LAZYSHELL.TilesetForm[] {
         null};
             this.toolStrip1.ResumeLayout(false);

@@ -250,10 +250,26 @@ namespace LAZYSHELL.Controls
         /// Gets or sets a value indicating whether a form is currently closing.
         /// </summary>
         public bool IsClosing { get; set; }
+
+	    protected DockPanel dock;
         /// <summary>
         /// The DockPanel container used in this form.
         /// </summary>
-        public DockPanel DockPanel { get; set; }
+        public DockPanel DockPanel
+		{
+	        get
+	        {
+		        return dock;
+	        }
+	        set
+	        {
+				dock = value;
+				if (Do.CustomThemeEnabled && dock?.Theme != Do.Theme)
+				{
+					dock.Theme = Do.Theme;
+				}
+	        }
+		}
 
         #endregion
 

@@ -33,9 +33,8 @@ namespace LAZYSHELL.Dialogues
 
         private void InitializeForms()
         {
-            DialoguesForm = new DialoguesForm(this);
-            DialoguesForm.ToggleButton = toggleDialogues;
-            DialoguesForm.Show(dockPanel, DockState.Document);
+	        DialoguesForm = new DialoguesForm(this) {ToggleButton = toggleDialogues};
+	        DialoguesForm.Show(dockPanel, DockState.Document);
             DTETableForm = new DTETableForm(this);
             DTETableForm.ToggleButton = toggleDTETable;
             DTETableForm.Show(DialoguesForm.Pane, DockAlignment.Right, 0.50);

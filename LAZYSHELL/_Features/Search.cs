@@ -127,7 +127,7 @@ namespace LAZYSHELL
                 this.treeView.BringToFront();
                 this.performSearch.DynamicInvoke(searchForText.Text, treeView, stringComparison, matchWholeWord.Checked);
             }
-            else if (resultWindow == typeof(TextBox))
+            else if (resultWindow == typeof(TextBoxBase))
             {
                 this.searchTextBox.Enabled = true;
                 this.searchTextBox.Show();

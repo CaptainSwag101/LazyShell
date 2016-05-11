@@ -189,7 +189,7 @@ namespace LAZYSHELL
         #endregion
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.RichTextBox searchTextBox;
+        private System.Windows.Forms.TextBoxBase searchTextBox;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator replaceWithSeparator;
         private System.Windows.Forms.ToolStripLabel replaceWithLabel;
