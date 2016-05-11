@@ -114,6 +114,7 @@ namespace LAZYSHELL
 			// 
 			// panel1
 			// 
+			this.panel1.BackColor = System.Drawing.SystemColors.Control;
 			this.panel1.Controls.Add(this.romInfo);
 			this.panel1.Controls.Add(this.label1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -476,7 +477,7 @@ namespace LAZYSHELL
 			// 
 			this.panel2.AllowDrop = true;
 			this.panel2.AutoScroll = true;
-			this.panel2.BackColor = System.Drawing.SystemColors.Window;
+			this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 130);
 			this.panel2.Name = "panel2";
