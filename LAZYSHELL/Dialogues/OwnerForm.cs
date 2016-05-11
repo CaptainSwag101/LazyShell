@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LAZYSHELL.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace LAZYSHELL.Dialogues
@@ -33,15 +34,32 @@ namespace LAZYSHELL.Dialogues
 
         private void InitializeForms()
         {
-	        DialoguesForm = new DialoguesForm(this) {ToggleButton = toggleDialogues};
-	        DialoguesForm.Show(dockPanel, DockState.Document);
-            DTETableForm = new DTETableForm(this);
+			if (Do.CustomThemeEnabled)
+			{
+				dockPanel.Theme = Do.Theme;
+				//Do.Theme.Apply(dockPanel);
+			}
+
+			DialoguesForm = new DialoguesForm(this) {ToggleButton = toggleDialogues};
+			DialoguesForm.Show(dockPanel, DockState.Document);
+			DTETableForm = new DTETableForm(this);
             DTETableForm.ToggleButton = toggleDTETable;
+	        DTETableForm.CloseButton = false;
             DTETableForm.Show(DialoguesForm.Pane, DockAlignment.Right, 0.50);
             BattleDialoguesForm = new BattleDialoguesForm(this);
-            BattleDialoguesForm.ToggleButton = toggleBattleDialogues;
+			BattleDialoguesForm.ToggleButton = toggleBattleDialogues;
             BattleDialoguesForm.Show(DTETableForm.Pane, DTETableForm);
-        }
+			
+			foreach (IDockContent content in dockPanel.Contents)
+			{
+				DockContent tab = content as DockContent;
+				if (tab != null)
+				{
+					tab.CloseButtonVisible = false;
+					tab.CloseButton = false;
+				}
+			}
+		}
         private void CreateHelperForms()
         {
             new ToolTipLabel(this, baseConvertor, helpTips);

@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace LAZYSHELL.Dialogues
 {
-    [Serializable()]
+    [Serializable]
     public class Dialogue : Element
     {
         #region Variables

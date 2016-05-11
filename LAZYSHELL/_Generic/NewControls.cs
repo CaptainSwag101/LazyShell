@@ -267,6 +267,7 @@ namespace LAZYSHELL.Controls
 				if (Do.CustomThemeEnabled && dock?.Theme != Do.Theme)
 				{
 					dock.Theme = Do.Theme;
+					Do.Theme.Apply(dock);
 				}
 	        }
 		}

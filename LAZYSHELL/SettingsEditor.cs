@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.Windows.Forms;
 using LAZYSHELL.Properties;
+using WeifenLuo.WinFormsUI.Docking;
+using WeifenLuo.WinFormsUI.ThemeVS2013Blue;
 
 namespace LAZYSHELL
 {
@@ -30,7 +32,7 @@ namespace LAZYSHELL
         {
             settings = Settings.Default;
         }
-        private void LoadSettings()
+        public void LoadSettings()
         {
             checkedListBox1.SetItemChecked(0, settings.LoadLastUsedROM);
             checkedListBox1.SetItemChecked(1, settings.LoadAllData);
@@ -51,24 +53,32 @@ namespace LAZYSHELL
                 customDirectory.Checked = true;
                 customDirectoryTextBox.Text = settings.BackupROMDirectory;
             }
-            if (settings.VisualTheme == 0)
+
+            switch (settings.VisualTheme)
             {
-                visualThemeSystem.Checked = true;
-                visualThemeSimple.Checked = false;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+	            case 0:
+		            visualThemeSystem.Checked = true;
+		            visualThemeSimple.Checked = false;
+		            visualThemeBlue.Checked = false;
+		            Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+		            Do.UseSystemTheme();
+		            break;
+	            case 1:
+		            visualThemeSystem.Checked = false;
+		            visualThemeSimple.Checked = true;
+		            visualThemeBlue.Checked = false;
+		            Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+		            Do.UseSimpleTheme();
+		            break;
+	            case 2:
+		            visualThemeSystem.Checked = false;
+		            visualThemeSimple.Checked = false;
+		            visualThemeBlue.Checked = true;
+		            Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+		            Do.UseBlueTheme();
+		            break;
             }
-            else if (settings.VisualTheme == 1)
-            {
-                visualThemeSystem.Checked = false;
-                visualThemeSimple.Checked = true;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-            }
-            else
-            {
-				visualThemeSystem.Checked = false;
-				visualThemeSimple.Checked = true;
-				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-			}
+
             this.patchHTTPServer.Text = this.settings.PatchServerURL;
         }
 
@@ -108,19 +118,36 @@ namespace LAZYSHELL
                 settings.BackupROMDirectory = customDirectoryTextBox.Text;
             else if (romDirectory.Checked)
                 settings.BackupROMDirectory = "";
-	        if (visualThemeSystem.Checked)
-	        {
+
+			if (visualThemeSystem.Checked)
+			{
 				settings.VisualTheme = 0;
+				visualThemeSystem.Checked = true;
+				visualThemeSimple.Checked = false;
+				visualThemeBlue.Checked = false;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+				Do.UseSystemTheme();
 			}
 			else if (visualThemeSimple.Checked)
 			{
-				
+				settings.VisualTheme = 1;
+				visualThemeSystem.Checked = false;
+				visualThemeSimple.Checked = true;
+				visualThemeBlue.Checked = false;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+				Do.UseSimpleTheme();
 			}
-			else
+			else if (visualThemeBlue.Checked)
 			{
-				
+				settings.VisualTheme = 2;
+				visualThemeSystem.Checked = false;
+				visualThemeSimple.Checked = false;
+				visualThemeBlue.Checked = true;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+				Do.UseBlueTheme();
 			}
-            settings.PatchServerURL = patchHTTPServer.Text;
+
+			settings.PatchServerURL = patchHTTPServer.Text;
             settings.Save();
         }
         private void buttonOK_Click(object sender, EventArgs e)

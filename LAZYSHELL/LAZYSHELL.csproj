@@ -66,6 +66,9 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>.\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light">
+      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light.dll</HintPath>
+    </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
       <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
     </Reference>
