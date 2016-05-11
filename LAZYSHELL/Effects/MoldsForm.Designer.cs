@@ -694,7 +694,6 @@ namespace LAZYSHELL.Effects
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "MoldsForm";
             this.Text = "Molds";
-            this.TilesetForm = null;
             this.TilesetForms = new LAZYSHELL.TilesetForm[] {
         null};
             this.panelMoldImage.ResumeLayout(false);

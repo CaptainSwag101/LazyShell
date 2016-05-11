@@ -530,7 +530,6 @@ namespace LAZYSHELL.WorldMaps
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "WorldMapsForm";
             this.Text = "Tileset";
-            this.TilesetForm = null;
             this.TilesetForms = new LAZYSHELL.TilesetForm[] {
         null};
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldMaps_FormClosing);
