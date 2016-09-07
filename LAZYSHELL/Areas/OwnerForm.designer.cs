@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace LAZYSHELL.Areas
 {
@@ -125,6 +126,7 @@ namespace LAZYSHELL.Areas
 			this.toggleTilesetL3Form = new LAZYSHELL.Controls.NewToolStripButton();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+			this.dockPanel.Theme = new VS2013BlueTheme();
 			this.toolStripArea.SuspendLayout();
 			this.toolStripToggle.SuspendLayout();
 			this.SuspendLayout();

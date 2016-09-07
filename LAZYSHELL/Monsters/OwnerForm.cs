@@ -103,7 +103,11 @@ namespace LAZYSHELL.Monsters
             // Editor forms
             monstersForm = new MonstersForm(this);
             monstersForm.ToggleButton = toggleMonsters;
-            monstersForm.Show(dockPanel, DockState.Document);
+			DockPanel = new DockPanel();
+			DockPanel = dockPanel;
+			DockPanel.Theme = new VS2013BlueTheme();
+			dockPanel = DockPanel;
+			monstersForm.Show(dockPanel, DockState.Document);
             spriteForm = new SpriteForm(this);
             spriteForm.ToggleButton = toggleSprite;
             spriteForm.Show(dockPanel, DockState.Document);

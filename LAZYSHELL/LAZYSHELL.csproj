@@ -66,8 +66,17 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>.\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
-      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2003">
+      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2005Multithreading">
+      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2005Multithreading.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012">
+      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2012.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013">
+      <HintPath>.\WeifenLuo.WinFormsUI.Docking.ThemeVS2013.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

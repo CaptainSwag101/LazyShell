@@ -61,7 +61,11 @@ namespace LAZYSHELL.Formations
             FormationsForm.ToggleButton = toggleFormations;
             FormationsForm.Left = this.Left;
             FormationsForm.Top = this.Bottom;
-            FormationsForm.Show(dockPanel, DockState.Document);
+			DockPanel = new DockPanel();
+			DockPanel = dockPanel;
+			DockPanel.Theme = new VS2013BlueTheme();
+			dockPanel = DockPanel;
+			FormationsForm.Show(dockPanel, DockState.Document);
             PacksForm = new PacksForm(this);
             PacksForm.ToggleButton = togglePacks;
             PacksForm.Left = FormationsForm.Right;

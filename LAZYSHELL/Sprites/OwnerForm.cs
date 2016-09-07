@@ -177,7 +177,11 @@ namespace LAZYSHELL.Sprites
             // PropertiesForm
             PropertiesForm = new PropertiesForm(this);
             PropertiesForm.ToggleButton = toggleProperties;
-            PropertiesForm.Show(dockPanel, DockState.DockLeft);
+			DockPanel = new DockPanel();
+			DockPanel = dockPanel;
+			DockPanel.Theme = new VS2013BlueTheme();
+			dockPanel = DockPanel;
+			PropertiesForm.Show(dockPanel, DockState.DockLeft);
 
             // MoldsForm, SequencesForm
             MoldsForm = new MoldsForm(this);

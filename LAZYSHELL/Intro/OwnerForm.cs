@@ -35,7 +35,11 @@ namespace LAZYSHELL.Intro
         private void InitializeForms()
         {
             TitleScreenForm = new TitleScreenForm(this);
-            TitleScreenForm.Show(dockPanel, DockState.Document);
+			DockPanel = new DockPanel();
+			DockPanel = dockPanel;
+			DockPanel.Theme = new VS2013BlueTheme();
+			dockPanel = DockPanel;
+			TitleScreenForm.Show(dockPanel, DockState.Document);
             TitleScreenForm.LoadTilesetEditor();
             PreGameForm = new PreGameForm(this);
             PreGameForm.Show(dockPanel, DockState.DockRight);

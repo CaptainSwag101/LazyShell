@@ -112,7 +112,11 @@ namespace LAZYSHELL.WorldMaps
         private void InitializeForms()
         {
             LocationsForm = new LocationsForm(this);
-            LocationsForm.Show(dockPanel, DockState.DockRight);
+			DockPanel = new DockPanel();
+			DockPanel = dockPanel;
+			DockPanel.Theme = new VS2013BlueTheme();
+			dockPanel = DockPanel;
+			LocationsForm.Show(dockPanel, DockState.DockRight);
             WorldMapsForm = new WorldMapsForm(this);
             WorldMapsForm.Show(dockPanel, DockState.Document);
         }

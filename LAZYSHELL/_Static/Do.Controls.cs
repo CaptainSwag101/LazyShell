@@ -20,7 +20,7 @@ using System.Xml;
 using LAZYSHELL.Properties;
 using LAZYSHELL.EventScripts;
 using WeifenLuo.WinFormsUI.Docking;
-using WeifenLuo.WinFormsUI.ThemeVS2013Blue;
+using WeifenLuo.WinFormsUI.ThemeVS2013;
 
 namespace LAZYSHELL
 {
