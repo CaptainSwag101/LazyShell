@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class EditLabel : Controls.NewForm
     {
@@ -94,7 +94,7 @@ namespace LAZYSHELL
             if (canEditLabel)
             {
                 ToolStripMenuItem editLabel = new ToolStripMenuItem();
-                editLabel.Image = global::LAZYSHELL.Properties.Resources.label;
+                editLabel.Image = global::LazyShell.Properties.Resources.label;
                 editLabel.ImageAlign = ContentAlignment.MiddleCenter;
                 editLabel.ImageScaling = ToolStripItemImageScaling.None;
                 editLabel.Name = "editLabel";
@@ -103,7 +103,7 @@ namespace LAZYSHELL
                 labelToolStrip.Items.Add(editLabel);
             }
             ToolStripMenuItem addToNotes = new ToolStripMenuItem();
-            addToNotes.Image = global::LAZYSHELL.Properties.Resources.addToNotes;
+            addToNotes.Image = global::LazyShell.Properties.Resources.addToNotes;
             addToNotes.ImageAlign = ContentAlignment.MiddleCenter;
             addToNotes.ImageScaling = ToolStripItemImageScaling.None;
             addToNotes.Name = "addToNotes";
@@ -210,8 +210,8 @@ namespace LAZYSHELL
         private void addToNotes_Click(object sender, EventArgs e)
         {
             if (Model.Program.Project == null || !Model.Program.Project.Visible)
-                LAZYSHELL.Model.Program.CreateProjectWindow();
-            ProjectForm temp = LAZYSHELL.Model.Program.Project;
+                LazyShell.Model.Program.CreateProjectWindow();
+            ProjectForm temp = LazyShell.Model.Program.Project;
             if (Model.Project == null)
                 temp.OpenProjectFile();
             if (Model.Project != null)

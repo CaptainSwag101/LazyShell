@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
     public static class Model
     {
@@ -12,8 +12,8 @@ namespace LAZYSHELL.Battlefields
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         // Compressed data
@@ -91,7 +91,7 @@ namespace LAZYSHELL.Battlefields
                         paletteSets[battlefields[i++].PaletteSet], battlefields[i]);
                 }
                 Do.Export(serialized,
-                    fullPath + "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - Battlefields\\" + "battlefield",
+                    fullPath + "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - Battlefields\\" + "battlefield",
                     "BATTLEFIELD", true);
 
         }

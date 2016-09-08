@@ -6,7 +6,7 @@ using System.Collections;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     /// <summary>
     /// Incorporates an event or action script into a TreeView control to manage a navigable interface of TreeNodes and their associated script commands.

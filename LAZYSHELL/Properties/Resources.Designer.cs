@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LAZYSHELL.Properties {
+namespace LazyShell.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LAZYSHELL.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LAZYSHELL.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LazyShell.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -1190,9 +1190,9 @@ namespace LAZYSHELL.Properties {
         ///{
         ///	backg [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LAZYSHELL_css {
+        internal static string LazyShell_css {
             get {
-                return ResourceManager.GetString("LAZYSHELL_css", resourceCulture);
+                return ResourceManager.GetString("LazyShell_css", resourceCulture);
             }
         }
         
@@ -1209,34 +1209,34 @@ namespace LAZYSHELL.Properties {
         ///                document.getElementById(editor).style.zIndex = ++z;
         ///  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LAZYSHELL_html {
+        internal static string LazyShell_html {
             get {
-                return ResourceManager.GetString("LAZYSHELL_html", resourceCulture);
+                return ResourceManager.GetString("LazyShell_html", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon LAZYSHELL_icon {
+        internal static System.Drawing.Icon LazyShell_icon {
             get {
-                object obj = ResourceManager.GetObject("LAZYSHELL_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("LazyShell_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;LAZYSHELL_xsl.xsl&quot;?&gt;
-        ///&lt;LAZYSHELL form=&quot;Editor&quot; icon=&quot;icons/main.gif&quot; title=&quot;LAZY SHELL - Super Mario RPG Editor&quot;&gt;
-        ///  &lt;Properties version=&quot;3.19.0&quot; date=&quot;January 22, 2014&quot; homepage=&quot;http://home.comcast.net/~giangurgolo/smrpg/&quot; author=&quot;giangurgolo and Omega&quot; /&gt;
+        ///&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;LazyShell_xsl.xsl&quot;?&gt;
+        ///&lt;LazyShell form=&quot;Editor&quot; icon=&quot;icons/main.gif&quot; title=&quot;LAZY SHELL - Super Mario RPG Editor&quot;&gt;
+        ///  &lt;Properties version=&quot;4.0.0b&quot; date=&quot;May 11, 2016&quot; homepage=&quot;https://github.com/jpmac26/LazyShell&quot; author=&quot;giangurgolo, Omega and CaptainSwag101&quot; /&gt;
         ///  &lt;Read&gt;
         ///    &lt;header&gt;Read this first&lt;/header&gt;
-        ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/introducti [rest of string was truncated]&quot;;.
+        ///    &lt;introduction&gt;If this is your first time using Lazy Shell, please take the time to read the following advice:&lt;/intro [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LAZYSHELL_xml {
+        internal static string LazyShell_xml {
             get {
-                return ResourceManager.GetString("LAZYSHELL_xml", resourceCulture);
+                return ResourceManager.GetString("LazyShell_xml", resourceCulture);
             }
         }
         
@@ -1247,7 +1247,7 @@ namespace LAZYSHELL.Properties {
         ///  &lt;xsl:template match=&quot;/&quot;&gt;
         ///    &lt;html&gt;
         ///      &lt;head&gt;
-        ///        &lt;link href=&quot;LAZYSHELL_css.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  /&gt;
+        ///        &lt;link href=&quot;LazyShell_css.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  /&gt;
         ///        &lt;script type=&quot;text/javascript&quot;&gt;
         ///          &lt;![CDATA[
         ///            var z = 0;
@@ -1255,9 +1255,9 @@ namespace LAZYSHELL.Properties {
         ///            {
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string LAZYSHELL_xsl {
+        internal static string LazyShell_xsl {
             get {
-                return ResourceManager.GetString("LAZYSHELL_xsl", resourceCulture);
+                return ResourceManager.GetString("LazyShell_xsl", resourceCulture);
             }
         }
         

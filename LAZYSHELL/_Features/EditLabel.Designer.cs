@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL
+namespace LazyShell
 {
     partial class EditLabel
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -26,37 +26,38 @@ namespace LAZYSHELL
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelText = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
-            // 
-            // labelText
-            // 
-            this.labelText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelText.Location = new System.Drawing.Point(0, 0);
-            this.labelText.Name = "labelText";
-            this.labelText.Size = new System.Drawing.Size(400, 21);
-            this.labelText.TabIndex = 0;
-            this.labelText.TextChanged += new System.EventHandler(this.labelText_TextChanged);
-            this.labelText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditLabel_KeyDown);
-            // 
-            // EditLabel
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 23);
-            this.Controls.Add(this.labelText);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "EditLabel";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.Text = "EDIT LABEL";
-            this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLabel_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditLabel_KeyDown);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			this.labelText = new System.Windows.Forms.TextBox();
+			this.SuspendLayout();
+			// 
+			// labelText
+			// 
+			this.labelText.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.labelText.Location = new System.Drawing.Point(0, 0);
+			this.labelText.Name = "labelText";
+			this.labelText.Size = new System.Drawing.Size(400, 21);
+			this.labelText.TabIndex = 0;
+			this.labelText.TextChanged += new System.EventHandler(this.labelText_TextChanged);
+			this.labelText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditLabel_KeyDown);
+			// 
+			// EditLabel
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(400, 23);
+			this.Controls.Add(this.labelText);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.Location = new System.Drawing.Point(0, 0);
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "EditLabel";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.Text = "Edit Label";
+			this.TopMost = true;
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLabel_FormClosing);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditLabel_KeyDown);
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
         #endregion

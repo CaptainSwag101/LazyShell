@@ -7,10 +7,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class PreviewerForm : Controls.NewForm
     {
@@ -490,19 +490,19 @@ namespace LAZYSHELL
                 this.eventListBox.SelectedIndex < 0 || this.eventListBox.SelectedIndex >= this.eventTriggers.Count))
             {
                 if (this.behavior == ElementType.BattleScript)
-                    LAZYSHELL.Model.Program.Monsters.WriteToROM();
+                    LazyShell.Model.Program.Monsters.WriteToROM();
                 if (this.behavior == ElementType.EventScript ||
                     this.behavior == ElementType.ActionScript)
-                    LAZYSHELL.Model.Program.EventScripts.WriteToROM();
+                    LazyShell.Model.Program.EventScripts.WriteToROM();
                 if (this.behavior == ElementType.Area)
-                    LAZYSHELL.Model.Program.Areas.WriteToROM();
+                    LazyShell.Model.Program.Areas.WriteToROM();
                 if (this.behavior == ElementType.MineCart)
-                    LAZYSHELL.Model.Program.Minecart.WriteToROM();
+                    LazyShell.Model.Program.Minecart.WriteToROM();
                 if (this.behavior == ElementType.SPCTrack ||
                     this.behavior == ElementType.SPCEvent ||
                     this.behavior == ElementType.SPCBattle)
                 {
-                    LAZYSHELL.Model.Program.Audio.WriteToROM(false);
+                    LazyShell.Model.Program.Audio.WriteToROM(false);
                     if (this.behavior == ElementType.SPCEvent)
                         soundFX = Bits.GetBytes(Model.ROM, 0x042826, 0x1600);
                     else if (this.behavior == ElementType.SPCBattle)
@@ -538,9 +538,9 @@ namespace LAZYSHELL
                 {
                     byte[] lc;
                     if (snes9x)
-                        lc = Resources.RomPreviewBaseSave;
+                        lc = global::LazyShell.Properties.Resources.RomPreviewBaseSave;
                     else
-                        lc = Resources.RomPreviewBaseSave1;
+                        lc = global::LazyShell.Properties.Resources.RomPreviewBaseSave1;
                     File.WriteAllBytes(Model.GetEditorPathWithoutFileName() + "RomPreviewBaseSave" + ext, lc);
                 }
                 FileStream fs = fInfo.OpenRead();

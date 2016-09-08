@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     /// <summary>
     /// Form for creating and modifying an animation command in a user interface.

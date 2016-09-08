@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class PropertiesForm : Controls.DockForm
     {
@@ -174,11 +174,11 @@ namespace LAZYSHELL.Areas
         }
         private void buttonGotoC_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.EventScripts == null || !LAZYSHELL.Model.Program.EventScripts.Visible)
-                LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-            LAZYSHELL.Model.Program.EventScripts.Type = 0;
-            LAZYSHELL.Model.Program.EventScripts.Index = (int)startEvent.Value;
-            LAZYSHELL.Model.Program.EventScripts.BringToFront();
+            if (LazyShell.Model.Program.EventScripts == null || !LazyShell.Model.Program.EventScripts.Visible)
+                LazyShell.Model.Program.CreateEventScriptsWindow();
+            LazyShell.Model.Program.EventScripts.Type = 0;
+            LazyShell.Model.Program.EventScripts.Index = (int)startEvent.Value;
+            LazyShell.Model.Program.EventScripts.BringToFront();
         }
 
         #endregion

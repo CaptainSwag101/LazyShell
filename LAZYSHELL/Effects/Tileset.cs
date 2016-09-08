@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     [Serializable()]
     public class Tileset

@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     partial class BattleDialoguesForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Dialogues
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -29,7 +29,7 @@ namespace LAZYSHELL.Dialogues
 			this.textBox = new System.Windows.Forms.RichTextBox();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.typeName = new System.Windows.Forms.ToolStripComboBox();
-			this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.searchButton = new System.Windows.Forms.ToolStripButton();
 			this.picture = new System.Windows.Forms.PictureBox();
 			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -137,14 +137,14 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// searchButton
 			// 
-			this.searchButton.Image = global::LAZYSHELL.Properties.Resources.search;
+			this.searchButton.Image = global::LazyShell.Properties.Resources.search;
 			this.searchButton.Name = "searchButton";
 			this.searchButton.Size = new System.Drawing.Size(23, 22);
 			this.searchButton.ToolTipText = "Search For Dialogue";
 			// 
 			// picture
 			// 
-			this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+			this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
 			this.picture.Dock = System.Windows.Forms.DockStyle.Top;
 			this.picture.Location = new System.Drawing.Point(0, 0);
 			this.picture.Name = "picture";
@@ -172,7 +172,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// pageUp
 			// 
-			this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
+			this.pageUp.Image = global::LazyShell.Properties.Resources.pageUp;
 			this.pageUp.Name = "pageUp";
 			this.pageUp.Size = new System.Drawing.Size(23, 22);
 			this.pageUp.ToolTipText = "Page Up";
@@ -180,7 +180,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// pageDown
 			// 
-			this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
+			this.pageDown.Image = global::LazyShell.Properties.Resources.pageDown;
 			this.pageDown.Name = "pageDown";
 			this.pageDown.Size = new System.Drawing.Size(23, 22);
 			this.pageDown.ToolTipText = "Page Down";
@@ -194,7 +194,7 @@ namespace LAZYSHELL.Dialogues
 			// textView
 			// 
 			this.textView.CheckOnClick = true;
-			this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+			this.textView.Image = global::LazyShell.Properties.Resources.textView;
 			this.textView.Name = "textView";
 			this.textView.Size = new System.Drawing.Size(23, 22);
 			this.textView.ToolTipText = "Text View";
@@ -213,7 +213,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// newLine
 			// 
-			this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
+			this.newLine.Image = global::LazyShell.Properties.Resources.newLine;
 			this.newLine.Name = "newLine";
 			this.newLine.Size = new System.Drawing.Size(21, 20);
 			this.newLine.ToolTipText = "New Line";
@@ -221,7 +221,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// endString
 			// 
-			this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
+			this.endString.Image = global::LazyShell.Properties.Resources.endString;
 			this.endString.Name = "endString";
 			this.endString.Size = new System.Drawing.Size(21, 20);
 			this.endString.ToolTipText = "End String";
@@ -229,7 +229,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// pause60f
 			// 
-			this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
+			this.pause60f.Image = global::LazyShell.Properties.Resources.pause60f;
 			this.pause60f.Name = "pause60f";
 			this.pause60f.Size = new System.Drawing.Size(21, 20);
 			this.pause60f.ToolTipText = "Pause 1 second";
@@ -237,7 +237,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// pauseA
 			// 
-			this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
+			this.pauseA.Image = global::LazyShell.Properties.Resources.pauseA;
 			this.pauseA.Name = "pauseA";
 			this.pauseA.Size = new System.Drawing.Size(21, 20);
 			this.pauseA.ToolTipText = "Pause, wait for input";
@@ -246,7 +246,7 @@ namespace LAZYSHELL.Dialogues
 			// pauseFrames
 			// 
 			this.pauseFrames.CheckOnClick = true;
-			this.pauseFrames.Image = global::LAZYSHELL.Properties.Resources.pauseFrames;
+			this.pauseFrames.Image = global::LazyShell.Properties.Resources.pauseFrames;
 			this.pauseFrames.Name = "pauseFrames";
 			this.pauseFrames.Size = new System.Drawing.Size(21, 20);
 			this.pauseFrames.ToolTipText = "Pause for # of frames";
@@ -274,28 +274,28 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// import
 			// 
-			this.import.Image = global::LAZYSHELL.Properties.Resources.importText;
+			this.import.Image = global::LazyShell.Properties.Resources.importText;
 			this.import.Name = "import";
 			this.import.Size = new System.Drawing.Size(23, 22);
 			this.import.Click += new System.EventHandler(this.import_Click);
 			// 
 			// export
 			// 
-			this.export.Image = global::LAZYSHELL.Properties.Resources.exportText;
+			this.export.Image = global::LazyShell.Properties.Resources.exportText;
 			this.export.Name = "export";
 			this.export.Size = new System.Drawing.Size(23, 22);
 			this.export.Click += new System.EventHandler(this.export_Click);
 			// 
 			// clear
 			// 
-			this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+			this.clear.Image = global::LazyShell.Properties.Resources.clear;
 			this.clear.Name = "clear";
 			this.clear.Size = new System.Drawing.Size(23, 22);
 			this.clear.Click += new System.EventHandler(this.clear_Click);
 			// 
 			// reset
 			// 
-			this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.reset.Image = global::LazyShell.Properties.Resources.reset;
 			this.reset.Name = "reset";
 			this.reset.Size = new System.Drawing.Size(23, 22);
 			this.reset.ToolTipText = "Reset";
@@ -320,7 +320,7 @@ namespace LAZYSHELL.Dialogues
 			// toggleTileGrid
 			// 
 			this.toggleTileGrid.CheckOnClick = true;
-			this.toggleTileGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+			this.toggleTileGrid.Image = global::LazyShell.Properties.Resources.buttonToggleGrid;
 			this.toggleTileGrid.Name = "toggleTileGrid";
 			this.toggleTileGrid.Size = new System.Drawing.Size(23, 22);
 			this.toggleTileGrid.ToolTipText = "Tile Grid";
@@ -333,7 +333,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// openTileEditor
 			// 
-			this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
+			this.openTileEditor.Image = global::LazyShell.Properties.Resources.openTileEditor;
 			this.openTileEditor.Name = "openTileEditor";
 			this.openTileEditor.Size = new System.Drawing.Size(23, 22);
 			this.openTileEditor.ToolTipText = "Tile Editor";
@@ -341,7 +341,7 @@ namespace LAZYSHELL.Dialogues
 			// 
 			// openGraphics
 			// 
-			this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+			this.openGraphics.Image = global::LazyShell.Properties.Resources.openGraphics;
 			this.openGraphics.Name = "openGraphics";
 			this.openGraphics.Size = new System.Drawing.Size(23, 22);
 			this.openGraphics.ToolTipText = "BPP Graphics";
@@ -352,7 +352,7 @@ namespace LAZYSHELL.Dialogues
 			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openPaletteDialogue,
             this.openPaletteMenu});
-			this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+			this.toolStripDropDownButton1.Image = global::LazyShell.Properties.Resources.openPalettes;
 			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
 			this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -408,7 +408,7 @@ namespace LAZYSHELL.Dialogues
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "BattleDialoguesForm";
 			this.Text = "Battle Dialogues";
-			this.TilesetForms = new LAZYSHELL.TilesetForm[] {
+			this.TilesetForms = new LazyShell.TilesetForm[] {
         null};
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();

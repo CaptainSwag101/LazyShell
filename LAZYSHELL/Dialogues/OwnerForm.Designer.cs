@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Dialogues
+﻿namespace LazyShell.Dialogues
 {
     partial class OwnerForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -35,9 +35,9 @@
 			this.helpTips = new System.Windows.Forms.ToolStripButton();
 			this.baseConvertor = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-			this.toggleDialogues = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleDTETable = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleBattleDialogues = new LAZYSHELL.Controls.NewToolStripButton();
+			this.toggleDialogues = new LazyShell.Controls.NewToolStripButton();
+			this.toggleDTETable = new LazyShell.Controls.NewToolStripButton();
+			this.toggleBattleDialogues = new LazyShell.Controls.NewToolStripButton();
 			this.toolStrip3.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -70,7 +70,7 @@
 			// 
 			// save
 			// 
-			this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.save.Image = global::LazyShell.Properties.Resources.save;
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(23, 22);
 			this.save.ToolTipText = "Save";
@@ -84,7 +84,7 @@
 			// helpTips
 			// 
 			this.helpTips.CheckOnClick = true;
-			this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.helpTips.Image = global::LazyShell.Properties.Resources.help;
 			this.helpTips.Name = "helpTips";
 			this.helpTips.Size = new System.Drawing.Size(23, 22);
 			this.helpTips.ToolTipText = "Help Tips";
@@ -92,7 +92,7 @@
 			// baseConvertor
 			// 
 			this.baseConvertor.CheckOnClick = true;
-			this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+			this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
 			this.baseConvertor.Name = "baseConvertor";
 			this.baseConvertor.Size = new System.Drawing.Size(23, 22);
 			this.baseConvertor.ToolTipText = "Base Convertor";
@@ -108,7 +108,7 @@
 			this.toggleDialogues.CheckOnClick = true;
 			this.toggleDialogues.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleDialogues.Form = null;
-			this.toggleDialogues.Image = global::LAZYSHELL.Properties.Resources.openDialogues;
+			this.toggleDialogues.Image = global::LazyShell.Properties.Resources.openDialogues;
 			this.toggleDialogues.Name = "toggleDialogues";
 			this.toggleDialogues.Size = new System.Drawing.Size(23, 22);
 			this.toggleDialogues.ToolTipText = "Compression Table";
@@ -119,7 +119,7 @@
 			this.toggleDTETable.CheckOnClick = true;
 			this.toggleDTETable.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleDTETable.Form = null;
-			this.toggleDTETable.Image = global::LAZYSHELL.Properties.Resources.table;
+			this.toggleDTETable.Image = global::LazyShell.Properties.Resources.table;
 			this.toggleDTETable.Name = "toggleDTETable";
 			this.toggleDTETable.Size = new System.Drawing.Size(23, 22);
 			this.toggleDTETable.ToolTipText = "Compression Table";
@@ -130,7 +130,7 @@
 			this.toggleBattleDialogues.CheckOnClick = true;
 			this.toggleBattleDialogues.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleBattleDialogues.Form = null;
-			this.toggleBattleDialogues.Image = global::LAZYSHELL.Properties.Resources.openBattleDialogues;
+			this.toggleBattleDialogues.Image = global::LazyShell.Properties.Resources.openBattleDialogues;
 			this.toggleBattleDialogues.Name = "toggleBattleDialogues";
 			this.toggleBattleDialogues.Size = new System.Drawing.Size(23, 22);
 			this.toggleBattleDialogues.ToolTipText = "Battle Dialogues";
@@ -145,7 +145,7 @@
 			this.IsMdiContainer = true;
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "OwnerForm";
-			this.Text = "DIALOGUES - Lazy Shell";
+			this.Text = "Dialogues - Lazy Shell";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);
 			this.toolStrip3.ResumeLayout(false);
 			this.toolStrip3.PerformLayout();

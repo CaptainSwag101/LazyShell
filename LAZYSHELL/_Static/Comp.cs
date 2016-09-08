@@ -4,9 +4,9 @@ using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for decompressing and compressing data in the Mario RPG ROM using the Lunar Compress.dll library.
@@ -373,7 +373,7 @@ namespace LAZYSHELL
 				{
 					if (!File.Exists("Lunar Compress.dll"))
 					{
-						byte[] lc = Resources.Lunar_Compress_x64;
+						byte[] lc = global::LazyShell.Properties.Resources.Lunar_Compress_x64;
 						File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
 					}
 				}
@@ -381,7 +381,7 @@ namespace LAZYSHELL
 				{
 					if (!File.Exists("Lunar Compress.dll"))
 					{
-						byte[] lc = Resources.Lunar_Compress;
+						byte[] lc = global::LazyShell.Properties.Resources.Lunar_Compress;
 						File.WriteAllBytes(Path.GetDirectoryName(Application.ExecutablePath) + '\\' + "Lunar Compress.dll", lc);
 					}
 				}

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Undo
+namespace LazyShell.Undo
 {
     interface Edit
     {

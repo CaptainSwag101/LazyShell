@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
     [Serializable()]
     public class Serialized

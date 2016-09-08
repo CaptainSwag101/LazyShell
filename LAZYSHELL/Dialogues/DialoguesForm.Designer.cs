@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Dialogues
+﻿namespace LazyShell.Dialogues
 {
     partial class DialoguesForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -53,7 +53,7 @@
 			this.panel69 = new System.Windows.Forms.Panel();
 			this.picture = new System.Windows.Forms.PictureBox();
 			this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-			this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.search = new System.Windows.Forms.ToolStripButton();
 			this.findReferences = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -63,7 +63,7 @@
 			this.reset = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip4 = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-			this.pauseFrameNum = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.pauseFrameNum = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.pauseFramesInsert = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip6 = new System.Windows.Forms.ToolStrip();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -117,7 +117,7 @@
 			// 
 			// newLine
 			// 
-			this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
+			this.newLine.Image = global::LazyShell.Properties.Resources.newLine;
 			this.newLine.Name = "newLine";
 			this.newLine.Size = new System.Drawing.Size(29, 20);
 			this.newLine.ToolTipText = "New Line";
@@ -125,7 +125,7 @@
 			// 
 			// newLineA
 			// 
-			this.newLineA.Image = global::LAZYSHELL.Properties.Resources.newLineA;
+			this.newLineA.Image = global::LazyShell.Properties.Resources.newLineA;
 			this.newLineA.Name = "newLineA";
 			this.newLineA.Size = new System.Drawing.Size(29, 20);
 			this.newLineA.ToolTipText = "New Line, wait for input";
@@ -138,7 +138,7 @@
 			// 
 			// newPage
 			// 
-			this.newPage.Image = global::LAZYSHELL.Properties.Resources.pageBreak;
+			this.newPage.Image = global::LazyShell.Properties.Resources.pageBreak;
 			this.newPage.Name = "newPage";
 			this.newPage.Size = new System.Drawing.Size(29, 20);
 			this.newPage.ToolTipText = "New Page";
@@ -146,7 +146,7 @@
 			// 
 			// newPageA
 			// 
-			this.newPageA.Image = global::LAZYSHELL.Properties.Resources.pageBreakA;
+			this.newPageA.Image = global::LazyShell.Properties.Resources.pageBreakA;
 			this.newPageA.Name = "newPageA";
 			this.newPageA.Size = new System.Drawing.Size(29, 20);
 			this.newPageA.ToolTipText = "New Page, wait for input";
@@ -159,7 +159,7 @@
 			// 
 			// endString
 			// 
-			this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
+			this.endString.Image = global::LazyShell.Properties.Resources.endString;
 			this.endString.Name = "endString";
 			this.endString.Size = new System.Drawing.Size(29, 20);
 			this.endString.ToolTipText = "End String";
@@ -167,7 +167,7 @@
 			// 
 			// endStringA
 			// 
-			this.endStringA.Image = global::LAZYSHELL.Properties.Resources.endStringA;
+			this.endStringA.Image = global::LazyShell.Properties.Resources.endStringA;
 			this.endStringA.Name = "endStringA";
 			this.endStringA.Size = new System.Drawing.Size(29, 20);
 			this.endStringA.ToolTipText = "End String, wait for input";
@@ -192,7 +192,7 @@
 			// 
 			// pause60f
 			// 
-			this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
+			this.pause60f.Image = global::LazyShell.Properties.Resources.pause60f;
 			this.pause60f.Name = "pause60f";
 			this.pause60f.Size = new System.Drawing.Size(29, 20);
 			this.pause60f.ToolTipText = "Pause 1 second";
@@ -200,7 +200,7 @@
 			// 
 			// pauseA
 			// 
-			this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
+			this.pauseA.Image = global::LazyShell.Properties.Resources.pauseA;
 			this.pauseA.Name = "pauseA";
 			this.pauseA.Size = new System.Drawing.Size(29, 20);
 			this.pauseA.ToolTipText = "Pause, wait for input";
@@ -223,7 +223,7 @@
 			// 
 			// pageUp
 			// 
-			this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
+			this.pageUp.Image = global::LazyShell.Properties.Resources.pageUp;
 			this.pageUp.Name = "pageUp";
 			this.pageUp.Size = new System.Drawing.Size(23, 22);
 			this.pageUp.ToolTipText = "Back 1 Page";
@@ -231,7 +231,7 @@
 			// 
 			// pageDown
 			// 
-			this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
+			this.pageDown.Image = global::LazyShell.Properties.Resources.pageDown;
 			this.pageDown.Name = "pageDown";
 			this.pageDown.Size = new System.Drawing.Size(23, 22);
 			this.pageDown.ToolTipText = "Foward 1 Page";
@@ -245,7 +245,7 @@
 			// textView
 			// 
 			this.textView.CheckOnClick = true;
-			this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+			this.textView.Image = global::LazyShell.Properties.Resources.textView;
 			this.textView.Name = "textView";
 			this.textView.Size = new System.Drawing.Size(23, 22);
 			this.textView.ToolTipText = "Text View";
@@ -274,7 +274,7 @@
 			// 
 			this.picture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+			this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
 			this.picture.Location = new System.Drawing.Point(-8, 0);
 			this.picture.Name = "picture";
 			this.picture.Size = new System.Drawing.Size(256, 56);
@@ -334,14 +334,14 @@
 			// 
 			// search
 			// 
-			this.search.Image = global::LAZYSHELL.Properties.Resources.search;
+			this.search.Image = global::LazyShell.Properties.Resources.search;
 			this.search.Name = "search";
 			this.search.Size = new System.Drawing.Size(23, 22);
 			this.search.ToolTipText = "Search For Dialogue";
 			// 
 			// findReferences
 			// 
-			this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
+			this.findReferences.Image = global::LazyShell.Properties.Resources.findReferences;
 			this.findReferences.Name = "findReferences";
 			this.findReferences.Size = new System.Drawing.Size(23, 22);
 			this.findReferences.ToolTipText = "Find references to dialogue";
@@ -354,28 +354,28 @@
 			// 
 			// import
 			// 
-			this.import.Image = global::LAZYSHELL.Properties.Resources.importText;
+			this.import.Image = global::LazyShell.Properties.Resources.importText;
 			this.import.Name = "import";
 			this.import.Size = new System.Drawing.Size(23, 22);
 			this.import.Click += new System.EventHandler(this.import_Click);
 			// 
 			// export
 			// 
-			this.export.Image = global::LAZYSHELL.Properties.Resources.exportText;
+			this.export.Image = global::LazyShell.Properties.Resources.exportText;
 			this.export.Name = "export";
 			this.export.Size = new System.Drawing.Size(23, 22);
 			this.export.Click += new System.EventHandler(this.export_Click);
 			// 
 			// clear
 			// 
-			this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+			this.clear.Image = global::LazyShell.Properties.Resources.clear;
 			this.clear.Name = "clear";
 			this.clear.Size = new System.Drawing.Size(23, 22);
 			this.clear.Click += new System.EventHandler(this.clear_Click);
 			// 
 			// reset
 			// 
-			this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.reset.Image = global::LazyShell.Properties.Resources.reset;
 			this.reset.Name = "reset";
 			this.reset.Size = new System.Drawing.Size(23, 22);
 			this.reset.Click += new System.EventHandler(this.reset_Click);
@@ -435,7 +435,7 @@
 			// 
 			// pauseFramesInsert
 			// 
-			this.pauseFramesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
+			this.pauseFramesInsert.Image = global::LazyShell.Properties.Resources.insertIntoText;
 			this.pauseFramesInsert.Name = "pauseFramesInsert";
 			this.pauseFramesInsert.Size = new System.Drawing.Size(23, 22);
 			this.pauseFramesInsert.ToolTipText = "Insert into text";
@@ -478,7 +478,7 @@
 			// 
 			// variablesInsert
 			// 
-			this.variablesInsert.Image = global::LAZYSHELL.Properties.Resources.insertIntoText;
+			this.variablesInsert.Image = global::LazyShell.Properties.Resources.insertIntoText;
 			this.variablesInsert.Name = "variablesInsert";
 			this.variablesInsert.Size = new System.Drawing.Size(23, 22);
 			this.variablesInsert.ToolTipText = "Insert into text";

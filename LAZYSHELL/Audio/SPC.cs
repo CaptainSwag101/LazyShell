@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     [Serializable()]
     public abstract class SPC : Element

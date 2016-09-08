@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Text;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     /// <summary>
     /// Contains all of the data, collections, and methods  

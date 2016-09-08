@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.WorldMaps
+﻿namespace LazyShell.WorldMaps
 {
     partial class LocationsForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -39,8 +39,8 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.nameFreeSpace = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.name = new LAZYSHELL.Controls.NewToolStripComboBox();
-            this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.name = new LazyShell.Controls.NewToolStripComboBox();
+            this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.leadToLocation = new System.Windows.Forms.CheckBox();
             this.label52 = new System.Windows.Forms.Label();
             this.panel17 = new System.Windows.Forms.Panel();
@@ -68,9 +68,9 @@
             this.toWestPoint = new System.Windows.Forms.ComboBox();
             this.toSouthPoint = new System.Windows.Forms.ComboBox();
             this.enableWestPath = new System.Windows.Forms.CheckBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.locationYCoord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.showCheckBit)).BeginInit();

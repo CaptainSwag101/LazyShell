@@ -8,12 +8,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
+using LazyShell.Undo;
 //
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     public partial class BattleScriptForm : Controls.DockForm
     {
@@ -287,7 +287,7 @@ namespace LAZYSHELL.Monsters
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - battleScripts.txt";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - battleScripts.txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -412,11 +412,11 @@ namespace LAZYSHELL.Monsters
             Command temp = (Command)commandTree.SelectedNode.Tag;
             int num = temp.Data[1];
             //
-            if (LAZYSHELL.Model.Program.Dialogues == null || !LAZYSHELL.Model.Program.Dialogues.Visible)
-                LAZYSHELL.Model.Program.CreateDialoguesWindow();
+            if (LazyShell.Model.Program.Dialogues == null || !LazyShell.Model.Program.Dialogues.Visible)
+                LazyShell.Model.Program.CreateDialoguesWindow();
             //
-            LAZYSHELL.Model.Program.Dialogues.BattleDialoguesForm.Index = num;
-            LAZYSHELL.Model.Program.Dialogues.BringToFront();
+            LazyShell.Model.Program.Dialogues.BattleDialoguesForm.Index = num;
+            LazyShell.Model.Program.Dialogues.BringToFront();
         }
         private void goToEvent_Click(object sender, EventArgs e)
         {
@@ -426,12 +426,12 @@ namespace LAZYSHELL.Monsters
             Command temp = (Command)commandTree.SelectedNode.Tag;
             int num = temp.Data[1];
             //
-            if (LAZYSHELL.Model.Program.Animations == null || !LAZYSHELL.Model.Program.Animations.Visible)
-                LAZYSHELL.Model.Program.CreateAnimationsWindow();
+            if (LazyShell.Model.Program.Animations == null || !LazyShell.Model.Program.Animations.Visible)
+                LazyShell.Model.Program.CreateAnimationsWindow();
             //
-            LAZYSHELL.Model.Program.Animations.CurrentSet = Animations.Set.BattleEvent;
-            LAZYSHELL.Model.Program.Animations.Index = num;
-            LAZYSHELL.Model.Program.Animations.BringToFront();
+            LazyShell.Model.Program.Animations.CurrentSet = Animations.Set.BattleEvent;
+            LazyShell.Model.Program.Animations.Index = num;
+            LazyShell.Model.Program.Animations.BringToFront();
         }
 
         // Edit command
@@ -560,7 +560,7 @@ namespace LAZYSHELL.Monsters
 
         #endregion
 
-        private class CommandEdit : LAZYSHELL.Undo.Edit
+        private class CommandEdit : LazyShell.Undo.Edit
         {
             #region Variables
 

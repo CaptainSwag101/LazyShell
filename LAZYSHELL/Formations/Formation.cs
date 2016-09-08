@@ -3,9 +3,9 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Formations
+namespace LazyShell.Formations
 {
     [Serializable()]
     public class Formation : Element
@@ -68,8 +68,8 @@ namespace LAZYSHELL.Formations
                 if (Active[i])
                 {
                     // Get correct monster image
-                    int[] pixels = LAZYSHELL.Monsters.Model.Monsters[Monsters[i]].Pixels;
-                    int elevation = LAZYSHELL.Monsters.Model.Monsters[Monsters[i]].Elevation * 16;
+                    int[] pixels = LazyShell.Monsters.Model.Monsters[Monsters[i]].Pixels;
+                    int elevation = LazyShell.Monsters.Model.Monsters[Monsters[i]].Elevation * 16;
                     for (int y = 0; y < 256; y++)
                     {
                         for (int x = 0; x < 256; x++)
@@ -96,7 +96,7 @@ namespace LAZYSHELL.Formations
             string output = "";
             for (int i = 0; i < 8; i++)
             {
-                var name = LAZYSHELL.Monsters.Model.Monsters[Monsters[i]].Name;
+                var name = LazyShell.Monsters.Model.Monsters[Monsters[i]].Name;
                 if (Active[i])
                     output += Do.RawToASCII(name, Lists.KeystrokesMenu).Trim() + separator;
                 else
@@ -113,7 +113,7 @@ namespace LAZYSHELL.Formations
             string[] output = new string[8];
             for (int i = 0; i < 8; i++)
             {
-                var name = LAZYSHELL.Monsters.Model.Monsters[Monsters[i]].Name;
+                var name = LazyShell.Monsters.Model.Monsters[Monsters[i]].Name;
                 if (Active[i])
                     output[i] = Do.RawToASCII(name, Lists.KeystrokesMenu).Trim();
                 else

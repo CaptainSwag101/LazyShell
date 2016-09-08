@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     [Serializable()]
     public class ProjectDB

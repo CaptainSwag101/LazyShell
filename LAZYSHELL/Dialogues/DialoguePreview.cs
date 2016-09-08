@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using LAZYSHELL.Fonts;
+using LazyShell.Fonts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class DialoguePreview
     {

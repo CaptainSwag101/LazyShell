@@ -2,42 +2,42 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.WorldMaps.UpdateGraphics();
+            LazyShell.Model.Program.WorldMaps.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         // Updating
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.WorldMaps.UpdatePalette();
+            LazyShell.Model.Program.WorldMaps.UpdatePalette();
         }
     }
-    class LogoPaletteUpdater : LAZYSHELL.PaletteUpdater
+    class LogoPaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.WorldMaps.UpdateLogoPalette();
+            LazyShell.Model.Program.WorldMaps.UpdateLogoPalette();
         }
     }
-    class LogoGraphicUpdater : LAZYSHELL.GraphicUpdater
+    class LogoGraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.WorldMaps.UpdateLogoGraphics();
+            LazyShell.Model.Program.WorldMaps.UpdateLogoGraphics();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.WorldMaps.UpdateTile();
+            LazyShell.Model.Program.WorldMaps.UpdateTile();
         }
     }
 }

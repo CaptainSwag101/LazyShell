@@ -11,11 +11,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.Undo;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class OwnerForm : MapEditor
     {
@@ -702,7 +702,7 @@ namespace LAZYSHELL.Areas
             Comp.Compress(Model.Tilemaps, Model.Modify_Tilemaps, 0x160000, 0x1A8000, "TILE MAP", 0, 109, 163, 219, 275);
             Comp.Compress(Model.CollisionMaps, Model.Modify_CollisionMaps, 0x1B0000, 0x1C8000, "COLLISION MAP", 0, 80);
             Comp.Compress(Model.Tilesets, Model.Modify_Tilesets, 0x3B0000, 0x3DC000, "TILE SET", 0, 58, 91);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.HighlightChanges();
             this.Modified = false;
         }
 
@@ -1073,7 +1073,7 @@ namespace LAZYSHELL.Areas
         private void exportArrays_Click(object sender, EventArgs e)
         {
             string fullPath = Do.GetDirectoryPath("Select directory to export arrays to...");
-            fullPath += "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - Arrays\\";
+            fullPath += "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - Arrays\\";
             // Create Area Data directory
             if (!Do.CreateDirectory(fullPath))
                 return;
@@ -1202,7 +1202,7 @@ namespace LAZYSHELL.Areas
         {
             BinaryWriter binWriter;
             string path = Do.GetDirectoryPath("Where do you want to save the graphic sets?");
-            path += "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - Graphic Sets\\";
+            path += "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - Graphic Sets\\";
             if (!Do.CreateDirectory(path))
                 return;
             if (path == null)
@@ -1264,7 +1264,7 @@ namespace LAZYSHELL.Areas
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - NPCS.txt";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - NPCS.txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -1293,9 +1293,9 @@ namespace LAZYSHELL.Areas
         // ToolStrip : Hex editor
         private void hexEditor_Click(object sender, EventArgs e)
         {
-            LAZYSHELL.Model.HexEditor.SetOffset((Index * 18) + 0x1D0040);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
-            LAZYSHELL.Model.HexEditor.Show();
+            LazyShell.Model.HexEditor.SetOffset((Index * 18) + 0x1D0040);
+            LazyShell.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.Show();
         }
 
         // ToolStrip : Reset

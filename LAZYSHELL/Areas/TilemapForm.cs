@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
-using LAZYSHELL.Minecart;
-using LAZYSHELL.Undo;
+using LazyShell.Areas;
+using LazyShell.Minecart;
+using LazyShell.Undo;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class TilemapForm : Controls.DockForm
     {
@@ -2830,19 +2830,19 @@ namespace LAZYSHELL
                 else
                 {
                     if (Model.Program.WorldMaps == null || !Model.Program.WorldMaps.Visible)
-                        LAZYSHELL.Model.Program.CreateWorldMapsWindow();
-                    LAZYSHELL.Model.Program.WorldMaps.Index = exit.Destination;
-                    LAZYSHELL.Model.Program.WorldMaps.BringToFront();
+                        LazyShell.Model.Program.CreateWorldMapsWindow();
+                    LazyShell.Model.Program.WorldMaps.Index = exit.Destination;
+                    LazyShell.Model.Program.WorldMaps.BringToFront();
                 }
             }
             else if (objectFunction.Text == "Edit event's script")
             {
                 EventTrigger EVENT = eventTriggers.Triggers[(int)objectFunction.Tag];
                 if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
-                    LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-                LAZYSHELL.Model.Program.EventScripts.Type = 0;
-                LAZYSHELL.Model.Program.EventScripts.Index = EVENT.RunEvent;
-                LAZYSHELL.Model.Program.EventScripts.BringToFront();
+                    LazyShell.Model.Program.CreateEventScriptsWindow();
+                LazyShell.Model.Program.EventScripts.Type = 0;
+                LazyShell.Model.Program.EventScripts.Index = EVENT.RunEvent;
+                LazyShell.Model.Program.EventScripts.BringToFront();
             }
             else if (objectFunction.Text == "Edit npc's script")
             {
@@ -2850,22 +2850,22 @@ namespace LAZYSHELL
                 NPCObject npc = npcObjects.NPCObjects[tag[0]];
                 NPCObject reference = null;
                 if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
-                    LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-                LAZYSHELL.Model.Program.EventScripts.Type = 0;
+                    LazyShell.Model.Program.CreateEventScriptsWindow();
+                LazyShell.Model.Program.EventScripts.Type = 0;
                 if (reference == null)
-                    LAZYSHELL.Model.Program.EventScripts.Index = npc.Event;
-                LAZYSHELL.Model.Program.EventScripts.BringToFront();
+                    LazyShell.Model.Program.EventScripts.Index = npc.Event;
+                LazyShell.Model.Program.EventScripts.BringToFront();
             }
             else if (objectFunction.Text == "Edit npc's formation pack")
             {
                 List<int> tag = (List<int>)objectFunction.Tag;
                 NPCObject npc = npcObjects.NPCObjects[tag[0]];
                 if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
-                    LAZYSHELL.Model.Program.CreateFormationsWindow();
+                    LazyShell.Model.Program.CreateFormationsWindow();
                 int pack = npc.Pack;
-                LAZYSHELL.Model.Program.Formations.PackIndex = pack;
-                LAZYSHELL.Model.Program.Formations.FormationIndex = Formations.Model.Packs[pack].Formations[0];
-                LAZYSHELL.Model.Program.Formations.BringToFront();
+                LazyShell.Model.Program.Formations.PackIndex = pack;
+                LazyShell.Model.Program.Formations.FormationIndex = Formations.Model.Packs[pack].Formations[0];
+                LazyShell.Model.Program.Formations.BringToFront();
             }
         }
 

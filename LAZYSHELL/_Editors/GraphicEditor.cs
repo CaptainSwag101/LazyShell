@@ -8,9 +8,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Undo;
+using LazyShell.Undo;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class GraphicEditor : Controls.NewForm
     {

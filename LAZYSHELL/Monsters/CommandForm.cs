@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     public partial class CommandForm : Controls.NewForm
     {

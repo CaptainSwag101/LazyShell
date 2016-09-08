@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class OverlapsForm : Controls.DockForm
     {

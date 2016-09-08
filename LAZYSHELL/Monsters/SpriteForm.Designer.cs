@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Monsters
+﻿namespace LazyShell.Monsters
 {
     partial class SpriteForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -40,8 +40,8 @@
             this.label26 = new System.Windows.Forms.Label();
             this.elevation = new System.Windows.Forms.NumericUpDown();
             this.label210 = new System.Windows.Forms.Label();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetArrowY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetArrowX)).BeginInit();
@@ -50,7 +50,7 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox.Location = new System.Drawing.Point(3, 20);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(256, 256);

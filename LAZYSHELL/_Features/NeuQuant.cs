@@ -36,7 +36,7 @@
 #endregion
 using System;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class NeuQuant
     {

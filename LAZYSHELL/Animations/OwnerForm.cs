@@ -6,11 +6,11 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.EventScripts;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.EventScripts;
+using LazyShell.Properties;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     /// <summary>
     /// Main form of the Animations namespace.

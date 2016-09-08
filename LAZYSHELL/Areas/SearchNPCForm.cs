@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
+using LazyShell.Areas;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class SearchNPCForm : Controls.NewForm
     {

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for managing the event history of the user's interaction with the application's controls.
@@ -258,7 +258,7 @@ namespace LAZYSHELL
         private void FormClosed(object sender, FormClosedEventArgs e)
         {
             Do.AddHistory("CLOSED FORM \"" + form.Name + "\"");
-            LAZYSHELL.Properties.Settings.Default.Save();
+            LazyShell.Properties.Settings.Default.Save();
         }
         private void MouseDown(object sender, MouseEventArgs e)
         {

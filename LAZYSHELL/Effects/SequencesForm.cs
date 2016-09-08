@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     public partial class SequencesForm : Controls.DockForm
     {
@@ -211,7 +211,7 @@ namespace LAZYSHELL.Effects
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
-                frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+                frame.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
                 frame.Name = "frame" + i;
                 frame.Size = new Size(width, height);

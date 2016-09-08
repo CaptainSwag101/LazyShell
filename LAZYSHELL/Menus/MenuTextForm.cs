@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     public partial class MenuTextForm : Controls.NewForm
     {

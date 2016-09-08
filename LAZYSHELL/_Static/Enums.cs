@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     #region Types
 

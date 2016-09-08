@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Base type class for all classes of each element in the Mario RPG ROM.

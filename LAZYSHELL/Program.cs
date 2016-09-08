@@ -5,11 +5,11 @@ using System.Drawing.Imaging;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Threading;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Patches;
-using LAZYSHELL.EventScripts;
+using LazyShell.Properties;
+using LazyShell.Patches;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
 	public class Program
 	{
@@ -88,7 +88,7 @@ namespace LAZYSHELL
 		// Constructor
 		public Program()
 		{
-			LAZYSHELL.Model.Program = this;
+			LazyShell.Model.Program = this;
 			ProgramController controls = new ProgramController(this);
 			MainForm.GuiMain(controls);
 		}

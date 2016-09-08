@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public static class Model
     {
@@ -12,8 +12,8 @@ namespace LAZYSHELL.Audio
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         // SPCs
@@ -157,7 +157,7 @@ namespace LAZYSHELL.Audio
             for (int i = 0; i < brrSamples.Length; i++)
                 samples[i] = brrSamples[i].Sample;
             Do.Export(samples,
-                fullPath + "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - BRR Samples\\" + "brr-sample",
+                fullPath + "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - BRR Samples\\" + "brr-sample",
                 "BRR SAMPLE", true);
         }
         public static void ExportWAVSample(string fullPath, int index, int rate)
@@ -172,7 +172,7 @@ namespace LAZYSHELL.Audio
             foreach (var brr in BRRSamples)
                 samples[i++] = BRR.BRRToWAV(brr.Sample, rate);
             Do.Export(samples,
-                fullPath + "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - WAV Samples\\" + "wav-sample",
+                fullPath + "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - WAV Samples\\" + "wav-sample",
                 "SAMPLE", true);
         }
         public static void ExportSPC(string fullPath, int index)
@@ -181,7 +181,7 @@ namespace LAZYSHELL.Audio
         }
         public static void ExportSPCs(string fullPath)
         {
-            Do.Export(SPCs, fullPath + "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - SPCs\\" + "spc", "SPC", true);
+            Do.Export(SPCs, fullPath + "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - SPCs\\" + "spc", "SPC", true);
         }
 
         // Import elements

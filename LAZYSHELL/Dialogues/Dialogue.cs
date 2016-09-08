@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     [Serializable()]
     public class Dialogue : Element

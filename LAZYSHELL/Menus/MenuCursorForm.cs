@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     public partial class MenuCursorForm : Controls.NewForm
     {

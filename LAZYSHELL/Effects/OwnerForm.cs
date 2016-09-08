@@ -10,10 +10,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     public partial class OwnerForm : Controls.NewForm
     {

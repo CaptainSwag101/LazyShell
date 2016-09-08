@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     [Serializable()]
     public class Sequence

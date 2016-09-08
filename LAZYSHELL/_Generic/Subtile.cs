@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for generic 8x8 subtile used universally.

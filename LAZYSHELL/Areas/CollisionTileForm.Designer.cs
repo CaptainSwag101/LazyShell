@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     partial class CollisionTileForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Areas
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -26,11 +26,11 @@ namespace LAZYSHELL.Areas
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CollisionTileForm));
+            System.ComponentModel.ComponentResourceManager Resources = new System.ComponentModel.ComponentResourceManager(typeof(CollisionTileForm));
             this.panelPhysicalTile = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.collisionTileNum = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.collisionTileNum = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.reset = new System.Windows.Forms.ToolStripButton();
             this.search = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,13 +48,13 @@ namespace LAZYSHELL.Areas
             this.checkDoorFormat = new System.Windows.Forms.Label();
             this.checkConveyor = new System.Windows.Forms.Label();
             this.p3OverEdge = new System.Windows.Forms.CheckBox();
-            this.headerLabel5 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel4 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel5 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel4 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
             this.p3OnEdge = new System.Windows.Forms.CheckBox();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
             this.solidQuadrantS = new System.Windows.Forms.CheckBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
             this.solidEdgeSW = new System.Windows.Forms.CheckBox();
             this.heightOfBaseTile = new System.Windows.Forms.NumericUpDown();
             this.solidEdgeSE = new System.Windows.Forms.CheckBox();
@@ -94,7 +94,7 @@ namespace LAZYSHELL.Areas
             // pictureBox
             // 
             this.pictureBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pictureBox.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox.Location = new System.Drawing.Point(2, -268);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(32, 784);
@@ -146,7 +146,7 @@ namespace LAZYSHELL.Areas
             // 
             // reset
             // 
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.Image = global::LazyShell.Properties.Resources.reset;
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(23, 22);
             this.reset.ToolTipText = "Reset";
@@ -155,7 +155,7 @@ namespace LAZYSHELL.Areas
             // search
             // 
             this.search.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.search.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.search.Image = global::LazyShell.Properties.Resources.search;
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(23, 22);
             this.search.ToolTipText = "Search For Collision Tiles";
@@ -427,7 +427,7 @@ namespace LAZYSHELL.Areas
             // 
             this.solidQuadrantS.Appearance = System.Windows.Forms.Appearance.Button;
             this.solidQuadrantS.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.solidQuadrantS.Image = ((System.Drawing.Image)(resources.GetObject("solidQuadrantS.Image")));
+            this.solidQuadrantS.Image = ((System.Drawing.Image)(Resources.GetObject("solidQuadrantS.Image")));
             this.solidQuadrantS.Location = new System.Drawing.Point(35, 180);
             this.solidQuadrantS.Name = "solidQuadrantS";
             this.solidQuadrantS.Size = new System.Drawing.Size(32, 20);
@@ -526,7 +526,7 @@ namespace LAZYSHELL.Areas
             // 
             this.solidQuadrantE.Appearance = System.Windows.Forms.Appearance.Button;
             this.solidQuadrantE.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.solidQuadrantE.Image = ((System.Drawing.Image)(resources.GetObject("solidQuadrantE.Image")));
+            this.solidQuadrantE.Image = ((System.Drawing.Image)(Resources.GetObject("solidQuadrantE.Image")));
             this.solidQuadrantE.Location = new System.Drawing.Point(67, 160);
             this.solidQuadrantE.Name = "solidQuadrantE";
             this.solidQuadrantE.Size = new System.Drawing.Size(32, 20);
@@ -547,7 +547,7 @@ namespace LAZYSHELL.Areas
             // 
             this.solidQuadrantW.Appearance = System.Windows.Forms.Appearance.Button;
             this.solidQuadrantW.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.solidQuadrantW.Image = ((System.Drawing.Image)(resources.GetObject("solidQuadrantW.Image")));
+            this.solidQuadrantW.Image = ((System.Drawing.Image)(Resources.GetObject("solidQuadrantW.Image")));
             this.solidQuadrantW.Location = new System.Drawing.Point(3, 160);
             this.solidQuadrantW.Name = "solidQuadrantW";
             this.solidQuadrantW.Size = new System.Drawing.Size(32, 20);
@@ -572,7 +572,7 @@ namespace LAZYSHELL.Areas
             // 
             this.solidQuadrantN.Appearance = System.Windows.Forms.Appearance.Button;
             this.solidQuadrantN.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.solidQuadrantN.Image = global::LAZYSHELL.Properties.Resources.quadBase;
+            this.solidQuadrantN.Image = global::LazyShell.Properties.Resources.quadBase;
             this.solidQuadrantN.Location = new System.Drawing.Point(35, 140);
             this.solidQuadrantN.Name = "solidQuadrantN";
             this.solidQuadrantN.Size = new System.Drawing.Size(32, 20);

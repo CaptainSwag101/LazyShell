@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Areas.UpdateGraphics();
+            LazyShell.Model.Program.Areas.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Areas.UpdatePalette();
+            LazyShell.Model.Program.Areas.UpdatePalette();
         }
     }
-    class TilesetUpdater : LAZYSHELL.TilesetUpdater
+    class TilesetUpdater : LazyShell.TilesetUpdater
     {
         public override void UpdateTileset()
         {
-            LAZYSHELL.Model.Program.Areas.UpdateTileset();
+            LazyShell.Model.Program.Areas.UpdateTileset();
         }
     }
 }

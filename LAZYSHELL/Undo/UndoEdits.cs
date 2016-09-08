@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.EventScripts;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL.Undo
+namespace LazyShell.Undo
 {
     class AnimationEdit : Edit
     {

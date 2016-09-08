@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     partial class SequencesForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Sprites
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -26,11 +26,11 @@ namespace LAZYSHELL.Sprites
         /// </summary>
         private void InitializeComponent()
         {
-            this.frameMold = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
-            this.duration = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.frameMold = new LazyShell.Controls.NewToolStripNumericUpDown();
+            this.duration = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.panelSequence = new System.Windows.Forms.Panel();
             this.pictureBoxSequence = new System.Windows.Forms.PictureBox();
-            this.frames = new LAZYSHELL.Controls.NewPanel();
+            this.frames = new LazyShell.Controls.NewPanel();
             this.sequences = new System.Windows.Forms.ListBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.exportAnimatedGIF = new System.Windows.Forms.ToolStripButton();
@@ -42,7 +42,7 @@ namespace LAZYSHELL.Sprites
             this.moveSequenceBack = new System.Windows.Forms.ToolStripButton();
             this.moveSeqeuenceFoward = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.sequenceActive = new LAZYSHELL.Controls.NewToolStripCheckBox();
+            this.sequenceActive = new LazyShell.Controls.NewToolStripCheckBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -53,7 +53,7 @@ namespace LAZYSHELL.Sprites
             this.back = new System.Windows.Forms.ToolStripButton();
             this.foward = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.infinitePlayback = new LAZYSHELL.Controls.NewToolStripCheckBox();
+            this.infinitePlayback = new LazyShell.Controls.NewToolStripCheckBox();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.newFrame = new System.Windows.Forms.ToolStripButton();
             this.copy = new System.Windows.Forms.ToolStripButton();
@@ -150,7 +150,7 @@ namespace LAZYSHELL.Sprites
             // 
             // pictureBoxSequence
             // 
-            this.pictureBoxSequence.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxSequence.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBoxSequence.Location = new System.Drawing.Point(21, 0);
             this.pictureBoxSequence.Name = "pictureBoxSequence";
             this.pictureBoxSequence.Size = new System.Drawing.Size(256, 256);
@@ -160,7 +160,7 @@ namespace LAZYSHELL.Sprites
             // 
             // frames
             // 
-            this.frames.BackgroundImage = global::LAZYSHELL.Properties.Resources._canvas;
+            this.frames.BackgroundImage = global::LazyShell.Properties.Resources._canvas;
             this.frames.Location = new System.Drawing.Point(0, 0);
             this.frames.Name = "frames";
             this.frames.Size = new System.Drawing.Size(264, 264);
@@ -198,7 +198,7 @@ namespace LAZYSHELL.Sprites
             // 
             // exportAnimatedGIF
             // 
-            this.exportAnimatedGIF.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.exportAnimatedGIF.Image = global::LazyShell.Properties.Resources.exportImage;
             this.exportAnimatedGIF.Name = "exportAnimatedGIF";
             this.exportAnimatedGIF.Size = new System.Drawing.Size(23, 23);
             this.exportAnimatedGIF.ToolTipText = "Export to Animated GIF";
@@ -211,7 +211,7 @@ namespace LAZYSHELL.Sprites
             // 
             // newSequence
             // 
-            this.newSequence.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newSequence.Image = global::LazyShell.Properties.Resources.new_file;
             this.newSequence.Name = "newSequence";
             this.newSequence.Size = new System.Drawing.Size(23, 23);
             this.newSequence.ToolTipText = "New Sequence";
@@ -219,7 +219,7 @@ namespace LAZYSHELL.Sprites
             // 
             // deleteSequence
             // 
-            this.deleteSequence.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deleteSequence.Image = global::LazyShell.Properties.Resources.delete;
             this.deleteSequence.Name = "deleteSequence";
             this.deleteSequence.Size = new System.Drawing.Size(23, 23);
             this.deleteSequence.ToolTipText = "Delete Sequence";
@@ -227,7 +227,7 @@ namespace LAZYSHELL.Sprites
             // 
             // duplicateSequence
             // 
-            this.duplicateSequence.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicateSequence.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicateSequence.Name = "duplicateSequence";
             this.duplicateSequence.Size = new System.Drawing.Size(23, 23);
             this.duplicateSequence.ToolTipText = "Duplicate Sequence";
@@ -240,7 +240,7 @@ namespace LAZYSHELL.Sprites
             // 
             // moveSequenceBack
             // 
-            this.moveSequenceBack.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.moveSequenceBack.Image = global::LazyShell.Properties.Resources.back;
             this.moveSequenceBack.Name = "moveSequenceBack";
             this.moveSequenceBack.Size = new System.Drawing.Size(23, 23);
             this.moveSequenceBack.ToolTipText = "Move Sequence Back";
@@ -248,7 +248,7 @@ namespace LAZYSHELL.Sprites
             // 
             // moveSeqeuenceFoward
             // 
-            this.moveSeqeuenceFoward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.moveSeqeuenceFoward.Image = global::LazyShell.Properties.Resources.foward;
             this.moveSeqeuenceFoward.Name = "moveSeqeuenceFoward";
             this.moveSeqeuenceFoward.Size = new System.Drawing.Size(23, 23);
             this.moveSeqeuenceFoward.ToolTipText = "Move Sequence Forward";
@@ -313,7 +313,7 @@ namespace LAZYSHELL.Sprites
             // 
             // play
             // 
-            this.play.Image = global::LAZYSHELL.Properties.Resources.play;
+            this.play.Image = global::LazyShell.Properties.Resources.play;
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(23, 23);
             this.play.ToolTipText = "Play";
@@ -321,7 +321,7 @@ namespace LAZYSHELL.Sprites
             // 
             // pause
             // 
-            this.pause.Image = global::LAZYSHELL.Properties.Resources.stop;
+            this.pause.Image = global::LazyShell.Properties.Resources.stop;
             this.pause.Name = "pause";
             this.pause.Size = new System.Drawing.Size(23, 23);
             this.pause.ToolTipText = "Stop";
@@ -329,7 +329,7 @@ namespace LAZYSHELL.Sprites
             // 
             // back
             // 
-            this.back.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.back.Image = global::LazyShell.Properties.Resources.back;
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(23, 23);
             this.back.ToolTipText = "Select Previous Frame";
@@ -337,7 +337,7 @@ namespace LAZYSHELL.Sprites
             // 
             // foward
             // 
-            this.foward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.foward.Image = global::LazyShell.Properties.Resources.foward;
             this.foward.Name = "foward";
             this.foward.Size = new System.Drawing.Size(23, 23);
             this.foward.ToolTipText = "Select Next Frame";
@@ -376,7 +376,7 @@ namespace LAZYSHELL.Sprites
             // 
             // newFrame
             // 
-            this.newFrame.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newFrame.Image = global::LazyShell.Properties.Resources.new_file;
             this.newFrame.Name = "newFrame";
             this.newFrame.Size = new System.Drawing.Size(23, 22);
             this.newFrame.ToolTipText = "New Frame";
@@ -384,7 +384,7 @@ namespace LAZYSHELL.Sprites
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy Frame(s)";
@@ -392,7 +392,7 @@ namespace LAZYSHELL.Sprites
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste Frame(s)";
@@ -400,7 +400,7 @@ namespace LAZYSHELL.Sprites
             // 
             // deleteFrame
             // 
-            this.deleteFrame.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deleteFrame.Image = global::LazyShell.Properties.Resources.delete;
             this.deleteFrame.Name = "deleteFrame";
             this.deleteFrame.Size = new System.Drawing.Size(23, 22);
             this.deleteFrame.ToolTipText = "Delete Frame(s)";
@@ -408,7 +408,7 @@ namespace LAZYSHELL.Sprites
             // 
             // duplicateFrame
             // 
-            this.duplicateFrame.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicateFrame.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicateFrame.Name = "duplicateFrame";
             this.duplicateFrame.Size = new System.Drawing.Size(23, 22);
             this.duplicateFrame.ToolTipText = "Duplicate Frame";
@@ -416,7 +416,7 @@ namespace LAZYSHELL.Sprites
             // 
             // reverseFrames
             // 
-            this.reverseFrames.Image = global::LAZYSHELL.Properties.Resources.widthDecrease;
+            this.reverseFrames.Image = global::LazyShell.Properties.Resources.widthDecrease;
             this.reverseFrames.Name = "reverseFrames";
             this.reverseFrames.Size = new System.Drawing.Size(23, 22);
             this.reverseFrames.ToolTipText = "Reverse Frames";
@@ -429,7 +429,7 @@ namespace LAZYSHELL.Sprites
             // 
             // moveFrameBack
             // 
-            this.moveFrameBack.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.moveFrameBack.Image = global::LazyShell.Properties.Resources.back;
             this.moveFrameBack.Name = "moveFrameBack";
             this.moveFrameBack.Size = new System.Drawing.Size(23, 22);
             this.moveFrameBack.ToolTipText = "Move Frame(s) Back";
@@ -437,7 +437,7 @@ namespace LAZYSHELL.Sprites
             // 
             // moveFrameFoward
             // 
-            this.moveFrameFoward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.moveFrameFoward.Image = global::LazyShell.Properties.Resources.foward;
             this.moveFrameFoward.Name = "moveFrameFoward";
             this.moveFrameFoward.Size = new System.Drawing.Size(23, 22);
             this.moveFrameFoward.ToolTipText = "Move Frame(s) Forward";
@@ -467,7 +467,7 @@ namespace LAZYSHELL.Sprites
             // 
             this.panelFrames.AutoScroll = true;
             this.panelFrames.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelFrames.BackgroundImage = global::LAZYSHELL.Properties.Resources._canvas;
+            this.panelFrames.BackgroundImage = global::LazyShell.Properties.Resources._canvas;
             this.panelFrames.Controls.Add(this.frames);
             this.panelFrames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFrames.Location = new System.Drawing.Point(156, 77);

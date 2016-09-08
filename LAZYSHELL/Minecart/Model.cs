@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     public static class Model
     {
@@ -11,8 +11,8 @@ namespace LAZYSHELL.Minecart
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         #region Mode7

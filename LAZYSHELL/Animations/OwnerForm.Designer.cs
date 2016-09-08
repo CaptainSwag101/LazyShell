@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     partial class OwnerForm
     {
@@ -28,20 +28,20 @@ namespace LAZYSHELL.Animations
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("");
-            this.treeView = new LAZYSHELL.Controls.NewTreeView();
+            this.treeView = new LazyShell.Controls.NewTreeView();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.export = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.set = new System.Windows.Forms.ToolStripComboBox();
-            this.name = new LAZYSHELL.Controls.NewToolStripComboBox();
-            this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.name = new LazyShell.Controls.NewToolStripComboBox();
+            this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.openPreviewer = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.helpTips = new System.Windows.Forms.ToolStripButton();
             this.baseConvertor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCommands = new LAZYSHELL.Controls.NewToolStrip();
+            this.toolStripCommands = new LazyShell.Controls.NewToolStrip();
             this.edit = new System.Windows.Forms.ToolStripButton();
             this.moveUp = new System.Windows.Forms.ToolStripButton();
             this.moveDown = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +52,7 @@ namespace LAZYSHELL.Animations
             this.expandAll = new System.Windows.Forms.ToolStripButton();
             this.collapseAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toggleByteEditor = new LAZYSHELL.Controls.NewToolStripButton();
+            this.toggleByteEditor = new LazyShell.Controls.NewToolStripButton();
             this.textBoxHex = new System.Windows.Forms.ToolStripTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip4.SuspendLayout();
@@ -99,7 +99,7 @@ namespace LAZYSHELL.Animations
             // 
             // save
             // 
-            this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+            this.save.Image = global::LazyShell.Properties.Resources.save;
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(23, 23);
             this.save.ToolTipText = "Save";
@@ -107,7 +107,7 @@ namespace LAZYSHELL.Animations
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.exportText;
+            this.export.Image = global::LazyShell.Properties.Resources.exportText;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(23, 23);
             this.export.ToolTipText = "Dump Animation Text";
@@ -191,7 +191,7 @@ namespace LAZYSHELL.Animations
             // 
             // openPreviewer
             // 
-            this.openPreviewer.Image = global::LAZYSHELL.Properties.Resources.preview;
+            this.openPreviewer.Image = global::LazyShell.Properties.Resources.preview;
             this.openPreviewer.Name = "openPreviewer";
             this.openPreviewer.Size = new System.Drawing.Size(23, 23);
             this.openPreviewer.ToolTipText = "Open Previewer";
@@ -205,7 +205,7 @@ namespace LAZYSHELL.Animations
             // helpTips
             // 
             this.helpTips.CheckOnClick = true;
-            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+            this.helpTips.Image = global::LazyShell.Properties.Resources.help;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 23);
             this.helpTips.ToolTipText = "Help Tips";
@@ -213,7 +213,7 @@ namespace LAZYSHELL.Animations
             // baseConvertor
             // 
             this.baseConvertor.CheckOnClick = true;
-            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
             this.baseConvertor.Name = "baseConvertor";
             this.baseConvertor.Size = new System.Drawing.Size(23, 23);
             this.baseConvertor.ToolTipText = "Base Convertor";
@@ -240,7 +240,7 @@ namespace LAZYSHELL.Animations
             // 
             // edit
             // 
-            this.edit.Image = global::LAZYSHELL.Properties.Resources.edit;
+            this.edit.Image = global::LazyShell.Properties.Resources.edit;
             this.edit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.edit.Name = "edit";
             this.edit.Size = new System.Drawing.Size(23, 22);
@@ -249,7 +249,7 @@ namespace LAZYSHELL.Animations
             // 
             // moveUp
             // 
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(23, 22);
             this.moveUp.ToolTipText = "Move Down Command";
@@ -257,7 +257,7 @@ namespace LAZYSHELL.Animations
             // 
             // moveDown
             // 
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(23, 22);
             this.moveDown.ToolTipText = "Move Up Command";
@@ -270,7 +270,7 @@ namespace LAZYSHELL.Animations
             // 
             // undo
             // 
-            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.undo.Image = global::LazyShell.Properties.Resources.undo;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(23, 22);
             this.undo.ToolTipText = "Undo";
@@ -278,7 +278,7 @@ namespace LAZYSHELL.Animations
             // 
             // redo
             // 
-            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.redo.Image = global::LazyShell.Properties.Resources.redo;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(23, 22);
             this.redo.ToolTipText = "Redo";
@@ -291,7 +291,7 @@ namespace LAZYSHELL.Animations
             // 
             // expandAll
             // 
-            this.expandAll.Image = global::LAZYSHELL.Properties.Resources.expandAll;
+            this.expandAll.Image = global::LazyShell.Properties.Resources.expandAll;
             this.expandAll.Name = "expandAll";
             this.expandAll.Size = new System.Drawing.Size(23, 22);
             this.expandAll.ToolTipText = "Expand All";
@@ -299,7 +299,7 @@ namespace LAZYSHELL.Animations
             // 
             // collapseAll
             // 
-            this.collapseAll.Image = global::LAZYSHELL.Properties.Resources.collapseAll;
+            this.collapseAll.Image = global::LazyShell.Properties.Resources.collapseAll;
             this.collapseAll.Name = "collapseAll";
             this.collapseAll.Size = new System.Drawing.Size(23, 22);
             this.collapseAll.ToolTipText = "Collapse All";
@@ -314,7 +314,7 @@ namespace LAZYSHELL.Animations
             // 
             this.toggleByteEditor.CheckOnClick = true;
             this.toggleByteEditor.Form = null;
-            this.toggleByteEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+            this.toggleByteEditor.Image = global::LazyShell.Properties.Resources.hexEditor;
             this.toggleByteEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toggleByteEditor.Name = "toggleByteEditor";
             this.toggleByteEditor.Size = new System.Drawing.Size(23, 22);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     [Serializable()]
     public class Layering

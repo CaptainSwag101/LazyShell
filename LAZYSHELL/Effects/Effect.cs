@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     [Serializable()]
     public class Effect

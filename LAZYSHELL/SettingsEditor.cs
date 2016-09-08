@@ -7,9 +7,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class SettingsEditor : Controls.NewForm
     {

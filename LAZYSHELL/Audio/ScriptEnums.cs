@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public static class ScriptEnums
     {

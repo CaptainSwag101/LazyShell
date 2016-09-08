@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using LAZYSHELL.Fonts;
+using LazyShell.Fonts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     class MenuDescriptionPreview
     {

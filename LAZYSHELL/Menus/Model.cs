@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     public static class Model
     {
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         #region Status and shop menus

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// This class is an implementation of the 'IComparer' interface.

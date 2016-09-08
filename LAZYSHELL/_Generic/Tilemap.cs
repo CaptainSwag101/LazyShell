@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Base class for creating an instance of a tilemap.

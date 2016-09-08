@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     [Serializable()]
-    public class Command : LAZYSHELL.Command
+    public class Command : LazyShell.Command
     {
         #region Variables
 

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class FindReferences : Controls.NewForm
     {

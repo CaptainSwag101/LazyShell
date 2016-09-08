@@ -10,16 +10,16 @@ using System.Net;
 using System.IO;
 using System.Collections;
 using System.Threading;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Patches
+namespace LazyShell.Patches
 {
     public partial class PatchesForm : Controls.NewForm
     {
         #region Variables
 
         private Settings settings = Settings.Default;
-        private string verifyType = "LAZYSHELL PATCH INFORMATION";
+        private string verifyType = "LazyShell PATCH INFORMATION";
         private WebClient client = new WebClient();
         private WebClient IPSClient = new WebClient();
         private ArrayList patches = new ArrayList();

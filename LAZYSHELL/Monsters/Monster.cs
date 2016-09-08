@@ -5,9 +5,9 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     [Serializable()]
     public class Monster : Element

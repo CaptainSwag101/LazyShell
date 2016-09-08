@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class TileSwitchesForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -50,7 +50,7 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.moveUp = new System.Windows.Forms.ToolStripButton();
             this.moveDown = new System.Windows.Forms.ToolStripButton();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.height)).BeginInit();
@@ -223,7 +223,7 @@
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.insert.Image = global::LazyShell.Properties.Resources.new_file;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "New Tile Switch";
@@ -231,7 +231,7 @@
             // 
             // insertAlternate
             // 
-            this.insertAlternate.Image = global::LAZYSHELL.Properties.Resources.newInstance;
+            this.insertAlternate.Image = global::LazyShell.Properties.Resources.newInstance;
             this.insertAlternate.Name = "insertAlternate";
             this.insertAlternate.Size = new System.Drawing.Size(23, 22);
             this.insertAlternate.ToolTipText = "New Alternate Tile Switch";
@@ -239,7 +239,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete Tile Switch";
@@ -252,7 +252,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy Tile Switch";
@@ -260,7 +260,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste Tile Switch";
@@ -268,7 +268,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate Tile Switch";
@@ -281,7 +281,7 @@
             // 
             // moveUp
             // 
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(23, 22);
             this.moveUp.ToolTipText = "Move Tile Switch Up";
@@ -289,7 +289,7 @@
             // 
             // moveDown
             // 
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(23, 22);
             this.moveDown.ToolTipText = "Move Tile Switch Down";

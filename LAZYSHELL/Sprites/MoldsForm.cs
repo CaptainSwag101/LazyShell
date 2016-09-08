@@ -8,9 +8,9 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Undo;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     public partial class MoldsForm : Controls.DockForm
     {

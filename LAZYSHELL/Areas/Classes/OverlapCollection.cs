@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     [Serializable()]
     public class OverlapCollection : IList<Overlap>

@@ -7,9 +7,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     public partial class BattleDialoguesForm : MapEditor
     {

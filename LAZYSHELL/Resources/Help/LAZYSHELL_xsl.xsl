@@ -4,7 +4,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <link href="LAZYSHELL_css.css" type="text/css" rel="stylesheet"  />
+        <link href="LazyShell_css.css" type="text/css" rel="stylesheet"  />
         <script type="text/javascript">
           <![CDATA[
             var z = 0;
@@ -20,7 +20,7 @@
       </head>
       <body>
         <!--TITLE-->
-        <xsl:for-each select="LAZYSHELL">
+        <xsl:for-each select="LazyShell">
           <a class="body" href="javascript:void(0)"
              onclick="ShowHide('{@form}', '{concat('faq_', @form)}')">
             <img src="{@icon}" title="LAZY SHELL - Help Database"/>
@@ -332,7 +332,7 @@
   <xsl:template name="faq">
     <div class="faq" id="{concat('faq_', @form)}">
       <h1 class="faq">
-        <img src="{//LAZYSHELL/@icon}" title="Frequently Asked Questions"/>
+        <img src="{//LazyShell/@icon}" title="Frequently Asked Questions"/>
         FAQ
       </h1>
       <div class="faq_box">
@@ -375,7 +375,7 @@
     <xsl:param name="text"/>
     <xsl:call-template name="glossarize">
       <xsl:with-param name="text" select="$text"/>
-      <xsl:with-param name="entries" select="//LAZYSHELL/Glossary/entry"/>
+      <xsl:with-param name="entries" select="//LazyShell/Glossary/entry"/>
     </xsl:call-template>
   </xsl:template>
   

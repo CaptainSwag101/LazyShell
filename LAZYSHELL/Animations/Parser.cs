@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     /// <summary>
     /// Provides methods for parsing an animation script command to a descriptive text string.

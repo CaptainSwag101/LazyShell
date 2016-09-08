@@ -7,10 +7,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
     public partial class WorldMapsForm : MapEditor
     {

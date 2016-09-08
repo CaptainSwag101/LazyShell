@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class About : Controls.NewForm
     {
@@ -34,17 +34,19 @@ namespace LAZYSHELL
 		{
 			if (Environment.Is64BitProcess)
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0b 64-bit" +
-										"\nCopyright © 2007-2014  giangurgolo & Omega, © 2016 CaptainSwag101" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.2 64-bit" +
+										"\nCopyright © 2007-2015 giangurgolo & Omega" +
 										"\n" +
-										"\nCreated by Omega & giangurgolo";
+										"\nCreated by Omega & giangurgolo" +
+										"\nMaintained by CaptainSwag101";
 			}
 			else
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0b" +
-										"\nCopyright © 2007-2014  giangurgolo & Omega, © 2016 CaptainSwag101" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.2" +
+										"\nCopyright © 2007-2015 giangurgolo & Omega" +
 				                        "\n" +
-				                        "\nCreated by Omega & giangurgolo";
+										"\nCreated by Omega & giangurgolo" +
+										"\nMaintained by CaptainSwag101";
 			}
 		}
 	}

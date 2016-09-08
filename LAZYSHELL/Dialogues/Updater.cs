@@ -2,34 +2,34 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Dialogues.BattleDialoguesForm.UpdateGraphics();
+            LazyShell.Model.Program.Dialogues.BattleDialoguesForm.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Dialogues.BattleDialoguesForm.UpdatePalette();
+            LazyShell.Model.Program.Dialogues.BattleDialoguesForm.UpdatePalette();
         }
     }
-    class PaletteMenuUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteMenuUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Dialogues.BattleDialoguesForm.UpdatePaletteMenu();
+            LazyShell.Model.Program.Dialogues.BattleDialoguesForm.UpdatePaletteMenu();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.Dialogues.BattleDialoguesForm.UpdateTile();
+            LazyShell.Model.Program.Dialogues.BattleDialoguesForm.UpdateTile();
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.NewGame
+namespace LazyShell.NewGame
 {
     public partial class OwnerForm : Controls.NewForm
     {

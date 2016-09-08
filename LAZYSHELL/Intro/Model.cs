@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     public static class Model
     {
@@ -11,8 +11,8 @@ namespace LAZYSHELL.Intro
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         // Title screen

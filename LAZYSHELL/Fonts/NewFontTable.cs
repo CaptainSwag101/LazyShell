@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Fonts
+namespace LazyShell.Fonts
 {
     public partial class NewFontTable : Controls.NewForm
     {

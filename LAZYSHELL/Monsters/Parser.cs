@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     public static class Parser
     {

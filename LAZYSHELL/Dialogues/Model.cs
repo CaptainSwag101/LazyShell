@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     public static class Model
     {
@@ -13,8 +13,8 @@ namespace LAZYSHELL.Dialogues
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         // Tileset

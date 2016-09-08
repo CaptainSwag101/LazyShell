@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class SpritePartitionsForm : Controls.NewForm
     {

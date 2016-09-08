@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class HexEditor : Controls.NewForm
     {

@@ -2,62 +2,62 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
-    class PaletteBGUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteBGUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateBGPalette();
+            LazyShell.Model.Program.Menus.UpdateBGPalette();
         }
     }
-    class GraphicBGUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicBGUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateBGGraphic();
+            LazyShell.Model.Program.Menus.UpdateBGGraphic();
         }
     }
-    class PaletteFGUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteFGUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateFGPalette();
+            LazyShell.Model.Program.Menus.UpdateFGPalette();
         }
     }
-    class GraphicFGUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicFGUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateFGGraphic();
+            LazyShell.Model.Program.Menus.UpdateFGGraphic();
         }
     }
-    class PaletteCursorsUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteCursorsUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateCursorsPalette();
+            LazyShell.Model.Program.Menus.UpdateCursorsPalette();
         }
     }
-    class GraphicCursorsUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicCursorsUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateCursorsGraphic();
+            LazyShell.Model.Program.Menus.UpdateCursorsGraphic();
         }
     }
-    class PaletteSpeakersUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteSpeakersUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateSpeakersPalette();
+            LazyShell.Model.Program.Menus.UpdateSpeakersPalette();
         }
     }
-    class GraphicSpeakersUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicSpeakersUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Menus.UpdateSpeakersGraphic();
+            LazyShell.Model.Program.Menus.UpdateSpeakersGraphic();
         }
     }
 }

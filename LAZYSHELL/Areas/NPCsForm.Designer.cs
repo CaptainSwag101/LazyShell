@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class NPCsForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -63,11 +63,11 @@
             this.openEventOrPackForm = new System.Windows.Forms.Button();
             this.openEventsForm = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel4 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel5 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel4 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel5 = new LazyShell.Controls.HeaderLabel();
             this.bytesLeft = new System.Windows.Forms.Label();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.x)).BeginInit();
@@ -143,7 +143,7 @@
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.npcAdd;
+            this.insert.Image = global::LazyShell.Properties.Resources.npcAdd;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "New NPC";
@@ -151,7 +151,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.npcRemove;
+            this.delete.Image = global::LazyShell.Properties.Resources.npcRemove;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete NPC";
@@ -159,7 +159,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy NPC";
@@ -167,7 +167,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste NPC";
@@ -175,7 +175,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate NPC";
@@ -188,7 +188,7 @@
             // 
             // moveUp
             // 
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(23, 22);
             this.moveUp.ToolTipText = "Move NPC Up";
@@ -196,7 +196,7 @@
             // 
             // moveDown
             // 
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(23, 22);
             this.moveDown.ToolTipText = "Move NPC Down";

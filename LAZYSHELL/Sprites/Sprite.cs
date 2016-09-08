@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     [Serializable()]
     public class Sprite

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using LAZYSHELL.Properties;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     /// <summary>
     /// Class for managing and drawing the pixels of a collision map.
@@ -114,44 +113,44 @@ namespace LAZYSHELL.Areas
         {
             for (int i = 0, o = 4; i < 4; i++, o++)
             {
-                quadBasePixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBase);
-                quadBasePixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBase);
+                quadBasePixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.quadBase);
+                quadBasePixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.quadBase);
                 Do.Colorize(quadBasePixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(quadBasePixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(quadBasePixels[i], 16, 8, 32, -96, true);
                 Do.Gradient(quadBasePixels[o], 16, 8, 32, -96, true);
-                quadBlockPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBlock);
-                quadBlockPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.quadBlock);
+                quadBlockPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.quadBlock);
+                quadBlockPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.quadBlock);
                 Do.Colorize(quadBlockPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(quadBlockPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(quadBlockPixels[i], 16, 24, 32, -96, true);
                 Do.Gradient(quadBlockPixels[o], 16, 24, 32, -96, true);
-                halfQuadBlockPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.halfQuadBlock);
-                halfQuadBlockPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.halfQuadBlock);
+                halfQuadBlockPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.halfQuadBlock);
+                halfQuadBlockPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.halfQuadBlock);
                 Do.Colorize(halfQuadBlockPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(halfQuadBlockPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(halfQuadBlockPixels[i], 16, 16, 32, -96, true);
                 Do.Gradient(halfQuadBlockPixels[o], 16, 16, 32, -96, true);
-                stairsUpLeftLowPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftLow);
-                stairsUpLeftLowPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftLow);
+                stairsUpLeftLowPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpLeftLow);
+                stairsUpLeftLowPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpLeftLow);
                 Do.Colorize(stairsUpLeftLowPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(stairsUpLeftLowPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(stairsUpLeftLowPixels[i], 16, 24, 32, -96, true);
                 Do.Gradient(stairsUpLeftLowPixels[o], 16, 24, 32, -96, true);
-                stairsUpLeftHighPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftHigh);
-                stairsUpLeftHighPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpLeftHigh);
+                stairsUpLeftHighPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpLeftHigh);
+                stairsUpLeftHighPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpLeftHigh);
                 Do.Colorize(stairsUpLeftHighPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(stairsUpLeftHighPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(stairsUpLeftHighPixels[i], 16, 24, 32, -96, true);
                 Do.Gradient(stairsUpLeftHighPixels[o], 16, 24, 32, -96, true);
-                stairsUpRightLowPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightLow);
-                stairsUpRightLowPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightLow);
+                stairsUpRightLowPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpRightLow);
+                stairsUpRightLowPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpRightLow);
                 Do.Colorize(stairsUpRightLowPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(stairsUpRightLowPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(stairsUpRightLowPixels[i], 16, 24, 32, -96, true);
                 Do.Gradient(stairsUpRightLowPixels[o], 16, 24, 32, -96, true);
-                stairsUpRightHighPixels[i] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightHigh);
-                stairsUpRightHighPixels[o] = Do.ImageToPixels(global::LAZYSHELL.Properties.Resources.stairsUpRightHigh);
+                stairsUpRightHighPixels[i] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpRightHigh);
+                stairsUpRightHighPixels[o] = Do.ImageToPixels(global::LazyShell.Properties.Resources.stairsUpRightHigh);
                 Do.Colorize(stairsUpRightHighPixels[i], hues[i], sats[i], -16.0, 255);
                 Do.Colorize(stairsUpRightHighPixels[o], hues[o], sats[o], -64.0, 255);
                 Do.Gradient(stairsUpRightHighPixels[i], 16, 24, 32, -96, true);

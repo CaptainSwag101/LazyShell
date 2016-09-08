@@ -14,10 +14,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -294,8 +294,8 @@ namespace LAZYSHELL.Sprites
             foreach (var palette in palettes)
                 palette.WriteToBuffer(0);
             Buffer.BlockCopy(Model.Graphics, 0, rom, 0x280000, 0xB4000);
-            LAZYSHELL.Model.HexEditor.SetOffset(Animation.AnimationOffset);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.SetOffset(Animation.AnimationOffset);
+            LazyShell.Model.HexEditor.HighlightChanges();
             MoldsForm.Modified = false;
             SequencesForm.Modified = false;
             this.Modified = false;
@@ -549,9 +549,9 @@ namespace LAZYSHELL.Sprites
         }
         private void hexViewer_Click(object sender, EventArgs e)
         {
-            LAZYSHELL.Model.HexEditor.SetOffset(Animation.AnimationOffset);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
-            LAZYSHELL.Model.HexEditor.Show();
+            LazyShell.Model.HexEditor.SetOffset(Animation.AnimationOffset);
+            LazyShell.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.Show();
         }
 
         #endregion

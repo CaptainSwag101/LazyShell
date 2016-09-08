@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class ExitsForm
     {
@@ -59,8 +59,8 @@
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.bytesLeft = new System.Windows.Forms.ToolStripLabel();
             this.listBox = new System.Windows.Forms.ListBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.destY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.destZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.destX)).BeginInit();
@@ -381,7 +381,7 @@
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.exitAdd;
+            this.insert.Image = global::LazyShell.Properties.Resources.exitAdd;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "New Exit";
@@ -389,7 +389,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.exitRemove;
+            this.delete.Image = global::LazyShell.Properties.Resources.exitRemove;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete Exit";
@@ -397,7 +397,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy Exit";
@@ -405,7 +405,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste Exit";
@@ -413,7 +413,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate Exit";

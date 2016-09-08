@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     [Serializable()]
     public class Mold

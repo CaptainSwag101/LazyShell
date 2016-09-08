@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     partial class OwnerForm
     {
@@ -15,9 +15,9 @@ namespace LAZYSHELL.Sprites
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -34,7 +34,7 @@ namespace LAZYSHELL.Sprites
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.PlaybackSequence = new System.ComponentModel.BackgroundWorker();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -63,9 +63,9 @@ namespace LAZYSHELL.Sprites
 			this.name = new System.Windows.Forms.ToolStripComboBox();
 			this.searchEffectNames = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toggleProperties = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleMolds = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleSequences = new LAZYSHELL.Controls.NewToolStripButton();
+			this.toggleProperties = new LazyShell.Controls.NewToolStripButton();
+			this.toggleMolds = new LazyShell.Controls.NewToolStripButton();
+			this.toggleSequences = new LazyShell.Controls.NewToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.openPalettes = new System.Windows.Forms.ToolStripButton();
 			this.openGraphics = new System.Windows.Forms.ToolStripButton();
@@ -183,7 +183,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// save
 			// 
-			this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.save.Image = global::LazyShell.Properties.Resources.save;
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(23, 22);
 			this.save.ToolTipText = "Save";
@@ -196,7 +196,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// import
 			// 
-			this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
+			this.import.Image = global::LazyShell.Properties.Resources.importData;
 			this.import.Name = "import";
 			this.import.Size = new System.Drawing.Size(23, 22);
 			this.import.ToolTipText = "Import";
@@ -207,7 +207,7 @@ namespace LAZYSHELL.Sprites
 			this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportAnimations,
             this.exportMoldImages});
-			this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
+			this.export.Image = global::LazyShell.Properties.Resources.exportData;
 			this.export.Name = "export";
 			this.export.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -220,7 +220,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// exportMoldImages
 			// 
-			this.exportMoldImages.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+			this.exportMoldImages.Image = global::LazyShell.Properties.Resources.exportImage;
 			this.exportMoldImages.Name = "exportMoldImages";
 			this.exportMoldImages.Size = new System.Drawing.Size(162, 22);
 			this.exportMoldImages.Text = "Sprite image(s)...";
@@ -228,7 +228,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// reset
 			// 
-			this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.reset.Image = global::LazyShell.Properties.Resources.reset;
 			this.reset.Name = "reset";
 			this.reset.Size = new System.Drawing.Size(23, 22);
 			this.reset.ToolTipText = "Reset";
@@ -236,7 +236,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// clear
 			// 
-			this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+			this.clear.Image = global::LazyShell.Properties.Resources.clear;
 			this.clear.Name = "clear";
 			this.clear.Size = new System.Drawing.Size(23, 22);
 			this.clear.ToolTipText = "Clear";
@@ -250,7 +250,7 @@ namespace LAZYSHELL.Sprites
 			// helpTips
 			// 
 			this.helpTips.CheckOnClick = true;
-			this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.helpTips.Image = global::LazyShell.Properties.Resources.help;
 			this.helpTips.Name = "helpTips";
 			this.helpTips.Size = new System.Drawing.Size(23, 22);
 			this.helpTips.ToolTipText = "Help Tips";
@@ -258,14 +258,14 @@ namespace LAZYSHELL.Sprites
 			// baseConvertor
 			// 
 			this.baseConvertor.CheckOnClick = true;
-			this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+			this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
 			this.baseConvertor.Name = "baseConvertor";
 			this.baseConvertor.Size = new System.Drawing.Size(23, 22);
 			this.baseConvertor.ToolTipText = "Base Convertor";
 			// 
 			// hexEditor
 			// 
-			this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+			this.hexEditor.Image = global::LazyShell.Properties.Resources.hexEditor;
 			this.hexEditor.Name = "hexEditor";
 			this.hexEditor.Size = new System.Drawing.Size(23, 22);
 			this.hexEditor.ToolTipText = "Hex Editor";
@@ -278,7 +278,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// npcPacketButton
 			// 
-			this.npcPacketButton.Image = global::LAZYSHELL.Properties.Resources.openPackets;
+			this.npcPacketButton.Image = global::LazyShell.Properties.Resources.openPackets;
 			this.npcPacketButton.Name = "npcPacketButton";
 			this.npcPacketButton.Size = new System.Drawing.Size(23, 22);
 			this.npcPacketButton.ToolTipText = "NPC Packets";
@@ -315,7 +315,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// searchEffectNames
 			// 
-			this.searchEffectNames.Image = global::LAZYSHELL.Properties.Resources.search;
+			this.searchEffectNames.Image = global::LazyShell.Properties.Resources.search;
 			this.searchEffectNames.Name = "searchEffectNames";
 			this.searchEffectNames.Size = new System.Drawing.Size(23, 22);
 			this.searchEffectNames.ToolTipText = "Search for sprite";
@@ -329,7 +329,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			this.toggleProperties.CheckOnClick = true;
 			this.toggleProperties.Form = null;
-			this.toggleProperties.Image = global::LAZYSHELL.Properties.Resources.showMain;
+			this.toggleProperties.Image = global::LazyShell.Properties.Resources.showMain;
 			this.toggleProperties.Name = "toggleProperties";
 			this.toggleProperties.Size = new System.Drawing.Size(23, 22);
 			this.toggleProperties.ToolTipText = "Main";
@@ -338,7 +338,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			this.toggleMolds.CheckOnClick = true;
 			this.toggleMolds.Form = null;
-			this.toggleMolds.Image = global::LAZYSHELL.Properties.Resources.openMolds;
+			this.toggleMolds.Image = global::LazyShell.Properties.Resources.openMolds;
 			this.toggleMolds.Name = "toggleMolds";
 			this.toggleMolds.Size = new System.Drawing.Size(23, 22);
 			this.toggleMolds.ToolTipText = "Molds";
@@ -348,7 +348,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			this.toggleSequences.CheckOnClick = true;
 			this.toggleSequences.Form = null;
-			this.toggleSequences.Image = global::LAZYSHELL.Properties.Resources.openSequences;
+			this.toggleSequences.Image = global::LazyShell.Properties.Resources.openSequences;
 			this.toggleSequences.Name = "toggleSequences";
 			this.toggleSequences.Size = new System.Drawing.Size(23, 22);
 			this.toggleSequences.ToolTipText = "Sequences";
@@ -361,7 +361,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// openPalettes
 			// 
-			this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+			this.openPalettes.Image = global::LazyShell.Properties.Resources.openPalettes;
 			this.openPalettes.Name = "openPalettes";
 			this.openPalettes.Size = new System.Drawing.Size(23, 22);
 			this.openPalettes.ToolTipText = "Palettes";
@@ -369,7 +369,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// openGraphics
 			// 
-			this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+			this.openGraphics.Image = global::LazyShell.Properties.Resources.openGraphics;
 			this.openGraphics.Name = "openGraphics";
 			this.openGraphics.Size = new System.Drawing.Size(23, 22);
 			this.openGraphics.ToolTipText = "BPP Graphics";
@@ -377,7 +377,7 @@ namespace LAZYSHELL.Sprites
 			// 
 			// findReferences
 			// 
-			this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
+			this.findReferences.Image = global::LazyShell.Properties.Resources.findReferences;
 			this.findReferences.Name = "findReferences";
 			this.findReferences.Size = new System.Drawing.Size(23, 22);
 			this.findReferences.ToolTipText = "Find all references to sprite";
@@ -409,7 +409,7 @@ namespace LAZYSHELL.Sprites
 			this.KeyPreview = true;
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "OwnerForm";
-			this.Text = "SPRITES - Lazy Shell";
+			this.Text = "Sprites - Lazy Shell";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();

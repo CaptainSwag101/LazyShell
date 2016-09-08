@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     /// <summary>
     /// Class containing all of the properties and object collections of an Area.

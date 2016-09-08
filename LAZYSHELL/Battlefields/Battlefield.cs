@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
     [Serializable()]
     public class Battlefield

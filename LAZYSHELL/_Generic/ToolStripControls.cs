@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Controls
+namespace LazyShell.Controls
 {
 	[ToolboxItem(true)]
 	public class NewToolStripComboBox : ToolStripControlHost

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for managing, converting, and modifying the values of various integer types.

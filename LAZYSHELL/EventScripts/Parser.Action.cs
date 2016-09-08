@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using LAZYSHELL.EventScripts;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     public static partial class Parser
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.NewGame
+namespace LazyShell.NewGame
 {
     [Serializable()]
     public class Ally : Element

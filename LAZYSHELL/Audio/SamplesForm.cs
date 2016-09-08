@@ -7,9 +7,9 @@ using System.IO;
 using System.Media;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class SamplesForm : Controls.DockForm
     {

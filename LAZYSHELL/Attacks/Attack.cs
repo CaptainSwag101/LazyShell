@@ -2,9 +2,9 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Attacks
+namespace LazyShell.Attacks
 {
     [Serializable()]
     public class Attack : Element

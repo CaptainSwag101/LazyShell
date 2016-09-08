@@ -10,10 +10,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class IOElements : Controls.NewForm
     {

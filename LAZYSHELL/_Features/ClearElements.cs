@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.EventScripts;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class ClearElements : Controls.NewForm
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     partial class MoldsForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Effects
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -27,10 +27,10 @@ namespace LAZYSHELL.Effects
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.moldWidth = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
-            this.moldHeight = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
-            this.panelMoldImage = new LAZYSHELL.Controls.NewPanel();
-            this.pictureBoxMold = new LAZYSHELL.Controls.NewPictureBox();
+            this.moldWidth = new LazyShell.Controls.NewToolStripNumericUpDown();
+            this.moldHeight = new LazyShell.Controls.NewToolStripNumericUpDown();
+            this.panelMoldImage = new LazyShell.Controls.NewPanel();
+            this.pictureBoxMold = new LazyShell.Controls.NewPictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuCut = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCopy = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +69,7 @@ namespace LAZYSHELL.Effects
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.label86 = new System.Windows.Forms.Label();
             this.tilesetSize = new System.Windows.Forms.NumericUpDown();
-            this.listBox = new LAZYSHELL.Controls.NewListBox();
+            this.listBox = new LazyShell.Controls.NewListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.importIntoTilemap = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
@@ -165,7 +165,7 @@ namespace LAZYSHELL.Effects
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMoldImage.AutoScroll = true;
             this.panelMoldImage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelMoldImage.BackgroundImage = global::LAZYSHELL.Properties.Resources._canvas;
+            this.panelMoldImage.BackgroundImage = global::LazyShell.Properties.Resources._canvas;
             this.panelMoldImage.Controls.Add(this.pictureBoxMold);
             this.panelMoldImage.Location = new System.Drawing.Point(102, 25);
             this.panelMoldImage.Name = "panelMoldImage";
@@ -174,7 +174,7 @@ namespace LAZYSHELL.Effects
             // 
             // pictureBoxMold
             // 
-            this.pictureBoxMold.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxMold.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBoxMold.ContextMenuStrip = this.contextMenuStrip1;
             this.pictureBoxMold.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxMold.Name = "pictureBoxMold";
@@ -206,7 +206,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuCut
             // 
-            this.menuCut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.menuCut.Image = global::LazyShell.Properties.Resources.cut;
             this.menuCut.Name = "menuCut";
             this.menuCut.Size = new System.Drawing.Size(159, 22);
             this.menuCut.Text = "Cut";
@@ -214,7 +214,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuCopy
             // 
-            this.menuCopy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.menuCopy.Image = global::LazyShell.Properties.Resources.copy;
             this.menuCopy.Name = "menuCopy";
             this.menuCopy.Size = new System.Drawing.Size(159, 22);
             this.menuCopy.Text = "Copy";
@@ -222,7 +222,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuPaste
             // 
-            this.menuPaste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.menuPaste.Image = global::LazyShell.Properties.Resources.paste;
             this.menuPaste.Name = "menuPaste";
             this.menuPaste.Size = new System.Drawing.Size(159, 22);
             this.menuPaste.Text = "Paste";
@@ -230,7 +230,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuDelete
             // 
-            this.menuDelete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.menuDelete.Image = global::LazyShell.Properties.Resources.delete;
             this.menuDelete.Name = "menuDelete";
             this.menuDelete.Size = new System.Drawing.Size(159, 22);
             this.menuDelete.Text = "Delete";
@@ -243,7 +243,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuMirror
             // 
-            this.menuMirror.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.menuMirror.Image = global::LazyShell.Properties.Resources.mirror;
             this.menuMirror.Name = "menuMirror";
             this.menuMirror.Size = new System.Drawing.Size(159, 22);
             this.menuMirror.Text = "Mirror";
@@ -251,7 +251,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuInvert
             // 
-            this.menuInvert.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.menuInvert.Image = global::LazyShell.Properties.Resources.flip;
             this.menuInvert.Name = "menuInvert";
             this.menuInvert.Size = new System.Drawing.Size(159, 22);
             this.menuInvert.Text = "Invert";
@@ -264,7 +264,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuSaveImageAs
             // 
-            this.menuSaveImageAs.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.menuSaveImageAs.Image = global::LazyShell.Properties.Resources.exportImage;
             this.menuSaveImageAs.Name = "menuSaveImageAs";
             this.menuSaveImageAs.Size = new System.Drawing.Size(159, 22);
             this.menuSaveImageAs.Text = "Save Image As...";
@@ -299,7 +299,7 @@ namespace LAZYSHELL.Effects
             // draw
             // 
             this.draw.CheckOnClick = true;
-            this.draw.Image = global::LAZYSHELL.Properties.Resources.draw;
+            this.draw.Image = global::LazyShell.Properties.Resources.draw;
             this.draw.Name = "draw";
             this.draw.Size = new System.Drawing.Size(22, 20);
             this.draw.ToolTipText = "Draw (D)";
@@ -308,7 +308,7 @@ namespace LAZYSHELL.Effects
             // erase
             // 
             this.erase.CheckOnClick = true;
-            this.erase.Image = global::LAZYSHELL.Properties.Resources.erase;
+            this.erase.Image = global::LazyShell.Properties.Resources.erase;
             this.erase.Name = "erase";
             this.erase.Size = new System.Drawing.Size(22, 20);
             this.erase.ToolTipText = "Erase (E)";
@@ -317,7 +317,7 @@ namespace LAZYSHELL.Effects
             // select
             // 
             this.select.CheckOnClick = true;
-            this.select.Image = global::LAZYSHELL.Properties.Resources.select;
+            this.select.Image = global::LazyShell.Properties.Resources.select;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(22, 20);
             this.select.ToolTipText = "Select (S)";
@@ -325,7 +325,7 @@ namespace LAZYSHELL.Effects
             // 
             // selectAll
             // 
-            this.selectAll.Image = global::LAZYSHELL.Properties.Resources.select_all;
+            this.selectAll.Image = global::LazyShell.Properties.Resources.select_all;
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(22, 20);
             this.selectAll.ToolTipText = "Select All (Ctrl+A)";
@@ -338,7 +338,7 @@ namespace LAZYSHELL.Effects
             // 
             // cut
             // 
-            this.cut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.cut.Image = global::LazyShell.Properties.Resources.cut;
             this.cut.Name = "cut";
             this.cut.Size = new System.Drawing.Size(22, 20);
             this.cut.ToolTipText = "Cut (Ctrl+X)";
@@ -346,7 +346,7 @@ namespace LAZYSHELL.Effects
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(22, 20);
             this.copy.ToolTipText = "Copy (Ctrl+C)";
@@ -354,7 +354,7 @@ namespace LAZYSHELL.Effects
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(22, 20);
             this.paste.ToolTipText = "Paste (Ctrl+V)";
@@ -362,7 +362,7 @@ namespace LAZYSHELL.Effects
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(22, 20);
             this.delete.ToolTipText = "Delete (Del)";
@@ -375,7 +375,7 @@ namespace LAZYSHELL.Effects
             // 
             // undoButton
             // 
-            this.undoButton.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.undoButton.Image = global::LazyShell.Properties.Resources.undo;
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(22, 20);
             this.undoButton.ToolTipText = "Undo (Ctrl+Z)";
@@ -383,7 +383,7 @@ namespace LAZYSHELL.Effects
             // 
             // redoButton
             // 
-            this.redoButton.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.redoButton.Image = global::LazyShell.Properties.Resources.redo;
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(22, 20);
             this.redoButton.ToolTipText = "Redo (Ctrl+Y)";
@@ -396,7 +396,7 @@ namespace LAZYSHELL.Effects
             // 
             // mirror
             // 
-            this.mirror.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.mirror.Image = global::LazyShell.Properties.Resources.mirror;
             this.mirror.Name = "mirror";
             this.mirror.Size = new System.Drawing.Size(22, 20);
             this.mirror.ToolTipText = "Mirror Selection";
@@ -404,7 +404,7 @@ namespace LAZYSHELL.Effects
             // 
             // invert
             // 
-            this.invert.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.invert.Image = global::LazyShell.Properties.Resources.flip;
             this.invert.Name = "invert";
             this.invert.Size = new System.Drawing.Size(22, 20);
             this.invert.ToolTipText = "Invert Selection";
@@ -413,7 +413,7 @@ namespace LAZYSHELL.Effects
             // toggleTileGrid
             // 
             this.toggleTileGrid.CheckOnClick = true;
-            this.toggleTileGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+            this.toggleTileGrid.Image = global::LazyShell.Properties.Resources.buttonToggleGrid;
             this.toggleTileGrid.Name = "toggleTileGrid";
             this.toggleTileGrid.Size = new System.Drawing.Size(23, 22);
             this.toggleTileGrid.ToolTipText = "Tile Grid (G)";
@@ -422,7 +422,7 @@ namespace LAZYSHELL.Effects
             // zoomIn
             // 
             this.zoomIn.CheckOnClick = true;
-            this.zoomIn.Image = global::LAZYSHELL.Properties.Resources.zoomin;
+            this.zoomIn.Image = global::LazyShell.Properties.Resources.zoomin;
             this.zoomIn.Name = "zoomIn";
             this.zoomIn.Size = new System.Drawing.Size(23, 22);
             this.zoomIn.ToolTipText = "Zoom In (Ctrl+Up)";
@@ -431,7 +431,7 @@ namespace LAZYSHELL.Effects
             // zoomOut
             // 
             this.zoomOut.CheckOnClick = true;
-            this.zoomOut.Image = global::LAZYSHELL.Properties.Resources.zoomout;
+            this.zoomOut.Image = global::LazyShell.Properties.Resources.zoomout;
             this.zoomOut.Name = "zoomOut";
             this.zoomOut.Size = new System.Drawing.Size(23, 22);
             this.zoomOut.ToolTipText = "Zoom Out (Ctrl+Down)";
@@ -455,7 +455,7 @@ namespace LAZYSHELL.Effects
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.BackgroundImage = global::LAZYSHELL.Properties.Resources._canvas;
+            this.panel1.BackgroundImage = global::LazyShell.Properties.Resources._canvas;
             this.panel1.Controls.Add(this.pictureBoxTileset);
             this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
@@ -464,7 +464,7 @@ namespace LAZYSHELL.Effects
             // 
             // pictureBoxTileset
             // 
-            this.pictureBoxTileset.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxTileset.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBoxTileset.ContextMenuStrip = this.contextMenuStrip2;
             this.pictureBoxTileset.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBoxTileset.Dock = System.Windows.Forms.DockStyle.Top;
@@ -487,7 +487,7 @@ namespace LAZYSHELL.Effects
             // 
             // menuTilesetSaveImageAs
             // 
-            this.menuTilesetSaveImageAs.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.menuTilesetSaveImageAs.Image = global::LazyShell.Properties.Resources.exportImage;
             this.menuTilesetSaveImageAs.Name = "menuTilesetSaveImageAs";
             this.menuTilesetSaveImageAs.Size = new System.Drawing.Size(159, 22);
             this.menuTilesetSaveImageAs.Text = "Save Image As...";
@@ -508,7 +508,7 @@ namespace LAZYSHELL.Effects
             // openTileEditor
             // 
             this.openTileEditor.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
+            this.openTileEditor.Image = global::LazyShell.Properties.Resources.openTileEditor;
             this.openTileEditor.Name = "openTileEditor";
             this.openTileEditor.Size = new System.Drawing.Size(23, 22);
             this.openTileEditor.ToolTipText = "Tile Editor";
@@ -592,7 +592,7 @@ namespace LAZYSHELL.Effects
             // 
             // importIntoTilemap
             // 
-            this.importIntoTilemap.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importIntoTilemap.Image = global::LazyShell.Properties.Resources.importImage;
             this.importIntoTilemap.Name = "importIntoTilemap";
             this.importIntoTilemap.Size = new System.Drawing.Size(23, 22);
             this.importIntoTilemap.ToolTipText = "Import Image(s)";
@@ -605,7 +605,7 @@ namespace LAZYSHELL.Effects
             // 
             // newMold
             // 
-            this.newMold.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newMold.Image = global::LazyShell.Properties.Resources.new_file;
             this.newMold.Name = "newMold";
             this.newMold.Size = new System.Drawing.Size(23, 22);
             this.newMold.ToolTipText = "New Mold";
@@ -613,7 +613,7 @@ namespace LAZYSHELL.Effects
             // 
             // deleteMold
             // 
-            this.deleteMold.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deleteMold.Image = global::LazyShell.Properties.Resources.delete;
             this.deleteMold.Name = "deleteMold";
             this.deleteMold.Size = new System.Drawing.Size(23, 22);
             this.deleteMold.ToolTipText = "Delete Mold";
@@ -621,7 +621,7 @@ namespace LAZYSHELL.Effects
             // 
             // duplicateMold
             // 
-            this.duplicateMold.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicateMold.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicateMold.Name = "duplicateMold";
             this.duplicateMold.Size = new System.Drawing.Size(23, 22);
             this.duplicateMold.ToolTipText = "Duplicate Mold";
@@ -660,7 +660,7 @@ namespace LAZYSHELL.Effects
             // toggleZoomBox
             // 
             this.toggleZoomBox.CheckOnClick = true;
-            this.toggleZoomBox.Image = global::LAZYSHELL.Properties.Resources.zoomBox;
+            this.toggleZoomBox.Image = global::LazyShell.Properties.Resources.zoomBox;
             this.toggleZoomBox.Name = "toggleZoomBox";
             this.toggleZoomBox.Size = new System.Drawing.Size(23, 22);
             this.toggleZoomBox.ToolTipText = "Zoom Box (Z)";
@@ -694,7 +694,7 @@ namespace LAZYSHELL.Effects
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "MoldsForm";
             this.Text = "Molds";
-            this.TilesetForms = new LAZYSHELL.TilesetForm[] {
+            this.TilesetForms = new LazyShell.TilesetForm[] {
         null};
             this.panelMoldImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMold)).EndInit();

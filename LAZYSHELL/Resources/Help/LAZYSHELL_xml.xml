@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="LAZYSHELL_xsl.xsl"?>
-<LAZYSHELL form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
+<?xml-stylesheet type="text/xsl" href="LazyShell_xsl.xsl"?>
+<LazyShell form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
   <Properties version="4.0.0b" date="May 11, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
   <Read>
     <header>Read this first</header>
@@ -76,12 +76,12 @@ The reason this is the only way to do it is because by using the same exported f
   <Files>
     <header>Files in Archive</header>
     <body>*** Make sure all files stay within the same directory as each other, or there will be problems running Lazy Shell ***</body>
-    <file name="LAZYSHELL.exe">
+    <file name="LazyShell.exe">
       <description>The application.</description>
     </file>
     <file name="Lunar Compress.dll">
       <description>Generates automatically when needed.
-This file is essential to Lazy Shell's functionality. It decompresses and compresses the data that Lazy Shell modifies. It is needed to run the Stats, Levels, and Sprites editors and must be in the exact same directory as LAZYSHELL.exe. Without it, the program is almost completely functionless.</description>
+This file is essential to Lazy Shell's functionality. It decompresses and compresses the data that Lazy Shell modifies. It is needed to run the Stats, Levels, and Sprites editors and must be in the exact same directory as LazyShell.exe. Without it, the program is almost completely functionless.</description>
     </file>
     <file name="RomPreviewBaseSave.000, RomPreviewBaseSave.zst">
       <description>These generate automatically when needed.
@@ -3455,4 +3455,4 @@ Copying, pasting, and deleting values is supported with the typical keyboard sho
       <FAQ />
     </HexEditor>
   </Other>
-</LAZYSHELL>
+</LazyShell>

@@ -7,10 +7,10 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Controls
+namespace LazyShell.Controls
 {
     public class HeaderLabel : Label
     {
@@ -121,7 +121,7 @@ namespace LAZYSHELL.Controls
             this.DoubleBuffered = true;
             this.Font = new Font("Tahoma", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.HideOnClose = true;
-            this.Icon = Resources.LAZYSHELL_icon;
+            this.Icon = global::LazyShell.Properties.Resources.LazyShell_icon;
         }
 
         #region Form Status
@@ -199,7 +199,7 @@ namespace LAZYSHELL.Controls
         {
             this.DoubleBuffered = true;
             this.Font = new Font("Tahoma", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.Icon = Resources.LAZYSHELL_icon;
+            this.Icon = global::LazyShell.Properties.Resources.LazyShell_icon;
             this.Location = new Point(20, 20);
             this.SnapEdgeBoundary = 10;
             this.SnapToEdges = true;

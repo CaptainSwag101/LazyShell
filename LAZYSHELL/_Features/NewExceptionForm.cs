@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class NewExceptionForm : Controls.NewForm
     {
@@ -54,7 +54,7 @@ namespace LAZYSHELL
             int number = 0;
             while ((line = reader.ReadLine()) != null)
             {
-                if (!line.StartsWith("   at LAZYSHELL"))
+                if (!line.StartsWith("   at LazyShell"))
                     continue;
                 exceptionText.Text += line + "\r\n";
             }

@@ -2,41 +2,41 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Fonts
+namespace LazyShell.Fonts
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Fonts.UpdateGraphics();
+            LazyShell.Model.Program.Fonts.UpdateGraphics();
         }
     }
-    class GraphicFontUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicFontUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Fonts.UpdateGraphicsFont();
+            LazyShell.Model.Program.Fonts.UpdateGraphicsFont();
         }
     }
-    class GraphicMenuUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicMenuUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Fonts.UpdateGraphicsMenu();
+            LazyShell.Model.Program.Fonts.UpdateGraphicsMenu();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Fonts.UpdatePalettes();
+            LazyShell.Model.Program.Fonts.UpdatePalettes();
         }
     }
-    class PaletteMenuUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteMenuUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Fonts.UpdatePalettesMenu();
+            LazyShell.Model.Program.Fonts.UpdatePalettesMenu();
         }
     }
 }

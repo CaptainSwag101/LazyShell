@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     [Serializable()]
     public class MinecartData

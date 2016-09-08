@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Sprites.UpdateGraphics();
+            LazyShell.Model.Program.Sprites.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Sprites.UpdatePalette();
+            LazyShell.Model.Program.Sprites.UpdatePalette();
         }
     }
 }

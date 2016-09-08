@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     [Serializable()]
     public class EventCommand : Command

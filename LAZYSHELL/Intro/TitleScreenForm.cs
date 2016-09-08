@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
+using LazyShell.Areas;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     public partial class TitleScreenForm : MapEditor
     {

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     public partial class NPCPacketsForm : Controls.NewForm
     {
@@ -146,11 +146,11 @@ namespace LAZYSHELL.Sprites
         }
         private void editSprite_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.Sprites == null || !LAZYSHELL.Model.Program.Sprites.Visible)
-                LAZYSHELL.Model.Program.CreateSpritesWindow();
+            if (LazyShell.Model.Program.Sprites == null || !LazyShell.Model.Program.Sprites.Visible)
+                LazyShell.Model.Program.CreateSpritesWindow();
             //
-            LAZYSHELL.Model.Program.Sprites.Index = (int)spriteNum.Value;
-            LAZYSHELL.Model.Program.Sprites.BringToFront();
+            LazyShell.Model.Program.Sprites.Index = (int)spriteNum.Value;
+            LazyShell.Model.Program.Sprites.BringToFront();
         }
 
         // Action
@@ -160,12 +160,12 @@ namespace LAZYSHELL.Sprites
         }
         private void actionButton_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.EventScripts == null || !LAZYSHELL.Model.Program.EventScripts.Visible)
-                LAZYSHELL.Model.Program.CreateEventScriptsWindow();
+            if (LazyShell.Model.Program.EventScripts == null || !LazyShell.Model.Program.EventScripts.Visible)
+                LazyShell.Model.Program.CreateEventScriptsWindow();
             //
-            LAZYSHELL.Model.Program.EventScripts.Type = 1;
-            LAZYSHELL.Model.Program.EventScripts.Index = (int)action.Value;
-            LAZYSHELL.Model.Program.EventScripts.BringToFront();
+            LazyShell.Model.Program.EventScripts.Type = 1;
+            LazyShell.Model.Program.EventScripts.Index = (int)action.Value;
+            LazyShell.Model.Program.EventScripts.BringToFront();
         }
 
         // Unknown

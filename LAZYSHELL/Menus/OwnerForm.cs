@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -892,7 +892,7 @@ namespace LAZYSHELL.Menus
         private void importImage(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.InitialDirectory = LazyShell.Properties.Settings.Default.LastRomPath;
             openFileDialog1.Title = "Import background image";
             openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
             openFileDialog1.FilterIndex = 1;

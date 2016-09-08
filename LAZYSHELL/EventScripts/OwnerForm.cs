@@ -7,9 +7,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -831,10 +831,10 @@ namespace LAZYSHELL.EventScripts
                     "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // update hex editor form
             if (ElementType == ElementType.EventScript)
-                LAZYSHELL.Model.HexEditor.SetOffset(eventScript.BaseOffset);
+                LazyShell.Model.HexEditor.SetOffset(eventScript.BaseOffset);
             else
-                LAZYSHELL.Model.HexEditor.SetOffset(actionScript.BaseOffset);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
+                LazyShell.Model.HexEditor.SetOffset(actionScript.BaseOffset);
+            LazyShell.Model.HexEditor.HighlightChanges();
             this.Modified = false; // reset modified flag after saving changes
             settings.Save();
         }
@@ -1028,11 +1028,11 @@ namespace LAZYSHELL.EventScripts
         private void openHexEditor_Click(object sender, EventArgs e)
         {
             if (ElementType == ElementType.EventScript)
-                LAZYSHELL.Model.HexEditor.SetOffset(eventScript.BaseOffset);
+                LazyShell.Model.HexEditor.SetOffset(eventScript.BaseOffset);
             else
-                LAZYSHELL.Model.HexEditor.SetOffset(actionScript.BaseOffset);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
-            LAZYSHELL.Model.HexEditor.Show();
+                LazyShell.Model.HexEditor.SetOffset(actionScript.BaseOffset);
+            LazyShell.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.Show();
         }
         private void openPreviewer_Click(object sender, EventArgs e)
         {
@@ -1111,7 +1111,7 @@ namespace LAZYSHELL.EventScripts
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - eventScripts.txt";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - eventScripts.txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1181,7 +1181,7 @@ namespace LAZYSHELL.EventScripts
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - actionScripts.txt";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - actionScripts.txt";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -1597,10 +1597,10 @@ namespace LAZYSHELL.EventScripts
                 return;
             var evc = (EventCommand)commandTree.SelectedNode.Tag;
             int num = Bits.GetShort(evc.Data, 1) & 0xFFF;
-            if (LAZYSHELL.Model.Program.Dialogues == null || !LAZYSHELL.Model.Program.Dialogues.Visible)
-                LAZYSHELL.Model.Program.CreateDialoguesWindow();
-            LAZYSHELL.Model.Program.Dialogues.DialoguesForm.Index = num;
-            LAZYSHELL.Model.Program.Dialogues.BringToFront();
+            if (LazyShell.Model.Program.Dialogues == null || !LazyShell.Model.Program.Dialogues.Visible)
+                LazyShell.Model.Program.CreateDialoguesWindow();
+            LazyShell.Model.Program.Dialogues.DialoguesForm.Index = num;
+            LazyShell.Model.Program.Dialogues.BringToFront();
         }
         private void addMemoryToNotesDatabase_Click(object sender, EventArgs e)
         {
@@ -1649,12 +1649,12 @@ namespace LAZYSHELL.EventScripts
                 addressBit = temp.Param1 & 0x07;
             }
             label = description = "[" + address.ToString("X4") + ", bit: " + addressBit.ToString() + "]";
-            if (LAZYSHELL.Model.Program.Project == null || !LAZYSHELL.Model.Program.Project.Visible)
-                LAZYSHELL.Model.Program.CreateProjectWindow();
-            var project = LAZYSHELL.Model.Program.Project;
-            if (LAZYSHELL.Model.Project == null)
+            if (LazyShell.Model.Program.Project == null || !LazyShell.Model.Program.Project.Visible)
+                LazyShell.Model.Program.CreateProjectWindow();
+            var project = LazyShell.Model.Program.Project;
+            if (LazyShell.Model.Project == null)
                 project.OpenProjectFile();
-            if (LAZYSHELL.Model.Project != null)
+            if (LazyShell.Model.Project != null)
             {
                 project.AddingFromEditor("Memory Bits", address, addressBit, label, description);
                 project.BringToFront();
@@ -1759,7 +1759,7 @@ namespace LAZYSHELL.EventScripts
     /// <summary>
     /// Class containing the data and methods for changing a script's command data.
     /// </summary>
-    public class CommandEdit : LAZYSHELL.Undo.Edit
+    public class CommandEdit : LazyShell.Undo.Edit
     {
         #region Variables
 

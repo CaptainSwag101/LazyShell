@@ -2,9 +2,9 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for managing a sorted list based on element names in the Mario RPG Rom.

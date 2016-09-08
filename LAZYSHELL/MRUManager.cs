@@ -61,7 +61,7 @@ public class Form1 : System.Windows.Forms.Form, IMRUClient
 
 
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Interface which should be implemented by owner form

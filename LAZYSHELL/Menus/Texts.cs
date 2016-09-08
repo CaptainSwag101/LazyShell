@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Text;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Dialogues;
+using LazyShell.Properties;
+using LazyShell.Dialogues;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     [Serializable()]
     public class MenuText

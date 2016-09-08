@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL.Fonts
+namespace LazyShell.Fonts
 {
     /// <summary>
     /// Class containing the properties of a font's glyph and the methods 

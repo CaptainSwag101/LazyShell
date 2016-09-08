@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Audio
+﻿namespace LazyShell.Audio
 {
     partial class TrackViewerForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -155,7 +155,7 @@
             // 
             // findCommand
             // 
-            this.findCommand.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.findCommand.Image = global::LazyShell.Properties.Resources.search;
             this.findCommand.Name = "findCommand";
             this.findCommand.Size = new System.Drawing.Size(23, 22);
             this.findCommand.ToolTipText = "Find command";
@@ -214,7 +214,7 @@
             // 
             // newNote
             // 
-            this.newNote.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newNote.Image = global::LazyShell.Properties.Resources.new_file;
             this.newNote.Name = "newNote";
             this.newNote.Size = new System.Drawing.Size(23, 22);
             this.newNote.ToolTipText = "New";
@@ -227,7 +227,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete";
@@ -235,7 +235,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy";
@@ -243,7 +243,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste";
@@ -251,7 +251,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate";
@@ -259,7 +259,7 @@
             // 
             // moveLeft
             // 
-            this.moveLeft.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.moveLeft.Image = global::LazyShell.Properties.Resources.back;
             this.moveLeft.Name = "moveLeft";
             this.moveLeft.Size = new System.Drawing.Size(23, 22);
             this.moveLeft.ToolTipText = "Move Left";
@@ -267,7 +267,7 @@
             // 
             // moveRight
             // 
-            this.moveRight.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.moveRight.Image = global::LazyShell.Properties.Resources.foward;
             this.moveRight.Name = "moveRight";
             this.moveRight.Size = new System.Drawing.Size(23, 22);
             this.moveRight.ToolTipText = "Move Right";
@@ -535,14 +535,14 @@
             // 
             // exportScript
             // 
-            this.exportScript.Image = global::LAZYSHELL.Properties.Resources.exportText;
+            this.exportScript.Image = global::LazyShell.Properties.Resources.exportText;
             this.exportScript.Name = "exportScript";
             this.exportScript.Size = new System.Drawing.Size(190, 22);
             this.exportScript.Text = "Export Channel Script...";
             // 
             // importScript
             // 
-            this.importScript.Image = global::LAZYSHELL.Properties.Resources.importText;
+            this.importScript.Image = global::LazyShell.Properties.Resources.importText;
             this.importScript.Name = "importScript";
             this.importScript.Size = new System.Drawing.Size(190, 22);
             this.importScript.Text = "Import Channel Script...";
@@ -554,7 +554,7 @@
             // 
             // clearChannel
             // 
-            this.clearChannel.Image = global::LAZYSHELL.Properties.Resources.clear;
+            this.clearChannel.Image = global::LazyShell.Properties.Resources.clear;
             this.clearChannel.Name = "clearChannel";
             this.clearChannel.Size = new System.Drawing.Size(190, 22);
             this.clearChannel.Text = "Clear Channel";

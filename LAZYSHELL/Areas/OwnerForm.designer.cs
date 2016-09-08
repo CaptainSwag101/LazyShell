@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     partial class OwnerForm
     {
@@ -16,9 +16,9 @@ namespace LAZYSHELL.Areas
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -36,12 +36,12 @@ namespace LAZYSHELL.Areas
         {
 			this.components = new System.ComponentModel.Container();
 			this.importAreaData = new System.Windows.Forms.ToolStripMenuItem();
-			this.areaInfo = new LAZYSHELL.Controls.NewToolStripListView();
+			this.areaInfo = new LazyShell.Controls.NewToolStripListView();
 			this.areaName = new System.Windows.Forms.ToolStripComboBox();
-			this.areaNum = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.areaNum = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.exportArrays = new System.Windows.Forms.ToolStripMenuItem();
 			this.importArrays = new System.Windows.Forms.ToolStripMenuItem();
-			this.baseConvertor = new LAZYSHELL.Controls.NewToolStripButton();
+			this.baseConvertor = new LazyShell.Controls.NewToolStripButton();
 			this.clear = new System.Windows.Forms.ToolStripDropDownButton();
 			this.clearAllAreaData = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator38 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,14 +66,14 @@ namespace LAZYSHELL.Areas
 			this.exportImages = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
 			this.importGraphicSet = new System.Windows.Forms.ToolStripMenuItem();
-			this.helpTips = new LAZYSHELL.Controls.NewToolStripButton();
-			this.hexEditor = new LAZYSHELL.Controls.NewToolStripButton();
+			this.helpTips = new LazyShell.Controls.NewToolStripButton();
+			this.hexEditor = new LazyShell.Controls.NewToolStripButton();
 			this.import = new System.Windows.Forms.ToolStripDropDownButton();
 			this.importArchitecture = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
-			this.navigateBck = new LAZYSHELL.Controls.NewToolStripButton();
-			this.navigateFwd = new LAZYSHELL.Controls.NewToolStripButton();
-			this.openSpaceAnalyzer = new LAZYSHELL.Controls.NewToolStripButton();
+			this.navigateBck = new LazyShell.Controls.NewToolStripButton();
+			this.navigateFwd = new LazyShell.Controls.NewToolStripButton();
+			this.openSpaceAnalyzer = new LazyShell.Controls.NewToolStripButton();
 			this.reset = new System.Windows.Forms.ToolStripDropDownButton();
 			this.resetMap = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetLayering = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,25 +91,25 @@ namespace LAZYSHELL.Areas
 			this.resetCollisionMap = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.resetAllElements = new System.Windows.Forms.ToolStripMenuItem();
-			this.save = new LAZYSHELL.Controls.NewToolStripButton();
-			this.searchLocationNames = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleChunksForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleCollisionSwitchesForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleCollisionTileForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleEventsForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleExitsForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.openGraphicEditor = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleLayeringForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleMapForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleNPCsForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleOverlapsForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.openPaletteEditor = new LAZYSHELL.Controls.NewToolStripButton();
-			this.openPreviewerForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.togglePriorityForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.togglePropertiesForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleTileSwitchesForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleTilemapForm = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleTilesetL1Form = new LAZYSHELL.Controls.NewToolStripButton();
+			this.save = new LazyShell.Controls.NewToolStripButton();
+			this.searchLocationNames = new LazyShell.Controls.NewToolStripButton();
+			this.toggleChunksForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleCollisionSwitchesForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleCollisionTileForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleEventsForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleExitsForm = new LazyShell.Controls.NewToolStripButton();
+			this.openGraphicEditor = new LazyShell.Controls.NewToolStripButton();
+			this.toggleLayeringForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleMapForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleNPCsForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleOverlapsForm = new LazyShell.Controls.NewToolStripButton();
+			this.openPaletteEditor = new LazyShell.Controls.NewToolStripButton();
+			this.openPreviewerForm = new LazyShell.Controls.NewToolStripButton();
+			this.togglePriorityForm = new LazyShell.Controls.NewToolStripButton();
+			this.togglePropertiesForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleTileSwitchesForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleTilemapForm = new LazyShell.Controls.NewToolStripButton();
+			this.toggleTilesetL1Form = new LazyShell.Controls.NewToolStripButton();
 			this.toolStripArea = new System.Windows.Forms.ToolStrip();
 			this.findReferences = new System.Windows.Forms.ToolStripButton();
 			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,11 +122,10 @@ namespace LAZYSHELL.Areas
 			this.toolStripToggle = new System.Windows.Forms.ToolStrip();
 			this.statistics = new System.Windows.Forms.ToolStripButton();
 			this.viewAreaInfo = new System.Windows.Forms.ToolStripDropDownButton();
-			this.toggleTilesetL2Form = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleTilesetL3Form = new LAZYSHELL.Controls.NewToolStripButton();
+			this.toggleTilesetL2Form = new LazyShell.Controls.NewToolStripButton();
+			this.toggleTilesetL3Form = new LazyShell.Controls.NewToolStripButton();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-			this.dockPanel.Theme = new VS2013BlueTheme();
 			this.toolStripArea.SuspendLayout();
 			this.toolStripToggle.SuspendLayout();
 			this.SuspendLayout();
@@ -166,7 +165,7 @@ namespace LAZYSHELL.Areas
             0,
             0,
             0});
-			this.areaNum.Location = new System.Drawing.Point(314, 1);
+			this.areaNum.Location = new System.Drawing.Point(314, 2);
 			this.areaNum.Maximum = new decimal(new int[] {
             509,
             0,
@@ -178,7 +177,7 @@ namespace LAZYSHELL.Areas
             0,
             0});
 			this.areaNum.Name = "areaNum";
-			this.areaNum.Size = new System.Drawing.Size(60, 21);
+			this.areaNum.Size = new System.Drawing.Size(60, 20);
 			this.areaNum.Text = "0";
 			this.areaNum.Value = new decimal(new int[] {
             0,
@@ -189,7 +188,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// exportArrays
 			// 
-			this.exportArrays.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
+			this.exportArrays.Image = global::LazyShell.Properties.Resources.exportBinary;
 			this.exportArrays.Name = "exportArrays";
 			this.exportArrays.Size = new System.Drawing.Size(186, 22);
 			this.exportArrays.Text = "Export Arrays...";
@@ -197,7 +196,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// importArrays
 			// 
-			this.importArrays.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+			this.importArrays.Image = global::LazyShell.Properties.Resources.importBinary;
 			this.importArrays.Name = "importArrays";
 			this.importArrays.Size = new System.Drawing.Size(187, 22);
 			this.importArrays.Text = "Import Arrays...";
@@ -207,7 +206,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.baseConvertor.CheckOnClick = true;
 			this.baseConvertor.Form = null;
-			this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+			this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
 			this.baseConvertor.Name = "baseConvertor";
 			this.baseConvertor.Size = new System.Drawing.Size(23, 22);
 			this.baseConvertor.ToolTipText = "Base Convertor";
@@ -229,7 +228,7 @@ namespace LAZYSHELL.Areas
             this.toolStripSeparator8,
             this.clearAllComponentsAll,
             this.clearAllComponentsCurrent});
-			this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+			this.clear.Image = global::LazyShell.Properties.Resources.clear;
 			this.clear.Name = "clear";
 			this.clear.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -327,7 +326,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// dumpText
 			// 
-			this.dumpText.Image = global::LAZYSHELL.Properties.Resources.exportText;
+			this.dumpText.Image = global::LazyShell.Properties.Resources.exportText;
 			this.dumpText.Name = "dumpText";
 			this.dumpText.Size = new System.Drawing.Size(186, 22);
 			this.dumpText.Text = "Dump NPCs to Text...";
@@ -344,7 +343,7 @@ namespace LAZYSHELL.Areas
             this.exportImages,
             this.toolStripSeparator32,
             this.dumpText});
-			this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
+			this.export.Image = global::LazyShell.Properties.Resources.exportData;
 			this.export.Name = "export";
 			this.export.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -357,7 +356,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// exportArchitecture
 			// 
-			this.exportArchitecture.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
+			this.exportArchitecture.Image = global::LazyShell.Properties.Resources.exportBinary;
 			this.exportArchitecture.Name = "exportArchitecture";
 			this.exportArchitecture.Size = new System.Drawing.Size(186, 22);
 			this.exportArchitecture.Text = "Export Architecture...";
@@ -370,7 +369,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// exportGraphicSets
 			// 
-			this.exportGraphicSets.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
+			this.exportGraphicSets.Image = global::LazyShell.Properties.Resources.exportBinary;
 			this.exportGraphicSets.Name = "exportGraphicSets";
 			this.exportGraphicSets.Size = new System.Drawing.Size(186, 22);
 			this.exportGraphicSets.Text = "Export Graphic Sets...";
@@ -378,7 +377,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// exportImages
 			// 
-			this.exportImages.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+			this.exportImages.Image = global::LazyShell.Properties.Resources.exportImage;
 			this.exportImages.Name = "exportImages";
 			this.exportImages.Size = new System.Drawing.Size(186, 22);
 			this.exportImages.Text = "Export Area Images...";
@@ -391,7 +390,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// importGraphicSet
 			// 
-			this.importGraphicSet.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+			this.importGraphicSet.Image = global::LazyShell.Properties.Resources.importBinary;
 			this.importGraphicSet.Name = "importGraphicSet";
 			this.importGraphicSet.Size = new System.Drawing.Size(187, 22);
 			this.importGraphicSet.Text = "Import Graphic Set...";
@@ -401,7 +400,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.helpTips.CheckOnClick = true;
 			this.helpTips.Form = null;
-			this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.helpTips.Image = global::LazyShell.Properties.Resources.help;
 			this.helpTips.Name = "helpTips";
 			this.helpTips.Size = new System.Drawing.Size(23, 22);
 			this.helpTips.ToolTipText = "Help Tips";
@@ -409,7 +408,7 @@ namespace LAZYSHELL.Areas
 			// hexEditor
 			// 
 			this.hexEditor.Form = null;
-			this.hexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+			this.hexEditor.Image = global::LazyShell.Properties.Resources.hexEditor;
 			this.hexEditor.Name = "hexEditor";
 			this.hexEditor.Size = new System.Drawing.Size(23, 22);
 			this.hexEditor.ToolTipText = "Hex Editor";
@@ -423,13 +422,13 @@ namespace LAZYSHELL.Areas
             this.toolStripSeparator30,
             this.importArrays,
             this.importGraphicSet});
-			this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
+			this.import.Image = global::LazyShell.Properties.Resources.importData;
 			this.import.Name = "import";
 			this.import.Size = new System.Drawing.Size(29, 22);
 			// 
 			// importArchitecture
 			// 
-			this.importArchitecture.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+			this.importArchitecture.Image = global::LazyShell.Properties.Resources.importBinary;
 			this.importArchitecture.Name = "importArchitecture";
 			this.importArchitecture.Size = new System.Drawing.Size(187, 22);
 			this.importArchitecture.Text = "Import Architecture...";
@@ -444,7 +443,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.navigateBck.Enabled = false;
 			this.navigateBck.Form = null;
-			this.navigateBck.Image = global::LAZYSHELL.Properties.Resources.back;
+			this.navigateBck.Image = global::LazyShell.Properties.Resources.back;
 			this.navigateBck.Name = "navigateBck";
 			this.navigateBck.Size = new System.Drawing.Size(23, 22);
 			this.navigateBck.ToolTipText = "Navigate Backward";
@@ -454,7 +453,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.navigateFwd.Enabled = false;
 			this.navigateFwd.Form = null;
-			this.navigateFwd.Image = global::LAZYSHELL.Properties.Resources.foward;
+			this.navigateFwd.Image = global::LazyShell.Properties.Resources.foward;
 			this.navigateFwd.Name = "navigateFwd";
 			this.navigateFwd.Size = new System.Drawing.Size(23, 22);
 			this.navigateFwd.ToolTipText = "Navigate Forward";
@@ -463,7 +462,7 @@ namespace LAZYSHELL.Areas
 			// openSpaceAnalyzer
 			// 
 			this.openSpaceAnalyzer.Form = null;
-			this.openSpaceAnalyzer.Image = global::LAZYSHELL.Properties.Resources.spaceAnalyzer;
+			this.openSpaceAnalyzer.Image = global::LazyShell.Properties.Resources.spaceAnalyzer;
 			this.openSpaceAnalyzer.Name = "openSpaceAnalyzer";
 			this.openSpaceAnalyzer.Size = new System.Drawing.Size(23, 22);
 			this.openSpaceAnalyzer.ToolTipText = "Open space analyzer";
@@ -488,7 +487,7 @@ namespace LAZYSHELL.Areas
             this.resetCollisionMap,
             this.toolStripSeparator4,
             this.resetAllElements});
-			this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.reset.Image = global::LazyShell.Properties.Resources.reset;
 			this.reset.Name = "reset";
 			this.reset.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -602,7 +601,7 @@ namespace LAZYSHELL.Areas
 			// save
 			// 
 			this.save.Form = null;
-			this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.save.Image = global::LazyShell.Properties.Resources.save;
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(23, 22);
 			this.save.ToolTipText = "Save";
@@ -611,7 +610,7 @@ namespace LAZYSHELL.Areas
 			// searchLocationNames
 			// 
 			this.searchLocationNames.Form = null;
-			this.searchLocationNames.Image = global::LAZYSHELL.Properties.Resources.search;
+			this.searchLocationNames.Image = global::LazyShell.Properties.Resources.search;
 			this.searchLocationNames.Name = "searchLocationNames";
 			this.searchLocationNames.Size = new System.Drawing.Size(23, 22);
 			this.searchLocationNames.ToolTipText = "Search Area Names";
@@ -620,7 +619,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleChunksForm.CheckOnClick = true;
 			this.toggleChunksForm.Form = null;
-			this.toggleChunksForm.Image = global::LAZYSHELL.Properties.Resources.openTemplates;
+			this.toggleChunksForm.Image = global::LazyShell.Properties.Resources.openTemplates;
 			this.toggleChunksForm.Name = "toggleChunksForm";
 			this.toggleChunksForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleChunksForm.ToolTipText = "Chunk Collection Window";
@@ -629,7 +628,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleCollisionSwitchesForm.CheckOnClick = true;
 			this.toggleCollisionSwitchesForm.Form = null;
-			this.toggleCollisionSwitchesForm.Image = global::LAZYSHELL.Properties.Resources.toggleCollisionSwitches;
+			this.toggleCollisionSwitchesForm.Image = global::LazyShell.Properties.Resources.toggleCollisionSwitches;
 			this.toggleCollisionSwitchesForm.Name = "toggleCollisionSwitchesForm";
 			this.toggleCollisionSwitchesForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleCollisionSwitchesForm.ToolTipText = "Collision Switches Window";
@@ -638,7 +637,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleCollisionTileForm.CheckOnClick = true;
 			this.toggleCollisionTileForm.Form = null;
-			this.toggleCollisionTileForm.Image = global::LAZYSHELL.Properties.Resources.buttonPhysicalTiles;
+			this.toggleCollisionTileForm.Image = global::LazyShell.Properties.Resources.buttonPhysicalTiles;
 			this.toggleCollisionTileForm.Name = "toggleCollisionTileForm";
 			this.toggleCollisionTileForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleCollisionTileForm.ToolTipText = "Collision Tile Window";
@@ -647,7 +646,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleEventsForm.CheckOnClick = true;
 			this.toggleEventsForm.Form = null;
-			this.toggleEventsForm.Image = global::LAZYSHELL.Properties.Resources.toggleEvents;
+			this.toggleEventsForm.Image = global::LazyShell.Properties.Resources.toggleEvents;
 			this.toggleEventsForm.Name = "toggleEventsForm";
 			this.toggleEventsForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleEventsForm.ToolTipText = "Event Triggers Window";
@@ -656,7 +655,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleExitsForm.CheckOnClick = true;
 			this.toggleExitsForm.Form = null;
-			this.toggleExitsForm.Image = global::LAZYSHELL.Properties.Resources.toggleExits;
+			this.toggleExitsForm.Image = global::LazyShell.Properties.Resources.toggleExits;
 			this.toggleExitsForm.Name = "toggleExitsForm";
 			this.toggleExitsForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleExitsForm.ToolTipText = "Exit Triggers Window";
@@ -664,7 +663,7 @@ namespace LAZYSHELL.Areas
 			// openGraphicEditor
 			// 
 			this.openGraphicEditor.Form = null;
-			this.openGraphicEditor.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+			this.openGraphicEditor.Image = global::LazyShell.Properties.Resources.openGraphics;
 			this.openGraphicEditor.Name = "openGraphicEditor";
 			this.openGraphicEditor.Size = new System.Drawing.Size(23, 22);
 			this.openGraphicEditor.ToolTipText = "Graphics Editor";
@@ -674,7 +673,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleLayeringForm.CheckOnClick = true;
 			this.toggleLayeringForm.Form = null;
-			this.toggleLayeringForm.Image = global::LAZYSHELL.Properties.Resources.toggleLayering;
+			this.toggleLayeringForm.Image = global::LazyShell.Properties.Resources.toggleLayering;
 			this.toggleLayeringForm.Name = "toggleLayeringForm";
 			this.toggleLayeringForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleLayeringForm.ToolTipText = "Layer Properties Window";
@@ -683,7 +682,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleMapForm.CheckOnClick = true;
 			this.toggleMapForm.Form = null;
-			this.toggleMapForm.Image = global::LAZYSHELL.Properties.Resources.toggleMap;
+			this.toggleMapForm.Image = global::LazyShell.Properties.Resources.toggleMap;
 			this.toggleMapForm.Name = "toggleMapForm";
 			this.toggleMapForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleMapForm.ToolTipText = "Map Properties Window";
@@ -692,7 +691,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleNPCsForm.CheckOnClick = true;
 			this.toggleNPCsForm.Form = null;
-			this.toggleNPCsForm.Image = global::LAZYSHELL.Properties.Resources.toggleNPCs;
+			this.toggleNPCsForm.Image = global::LazyShell.Properties.Resources.toggleNPCs;
 			this.toggleNPCsForm.Name = "toggleNPCsForm";
 			this.toggleNPCsForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleNPCsForm.ToolTipText = "NPCs Window";
@@ -701,7 +700,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleOverlapsForm.CheckOnClick = true;
 			this.toggleOverlapsForm.Form = null;
-			this.toggleOverlapsForm.Image = global::LAZYSHELL.Properties.Resources.toggleOverlaps;
+			this.toggleOverlapsForm.Image = global::LazyShell.Properties.Resources.toggleOverlaps;
 			this.toggleOverlapsForm.Name = "toggleOverlapsForm";
 			this.toggleOverlapsForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleOverlapsForm.ToolTipText = "Overlaps Window";
@@ -709,7 +708,7 @@ namespace LAZYSHELL.Areas
 			// openPaletteEditor
 			// 
 			this.openPaletteEditor.Form = null;
-			this.openPaletteEditor.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+			this.openPaletteEditor.Image = global::LazyShell.Properties.Resources.openPalettes;
 			this.openPaletteEditor.Name = "openPaletteEditor";
 			this.openPaletteEditor.Size = new System.Drawing.Size(23, 22);
 			this.openPaletteEditor.ToolTipText = "Palette Editor";
@@ -718,7 +717,7 @@ namespace LAZYSHELL.Areas
 			// openPreviewerForm
 			// 
 			this.openPreviewerForm.Form = null;
-			this.openPreviewerForm.Image = global::LAZYSHELL.Properties.Resources.preview;
+			this.openPreviewerForm.Image = global::LazyShell.Properties.Resources.preview;
 			this.openPreviewerForm.Name = "openPreviewerForm";
 			this.openPreviewerForm.Size = new System.Drawing.Size(23, 22);
 			this.openPreviewerForm.ToolTipText = "Previewer";
@@ -728,7 +727,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.togglePriorityForm.CheckOnClick = true;
 			this.togglePriorityForm.Form = null;
-			this.togglePriorityForm.Image = global::LAZYSHELL.Properties.Resources.togglePriority;
+			this.togglePriorityForm.Image = global::LazyShell.Properties.Resources.togglePriority;
 			this.togglePriorityForm.Name = "togglePriorityForm";
 			this.togglePriorityForm.Size = new System.Drawing.Size(23, 22);
 			this.togglePriorityForm.ToolTipText = "Priority Settings Window";
@@ -737,7 +736,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.togglePropertiesForm.CheckOnClick = true;
 			this.togglePropertiesForm.Form = null;
-			this.togglePropertiesForm.Image = global::LAZYSHELL.Properties.Resources.showMain;
+			this.togglePropertiesForm.Image = global::LazyShell.Properties.Resources.showMain;
 			this.togglePropertiesForm.Name = "togglePropertiesForm";
 			this.togglePropertiesForm.Size = new System.Drawing.Size(23, 22);
 			this.togglePropertiesForm.ToolTipText = "Area Properties Window";
@@ -746,7 +745,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleTileSwitchesForm.CheckOnClick = true;
 			this.toggleTileSwitchesForm.Form = null;
-			this.toggleTileSwitchesForm.Image = global::LAZYSHELL.Properties.Resources.toggleTileSwitches;
+			this.toggleTileSwitchesForm.Image = global::LazyShell.Properties.Resources.toggleTileSwitches;
 			this.toggleTileSwitchesForm.Name = "toggleTileSwitchesForm";
 			this.toggleTileSwitchesForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleTileSwitchesForm.ToolTipText = "Tile Switches Window";
@@ -755,7 +754,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleTilemapForm.CheckOnClick = true;
 			this.toggleTilemapForm.Form = null;
-			this.toggleTilemapForm.Image = global::LAZYSHELL.Properties.Resources.openMap;
+			this.toggleTilemapForm.Image = global::LazyShell.Properties.Resources.openMap;
 			this.toggleTilemapForm.Name = "toggleTilemapForm";
 			this.toggleTilemapForm.Size = new System.Drawing.Size(23, 22);
 			this.toggleTilemapForm.ToolTipText = "Tilemap Editor";
@@ -764,7 +763,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleTilesetL1Form.CheckOnClick = true;
 			this.toggleTilesetL1Form.Form = null;
-			this.toggleTilesetL1Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL1;
+			this.toggleTilesetL1Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL1;
 			this.toggleTilesetL1Form.Name = "toggleTilesetL1Form";
 			this.toggleTilesetL1Form.Size = new System.Drawing.Size(23, 22);
 			this.toggleTilesetL1Form.ToolTipText = "Tileset L1 Editor";
@@ -785,7 +784,7 @@ namespace LAZYSHELL.Areas
 			// 
 			// findReferences
 			// 
-			this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
+			this.findReferences.Image = global::LazyShell.Properties.Resources.findReferences;
 			this.findReferences.Name = "findReferences";
 			this.findReferences.Size = new System.Drawing.Size(23, 22);
 			this.findReferences.ToolTipText = "Find all references to area";
@@ -874,7 +873,7 @@ namespace LAZYSHELL.Areas
 			// statistics
 			// 
 			this.statistics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.statistics.Image = global::LAZYSHELL.Properties.Resources.statistics;
+			this.statistics.Image = global::LazyShell.Properties.Resources.statistics;
 			this.statistics.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.statistics.Name = "statistics";
 			this.statistics.Size = new System.Drawing.Size(23, 22);
@@ -885,7 +884,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.viewAreaInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.areaInfo});
-			this.viewAreaInfo.Image = global::LAZYSHELL.Properties.Resources.about;
+			this.viewAreaInfo.Image = global::LazyShell.Properties.Resources.about;
 			this.viewAreaInfo.Name = "viewAreaInfo";
 			this.viewAreaInfo.Size = new System.Drawing.Size(29, 22);
 			this.viewAreaInfo.ToolTipText = "View Area Offsets";
@@ -894,7 +893,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleTilesetL2Form.CheckOnClick = true;
 			this.toggleTilesetL2Form.Form = null;
-			this.toggleTilesetL2Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL2;
+			this.toggleTilesetL2Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL2;
 			this.toggleTilesetL2Form.Name = "toggleTilesetL2Form";
 			this.toggleTilesetL2Form.Size = new System.Drawing.Size(23, 22);
 			this.toggleTilesetL2Form.ToolTipText = "Tileset L2 Editor";
@@ -903,7 +902,7 @@ namespace LAZYSHELL.Areas
 			// 
 			this.toggleTilesetL3Form.CheckOnClick = true;
 			this.toggleTilesetL3Form.Form = null;
-			this.toggleTilesetL3Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL3;
+			this.toggleTilesetL3Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL3;
 			this.toggleTilesetL3Form.Name = "toggleTilesetL3Form";
 			this.toggleTilesetL3Form.Size = new System.Drawing.Size(23, 22);
 			// 
@@ -935,8 +934,9 @@ namespace LAZYSHELL.Areas
 			this.KeyPreview = true;
 			this.Location = new System.Drawing.Point(20, 20);
 			this.Name = "OwnerForm";
-			this.Text = "AREAS - Lazy Shell";
-			this.TilesetForms = new LAZYSHELL.TilesetForm[] {
+			this.Text = "Areas - Lazy Shell";
+			this.TilesetForm = null;
+			this.TilesetForms = new LazyShell.TilesetForm[] {
         null,
         null,
         null};

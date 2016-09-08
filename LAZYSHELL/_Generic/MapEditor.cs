@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Form that supports the editing of one or more elements of a tilemap.

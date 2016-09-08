@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Audio
+﻿namespace LazyShell.Audio
 {
     partial class ScoreWriterForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScoreWriterForm));
+            System.ComponentModel.ComponentResourceManager Resources = new System.ComponentModel.ComponentResourceManager(typeof(ScoreWriterForm));
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.saveScoreFile = new System.Windows.Forms.ToolStripButton();
             this.openScoreFile = new System.Windows.Forms.ToolStripButton();
@@ -46,13 +46,13 @@
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.keySW = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.timeBeatsSW = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
-            this.timeValueSW = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.timeBeatsSW = new LazyShell.Controls.NewToolStripNumericUpDown();
+            this.timeValueSW = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.staffHeightSW = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.staffHeightSW = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.noteSpacingSW = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.noteSpacingSW = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripNote = new System.Windows.Forms.ToolStrip();
             this.sharp = new System.Windows.Forms.ToolStripButton();
             this.flat = new System.Windows.Forms.ToolStripButton();
@@ -73,7 +73,7 @@
             this.note32nd = new System.Windows.Forms.ToolStripButton();
             this.note64th = new System.Windows.Forms.ToolStripButton();
             this.ticksNoteButton = new System.Windows.Forms.ToolStripButton();
-            this.ticksNoteValue = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.ticksNoteValue = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.restWhole = new System.Windows.Forms.ToolStripButton();
             this.restHalfD = new System.Windows.Forms.ToolStripButton();
@@ -89,7 +89,7 @@
             this.rest32nd = new System.Windows.Forms.ToolStripButton();
             this.rest64th = new System.Windows.Forms.ToolStripButton();
             this.ticksRestButton = new System.Windows.Forms.ToolStripButton();
-            this.ticksRestValue = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.ticksRestValue = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripAction = new System.Windows.Forms.ToolStrip();
             this.draw = new System.Windows.Forms.ToolStripButton();
             this.erase = new System.Windows.Forms.ToolStripButton();
@@ -102,8 +102,8 @@
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.undo = new System.Windows.Forms.ToolStripButton();
             this.redo = new System.Windows.Forms.ToolStripButton();
-            this.scoreWriterPanel = new LAZYSHELL.Controls.NewPanel();
-            this.picture = new LAZYSHELL.Controls.NewPictureBox();
+            this.scoreWriterPanel = new LazyShell.Controls.NewPanel();
+            this.picture = new LazyShell.Controls.NewPictureBox();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
             this.labelNote = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -146,7 +146,7 @@
             // 
             // saveScoreFile
             // 
-            this.saveScoreFile.Image = global::LAZYSHELL.Properties.Resources.save;
+            this.saveScoreFile.Image = global::LazyShell.Properties.Resources.save;
             this.saveScoreFile.Name = "saveScoreFile";
             this.saveScoreFile.Size = new System.Drawing.Size(23, 22);
             this.saveScoreFile.ToolTipText = "Save Score";
@@ -154,7 +154,7 @@
             // 
             // openScoreFile
             // 
-            this.openScoreFile.Image = global::LAZYSHELL.Properties.Resources.open;
+            this.openScoreFile.Image = global::LazyShell.Properties.Resources.open;
             this.openScoreFile.Name = "openScoreFile";
             this.openScoreFile.Size = new System.Drawing.Size(23, 22);
             this.openScoreFile.ToolTipText = "Open Score";
@@ -165,7 +165,7 @@
             this.toolStripDropDownButton5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportScoreFiles,
             this.exportStaffsMML});
-            this.toolStripDropDownButton5.Image = global::LAZYSHELL.Properties.Resources.exportText;
+            this.toolStripDropDownButton5.Image = global::LazyShell.Properties.Resources.exportText;
             this.toolStripDropDownButton5.Name = "toolStripDropDownButton5";
             this.toolStripDropDownButton5.Size = new System.Drawing.Size(29, 22);
             // 
@@ -190,7 +190,7 @@
             // 
             // staffNew
             // 
-            this.staffNew.Image = global::LAZYSHELL.Properties.Resources.staffNew;
+            this.staffNew.Image = global::LazyShell.Properties.Resources.staffNew;
             this.staffNew.Name = "staffNew";
             this.staffNew.Size = new System.Drawing.Size(23, 22);
             this.staffNew.ToolTipText = "New Staff";
@@ -199,7 +199,7 @@
             // staffDelete
             // 
             this.staffDelete.Enabled = false;
-            this.staffDelete.Image = global::LAZYSHELL.Properties.Resources.staffDelete;
+            this.staffDelete.Image = global::LazyShell.Properties.Resources.staffDelete;
             this.staffDelete.Name = "staffDelete";
             this.staffDelete.Size = new System.Drawing.Size(23, 22);
             this.staffDelete.ToolTipText = "Delete Staff";
@@ -208,7 +208,7 @@
             // staffMoveUp
             // 
             this.staffMoveUp.Enabled = false;
-            this.staffMoveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.staffMoveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.staffMoveUp.Name = "staffMoveUp";
             this.staffMoveUp.Size = new System.Drawing.Size(23, 22);
             this.staffMoveUp.ToolTipText = "Move Staff Up";
@@ -217,7 +217,7 @@
             // staffMoveDown
             // 
             this.staffMoveDown.Enabled = false;
-            this.staffMoveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.staffMoveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.staffMoveDown.Name = "staffMoveDown";
             this.staffMoveDown.Size = new System.Drawing.Size(23, 22);
             this.staffMoveDown.ToolTipText = "Move Staff Down";
@@ -490,7 +490,7 @@
             // 
             this.sharp.AutoSize = false;
             this.sharp.CheckOnClick = true;
-            this.sharp.Image = global::LAZYSHELL.Properties.Resources.sharp;
+            this.sharp.Image = global::LazyShell.Properties.Resources.sharp;
             this.sharp.Name = "sharp";
             this.sharp.Size = new System.Drawing.Size(23, 22);
             this.sharp.ToolTipText = "Sharp";
@@ -498,7 +498,7 @@
             // flat
             // 
             this.flat.CheckOnClick = true;
-            this.flat.Image = global::LAZYSHELL.Properties.Resources.flat;
+            this.flat.Image = global::LazyShell.Properties.Resources.flat;
             this.flat.Name = "flat";
             this.flat.Size = new System.Drawing.Size(23, 22);
             this.flat.ToolTipText = "Flat";
@@ -506,7 +506,7 @@
             // natural
             // 
             this.natural.CheckOnClick = true;
-            this.natural.Image = global::LAZYSHELL.Properties.Resources.natural;
+            this.natural.Image = global::LazyShell.Properties.Resources.natural;
             this.natural.Name = "natural";
             this.natural.Size = new System.Drawing.Size(23, 22);
             this.natural.ToolTipText = "Natural";
@@ -514,7 +514,7 @@
             // tie
             // 
             this.tie.CheckOnClick = true;
-            this.tie.Image = ((System.Drawing.Image)(resources.GetObject("tie.Image")));
+            this.tie.Image = ((System.Drawing.Image)(Resources.GetObject("tie.Image")));
             this.tie.Name = "tie";
             this.tie.Size = new System.Drawing.Size(23, 22);
             this.tie.ToolTipText = "Tie";
@@ -527,7 +527,7 @@
             // noteWhole
             // 
             this.noteWhole.CheckOnClick = true;
-            this.noteWhole.Image = global::LAZYSHELL.Properties.Resources.noteWhole;
+            this.noteWhole.Image = global::LazyShell.Properties.Resources.noteWhole;
             this.noteWhole.Name = "noteWhole";
             this.noteWhole.Size = new System.Drawing.Size(23, 22);
             this.noteWhole.ToolTipText = "Whole Note";
@@ -535,7 +535,7 @@
             // noteHalfD
             // 
             this.noteHalfD.CheckOnClick = true;
-            this.noteHalfD.Image = global::LAZYSHELL.Properties.Resources.noteHalfDotted;
+            this.noteHalfD.Image = global::LazyShell.Properties.Resources.noteHalfDotted;
             this.noteHalfD.Name = "noteHalfD";
             this.noteHalfD.Size = new System.Drawing.Size(23, 22);
             this.noteHalfD.ToolTipText = "Dotted Half Note";
@@ -543,7 +543,7 @@
             // noteHalf
             // 
             this.noteHalf.CheckOnClick = true;
-            this.noteHalf.Image = global::LAZYSHELL.Properties.Resources.noteHalf;
+            this.noteHalf.Image = global::LazyShell.Properties.Resources.noteHalf;
             this.noteHalf.Name = "noteHalf";
             this.noteHalf.Size = new System.Drawing.Size(23, 22);
             this.noteHalf.ToolTipText = "Half Note";
@@ -551,7 +551,7 @@
             // noteQuarterD
             // 
             this.noteQuarterD.CheckOnClick = true;
-            this.noteQuarterD.Image = global::LAZYSHELL.Properties.Resources.noteDotted;
+            this.noteQuarterD.Image = global::LazyShell.Properties.Resources.noteDotted;
             this.noteQuarterD.Name = "noteQuarterD";
             this.noteQuarterD.Size = new System.Drawing.Size(23, 22);
             this.noteQuarterD.ToolTipText = "Dotted Quarter Note";
@@ -559,7 +559,7 @@
             // noteQuarter
             // 
             this.noteQuarter.CheckOnClick = true;
-            this.noteQuarter.Image = global::LAZYSHELL.Properties.Resources.noteQuarter;
+            this.noteQuarter.Image = global::LazyShell.Properties.Resources.noteQuarter;
             this.noteQuarter.Name = "noteQuarter";
             this.noteQuarter.Size = new System.Drawing.Size(23, 22);
             this.noteQuarter.ToolTipText = "Quarter Note";
@@ -567,7 +567,7 @@
             // noteQuarterT
             // 
             this.noteQuarterT.CheckOnClick = true;
-            this.noteQuarterT.Image = global::LAZYSHELL.Properties.Resources.noteQuarterTriplet;
+            this.noteQuarterT.Image = global::LazyShell.Properties.Resources.noteQuarterTriplet;
             this.noteQuarterT.Name = "noteQuarterT";
             this.noteQuarterT.Size = new System.Drawing.Size(23, 22);
             this.noteQuarterT.ToolTipText = "Triplet 8th Note (x3 = one half note)";
@@ -575,7 +575,7 @@
             // note8thD
             // 
             this.note8thD.CheckOnClick = true;
-            this.note8thD.Image = global::LAZYSHELL.Properties.Resources.note8thDotted;
+            this.note8thD.Image = global::LazyShell.Properties.Resources.note8thDotted;
             this.note8thD.Name = "note8thD";
             this.note8thD.Size = new System.Drawing.Size(23, 22);
             this.note8thD.ToolTipText = "Dotted 8th Note";
@@ -583,7 +583,7 @@
             // note8th
             // 
             this.note8th.CheckOnClick = true;
-            this.note8th.Image = global::LAZYSHELL.Properties.Resources.note8th;
+            this.note8th.Image = global::LazyShell.Properties.Resources.note8th;
             this.note8th.Name = "note8th";
             this.note8th.Size = new System.Drawing.Size(23, 22);
             this.note8th.ToolTipText = "8th note";
@@ -591,7 +591,7 @@
             // note8thT
             // 
             this.note8thT.CheckOnClick = true;
-            this.note8thT.Image = global::LAZYSHELL.Properties.Resources.note8thTriplet;
+            this.note8thT.Image = global::LazyShell.Properties.Resources.note8thTriplet;
             this.note8thT.Name = "note8thT";
             this.note8thT.Size = new System.Drawing.Size(23, 22);
             this.note8thT.ToolTipText = "Triplet 8th Note (x3 = one quarter note)";
@@ -599,7 +599,7 @@
             // note16th
             // 
             this.note16th.CheckOnClick = true;
-            this.note16th.Image = global::LAZYSHELL.Properties.Resources.note16th;
+            this.note16th.Image = global::LazyShell.Properties.Resources.note16th;
             this.note16th.Name = "note16th";
             this.note16th.Size = new System.Drawing.Size(23, 22);
             this.note16th.ToolTipText = "16th Note";
@@ -607,7 +607,7 @@
             // note16thT
             // 
             this.note16thT.CheckOnClick = true;
-            this.note16thT.Image = global::LAZYSHELL.Properties.Resources.note16thTriplet;
+            this.note16thT.Image = global::LazyShell.Properties.Resources.note16thTriplet;
             this.note16thT.Name = "note16thT";
             this.note16thT.Size = new System.Drawing.Size(23, 22);
             this.note16thT.ToolTipText = "Triplet 16th Note (x3 = one 8th note)";
@@ -615,7 +615,7 @@
             // note32nd
             // 
             this.note32nd.CheckOnClick = true;
-            this.note32nd.Image = global::LAZYSHELL.Properties.Resources.note32nd;
+            this.note32nd.Image = global::LazyShell.Properties.Resources.note32nd;
             this.note32nd.Name = "note32nd";
             this.note32nd.Size = new System.Drawing.Size(23, 22);
             this.note32nd.ToolTipText = "32nd Note";
@@ -623,7 +623,7 @@
             // note64th
             // 
             this.note64th.CheckOnClick = true;
-            this.note64th.Image = global::LAZYSHELL.Properties.Resources.note64th;
+            this.note64th.Image = global::LazyShell.Properties.Resources.note64th;
             this.note64th.Name = "note64th";
             this.note64th.Size = new System.Drawing.Size(23, 22);
             this.note64th.ToolTipText = "64th Note";
@@ -673,7 +673,7 @@
             // restWhole
             // 
             this.restWhole.CheckOnClick = true;
-            this.restWhole.Image = global::LAZYSHELL.Properties.Resources.restWhole;
+            this.restWhole.Image = global::LazyShell.Properties.Resources.restWhole;
             this.restWhole.Name = "restWhole";
             this.restWhole.Size = new System.Drawing.Size(23, 22);
             this.restWhole.ToolTipText = "Whole Rest";
@@ -681,7 +681,7 @@
             // restHalfD
             // 
             this.restHalfD.CheckOnClick = true;
-            this.restHalfD.Image = global::LAZYSHELL.Properties.Resources.restHalfDotted;
+            this.restHalfD.Image = global::LazyShell.Properties.Resources.restHalfDotted;
             this.restHalfD.Name = "restHalfD";
             this.restHalfD.Size = new System.Drawing.Size(23, 22);
             this.restHalfD.ToolTipText = "Dotted Half Rest";
@@ -689,7 +689,7 @@
             // restHalf
             // 
             this.restHalf.CheckOnClick = true;
-            this.restHalf.Image = global::LAZYSHELL.Properties.Resources.restHalf;
+            this.restHalf.Image = global::LazyShell.Properties.Resources.restHalf;
             this.restHalf.Name = "restHalf";
             this.restHalf.Size = new System.Drawing.Size(23, 22);
             this.restHalf.ToolTipText = "Half Rest";
@@ -697,7 +697,7 @@
             // restQuarterD
             // 
             this.restQuarterD.CheckOnClick = true;
-            this.restQuarterD.Image = global::LAZYSHELL.Properties.Resources.restDotted;
+            this.restQuarterD.Image = global::LazyShell.Properties.Resources.restDotted;
             this.restQuarterD.Name = "restQuarterD";
             this.restQuarterD.Size = new System.Drawing.Size(23, 22);
             this.restQuarterD.ToolTipText = "Dotted Quarter Rest";
@@ -705,7 +705,7 @@
             // restQuarter
             // 
             this.restQuarter.CheckOnClick = true;
-            this.restQuarter.Image = global::LAZYSHELL.Properties.Resources.restQuarter;
+            this.restQuarter.Image = global::LazyShell.Properties.Resources.restQuarter;
             this.restQuarter.Name = "restQuarter";
             this.restQuarter.Size = new System.Drawing.Size(23, 22);
             this.restQuarter.ToolTipText = "Quarter Rest";
@@ -713,7 +713,7 @@
             // restQuarterT
             // 
             this.restQuarterT.CheckOnClick = true;
-            this.restQuarterT.Image = global::LAZYSHELL.Properties.Resources.restQuarterTriplet;
+            this.restQuarterT.Image = global::LazyShell.Properties.Resources.restQuarterTriplet;
             this.restQuarterT.Name = "restQuarterT";
             this.restQuarterT.Size = new System.Drawing.Size(23, 22);
             this.restQuarterT.ToolTipText = "Triplet Quarter Rest (x3 = one half rest)";
@@ -721,7 +721,7 @@
             // rest8thD
             // 
             this.rest8thD.CheckOnClick = true;
-            this.rest8thD.Image = global::LAZYSHELL.Properties.Resources.rest8thDotted;
+            this.rest8thD.Image = global::LazyShell.Properties.Resources.rest8thDotted;
             this.rest8thD.Name = "rest8thD";
             this.rest8thD.Size = new System.Drawing.Size(23, 22);
             this.rest8thD.ToolTipText = "Dotted 8th Rest";
@@ -729,7 +729,7 @@
             // rest8th
             // 
             this.rest8th.CheckOnClick = true;
-            this.rest8th.Image = global::LAZYSHELL.Properties.Resources.rest8th;
+            this.rest8th.Image = global::LazyShell.Properties.Resources.rest8th;
             this.rest8th.Name = "rest8th";
             this.rest8th.Size = new System.Drawing.Size(23, 22);
             this.rest8th.ToolTipText = "8th Rest";
@@ -737,7 +737,7 @@
             // rest8thT
             // 
             this.rest8thT.CheckOnClick = true;
-            this.rest8thT.Image = global::LAZYSHELL.Properties.Resources.rest8thTriplet;
+            this.rest8thT.Image = global::LazyShell.Properties.Resources.rest8thTriplet;
             this.rest8thT.Name = "rest8thT";
             this.rest8thT.Size = new System.Drawing.Size(23, 22);
             this.rest8thT.ToolTipText = "Triplet 8th Rest (x3 = one quarter rest)";
@@ -745,7 +745,7 @@
             // rest16th
             // 
             this.rest16th.CheckOnClick = true;
-            this.rest16th.Image = global::LAZYSHELL.Properties.Resources.rest16th;
+            this.rest16th.Image = global::LazyShell.Properties.Resources.rest16th;
             this.rest16th.Name = "rest16th";
             this.rest16th.Size = new System.Drawing.Size(23, 22);
             this.rest16th.ToolTipText = "16th Rest";
@@ -753,7 +753,7 @@
             // rest16thT
             // 
             this.rest16thT.CheckOnClick = true;
-            this.rest16thT.Image = global::LAZYSHELL.Properties.Resources.rest16thTriplet;
+            this.rest16thT.Image = global::LazyShell.Properties.Resources.rest16thTriplet;
             this.rest16thT.Name = "rest16thT";
             this.rest16thT.Size = new System.Drawing.Size(23, 22);
             this.rest16thT.ToolTipText = "Triplet 16th Rest (x3 = one 8th rest)";
@@ -761,7 +761,7 @@
             // rest32nd
             // 
             this.rest32nd.CheckOnClick = true;
-            this.rest32nd.Image = global::LAZYSHELL.Properties.Resources.rest32nd;
+            this.rest32nd.Image = global::LazyShell.Properties.Resources.rest32nd;
             this.rest32nd.Name = "rest32nd";
             this.rest32nd.Size = new System.Drawing.Size(23, 22);
             this.rest32nd.ToolTipText = "32nd Rest";
@@ -769,7 +769,7 @@
             // rest64th
             // 
             this.rest64th.CheckOnClick = true;
-            this.rest64th.Image = global::LAZYSHELL.Properties.Resources.rest64th;
+            this.rest64th.Image = global::LazyShell.Properties.Resources.rest64th;
             this.rest64th.Name = "rest64th";
             this.rest64th.Size = new System.Drawing.Size(23, 22);
             this.rest64th.ToolTipText = "64th Rest";
@@ -836,7 +836,7 @@
             // draw
             // 
             this.draw.CheckOnClick = true;
-            this.draw.Image = global::LAZYSHELL.Properties.Resources.draw;
+            this.draw.Image = global::LazyShell.Properties.Resources.draw;
             this.draw.Name = "draw";
             this.draw.Size = new System.Drawing.Size(21, 20);
             this.draw.ToolTipText = "Draw Note (D)";
@@ -844,7 +844,7 @@
             // erase
             // 
             this.erase.CheckOnClick = true;
-            this.erase.Image = global::LAZYSHELL.Properties.Resources.erase;
+            this.erase.Image = global::LazyShell.Properties.Resources.erase;
             this.erase.Name = "erase";
             this.erase.Size = new System.Drawing.Size(21, 20);
             this.erase.ToolTipText = "Erase (E)";
@@ -852,7 +852,7 @@
             // select
             // 
             this.select.CheckOnClick = true;
-            this.select.Image = global::LAZYSHELL.Properties.Resources.select;
+            this.select.Image = global::LazyShell.Properties.Resources.select;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(21, 20);
             this.select.ToolTipText = "Select (S)";
@@ -864,14 +864,14 @@
             // 
             // cut
             // 
-            this.cut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.cut.Image = global::LazyShell.Properties.Resources.cut;
             this.cut.Name = "cut";
             this.cut.Size = new System.Drawing.Size(21, 20);
             this.cut.ToolTipText = "Cut (Ctrl+X)";
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(21, 20);
             this.copy.ToolTipText = "Copy (Ctrl+C)";
@@ -879,14 +879,14 @@
             // paste
             // 
             this.paste.CheckOnClick = true;
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(21, 20);
             this.paste.ToolTipText = "Paste (Ctrl+V)";
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(21, 20);
             this.delete.ToolTipText = "Delete (Del)";
@@ -899,7 +899,7 @@
             // undo
             // 
             this.undo.Enabled = false;
-            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.undo.Image = global::LazyShell.Properties.Resources.undo;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(21, 20);
             this.undo.ToolTipText = "Undo (Ctrl+Z)";
@@ -907,7 +907,7 @@
             // redo
             // 
             this.redo.Enabled = false;
-            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.redo.Image = global::LazyShell.Properties.Resources.redo;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(21, 20);
             this.redo.ToolTipText = "Redo (Ctrl+Y)";

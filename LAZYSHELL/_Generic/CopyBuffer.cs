@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// A buffer of copied 16x16 tiles.

@@ -5,10 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.Formations
+namespace LazyShell.Formations
 {
     public partial class FormationsForm : Controls.DockForm
     {
@@ -825,7 +825,7 @@ namespace LAZYSHELL.Formations
         }
         private void active_CheckedChanged(object sender, EventArgs e)
         {
-            this.active.Image = active.Checked ? Resources.apply : Resources.inactive;
+            this.active.Image = active.Checked ? global::LazyShell.Properties.Resources.apply : global::LazyShell.Properties.Resources.inactive;
             this.x.Enabled = active.Checked;
             this.y.Enabled = active.Checked;
             this.monsterName.Enabled = active.Checked;

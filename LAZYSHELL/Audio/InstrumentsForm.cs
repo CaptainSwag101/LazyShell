@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class InstrumentsForm : Controls.DockForm
     {

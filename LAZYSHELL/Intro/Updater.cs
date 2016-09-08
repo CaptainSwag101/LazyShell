@@ -2,62 +2,62 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
-    class GraphicTitleUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicTitleUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdateGraphics();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdateGraphics();
         }
     }
-    class GraphicPreGameUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicPreGameUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Intro.PreGameForm.UpdateGraphics();
+            LazyShell.Model.Program.Intro.PreGameForm.UpdateGraphics();
         }
     }
-    class GraphicSpriteUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicSpriteUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdateSpriteGraphics();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdateSpriteGraphics();
         }
     }
-    class PaletteTitleUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteTitleUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdatePalette();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdatePalette();
         }
     }
-    class PalettePreGameUpdater : LAZYSHELL.PaletteUpdater
+    class PalettePreGameUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Intro.PreGameForm.UpdatePalette();
+            LazyShell.Model.Program.Intro.PreGameForm.UpdatePalette();
         }
     }
-    class PaletteSpriteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteSpriteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdateSpritePalettes();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdateSpritePalettes();
         }
     }
-    class TilesetUpdater : LAZYSHELL.TilesetUpdater
+    class TilesetUpdater : LazyShell.TilesetUpdater
     {
         public override void UpdateTileset()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdateTileset();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdateTileset();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.Intro.TitleScreenForm.UpdateTile();
+            LazyShell.Model.Program.Intro.TitleScreenForm.UpdateTile();
         }
     }
 }

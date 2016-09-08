@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     partial class BattleScriptForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Monsters
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -52,7 +52,7 @@ namespace LAZYSHELL.Monsters
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStripGoto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.commandTree = new LAZYSHELL.Controls.NewTreeView();
+            this.commandTree = new LazyShell.Controls.NewTreeView();
             this.toolStrip2.SuspendLayout();
             this.contextMenuStripGoto.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +60,7 @@ namespace LAZYSHELL.Monsters
             // moveUp
             // 
             this.moveUp.AutoSize = false;
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(22, 22);
             this.moveUp.ToolTipText = "Move Command Up (Shift+Up)";
@@ -69,7 +69,7 @@ namespace LAZYSHELL.Monsters
             // moveDown
             // 
             this.moveDown.AutoSize = false;
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(22, 22);
             this.moveDown.ToolTipText = "Move Command Down (Shift+Down)";
@@ -78,7 +78,7 @@ namespace LAZYSHELL.Monsters
             // copy
             // 
             this.copy.AutoSize = false;
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(22, 22);
             this.copy.ToolTipText = "Copy Command (Ctrl+C)";
@@ -87,7 +87,7 @@ namespace LAZYSHELL.Monsters
             // paste
             // 
             this.paste.AutoSize = false;
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(22, 22);
             this.paste.ToolTipText = "Paste Command (Ctrl+V)";
@@ -96,7 +96,7 @@ namespace LAZYSHELL.Monsters
             // delete
             // 
             this.delete.AutoSize = false;
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(22, 22);
             this.delete.ToolTipText = "Delete Command (Del)";
@@ -105,7 +105,7 @@ namespace LAZYSHELL.Monsters
             // edit
             // 
             this.edit.AutoSize = false;
-            this.edit.Image = global::LAZYSHELL.Properties.Resources.edit;
+            this.edit.Image = global::LazyShell.Properties.Resources.edit;
             this.edit.Name = "edit";
             this.edit.Size = new System.Drawing.Size(22, 22);
             this.edit.ToolTipText = "Edit Command";
@@ -114,7 +114,7 @@ namespace LAZYSHELL.Monsters
             // expandAll
             // 
             this.expandAll.AutoSize = false;
-            this.expandAll.Image = global::LAZYSHELL.Properties.Resources.expandAll;
+            this.expandAll.Image = global::LazyShell.Properties.Resources.expandAll;
             this.expandAll.Name = "expandAll";
             this.expandAll.Size = new System.Drawing.Size(22, 22);
             this.expandAll.ToolTipText = "Expand All";
@@ -123,7 +123,7 @@ namespace LAZYSHELL.Monsters
             // collapseAll
             // 
             this.collapseAll.AutoSize = false;
-            this.collapseAll.Image = global::LAZYSHELL.Properties.Resources.collapseAll;
+            this.collapseAll.Image = global::LazyShell.Properties.Resources.collapseAll;
             this.collapseAll.Name = "collapseAll";
             this.collapseAll.Size = new System.Drawing.Size(22, 22);
             this.collapseAll.ToolTipText = "Collapse All";
@@ -198,7 +198,7 @@ namespace LAZYSHELL.Monsters
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.insert.Image = global::LazyShell.Properties.Resources.new_file;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "Insert new command";
@@ -216,7 +216,7 @@ namespace LAZYSHELL.Monsters
             // 
             // undo
             // 
-            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.undo.Image = global::LazyShell.Properties.Resources.undo;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(23, 22);
             this.undo.ToolTipText = "Undo (Ctrl+Z)";
@@ -224,7 +224,7 @@ namespace LAZYSHELL.Monsters
             // 
             // redo
             // 
-            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.redo.Image = global::LazyShell.Properties.Resources.redo;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(23, 22);
             this.redo.ToolTipText = "Redo (Ctrl+Y)";
@@ -244,7 +244,7 @@ namespace LAZYSHELL.Monsters
             // 
             // goToToolStripMenuItem
             // 
-            this.goToToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.jumpTo;
+            this.goToToolStripMenuItem.Image = global::LazyShell.Properties.Resources.jumpTo;
             this.goToToolStripMenuItem.Name = "goToToolStripMenuItem";
             this.goToToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 

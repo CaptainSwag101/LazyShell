@@ -5,10 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     public partial class OwnerForm : MapEditor
     {
@@ -399,7 +399,7 @@ namespace LAZYSHELL.Minecart
         {
             if (!this.Modified)
             {
-                LAZYSHELL.Properties.Settings.Default.Save();
+                LazyShell.Properties.Settings.Default.Save();
                 return;
             }
             var result = MessageBox.Show("Mine-cart areas have not been saved.\n\nWould you like to save changes?",

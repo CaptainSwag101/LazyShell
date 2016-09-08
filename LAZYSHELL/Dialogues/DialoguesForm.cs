@@ -8,9 +8,9 @@ using System.Text.RegularExpressions;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     public partial class DialoguesForm : Controls.DockForm
     {
@@ -489,7 +489,7 @@ namespace LAZYSHELL.Dialogues
             if (replaceAll)
             {
                 MessageBox.Show(j.ToString() + " occurrences were replaced.",
-                    "LAZYSHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "LazyShell", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 num_ValueChanged(null, null);
             }
         }

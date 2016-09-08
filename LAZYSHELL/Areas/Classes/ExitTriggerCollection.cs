@@ -4,7 +4,7 @@ using System.Collections;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     /// <summary>
     /// Class for managing an area's exit trigger collection.

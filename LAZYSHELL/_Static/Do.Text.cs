@@ -18,10 +18,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public static partial class Do
     {

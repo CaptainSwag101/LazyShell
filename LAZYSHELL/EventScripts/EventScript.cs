@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     [Serializable()]
     public class EventScript : Element

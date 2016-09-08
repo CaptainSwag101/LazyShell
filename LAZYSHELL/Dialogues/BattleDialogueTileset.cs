@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     [Serializable()]
     public class Tileset

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for decoding/encoding BRR sample data and converting to/from raw PCM WAV format.

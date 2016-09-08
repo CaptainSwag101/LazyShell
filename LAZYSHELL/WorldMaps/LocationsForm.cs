@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
     public partial class LocationsForm : Controls.DockForm
     {
@@ -549,11 +549,11 @@ namespace LAZYSHELL.WorldMaps
         }
         private void runEventEdit_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.EventScripts == null || !LAZYSHELL.Model.Program.EventScripts.Visible)
-                LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-            LAZYSHELL.Model.Program.EventScripts.Type = 0;
-            LAZYSHELL.Model.Program.EventScripts.Index = (int)runEvent.Value;
-            LAZYSHELL.Model.Program.EventScripts.BringToFront();
+            if (LazyShell.Model.Program.EventScripts == null || !LazyShell.Model.Program.EventScripts.Visible)
+                LazyShell.Model.Program.CreateEventScriptsWindow();
+            LazyShell.Model.Program.EventScripts.Type = 0;
+            LazyShell.Model.Program.EventScripts.Index = (int)runEvent.Value;
+            LazyShell.Model.Program.EventScripts.BringToFront();
         }
         private void goLocationB_SelectedIndexChanged(object sender, EventArgs e)
         {

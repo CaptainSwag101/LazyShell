@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     /// <summary>
     /// Class containing all of the data for drawing a map containing the regions used by one or more areas.

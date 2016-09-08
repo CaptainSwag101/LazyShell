@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Attacks
+namespace LazyShell.Attacks
 {
     public static class Model
     {
@@ -11,8 +11,8 @@ namespace LAZYSHELL.Attacks
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
         // Elements
         private static Attack[] attacks;

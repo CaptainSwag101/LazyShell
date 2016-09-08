@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
     [Serializable()]
     public class Animation : Element

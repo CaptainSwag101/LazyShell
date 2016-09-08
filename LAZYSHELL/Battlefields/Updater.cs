@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Battlefields.UpdateGraphics();
+            LazyShell.Model.Program.Battlefields.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Battlefields.UpdatePalette();
+            LazyShell.Model.Program.Battlefields.UpdatePalette();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.Battlefields.UpdateTile();
+            LazyShell.Model.Program.Battlefields.UpdateTile();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class PropertiesForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -41,8 +41,8 @@
             this.startEvent = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.mapName = new System.Windows.Forms.ComboBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mapNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spritePartition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prioritySetNum)).BeginInit();

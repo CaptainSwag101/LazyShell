@@ -10,9 +10,9 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     public partial class SequencesForm : Controls.DockForm
     {
@@ -261,7 +261,7 @@ namespace LAZYSHELL.Sprites
             for (int i = 0; i < sequence.Frames.Count; i++)
             {
                 PictureBox frame = new PictureBox();
-                frame.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+                frame.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
                 frame.BorderStyle = BorderStyle.None;
                 frame.Location = new Point(i * (this.bounds.Width + 4) + 4,
                     (this.frames.Height / 2) - (this.bounds.Height / 2));
@@ -372,7 +372,7 @@ namespace LAZYSHELL.Sprites
             }
             else
             {
-                e.Graphics.DrawImage(Resources.warning, 2, 2);
+                e.Graphics.DrawImage(global::LazyShell.Properties.Resources.warning, 2, 2);
             }
             if (this.indexes.Contains(index))
             {

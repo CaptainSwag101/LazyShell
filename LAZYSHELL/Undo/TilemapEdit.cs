@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL.Undo
+namespace LazyShell.Undo
 {
     class TilemapEdit : Edit
     {

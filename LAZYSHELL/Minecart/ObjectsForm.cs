@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     public partial class ObjectsForm : Controls.DockForm
     {

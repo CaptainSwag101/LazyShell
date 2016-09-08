@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Formations
+namespace LazyShell.Formations
 {
     partial class FormationsForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Formations
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -40,7 +40,7 @@ namespace LAZYSHELL.Formations
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.search = new System.Windows.Forms.ToolStripButton();
-            this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.startEvent = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
@@ -73,9 +73,9 @@ namespace LAZYSHELL.Formations
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.moveUp = new System.Windows.Forms.ToolStripButton();
             this.moveDown = new System.Windows.Forms.ToolStripButton();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.lineSeparator1 = new LAZYSHELL.LineSeparator();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.lineSeparator1 = new LazyShell.LineSeparator();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unknown)).BeginInit();
@@ -101,7 +101,7 @@ namespace LAZYSHELL.Formations
             // 
             // picture
             // 
-            this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.picture.Location = new System.Drawing.Point(0, -32);
             this.picture.Name = "picture";
             this.picture.Size = new System.Drawing.Size(512, 512);
@@ -233,7 +233,7 @@ namespace LAZYSHELL.Formations
             // 
             // search
             // 
-            this.search.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.search.Image = global::LazyShell.Properties.Resources.search;
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(23, 22);
             this.search.ToolTipText = "Search for formation";
@@ -313,7 +313,7 @@ namespace LAZYSHELL.Formations
             // 
             // saveImage
             // 
-            this.saveImage.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImage.Image = global::LazyShell.Properties.Resources.exportImage;
             this.saveImage.Name = "saveImage";
             this.saveImage.Size = new System.Drawing.Size(23, 22);
             this.saveImage.ToolTipText = "Save Formation Image...";
@@ -327,7 +327,7 @@ namespace LAZYSHELL.Formations
             // toggleAllies
             // 
             this.toggleAllies.CheckOnClick = true;
-            this.toggleAllies.Image = global::LAZYSHELL.Properties.Resources.marioicon;
+            this.toggleAllies.Image = global::LazyShell.Properties.Resources.marioicon;
             this.toggleAllies.Name = "toggleAllies";
             this.toggleAllies.Size = new System.Drawing.Size(23, 22);
             this.toggleAllies.ToolTipText = "Show/hide Allies";
@@ -336,7 +336,7 @@ namespace LAZYSHELL.Formations
             // isometricGrid
             // 
             this.isometricGrid.CheckOnClick = true;
-            this.isometricGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleOrthGrid;
+            this.isometricGrid.Image = global::LazyShell.Properties.Resources.buttonToggleOrthGrid;
             this.isometricGrid.Name = "isometricGrid";
             this.isometricGrid.Size = new System.Drawing.Size(23, 22);
             this.isometricGrid.ToolTipText = "Isometric Grid (G)";
@@ -345,7 +345,7 @@ namespace LAZYSHELL.Formations
             // snapIsometricLeft
             // 
             this.snapIsometricLeft.CheckOnClick = true;
-            this.snapIsometricLeft.Image = global::LAZYSHELL.Properties.Resources.snapIsometricLeft;
+            this.snapIsometricLeft.Image = global::LazyShell.Properties.Resources.snapIsometricLeft;
             this.snapIsometricLeft.Name = "snapIsometricLeft";
             this.snapIsometricLeft.Size = new System.Drawing.Size(23, 22);
             this.snapIsometricLeft.ToolTipText = "Snap to left";
@@ -353,7 +353,7 @@ namespace LAZYSHELL.Formations
             // snapIsometricRight
             // 
             this.snapIsometricRight.CheckOnClick = true;
-            this.snapIsometricRight.Image = global::LAZYSHELL.Properties.Resources.snapIsometricRight;
+            this.snapIsometricRight.Image = global::LazyShell.Properties.Resources.snapIsometricRight;
             this.snapIsometricRight.Name = "snapIsometricRight";
             this.snapIsometricRight.Size = new System.Drawing.Size(23, 22);
             this.snapIsometricRight.ToolTipText = "Snap to right";
@@ -366,7 +366,7 @@ namespace LAZYSHELL.Formations
             // select
             // 
             this.select.CheckOnClick = true;
-            this.select.Image = global::LAZYSHELL.Properties.Resources.select;
+            this.select.Image = global::LazyShell.Properties.Resources.select;
             this.select.Name = "select";
             this.select.Size = new System.Drawing.Size(23, 22);
             this.select.ToolTipText = "Select (S)";
@@ -379,7 +379,7 @@ namespace LAZYSHELL.Formations
             // 
             // undo
             // 
-            this.undo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.undo.Image = global::LazyShell.Properties.Resources.undo;
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(23, 22);
             this.undo.ToolTipText = "Undo (Ctrl+Z)";
@@ -387,7 +387,7 @@ namespace LAZYSHELL.Formations
             // 
             // redo
             // 
-            this.redo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.redo.Image = global::LazyShell.Properties.Resources.redo;
             this.redo.Name = "redo";
             this.redo.Size = new System.Drawing.Size(23, 22);
             this.redo.ToolTipText = "Redo (Ctrl+Y)";
@@ -546,7 +546,7 @@ namespace LAZYSHELL.Formations
             // active
             // 
             this.active.CheckOnClick = true;
-            this.active.Image = global::LAZYSHELL.Properties.Resources.inactive;
+            this.active.Image = global::LazyShell.Properties.Resources.inactive;
             this.active.Name = "active";
             this.active.Size = new System.Drawing.Size(23, 22);
             this.active.ToolTipText = "Active in formation";
@@ -555,7 +555,7 @@ namespace LAZYSHELL.Formations
             // hide
             // 
             this.hide.CheckOnClick = true;
-            this.hide.Image = global::LAZYSHELL.Properties.Resources.hideMonster;
+            this.hide.Image = global::LazyShell.Properties.Resources.hideMonster;
             this.hide.Name = "hide";
             this.hide.Size = new System.Drawing.Size(23, 22);
             this.hide.ToolTipText = "Hide at battle start";
@@ -568,7 +568,7 @@ namespace LAZYSHELL.Formations
             // 
             // moveUp
             // 
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(23, 22);
             this.moveUp.ToolTipText = "Move monster up";
@@ -577,7 +577,7 @@ namespace LAZYSHELL.Formations
             // moveDown
             // 
             this.moveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(23, 22);
@@ -596,7 +596,7 @@ namespace LAZYSHELL.Formations
             // 
             // lineSeparator1
             // 
-            this.lineSeparator1.LineDirection = LAZYSHELL.LineDirection.Vertical;
+            this.lineSeparator1.LineDirection = LazyShell.LineDirection.Vertical;
             this.lineSeparator1.Location = new System.Drawing.Point(269, 28);
             this.lineSeparator1.MaximumSize = new System.Drawing.Size(2, 2000);
             this.lineSeparator1.MinimumSize = new System.Drawing.Size(2, 0);

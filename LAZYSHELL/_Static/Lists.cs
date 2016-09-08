@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for accessing the lists used by the application's list controls.

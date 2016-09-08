@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for creating and managing a set of palettes from the SNES palette binary data in a buffer.

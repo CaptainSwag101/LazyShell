@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     /// <summary>
     /// Provides methods for parsing an SPC script command to a descriptive text string.

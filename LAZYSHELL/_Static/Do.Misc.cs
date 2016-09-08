@@ -17,10 +17,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Provides a number of functions for drawing and modifying images and writing text.
@@ -279,7 +279,7 @@ namespace LAZYSHELL
                     results += "Mismatched index: " + i + "\r\n";
             }
             if (results == "")
-                MessageBox.Show("Found no mismatched indexes.", "LAZYSHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Found no mismatched indexes.", "LazyShell", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 NewMessage.Show("MISMATCHED INDEXES", "Found the following mismatched indexes", results);
         }

@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public class AreaTilemap : Tilemap
     {

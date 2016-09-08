@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Audio
+﻿namespace LazyShell.Audio
 {
     partial class InstrumentsForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -43,7 +43,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.percussiveName = new System.Windows.Forms.ComboBox();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.percussiveBalance = new System.Windows.Forms.NumericUpDown();
@@ -53,9 +53,9 @@
             this.percussivePitchIndex = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
-            this.lineSeparator1 = new LAZYSHELL.LineSeparator();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
+            this.lineSeparator1 = new LazyShell.LineSeparator();
             this.panelReverberation = new System.Windows.Forms.Panel();
             this.panelInstruments = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.delayTime)).BeginInit();
@@ -180,14 +180,14 @@
             // 
             // newPercussive
             // 
-            this.newPercussive.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newPercussive.Image = global::LazyShell.Properties.Resources.new_file;
             this.newPercussive.Name = "newPercussive";
             this.newPercussive.Size = new System.Drawing.Size(23, 22);
             this.newPercussive.ToolTipText = "New";
             // 
             // deletePercussive
             // 
-            this.deletePercussive.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deletePercussive.Image = global::LazyShell.Properties.Resources.delete;
             this.deletePercussive.Name = "deletePercussive";
             this.deletePercussive.Size = new System.Drawing.Size(23, 22);
             this.deletePercussive.ToolTipText = "Delete";
@@ -357,7 +357,7 @@
             // 
             this.lineSeparator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lineSeparator1.LineDirection = LAZYSHELL.LineDirection.Vertical;
+            this.lineSeparator1.LineDirection = LazyShell.LineDirection.Vertical;
             this.lineSeparator1.Location = new System.Drawing.Point(213, 6);
             this.lineSeparator1.MaximumSize = new System.Drawing.Size(2, 2000);
             this.lineSeparator1.MinimumSize = new System.Drawing.Size(2, 0);

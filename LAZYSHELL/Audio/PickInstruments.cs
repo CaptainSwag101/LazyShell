@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class PickInstruments : Controls.NewForm
     {

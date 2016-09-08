@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
+using LazyShell.Areas;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class Overlay
     {
@@ -143,8 +143,8 @@ namespace LAZYSHELL
         // Exit triggers
         private void CreateExitTriggerImages()
         {
-            Bitmap exitFieldBase = Resources.fieldBase;
-            Bitmap exitFieldBlock = Resources.fieldBlock;
+            Bitmap exitFieldBase = global::LazyShell.Properties.Resources.fieldBase;
+            Bitmap exitFieldBlock = global::LazyShell.Properties.Resources.fieldBlock;
             int[] exitFieldBasePixels = Do.ImageToPixels(exitFieldBase);
             int[] exitFieldBlockPixels = Do.ImageToPixels(exitFieldBlock);
             Do.Colorize(exitFieldBasePixels, 60.0, 1.0);
@@ -306,8 +306,8 @@ namespace LAZYSHELL
         // Event triggers
         private void CreateEventTriggerImages()
         {
-            Bitmap eventFieldBase = Resources.fieldBase;
-            Bitmap eventFieldBlock = Resources.fieldBlock;
+            Bitmap eventFieldBase = global::LazyShell.Properties.Resources.fieldBase;
+            Bitmap eventFieldBlock = global::LazyShell.Properties.Resources.fieldBlock;
             int[] eventFieldBasePixels = Do.ImageToPixels(eventFieldBase);
             int[] eventFieldBlockPixels = Do.ImageToPixels(eventFieldBlock);
             Do.Colorize(eventFieldBasePixels, 120.0, 1.0);
@@ -477,7 +477,7 @@ namespace LAZYSHELL
         // NPC objects
         private void CreateNPCObjectImages()
         {
-            Bitmap npcFieldBase = Resources.fieldBase;
+            Bitmap npcFieldBase = global::LazyShell.Properties.Resources.fieldBase;
             int[] npcFieldBasePixels = Do.ImageToPixels(npcFieldBase);
             Do.Colorize(npcFieldBasePixels, 0.0, 1.0);
             Do.Gradient(npcFieldBasePixels, 32, 16, 128.0, -128.0, true);
@@ -651,7 +651,7 @@ namespace LAZYSHELL
         // Overlaps
         private void CreateOverlapObjectImages()
         {
-            Bitmap overlapFieldBase = global::LAZYSHELL.Properties.Resources.fieldBase;
+            Bitmap overlapFieldBase = global::LazyShell.Properties.Resources.fieldBase;
             int[] overlapFieldBasePixels = Do.ImageToPixels(overlapFieldBase);
             Do.Colorize(overlapFieldBasePixels, 240.0, 1.0);
             Do.Gradient(overlapFieldBasePixels, 32, 16, 128.0, -128.0, true);

@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Magic
+namespace LazyShell.Magic
 {
     public partial class OwnerForm : Controls.NewForm
     {

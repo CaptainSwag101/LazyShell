@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     partial class ScreensForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Minecart
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -27,18 +27,18 @@ namespace LAZYSHELL.Minecart
         private void InitializeComponent()
         {
             this.railColorKey = new System.Windows.Forms.Label();
-            this.panelScreens = new LAZYSHELL.Controls.NewPanel();
+            this.panelScreens = new LazyShell.Controls.NewPanel();
             this.screensPanel = new System.Windows.Forms.Panel();
             this.picture = new System.Windows.Forms.PictureBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toggleObjects = new LAZYSHELL.Controls.NewToolStripButton();
+            this.toggleObjects = new LazyShell.Controls.NewToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.screenWidth = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.screenWidth = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.screenL1Number = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.screenL1Number = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.screenL2Number = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.screenL2Number = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.newScreen = new System.Windows.Forms.ToolStripButton();
             this.deleteScreen = new System.Windows.Forms.ToolStripButton();
@@ -88,7 +88,7 @@ namespace LAZYSHELL.Minecart
             // 
             // picture
             // 
-            this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.picture.Location = new System.Drawing.Point(0, 0);
             this.picture.Name = "picture";
             this.picture.Size = new System.Drawing.Size(256, 256);
@@ -128,7 +128,7 @@ namespace LAZYSHELL.Minecart
             // 
             this.toggleObjects.CheckOnClick = true;
             this.toggleObjects.Form = null;
-            this.toggleObjects.Image = global::LAZYSHELL.Properties.Resources.buttonSSObjects;
+            this.toggleObjects.Image = global::LazyShell.Properties.Resources.buttonSSObjects;
             this.toggleObjects.Name = "toggleObjects";
             this.toggleObjects.Size = new System.Drawing.Size(23, 22);
             this.toggleObjects.ToolTipText = "Show/hide objects";
@@ -257,7 +257,7 @@ namespace LAZYSHELL.Minecart
             // 
             // newScreen
             // 
-            this.newScreen.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.newScreen.Image = global::LazyShell.Properties.Resources.new_file;
             this.newScreen.Name = "newScreen";
             this.newScreen.Size = new System.Drawing.Size(23, 22);
             this.newScreen.ToolTipText = "New Screen";
@@ -265,7 +265,7 @@ namespace LAZYSHELL.Minecart
             // 
             // deleteScreen
             // 
-            this.deleteScreen.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deleteScreen.Image = global::LazyShell.Properties.Resources.delete;
             this.deleteScreen.Name = "deleteScreen";
             this.deleteScreen.Size = new System.Drawing.Size(23, 22);
             this.deleteScreen.ToolTipText = "Delete Screen";
@@ -273,7 +273,7 @@ namespace LAZYSHELL.Minecart
             // 
             // duplicateScreen
             // 
-            this.duplicateScreen.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicateScreen.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicateScreen.Name = "duplicateScreen";
             this.duplicateScreen.Size = new System.Drawing.Size(23, 22);
             this.duplicateScreen.ToolTipText = "Duplicate Screen";
@@ -281,7 +281,7 @@ namespace LAZYSHELL.Minecart
             // 
             // moveScreenBack
             // 
-            this.moveScreenBack.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.moveScreenBack.Image = global::LazyShell.Properties.Resources.back;
             this.moveScreenBack.Name = "moveScreenBack";
             this.moveScreenBack.Size = new System.Drawing.Size(23, 22);
             this.moveScreenBack.ToolTipText = "Move Screen Back";
@@ -289,7 +289,7 @@ namespace LAZYSHELL.Minecart
             // 
             // moveScreenFoward
             // 
-            this.moveScreenFoward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.moveScreenFoward.Image = global::LazyShell.Properties.Resources.foward;
             this.moveScreenFoward.Name = "moveScreenFoward";
             this.moveScreenFoward.Size = new System.Drawing.Size(23, 22);
             this.moveScreenFoward.ToolTipText = "Move Screen Forward";

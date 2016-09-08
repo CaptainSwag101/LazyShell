@@ -9,9 +9,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class ChunksForm : Controls.NewForm
     {

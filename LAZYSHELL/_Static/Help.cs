@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Class for converting an XML help file to a raw text file.
@@ -15,13 +15,13 @@ namespace LAZYSHELL
         /// <summary>
         /// Creates a help or readme document and opens the document for viewing.
         /// </summary>
-        /// <param name="LAZYSHELL_xml">The source XML data to use for the output.</param>
+        /// <param name="LazyShell_xml">The source XML data to use for the output.</param>
         /// <param name="readme">Indicates whether to output a readme.txt file. 
-        /// If set to false, a LAZYSHELL_txt.txt file based on the help document is created.</param>
-        public static void CreateHelp(XmlDocument LAZYSHELL_xml, bool readme)
+        /// If set to false, a LazyShell_txt.txt file based on the help document is created.</param>
+        public static void CreateHelp(XmlDocument LazyShell_xml, bool readme)
         {
             var writer = new StringWriter();
-            var main = LAZYSHELL_xml.SelectSingleNode("LAZYSHELL");
+            var main = LazyShell_xml.SelectSingleNode("LazyShell");
             writer.WriteLine(main.Attributes["title"].Value);
             //
             foreach (XmlNode node in main.ChildNodes)
@@ -137,8 +137,8 @@ namespace LAZYSHELL
             {
                 if (!Directory.Exists("help"))
                     Directory.CreateDirectory("help");
-                File.WriteAllText("help//LAZYSHELL_txt.txt", writer.ToString(), Encoding.UTF8);
-                Process.Start("help\\LAZYSHELL_txt.txt");
+                File.WriteAllText("help//LazyShell_txt.txt", writer.ToString(), Encoding.UTF8);
+                Process.Start("help\\LazyShell_txt.txt");
             }
         }
         /// <summary>

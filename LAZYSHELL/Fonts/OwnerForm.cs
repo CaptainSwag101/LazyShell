@@ -9,10 +9,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.Fonts
+namespace LazyShell.Fonts
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -39,8 +39,8 @@ namespace LAZYSHELL.Fonts
         public NewFontTable NewFontTable { get; set; }
         private Dialogues.OwnerForm dialoguesForm
         {
-            get { return LAZYSHELL.Model.Program.Dialogues; }
-            set { LAZYSHELL.Model.Program.Dialogues = value; }
+            get { return LazyShell.Model.Program.Dialogues; }
+            set { LazyShell.Model.Program.Dialogues = value; }
         }
         private GraphicEditor numeralGraphicEditor;
         private PaletteEditor numeralPaletteEditor;
@@ -667,7 +667,7 @@ namespace LAZYSHELL.Fonts
         }
         private void toggleKeystrokes_CheckedChanged(object sender, EventArgs e)
         {
-            if (toggleKeystrokes.Checked && LAZYSHELL.Model.CheckLoadedProject())
+            if (toggleKeystrokes.Checked && LazyShell.Model.CheckLoadedProject())
             {
                 picture.Visible = false;
                 fontTable.Visible = true;
@@ -730,9 +730,9 @@ namespace LAZYSHELL.Fonts
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             switch (FontType)
             {
-                case FontType.Menu: saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - keystrokesMenu.txt"; break;
-                case FontType.Dialogue: saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - keystrokesDialogue.txt"; break;
-                case FontType.Description: saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - keystrokesDescriptions.txt"; break;
+                case FontType.Menu: saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - keystrokesMenu.txt"; break;
+                case FontType.Dialogue: saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - keystrokesDialogue.txt"; break;
+                case FontType.Description: saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - keystrokesDescriptions.txt"; break;
             }
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;

@@ -1,5 +1,5 @@
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     partial class MainForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -61,6 +61,7 @@ namespace LAZYSHELL
 			this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.webBrowser1 = new System.Windows.Forms.WebBrowser();
 			this.toolStrip4 = new System.Windows.Forms.ToolStrip();
 			this.recentFiles = new System.Windows.Forms.ToolStripDropDownButton();
 			this.refreshROM = new System.Windows.Forms.ToolStripButton();
@@ -88,7 +89,6 @@ namespace LAZYSHELL
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.help = new System.Windows.Forms.ToolStripButton();
 			this.info = new System.Windows.Forms.ToolStripButton();
-			this.webBrowser1 = new System.Windows.Forms.WebBrowser();
 			this.panel4.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -111,7 +111,7 @@ namespace LAZYSHELL
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel4.Location = new System.Drawing.Point(0, 25);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(542, 82);
+			this.panel4.Size = new System.Drawing.Size(542, 83);
 			this.panel4.TabIndex = 1;
 			// 
 			// panel1
@@ -120,22 +120,22 @@ namespace LAZYSHELL
 			this.panel1.Controls.Add(this.romInfo);
 			this.panel1.Controls.Add(this.label1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel1.Location = new System.Drawing.Point(0, 25);
+			this.panel1.Location = new System.Drawing.Point(0, 26);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(542, 57);
 			this.panel1.TabIndex = 1;
 			// 
 			// romInfo
 			// 
-			this.romInfo.BackColor = System.Drawing.SystemColors.Window;
-			this.romInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.romInfo.BackColor = System.Drawing.SystemColors.Control;
+			this.romInfo.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.romInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.romInfo.Location = new System.Drawing.Point(106, 0);
+			this.romInfo.Location = new System.Drawing.Point(96, 0);
 			this.romInfo.Name = "romInfo";
 			this.romInfo.ReadOnly = true;
 			this.romInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.romInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-			this.romInfo.Size = new System.Drawing.Size(436, 57);
+			this.romInfo.Size = new System.Drawing.Size(446, 57);
 			this.romInfo.TabIndex = 1;
 			this.romInfo.Text = "";
 			this.romInfo.WordWrap = false;
@@ -146,13 +146,14 @@ namespace LAZYSHELL
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Padding = new System.Windows.Forms.Padding(2);
-			this.label1.Size = new System.Drawing.Size(106, 57);
+			this.label1.Size = new System.Drawing.Size(96, 57);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Rom Name\nHeader\nChecksum\nGamecode";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// toolStrip1
 			// 
+			this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
 			this.toolStrip1.CanOverflow = false;
 			this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,7 +161,7 @@ namespace LAZYSHELL
             this.loadRomTextBox});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(542, 25);
+			this.toolStrip1.Size = new System.Drawing.Size(542, 26);
 			this.toolStrip1.Stretch = true;
 			this.toolStrip1.TabIndex = 0;
 			this.toolStrip1.SizeChanged += new System.EventHandler(this.toolStrip1_SizeChanged);
@@ -168,7 +169,7 @@ namespace LAZYSHELL
 			// loadRom
 			// 
 			this.loadRom.AutoSize = false;
-			this.loadRom.Image = global::LAZYSHELL.Properties.Resources.cartridge;
+			this.loadRom.Image = global::LazyShell.Properties.Resources.cartridge;
 			this.loadRom.Name = "loadRom";
 			this.loadRom.Size = new System.Drawing.Size(96, 22);
 			this.loadRom.Text = "Load ROM...";
@@ -178,6 +179,7 @@ namespace LAZYSHELL
 			// 
 			this.loadRomTextBox.AutoSize = false;
 			this.loadRomTextBox.BackColor = System.Drawing.SystemColors.Window;
+			this.loadRomTextBox.Margin = new System.Windows.Forms.Padding(1, 0, 1, 1);
 			this.loadRomTextBox.Name = "loadRomTextBox";
 			this.loadRomTextBox.ReadOnly = true;
 			this.loadRomTextBox.Size = new System.Drawing.Size(434, 25);
@@ -212,16 +214,17 @@ namespace LAZYSHELL
             this.openProject,
             this.openPatches});
 			this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-			this.toolStrip2.Location = new System.Drawing.Point(0, 107);
+			this.toolStrip2.Location = new System.Drawing.Point(0, 108);
 			this.toolStrip2.Name = "toolStrip2";
 			this.toolStrip2.Size = new System.Drawing.Size(542, 23);
 			this.toolStrip2.TabIndex = 2;
 			// 
 			// openAnimations
 			// 
-			this.openAnimations.Image = global::LAZYSHELL.Properties.Resources.mainAnimations;
+			this.openAnimations.Image = global::LazyShell.Properties.Resources.mainAnimations;
 			this.openAnimations.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openAnimations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.openAnimations.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
 			this.openAnimations.Name = "openAnimations";
 			this.openAnimations.Size = new System.Drawing.Size(23, 20);
 			this.openAnimations.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -230,7 +233,7 @@ namespace LAZYSHELL
 			// 
 			// openAreas
 			// 
-			this.openAreas.Image = global::LAZYSHELL.Properties.Resources.mainLevels;
+			this.openAreas.Image = global::LazyShell.Properties.Resources.mainLevels;
 			this.openAreas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openAreas.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openAreas.Name = "openAreas";
@@ -241,7 +244,7 @@ namespace LAZYSHELL
 			// 
 			// openAttacks
 			// 
-			this.openAttacks.Image = global::LAZYSHELL.Properties.Resources.openAttacks;
+			this.openAttacks.Image = global::LazyShell.Properties.Resources.openAttacks;
 			this.openAttacks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openAttacks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openAttacks.Name = "openAttacks";
@@ -252,7 +255,7 @@ namespace LAZYSHELL
 			// 
 			// openAudio
 			// 
-			this.openAudio.Image = global::LAZYSHELL.Properties.Resources.mainAudio;
+			this.openAudio.Image = global::LazyShell.Properties.Resources.mainAudio;
 			this.openAudio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openAudio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openAudio.Name = "openAudio";
@@ -263,7 +266,7 @@ namespace LAZYSHELL
 			// 
 			// openBattlefields
 			// 
-			this.openBattlefields.Image = global::LAZYSHELL.Properties.Resources.mainBattlefields;
+			this.openBattlefields.Image = global::LazyShell.Properties.Resources.mainBattlefields;
 			this.openBattlefields.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openBattlefields.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openBattlefields.Name = "openBattlefields";
@@ -274,7 +277,7 @@ namespace LAZYSHELL
 			// 
 			// openDialogues
 			// 
-			this.openDialogues.Image = global::LAZYSHELL.Properties.Resources.mainDialogues;
+			this.openDialogues.Image = global::LazyShell.Properties.Resources.mainDialogues;
 			this.openDialogues.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openDialogues.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openDialogues.Name = "openDialogues";
@@ -285,7 +288,7 @@ namespace LAZYSHELL
 			// 
 			// openEffects
 			// 
-			this.openEffects.Image = global::LAZYSHELL.Properties.Resources.mainEffects;
+			this.openEffects.Image = global::LazyShell.Properties.Resources.mainEffects;
 			this.openEffects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openEffects.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openEffects.Name = "openEffects";
@@ -296,7 +299,7 @@ namespace LAZYSHELL
 			// 
 			// openEventScripts
 			// 
-			this.openEventScripts.Image = global::LAZYSHELL.Properties.Resources.mainEventScripts;
+			this.openEventScripts.Image = global::LazyShell.Properties.Resources.mainEventScripts;
 			this.openEventScripts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openEventScripts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openEventScripts.Name = "openEventScripts";
@@ -307,7 +310,7 @@ namespace LAZYSHELL
 			// 
 			// openFonts
 			// 
-			this.openFonts.Image = global::LAZYSHELL.Properties.Resources.openFonts;
+			this.openFonts.Image = global::LazyShell.Properties.Resources.openFonts;
 			this.openFonts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openFonts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openFonts.Name = "openFonts";
@@ -318,7 +321,7 @@ namespace LAZYSHELL
 			// 
 			// openFormations
 			// 
-			this.openFormations.Image = global::LAZYSHELL.Properties.Resources.mainFormations;
+			this.openFormations.Image = global::LazyShell.Properties.Resources.mainFormations;
 			this.openFormations.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openFormations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openFormations.Name = "openFormations";
@@ -329,7 +332,7 @@ namespace LAZYSHELL
 			// 
 			// openMainTitle
 			// 
-			this.openMainTitle.Image = global::LAZYSHELL.Properties.Resources.mainMainTitle;
+			this.openMainTitle.Image = global::LazyShell.Properties.Resources.mainMainTitle;
 			this.openMainTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openMainTitle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openMainTitle.Name = "openMainTitle";
@@ -340,7 +343,7 @@ namespace LAZYSHELL
 			// 
 			// openItems
 			// 
-			this.openItems.Image = global::LAZYSHELL.Properties.Resources.mainItems;
+			this.openItems.Image = global::LazyShell.Properties.Resources.mainItems;
 			this.openItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openItems.Name = "openItems";
@@ -351,7 +354,7 @@ namespace LAZYSHELL
 			// 
 			// openLevelUps
 			// 
-			this.openLevelUps.Image = global::LAZYSHELL.Properties.Resources.openLevelUps;
+			this.openLevelUps.Image = global::LazyShell.Properties.Resources.openLevelUps;
 			this.openLevelUps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openLevelUps.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openLevelUps.Name = "openLevelUps";
@@ -362,7 +365,7 @@ namespace LAZYSHELL
 			// 
 			// openMagic
 			// 
-			this.openMagic.Image = global::LAZYSHELL.Properties.Resources.mainAttacks;
+			this.openMagic.Image = global::LazyShell.Properties.Resources.mainAttacks;
 			this.openMagic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openMagic.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openMagic.Name = "openMagic";
@@ -372,7 +375,7 @@ namespace LAZYSHELL
 			// 
 			// openMenus
 			// 
-			this.openMenus.Image = global::LAZYSHELL.Properties.Resources.mainMenus;
+			this.openMenus.Image = global::LazyShell.Properties.Resources.mainMenus;
 			this.openMenus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openMenus.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openMenus.Name = "openMenus";
@@ -383,7 +386,7 @@ namespace LAZYSHELL
 			// 
 			// openMiniGames
 			// 
-			this.openMiniGames.Image = global::LAZYSHELL.Properties.Resources.mainMiniGames;
+			this.openMiniGames.Image = global::LazyShell.Properties.Resources.mainMiniGames;
 			this.openMiniGames.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openMiniGames.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openMiniGames.Name = "openMiniGames";
@@ -394,7 +397,7 @@ namespace LAZYSHELL
 			// 
 			// openMonsters
 			// 
-			this.openMonsters.Image = global::LAZYSHELL.Properties.Resources.mainMonsters;
+			this.openMonsters.Image = global::LazyShell.Properties.Resources.mainMonsters;
 			this.openMonsters.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openMonsters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openMonsters.Name = "openMonsters";
@@ -405,7 +408,7 @@ namespace LAZYSHELL
 			// 
 			// openNewGame
 			// 
-			this.openNewGame.Image = global::LAZYSHELL.Properties.Resources.openNewGame;
+			this.openNewGame.Image = global::LazyShell.Properties.Resources.openNewGame;
 			this.openNewGame.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openNewGame.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openNewGame.Name = "openNewGame";
@@ -415,7 +418,7 @@ namespace LAZYSHELL
 			// 
 			// openShops
 			// 
-			this.openShops.Image = global::LAZYSHELL.Properties.Resources.openShops;
+			this.openShops.Image = global::LazyShell.Properties.Resources.openShops;
 			this.openShops.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openShops.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openShops.Name = "openShops";
@@ -425,7 +428,7 @@ namespace LAZYSHELL
 			// 
 			// openSprites
 			// 
-			this.openSprites.Image = global::LAZYSHELL.Properties.Resources.mainSprites;
+			this.openSprites.Image = global::LazyShell.Properties.Resources.mainSprites;
 			this.openSprites.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openSprites.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openSprites.Name = "openSprites";
@@ -436,7 +439,7 @@ namespace LAZYSHELL
 			// 
 			// openWorldMaps
 			// 
-			this.openWorldMaps.Image = global::LAZYSHELL.Properties.Resources.mainWorldMaps;
+			this.openWorldMaps.Image = global::LazyShell.Properties.Resources.mainWorldMaps;
 			this.openWorldMaps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openWorldMaps.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.openWorldMaps.Name = "openWorldMaps";
@@ -447,7 +450,7 @@ namespace LAZYSHELL
 			// 
 			// openProject
 			// 
-			this.openProject.Image = global::LAZYSHELL.Properties.Resources.mainNotes;
+			this.openProject.Image = global::LazyShell.Properties.Resources.mainNotes;
 			this.openProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openProject.Name = "openProject";
 			this.openProject.Size = new System.Drawing.Size(23, 20);
@@ -457,7 +460,7 @@ namespace LAZYSHELL
 			// 
 			// openPatches
 			// 
-			this.openPatches.Image = global::LAZYSHELL.Properties.Resources.mainPatches;
+			this.openPatches.Image = global::LazyShell.Properties.Resources.mainPatches;
 			this.openPatches.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openPatches.Name = "openPatches";
 			this.openPatches.Size = new System.Drawing.Size(23, 20);
@@ -482,10 +485,19 @@ namespace LAZYSHELL
 			this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
 			this.panel2.Controls.Add(this.webBrowser1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 130);
+			this.panel2.Location = new System.Drawing.Point(0, 131);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(542, 443);
+			this.panel2.Size = new System.Drawing.Size(542, 442);
 			this.panel2.TabIndex = 4;
+			// 
+			// webBrowser1
+			// 
+			this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+			this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+			this.webBrowser1.Name = "webBrowser1";
+			this.webBrowser1.Size = new System.Drawing.Size(542, 442);
+			this.webBrowser1.TabIndex = 0;
 			// 
 			// toolStrip4
 			// 
@@ -524,7 +536,8 @@ namespace LAZYSHELL
 			// 
 			// recentFiles
 			// 
-			this.recentFiles.Image = global::LAZYSHELL.Properties.Resources.recentFiles;
+			this.recentFiles.Image = global::LazyShell.Properties.Resources.recentFiles;
+			this.recentFiles.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
 			this.recentFiles.Name = "recentFiles";
 			this.recentFiles.Size = new System.Drawing.Size(29, 22);
 			this.recentFiles.ToolTipText = "Recent ROM Files";
@@ -532,7 +545,7 @@ namespace LAZYSHELL
 			// refreshROM
 			// 
 			this.refreshROM.Enabled = false;
-			this.refreshROM.Image = global::LAZYSHELL.Properties.Resources.cartridgeReload;
+			this.refreshROM.Image = global::LazyShell.Properties.Resources.cartridgeReload;
 			this.refreshROM.Name = "refreshROM";
 			this.refreshROM.Size = new System.Drawing.Size(23, 22);
 			this.refreshROM.ToolTipText = "Reload ROM";
@@ -541,7 +554,7 @@ namespace LAZYSHELL
 			// closeROM
 			// 
 			this.closeROM.Enabled = false;
-			this.closeROM.Image = global::LAZYSHELL.Properties.Resources.cartridgeClose;
+			this.closeROM.Image = global::LazyShell.Properties.Resources.cartridgeClose;
 			this.closeROM.Name = "closeROM";
 			this.closeROM.Size = new System.Drawing.Size(23, 22);
 			this.closeROM.ToolTipText = "Close ROM";
@@ -555,7 +568,7 @@ namespace LAZYSHELL
 			// saveROM
 			// 
 			this.saveROM.Enabled = false;
-			this.saveROM.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.saveROM.Image = global::LazyShell.Properties.Resources.save;
 			this.saveROM.Name = "saveROM";
 			this.saveROM.Size = new System.Drawing.Size(23, 22);
 			this.saveROM.ToolTipText = "Save ROM";
@@ -564,7 +577,7 @@ namespace LAZYSHELL
 			// saveROMAs
 			// 
 			this.saveROMAs.Enabled = false;
-			this.saveROMAs.Image = global::LAZYSHELL.Properties.Resources.save_as;
+			this.saveROMAs.Image = global::LazyShell.Properties.Resources.save_as;
 			this.saveROMAs.Name = "saveROMAs";
 			this.saveROMAs.Size = new System.Drawing.Size(23, 22);
 			this.saveROMAs.ToolTipText = "Save ROM As";
@@ -577,7 +590,7 @@ namespace LAZYSHELL
 			// 
 			// openSettings
 			// 
-			this.openSettings.Image = global::LAZYSHELL.Properties.Resources.settings;
+			this.openSettings.Image = global::LazyShell.Properties.Resources.settings;
 			this.openSettings.Name = "openSettings";
 			this.openSettings.Size = new System.Drawing.Size(23, 22);
 			this.openSettings.ToolTipText = "Preferences";
@@ -586,7 +599,7 @@ namespace LAZYSHELL
 			// restoreElements
 			// 
 			this.restoreElements.Enabled = false;
-			this.restoreElements.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+			this.restoreElements.Image = global::LazyShell.Properties.Resources.importBinary;
 			this.restoreElements.Name = "restoreElements";
 			this.restoreElements.Size = new System.Drawing.Size(23, 22);
 			this.restoreElements.ToolTipText = "Import elements from another ROM";
@@ -599,7 +612,7 @@ namespace LAZYSHELL
 			// 
 			// openHistoryLog
 			// 
-			this.openHistoryLog.Image = global::LAZYSHELL.Properties.Resources.history;
+			this.openHistoryLog.Image = global::LazyShell.Properties.Resources.history;
 			this.openHistoryLog.Name = "openHistoryLog";
 			this.openHistoryLog.Size = new System.Drawing.Size(23, 22);
 			this.openHistoryLog.ToolTipText = "Open history log";
@@ -611,7 +624,7 @@ namespace LAZYSHELL
 			this.showROMInfo.CheckOnClick = true;
 			this.showROMInfo.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.showROMInfo.Enabled = false;
-			this.showROMInfo.Image = global::LAZYSHELL.Properties.Resources.romInfo;
+			this.showROMInfo.Image = global::LazyShell.Properties.Resources.romInfo;
 			this.showROMInfo.Name = "showROMInfo";
 			this.showROMInfo.Size = new System.Drawing.Size(23, 22);
 			this.showROMInfo.ToolTipText = "Show ROM Info";
@@ -620,7 +633,7 @@ namespace LAZYSHELL
 			// openHexEditor
 			// 
 			this.openHexEditor.Enabled = false;
-			this.openHexEditor.Image = global::LAZYSHELL.Properties.Resources.hexEditor;
+			this.openHexEditor.Image = global::LazyShell.Properties.Resources.hexEditor;
 			this.openHexEditor.Name = "openHexEditor";
 			this.openHexEditor.Size = new System.Drawing.Size(23, 22);
 			this.openHexEditor.ToolTipText = "Open Hex Editor";
@@ -634,7 +647,7 @@ namespace LAZYSHELL
 			// openAll
 			// 
 			this.openAll.Enabled = false;
-			this.openAll.Image = global::LAZYSHELL.Properties.Resources.openAll;
+			this.openAll.Image = global::LazyShell.Properties.Resources.openAll;
 			this.openAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.openAll.Name = "openAll";
 			this.openAll.Size = new System.Drawing.Size(23, 22);
@@ -645,7 +658,7 @@ namespace LAZYSHELL
 			// closeAll
 			// 
 			this.closeAll.Enabled = false;
-			this.closeAll.Image = global::LAZYSHELL.Properties.Resources.closeAll;
+			this.closeAll.Image = global::LazyShell.Properties.Resources.closeAll;
 			this.closeAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.closeAll.Name = "closeAll";
 			this.closeAll.Size = new System.Drawing.Size(23, 22);
@@ -656,7 +669,7 @@ namespace LAZYSHELL
 			// restoreAll
 			// 
 			this.restoreAll.Enabled = false;
-			this.restoreAll.Image = global::LAZYSHELL.Properties.Resources.restoreAll;
+			this.restoreAll.Image = global::LazyShell.Properties.Resources.restoreAll;
 			this.restoreAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.restoreAll.Name = "restoreAll";
 			this.restoreAll.Size = new System.Drawing.Size(23, 22);
@@ -667,7 +680,7 @@ namespace LAZYSHELL
 			// minimizeAll
 			// 
 			this.minimizeAll.Enabled = false;
-			this.minimizeAll.Image = global::LAZYSHELL.Properties.Resources.minimizeAll;
+			this.minimizeAll.Image = global::LazyShell.Properties.Resources.minimizeAll;
 			this.minimizeAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.minimizeAll.Name = "minimizeAll";
 			this.minimizeAll.Size = new System.Drawing.Size(23, 22);
@@ -684,7 +697,7 @@ namespace LAZYSHELL
 			// 
 			this.docking.CheckOnClick = true;
 			this.docking.Enabled = false;
-			this.docking.Image = global::LAZYSHELL.Properties.Resources.dock;
+			this.docking.Image = global::LazyShell.Properties.Resources.dock;
 			this.docking.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.docking.Name = "docking";
 			this.docking.Size = new System.Drawing.Size(23, 22);
@@ -700,7 +713,7 @@ namespace LAZYSHELL
 			// resetModel
 			// 
 			this.resetModel.Enabled = false;
-			this.resetModel.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.resetModel.Image = global::LazyShell.Properties.Resources.reset;
 			this.resetModel.Name = "resetModel";
 			this.resetModel.Size = new System.Drawing.Size(23, 22);
 			this.resetModel.ToolTipText = "Reset Editor Memory";
@@ -709,7 +722,7 @@ namespace LAZYSHELL
 			// clearModel
 			// 
 			this.clearModel.Enabled = false;
-			this.clearModel.Image = global::LAZYSHELL.Properties.Resources.clearModel;
+			this.clearModel.Image = global::LazyShell.Properties.Resources.clearModel;
 			this.clearModel.Name = "clearModel";
 			this.clearModel.Size = new System.Drawing.Size(23, 22);
 			this.clearModel.ToolTipText = "Clear Editor Memory";
@@ -722,7 +735,7 @@ namespace LAZYSHELL
 			// 
 			// help
 			// 
-			this.help.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.help.Image = global::LazyShell.Properties.Resources.help;
 			this.help.Name = "help";
 			this.help.Size = new System.Drawing.Size(23, 22);
 			this.help.ToolTipText = "Open Help Window";
@@ -730,20 +743,11 @@ namespace LAZYSHELL
 			// 
 			// info
 			// 
-			this.info.Image = global::LAZYSHELL.Properties.Resources.about;
+			this.info.Image = global::LazyShell.Properties.Resources.about;
 			this.info.Name = "info";
 			this.info.Size = new System.Drawing.Size(23, 22);
 			this.info.ToolTipText = "About";
 			this.info.Click += new System.EventHandler(this.about_Click);
-			// 
-			// webBrowser1
-			// 
-			this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-			this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-			this.webBrowser1.Name = "webBrowser1";
-			this.webBrowser1.Size = new System.Drawing.Size(542, 443);
-			this.webBrowser1.TabIndex = 0;
 			// 
 			// MainForm
 			// 
@@ -759,7 +763,7 @@ namespace LAZYSHELL
 			this.Location = new System.Drawing.Point(5, 5);
 			this.Name = "MainForm";
 			this.SnapToEdges = false;
-			this.Text = "LAZY SHELL - Super Mario RPG Editor";
+			this.Text = "Lazy Shell - Super Mario RPG Editor";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.panel4.ResumeLayout(false);
 			this.panel4.PerformLayout();

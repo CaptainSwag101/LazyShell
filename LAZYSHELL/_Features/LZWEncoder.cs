@@ -20,7 +20,7 @@
 using System;
 using System.IO;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class LZWEncoder
     {

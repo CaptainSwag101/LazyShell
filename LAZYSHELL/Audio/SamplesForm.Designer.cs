@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     partial class SamplesForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Audio
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -29,7 +29,7 @@ namespace LAZYSHELL.Audio
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.sampleName = new System.Windows.Forms.ToolStripComboBox();
             this.searchNames = new System.Windows.Forms.ToolStripButton();
-            this.sampleNum = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.sampleNum = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.findReferences = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.import = new System.Windows.Forms.ToolStripDropDownButton();
@@ -46,7 +46,7 @@ namespace LAZYSHELL.Audio
             this.back = new System.Windows.Forms.ToolStripButton();
             this.foward = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.infiniteLoop = new LAZYSHELL.Controls.NewToolStripCheckBox();
+            this.infiniteLoop = new LazyShell.Controls.NewToolStripCheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonPitch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -107,7 +107,7 @@ namespace LAZYSHELL.Audio
             // 
             // searchNames
             // 
-            this.searchNames.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.searchNames.Image = global::LazyShell.Properties.Resources.search;
             this.searchNames.Name = "searchNames";
             this.searchNames.Size = new System.Drawing.Size(23, 22);
             this.searchNames.ToolTipText = "Search for effect";
@@ -146,7 +146,7 @@ namespace LAZYSHELL.Audio
             // 
             // findReferences
             // 
-            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
+            this.findReferences.Image = global::LazyShell.Properties.Resources.findReferences;
             this.findReferences.Name = "findReferences";
             this.findReferences.Size = new System.Drawing.Size(23, 22);
             this.findReferences.ToolTipText = "Find all references to sample";
@@ -162,7 +162,7 @@ namespace LAZYSHELL.Audio
             this.import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importWAV,
             this.importBRR});
-            this.import.Image = global::LAZYSHELL.Properties.Resources.importWAV;
+            this.import.Image = global::LazyShell.Properties.Resources.importWAV;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(29, 22);
             // 
@@ -175,7 +175,7 @@ namespace LAZYSHELL.Audio
             // 
             // importBRR
             // 
-            this.importBRR.Image = global::LAZYSHELL.Properties.Resources.importBinary;
+            this.importBRR.Image = global::LazyShell.Properties.Resources.importBinary;
             this.importBRR.Name = "importBRR";
             this.importBRR.Size = new System.Drawing.Size(144, 22);
             this.importBRR.Text = "Import BRR...";
@@ -186,7 +186,7 @@ namespace LAZYSHELL.Audio
             this.export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportWAV,
             this.exportBRR});
-            this.export.Image = global::LAZYSHELL.Properties.Resources.exportWAV;
+            this.export.Image = global::LazyShell.Properties.Resources.exportWAV;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(29, 22);
             // 
@@ -199,7 +199,7 @@ namespace LAZYSHELL.Audio
             // 
             // exportBRR
             // 
-            this.exportBRR.Image = global::LAZYSHELL.Properties.Resources.exportBinary;
+            this.exportBRR.Image = global::LazyShell.Properties.Resources.exportBinary;
             this.exportBRR.Name = "exportBRR";
             this.exportBRR.Size = new System.Drawing.Size(144, 22);
             this.exportBRR.Text = "Export BRR...";
@@ -207,7 +207,7 @@ namespace LAZYSHELL.Audio
             // 
             // clear
             // 
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+            this.clear.Image = global::LazyShell.Properties.Resources.clear;
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(23, 22);
             this.clear.ToolTipText = "Clear";
@@ -215,7 +215,7 @@ namespace LAZYSHELL.Audio
             // 
             // reset
             // 
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.Image = global::LazyShell.Properties.Resources.reset;
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(23, 22);
             this.reset.ToolTipText = "Reset sample";
@@ -228,7 +228,7 @@ namespace LAZYSHELL.Audio
             // 
             // play
             // 
-            this.play.Image = global::LAZYSHELL.Properties.Resources.play;
+            this.play.Image = global::LazyShell.Properties.Resources.play;
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(23, 22);
             this.play.ToolTipText = "Play";
@@ -236,7 +236,7 @@ namespace LAZYSHELL.Audio
             // 
             // stop
             // 
-            this.stop.Image = global::LAZYSHELL.Properties.Resources.stop;
+            this.stop.Image = global::LazyShell.Properties.Resources.stop;
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(23, 22);
             this.stop.ToolTipText = "Stop";
@@ -244,7 +244,7 @@ namespace LAZYSHELL.Audio
             // 
             // back
             // 
-            this.back.Image = global::LAZYSHELL.Properties.Resources.back;
+            this.back.Image = global::LazyShell.Properties.Resources.back;
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(23, 22);
             this.back.ToolTipText = "Play Previous";
@@ -252,7 +252,7 @@ namespace LAZYSHELL.Audio
             // 
             // foward
             // 
-            this.foward.Image = global::LAZYSHELL.Properties.Resources.foward;
+            this.foward.Image = global::LazyShell.Properties.Resources.foward;
             this.foward.Name = "foward";
             this.foward.Size = new System.Drawing.Size(23, 22);
             this.foward.ToolTipText = "Play Next";

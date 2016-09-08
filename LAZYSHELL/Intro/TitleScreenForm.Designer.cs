@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     partial class TitleScreenForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Intro
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,9 +28,9 @@ namespace LAZYSHELL.Intro
         {
             this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toggleTilesetL1Form = new LAZYSHELL.Controls.NewToolStripButton();
-            this.toggleTilesetL2Form = new LAZYSHELL.Controls.NewToolStripButton();
-            this.toggleTilesetL3Form = new LAZYSHELL.Controls.NewToolStripButton();
+            this.toggleTilesetL1Form = new LazyShell.Controls.NewToolStripButton();
+            this.toggleTilesetL2Form = new LazyShell.Controls.NewToolStripButton();
+            this.toggleTilesetL3Form = new LazyShell.Controls.NewToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.openPalettes = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,7 @@ namespace LAZYSHELL.Intro
             // 
             // pictureBoxTitle
             // 
-            this.pictureBoxTitle.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxTitle.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBoxTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxTitle.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxTitle.Name = "pictureBoxTitle";
@@ -73,7 +73,7 @@ namespace LAZYSHELL.Intro
             // 
             this.toggleTilesetL1Form.CheckOnClick = true;
             this.toggleTilesetL1Form.Form = null;
-            this.toggleTilesetL1Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL1;
+            this.toggleTilesetL1Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL1;
             this.toggleTilesetL1Form.Name = "toggleTilesetL1Form";
             this.toggleTilesetL1Form.Size = new System.Drawing.Size(23, 22);
             this.toggleTilesetL1Form.ToolTipText = "Tileset L1 Window";
@@ -82,7 +82,7 @@ namespace LAZYSHELL.Intro
             // 
             this.toggleTilesetL2Form.CheckOnClick = true;
             this.toggleTilesetL2Form.Form = null;
-            this.toggleTilesetL2Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL2;
+            this.toggleTilesetL2Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL2;
             this.toggleTilesetL2Form.Name = "toggleTilesetL2Form";
             this.toggleTilesetL2Form.Size = new System.Drawing.Size(23, 22);
             this.toggleTilesetL2Form.ToolTipText = "Tileset L2 Window";
@@ -91,7 +91,7 @@ namespace LAZYSHELL.Intro
             // 
             this.toggleTilesetL3Form.CheckOnClick = true;
             this.toggleTilesetL3Form.Form = null;
-            this.toggleTilesetL3Form.Image = global::LAZYSHELL.Properties.Resources.toggleTilesetL3;
+            this.toggleTilesetL3Form.Image = global::LazyShell.Properties.Resources.toggleTilesetL3;
             this.toggleTilesetL3Form.Name = "toggleTilesetL3Form";
             this.toggleTilesetL3Form.Size = new System.Drawing.Size(23, 22);
             this.toggleTilesetL3Form.ToolTipText = "Tileset L3 Window";
@@ -106,7 +106,7 @@ namespace LAZYSHELL.Intro
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openPalettes,
             this.openSpritePalettes});
-            this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.toolStripDropDownButton1.Image = global::LazyShell.Properties.Resources.openPalettes;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
             // 
@@ -129,7 +129,7 @@ namespace LAZYSHELL.Intro
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openGraphics,
             this.openSpriteGraphics});
-            this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.toolStripDropDownButton2.Image = global::LazyShell.Properties.Resources.openGraphics;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
             // 
@@ -168,7 +168,7 @@ namespace LAZYSHELL.Intro
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "TitleScreenForm";
             this.Text = "Title Screen Preview";
-            this.TilesetForms = new LAZYSHELL.TilesetForm[] {
+            this.TilesetForms = new LazyShell.TilesetForm[] {
         null,
         null,
         null};

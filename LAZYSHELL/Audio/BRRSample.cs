@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     [Serializable()]
     public class BRRSample : Element

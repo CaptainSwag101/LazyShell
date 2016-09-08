@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class ProgressBar : Controls.NewForm
     {

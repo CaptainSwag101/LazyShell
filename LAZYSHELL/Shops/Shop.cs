@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Shops
+namespace LazyShell.Shops
 {
     [Serializable()]
     public class Shop : Element
@@ -25,7 +25,7 @@ namespace LAZYSHELL.Shops
             {
                 string[] names = new string[15];
                 for (int i = 0; i < names.Length; i++)
-                    names[i] = LAZYSHELL.Items.Model.Names.GetUnsortedName(Items[i]);
+                    names[i] = LazyShell.Items.Model.Names.GetUnsortedName(Items[i]);
                 return names;
             }
         }

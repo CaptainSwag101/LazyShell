@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     public static class ScriptEnums
     {

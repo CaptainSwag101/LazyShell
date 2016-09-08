@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class CollisionSwitchesForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -48,7 +48,7 @@
             this.paste = new System.Windows.Forms.ToolStripButton();
             this.duplicate = new System.Windows.Forms.ToolStripButton();
             this.listBox = new System.Windows.Forms.ListBox();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.width)).BeginInit();
@@ -193,7 +193,7 @@
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.new_file;
+            this.insert.Image = global::LazyShell.Properties.Resources.new_file;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "New Collision Mod";
@@ -201,7 +201,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.delete.Image = global::LazyShell.Properties.Resources.delete;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete Collision Mod";
@@ -214,7 +214,7 @@
             // 
             // moveUp
             // 
-            this.moveUp.Image = global::LAZYSHELL.Properties.Resources.moveup;
+            this.moveUp.Image = global::LazyShell.Properties.Resources.moveup;
             this.moveUp.Name = "moveUp";
             this.moveUp.Size = new System.Drawing.Size(23, 22);
             this.moveUp.ToolTipText = "Move Collision Mod Up";
@@ -222,7 +222,7 @@
             // 
             // moveDown
             // 
-            this.moveDown.Image = global::LAZYSHELL.Properties.Resources.movedown;
+            this.moveDown.Image = global::LazyShell.Properties.Resources.movedown;
             this.moveDown.Name = "moveDown";
             this.moveDown.Size = new System.Drawing.Size(23, 22);
             this.moveDown.ToolTipText = "Move Collision Mod Down";
@@ -235,7 +235,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy Collision Mod";
@@ -243,7 +243,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste Collision Mod";
@@ -251,7 +251,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate Collision Mod";

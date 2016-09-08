@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     partial class OwnerForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Intro
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -45,7 +45,7 @@ namespace LAZYSHELL.Intro
 			// 
 			// save
 			// 
-			this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.save.Image = global::LazyShell.Properties.Resources.save;
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(23, 22);
 			this.save.ToolTipText = "Save";
@@ -54,7 +54,7 @@ namespace LAZYSHELL.Intro
 			// helpTips
 			// 
 			this.helpTips.CheckOnClick = true;
-			this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.helpTips.Image = global::LazyShell.Properties.Resources.help;
 			this.helpTips.Name = "helpTips";
 			this.helpTips.Size = new System.Drawing.Size(23, 22);
 			this.helpTips.ToolTipText = "Help Tips";
@@ -67,21 +67,21 @@ namespace LAZYSHELL.Intro
 			this.dockPanel.DockRightPortion = 268D;
 			this.dockPanel.Location = new System.Drawing.Point(0, 25);
 			this.dockPanel.Name = "dockPanel";
-			this.dockPanel.Size = new System.Drawing.Size(792, 628);
+			this.dockPanel.Size = new System.Drawing.Size(792, 632);
 			this.dockPanel.TabIndex = 3;
 			// 
 			// OwnerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(792, 653);
+			this.ClientSize = new System.Drawing.Size(792, 657);
 			this.Controls.Add(this.dockPanel);
 			this.Controls.Add(this.toolStrip1);
 			this.DockPanel = this.dockPanel;
 			this.IsMdiContainer = true;
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "OwnerForm";
-			this.Text = "INTRO - Lazy Shell";
+			this.Text = "Intro - Lazy Shell";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();

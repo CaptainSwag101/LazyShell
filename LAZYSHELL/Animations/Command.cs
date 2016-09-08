@@ -5,12 +5,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     /// <summary>
     /// Class for the creation and management of animation script commands in the Mario RPG ROM.
     /// </summary>
-    public class Command : LAZYSHELL.Command
+    public class Command : LazyShell.Command
     {
         #region Variables
 

@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class SpaceAnalyzer : Controls.NewForm
     {

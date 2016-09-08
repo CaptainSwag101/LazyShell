@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Menus
+namespace LazyShell.Menus
 {
     class Tileset
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 
-namespace LAZYSHELL.Patches
+namespace LazyShell.Patches
 {
     public class IPSPatch
     {

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     /// <summary>
     /// Custom Windows Form class for displaying a tooltip window.
@@ -32,7 +32,7 @@ namespace LAZYSHELL
     }
 
     /// <summary>
-    /// Class for managing a form's tooltips by accessing the LAZYSHELL_xml help document.
+    /// Class for managing a form's tooltips by accessing the LazyShell_xml help document.
     /// </summary>
     public class ToolTipLabel
     {
@@ -61,7 +61,7 @@ namespace LAZYSHELL
         /// <param name="baseConvertor">The button associated with the optional display of a control's 
         /// values in decimal or hexadecimal.</param>
         /// <param name="helpTips">The button associated with the optional display of a control's 
-        /// Associated tooltip attribute in the LAZYSHELL_xml document.</param>
+        /// Associated tooltip attribute in the LazyShell_xml document.</param>
         public ToolTipLabel(Form form, ToolStripButton baseConvertor, ToolStripButton helpTips)
         {
             this.form = form;
@@ -151,7 +151,7 @@ namespace LAZYSHELL
         }
 
         /// <summary>
-        /// Retrieves the text of a control's tooltip attribute in the LAZYSHELL_xml document.
+        /// Retrieves the text of a control's tooltip attribute in the LazyShell_xml document.
         /// </summary>
         /// <param name="control">The specified control associated with the tooltip attribute in the XML document.</param>
         /// <param name="caption">The optional caption to display in bold at the top of the tooltip window.</param>
@@ -188,11 +188,11 @@ namespace LAZYSHELL
             #region Get control's tooltip from XML
 
             // Load XML help file from Model
-            var LAZYSHELL_help = Model.LAZYSHELL_xml;
+            var LazyShell_help = Model.LazyShell_xml;
 
             // Select node containing the form's data
             name = string.Format("//*[@form='{0}']", form.Name);
-            var window = LAZYSHELL_help.SelectSingleNode(name);
+            var window = LazyShell_help.SelectSingleNode(name);
 
             // Select control's node in form's node
             if (window != null)

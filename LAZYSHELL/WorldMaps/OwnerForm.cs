@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -164,7 +164,7 @@ namespace LAZYSHELL.WorldMaps
         }
         private void LoadLogoPaletteEditor()
         {
-            var ownerForm = LAZYSHELL.Model.Program.WorldMaps.WorldMapsForm;
+            var ownerForm = LazyShell.Model.Program.WorldMaps.WorldMapsForm;
             if (logoPaletteEditor == null)
             {
                 logoPaletteEditor = new PaletteEditor(new LogoPaletteUpdater(), Model.Logos_PaletteSet, 1, 0, 1);

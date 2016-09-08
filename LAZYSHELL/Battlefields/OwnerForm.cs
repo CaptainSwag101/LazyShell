@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Undo;
-using LAZYSHELL.Properties;
+using LazyShell.Undo;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
     public partial class OwnerForm : MapEditor
     {

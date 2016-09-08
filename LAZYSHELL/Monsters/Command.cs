@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.EventScripts;
+using LazyShell.EventScripts;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     [Serializable()]
-    public class Command : LAZYSHELL.Command
+    public class Command : LazyShell.Command
     {
         #region Variables
 

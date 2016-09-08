@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
     [Serializable()]
     public class ActionScript : Element

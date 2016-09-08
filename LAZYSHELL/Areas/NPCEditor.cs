@@ -5,11 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Sprites;
+using LazyShell.Areas;
+using LazyShell.Properties;
+using LazyShell.Sprites;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class NPCEditor : Controls.NewForm
     {
@@ -181,10 +181,10 @@ namespace LAZYSHELL.Areas
         }
         private void editSprite_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.Sprites == null || !LAZYSHELL.Model.Program.Sprites.Visible)
-                LAZYSHELL.Model.Program.CreateSpritesWindow();
-            LAZYSHELL.Model.Program.Sprites.Index = (int)spriteNum.Value;
-            LAZYSHELL.Model.Program.Sprites.BringToFront();
+            if (LazyShell.Model.Program.Sprites == null || !LazyShell.Model.Program.Sprites.Visible)
+                LazyShell.Model.Program.CreateSpritesWindow();
+            LazyShell.Model.Program.Sprites.Index = (int)spriteNum.Value;
+            LazyShell.Model.Program.Sprites.BringToFront();
         }
 
         // Properties

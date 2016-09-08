@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     partial class PreGameForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Intro
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -72,7 +72,7 @@ namespace LAZYSHELL.Intro
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox1.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
@@ -91,7 +91,7 @@ namespace LAZYSHELL.Intro
             // 
             // importImageToolStripMenuItem
             // 
-            this.importImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importImageToolStripMenuItem.Image = global::LazyShell.Properties.Resources.importImage;
             this.importImageToolStripMenuItem.Name = "importImageToolStripMenuItem";
             this.importImageToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.importImageToolStripMenuItem.Text = "Import image...";
@@ -99,7 +99,7 @@ namespace LAZYSHELL.Intro
             // 
             // saveImageAsToolStripMenuItem
             // 
-            this.saveImageAsToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageAsToolStripMenuItem.Image = global::LazyShell.Properties.Resources.exportImage;
             this.saveImageAsToolStripMenuItem.Name = "saveImageAsToolStripMenuItem";
             this.saveImageAsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveImageAsToolStripMenuItem.Text = "Save image as...";
@@ -131,7 +131,7 @@ namespace LAZYSHELL.Intro
             // 
             // openPalettes
             // 
-            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.openPalettes.Image = global::LazyShell.Properties.Resources.openPalettes;
             this.openPalettes.Name = "openPalettes";
             this.openPalettes.Size = new System.Drawing.Size(23, 22);
             this.openPalettes.ToolTipText = "Palette";
@@ -139,7 +139,7 @@ namespace LAZYSHELL.Intro
             // 
             // openGraphics
             // 
-            this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.openGraphics.Image = global::LazyShell.Properties.Resources.openGraphics;
             this.openGraphics.Name = "openGraphics";
             this.openGraphics.Size = new System.Drawing.Size(23, 22);
             this.openGraphics.ToolTipText = "Graphics";
@@ -152,7 +152,7 @@ namespace LAZYSHELL.Intro
             // 
             // importImage
             // 
-            this.importImage.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importImage.Image = global::LazyShell.Properties.Resources.importImage;
             this.importImage.Name = "importImage";
             this.importImage.Size = new System.Drawing.Size(23, 22);
             this.importImage.ToolTipText = "Import Image";
@@ -160,7 +160,7 @@ namespace LAZYSHELL.Intro
             // 
             // exportImage
             // 
-            this.exportImage.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.exportImage.Image = global::LazyShell.Properties.Resources.exportImage;
             this.exportImage.Name = "exportImage";
             this.exportImage.Size = new System.Drawing.Size(23, 22);
             this.exportImage.ToolTipText = "Export Image";

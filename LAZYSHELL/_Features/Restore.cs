@@ -6,9 +6,9 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class Restore : Controls.NewForm
     {

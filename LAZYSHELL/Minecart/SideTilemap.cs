@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     public class SideTilemap : Tilemap
     {

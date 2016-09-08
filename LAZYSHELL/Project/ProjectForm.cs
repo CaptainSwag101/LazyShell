@@ -11,9 +11,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class ProjectForm : Controls.NewForm
     {
@@ -868,9 +868,9 @@ namespace LAZYSHELL
         {
             Model.Project = null;
             Model.ResetListCollections();
-            LAZYSHELL.Model.Program.Project.Close();
+            LazyShell.Model.Program.Project.Close();
             if (Model.Program.Project == null || !Model.Program.Project.Visible)
-                LAZYSHELL.Model.Program.CreateProjectWindow();
+                LazyShell.Model.Program.CreateProjectWindow();
         }
         private void save_Click(object sender, EventArgs e)
         {
@@ -1119,91 +1119,91 @@ namespace LAZYSHELL
             {
                 case "Action Scripts":
                     if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
-                        LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-                    LAZYSHELL.Model.Program.EventScripts.Type = 1;
-                    LAZYSHELL.Model.Program.EventScripts.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.EventScripts.BringToFront();
+                        LazyShell.Model.Program.CreateEventScriptsWindow();
+                    LazyShell.Model.Program.EventScripts.Type = 1;
+                    LazyShell.Model.Program.EventScripts.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.EventScripts.BringToFront();
                     break;
                 case "Attacks":
                     if (Model.Program.Attacks == null || !Model.Program.Attacks.Visible)
-                        LAZYSHELL.Model.Program.CreateAttacksWindow();
-                    LAZYSHELL.Model.Program.Attacks.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Attacks.BringToFront();
+                        LazyShell.Model.Program.CreateAttacksWindow();
+                    LazyShell.Model.Program.Attacks.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Attacks.BringToFront();
                     break;
                 case "Battlefields":
                     if (Model.Program.Battlefields == null || !Model.Program.Battlefields.Visible)
-                        LAZYSHELL.Model.Program.CreateBattlefieldsWindow();
-                    LAZYSHELL.Model.Program.Battlefields.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Battlefields.BringToFront();
+                        LazyShell.Model.Program.CreateBattlefieldsWindow();
+                    LazyShell.Model.Program.Battlefields.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Battlefields.BringToFront();
                     break;
                 case "Dialogues":
                     if (Model.Program.Dialogues == null || !Model.Program.Dialogues.Visible)
-                        LAZYSHELL.Model.Program.CreateDialoguesWindow();
-                    LAZYSHELL.Model.Program.Dialogues.DialoguesForm.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Dialogues.BringToFront();
+                        LazyShell.Model.Program.CreateDialoguesWindow();
+                    LazyShell.Model.Program.Dialogues.DialoguesForm.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Dialogues.BringToFront();
                     break;
                 case "Effects":
                     if (Model.Program.Effects == null || !Model.Program.Effects.Visible)
-                        LAZYSHELL.Model.Program.CreateEffectsWindow();
-                    LAZYSHELL.Model.Program.Effects.index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Effects.BringToFront();
+                        LazyShell.Model.Program.CreateEffectsWindow();
+                    LazyShell.Model.Program.Effects.index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Effects.BringToFront();
                     break;
                 case "Event Scripts":
                     if (Model.Program.EventScripts == null || !Model.Program.EventScripts.Visible)
-                        LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-                    LAZYSHELL.Model.Program.EventScripts.Type = 0;
-                    LAZYSHELL.Model.Program.EventScripts.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.EventScripts.BringToFront();
+                        LazyShell.Model.Program.CreateEventScriptsWindow();
+                    LazyShell.Model.Program.EventScripts.Type = 0;
+                    LazyShell.Model.Program.EventScripts.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.EventScripts.BringToFront();
                     break;
                 case "Formations":
                     if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
-                        LAZYSHELL.Model.Program.CreateFormationsWindow();
-                    LAZYSHELL.Model.Program.Formations.FormationIndex = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Formations.BringToFront();
+                        LazyShell.Model.Program.CreateFormationsWindow();
+                    LazyShell.Model.Program.Formations.FormationIndex = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Formations.BringToFront();
                     break;
                 case "Items":
                     if (Model.Program.Items == null || !Model.Program.Items.Visible)
-                        LAZYSHELL.Model.Program.CreateItemsWindow();
-                    LAZYSHELL.Model.Program.Items.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Items.BringToFront();
+                        LazyShell.Model.Program.CreateItemsWindow();
+                    LazyShell.Model.Program.Items.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Items.BringToFront();
                     break;
                 case "Levels":
                     if (Model.Program.Areas == null || !Model.Program.Areas.Visible)
-                        LAZYSHELL.Model.Program.CreateAreasWindow();
-                    LAZYSHELL.Model.Program.Areas.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Areas.BringToFront();
+                        LazyShell.Model.Program.CreateAreasWindow();
+                    LazyShell.Model.Program.Areas.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Areas.BringToFront();
                     break;
                 case "Memory Bits":
                     break;
                 case "Monsters":
                     if (Model.Program.Monsters == null || !Model.Program.Monsters.Visible)
-                        LAZYSHELL.Model.Program.CreateMonstersWindow();
-                    LAZYSHELL.Model.Program.Monsters.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Monsters.BringToFront();
+                        LazyShell.Model.Program.CreateMonstersWindow();
+                    LazyShell.Model.Program.Monsters.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Monsters.BringToFront();
                     break;
                 case "Packs":
                     if (Model.Program.Formations == null || !Model.Program.Formations.Visible)
-                        LAZYSHELL.Model.Program.CreateFormationsWindow();
-                    LAZYSHELL.Model.Program.Formations.PackIndex = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Formations.BringToFront();
+                        LazyShell.Model.Program.CreateFormationsWindow();
+                    LazyShell.Model.Program.Formations.PackIndex = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Formations.BringToFront();
                     break;
                 case "Shops":
                     if (Model.Program.Shops == null || !Model.Program.Shops.Visible)
-                        LAZYSHELL.Model.Program.CreateItemsWindow();
-                    LAZYSHELL.Model.Program.Shops.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Items.BringToFront();
+                        LazyShell.Model.Program.CreateItemsWindow();
+                    LazyShell.Model.Program.Shops.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Items.BringToFront();
                     break;
                 case "Spells":
                     if (Model.Program.Magic == null || !Model.Program.Magic.Visible)
-                        LAZYSHELL.Model.Program.CreateMagicWindow();
-                    LAZYSHELL.Model.Program.Magic.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Magic.BringToFront();
+                        LazyShell.Model.Program.CreateMagicWindow();
+                    LazyShell.Model.Program.Magic.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Magic.BringToFront();
                     break;
                 case "Sprites":
                     if (Model.Program.Sprites == null || !Model.Program.Sprites.Visible)
-                        LAZYSHELL.Model.Program.CreateSpritesWindow();
-                    LAZYSHELL.Model.Program.Sprites.Index = (int)indexNumber.Value;
-                    LAZYSHELL.Model.Program.Sprites.BringToFront();
+                        LazyShell.Model.Program.CreateSpritesWindow();
+                    LazyShell.Model.Program.Sprites.Index = (int)indexNumber.Value;
+                    LazyShell.Model.Program.Sprites.BringToFront();
                     break;
             }
         }

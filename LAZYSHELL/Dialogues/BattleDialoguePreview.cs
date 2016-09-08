@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using LAZYSHELL.Dialogues;
-using LAZYSHELL.Fonts;
+using LazyShell.Dialogues;
+using LazyShell.Fonts;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class BattleDialoguePreview : Preview
     {

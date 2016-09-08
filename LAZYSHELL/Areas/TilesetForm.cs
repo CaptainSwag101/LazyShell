@@ -7,10 +7,10 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Areas;
-using LAZYSHELL.Undo;
+using LazyShell.Areas;
+using LazyShell.Undo;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class TilesetForm : Controls.DockForm
     {
@@ -355,7 +355,7 @@ namespace LAZYSHELL
         {
             Layer = 0;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.InitialDirectory = LazyShell.Properties.Settings.Default.LastRomPath;
             openFileDialog1.Title = "Import Layer 1";
             openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
             openFileDialog1.FilterIndex = 1;
@@ -417,7 +417,7 @@ namespace LAZYSHELL
         private void ImportTitleLogo()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.InitialDirectory = LazyShell.Properties.Settings.Default.LastRomPath;
             openFileDialog1.Title = "Import title logo";
             openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
             openFileDialog1.FilterIndex = 1;

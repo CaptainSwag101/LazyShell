@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class LayeringForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -60,12 +60,12 @@
             this.maskHighY = new System.Windows.Forms.NumericUpDown();
             this.maskLowX = new System.Windows.Forms.NumericUpDown();
             this.maskLowY = new System.Windows.Forms.NumericUpDown();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel4 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel5 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel6 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel4 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel5 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel6 = new LazyShell.Controls.HeaderLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xNegL2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.yNegL2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xNegL3)).BeginInit();

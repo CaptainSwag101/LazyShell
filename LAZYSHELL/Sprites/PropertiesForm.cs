@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     public partial class PropertiesForm : Controls.DockForm
     {

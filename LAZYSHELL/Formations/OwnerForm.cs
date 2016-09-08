@@ -5,10 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Formations
+namespace LazyShell.Formations
 {
     public partial class OwnerForm : Controls.NewForm
     {

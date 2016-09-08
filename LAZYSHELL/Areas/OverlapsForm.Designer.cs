@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Areas
+﻿namespace LazyShell.Areas
 {
     partial class OverlapsForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -38,7 +38,7 @@
             this.label103 = new System.Windows.Forms.Label();
             this.z = new System.Windows.Forms.NumericUpDown();
             this.label107 = new System.Windows.Forms.Label();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
             this.listBox = new System.Windows.Forms.ListBox();
             this.unknownBits = new System.Windows.Forms.CheckedListBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
@@ -233,7 +233,7 @@
             // 
             // insert
             // 
-            this.insert.Image = global::LAZYSHELL.Properties.Resources.overlapAdd;
+            this.insert.Image = global::LazyShell.Properties.Resources.overlapAdd;
             this.insert.Name = "insert";
             this.insert.Size = new System.Drawing.Size(23, 22);
             this.insert.ToolTipText = "Insert overlap";
@@ -241,7 +241,7 @@
             // 
             // delete
             // 
-            this.delete.Image = global::LAZYSHELL.Properties.Resources.overlapRemove;
+            this.delete.Image = global::LazyShell.Properties.Resources.overlapRemove;
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(23, 22);
             this.delete.ToolTipText = "Delete overlap";
@@ -249,7 +249,7 @@
             // 
             // copy
             // 
-            this.copy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copy.Image = global::LazyShell.Properties.Resources.copy;
             this.copy.Name = "copy";
             this.copy.Size = new System.Drawing.Size(23, 22);
             this.copy.ToolTipText = "Copy Overlap";
@@ -257,7 +257,7 @@
             // 
             // paste
             // 
-            this.paste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.paste.Image = global::LazyShell.Properties.Resources.paste;
             this.paste.Name = "paste";
             this.paste.Size = new System.Drawing.Size(23, 22);
             this.paste.ToolTipText = "Paste Overlap";
@@ -265,7 +265,7 @@
             // 
             // duplicate
             // 
-            this.duplicate.Image = global::LAZYSHELL.Properties.Resources.duplicate;
+            this.duplicate.Image = global::LazyShell.Properties.Resources.duplicate;
             this.duplicate.Name = "duplicate";
             this.duplicate.Size = new System.Drawing.Size(23, 22);
             this.duplicate.ToolTipText = "Duplicate Overlap";
@@ -297,7 +297,7 @@
             // pictureBoxTileset
             // 
             this.pictureBoxTileset.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBoxTileset.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBoxTileset.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBoxTileset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxTileset.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxTileset.Name = "pictureBoxTileset";
@@ -317,7 +317,7 @@
             // 
             // saveOverlapsImage
             // 
-            this.saveOverlapsImage.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveOverlapsImage.Image = global::LazyShell.Properties.Resources.exportImage;
             this.saveOverlapsImage.Name = "saveOverlapsImage";
             this.saveOverlapsImage.Size = new System.Drawing.Size(202, 22);
             this.saveOverlapsImage.Text = "Save overlaps image...";
@@ -325,7 +325,7 @@
             // 
             // importOverlapsImage
             // 
-            this.importOverlapsImage.Image = global::LAZYSHELL.Properties.Resources.importImage;
+            this.importOverlapsImage.Image = global::LazyShell.Properties.Resources.importImage;
             this.importOverlapsImage.Name = "importOverlapsImage";
             this.importOverlapsImage.Size = new System.Drawing.Size(202, 22);
             this.importOverlapsImage.Text = "Import overlaps image...";

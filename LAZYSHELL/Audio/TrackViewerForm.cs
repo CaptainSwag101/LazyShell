@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class TrackViewerForm : Controls.DockForm
     {
@@ -1012,7 +1012,7 @@ namespace LAZYSHELL.Audio
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - ";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - ";
             if (Type == ElementType.SPCTrack)
                 saveFileDialog.FileName += "SPCScript-" + Index.ToString("d2");
             else if (Type == ElementType.SPCEvent)

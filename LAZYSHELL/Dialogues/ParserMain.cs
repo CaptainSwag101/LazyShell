@@ -4,9 +4,9 @@ using System.Text;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     /// <summary>
     /// Class for encoding and decoding text used in overworld dialogues.

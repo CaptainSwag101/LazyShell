@@ -340,8 +340,8 @@
   <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LAZYSHELL_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help\LAZYSHELL_css.css;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LazyShell_css" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LazyShell_css.css;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="openSpells" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Editor\openSpells.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -775,8 +775,8 @@
   <data name="speakerBalance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Music\speakerBalance.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LAZYSHELL_xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help\LAZYSHELL_xml.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LazyShell_xml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LazyShell_xml.xml;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\replace.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -862,8 +862,8 @@
   <data name="cartridge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Data\cartridge.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LAZYSHELL_xsl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help\LAZYSHELL_xsl.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="LazyShell_xsl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LazyShell_xsl.xsl;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="moveall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Draw\moveall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -913,8 +913,8 @@
   <data name="minimizeAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forms\minimizeAll.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LAZYSHELL_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LAZYSHELL_icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LazyShell_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LazyShell_icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="restHalfDotted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Music\restHalfDotted.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1132,7 +1132,7 @@
   <data name="Lunar_Compress_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lunar Compress x64.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LAZYSHELL_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Help\LAZYSHELL_html.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="LazyShell_html" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Help\LazyShell_html.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

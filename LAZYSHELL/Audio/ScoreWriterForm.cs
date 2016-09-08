@@ -8,10 +8,10 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.Undo;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class ScoreWriterForm : Controls.DockForm
     {
@@ -104,9 +104,9 @@ namespace LAZYSHELL.Audio
             this.commandStack = new UndoStack();
             //
             this.score = new Score();
-            this.clefF = Resources.clefF;
-            this.clefG = Resources.clefG;
-            this.insert = Resources.insert;
+            this.clefF = global::LazyShell.Properties.Resources.clefF;
+            this.clefG = global::LazyShell.Properties.Resources.clefG;
+            this.insert = global::LazyShell.Properties.Resources.insert;
         }
         private void EnableToolStrips()
         {

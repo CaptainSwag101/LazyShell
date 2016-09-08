@@ -4,9 +4,9 @@ using System.Text;
 using System.IO;
 using System.Drawing;
 using System.Net;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Patches
+namespace LazyShell.Patches
 {
     class Patch
     {

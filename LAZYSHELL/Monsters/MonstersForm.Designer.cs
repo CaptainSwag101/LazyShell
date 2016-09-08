@@ -1,4 +1,4 @@
-﻿namespace LAZYSHELL.Monsters
+﻿namespace LazyShell.Monsters
 {
     partial class MonstersForm
     {
@@ -8,9 +8,9 @@
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -44,7 +44,7 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.freeBytesLabel = new System.Windows.Forms.ToolStripLabel();
             this.picturePsychopath = new System.Windows.Forms.PictureBox();
-            this.headerLabel9 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel9 = new LazyShell.Controls.HeaderLabel();
             this.flowerBonus = new System.Windows.Forms.ComboBox();
             this.flowerOdds = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -87,15 +87,15 @@
             this.speed = new System.Windows.Forms.NumericUpDown();
             this.hp = new System.Windows.Forms.NumericUpDown();
             this.fp = new System.Windows.Forms.NumericUpDown();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel2 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel3 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel4 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel5 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel6 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel7 = new LAZYSHELL.Controls.HeaderLabel();
-            this.headerLabel8 = new LAZYSHELL.Controls.HeaderLabel();
-            this.lineSeparator1 = new LAZYSHELL.LineSeparator();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel2 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel3 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel4 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel5 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel6 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel7 = new LazyShell.Controls.HeaderLabel();
+            this.headerLabel8 = new LazyShell.Controls.HeaderLabel();
+            this.lineSeparator1 = new LazyShell.LineSeparator();
             this.panel1.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -155,7 +155,7 @@
             // 
             // newLine
             // 
-            this.newLine.Image = global::LAZYSHELL.Properties.Resources.newLine;
+            this.newLine.Image = global::LazyShell.Properties.Resources.newLine;
             this.newLine.Name = "newLine";
             this.newLine.Size = new System.Drawing.Size(21, 20);
             this.newLine.ToolTipText = "New Line";
@@ -163,7 +163,7 @@
             // 
             // endString
             // 
-            this.endString.Image = global::LAZYSHELL.Properties.Resources.endString;
+            this.endString.Image = global::LazyShell.Properties.Resources.endString;
             this.endString.Name = "endString";
             this.endString.Size = new System.Drawing.Size(21, 20);
             this.endString.ToolTipText = "End String";
@@ -171,7 +171,7 @@
             // 
             // pause60f
             // 
-            this.pause60f.Image = global::LAZYSHELL.Properties.Resources.pause60f;
+            this.pause60f.Image = global::LazyShell.Properties.Resources.pause60f;
             this.pause60f.Name = "pause60f";
             this.pause60f.Size = new System.Drawing.Size(21, 20);
             this.pause60f.ToolTipText = "Pause 1 second";
@@ -179,7 +179,7 @@
             // 
             // pauseA
             // 
-            this.pauseA.Image = global::LAZYSHELL.Properties.Resources.pauseA;
+            this.pauseA.Image = global::LazyShell.Properties.Resources.pauseA;
             this.pauseA.Name = "pauseA";
             this.pauseA.Size = new System.Drawing.Size(21, 20);
             this.pauseA.ToolTipText = "Pause, wait for input";
@@ -188,7 +188,7 @@
             // pauseFrames
             // 
             this.pauseFrames.CheckOnClick = true;
-            this.pauseFrames.Image = global::LAZYSHELL.Properties.Resources.pauseFrames;
+            this.pauseFrames.Image = global::LazyShell.Properties.Resources.pauseFrames;
             this.pauseFrames.Name = "pauseFrames";
             this.pauseFrames.Size = new System.Drawing.Size(21, 20);
             this.pauseFrames.ToolTipText = "Pause for # of frames";
@@ -210,7 +210,7 @@
             // 
             // pageUp
             // 
-            this.pageUp.Image = global::LAZYSHELL.Properties.Resources.pageUp;
+            this.pageUp.Image = global::LazyShell.Properties.Resources.pageUp;
             this.pageUp.Name = "pageUp";
             this.pageUp.Size = new System.Drawing.Size(23, 22);
             this.pageUp.ToolTipText = "Back 1 Page";
@@ -218,7 +218,7 @@
             // 
             // pageDown
             // 
-            this.pageDown.Image = global::LAZYSHELL.Properties.Resources.pageDown;
+            this.pageDown.Image = global::LazyShell.Properties.Resources.pageDown;
             this.pageDown.Name = "pageDown";
             this.pageDown.Size = new System.Drawing.Size(23, 22);
             this.pageDown.ToolTipText = "Foward 1 Page";
@@ -232,7 +232,7 @@
             // textView
             // 
             this.textView.CheckOnClick = true;
-            this.textView.Image = global::LAZYSHELL.Properties.Resources.textView;
+            this.textView.Image = global::LazyShell.Properties.Resources.textView;
             this.textView.Name = "textView";
             this.textView.Size = new System.Drawing.Size(23, 22);
             this.textView.ToolTipText = "Text View";
@@ -251,7 +251,7 @@
             // 
             // picturePsychopath
             // 
-            this.picturePsychopath.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.picturePsychopath.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.picturePsychopath.Dock = System.Windows.Forms.DockStyle.Top;
             this.picturePsychopath.Location = new System.Drawing.Point(0, 14);
             this.picturePsychopath.Name = "picturePsychopath";
@@ -861,7 +861,7 @@
             // 
             // lineSeparator1
             // 
-            this.lineSeparator1.LineDirection = LAZYSHELL.LineDirection.Vertical;
+            this.lineSeparator1.LineDirection = LazyShell.LineDirection.Vertical;
             this.lineSeparator1.Location = new System.Drawing.Point(182, 3);
             this.lineSeparator1.MaximumSize = new System.Drawing.Size(2, 2000);
             this.lineSeparator1.MinimumSize = new System.Drawing.Size(2, 0);

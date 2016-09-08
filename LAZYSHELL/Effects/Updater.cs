@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Effects
+namespace LazyShell.Effects
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Effects.UpdateGraphics();
+            LazyShell.Model.Program.Effects.UpdateGraphics();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Effects.UpdatePalette();
+            LazyShell.Model.Program.Effects.UpdatePalette();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.Effects.MoldsForm.UpdateTile();
+            LazyShell.Model.Program.Effects.MoldsForm.UpdateTile();
         }
     }
 }

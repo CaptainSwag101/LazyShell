@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Sprites
+namespace LazyShell.Sprites
 {
     [Serializable()]
     public class NPCPacket

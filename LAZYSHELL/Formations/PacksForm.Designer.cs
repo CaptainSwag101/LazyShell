@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Formations
+namespace LazyShell.Formations
 {
     partial class PacksForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Formations
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -27,7 +27,7 @@ namespace LAZYSHELL.Formations
         private void InitializeComponent()
         {
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.search = new System.Windows.Forms.ToolStripButton();
             this.findReferences = new System.Windows.Forms.ToolStripButton();
             this.formation1 = new System.Windows.Forms.NumericUpDown();
@@ -96,14 +96,14 @@ namespace LAZYSHELL.Formations
             // 
             // search
             // 
-            this.search.Image = global::LAZYSHELL.Properties.Resources.search;
+            this.search.Image = global::LazyShell.Properties.Resources.search;
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(23, 22);
             this.search.ToolTipText = "Search for effect";
             // 
             // findReferences
             // 
-            this.findReferences.Image = global::LAZYSHELL.Properties.Resources.findReferences;
+            this.findReferences.Image = global::LazyShell.Properties.Resources.findReferences;
             this.findReferences.Name = "findReferences";
             this.findReferences.Size = new System.Drawing.Size(23, 22);
             this.findReferences.ToolTipText = "Find all references to pack";
@@ -151,7 +151,7 @@ namespace LAZYSHELL.Formations
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox1.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox1.Location = new System.Drawing.Point(0, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(163, 157);
@@ -175,7 +175,7 @@ namespace LAZYSHELL.Formations
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox2.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox2.Location = new System.Drawing.Point(164, 24);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(163, 157);
@@ -225,7 +225,7 @@ namespace LAZYSHELL.Formations
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox3.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.pictureBox3.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.pictureBox3.Location = new System.Drawing.Point(328, 24);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(162, 157);

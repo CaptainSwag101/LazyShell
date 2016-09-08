@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     [Serializable()]
     public class CollisionSwitchCollection : IList<CollisionSwitch>

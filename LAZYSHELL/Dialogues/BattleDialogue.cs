@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     [Serializable()]
     public class BattleDialogue : Element

@@ -46,7 +46,7 @@ using System.IO;
 */
 #endregion
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public class AnimatedGifEncoder
     {

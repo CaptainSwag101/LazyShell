@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Battlefields
+namespace LazyShell.Battlefields
 {
     partial class OwnerForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Battlefields
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -40,7 +40,7 @@ namespace LAZYSHELL.Battlefields
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+            this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
             this.name = new System.Windows.Forms.ToolStripComboBox();
             this.paletteSetNum = new System.Windows.Forms.NumericUpDown();
             this.label97 = new System.Windows.Forms.Label();
@@ -119,7 +119,7 @@ namespace LAZYSHELL.Battlefields
             // 
             panel444.AutoScroll = true;
             panel444.BackColor = System.Drawing.SystemColors.Control;
-            panel444.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            panel444.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             panel444.Controls.Add(this.picture);
             panel444.Dock = System.Windows.Forms.DockStyle.Fill;
             panel444.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -130,7 +130,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // picture
             // 
-            this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.picture.ContextMenuStrip = this.contextMenuStrip1;
             this.picture.Location = new System.Drawing.Point(0, 0);
             this.picture.Name = "picture";
@@ -163,7 +163,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // cutToolStripMenuItem
             // 
-            this.cutToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.cutToolStripMenuItem.Image = global::LazyShell.Properties.Resources.cut;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.cutToolStripMenuItem.Text = "Cut";
@@ -171,7 +171,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // copyToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.copyToolStripMenuItem.Image = global::LazyShell.Properties.Resources.copy;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.copyToolStripMenuItem.Text = "Copy";
@@ -179,7 +179,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // pasteToolStripMenuItem
             // 
-            this.pasteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.pasteToolStripMenuItem.Image = global::LazyShell.Properties.Resources.paste;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
@@ -187,7 +187,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // deleteToolStripMenuItem
             // 
-            this.deleteToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.deleteToolStripMenuItem.Image = global::LazyShell.Properties.Resources.delete;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
@@ -200,7 +200,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // mirrorToolStripMenuItem
             // 
-            this.mirrorToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.mirrorToolStripMenuItem.Image = global::LazyShell.Properties.Resources.mirror;
             this.mirrorToolStripMenuItem.Name = "mirrorToolStripMenuItem";
             this.mirrorToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.mirrorToolStripMenuItem.Text = "Mirror";
@@ -208,7 +208,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // invertToolStripMenuItem
             // 
-            this.invertToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.invertToolStripMenuItem.Image = global::LazyShell.Properties.Resources.flip;
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
             this.invertToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.invertToolStripMenuItem.Text = "Invert";
@@ -221,7 +221,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // saveImageToolStripMenuItem
             // 
-            this.saveImageToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.saveImageToolStripMenuItem.Image = global::LazyShell.Properties.Resources.exportImage;
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
             this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image As...";
@@ -229,7 +229,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // importTilesetToolStripMenuItem
             // 
-            this.importTilesetToolStripMenuItem.Image = global::LAZYSHELL.Properties.Resources.importData;
+            this.importTilesetToolStripMenuItem.Image = global::LazyShell.Properties.Resources.importData;
             this.importTilesetToolStripMenuItem.Name = "importTilesetToolStripMenuItem";
             this.importTilesetToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.importTilesetToolStripMenuItem.Text = "Import tileset...";
@@ -670,7 +670,7 @@ namespace LAZYSHELL.Battlefields
             // editSelect
             // 
             this.editSelect.CheckOnClick = true;
-            this.editSelect.Image = global::LAZYSHELL.Properties.Resources.select;
+            this.editSelect.Image = global::LazyShell.Properties.Resources.select;
             this.editSelect.Name = "editSelect";
             this.editSelect.Size = new System.Drawing.Size(23, 20);
             this.editSelect.ToolTipText = "Select (S)";
@@ -683,7 +683,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editCut
             // 
-            this.editCut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.editCut.Image = global::LazyShell.Properties.Resources.cut;
             this.editCut.Name = "editCut";
             this.editCut.Size = new System.Drawing.Size(23, 20);
             this.editCut.ToolTipText = "Cut (Ctrl+X)";
@@ -691,7 +691,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editCopy
             // 
-            this.editCopy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.editCopy.Image = global::LazyShell.Properties.Resources.copy;
             this.editCopy.Name = "editCopy";
             this.editCopy.Size = new System.Drawing.Size(23, 20);
             this.editCopy.ToolTipText = "Copy (Ctrl+C)";
@@ -699,7 +699,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editPaste
             // 
-            this.editPaste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.editPaste.Image = global::LazyShell.Properties.Resources.paste;
             this.editPaste.Name = "editPaste";
             this.editPaste.Size = new System.Drawing.Size(23, 20);
             this.editPaste.ToolTipText = "Paste (Ctrl+V)";
@@ -707,7 +707,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editDelete
             // 
-            this.editDelete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.editDelete.Image = global::LazyShell.Properties.Resources.delete;
             this.editDelete.Name = "editDelete";
             this.editDelete.Size = new System.Drawing.Size(23, 20);
             this.editDelete.ToolTipText = "Delete (Del)";
@@ -721,7 +721,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editMirror
             // 
-            this.editMirror.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.editMirror.Image = global::LazyShell.Properties.Resources.mirror;
             this.editMirror.Name = "editMirror";
             this.editMirror.Size = new System.Drawing.Size(23, 20);
             this.editMirror.ToolTipText = "Mirror";
@@ -729,7 +729,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editInvert
             // 
-            this.editInvert.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.editInvert.Image = global::LazyShell.Properties.Resources.flip;
             this.editInvert.Name = "editInvert";
             this.editInvert.Size = new System.Drawing.Size(23, 20);
             this.editInvert.ToolTipText = "Invert";
@@ -742,7 +742,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editUndo
             // 
-            this.editUndo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.editUndo.Image = global::LazyShell.Properties.Resources.undo;
             this.editUndo.Name = "editUndo";
             this.editUndo.Size = new System.Drawing.Size(23, 20);
             this.editUndo.ToolTipText = "Undo (Ctrl+Z)";
@@ -750,7 +750,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // editRedo
             // 
-            this.editRedo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.editRedo.Image = global::LazyShell.Properties.Resources.redo;
             this.editRedo.Name = "editRedo";
             this.editRedo.Size = new System.Drawing.Size(23, 20);
             this.editRedo.ToolTipText = "Redo (Ctrl+Y)";
@@ -780,7 +780,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // openPalettes
             // 
-            this.openPalettes.Image = global::LAZYSHELL.Properties.Resources.openPalettes;
+            this.openPalettes.Image = global::LazyShell.Properties.Resources.openPalettes;
             this.openPalettes.Name = "openPalettes";
             this.openPalettes.Size = new System.Drawing.Size(23, 22);
             this.openPalettes.ToolTipText = "Palettes";
@@ -788,7 +788,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // openGraphics
             // 
-            this.openGraphics.Image = global::LAZYSHELL.Properties.Resources.openGraphics;
+            this.openGraphics.Image = global::LazyShell.Properties.Resources.openGraphics;
             this.openGraphics.Name = "openGraphics";
             this.openGraphics.Size = new System.Drawing.Size(23, 22);
             this.openGraphics.ToolTipText = "BPP Graphics";
@@ -796,7 +796,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // openTileEditor
             // 
-            this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
+            this.openTileEditor.Image = global::LazyShell.Properties.Resources.openTileEditor;
             this.openTileEditor.Name = "openTileEditor";
             this.openTileEditor.Size = new System.Drawing.Size(23, 22);
             this.openTileEditor.ToolTipText = "Tile Editor";
@@ -810,7 +810,7 @@ namespace LAZYSHELL.Battlefields
             // toggleTileGrid
             // 
             this.toggleTileGrid.CheckOnClick = true;
-            this.toggleTileGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+            this.toggleTileGrid.Image = global::LazyShell.Properties.Resources.buttonToggleGrid;
             this.toggleTileGrid.Name = "toggleTileGrid";
             this.toggleTileGrid.Size = new System.Drawing.Size(23, 22);
             this.toggleTileGrid.ToolTipText = "Tile Grid (G)";
@@ -846,7 +846,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // save
             // 
-            this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+            this.save.Image = global::LazyShell.Properties.Resources.save;
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(23, 22);
             this.save.ToolTipText = "Save";
@@ -859,7 +859,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // import
             // 
-            this.import.Image = global::LAZYSHELL.Properties.Resources.importData;
+            this.import.Image = global::LazyShell.Properties.Resources.importData;
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(23, 22);
             this.import.ToolTipText = "Import";
@@ -867,7 +867,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // export
             // 
-            this.export.Image = global::LAZYSHELL.Properties.Resources.exportData;
+            this.export.Image = global::LazyShell.Properties.Resources.exportData;
             this.export.Name = "export";
             this.export.Size = new System.Drawing.Size(23, 22);
             this.export.ToolTipText = "Export";
@@ -875,7 +875,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // reset
             // 
-            this.reset.Image = global::LAZYSHELL.Properties.Resources.reset;
+            this.reset.Image = global::LazyShell.Properties.Resources.reset;
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(23, 22);
             this.reset.ToolTipText = "Reset";
@@ -883,7 +883,7 @@ namespace LAZYSHELL.Battlefields
             // 
             // clear
             // 
-            this.clear.Image = global::LAZYSHELL.Properties.Resources.clear;
+            this.clear.Image = global::LazyShell.Properties.Resources.clear;
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(23, 22);
             this.clear.ToolTipText = "Clear";
@@ -897,7 +897,7 @@ namespace LAZYSHELL.Battlefields
             // helpTips
             // 
             this.helpTips.CheckOnClick = true;
-            this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+            this.helpTips.Image = global::LazyShell.Properties.Resources.help;
             this.helpTips.Name = "helpTips";
             this.helpTips.Size = new System.Drawing.Size(23, 22);
             this.helpTips.ToolTipText = "Help Tips";
@@ -905,7 +905,7 @@ namespace LAZYSHELL.Battlefields
             // baseConvertor
             // 
             this.baseConvertor.CheckOnClick = true;
-            this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+            this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
             this.baseConvertor.Name = "baseConvertor";
             this.baseConvertor.Size = new System.Drawing.Size(23, 22);
             this.baseConvertor.ToolTipText = "Base Convertor";
@@ -959,7 +959,7 @@ namespace LAZYSHELL.Battlefields
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "OwnerForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "BATTLEFIELDS - Lazy Shell";
+            this.Text = "Battlefields - Lazy Shell";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OwnerForm_KeyDown);
             panel444.ResumeLayout(false);

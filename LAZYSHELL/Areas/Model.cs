@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public static class Model
     {
@@ -12,8 +12,8 @@ namespace LAZYSHELL.Areas
         // ROM buffer
         public static byte[] ROM
         {
-            get { return LAZYSHELL.Model.ROM; }
-            set { LAZYSHELL.Model.ROM = value; }
+            get { return LazyShell.Model.ROM; }
+            set { LazyShell.Model.ROM = value; }
         }
 
         // Compressed data
@@ -317,7 +317,7 @@ namespace LAZYSHELL.Areas
             }
             // finally export the serialized levels
             Do.Export(sLevels,
-                fullPath + "\\" + LAZYSHELL.Model.GetFileNameWithoutPath() + " - Areas\\" + "area", "AREA", true);
+                fullPath + "\\" + LazyShell.Model.GetFileNameWithoutPath() + " - Areas\\" + "area", "AREA", true);
         }
         public static bool ImportArea(int index, string fullPath)
         {

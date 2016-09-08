@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.LevelUps
+namespace LazyShell.LevelUps
 {
     [Serializable()]
     public class LevelUp : Element

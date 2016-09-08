@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     public class Script
     {

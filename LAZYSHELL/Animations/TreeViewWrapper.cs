@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Animations
+namespace LazyShell.Animations
 {
     /// <summary>
     /// Incorporates an animation script into a TreeView control to manage a navigable user interface of TreeNodes and their associated script commands.

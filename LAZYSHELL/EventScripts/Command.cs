@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.EventScripts
+namespace LazyShell.EventScripts
 {
-    public abstract class Command : LAZYSHELL.Command
+    public abstract class Command : LazyShell.Command
     {
         // Pointer retrieval
         public abstract ushort ReadPointer();

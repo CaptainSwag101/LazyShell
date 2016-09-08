@@ -6,9 +6,9 @@ using System.Windows.Forms; // remove later
 using System.IO;
 using System.Security.Cryptography;
 using System.Xml;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public static class Model
     {
@@ -51,14 +51,14 @@ namespace LAZYSHELL
 
         // Help
         private static XmlDocument lazyshell_xml;
-        public static XmlDocument LAZYSHELL_xml
+        public static XmlDocument LazyShell_xml
         {
             get
             {
                 if (lazyshell_xml == null)
                 {
                     lazyshell_xml = new XmlDocument();
-                    lazyshell_xml.LoadXml(Resources.LAZYSHELL_xml);
+                    lazyshell_xml.LoadXml(global::LazyShell.Properties.Resources.LazyShell_xml);
                 }
                 return lazyshell_xml;
             }

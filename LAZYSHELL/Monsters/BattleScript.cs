@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     [Serializable()]
     public class BattleScript : Element

@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     partial class OwnerForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.Monsters
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,8 +28,8 @@ namespace LAZYSHELL.Monsters
         {
 			this.components = new System.ComponentModel.Container();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.name = new LAZYSHELL.Controls.NewToolStripComboBox();
-			this.num = new LAZYSHELL.Controls.NewToolStripNumericUpDown();
+			this.name = new LazyShell.Controls.NewToolStripComboBox();
+			this.num = new LazyShell.Controls.NewToolStripNumericUpDown();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.nameText = new System.Windows.Forms.ToolStripTextBox();
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -56,9 +56,9 @@ namespace LAZYSHELL.Monsters
 			this.baseConvertor = new System.Windows.Forms.ToolStripButton();
 			this.hackingTools = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-			this.toggleMonsters = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleSprite = new LAZYSHELL.Controls.NewToolStripButton();
-			this.toggleBattleScripts = new LAZYSHELL.Controls.NewToolStripButton();
+			this.toggleMonsters = new LazyShell.Controls.NewToolStripButton();
+			this.toggleSprite = new LazyShell.Controls.NewToolStripButton();
+			this.toggleBattleScripts = new LazyShell.Controls.NewToolStripButton();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
 			this.toolStrip1.SuspendLayout();
@@ -149,7 +149,7 @@ namespace LAZYSHELL.Monsters
 			// openPreviewer
 			// 
 			this.openPreviewer.AutoSize = false;
-			this.openPreviewer.Image = global::LAZYSHELL.Properties.Resources.preview;
+			this.openPreviewer.Image = global::LazyShell.Properties.Resources.preview;
 			this.openPreviewer.Name = "openPreviewer";
 			this.openPreviewer.Size = new System.Drawing.Size(22, 22);
 			this.openPreviewer.ToolTipText = "Open Previewer";
@@ -179,7 +179,7 @@ namespace LAZYSHELL.Monsters
 			// 
 			// save
 			// 
-			this.save.Image = global::LAZYSHELL.Properties.Resources.save;
+			this.save.Image = global::LazyShell.Properties.Resources.save;
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(23, 22);
 			this.save.ToolTipText = "Save";
@@ -195,7 +195,7 @@ namespace LAZYSHELL.Monsters
 			this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.import,
             this.importBattleScripts});
-			this.toolStripDropDownButton1.Image = global::LAZYSHELL.Properties.Resources.importData;
+			this.toolStripDropDownButton1.Image = global::LazyShell.Properties.Resources.importData;
 			this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
 			this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -220,7 +220,7 @@ namespace LAZYSHELL.Monsters
             this.exportBattleScripts,
             this.toolStripSeparator2,
             this.dumpBattleScriptText});
-			this.toolStripDropDownButton2.Image = global::LAZYSHELL.Properties.Resources.exportData;
+			this.toolStripDropDownButton2.Image = global::LazyShell.Properties.Resources.exportData;
 			this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
 			this.toolStripDropDownButton2.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -245,7 +245,7 @@ namespace LAZYSHELL.Monsters
 			// 
 			// dumpBattleScriptText
 			// 
-			this.dumpBattleScriptText.Image = global::LAZYSHELL.Properties.Resources.notepad;
+			this.dumpBattleScriptText.Image = global::LazyShell.Properties.Resources.notepad;
 			this.dumpBattleScriptText.Name = "dumpBattleScriptText";
 			this.dumpBattleScriptText.Size = new System.Drawing.Size(203, 22);
 			this.dumpBattleScriptText.Text = "Dump battle script text...";
@@ -256,7 +256,7 @@ namespace LAZYSHELL.Monsters
 			this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetCurrentMonster,
             this.resetCurrentBattleScript});
-			this.toolStripDropDownButton4.Image = global::LAZYSHELL.Properties.Resources.reset;
+			this.toolStripDropDownButton4.Image = global::LazyShell.Properties.Resources.reset;
 			this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
 			this.toolStripDropDownButton4.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -279,7 +279,7 @@ namespace LAZYSHELL.Monsters
 			this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clear,
             this.clearBattleScripts});
-			this.toolStripDropDownButton3.Image = global::LAZYSHELL.Properties.Resources.clear;
+			this.toolStripDropDownButton3.Image = global::LazyShell.Properties.Resources.clear;
 			this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
 			this.toolStripDropDownButton3.Size = new System.Drawing.Size(29, 22);
 			// 
@@ -305,7 +305,7 @@ namespace LAZYSHELL.Monsters
 			// helpTips
 			// 
 			this.helpTips.CheckOnClick = true;
-			this.helpTips.Image = global::LAZYSHELL.Properties.Resources.help;
+			this.helpTips.Image = global::LazyShell.Properties.Resources.help;
 			this.helpTips.Name = "helpTips";
 			this.helpTips.Size = new System.Drawing.Size(23, 22);
 			this.helpTips.ToolTipText = "Help Tips";
@@ -313,14 +313,14 @@ namespace LAZYSHELL.Monsters
 			// baseConvertor
 			// 
 			this.baseConvertor.CheckOnClick = true;
-			this.baseConvertor.Image = global::LAZYSHELL.Properties.Resources.baseConversion;
+			this.baseConvertor.Image = global::LazyShell.Properties.Resources.baseConversion;
 			this.baseConvertor.Name = "baseConvertor";
 			this.baseConvertor.Size = new System.Drawing.Size(23, 22);
 			this.baseConvertor.ToolTipText = "Base Convertor";
 			// 
 			// hackingTools
 			// 
-			this.hackingTools.Image = global::LAZYSHELL.Properties.Resources.tools;
+			this.hackingTools.Image = global::LazyShell.Properties.Resources.tools;
 			this.hackingTools.Name = "hackingTools";
 			this.hackingTools.Size = new System.Drawing.Size(23, 22);
 			this.hackingTools.ToolTipText = "Hacking tools";
@@ -337,7 +337,7 @@ namespace LAZYSHELL.Monsters
 			this.toggleMonsters.CheckOnClick = true;
 			this.toggleMonsters.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleMonsters.Form = null;
-			this.toggleMonsters.Image = global::LAZYSHELL.Properties.Resources.mainMonsters;
+			this.toggleMonsters.Image = global::LazyShell.Properties.Resources.mainMonsters;
 			this.toggleMonsters.Name = "toggleMonsters";
 			this.toggleMonsters.Size = new System.Drawing.Size(23, 22);
 			this.toggleMonsters.ToolTipText = "Monsters";
@@ -348,7 +348,7 @@ namespace LAZYSHELL.Monsters
 			this.toggleSprite.CheckOnClick = true;
 			this.toggleSprite.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleSprite.Form = null;
-			this.toggleSprite.Image = global::LAZYSHELL.Properties.Resources.toggleMonsterSprite;
+			this.toggleSprite.Image = global::LazyShell.Properties.Resources.toggleMonsterSprite;
 			this.toggleSprite.Name = "toggleSprite";
 			this.toggleSprite.Size = new System.Drawing.Size(23, 22);
 			this.toggleSprite.ToolTipText = "Show/hide monster sprite settings";
@@ -359,7 +359,7 @@ namespace LAZYSHELL.Monsters
 			this.toggleBattleScripts.CheckOnClick = true;
 			this.toggleBattleScripts.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toggleBattleScripts.Form = null;
-			this.toggleBattleScripts.Image = global::LAZYSHELL.Properties.Resources.mainBattleScripts;
+			this.toggleBattleScripts.Image = global::LazyShell.Properties.Resources.mainBattleScripts;
 			this.toggleBattleScripts.Name = "toggleBattleScripts";
 			this.toggleBattleScripts.Size = new System.Drawing.Size(23, 22);
 			this.toggleBattleScripts.ToolTipText = "Battlescripts";
@@ -390,7 +390,7 @@ namespace LAZYSHELL.Monsters
 			this.KeyPreview = true;
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "OwnerForm";
-			this.Text = "MONSTERS - Lazy Shell";
+			this.Text = "Monsters - Lazy Shell";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();

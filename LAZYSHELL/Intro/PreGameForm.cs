@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL.Intro
+namespace LazyShell.Intro
 {
     public partial class PreGameForm : Controls.DockForm
     {
@@ -161,7 +161,7 @@ namespace LAZYSHELL.Intro
         private void importImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+            openFileDialog1.InitialDirectory = LazyShell.Properties.Settings.Default.LastRomPath;
             openFileDialog1.Title = "Import opening credits";
             openFileDialog1.Filter = "Image files (*.gif,*.jpg,*.png)|*.gif;*.jpg;*.png";
             openFileDialog1.FilterIndex = 1;

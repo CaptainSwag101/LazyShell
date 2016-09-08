@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Dialogues
+namespace LazyShell.Dialogues
 {
     public partial class OwnerForm : Controls.NewForm
     {

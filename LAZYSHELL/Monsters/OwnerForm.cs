@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Monsters
+namespace LazyShell.Monsters
 {
     public partial class OwnerForm : Controls.NewForm
     {

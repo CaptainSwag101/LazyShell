@@ -2,69 +2,69 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
-    class GraphicUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateGraphics();
+            LazyShell.Model.Program.Minecart.UpdateGraphics();
         }
     }
-    class GraphicSpritesUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicSpritesUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateGraphicsSprites();
+            LazyShell.Model.Program.Minecart.UpdateGraphicsSprites();
         }
     }
-    class GraphicObjectsUpdater : LAZYSHELL.GraphicUpdater
+    class GraphicObjectsUpdater : LazyShell.GraphicUpdater
     {
         public override void UpdateGraphics()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateGraphicsObjects();
+            LazyShell.Model.Program.Minecart.UpdateGraphicsObjects();
         }
     }
-    class PaletteUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdatePalette();
+            LazyShell.Model.Program.Minecart.UpdatePalette();
         }
     }
-    class PaletteSpritesUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteSpritesUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateGraphicsSprites();
+            LazyShell.Model.Program.Minecart.UpdateGraphicsSprites();
         }
     }
-    class PaletteObjectsUpdater : LAZYSHELL.PaletteUpdater
+    class PaletteObjectsUpdater : LazyShell.PaletteUpdater
     {
         public override void UpdatePalette()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdatePalettesObjects();
+            LazyShell.Model.Program.Minecart.UpdatePalettesObjects();
         }
     }
-    class TilemapUpdater : LAZYSHELL.TilemapUpdater
+    class TilemapUpdater : LazyShell.TilemapUpdater
     {
         public override void UpdateTilemap()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateTilemap();
+            LazyShell.Model.Program.Minecart.UpdateTilemap();
         }
     }
-    class TilesetUpdater : LAZYSHELL.TilesetUpdater
+    class TilesetUpdater : LazyShell.TilesetUpdater
     {
         public override void UpdateTileset()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateTileset();
+            LazyShell.Model.Program.Minecart.UpdateTileset();
         }
     }
-    class TileUpdater : LAZYSHELL.TileUpdater
+    class TileUpdater : LazyShell.TileUpdater
     {
         public override void UpdateTile()
         {
-            LAZYSHELL.Model.Program.Minecart.UpdateTile();
+            LazyShell.Model.Program.Minecart.UpdateTile();
         }
     }
 }

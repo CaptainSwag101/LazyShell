@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL
+namespace LazyShell
 {
     partial class SettingsEditor
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -240,7 +240,7 @@ namespace LAZYSHELL
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "SettingsEditor";
-			this.Text = "LAZY SHELL - Preferences";
+			this.Text = "Preferences - Lazy Shell";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);

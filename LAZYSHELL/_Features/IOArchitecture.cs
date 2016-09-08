@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
     public partial class IOArchitecture : Controls.NewForm
     {
@@ -303,7 +303,7 @@ namespace LAZYSHELL
             else
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.InitialDirectory = LAZYSHELL.Properties.Settings.Default.LastRomPath;
+                openFileDialog.InitialDirectory = LazyShell.Properties.Settings.Default.LastRomPath;
                 openFileDialog.Title = "Select file to import from";
                 openFileDialog.Filter = filter;
                 openFileDialog.FilterIndex = 0;

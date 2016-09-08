@@ -10,12 +10,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.EventScripts;
-using LAZYSHELL.Undo;
+using LazyShell.Properties;
+using LazyShell.EventScripts;
+using LazyShell.Undo;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Audio
+namespace LazyShell.Audio
 {
     public partial class OwnerForm : Controls.NewForm
     {
@@ -1439,7 +1439,7 @@ namespace LAZYSHELL.Audio
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
-            saveFileDialog.FileName = LAZYSHELL.Model.GetFileNameWithoutPath() + " - ";
+            saveFileDialog.FileName = LazyShell.Model.GetFileNameWithoutPath() + " - ";
             if (exportMode == 0)
                 saveFileDialog.FileName += "SPCMML-" + Index.ToString("d2");
             else
@@ -1855,9 +1855,9 @@ namespace LAZYSHELL.Audio
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x042826) - 0x3400 + 0x042C26;
             else
                 offset = Bits.GetShort(Model.ROM, Index * 4 + 0x043E26) - 0x3400 + 0x044226;
-            LAZYSHELL.Model.HexEditor.SetOffset(offset - 0xC00000);
-            LAZYSHELL.Model.HexEditor.HighlightChanges();
-            LAZYSHELL.Model.HexEditor.Show();
+            LazyShell.Model.HexEditor.SetOffset(offset - 0xC00000);
+            LazyShell.Model.HexEditor.HighlightChanges();
+            LazyShell.Model.HexEditor.Show();
         }
         private void openPreviewer_Click(object sender, EventArgs e)
         {

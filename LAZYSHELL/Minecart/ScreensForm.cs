@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
-using LAZYSHELL.Areas;
+using LazyShell.Properties;
+using LazyShell.Areas;
 
-namespace LAZYSHELL.Minecart
+namespace LazyShell.Minecart
 {
     public partial class ScreensForm : Controls.DockForm
     {

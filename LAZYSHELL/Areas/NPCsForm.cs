@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace LAZYSHELL.Areas
+namespace LazyShell.Areas
 {
     public partial class NPCsForm : Controls.DockForm
     {
@@ -626,19 +626,19 @@ namespace LAZYSHELL.Areas
         {
             if (EngageType == EngageType.Battle)
                 return;
-            if (LAZYSHELL.Model.Program.EventScripts == null || !LAZYSHELL.Model.Program.EventScripts.Visible)
-                LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-            LAZYSHELL.Model.Program.EventScripts.Type = 0;
-            LAZYSHELL.Model.Program.EventScripts.Index = (int)eventOrPack.Value;
-            LAZYSHELL.Model.Program.EventScripts.BringToFront();
+            if (LazyShell.Model.Program.EventScripts == null || !LazyShell.Model.Program.EventScripts.Visible)
+                LazyShell.Model.Program.CreateEventScriptsWindow();
+            LazyShell.Model.Program.EventScripts.Type = 0;
+            LazyShell.Model.Program.EventScripts.Index = (int)eventOrPack.Value;
+            LazyShell.Model.Program.EventScripts.BringToFront();
         }
         private void openEventsForm_Click(object sender, EventArgs e)
         {
-            if (LAZYSHELL.Model.Program.EventScripts == null || !LAZYSHELL.Model.Program.EventScripts.Visible)
-                LAZYSHELL.Model.Program.CreateEventScriptsWindow();
-            LAZYSHELL.Model.Program.EventScripts.Type = 1;
-            LAZYSHELL.Model.Program.EventScripts.Index = (int)action.Value;
-            LAZYSHELL.Model.Program.EventScripts.BringToFront();
+            if (LazyShell.Model.Program.EventScripts == null || !LazyShell.Model.Program.EventScripts.Visible)
+                LazyShell.Model.Program.CreateEventScriptsWindow();
+            LazyShell.Model.Program.EventScripts.Type = 1;
+            LazyShell.Model.Program.EventScripts.Index = (int)action.Value;
+            LazyShell.Model.Program.EventScripts.BringToFront();
         }
 
         #endregion

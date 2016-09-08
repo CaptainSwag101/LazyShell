@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
     [Serializable()]
     public class WorldMap : Element

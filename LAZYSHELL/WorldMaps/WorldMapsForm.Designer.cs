@@ -1,5 +1,5 @@
 ﻿
-namespace LAZYSHELL.WorldMaps
+namespace LazyShell.WorldMaps
 {
     partial class WorldMapsForm
     {
@@ -8,9 +8,9 @@ namespace LAZYSHELL.WorldMaps
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         /// <summary>
-        /// Clean up any resources being used.
+        /// Clean up any global::LazyShell.Properties.Resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed global::LazyShell.Properties.Resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -70,7 +70,7 @@ namespace LAZYSHELL.WorldMaps
             this.openTileEditor = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.headerLabel1 = new LAZYSHELL.Controls.HeaderLabel();
+            this.headerLabel1 = new LazyShell.Controls.HeaderLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.worldMapYCoord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.worldMapTileset)).BeginInit();
@@ -198,7 +198,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // picture
             // 
-            this.picture.BackgroundImage = global::LAZYSHELL.Properties.Resources._transparent;
+            this.picture.BackgroundImage = global::LazyShell.Properties.Resources._transparent;
             this.picture.ContextMenuStrip = this.contextMenuStrip1;
             this.picture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picture.Location = new System.Drawing.Point(0, 0);
@@ -231,7 +231,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuCut
             // 
-            this.menuCut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.menuCut.Image = global::LazyShell.Properties.Resources.cut;
             this.menuCut.Name = "menuCut";
             this.menuCut.Size = new System.Drawing.Size(159, 22);
             this.menuCut.Text = "Cut";
@@ -239,7 +239,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuCopy
             // 
-            this.menuCopy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.menuCopy.Image = global::LazyShell.Properties.Resources.copy;
             this.menuCopy.Name = "menuCopy";
             this.menuCopy.Size = new System.Drawing.Size(159, 22);
             this.menuCopy.Text = "Copy";
@@ -247,7 +247,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuPaste
             // 
-            this.menuPaste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.menuPaste.Image = global::LazyShell.Properties.Resources.paste;
             this.menuPaste.Name = "menuPaste";
             this.menuPaste.Size = new System.Drawing.Size(159, 22);
             this.menuPaste.Text = "Paste";
@@ -255,7 +255,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuDelete
             // 
-            this.menuDelete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.menuDelete.Image = global::LazyShell.Properties.Resources.delete;
             this.menuDelete.Name = "menuDelete";
             this.menuDelete.Size = new System.Drawing.Size(159, 22);
             this.menuDelete.Text = "Delete";
@@ -268,7 +268,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuMirror
             // 
-            this.menuMirror.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.menuMirror.Image = global::LazyShell.Properties.Resources.mirror;
             this.menuMirror.Name = "menuMirror";
             this.menuMirror.Size = new System.Drawing.Size(159, 22);
             this.menuMirror.Text = "Mirror";
@@ -276,7 +276,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuInvert
             // 
-            this.menuInvert.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.menuInvert.Image = global::LazyShell.Properties.Resources.flip;
             this.menuInvert.Name = "menuInvert";
             this.menuInvert.Size = new System.Drawing.Size(159, 22);
             this.menuInvert.Text = "Invert";
@@ -289,7 +289,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // menuSaveImage
             // 
-            this.menuSaveImage.Image = global::LAZYSHELL.Properties.Resources.exportImage;
+            this.menuSaveImage.Image = global::LazyShell.Properties.Resources.exportImage;
             this.menuSaveImage.Name = "menuSaveImage";
             this.menuSaveImage.Size = new System.Drawing.Size(159, 22);
             this.menuSaveImage.Text = "Save Image As...";
@@ -319,7 +319,7 @@ namespace LAZYSHELL.WorldMaps
             // editSelect
             // 
             this.editSelect.CheckOnClick = true;
-            this.editSelect.Image = global::LAZYSHELL.Properties.Resources.select;
+            this.editSelect.Image = global::LazyShell.Properties.Resources.select;
             this.editSelect.Name = "editSelect";
             this.editSelect.Size = new System.Drawing.Size(23, 20);
             this.editSelect.ToolTipText = "Select (S)";
@@ -332,7 +332,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editCut
             // 
-            this.editCut.Image = global::LAZYSHELL.Properties.Resources.cut;
+            this.editCut.Image = global::LazyShell.Properties.Resources.cut;
             this.editCut.Name = "editCut";
             this.editCut.Size = new System.Drawing.Size(23, 20);
             this.editCut.ToolTipText = "Cut (Ctrl+X)";
@@ -340,7 +340,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editCopy
             // 
-            this.editCopy.Image = global::LAZYSHELL.Properties.Resources.copy;
+            this.editCopy.Image = global::LazyShell.Properties.Resources.copy;
             this.editCopy.Name = "editCopy";
             this.editCopy.Size = new System.Drawing.Size(23, 20);
             this.editCopy.ToolTipText = "Copy (Ctrl+C)";
@@ -348,7 +348,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editPaste
             // 
-            this.editPaste.Image = global::LAZYSHELL.Properties.Resources.paste;
+            this.editPaste.Image = global::LazyShell.Properties.Resources.paste;
             this.editPaste.Name = "editPaste";
             this.editPaste.Size = new System.Drawing.Size(23, 20);
             this.editPaste.ToolTipText = "Paste (Ctrl+V)";
@@ -356,7 +356,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editDelete
             // 
-            this.editDelete.Image = global::LAZYSHELL.Properties.Resources.delete;
+            this.editDelete.Image = global::LazyShell.Properties.Resources.delete;
             this.editDelete.Name = "editDelete";
             this.editDelete.Size = new System.Drawing.Size(23, 20);
             this.editDelete.ToolTipText = "Delete (Del)";
@@ -369,7 +369,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editMirror
             // 
-            this.editMirror.Image = global::LAZYSHELL.Properties.Resources.mirror;
+            this.editMirror.Image = global::LazyShell.Properties.Resources.mirror;
             this.editMirror.Name = "editMirror";
             this.editMirror.Size = new System.Drawing.Size(23, 20);
             this.editMirror.ToolTipText = "Mirror";
@@ -377,7 +377,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editInvert
             // 
-            this.editInvert.Image = global::LAZYSHELL.Properties.Resources.flip;
+            this.editInvert.Image = global::LazyShell.Properties.Resources.flip;
             this.editInvert.Name = "editInvert";
             this.editInvert.Size = new System.Drawing.Size(23, 20);
             this.editInvert.ToolTipText = "Invert";
@@ -391,7 +391,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editUndo
             // 
-            this.editUndo.Image = global::LAZYSHELL.Properties.Resources.undo;
+            this.editUndo.Image = global::LazyShell.Properties.Resources.undo;
             this.editUndo.Name = "editUndo";
             this.editUndo.Size = new System.Drawing.Size(23, 20);
             this.editUndo.ToolTipText = "Undo (Ctrl+Z)";
@@ -399,7 +399,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // editRedo
             // 
-            this.editRedo.Image = global::LAZYSHELL.Properties.Resources.redo;
+            this.editRedo.Image = global::LazyShell.Properties.Resources.redo;
             this.editRedo.Name = "editRedo";
             this.editRedo.Size = new System.Drawing.Size(23, 20);
             this.editRedo.ToolTipText = "Redo (Ctrl+Y)";
@@ -430,7 +430,7 @@ namespace LAZYSHELL.WorldMaps
             // toggleLocations
             // 
             this.toggleLocations.CheckOnClick = true;
-            this.toggleLocations.Image = global::LAZYSHELL.Properties.Resources.location;
+            this.toggleLocations.Image = global::LazyShell.Properties.Resources.location;
             this.toggleLocations.Name = "toggleLocations";
             this.toggleLocations.Size = new System.Drawing.Size(23, 22);
             this.toggleLocations.ToolTipText = "Show Locations";
@@ -439,7 +439,7 @@ namespace LAZYSHELL.WorldMaps
             // toggleBanner
             // 
             this.toggleBanner.CheckOnClick = true;
-            this.toggleBanner.Image = global::LAZYSHELL.Properties.Resources.mapBanner;
+            this.toggleBanner.Image = global::LazyShell.Properties.Resources.mapBanner;
             this.toggleBanner.Name = "toggleBanner";
             this.toggleBanner.Size = new System.Drawing.Size(23, 22);
             this.toggleBanner.ToolTipText = "Show Banner";
@@ -453,7 +453,7 @@ namespace LAZYSHELL.WorldMaps
             // toggleTileGrid
             // 
             this.toggleTileGrid.CheckOnClick = true;
-            this.toggleTileGrid.Image = global::LAZYSHELL.Properties.Resources.buttonToggleGrid;
+            this.toggleTileGrid.Image = global::LazyShell.Properties.Resources.buttonToggleGrid;
             this.toggleTileGrid.Name = "toggleTileGrid";
             this.toggleTileGrid.Size = new System.Drawing.Size(23, 22);
             this.toggleTileGrid.ToolTipText = "Tile Grid (G)";
@@ -472,7 +472,7 @@ namespace LAZYSHELL.WorldMaps
             // 
             // openTileEditor
             // 
-            this.openTileEditor.Image = global::LAZYSHELL.Properties.Resources.openTileEditor;
+            this.openTileEditor.Image = global::LazyShell.Properties.Resources.openTileEditor;
             this.openTileEditor.Name = "openTileEditor";
             this.openTileEditor.Size = new System.Drawing.Size(23, 22);
             this.openTileEditor.ToolTipText = "Tile Editor";
@@ -530,7 +530,7 @@ namespace LAZYSHELL.WorldMaps
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "WorldMapsForm";
             this.Text = "Tileset";
-            this.TilesetForms = new LAZYSHELL.TilesetForm[] {
+            this.TilesetForms = new LazyShell.TilesetForm[] {
         null};
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldMaps_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.worldMapYCoord)).EndInit();

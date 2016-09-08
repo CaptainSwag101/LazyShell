@@ -3,9 +3,9 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL.Magic
+namespace LazyShell.Magic
 {
     [Serializable()]
     public class Spell : Element
