@@ -27,7 +27,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization;
@@ -36,9 +35,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Microsoft.Win32;
-using LAZYSHELL.Properties;
+using LazyShell.Properties;
 
-namespace LAZYSHELL
+namespace LazyShell
 {
 	public partial class MainForm : Controls.NewForm, IMRUClient
 	{
@@ -54,7 +53,7 @@ namespace LAZYSHELL
 		// MRU List manager
 		private MRUManager mruManager;      // MRU list manager
 		private string initialDirectory;    // Initial directory for Save/Load operations
-		const string registryPath = "SOFTWARE\\LAZYSHELL\\LazyShell";  // Registry path to keep persistent data
+		const string registryPath = "SOFTWARE\\LazyShell\\LazyShell";  // Registry path to keep persistent data
 		[DllImport("advapi32.dll", EntryPoint = "RegDeleteKey")]
 		public static extern int RegDeleteKeyA(int hKey, string lpSubKey);
 
@@ -83,7 +82,7 @@ namespace LAZYSHELL
 			LoadProjectFile();
 			//
 			if (!settings.FirstLoad)
-				Help.CreateHelp(Model.LAZYSHELL_xml, true);
+				Help.CreateHelp(Model.LazyShell_xml, true);
 			settings.FirstLoad = true;
 			switch (settings.VisualTheme)
 			{
@@ -160,10 +159,10 @@ namespace LAZYSHELL
 		}
 		private void LoadWebpage()
 		{
-			XmlDocument LAZYSHELL_help = Model.LAZYSHELL_xml;
-			XmlNodeList nodes = LAZYSHELL_help.SelectNodes("//section");
+			XmlDocument LazyShell_help = Model.LazyShell_xml;
+			XmlNodeList nodes = LazyShell_help.SelectNodes("//section");
 			string documentText = "<html><head><style>";
-			documentText += Resources.LAZYSHELL_css;
+			documentText += global::LazyShell.Properties.Resources.LazyShell_css;
 			documentText += "</style></head>";
 			documentText += "<body>";
 			foreach (XmlNode node in nodes)
@@ -265,7 +264,7 @@ namespace LAZYSHELL
 		{
 			this.loadRomTextBox.Text = Model.FileName;
 			this.romInfo.Text =
-				AppControl.GetRomName() + "\n" +
+				AppControl.GetRomName().TrimEnd(' ') + "\n" +
 				AppControl.HeaderPresent() + "\n" +
 				AppControl.RomChecksum() + "\n" +
 				AppControl.GameCode();
@@ -464,32 +463,32 @@ namespace LAZYSHELL
 				"LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 			if (result == DialogResult.Cancel)
 				return;
-			XmlDocument LAZYSHELL_xml = Model.LAZYSHELL_xml;
+			XmlDocument LazyShell_xml = Model.LazyShell_xml;
 			if (result == DialogResult.No)
 			{
-				Help.CreateHelp(LAZYSHELL_xml, false);
+				Help.CreateHelp(LazyShell_xml, false);
 				return;
 			}
-			XmlNodeList icons = LAZYSHELL_xml.SelectNodes(".//*[@icon != '']");
+			XmlNodeList icons = LazyShell_xml.SelectNodes(".//*[@icon != '']");
 			if (!Directory.Exists("help"))
 				Directory.CreateDirectory("help");
 			if (!Directory.Exists("help//icons"))
 				Directory.CreateDirectory("help//icons");
-			//File.WriteAllText("help//LAZYSHELL_xml.xml", Resources.LAZYSHELL_xml);
-			//File.WriteAllText("help//LAZYSHELL_xsl.xsl", Resources.LAZYSHELL_xsl);
-			File.WriteAllText("help//LAZYSHELL_css.css", Resources.LAZYSHELL_css);
-			File.WriteAllText("help//LAZYSHELL_html.html", Resources.LAZYSHELL_html);
+			//File.WriteAllText("help//LazyShell_xml.xml", global::LazyShell.Properties.Resources.LazyShell_xml);
+			//File.WriteAllText("help//LazyShell_xsl.xsl", global::LazyShell.Properties.Resources.LazyShell_xsl);
+			File.WriteAllText("help//LazyShell_css.css", global::LazyShell.Properties.Resources.LazyShell_css);
+			File.WriteAllText("help//LazyShell_html.html", global::LazyShell.Properties.Resources.LazyShell_html);
 			foreach (XmlNode icon in icons)
 			{
 				string path = icon.Attributes["icon"].Value;
 				string file = Path.GetFileName(path);
 				string name = Path.GetFileNameWithoutExtension(path);
-				Bitmap image = (Bitmap)Resources.ResourceManager.GetObject(name);
+				Bitmap image = (Bitmap)global::LazyShell.Properties.Resources.ResourceManager.GetObject(name);
 				if (image == null)
 					continue;
 				image.Save("help//icons//" + file);
 			}
-			Process.Start("help\\LAZYSHELL_html.html");
+			Process.Start("help\\LazyShell_html.html");
 		}
 		private void about_Click(object sender, System.EventArgs e)
 		{
