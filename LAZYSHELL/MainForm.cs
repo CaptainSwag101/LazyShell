@@ -1,6 +1,6 @@
 /*	Licensed under GNU AGPLv3
 	
-	LAZY SHELL, a Super Mario RPG Editor
+	Lazy Shell, a Super Mario RPG Editor
     Copyright (C) 2009-2014  giangurgolo & Omega, (C) 2016 CaptainSwag101
 
     This program is free software: you can redistribute it and/or modify
@@ -134,7 +134,7 @@ namespace LazyShell
 				catch (Exception e)
 				{
 					MessageBox.Show("Could not load most recently used ROM.\n\n" + e.Message,
-						"LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						"Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -153,7 +153,7 @@ namespace LazyShell
 				catch (Exception e)
 				{
 					MessageBox.Show("Could not load most recently used project database.\n\n" + e.Message,
-						"LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						"Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -186,7 +186,7 @@ namespace LazyShell
 			if (AppControl.WriteToROMAndCloseWindows())
 			{
 				MessageBox.Show("All of the editor's windows must be closed before loading a new ROM.",
-					"LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					"Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return;
 			}
 			bool ret;
@@ -199,7 +199,7 @@ namespace LazyShell
 				if (AppControl.GameCode() != "ARWE")
 				{
 					if (MessageBox.Show("The game code for this ROM is invalid. There will likely be problems editing the ROM.\n\nLoad anyways?",
-						"LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+						"Lazy Shell", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
 						return;
 				}
 				toolStrip2.Enabled = true;
@@ -239,7 +239,7 @@ namespace LazyShell
 			if (!File.Exists(filename))
 			{
 				MessageBox.Show("Error loading last used database. The file has been moved, renamed, or no longer exists.",
-					"LAZY SHELL");
+					"Lazy Shell");
 				return;
 			}
 			Stream s = File.OpenRead(filename);
@@ -283,7 +283,7 @@ namespace LazyShell
 			{
 				result = MessageBox.Show(
 					"There are changes to the rom that have not been saved.\n\n" +
-					"Would you like to save them now" + (assembleFlag == 1 ? " and quit?" : "?"), "LAZY SHELL",
+					"Would you like to save them now" + (assembleFlag == 1 ? " and quit?" : "?"), "Lazy Shell",
 					MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 				if (result == DialogResult.Yes)
 				{
@@ -291,7 +291,7 @@ namespace LazyShell
 					{
 						MessageBox.Show(
 							"There was an error saving to \"" + Model.FileName + "\"",
-							"LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							"Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						return;
 					}
 				}
@@ -322,7 +322,7 @@ namespace LazyShell
 			catch (Exception e)
 			{
 				MessageBox.Show("Could not load most recently used ROM.\n\n" + e.Message,
-						"LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						"Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		private void LoadSettingsFromRegistry()
@@ -403,7 +403,7 @@ namespace LazyShell
 			}
 			catch
 			{
-				MessageBox.Show("Lazy Shell could not save the ROM.\n\nThe file is currently in use by another application.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Lazy Shell could not save the ROM.\n\nThe file is currently in use by another application.", "Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 			// Now, save the file
@@ -419,13 +419,13 @@ namespace LazyShell
 				settings.Save();
 			}
 			else
-				MessageBox.Show("Lazy Shell could not save the ROM.\n\nMake sure that the file is not currently in use by another appliaction.", "LAZY SHELL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Lazy Shell could not save the ROM.\n\nMake sure that the file is not currently in use by another appliaction.", "Lazy Shell", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 		private void restoreElements_Click(object sender, EventArgs e)
 		{
 			if (AppControl.WriteToROMAndCloseWindows())
 			{
-				MessageBox.Show("All of the editor's windows must be closed before importing data from another ROM.", "LAZY SHELL");
+				MessageBox.Show("All of the editor's windows must be closed before importing data from another ROM.", "Lazy Shell");
 				return;
 			}
 			restore = new Restore();
@@ -460,7 +460,7 @@ namespace LazyShell
 			var result = MessageBox.Show(
 				"Open the help database as a navigable web page?\n\n" +
 				"Selecting \"No\" will open the help file as a raw text file.",
-				"LAZY SHELL", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+				"Lazy Shell", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 			if (result == DialogResult.Cancel)
 				return;
 			XmlDocument LazyShell_xml = Model.LazyShell_xml;
@@ -627,7 +627,7 @@ namespace LazyShell
 		private void openAll_Click(object sender, EventArgs e)
 		{
 			if (MessageBox.Show("You are about to open all 17 editor windows.\n\nAre you sure you want to do this?",
-				"LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+				"Lazy Shell", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
 				return;
 			AppControl.OpenAll();
 		}
@@ -648,7 +648,7 @@ namespace LazyShell
 		private void resetModel_Click(object sender, EventArgs e)
 		{
 			if (MessageBox.Show("You are about to reset the editor's memory of all elements. Continue?",
-				"LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				"Lazy Shell", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				return;
 			AppControl.ClearAll();
 			AppControl.LoadAll();
@@ -656,7 +656,7 @@ namespace LazyShell
 		private void clearModel_Click(object sender, EventArgs e)
 		{
 			if (MessageBox.Show("You are about to clear the editor's memory of all elements. Continue?",
-				"LAZY SHELL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+				"Lazy Shell", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				return;
 			AppControl.ClearAll();
 		}

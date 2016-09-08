@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LazyShell_xsl.xsl"?>
-<LazyShell form="Editor" icon="icons/main.gif" title="LAZY SHELL - Super Mario RPG Editor">
-  <Properties version="4.0.0b" date="May 11, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
+<LazyShell form="Editor" icon="icons/main.gif" title="Lazy Shell - Super Mario RPG Editor">
+  <Properties version="4.0.1b" date="September 7, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>
@@ -26,7 +26,7 @@ Minimal system requirements:
   </section>
   <section>
     <header>Main Features</header>
-    <body>The editor is comprised of 17 individual editors. 
+    <body>The editor is comprised of 21 individual editors.
 Various status editors include modification capabilities for the statuses of monsters, formations, formation packs, items, spells, attacks, shops, new game properties, level-ups, and timing properties. The monsters editor contains a battle script editor for each monster. 
 The Levels portion allows the user to modify the maps of areas (aka locations) using a paint-like interface, the NPCs (ie the sprites in the maps), the exit fields (aka entrances), event fields, overlaps, and the basic layering properties. A template creator/editor lets the user to store a separate portion of the map composed of all 3 layers and the physical layer into a single file. 
 The two scripts editors in Lazy Shell enable the user to modify the event scripts, action scripts, and animations scripts. Commands within event scripts and action scripts may be added, modified, deleted, moved, or copied and pasted. Commands within animation scripts may be modified, moved, or replaced with new commands of the same or smaller length, but adding/deleting entirely new commands within animations is not supported and never will be due to the fickle and erratic nature of the animation script engine. 
