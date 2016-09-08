@@ -34,7 +34,7 @@ namespace LazyShell
 		{
 			if (Environment.Is64BitProcess)
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.2 64-bit" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.1b 64-bit" +
 										"\nCopyright © 2007-2015 giangurgolo & Omega" +
 										"\n" +
 										"\nCreated by Omega & giangurgolo" +
@@ -42,7 +42,7 @@ namespace LazyShell
 			}
 			else
 			{
-				copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.2" +
+				copyrightTextBox.Text = "Lazy Shell, Version 4.0.1b" +
 										"\nCopyright © 2007-2015 giangurgolo & Omega" +
 				                        "\n" +
 										"\nCreated by Omega & giangurgolo" +

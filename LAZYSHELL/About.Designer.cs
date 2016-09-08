@@ -25,7 +25,7 @@ namespace LazyShell
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager Resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.copyrightTextBox = new System.Windows.Forms.RichTextBox();
@@ -75,8 +75,8 @@ namespace LazyShell
 			this.copyrightTextBox.ReadOnly = true;
 			this.copyrightTextBox.Size = new System.Drawing.Size(407, 76);
 			this.copyrightTextBox.TabIndex = 1;
-			this.copyrightTextBox.Text = "Lazy Shell, Version 4.0.0.2\nCopyright © 2007-2015 giangurgolo & Omega\n\nCreated by" +
-    " Omega & giangurgolo\nMaintained by CaptainSwag101";
+			this.copyrightTextBox.Text = "Lazy Shell, Version 4.0.1b\nCopyright © 2007-2015 giangurgolo & Omega\n\nCreated by " +
+    "Omega & giangurgolo\nMaintained by CaptainSwag101";
 			// 
 			// infoTextBox
 			// 
@@ -89,7 +89,7 @@ namespace LazyShell
 			this.infoTextBox.ReadOnly = true;
 			this.infoTextBox.Size = new System.Drawing.Size(407, 310);
 			this.infoTextBox.TabIndex = 0;
-			this.infoTextBox.Text = Resources.GetString("infoTextBox.Text");
+			this.infoTextBox.Text = resources.GetString("infoTextBox.Text");
 			this.infoTextBox.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
 			// 
 			// pictureBox2
