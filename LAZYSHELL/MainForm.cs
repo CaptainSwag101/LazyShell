@@ -444,7 +444,7 @@ namespace LazyShell
 		// ToolStrip : Help
 		private void openHistoryLog_Click(object sender, EventArgs e)
 		{
-			NewMessage.Show("EVENT HISTORY - Lazy Shell",
+			NewMessage.Show("Event History - Lazy Shell",
 				"This is a list of past actions performed by the user exclusively within the Lazy Shell application. " +
 				"This is to be used for debugging purposes, chiefly for reproducing bugs and other defects encountered by the user.",
 				Model.History, 600, 600, true);

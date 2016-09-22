@@ -935,7 +935,6 @@ namespace LazyShell.Areas
 			this.Location = new System.Drawing.Point(20, 20);
 			this.Name = "OwnerForm";
 			this.Text = "Areas - Lazy Shell";
-			this.TilesetForm = null;
 			this.TilesetForms = new LazyShell.TilesetForm[] {
         null,
         null,

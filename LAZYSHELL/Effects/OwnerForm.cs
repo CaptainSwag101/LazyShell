@@ -100,7 +100,7 @@ namespace LazyShell.Effects
             PropertiesForm.ToggleButton = toggleProperties;
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			DockPanel.Theme = new VS2013BlueTheme();
+			//DockPanel.Theme = new VS2013BlueTheme();
 			dockPanel = DockPanel;
 			PropertiesForm.Show(dockPanel, DockState.DockLeft);
             MoldsForm = new MoldsForm(this);

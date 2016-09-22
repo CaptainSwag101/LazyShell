@@ -114,7 +114,7 @@ namespace LazyShell.WorldMaps
             LocationsForm = new LocationsForm(this);
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			DockPanel.Theme = new VS2013BlueTheme();
+			//DockPanel.Theme = new VS2013BlueTheme();
 			dockPanel = DockPanel;
 			LocationsForm.Show(dockPanel, DockState.DockRight);
             WorldMapsForm = new WorldMapsForm(this);

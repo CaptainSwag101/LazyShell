@@ -424,7 +424,6 @@
 			this.Location = new System.Drawing.Point(0, 0);
 			this.Name = "OwnerForm";
 			this.Text = "Minecart Minigame - Lazy Shell";
-			this.TilesetForm = null;
 			this.TilesetForms = new LazyShell.TilesetForm[] {
         null};
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OwnerForm_FormClosing);

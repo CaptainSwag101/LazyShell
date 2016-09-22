@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="LazyShell_xsl.xsl"?>
 <LazyShell form="Editor" icon="icons/main.gif" title="Lazy Shell - Super Mario RPG Editor">
-  <Properties version="4.0.1b" date="September 7, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
+  <Properties version="4.0.1b" date="September 22, 2016" homepage="https://github.com/jpmac26/LazyShell" author="giangurgolo, Omega and CaptainSwag101" />
   <Read>
     <header>Read this first</header>
     <introduction>If this is your first time using Lazy Shell, please take the time to read the following advice:</introduction>

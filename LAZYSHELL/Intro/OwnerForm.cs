@@ -37,7 +37,7 @@ namespace LazyShell.Intro
             TitleScreenForm = new TitleScreenForm(this);
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			DockPanel.Theme = new VS2013BlueTheme();
+			//DockPanel.Theme = new VS2013BlueTheme();
 			dockPanel = DockPanel;
 			TitleScreenForm.Show(dockPanel, DockState.Document);
             TitleScreenForm.LoadTilesetEditor();
