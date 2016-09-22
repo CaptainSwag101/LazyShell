@@ -1,6 +1,6 @@
 ﻿LAZY SHELL - Super Mario RPG Editor
-Version: 4.0.0b
-Date: May 11, 2016
+Version: 4.0.1b
+Date: September 6, 2016
 Home Page: https://github.com/jpmac26/LazyShell
 Written by giangurgolo, Omega and CaptainSwag101
 
