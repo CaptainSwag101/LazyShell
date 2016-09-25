@@ -30,6 +30,7 @@ namespace LazyShell
         {
             settings = Settings.Default;
         }
+
         private void LoadSettings()
         {
             checkedListBox1.SetItemChecked(0, settings.LoadLastUsedROM);
@@ -40,6 +41,7 @@ namespace LazyShell
             checkedListBox1.SetItemChecked(5, settings.UnverifiedRomWarning);
             checkedListBox1.SetItemChecked(6, settings.ShowEncryptionWarnings);
             checkedListBox1.SetItemChecked(7, settings.RememberLastIndex);
+
             if (settings.BackupROMDirectory == "")
             {
                 romDirectory.Checked = true;
@@ -52,22 +54,29 @@ namespace LazyShell
                 customDirectoryTextBox.Text = settings.BackupROMDirectory;
             }
 
-            if (visualThemeSystem.Checked)
+            if (settings.VisualTheme == 0)
             {
-	            settings.VisualTheme = 0;
                 visualThemeSystem.Checked = true;
                 visualThemeSimple.Checked = false;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+				visualThemeBlue.Checked = false;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
             }
-            else
-            {
-				settings.VisualTheme = 1;
+            else if (settings.VisualTheme == 1)
+			{
 				visualThemeSystem.Checked = false;
                 visualThemeSimple.Checked = true;
-                Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+				visualThemeBlue.Checked = false;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
             }
-           
-            this.patchHTTPServer.Text = this.settings.PatchServerURL;
+			else if (settings.VisualTheme == 2)
+			{
+				visualThemeSystem.Checked = false;
+				visualThemeSimple.Checked = false;
+				visualThemeBlue.Checked = true;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
+			}
+
+			this.patchHTTPServer.Text = this.settings.PatchServerURL;
         }
 
         #endregion
@@ -102,20 +111,29 @@ namespace LazyShell
             settings.UnverifiedRomWarning = checkedListBox1.GetItemChecked(5);
             settings.ShowEncryptionWarnings = checkedListBox1.GetItemChecked(6);
             settings.RememberLastIndex = checkedListBox1.GetItemChecked(7);
+
             if (customDirectory.Checked)
                 settings.BackupROMDirectory = customDirectoryTextBox.Text;
             else if (romDirectory.Checked)
                 settings.BackupROMDirectory = "";
+
 	        if (visualThemeSystem.Checked)
 	        {
 				settings.VisualTheme = 0;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
 			}
 			else if (visualThemeSimple.Checked)
 			{
 				settings.VisualTheme = 1;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
+			}
+			else if (visualThemeBlue.Checked)
+			{
+				settings.VisualTheme = 2;
+				Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
 			}
 
-            settings.PatchServerURL = patchHTTPServer.Text;
+			settings.PatchServerURL = patchHTTPServer.Text;
             settings.Save();
         }
         private void buttonOK_Click(object sender, EventArgs e)
@@ -128,6 +146,6 @@ namespace LazyShell
             this.Close();
         }
 
-        #endregion
-    }
+		#endregion
+	}
 }

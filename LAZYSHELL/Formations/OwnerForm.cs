@@ -63,7 +63,17 @@ namespace LazyShell.Formations
             FormationsForm.Top = this.Bottom;
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			//DockPanel.Theme = new VS2013BlueTheme();
+
+			Settings settings = Settings.Default;
+			if (settings.VisualTheme == 0 || settings.VisualTheme == 1)
+			{
+				DockPanel.Theme = new VS2005Theme();
+			}
+			else if (settings.VisualTheme == 2)
+			{
+				DockPanel.Theme = new VS2013BlueTheme();
+			}
+
 			dockPanel = DockPanel;
 			FormationsForm.Show(dockPanel, DockState.Document);
             PacksForm = new PacksForm(this);

@@ -264,10 +264,6 @@ namespace LazyShell.Controls
 	        set
 	        {
 				dock = value;
-				if (Do.CustomThemeEnabled && dock?.Theme != Do.Theme)
-				{
-					dock.Theme = Do.Theme;
-				}
 	        }
 		}
 

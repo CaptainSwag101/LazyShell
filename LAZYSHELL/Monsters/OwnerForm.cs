@@ -105,7 +105,17 @@ namespace LazyShell.Monsters
             monstersForm.ToggleButton = toggleMonsters;
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			//DockPanel.Theme = new VS2013BlueTheme();
+
+			Settings settings = Settings.Default;
+			if (settings.VisualTheme == 0 || settings.VisualTheme == 1)
+			{
+				DockPanel.Theme = new VS2005Theme();
+			}
+			else if (settings.VisualTheme == 2)
+			{
+				DockPanel.Theme = new VS2013BlueTheme();
+			}
+
 			dockPanel = DockPanel;
 			monstersForm.Show(dockPanel, DockState.Document);
             spriteForm = new SpriteForm(this);

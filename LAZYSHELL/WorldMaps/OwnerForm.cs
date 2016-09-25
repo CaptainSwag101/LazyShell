@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace LazyShell.WorldMaps
@@ -114,7 +115,18 @@ namespace LazyShell.WorldMaps
             LocationsForm = new LocationsForm(this);
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			//DockPanel.Theme = new VS2013BlueTheme();
+
+			Settings settings = Settings.Default;
+			if (settings.VisualTheme == 0 || settings.VisualTheme == 1)
+			{
+				DockPanel.Theme = new VS2005Theme();
+			}
+			else if (settings.VisualTheme == 2)
+			{
+				DockPanel.Theme = new VS2013BlueTheme();
+				DockPanel.DockPadding.Right = 0;
+			}
+
 			dockPanel = DockPanel;
 			LocationsForm.Show(dockPanel, DockState.DockRight);
             WorldMapsForm = new WorldMapsForm(this);

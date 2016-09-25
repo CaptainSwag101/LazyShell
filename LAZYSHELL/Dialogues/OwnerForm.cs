@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace LazyShell.Dialogues
@@ -36,7 +37,17 @@ namespace LazyShell.Dialogues
 	        DialoguesForm = new DialoguesForm(this) {ToggleButton = toggleDialogues};
 			DockPanel = new DockPanel();
 	        DockPanel = dockPanel;
-			//DockPanel.Theme = new VS2013BlueTheme();
+
+	        Settings settings = Settings.Default;
+	        if (settings.VisualTheme == 0 || settings.VisualTheme == 1)
+	        {
+				DockPanel.Theme = new VS2005Theme();
+			}
+			else if (settings.VisualTheme == 2)
+			{
+				DockPanel.Theme = new VS2013BlueTheme();
+			}
+			
 	        dockPanel = DockPanel;
 	        DialoguesForm.Show(dockPanel, DockState.Document);
             DTETableForm = new DTETableForm(this);

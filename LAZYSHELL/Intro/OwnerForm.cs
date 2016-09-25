@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using LazyShell.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace LazyShell.Intro
@@ -37,7 +38,17 @@ namespace LazyShell.Intro
             TitleScreenForm = new TitleScreenForm(this);
 			DockPanel = new DockPanel();
 			DockPanel = dockPanel;
-			//DockPanel.Theme = new VS2013BlueTheme();
+
+			Settings settings = Settings.Default;
+			if (settings.VisualTheme == 0 || settings.VisualTheme == 1)
+			{
+				DockPanel.Theme = new VS2005Theme();
+			}
+			else if (settings.VisualTheme == 2)
+			{
+				DockPanel.Theme = new VS2013BlueTheme();
+			}
+
 			dockPanel = DockPanel;
 			TitleScreenForm.Show(dockPanel, DockState.Document);
             TitleScreenForm.LoadTilesetEditor();

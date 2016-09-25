@@ -34,6 +34,7 @@ namespace LazyShell
 			this.visualThemeSimple = new System.Windows.Forms.RadioButton();
 			this.patchHTTPServer = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.visualThemeBlue = new System.Windows.Forms.RadioButton();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.romDirectory = new System.Windows.Forms.RadioButton();
 			this.customDirectory = new System.Windows.Forms.RadioButton();
@@ -81,7 +82,7 @@ namespace LazyShell
 			// buttonDefault
 			// 
 			this.buttonDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.buttonDefault.Location = new System.Drawing.Point(12, 220);
+			this.buttonDefault.Location = new System.Drawing.Point(12, 236);
 			this.buttonDefault.Name = "buttonDefault";
 			this.buttonDefault.Size = new System.Drawing.Size(75, 23);
 			this.buttonDefault.TabIndex = 7;
@@ -92,7 +93,7 @@ namespace LazyShell
 			// buttonApply
 			// 
 			this.buttonApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonApply.Location = new System.Drawing.Point(391, 220);
+			this.buttonApply.Location = new System.Drawing.Point(391, 236);
 			this.buttonApply.Name = "buttonApply";
 			this.buttonApply.Size = new System.Drawing.Size(75, 23);
 			this.buttonApply.TabIndex = 10;
@@ -133,14 +134,26 @@ namespace LazyShell
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.visualThemeBlue);
 			this.groupBox1.Controls.Add(this.visualThemeSystem);
 			this.groupBox1.Controls.Add(this.visualThemeSimple);
 			this.groupBox1.Location = new System.Drawing.Point(12, 154);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(110, 60);
+			this.groupBox1.Size = new System.Drawing.Size(110, 76);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Visual Theme";
+			// 
+			// visualThemeBlue
+			// 
+			this.visualThemeBlue.AutoSize = true;
+			this.visualThemeBlue.Location = new System.Drawing.Point(6, 54);
+			this.visualThemeBlue.Name = "visualThemeBlue";
+			this.visualThemeBlue.Size = new System.Drawing.Size(76, 17);
+			this.visualThemeBlue.TabIndex = 2;
+			this.visualThemeBlue.TabStop = true;
+			this.visualThemeBlue.Text = "Blue (WIP)";
+			this.visualThemeBlue.UseVisualStyleBackColor = true;
 			// 
 			// groupBox2
 			// 
@@ -193,7 +206,7 @@ namespace LazyShell
 			// buttonClose
 			// 
 			this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonClose.Location = new System.Drawing.Point(310, 220);
+			this.buttonClose.Location = new System.Drawing.Point(310, 236);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(75, 23);
 			this.buttonClose.TabIndex = 9;
@@ -204,7 +217,7 @@ namespace LazyShell
 			// buttonOK
 			// 
 			this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonOK.Location = new System.Drawing.Point(229, 220);
+			this.buttonOK.Location = new System.Drawing.Point(229, 236);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(75, 23);
 			this.buttonOK.TabIndex = 8;
@@ -217,7 +230,7 @@ namespace LazyShell
 			this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox5.Controls.Add(this.patchHTTPServer);
-			this.groupBox5.Location = new System.Drawing.Point(128, 154);
+			this.groupBox5.Location = new System.Drawing.Point(128, 170);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Size = new System.Drawing.Size(338, 60);
 			this.groupBox5.TabIndex = 5;
@@ -228,7 +241,7 @@ namespace LazyShell
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(478, 255);
+			this.ClientSize = new System.Drawing.Size(478, 271);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.checkedListBox1);
@@ -266,5 +279,6 @@ namespace LazyShell
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.RadioButton visualThemeBlue;
 	}
 }

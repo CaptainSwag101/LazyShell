@@ -449,26 +449,5 @@ namespace LazyShell
 
 		#endregion
 
-		#region Themes
-
-		public static ThemeBase Theme = new VS2013BlueTheme();
-		public static bool CustomThemeEnabled;
-
-		public static void UseBlueTheme()
-		{
-			CustomThemeEnabled = true;
-		}
-
-		public static void UseSystemTheme()
-		{
-			CustomThemeEnabled = false;
-		}
-
-		public static void UseSimpleTheme()
-		{
-			CustomThemeEnabled = false;
-		}
-
-		#endregion
 	}
 }

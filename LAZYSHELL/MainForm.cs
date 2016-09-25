@@ -88,15 +88,12 @@ namespace LazyShell
 			{
 				case 0:
 					Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
-					Do.UseSystemTheme();
 					break;
 				case 1:
 					Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.NoneEnabled;
-					Do.UseSimpleTheme();
 					break;
 				case 2:
 					Application.VisualStyleState = System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled;
-					Do.UseBlueTheme();
 					break;
 			}
 			//
