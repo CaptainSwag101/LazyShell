@@ -20,7 +20,7 @@ using System.Xml;
 using LazyShell.Properties;
 using LazyShell.EventScripts;
 using WeifenLuo.WinFormsUI.Docking;
-using WeifenLuo.WinFormsUI.ThemeVS2013;
+//using WeifenLuo.WinFormsUI.ThemeVS2013;
 
 namespace LazyShell
 {

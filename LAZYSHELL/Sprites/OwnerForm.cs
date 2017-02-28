@@ -187,7 +187,7 @@ namespace LazyShell.Sprites
 			}
 			else if (settings.VisualTheme == 2)
 			{
-				DockPanel.Theme = new VS2013BlueTheme();
+				//DockPanel.Theme = new VS2013BlueTheme();
 			}
 
 			dockPanel = DockPanel;

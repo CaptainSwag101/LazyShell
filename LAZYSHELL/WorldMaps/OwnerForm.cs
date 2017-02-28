@@ -123,7 +123,7 @@ namespace LazyShell.WorldMaps
 			}
 			else if (settings.VisualTheme == 2)
 			{
-				DockPanel.Theme = new VS2013BlueTheme();
+				//DockPanel.Theme = new VS2013BlueTheme();
 				DockPanel.DockPadding.Right = 0;
 			}
 
