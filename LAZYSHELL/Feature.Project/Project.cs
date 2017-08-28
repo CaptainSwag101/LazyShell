@@ -272,13 +272,15 @@ namespace LAZYSHELL
             {
                 ListViewItem lvitem = new ListViewItem(new string[]
                 {
-                    (elementType.SelectedItem == "Memory Bits" ? 
-                    index.Address.ToString("X4") : index.Index.ToString()) + 
-                    (elementType.SelectedItem == "Memory Bits" ? 
+                    ((string)elementType.SelectedItem == "Memory Bits" ?
+                    index.Address.ToString("X4") : index.Index.ToString()) +
+                    ((string)elementType.SelectedItem == "Memory Bits" ?
                     ":" + index.AddressBit.ToString() : ""),
                     index.Label
-                });
-                lvitem.Tag = counter++;
+                })
+                {
+                    Tag = counter++
+                };
                 listViewItems.Add(lvitem);
             }
             elementIndexes.Items.AddRange(listViewItems.ToArray());
@@ -303,13 +305,15 @@ namespace LAZYSHELL
         }
         public bool LoadProject()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = settings.NotePathCustom;
-            openFileDialog.Title = "Open existing project...";
-            openFileDialog.FileName = Model.GetFileNameWithoutPath() + ".lsproj";
-            openFileDialog.Filter = "Lazy Shell Project/Notes (*.lsproj; *.lsnotes)|*.lsproj;*.lsnotes";
-            openFileDialog.FilterIndex = 0;
-            openFileDialog.RestoreDirectory = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = settings.NotePathCustom,
+                Title = "Open existing project...",
+                FileName = Model.GetFileNameWithoutPath() + ".lsproj",
+                Filter = "Lazy Shell Project/Notes (*.lsproj; *.lsnotes)|*.lsproj;*.lsnotes",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
             if (openFileDialog.ShowDialog() == DialogResult.Cancel)
                 return false;
             //
@@ -363,13 +367,15 @@ namespace LAZYSHELL
                 if (result == DialogResult.Yes)
                     SaveLoadedProject();
             }
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = settings.NotePathCustom;
-            saveFileDialog.Title = "Create new project...";
-            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + ".lsproj";
-            saveFileDialog.Filter = "Lazy Shell Project (*.lsproj)|*.lsproj";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.RestoreDirectory = true;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = settings.NotePathCustom,
+                Title = "Create new project...",
+                FileName = Model.GetFileNameWithoutPath() + ".lsproj",
+                Filter = "Lazy Shell Project (*.lsproj)|*.lsproj",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                 return false;
             //
@@ -410,13 +416,15 @@ namespace LAZYSHELL
         }
         private void SaveAsNewProject()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = settings.NotePathCustom;
-            saveFileDialog.Title = "Save as new project...";
-            saveFileDialog.FileName = Model.GetFileNameWithoutPath() + ".lsproj";
-            saveFileDialog.Filter = "Project DB (*.lsproj)|*.lsproj";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.RestoreDirectory = true;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = settings.NotePathCustom,
+                Title = "Save as new project...",
+                FileName = Model.GetFileNameWithoutPath() + ".lsproj",
+                Filter = "Project DB (*.lsproj)|*.lsproj",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
             settings.NotePathCustom = saveFileDialog.FileName;
@@ -537,9 +545,11 @@ namespace LAZYSHELL
         {
             if (listBoxLists.SelectedItem == null)
                 return;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 0;
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 0
+            };
             if (exportAll)
                 saveFileDialog.FileName = "listCollections";
             else
@@ -571,9 +581,11 @@ namespace LAZYSHELL
         {
             if (listBoxLists.SelectedItem == null)
                 return;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 0;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 0
+            };
             if (importAll)
                 openFileDialog.FileName = "listCollections";
             else
@@ -626,8 +638,10 @@ namespace LAZYSHELL
         }
         private ProjectDB CreateProject(NotesDB notes)
         {
-            ProjectDB project = new ProjectDB();
-            project.OtherInfo = notes.GeneralNotes;
+            ProjectDB project = new ProjectDB
+            {
+                OtherInfo = notes.GeneralNotes
+            };
             foreach (NotesDB.Index index in notes.ActionScripts) project.ActionScripts.Add(new EIndex(index));
             foreach (NotesDB.Index index in notes.Attacks) project.Attacks.Add(new EIndex(index));
             foreach (NotesDB.Index index in notes.Dialogues) project.Dialogues.Add(new EIndex(index));
@@ -664,14 +678,16 @@ namespace LAZYSHELL
                 for (int x = 0; x < 8; x++)
                 {
                     int index = y * 8 + x;
-                    keyBox = new TextBox();
-                    keyBox.BackColor = Color.FromArgb(palette[3]);
-                    keyBox.BorderStyle = BorderStyle.None;
-                    keyBox.Font = new Font("Arial", 12F);
-                    keyBox.ForeColor = Color.FromArgb(palette[1]);
-                    keyBox.Left = x * 32;
-                    keyBox.MaxLength = 1;
-                    keyBox.Multiline = true;
+                    keyBox = new TextBox
+                    {
+                        BackColor = Color.FromArgb(palette[3]),
+                        BorderStyle = BorderStyle.None,
+                        Font = new Font("Arial", 12F),
+                        ForeColor = Color.FromArgb(palette[1]),
+                        Left = x * 32,
+                        MaxLength = 1,
+                        Multiline = true
+                    };
                     if (index == 0)
                         keyBox.ReadOnly = true;
                     keyBox.Size = new Size(31, 23);
@@ -1170,12 +1186,14 @@ namespace LAZYSHELL
         }
         private void openKeystrokes_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = settings.LastRomPath;
-            openFileDialog1.Title = "Load keystroke table";
-            openFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 0;
-            openFileDialog1.RestoreDirectory = true;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = settings.LastRomPath,
+                Title = "Load keystroke table",
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
             string path = openFileDialog1.FileName;
